@@ -1,0 +1,115 @@
+name: code_health
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - uses: bluefireteam/melos-action@v1
+        with:
+          melos-version: "3.0.1"
+      - name: "Run Analyze"
+        run: melos run analyze
+
+  pub_dry_run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - uses: bluefireteam/melos-action@v1
+        with:
+          melos-version: "3.0.1"
+      - name: "Pub Check"
+        run: |
+          melos exec -c 1 --no-private --ignore="*example*" -- \
+            dart pub publish --dry-run
+
+  pub_get_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - uses: bluefireteam/melos-action@v1
+        with:
+          melos-version: "3.0.1"
+      - name: "flutter pub get"
+        run: |
+          melos exec -c 1 --scope="*example*" -- \
+            "flutter pub get"
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - uses: bluefireteam/melos-action@v1
+        with:
+          melos-version: "3.0.1"
+      - uses: Homebrew/actions/setup-homebrew@master
+      - name: "Install Tools"
+        run: |
+          flutter pub global activate flutter_plugin_tools
+          brew install swiftformat
+          brew install clang-format
+          brew link --overwrite --force clang-format
+      - name: "Formatter version"
+        run: |
+          clang-format --version
+          swiftformat --version
+      - name: "Dart, Java and Objective-C "
+        run: |
+          flutter pub global run flutter_plugin_tools format
+          ./.github/workflows/scripts/validate-formatting.sh
+      - name: "Swift"
+        if: ${{ success() || failure() }}
+        run: |
+          swiftformat .
+          ./.github/workflows/scripts/validate-formatting.sh
+
+  check-files-license-headers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "^1.13.1"
+      - run: go install github.com/google/addlicense@latest
+      - name: Install Dart
+        uses: dart-lang/setup-dart@v1
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v1
+        with:
+          run-bootstrap: false
+          melos-version: "3.0.1"
+      - name: Check license header
+        run: melos run check-license-header

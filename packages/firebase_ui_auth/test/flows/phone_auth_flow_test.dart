@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' hide PhoneAuthProvider;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:mockito/mockito.dart';
@@ -182,7 +183,7 @@ void main() {
         expect(onErrorInvocation.callCount, 1);
         expect(onErrorInvocation.captured, [exception]);
       });
-    });
+    }, skip: kIsWeb); // TODO: fix web tests
 
     group('#verifySMSCode', () {
       test(

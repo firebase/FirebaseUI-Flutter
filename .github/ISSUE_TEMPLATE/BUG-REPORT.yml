@@ -1,0 +1,105 @@
+name: Bug Report
+description: File a bug report
+title: "🐛 [plugin_name]: <issue title>"
+labels: ["bug", "triage"]
+assignees:
+  - lesnitsky
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug report! 🐛
+        Please fill out the sections below to help us reproduce the issue you're experiencing.
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues and found no duplicates.
+          required: true
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: What plugin is this bug for?
+      description: Please select the plugin(s) affected by this bug.
+      multiple: true
+      options:
+        - Firebase UI Auth
+        - Firebase UI Database
+        - Firebase UI Firestore
+        - Firebase UI Storage
+        - Firebase UI Localizations
+        - Firebase UI OAuth
+        - Firebase UI OAuth Google
+        - Firebase UI OAuth Facebook
+        - Firebase UI OAuth Twitter
+        - Firebase UI OAuth Apple
+        - Firebase UI Shared
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: What platform(s) does this bug affect?
+      description: Please select the platform(s) affected by this bug.
+      multiple: true
+      options:
+        - "Android"
+        - "iOS"
+        - "Web"
+        - "macOS"
+        - "Linux"
+        - "Windows"
+  - type: textarea
+    attributes:
+      label: List of dependencies used.
+      description: Output of `flutter pub deps -s list` command.
+      placeholder: |
+        ```
+        `flutter pub deps -s list`
+        ```
+      value: |
+        <details>
+        <summary>flutter pub deps -s list</summary>
+        <pre>
+          <!-- Paste output here -->
+        </pre>
+        </details>
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Please provide a minimal reproducible example demonstrating the bug.
+        If possible, please provide a link to a GitHub repository with your example.
+        If you are unable to provide a link to a repository, please provide a minimal code example that reproduces the bug.
+        If you are unable to provide a code example, please provide a detailed description of the steps necessary to reproduce the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: |
+        Please provide a clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual Behavior
+      description: |
+        Please provide a clear and concise description of what actually happened.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: |
+        Please provide any additional information that may be helpful in resolving this issue.
+        For example, if you are experiencing a build issue, please provide the output of `flutter doctor -v`.
+    validations:
+      required: false
