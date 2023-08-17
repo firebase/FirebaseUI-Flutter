@@ -1,6 +1,6 @@
 name: firebase_ui_auth
 description: Pre-built widgets library that are integrated with the variety of the Firebase Auth providers.
-version: 1.6.2
+version: 1.6.3
 repository: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_auth
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_auth
 

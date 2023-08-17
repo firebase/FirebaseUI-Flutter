@@ -1,6 +1,6 @@
 name: firebase_ui_oauth
 description: Firebase UI widgets for authentication & OAuth
-version: 1.4.7
+version: 1.4.8
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_oauth
 
 environment:

@@ -1,6 +1,6 @@
 name: firebase_ui_storage
 description: Pre-built widgets and utilites that make it easy to integrate Firebase Storage into your Flutter app.
-version: 0.1.0-dev.8
+version: 0.1.0-dev.9
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_storage/
 
 environment:
