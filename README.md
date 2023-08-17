@@ -20,8 +20,8 @@ Firebase UI is a set of plugins for Flutter that allows you to quickly connect c
 
 ## Issues
 
-Please file Firebase UI specific issues, bugs, or feature requests in our [issue tracker](./issues/new/choose).
+Please file Firebase UI specific issues, bugs, or feature requests in our [issue tracker](https://github.com/firebase/FirebaseUI-Flutter/issues/new/choose).
 
 ## Contributing
 
-If you wish to contribute a change to any of the existing plugins in this repo, please review our [contribution guide](./docs/contributing.md) and open a [pull request](./pulls).
+If you wish to contribute a change to any of the existing plugins in this repo, please review our [contribution guide](./docs/contributing.md) and open a [pull request](https://github.com/firebase/FirebaseUI-Flutter/pulls).
