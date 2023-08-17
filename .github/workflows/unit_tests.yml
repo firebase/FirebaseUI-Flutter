@@ -1,0 +1,70 @@
+name: unit_tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  detect_changed_packages:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.filter.outputs.changed_packages }}
+      has_changes: ${{ steps.filter.outputs.changed_packages != '[]' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/changes
+        id: filter
+
+  unit_tests:
+    name: "Run unit tests"
+    runs-on: ubuntu-latest
+    needs: detect_changed_packages
+    if: needs.detect_changed_packages.outputs.has_changes == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.detect_changed_packages.outputs.packages) }}
+        target: ["html", "io"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - uses: bluefireteam/melos-action@v1
+        with:
+          melos-version: "3.0.1"
+
+      - name: Run unit tests on Chrome
+        if: matrix.target == 'html'
+        run: |
+          melos exec \
+            --scope=${{ matrix.package }}* \
+            --dir-exists="test" \
+            --fail-fast -- "flutter test --platform chrome"
+
+      - name: Run unit tests
+        if: matrix.target == 'io'
+        run: |
+          melos exec \
+            --scope=${{ matrix.package }}* \
+            --dir-exists="test" \
+            --fail-fast -- "flutter test"

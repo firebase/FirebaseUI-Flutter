@@ -1,0 +1,139 @@
+name: FirebaseUI
+repository: https://github.com/firebase/FirebaseUI-Flutter
+
+packages:
+  - packages/*
+
+command:
+  version:
+    linkToCommits: true
+    workspaceChangelog: true
+
+  bootstrap:
+    runPubGetInParallel: false
+    usePubspecOverrides: true
+
+scripts:
+  lint:
+    run: melos run analyze && melos run format
+    description: Run all static analysis checks.
+
+  analyze:
+    run: |
+      melos exec -- dart analyze . --fatal-infos
+    description: |
+      Run `dart analyze` in all packages.
+
+  format:
+    run: |
+      dart pub global run flutter_plugin_tools format && swiftformat .
+    description: |
+      Formats the code of all packages (Java, Objective-C, and Dart).
+       - Requires `flutter_plugin_tools` (`pub global activate flutter_plugin_tools`).
+       - Requires `git`.
+       - Requires `clang-format` (can be installed via Brew on MacOS).
+       - Requires `swiftformat` (can be installed via Brew on macOS).
+
+  test:
+    run: |
+      melos run test:unit:all
+    description: |
+      Run all tests available.
+
+  test:unit:all:
+    run: |
+      melos run test:unit --no-select && \
+      melos run test:unit:web --no-select
+    description: Run unit tests for all packages.
+    packageFilters:
+      dirExists:
+        - test
+
+  test:unit:
+    run: |
+      melos exec -c 6 --fail-fast -- "flutter test"
+    description: Run `flutter test` for a specific package.
+    packageFilters:
+      dirExists:
+        - test
+
+  test:unit:web:
+    run: |
+      melos exec -c 1 --fail-fast -- "flutter test --platform=chrome"
+    description: Run `flutter test --platform=chrome`.
+    packageFilters:
+      dirExists:
+        - test
+
+  # Additional cleanup lifecycle script, executed when `melos clean` is run.
+  postclean: >
+    melos exec -c 6 -- "flutter clean"
+
+  add-license-header:
+    # If you add here another --ignore flag, add it also to
+    # "check-license-header".
+    run: |
+      addlicense -f header_template.txt \
+        --ignore "**/*.yml" \
+        --ignore "**/*.yaml" \
+        --ignore "**/*.xml" \
+        --ignore "**/*.g.dart" \
+        --ignore "**/*.sh" \
+        --ignore "**/*.html" \
+        --ignore "**/*.js" \
+        --ignore "**/*.ts" \
+        --ignore "**/*.g.h" \
+        --ignore "**/*.g.m" \
+        --ignore "**/*.rb" \
+        --ignore "**/*.txt" \
+        --ignore "**/*.cmake" \
+        --ignore "**/Runner/AppDelegate.swift" \
+        --ignore "**/Runner/MainFlutterWindow.swift" \
+        --ignore "**/Runner/Runner-Bridging-Header.h" \
+        --ignore "**/Runner/AppDelegate.h" \
+        --ignore "**/Runner/AppDelegate.m" \
+        --ignore "**/Runner/main.m" \
+        --ignore "**/MainActivity.kt" \
+        --ignore "**/MainActivity.java" \
+        --ignore "**/FlutterMultiDexApplication.java" \
+        --ignore "**/GeneratedPluginRegistrant.swift" \
+        --ignore "**/Pods/**" \
+        --ignore "**/flutter/generated_plugin_registrant.h" \
+        --ignore "**/flutter/generated_plugin_registrant.cc" \
+        .
+    description: Add a license header to all necessary files.
+
+  check-license-header:
+    # If you add here another --ignore flag, add it also to
+    # "add-license-header".
+    run: |
+      addlicense -f header_template.txt \
+        --check \
+        --ignore "**/*.yml" \
+        --ignore "**/*.yaml" \
+        --ignore "**/*.xml" \
+        --ignore "**/*.g.dart" \
+        --ignore "**/*.sh" \
+        --ignore "**/*.html" \
+        --ignore "**/*.js" \
+        --ignore "**/*.ts" \
+        --ignore "**/*.g.h" \
+        --ignore "**/*.g.m" \
+        --ignore "**/*.rb" \
+        --ignore "**/*.txt" \
+        --ignore "**/*.cmake" \
+        --ignore "**/Runner/AppDelegate.swift" \
+        --ignore "**/Runner/MainFlutterWindow.swift" \
+        --ignore "**/Runner/Runner-Bridging-Header.h" \
+        --ignore "**/Runner/AppDelegate.h" \
+        --ignore "**/Runner/AppDelegate.m" \
+        --ignore "**/Runner/main.m" \
+        --ignore "**/MainActivity.kt" \
+        --ignore "**/MainActivity.java" \
+        --ignore "**/FlutterMultiDexApplication.java" \
+        --ignore "**/GeneratedPluginRegistrant.swift" \
+        --ignore "**/Pods/**" \
+        --ignore "**/flutter/generated_plugin_registrant.h" \
+        --ignore "**/flutter/generated_plugin_registrant.cc" \
+        .
+    description: Add a license header to all necessary files.

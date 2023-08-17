@@ -4,7 +4,7 @@
 
 Firebase UI Auth is a set of Flutter widgets and utilities designed to help you build and integrate your user interface with Firebase Authentication.
 
-> Please contribute to the [discussion](https://github.com/firebase/flutterfire/discussions/6978) with feedback.
+> Please contribute to the [discussion](https://github.com/firebase/FirebaseUI-Flutter/discussions/6978) with feedback.
 
 ## Platform support
 
@@ -84,19 +84,19 @@ fonts:
 
 ## Docs
 
-Find relevant documentation [here](https://github.com/firebase/flutterfire/tree/master/packages/firebase_ui_auth/doc)
+Find relevant documentation [here](https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_auth/doc)
 
-- [Getting started](https://github.com/firebase/flutterfire/tree/master/packages/firebase_ui_auth/doc)
+- [Getting started](https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_auth/doc)
 - Auth providers.
-  - [Email auth provider](https://github.com/firebase/flutterfire/blob/master/packages/firebase_ui_auth/doc/providers/email.md) – sign in using email and password.
-  - [Email verification](https://github.com/firebase/flutterfire/blob/master/packages/firebase_ui_auth/doc/providers/email-verification.md) - verify email.
-  - [Email link sign in](https://github.com/firebase/flutterfire/blob/master/packages/firebase_ui_auth/doc/providers/email-link.md) - sign in using a link sent to email.
-  - [Phone auth provider](https://github.com/firebase/flutterfire/blob/master/packages/firebase_ui_auth/doc/providers/phone.md) - sign in using phone number.
-  - [Universal email sign in](https://github.com/firebase/flutterfire/blob/master/packages/firebase_ui_auth/doc/providers/universal-email-sign-in.md) - resolve connected providers based on email and sign in using one of those.
-  - [OAuth](https://github.com/firebase/flutterfire/blob/master/packages/firebase_ui_auth/doc/providers/oauth.md) - sign in using Apple, Google, Facebook or Twitter.
+  - [Email auth provider](https://github.com/firebase/FirebaseUI-Flutter/blob/master/packages/firebase_ui_auth/doc/providers/email.md) – sign in using email and password.
+  - [Email verification](https://github.com/firebase/FirebaseUI-Flutter/blob/master/packages/firebase_ui_auth/doc/providers/email-verification.md) - verify email.
+  - [Email link sign in](https://github.com/firebase/FirebaseUI-Flutter/blob/master/packages/firebase_ui_auth/doc/providers/email-link.md) - sign in using a link sent to email.
+  - [Phone auth provider](https://github.com/firebase/FirebaseUI-Flutter/blob/master/packages/firebase_ui_auth/doc/providers/phone.md) - sign in using phone number.
+  - [Universal email sign in](https://github.com/firebase/FirebaseUI-Flutter/blob/master/packages/firebase_ui_auth/doc/providers/universal-email-sign-in.md) - resolve connected providers based on email and sign in using one of those.
+  - [OAuth](https://github.com/firebase/FirebaseUI-Flutter/blob/master/packages/firebase_ui_auth/doc/providers/oauth.md) - sign in using Apple, Google, Facebook or Twitter.
 
 ## Roadmap / Features
 
-- For issues, please create a new [issue on the repository](https://github.com/firebase/flutterfire/issues).
-- For feature requests, & questions, please participate on the [discussion](https://github.com/firebase/flutterfire/discussions/6978) thread.
-- To contribute a change to this plugin, please review our [contribution guide](https://github.com/firebase/flutterfire/blob/master/CONTRIBUTING.md) and open a [pull request](https://github.com/firebase/flutterfire/pulls).
+- For issues, please create a new [issue on the repository](https://github.com/firebase/FirebaseUI-Flutter/issues).
+- For feature requests, & questions, please participate on the [discussion](https://github.com/firebase/FirebaseUI-Flutter/discussions/6978) thread.
+- To contribute a change to this plugin, please review our [contribution guide](https://github.com/firebase/FirebaseUI-Flutter/blob/master/CONTRIBUTING.md) and open a [pull request](https://github.com/firebase/FirebaseUI-Flutter/pulls).
