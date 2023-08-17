@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_auth: ^4.7.2
-  firebase_ui_oauth: ^1.4.7
+  firebase_ui_oauth: ^1.4.8
   twitter_login: ^4.3.2
 
 dev_dependencies:

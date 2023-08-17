@@ -1,4 +1,0 @@
-# melos_managed_dependency_overrides: firebase_ui_localizations
-dependency_overrides:
-  firebase_ui_localizations:
-    path: ../firebase_ui_localizations

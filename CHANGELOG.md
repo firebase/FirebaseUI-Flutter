@@ -1,6 +1,63 @@
 # Change Log
 
-All notable changes for firebase_ui packages
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2023-08-17
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_shared` - `v1.3.1`](#firebase_ui_shared---v131)
+ - [`firebase_ui_storage` - `v0.1.0-dev.10`](#firebase_ui_storage---v010-dev10)
+ - [`firebase_ui_auth` - `v1.6.5`](#firebase_ui_auth---v165)
+ - [`firebase_ui_oauth` - `v1.4.9`](#firebase_ui_oauth---v149)
+ - [`firebase_ui_oauth_twitter` - `v1.2.9`](#firebase_ui_oauth_twitter---v129)
+ - [`firebase_ui_oauth_facebook` - `v1.2.9`](#firebase_ui_oauth_facebook---v129)
+ - [`firebase_ui_oauth_google` - `v1.2.9`](#firebase_ui_oauth_google---v129)
+ - [`firebase_ui_oauth_apple` - `v1.2.9`](#firebase_ui_oauth_apple---v129)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_storage` - `v0.1.0-dev.10`
+ - `firebase_ui_auth` - `v1.6.5`
+ - `firebase_ui_oauth` - `v1.4.9`
+ - `firebase_ui_oauth_twitter` - `v1.2.9`
+ - `firebase_ui_oauth_facebook` - `v1.2.9`
+ - `firebase_ui_oauth_google` - `v1.2.9`
+ - `firebase_ui_oauth_apple` - `v1.2.9`
+
+---
+
+#### `firebase_ui_shared` - `v1.3.1`
+
+ - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
+
+#### `firebase_ui_localizations` - `v1.5.2`
+
+ - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
+
+#### `firebase_ui_firestore` - `v1.5.8`
+
+ - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
+
+#### `firebase_ui_database` - `v1.3.6`
+
+ - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
+
+#### `firebase_ui_auth` - `v1.6.4`
+
+ - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
+
 
 ## 2023-07-26
 
