@@ -1,3 +1,26 @@
+## 1.3.0
+
+ - **FIX**(ui_auth_google): bump google_sign_in version ([#10531](https://github.com/firebase/FirebaseUI-Flutter/issues/10531)). ([b9059c25](https://github.com/firebase/FirebaseUI-Flutter/commit/b9059c25f486f5c4b5037e9442f066a23ad0f614))
+ - **FIX**(ui_auth,ui_oauth_google): allow GoogleService-Info.plist based configuration ([#10360](https://github.com/firebase/FirebaseUI-Flutter/issues/10360)). ([c1bc63bb](https://github.com/firebase/FirebaseUI-Flutter/commit/c1bc63bbacf9ba1fb65801c9b0189e592c58347a))
+ - **FIX**(ui_oauth_google,android): fix an issue with Google Sign In where the clientId was passed on Android ([#10017](https://github.com/firebase/FirebaseUI-Flutter/issues/10017)). ([97c9fe8b](https://github.com/firebase/FirebaseUI-Flutter/commit/97c9fe8b13d09bbaf823a2ad7481d742fc569625))
+ - **FIX**(ui_oauth_google): Pass the clientId into GoogleSignIn ([#9823](https://github.com/firebase/FirebaseUI-Flutter/issues/9823)). ([06b66ea2](https://github.com/firebase/FirebaseUI-Flutter/commit/06b66ea29066a3d3475e4d0ab9cbc1ccbc590b99))
+ - **FIX**(ui_auth_google): bump google_sign_in version ([#10531](https://github.com/firebase/FirebaseUI-Flutter/issues/10531)). ([2edd6574](https://github.com/firebase/FirebaseUI-Flutter/commit/2edd6574f82954279dce6fc36819224c9c2ce8fd))
+ - **FIX**(ui_auth,ui_oauth_google): allow GoogleService-Info.plist based configuration ([#10360](https://github.com/firebase/FirebaseUI-Flutter/issues/10360)). ([514af68a](https://github.com/firebase/FirebaseUI-Flutter/commit/514af68ad3555a84d9e3ed28acc481169bb873d6))
+ - **FIX**(ui_oauth_google,android): fix an issue with Google Sign In where the clientId was passed on Android ([#10017](https://github.com/firebase/FirebaseUI-Flutter/issues/10017)). ([93db38b6](https://github.com/firebase/FirebaseUI-Flutter/commit/93db38b66160850e0e3bb510d9e88ba9df2faec0))
+ - **FIX**(ui_oauth_google): Pass the clientId into GoogleSignIn ([#9823](https://github.com/firebase/FirebaseUI-Flutter/issues/9823)). ([00bd4236](https://github.com/firebase/FirebaseUI-Flutter/commit/00bd423607abe9d3aaef4cb49835ee439947f19e))
+ - **FEAT**: update dependency constraints to `sdk: '>=2.18.0 <4.0.0'` `flutter: '>=3.3.0'` ([#10946](https://github.com/firebase/FirebaseUI-Flutter/issues/10946)). ([9c2906d5](https://github.com/firebase/FirebaseUI-Flutter/commit/9c2906d52c75a74cf9b733f584e7c5d68f076de3))
+ - **FEAT**: update librairies to be compatible with Flutter 3.10.0 ([#10944](https://github.com/firebase/FirebaseUI-Flutter/issues/10944)). ([6a6b02b1](https://github.com/firebase/FirebaseUI-Flutter/commit/6a6b02b1125dbbe266fcc7dab379769d2fa6e4b3))
+ - **FEAT**: bump dart sdk constraint to 2.18 ([#10618](https://github.com/firebase/FirebaseUI-Flutter/issues/10618)). ([882d9205](https://github.com/firebase/FirebaseUI-Flutter/commit/882d9205325674648c02726ae1c16597012c5bdf))
+ - **FEAT**(ui_shared): extract common widgets to a shared library ([#10620](https://github.com/firebase/FirebaseUI-Flutter/issues/10620)). ([79f76d3a](https://github.com/firebase/FirebaseUI-Flutter/commit/79f76d3a886288738ccfdcbcd2d07e76c6e5a52e))
+ - **FEAT**(ui): add firebase_ui_auth and oauth providers ([#9343](https://github.com/firebase/FirebaseUI-Flutter/issues/9343)). ([2d2db74d](https://github.com/firebase/FirebaseUI-Flutter/commit/2d2db74d984ecc75b712d4058d2e65058c88c8ad))
+ - **FEAT**: update dependency constraints to `sdk: '>=2.18.0 <4.0.0'` `flutter: '>=3.3.0'` ([#10946](https://github.com/firebase/FirebaseUI-Flutter/issues/10946)). ([a26682e0](https://github.com/firebase/FirebaseUI-Flutter/commit/a26682e0957ea983b82b5c48a2c54cec1d80995b))
+ - **FEAT**: update librairies to be compatible with Flutter 3.10.0 ([#10944](https://github.com/firebase/FirebaseUI-Flutter/issues/10944)). ([eea2c2e7](https://github.com/firebase/FirebaseUI-Flutter/commit/eea2c2e76aa268a2b8a1b9a42e8b985e06ea80b6))
+ - **FEAT**: bump dart sdk constraint to 2.18 ([#10618](https://github.com/firebase/FirebaseUI-Flutter/issues/10618)). ([cf7aa79c](https://github.com/firebase/FirebaseUI-Flutter/commit/cf7aa79cbae0189e6e34a0c970d81e6cd4e5c25d))
+ - **FEAT**(ui_shared): extract common widgets to a shared library ([#10620](https://github.com/firebase/FirebaseUI-Flutter/issues/10620)). ([2b1e4a3d](https://github.com/firebase/FirebaseUI-Flutter/commit/2b1e4a3d968b0212881b0356464586c03ca71997))
+ - **FEAT**(ui): add firebase_ui_auth and oauth providers ([#9343](https://github.com/firebase/FirebaseUI-Flutter/issues/9343)). ([1795911a](https://github.com/firebase/FirebaseUI-Flutter/commit/1795911a82d9507f9801663003a913f15b0f39b4))
+ - **DOCS**(ui_auth): Fixed typo in firebase_ui_oauth packages for firebase_ui_auth package. ([#9931](https://github.com/firebase/FirebaseUI-Flutter/issues/9931)). ([9de6a764](https://github.com/firebase/FirebaseUI-Flutter/commit/9de6a764879e03dd9c3c546a99c1321e68c3bd18))
+ - **DOCS**(ui_auth): Fixed typo in firebase_ui_oauth packages for firebase_ui_auth package. ([#9931](https://github.com/firebase/FirebaseUI-Flutter/issues/9931)). ([0f45fe84](https://github.com/firebase/FirebaseUI-Flutter/commit/0f45fe84014d35b00ab088b8ade3c3fa3e58ea68))
+
 ## 1.2.7
 
  - Update a dependency to the latest release.

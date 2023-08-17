@@ -1,3 +1,32 @@
+## 1.6.0
+
+ - **REFACTOR**: upgrade project to remove warnings from Flutter 3.7 ([#10344](https://github.com/firebase/FirebaseUI-Flutter/issues/10344)). ([c9364bb6](https://github.com/firebase/FirebaseUI-Flutter/commit/c9364bb65dd479f00d646a4061673167dd26aa67))
+ - **REFACTOR**: upgrade project to remove warnings from Flutter 3.7 ([#10344](https://github.com/firebase/FirebaseUI-Flutter/issues/10344)). ([4f7a8050](https://github.com/firebase/FirebaseUI-Flutter/commit/4f7a8050b2fbed2cfcc3c6896a5af22df0df0442))
+ - **FIX**: add support for AGP 8.0 ([#10901](https://github.com/firebase/FirebaseUI-Flutter/issues/10901)). ([81a1bf47](https://github.com/firebase/FirebaseUI-Flutter/commit/81a1bf47166765349ed02a87ad2f5f41929c7fcc))
+ - **FIX**: allow to unlink providers only in edit mode ([#10649](https://github.com/firebase/FirebaseUI-Flutter/issues/10649)). ([aa217855](https://github.com/firebase/FirebaseUI-Flutter/commit/aa2178557aca63d484eb2a8abb108a07081ba8bb))
+ - **FIX**(ui): bump dependencies ([#9756](https://github.com/firebase/FirebaseUI-Flutter/issues/9756)). ([9fde266e](https://github.com/firebase/FirebaseUI-Flutter/commit/9fde266e8df7dc028b53ce21b71699d758171b71))
+ - **FIX**(ui): improve pub score ([#9722](https://github.com/firebase/FirebaseUI-Flutter/issues/9722)). ([12ee1bb0](https://github.com/firebase/FirebaseUI-Flutter/commit/12ee1bb049e4b26e65cc30c2d149e7fdb8c42f1e))
+ - **FIX**: add support for AGP 8.0 ([#10901](https://github.com/firebase/FirebaseUI-Flutter/issues/10901)). ([f6df184c](https://github.com/firebase/FirebaseUI-Flutter/commit/f6df184cfec4892cda7bc19d58bf81539b295c61))
+ - **FIX**: allow to unlink providers only in edit mode ([#10649](https://github.com/firebase/FirebaseUI-Flutter/issues/10649)). ([059ee882](https://github.com/firebase/FirebaseUI-Flutter/commit/059ee8827c5fa905132dfaf6c75f2e47e5d73b9f))
+ - **FIX**(ui): bump dependencies ([#9756](https://github.com/firebase/FirebaseUI-Flutter/issues/9756)). ([dd41fcb6](https://github.com/firebase/FirebaseUI-Flutter/commit/dd41fcb6fecf4511a881dd034d4a181080b4a00d))
+ - **FIX**(ui): improve pub score ([#9722](https://github.com/firebase/FirebaseUI-Flutter/issues/9722)). ([08dd9380](https://github.com/firebase/FirebaseUI-Flutter/commit/08dd9380c908005092efa7322f8eff179ab9472a))
+ - **FEAT**: update dependency constraints to `sdk: '>=2.18.0 <4.0.0'` `flutter: '>=3.3.0'` ([#10946](https://github.com/firebase/FirebaseUI-Flutter/issues/10946)). ([9c2906d5](https://github.com/firebase/FirebaseUI-Flutter/commit/9c2906d52c75a74cf9b733f584e7c5d68f076de3))
+ - **FEAT**: update librairies to be compatible with Flutter 3.10.0 ([#10944](https://github.com/firebase/FirebaseUI-Flutter/issues/10944)). ([6a6b02b1](https://github.com/firebase/FirebaseUI-Flutter/commit/6a6b02b1125dbbe266fcc7dab379769d2fa6e4b3))
+ - **FEAT**(core): add support for Windows via Firebase C++ desktop SDK ([#10496](https://github.com/firebase/FirebaseUI-Flutter/issues/10496)). ([9ce686c6](https://github.com/firebase/FirebaseUI-Flutter/commit/9ce686c68d78e94165bde3a616702ec4c13a0fa5))
+ - **FEAT**: upgrade to dart 3 compatible dependencies ([#10890](https://github.com/firebase/FirebaseUI-Flutter/issues/10890)). ([857070d2](https://github.com/firebase/FirebaseUI-Flutter/commit/857070d21ab1046df95ef874e1592418c3587af9))
+ - **FEAT**: bump dart sdk constraint to 2.18 ([#10618](https://github.com/firebase/FirebaseUI-Flutter/issues/10618)). ([882d9205](https://github.com/firebase/FirebaseUI-Flutter/commit/882d9205325674648c02726ae1c16597012c5bdf))
+ - **FEAT**(ui_firestore): use aggregate query to display total rows count in DataTable ([#10113](https://github.com/firebase/FirebaseUI-Flutter/issues/10113)). ([09f6a072](https://github.com/firebase/FirebaseUI-Flutter/commit/09f6a072d36c07f3909d2a672ae8c8b0f8c0c10d))
+ - **FEAT**(ui_firestore): Added empty builder in FirestoreListView ([#9916](https://github.com/firebase/FirebaseUI-Flutter/issues/9916)). ([25a582a1](https://github.com/firebase/FirebaseUI-Flutter/commit/25a582a162e4e6b3d75cf5c6fbc521921d59ffeb))
+ - **FEAT**(ui): add firebase_ui_firestore ([#9342](https://github.com/firebase/FirebaseUI-Flutter/issues/9342)). ([06fce9b2](https://github.com/firebase/FirebaseUI-Flutter/commit/06fce9b287ec0101e067337d473d4d8aae0e3edf))
+ - **FEAT**: update dependency constraints to `sdk: '>=2.18.0 <4.0.0'` `flutter: '>=3.3.0'` ([#10946](https://github.com/firebase/FirebaseUI-Flutter/issues/10946)). ([a26682e0](https://github.com/firebase/FirebaseUI-Flutter/commit/a26682e0957ea983b82b5c48a2c54cec1d80995b))
+ - **FEAT**: update librairies to be compatible with Flutter 3.10.0 ([#10944](https://github.com/firebase/FirebaseUI-Flutter/issues/10944)). ([eea2c2e7](https://github.com/firebase/FirebaseUI-Flutter/commit/eea2c2e76aa268a2b8a1b9a42e8b985e06ea80b6))
+ - **FEAT**(core): add support for Windows via Firebase C++ desktop SDK ([#10496](https://github.com/firebase/FirebaseUI-Flutter/issues/10496)). ([930becc3](https://github.com/firebase/FirebaseUI-Flutter/commit/930becc3ddbffcd65f4c79bd2973994e1be396d3))
+ - **FEAT**: upgrade to dart 3 compatible dependencies ([#10890](https://github.com/firebase/FirebaseUI-Flutter/issues/10890)). ([19794810](https://github.com/firebase/FirebaseUI-Flutter/commit/19794810caeaf45e32e45be88b4efd6714b98859))
+ - **FEAT**: bump dart sdk constraint to 2.18 ([#10618](https://github.com/firebase/FirebaseUI-Flutter/issues/10618)). ([cf7aa79c](https://github.com/firebase/FirebaseUI-Flutter/commit/cf7aa79cbae0189e6e34a0c970d81e6cd4e5c25d))
+ - **FEAT**(ui_firestore): use aggregate query to display total rows count in DataTable ([#10113](https://github.com/firebase/FirebaseUI-Flutter/issues/10113)). ([ea4b4a42](https://github.com/firebase/FirebaseUI-Flutter/commit/ea4b4a4233727f7c0680090d8addbdd0f3b0a071))
+ - **FEAT**(ui_firestore): Added empty builder in FirestoreListView ([#9916](https://github.com/firebase/FirebaseUI-Flutter/issues/9916)). ([540c8728](https://github.com/firebase/FirebaseUI-Flutter/commit/540c8728ff387e90f93ac8ff66a65e7f3b220caa))
+ - **FEAT**(ui): add firebase_ui_firestore ([#9342](https://github.com/firebase/FirebaseUI-Flutter/issues/9342)). ([39b647e7](https://github.com/firebase/FirebaseUI-Flutter/commit/39b647e7ba2fbf023812d049d350956d8f79dedd))
+
 ## 1.5.6
 
  - Update a dependency to the latest release.
