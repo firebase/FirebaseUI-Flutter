@@ -20,43 +20,42 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   String get cancelLabel => "отменить";
 
   @override
-  String get chooseACountry => "Choose a country (Выберите страну)";
+  String get chooseACountry => "Выберите страну";
 
   @override
   String get confirmPasswordDoesNotMatchErrorText => "Пароли не совпадают.";
 
   @override
-  String get confirmPasswordInputLabel =>
-      "Confirm password (Введите пароль ещё раз)";
+  String get confirmPasswordInputLabel => "Введите пароль ещё раз";
 
   @override
   String get confirmPasswordIsRequiredErrorText => "Подтвердите пароль";
 
   @override
-  String get continueText => "Continue (Далее)";
+  String get continueText => "Далее";
 
   @override
-  String get countryCode => "Code (Код)";
+  String get countryCode => "Код";
 
   @override
   String get credentialAlreadyInUseErrorText =>
       "Этот поставщик связан с аккаунтом другого пользователя.";
 
   @override
-  String get deleteAccount => "Delete account (Удалить аккаунт)";
+  String get deleteAccount => "Удалить аккаунт";
 
   @override
   String get differentMethodsSignInTitleText =>
       "Используйте один из следующих способов для входа";
 
   @override
-  String get disable => "Disable (Отключить)";
+  String get disable => "Отключить";
 
   @override
   String get eastInitialLabel => "E";
 
   @override
-  String get emailInputLabel => "Email (Электронная почта)";
+  String get emailInputLabel => "Электронная почта";
 
   @override
   String get emailIsRequiredErrorText => "Укажите адрес электронной почты.";
@@ -70,20 +69,20 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
       "К этой электронной почте уже привязан аккаунт.";
 
   @override
-  String get enable => "Enable (Включить)";
+  String get enable => "Включить";
 
   @override
   String get enableMoreSignInMethods => "Включить больше способов для входа.";
 
   @override
-  String get enterSMSCodeText => "Enter SMS code (Ввести код из SMS)";
+  String get enterSMSCodeText => "Ввести код из SMS";
 
   @override
   String get findProviderForEmailTitleText =>
       "Введите свой адрес электронной почты, чтобы продолжить";
 
   @override
-  String get forgotPasswordButtonLabel => "Forgot password? (Забыли пароль?)";
+  String get forgotPasswordButtonLabel => "Забыли пароль?";
 
   @override
   String get forgotPasswordHintText =>
@@ -96,7 +95,7 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   String get geopointLabel => "геоточка";
 
   @override
-  String get goBackButtonLabel => "Go back (Назад)";
+  String get goBackButtonLabel => "Назад";
 
   @override
   String get invalidCountryCode => "Неверный код.";
@@ -133,13 +132,13 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   String get numberLabel => "число";
 
   @override
-  String get off => "Off (Откл.)";
+  String get off => "Откл.";
 
   @override
-  String get on => "On (Вкл.)";
+  String get on => "Вкл.";
 
   @override
-  String get passwordInputLabel => "Password (Пароль)";
+  String get passwordInputLabel => "Пароль";
 
   @override
   String get passwordIsRequiredErrorText => "Укажите пароль.";
@@ -149,7 +148,7 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
       "Мы отправили вам электронное письмо со ссылкой для сброса пароля. Проверьте почту.";
 
   @override
-  String get phoneInputLabel => "Phone number (Номер телефона)";
+  String get phoneInputLabel => "Номер телефона";
 
   @override
   String get phoneNumberInvalidErrorText => "Недействительный номер телефона.";
@@ -170,62 +169,56 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   String get referenceLabel => "ссылка";
 
   @override
-  String get registerActionText => "Register (Зарегистрировать)";
+  String get registerActionText => "Зарегистрироваться";
 
   @override
   String get registerHintText => "У вас ещё нет аккаунта?";
 
   @override
-  String get registerText => "Register (Зарегистрировать)";
+  String get registerText => "Зарегистрироваться";
 
   @override
-  String get resetPasswordButtonLabel => "Reset password (Сбросить пароль)";
+  String get resetPasswordButtonLabel => "Сбросить пароль";
 
   @override
-  String get sendLinkButtonLabel => "Send magic link (Отправить ссылку)";
+  String get sendLinkButtonLabel => "Отправить ссылку";
 
   @override
-  String get signInActionText => "Sign in (Войти)";
+  String get signInActionText => "Войти";
 
   @override
   String get signInHintText => "Уже зарегистрированы?";
 
   @override
-  String get signInMethods => "Sign in methods (Как войти в систему)";
+  String get signInMethods => "Как войти в систему";
 
   @override
-  String get signInText => "Sign in (Войти)";
+  String get signInText => "Войти";
 
   @override
-  String get signInWithAppleButtonText =>
-      "Sign in with Apple (Войти через аккаунт Apple)";
+  String get signInWithAppleButtonText => "Войти через аккаунт Apple";
 
   @override
   String get signInWithEmailLinkSentText =>
       "Мы отправили вам электронное письмо со ссылкой. Проверьте свой ящик и перейдите по ссылке, чтобы войти в систему.";
 
   @override
-  String get signInWithEmailLinkViewTitleText =>
-      "Sign in with magic link (Войти по ссылке)";
+  String get signInWithEmailLinkViewTitleText => "Войти по ссылке";
 
   @override
-  String get signInWithFacebookButtonText =>
-      "Sign in with Facebook (Войти через аккаунт Facebook)";
+  String get signInWithFacebookButtonText => "Войти через аккаунт Facebook";
 
   @override
-  String get signInWithGoogleButtonText =>
-      "Sign in with Google (Войти с аккаунтом Google)";
+  String get signInWithGoogleButtonText => "Войти через аккаунт Google";
 
   @override
-  String get signInWithPhoneButtonText =>
-      "Sign in with phone (Войти по номеру телефона)";
+  String get signInWithPhoneButtonText => "Войти по номеру телефона";
 
   @override
-  String get signInWithTwitterButtonText =>
-      "Sign in with Twitter (Войти через аккаунт Twitter)";
+  String get signInWithTwitterButtonText => "Войти через аккаунт Twitter";
 
   @override
-  String get signOutButtonText => "Sign out (Выйти)";
+  String get signOutButtonText => "Выйти";
 
   @override
   String get smsAutoresolutionFailedError =>
@@ -256,7 +249,7 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   String get valueLabel => "значение";
 
   @override
-  String get verifyCodeButtonText => "Verify (Подтвердить)";
+  String get verifyCodeButtonText => "Подтвердить";
 
   @override
   String get verifyingSMSCodeText => "Идет подтверждение кода из SMS...";
