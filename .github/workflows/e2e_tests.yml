@@ -1,4 +1,4 @@
-name: unit_tests
+name: e2e_tests
 
 on:
   pull_request:
