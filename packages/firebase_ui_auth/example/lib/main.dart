@@ -22,7 +22,7 @@ import 'firebase_options.dart';
 final actionCodeSettings = ActionCodeSettings(
   url: 'https://flutterfire-e2e-tests.firebaseapp.com',
   handleCodeInApp: true,
-  androidMinimumVersion: '1',
+  androidMinimumVersion: '2',
   androidPackageName: 'io.flutter.plugins.firebase_ui.firebase_ui_example',
   iOSBundleId: 'io.flutter.plugins.fireabaseUiExample',
 );
