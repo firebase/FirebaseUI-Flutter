@@ -21,7 +21,7 @@
     "description": "",
     "placeholders": {}
   },
-  "chooseACountry": "Choose a country (Выберите страну)",
+  "chooseACountry": "Выберите страну",
   "@chooseACountry": {
     "description": "Used as a label of the country code picker dropdown.",
     "placeholders": {}
@@ -31,7 +31,7 @@
     "description": "Used as an error text when provided passwords do not match.",
     "placeholders": {}
   },
-  "confirmPasswordInputLabel": "Confirm password (Введите пароль ещё раз)",
+  "confirmPasswordInputLabel": "Введите пароль ещё раз",
   "@confirmPasswordInputLabel": {
     "description": "Used as a label of the PasswordInput that confirms a provided password.",
     "placeholders": {}
@@ -41,12 +41,12 @@
     "description": "Used as an error text when PasswordInput used to confirm the password is empty.",
     "placeholders": {}
   },
-  "continueText": "Continue (Далее)",
+  "continueText": "Далее",
   "@continueText": {
     "description": "Used as a label of the submit button that takes the user to the next step of the authenticatiion flow.",
     "placeholders": {}
   },
-  "countryCode": "Code (Код)",
+  "countryCode": "Код",
   "@countryCode": {
     "description": "Used as a placeholder of the country code input.",
     "placeholders": {}
@@ -56,7 +56,7 @@
     "description": "Error text that is show when user tries to use an OAuth provider that doesn't belong to currently signed in user account.",
     "placeholders": {}
   },
-  "deleteAccount": "Delete account (Удалить аккаунт)",
+  "deleteAccount": "Удалить аккаунт",
   "@deleteAccount": {
     "description": "Used as a label of the DeleteAccountButton.",
     "placeholders": {}
@@ -66,7 +66,7 @@
     "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
     "placeholders": {}
   },
-  "disable": "Disable (Отключить)",
+  "disable": "Отключить",
   "@disable": {
     "description": "Button label that suggests to disable 2FA",
     "placeholders": {}
@@ -76,7 +76,7 @@
     "description": "",
     "placeholders": {}
   },
-  "emailInputLabel": "Email (Электронная почта)",
+  "emailInputLabel": "Электронная почта",
   "@emailInputLabel": {
     "description": "Used as a label of the EmailInput.",
     "placeholders": {}
@@ -86,7 +86,7 @@
     "description": "Used as an error text of the EmailInput when the email is empty.",
     "placeholders": {}
   },
-  "emailLinkSignInButtonLabel": "Sign in with magic link (Войти по ссылке)",
+  "emailLinkSignInButtonLabel": "Войти по Magic Link",
   "@emailLinkSignInButtonLabel": {
     "description": "Used as a label of the EmailLinkSignInButton.",
     "placeholders": {}
@@ -96,7 +96,7 @@
     "description": "Used as an error message when the user tries to sign up with an email that is already used.",
     "placeholders": {}
   },
-  "enable": "Enable (Включить)",
+  "enable": "Включить",
   "@enable": {
     "description": "Button label that suggests to enable 2FA",
     "placeholders": {}
@@ -106,7 +106,7 @@
     "description": "Used as a hint to connect more providers.",
     "placeholders": {}
   },
-  "enterSMSCodeText": "Enter SMS code (Ввести код из SMS)",
+  "enterSMSCodeText": "Ввести код из SMS",
   "@enterSMSCodeText": {
     "description": "Used as a label of the SMSCodeInput.",
     "placeholders": {}
@@ -116,7 +116,7 @@
     "description": "Used as a title of the FindProvidersForEmailView.",
     "placeholders": {}
   },
-  "forgotPasswordButtonLabel": "Forgot password? (Забыли пароль?)",
+  "forgotPasswordButtonLabel": "Забыли пароль?",
   "@forgotPasswordButtonLabel": {
     "description": "Used as a label of the ForgotPasswordButton.",
     "placeholders": {}
@@ -136,7 +136,7 @@
     "description": "",
     "placeholders": {}
   },
-  "goBackButtonLabel": "Go back (Назад)",
+  "goBackButtonLabel": "Назад",
   "@goBackButtonLabel": {
     "description": "Used as a label of the back button.",
     "placeholders": {}
@@ -200,17 +200,17 @@
     "description": "",
     "placeholders": {}
   },
-  "off": "Off (Откл.)",
+  "off": "Откл.",
   "@off": {
     "description": "Label that suggests that 2-step verification is not enabled",
     "placeholders": {}
   },
-  "on": "On (Вкл.)",
+  "on": "Вкл.",
   "@on": {
     "description": "Label that suggests that 2-step verification is enabled",
     "placeholders": {}
   },
-  "passwordInputLabel": "Password (Пароль)",
+  "passwordInputLabel": "Пароль",
   "@passwordInputLabel": {
     "description": "Used as a label of the PasswordInput.",
     "placeholders": {}
@@ -225,7 +225,7 @@
     "description": "Indicates that the password reset email was sent.",
     "placeholders": {}
   },
-  "phoneInputLabel": "Phone number (Номер телефона)",
+  "phoneInputLabel": "Номер телефона",
   "@phoneInputLabel": {
     "description": "Used as a label of the PhoneInput.",
     "placeholders": {}
@@ -260,7 +260,7 @@
     "description": "",
     "placeholders": {}
   },
-  "registerActionText": "Register (Зарегистрировать)",
+  "registerActionText": "Зарегистрироваться",
   "@registerActionText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signUp.",
     "placeholders": {}
@@ -270,12 +270,12 @@
     "description": "Used as a hint text of the LoginView suggesting to create a new account.",
     "placeholders": {}
   },
-  "registerText": "Register (Зарегистрировать)",
+  "registerText": "Зарегистрироваться",
   "@registerText": {
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signUp.",
     "placeholders": {}
   },
-  "resetPasswordButtonLabel": "Reset password (Сбросить пароль)",
+  "resetPasswordButtonLabel": "Сбросить пароль",
   "@resetPasswordButtonLabel": {
     "description": "Used as a label of submit button of the ForgotPasswordView.",
     "placeholders": {}
@@ -284,12 +284,12 @@
     "description": "A representation of the runtime type of the object.",
     "placeholders": {}
   },
-  "sendLinkButtonLabel": "Send magic link (Отправить ссылку)",
+  "sendLinkButtonLabel": "Отправить ссылку",
   "@sendLinkButtonLabel": {
     "description": "Used as a label of the submit button on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInActionText": "Sign in (Войти)",
+  "signInActionText": "Войти",
   "@signInActionText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signIn.",
     "placeholders": {}
@@ -299,17 +299,17 @@
     "description": "Used as a hint text of the LoginView suggesting to sign in instead of registering a new account.",
     "placeholders": {}
   },
-  "signInMethods": "Sign in methods (Как войти в систему)",
+  "signInMethods": "Как войти в систему",
   "@signInMethods": {
     "description": "Used as a label of the row showing connected providers.",
     "placeholders": {}
   },
-  "signInText": "Sign in (Войти)",
+  "signInText": "Войти",
   "@signInText": {
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInWithAppleButtonText": "Sign in with Apple (Войти через аккаунт Apple)",
+  "signInWithAppleButtonText": "Войти через аккаунт Apple",
   "@signInWithAppleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
@@ -319,32 +319,32 @@
     "description": "Indicates that email with a sign in link was sent.",
     "placeholders": {}
   },
-  "signInWithEmailLinkViewTitleText": "Sign in with magic link (Войти по ссылке)",
+  "signInWithEmailLinkViewTitleText": "Войти по ссылке",
   "@signInWithEmailLinkViewTitleText": {
     "description": "Used as a title on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInWithFacebookButtonText": "Sign in with Facebook (Войти через аккаунт Facebook)",
+  "signInWithFacebookButtonText": "Войти через аккаунт Facebook",
   "@signInWithFacebookButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Facebook provider.",
     "placeholders": {}
   },
-  "signInWithGoogleButtonText": "Sign in with Google (Войти с аккаунтом Google)",
+  "signInWithGoogleButtonText": "Войти через аккаунт Google",
   "@signInWithGoogleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Google provider.",
     "placeholders": {}
   },
-  "signInWithPhoneButtonText": "Sign in with phone (Войти по номеру телефона)",
+  "signInWithPhoneButtonText": "Войти по номеру телефона",
   "@signInWithPhoneButtonText": {
     "description": "Used as a label of the PhoneVerificationButton.",
     "placeholders": {}
   },
-  "signInWithTwitterButtonText": "Sign in with Twitter (Войти через аккаунт Twitter)",
+  "signInWithTwitterButtonText": "Войти через аккаунт Twitter",
   "@signInWithTwitterButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Twitter provider.",
     "placeholders": {}
   },
-  "signOutButtonText": "Sign out (Выйти)",
+  "signOutButtonText": "Выйти",
   "@signOutButtonText": {
     "description": "Used as a label of the SignOutButton.",
     "placeholders": {}
@@ -394,7 +394,7 @@
     "description": "",
     "placeholders": {}
   },
-  "verifyCodeButtonText": "Verify (Подтвердить)",
+  "verifyCodeButtonText": "Подтвердить",
   "@verifyCodeButtonText": {
     "description": "Used as a label of the submit button of the SMSCodeInputView.",
     "placeholders": {}
@@ -425,3 +425,4 @@
     "placeholders": {}
   }
 }
+
