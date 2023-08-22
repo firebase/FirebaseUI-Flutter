@@ -29,42 +29,37 @@ jobs:
       has_changes: ${{ steps.filter.outputs.changed_packages != '[]' }}
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/changes_unit
+      - uses: ./.github/actions/changes_e2e
         id: filter
 
-  unit_tests:
-    name: "Run unit tests"
-    runs-on: ubuntu-latest
+  android:
+    runs-on: macos-13
     needs: detect_changed_packages
     if: needs.detect_changed_packages.outputs.has_changes == 'true'
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         package: ${{ fromJson(needs.detect_changed_packages.outputs.packages) }}
-        target: ["html", "io"]
-
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
+      - name: Install dependencies
+        run: flutter pub get
       - uses: bluefireteam/melos-action@v1
         with:
           melos-version: "3.0.1"
-
-      - name: Run unit tests on Chrome
-        if: matrix.target == 'html'
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          arch: x86_64
+      - run: flutter devices
+      - name: Run e2e tests
         run: |
-          melos exec \
-            --scope=${{ matrix.package }}* \
-            --dir-exists="test" \
-            --fail-fast -- "flutter test --platform chrome"
-
-      - name: Run unit tests
-        if: matrix.target == 'io'
-        run: |
-          melos exec \
-            --scope=${{ matrix.package }}* \
-            --dir-exists="test" \
-            --fail-fast -- "flutter test"
+          melos exec 
+            --scope ${{ matrix.package }}_example 
+            -c 1 
+            --fail-fast
+            -- flutter test integration_test/${{ matrix.package }}_e2e.dart

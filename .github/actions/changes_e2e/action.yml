@@ -1,0 +1,27 @@
+name: "Detect changes"
+description: "Detects which packages were changed"
+
+outputs:
+  changed_packages:
+    description: "A JSON string containing the changed packages"
+    value: ${{ steps.filter.outputs.changes }}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          firebase_ui_auth: 
+            - 'packages/firebase_ui_auth/**/*.dart'
+            - 'packages/firebase_ui_localizations/**/*.dart'
+            - 'packages/firebase_ui_oauth/**/*.dart'
+            - 'packages/firebase_ui_oauth_apple/**/*.dart'
+            - 'packages/firebase_ui_oauth_facebook/**/*.dart'
+            - 'packages/firebase_ui_oauth_google/**/*.dart'
+            - 'packages/firebase_ui_oauth_twitter/**/*.dart'
+          firebase_ui_firestore:
+            - 'packages/firebase_ui_firestore/**/*.dart'
+          firebase_ui_storage:
+            - 'packages/firebase_ui_storage/**/*.dart'
