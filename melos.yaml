@@ -3,6 +3,7 @@ repository: https://github.com/firebase/FirebaseUI-Flutter
 
 packages:
   - packages/*
+  - packages/*/example
 
 command:
   version:
