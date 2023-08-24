@@ -65,17 +65,13 @@ class FirebaseAuthUIExample extends StatelessWidget {
   const FirebaseAuthUIExample({super.key});
 
   String get initialRoute {
-    final auth = FirebaseAuth.instance;
+    final user = FirebaseAuth.instance.currentUser;
 
-    if (auth.currentUser == null) {
-      return '/';
-    }
-
-    if (!auth.currentUser!.emailVerified && auth.currentUser!.email != null) {
-      return '/verify-email';
-    }
-
-    return '/profile';
+    return switch (user) {
+      null => '/',
+      User(emailVerified: false, email: final String _) => '/verify-email',
+      _ => '/profile',
+    };
   }
 
   @override
@@ -127,25 +123,19 @@ class FirebaseAuthUIExample extends StatelessWidget {
               VerifyPhoneAction((context, _) {
                 Navigator.pushNamed(context, '/phone');
               }),
-              AuthStateChangeAction<SignedIn>((context, state) {
-                if (!state.user!.emailVerified) {
-                  Navigator.pushNamed(context, '/verify-email');
-                } else {
-                  Navigator.pushReplacementNamed(context, '/profile');
-                }
-              }),
-              AuthStateChangeAction<UserCreated>((context, state) {
-                if (!state.credential.user!.emailVerified) {
-                  Navigator.pushNamed(context, '/verify-email');
-                } else {
-                  Navigator.pushReplacementNamed(context, '/profile');
-                }
-              }),
-              AuthStateChangeAction<CredentialLinked>((context, state) {
-                if (!state.user.emailVerified) {
-                  Navigator.pushNamed(context, '/verify-email');
-                } else {
-                  Navigator.pushReplacementNamed(context, '/profile');
+              AuthStateChangeAction((context, state) {
+                final user = switch (state) {
+                  SignedIn(user: final user) => user,
+                  CredentialLinked(user: final user) => user,
+                  UserCreated(credential: final cred) => cred.user,
+                  _ => null,
+                };
+
+                switch (user) {
+                  case User(emailVerified: true):
+                    Navigator.pushReplacementNamed(context, '/profile');
+                  case User(emailVerified: false, email: final String _):
+                    Navigator.pushNamed(context, '/verify-email');
                 }
               }),
               mfaAction,
@@ -159,23 +149,29 @@ class FirebaseAuthUIExample extends StatelessWidget {
             headerBuilder: headerImage('assets/images/flutterfire_logo.png'),
             sideBuilder: sideImage('assets/images/flutterfire_logo.png'),
             subtitleBuilder: (context, action) {
+              final actionText = switch (action) {
+                AuthAction.signIn => 'Please sign in to continue.',
+                AuthAction.signUp => 'Please create an account to continue',
+                _ => throw Exception('Invalid action: $action'),
+              };
+
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  action == AuthAction.signIn
-                      ? 'Welcome to Firebase UI! Please sign in to continue.'
-                      : 'Welcome to Firebase UI! Please create an account to continue',
-                ),
+                child: Text('Welcome to Firebase UI! $actionText.'),
               );
             },
             footerBuilder: (context, action) {
+              final actionText = switch (action) {
+                AuthAction.signIn => 'signing in',
+                AuthAction.signUp => 'registering',
+                _ => throw Exception('Invalid action: $action'),
+              };
+
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: Text(
-                    action == AuthAction.signIn
-                        ? 'By signing in, you agree to our terms and conditions.'
-                        : 'By registering, you agree to our terms and conditions.',
+                    'By $actionText, you agree to our terms and conditions.',
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ),
