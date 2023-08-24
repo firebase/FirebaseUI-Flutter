@@ -39,6 +39,8 @@ class EmailLinkSignInView extends StatefulWidget {
 
 class _EmailLinkSignInViewState extends State<EmailLinkSignInView> {
   final emailCtrl = TextEditingController();
+  late final canPop = Navigator.canPop(context);
+
   @override
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
@@ -79,6 +81,16 @@ class _EmailLinkSignInViewState extends State<EmailLinkSignInView> {
                 label: l.sendLinkButtonLabel,
                 onTap: () {
                   ctrl.sendLink(emailCtrl.text);
+                },
+              ),
+            ],
+            if (canPop) ...[
+              const SizedBox(height: 8),
+              UniversalButton(
+                text: l.goBackButtonLabel,
+                variant: ButtonVariant.text,
+                onPressed: () {
+                  Navigator.of(context).pop();
                 },
               ),
             ],
