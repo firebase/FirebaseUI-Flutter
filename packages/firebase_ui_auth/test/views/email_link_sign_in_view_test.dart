@@ -56,7 +56,12 @@ void main() {
                         body: EmailLinkSignInView(
                             provider: emailLinkProvider, auth: auth),
                       ),
-                    ))))));
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
     await tester.tap(find.textContaining("Push"));
     await tester.pumpAndSettle();
     final button = find.text(labels.goBackButtonLabel);
