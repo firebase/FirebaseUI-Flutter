@@ -1,3 +1,7 @@
+## 1.3.7
+
+ - Update a dependency to the latest release.
+
 ## 1.3.6
 
  - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)

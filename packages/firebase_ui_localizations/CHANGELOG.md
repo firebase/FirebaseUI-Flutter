@@ -1,3 +1,7 @@
+## 1.5.3
+
+ - **FIX**: update ru translations to remove English duplicates ([#65](https://github.com/firebase/FirebaseUI-Flutter/issues/65)). ([9d813bee](https://github.com/firebase/FirebaseUI-Flutter/commit/9d813beed875654ea9eeab7ea9687508486624fe))
+
 ## 1.5.2
 
  - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
