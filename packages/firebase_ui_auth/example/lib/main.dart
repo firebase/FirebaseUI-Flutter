@@ -84,7 +84,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
     );
 
     final mfaAction = AuthStateChangeAction<MFARequired>(
-      (context, state) async {
+          (context, state) async {
         final nav = Navigator.of(context);
 
         await startMFAVerification(
@@ -131,11 +131,29 @@ class FirebaseAuthUIExample extends StatelessWidget {
                   _ => null,
                 };
 
+
                 switch (user) {
                   case User(emailVerified: true):
                     Navigator.pushReplacementNamed(context, '/profile');
                   case User(emailVerified: false, email: final String _):
                     Navigator.pushNamed(context, '/verify-email');
+                  case User(displayName: null):
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return Scaffold(
+                          appBar: AppBar(
+                            title: const Text('What is your name?'),
+                          ),
+                          body: const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Column(children: [
+                              SizedBox(height: 10),
+                              EditableUserDisplayName(),
+                            ]),
+                          ),
+                        );
+                      }),
+                    );
                 }
               }),
               mfaAction,
@@ -215,7 +233,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
         },
         '/sms': (context) {
           final arguments = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>?;
+          as Map<String, dynamic>?;
 
           return SMSCodeInputScreen(
             actions: [
@@ -231,7 +249,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
         },
         '/forgot-password': (context) {
           final arguments = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>?;
+          as Map<String, dynamic>?;
 
           return ForgotPasswordScreen(
             email: arguments?['email'],
