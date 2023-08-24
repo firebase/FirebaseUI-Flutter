@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_localizations` - `v1.5.3`](#firebase_ui_localizations---v153)
+ - [`firebase_ui_oauth_apple` - `v1.2.9`](#firebase_ui_oauth_apple---v129)
+ - [`firebase_ui_auth` - `v1.6.5`](#firebase_ui_auth---v165)
+ - [`firebase_ui_database` - `v1.3.7`](#firebase_ui_database---v137)
+ - [`firebase_ui_firestore` - `v1.5.9`](#firebase_ui_firestore---v159)
+ - [`firebase_ui_oauth` - `v1.4.9`](#firebase_ui_oauth---v149)
+ - [`firebase_ui_oauth_facebook` - `v1.2.9`](#firebase_ui_oauth_facebook---v129)
+ - [`firebase_ui_oauth_twitter` - `v1.2.9`](#firebase_ui_oauth_twitter---v129)
+ - [`firebase_ui_oauth_google` - `v1.2.9`](#firebase_ui_oauth_google---v129)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_auth` - `v1.6.5`
+ - `firebase_ui_database` - `v1.3.7`
+ - `firebase_ui_firestore` - `v1.5.9`
+ - `firebase_ui_oauth` - `v1.4.9`
+ - `firebase_ui_oauth_facebook` - `v1.2.9`
+ - `firebase_ui_oauth_twitter` - `v1.2.9`
+ - `firebase_ui_oauth_google` - `v1.2.9`
+
+---
+
+#### `firebase_ui_localizations` - `v1.5.3`
+
+ - **FIX**: update ru translations to remove English duplicates ([#65](https://github.com/firebase/FirebaseUI-Flutter/issues/65)). ([9d813bee](https://github.com/firebase/FirebaseUI-Flutter/commit/9d813beed875654ea9eeab7ea9687508486624fe))
+
+#### `firebase_ui_oauth_apple` - `v1.2.9`
+
+ - **FIX**(firebase_ui_oauth_apple): Enables Android as a supported platform for AppleProvider. ([48a1134b](https://github.com/firebase/FirebaseUI-Flutter/commit/48a1134b92a30684464c33adaa6e0f7beab7694e))
+
+
 ## 2023-08-17
 
 ### Changes
