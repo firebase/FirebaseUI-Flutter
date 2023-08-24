@@ -3,10 +3,10 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 import '../test_utils.dart';
 
@@ -45,23 +45,25 @@ void main() {
   /// If EmailLinkSignInView is pushed from another view, there
   /// should be a button allowing a user to go back.
   testWidgets('show go back option if not root', (tester) async {
-    await tester.pumpWidget(TestMaterialApp(
+    await tester.pumpWidget(
+      TestMaterialApp(
         child: Builder(
-            builder: (context) => TextButton(
-                child: const Text("Push"),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        body: EmailLinkSignInView(
-                            provider: emailLinkProvider, auth: auth),
-                      ),
-                    ),
-                  ),
+          builder: (context) => TextButton(
+            child: const Text("Push"),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  body: EmailLinkSignInView(
+                      provider: emailLinkProvider, auth: auth),
                 ),
               ),
             ),
-          );
+          ),
+        ),
+      ),
+    );
+
     await tester.tap(find.textContaining("Push"));
     await tester.pumpAndSettle();
     final button = find.text(labels.goBackButtonLabel);
