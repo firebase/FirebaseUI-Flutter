@@ -271,4 +271,7 @@ class EsLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "La contraseña no es válida o el usuario no tiene una contraseña";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

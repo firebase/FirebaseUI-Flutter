@@ -262,4 +262,7 @@ class HeLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "הסיסמה אינה חוקית או שלמשתמש אין סיסמה";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

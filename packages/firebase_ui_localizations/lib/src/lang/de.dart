@@ -266,4 +266,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Das Passwort ist ungültig oder der Nutzer hat kein Passwort";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

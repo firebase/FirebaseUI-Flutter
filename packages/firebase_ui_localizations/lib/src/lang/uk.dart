@@ -267,4 +267,7 @@ class UkLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "У користувача немає пароля або він недійсний";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

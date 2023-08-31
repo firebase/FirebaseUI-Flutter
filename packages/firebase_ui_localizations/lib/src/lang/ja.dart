@@ -259,4 +259,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get wrongOrNoPasswordErrorText => "パスワードが無効か、ユーザーにパスワードが設定されていません";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

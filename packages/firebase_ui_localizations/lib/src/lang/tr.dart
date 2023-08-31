@@ -265,4 +265,7 @@ class TrLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Girdiğiniz şifre yanlış veya kullanıcının şifresi yok";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

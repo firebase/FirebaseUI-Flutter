@@ -265,4 +265,7 @@ class PlLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Hasło jest nieprawidłowe lub użytkownik nie ma hasła";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

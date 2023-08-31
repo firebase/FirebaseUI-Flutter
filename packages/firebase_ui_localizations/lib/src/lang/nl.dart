@@ -265,4 +265,7 @@ class NlLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Het wachtwoord is ongeldig of de gebruiker heeft geen wachtwoord";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

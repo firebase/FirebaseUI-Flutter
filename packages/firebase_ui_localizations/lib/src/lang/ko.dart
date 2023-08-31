@@ -257,4 +257,7 @@ class KoLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get wrongOrNoPasswordErrorText => "비밀번호가 잘못되었거나 사용자에게 비밀번호가 없습니다.";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

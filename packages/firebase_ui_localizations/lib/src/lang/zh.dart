@@ -255,4 +255,7 @@ class ZhLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get wrongOrNoPasswordErrorText => "密码无效，或者用户没有密码";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

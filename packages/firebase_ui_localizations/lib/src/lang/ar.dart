@@ -269,4 +269,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "كلمة المرور غير صالحة أو لم يُدخِل المستخدم كلمة مرور.";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

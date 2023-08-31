@@ -262,4 +262,7 @@ class ThLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "รหัสผ่านไม่ถูกต้องหรือผู้ใช้ไม่มีรหัสผ่าน";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

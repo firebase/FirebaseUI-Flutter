@@ -272,4 +272,7 @@ class FrLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Le mot de passe n'est pas valide ou l'utilisateur n'en possède pas";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

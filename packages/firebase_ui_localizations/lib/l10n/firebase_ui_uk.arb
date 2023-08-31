@@ -1,6 +1,6 @@
 {
   "@@locale": "uk",
-  "@@last_modified": "2022-09-14T18:25:39.449",
+  "@@last_modified": "2023-08-31T15:49:19.836705",
   "accessDisabledErrorText": "Доступ до цього облікового запису тимчасово вимкнено",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -422,6 +422,11 @@
   "wrongOrNoPasswordErrorText": "У користувача немає пароля або він недійсний",
   "@wrongOrNoPasswordErrorText": {
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Upload file",
+  "@uploadButtonText": {
+    "description": "UploadButton label",
     "placeholders": {}
   }
 }
