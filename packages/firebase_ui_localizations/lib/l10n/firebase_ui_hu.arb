@@ -1,6 +1,6 @@
 {
   "@@locale": "hu",
-  "@@last_modified": "2022-12-14T10:50:43",
+  "@@last_modified": "2023-08-31T15:49:19.825507",
   "accessDisabledErrorText": "A fiók átmenetileg le van tiltva",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -422,6 +422,11 @@
   "wrongOrNoPasswordErrorText": "A jelszó helytelen vagy nincs megadva",
   "@wrongOrNoPasswordErrorText": {
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Upload file",
+  "@uploadButtonText": {
+    "description": "UploadButton label",
     "placeholders": {}
   }
 }

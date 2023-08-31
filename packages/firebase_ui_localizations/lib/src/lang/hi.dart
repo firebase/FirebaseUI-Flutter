@@ -265,4 +265,7 @@ class HiLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "पासवर्ड अमान्य है या उपयोगकर्ता ने कोई पासवर्ड सेट नहीं किया है";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

@@ -1,6 +1,6 @@
 {
   "@@locale": "zh_TW",
-  "@@last_modified": "2022-09-14T18:25:39.449",
+  "@@last_modified": "2023-08-31T15:49:19.838651",
   "accessDisabledErrorText": "這個帳戶暫時無法存取",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -422,6 +422,11 @@
   "wrongOrNoPasswordErrorText": "密碼無效或使用者未輸入密碼",
   "@wrongOrNoPasswordErrorText": {
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Upload file",
+  "@uploadButtonText": {
+    "description": "UploadButton label",
     "placeholders": {}
   }
 }

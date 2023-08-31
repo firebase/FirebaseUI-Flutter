@@ -5,6 +5,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -104,9 +105,10 @@ class _UploadButtonState extends State<UploadButton> {
   @override
   Widget build(BuildContext context) {
     final config = context.configFor(storage);
+    final l = FirebaseUILocalizations.labelsOf(context);
 
     return LoadingButton(
-      label: 'Upload file', // TOOD(lesnitsky): i18n
+      label: l.uploadButtonText,
       cupertinoIcon: CupertinoIcons.cloud_upload,
       materialIcon: Icons.upload_outlined,
       isLoading: isLoading,

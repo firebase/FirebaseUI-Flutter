@@ -266,4 +266,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "A senha é inválida ou o usuário não tem uma senha";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

@@ -1,6 +1,6 @@
 {
   "@@locale": "ko",
-  "@@last_modified": "2022-09-14T18:25:39.449",
+  "@@last_modified": "2023-08-31T15:49:19.820707",
   "accessDisabledErrorText": "이 계정의 액세스가 일시적으로 중지되었습니다.",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -422,6 +422,11 @@
   "wrongOrNoPasswordErrorText": "비밀번호가 잘못되었거나 사용자에게 비밀번호가 없습니다.",
   "@wrongOrNoPasswordErrorText": {
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Upload file",
+  "@uploadButtonText": {
+    "description": "UploadButton label",
     "placeholders": {}
   }
 }

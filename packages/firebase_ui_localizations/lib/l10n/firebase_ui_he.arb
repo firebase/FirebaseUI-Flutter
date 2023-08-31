@@ -1,6 +1,6 @@
 {
   "@@locale": "he",
-  "@@last_modified": "2023-03-28T13:23:39.449",
+  "@@last_modified": "2023-08-31T15:49:19.833349",
   "accessDisabledErrorText": "הגישה לחשבון זה הושבתה באופן זמני",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -31,7 +31,7 @@
     "description": "Used as an error text when provided passwords do not match.",
     "placeholders": {}
   },
-  "confirmPasswordInputLabel":  "וודא סיסמה",
+  "confirmPasswordInputLabel": "וודא סיסמה",
   "@confirmPasswordInputLabel": {
     "description": "Used as a label of the PasswordInput that confirms a provided password.",
     "placeholders": {}
@@ -422,6 +422,11 @@
   "wrongOrNoPasswordErrorText": "הסיסמה אינה חוקית או שלמשתמש אין סיסמה",
   "@wrongOrNoPasswordErrorText": {
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Upload file",
+  "@uploadButtonText": {
+    "description": "UploadButton label",
     "placeholders": {}
   }
 }

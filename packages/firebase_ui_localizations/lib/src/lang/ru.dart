@@ -265,4 +265,7 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Пароль недействителен или не установлен для этого пользователя.";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

@@ -263,4 +263,7 @@ class HuLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "A jelszó helytelen vagy nincs megadva";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

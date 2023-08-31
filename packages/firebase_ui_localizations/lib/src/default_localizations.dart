@@ -267,6 +267,9 @@ abstract class FirebaseUILocalizationLabels {
   String get latitudeLabel;
   String get geopointLabel;
   String get referenceLabel;
+
+  /// `UploadButton` label
+  String get uploadButtonText => "Upload file";
 }
 
 class DefaultLocalizations extends EnLocalizations {

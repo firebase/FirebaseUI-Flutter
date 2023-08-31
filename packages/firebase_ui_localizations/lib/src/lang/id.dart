@@ -263,4 +263,7 @@ class IdLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "Sandi tidak valid atau pengguna tidak memiliki sandi";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }

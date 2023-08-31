@@ -262,4 +262,7 @@ class EnLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get wrongOrNoPasswordErrorText =>
       "The password is invalid or the user does not have a password";
+
+  @override
+  String get uploadButtonText => "Upload file";
 }
