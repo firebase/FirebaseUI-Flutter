@@ -1,6 +1,6 @@
 # StorageGridView
 
-When loading large amounts of objects from the Firebase Storage, it makes sense to load them in batches, but requires handling of the pagination logic.
+When loading large amounts of objects from Firebase Storage, it makes sense to load them in batches, but requires handling of the pagination logic.
 
 `StorageGridView` implements pagination logic for you, and allows to load objects from the Firebase Storage in batches while scrolling.
 
