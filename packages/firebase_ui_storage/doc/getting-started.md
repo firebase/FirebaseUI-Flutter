@@ -10,7 +10,15 @@ Install dependencies
 flutter pub add firebase_core firebase_storage firebase_ui_storage
 ```
 
-Download Firebase project config
+Install the FlutterFire CLI by running the following command from any directory:
+
+```sh
+flutter pub global activate flutterfire_cli
+```
+
+Use the FlutterFire CLI to configure your Flutter apps to connect to Firebase.
+
+From your Flutter project directory, run the following command to start the app configuration workflow:
 
 ```sh
 flutterfire configure
