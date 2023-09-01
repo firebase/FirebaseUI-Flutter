@@ -1,6 +1,6 @@
 # TaskProgressIndicator
 
-`TaskProgressIndicator` shows `LinearProgressIndicator` under `MaterialApp` and a custom iOS-styled alternative under `CupertinoApp` while the file is being uploaded/downloaded, reflecting the amount of bytes trasnferred.
+`TaskProgressIndicator` shows `LinearProgressIndicator` under `MaterialApp`, and a custom iOS-styled alternative under `CupertinoApp` while the file is being uploaded/downloaded, reflecting the amount of bytes transferred.
 
 ## Usage
 
