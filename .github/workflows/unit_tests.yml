@@ -49,7 +49,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v1
+      - uses: bluefireteam/melos-action@v2
         with:
           melos-version: "3.0.1"
 
