@@ -12,14 +12,18 @@ export 'src/config.dart'
         KeepOriginalNameUploadPolicy,
         KeepPathUploadPolicy,
         UuidFileUploadNamingPolicy;
-
 export 'src/lib.dart' show FirebaseUIStorage;
-
-export 'src/widgets/upload_button.dart' show UploadButton;
+export 'src/paginated_loading_controller.dart'
+    show
+        PaginatedLoadingController,
+        PaginatedLoadingState,
+        InitialPageLoading,
+        PageLoadComplete,
+        PageLoadError,
+        PageLoading;
+export 'src/widgets/grid_view.dart' show StorageGridView;
+export 'src/widgets/image.dart' show StorageImage, LoadingStateVariant;
+export 'src/widgets/list_view.dart' show StorageListView;
 export 'src/widgets/progress_indicator.dart'
     show TaskProgressIndicator, TaskProgressWidget, ErrorBuilder;
-
-export 'src/widgets/image.dart' show StorageImage, LoadingStateVariant;
-export 'src/paginated_loading_controller.dart';
-export 'src/widgets/list_view.dart';
-export 'src/widgets/grid_view.dart';
+export 'src/widgets/upload_button.dart' show UploadButton;

@@ -90,7 +90,7 @@ abstract class TaskProgressWidget extends StatelessWidget {
       task: task,
       errorBuilder: errorBuilder,
       builder: (context, progress) {
-        return CircularProgressIndicator(value: progress);
+        return buildProgressIndicator(context, progress);
       },
     );
   }
