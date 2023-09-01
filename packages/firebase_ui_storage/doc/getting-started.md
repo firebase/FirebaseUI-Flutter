@@ -18,7 +18,7 @@ flutterfire configure
 
 ## Configuration
 
-This section will walk you through the configuration process of the Firebase UI Storage
+This section will walk you through the configuration process for Firebase UI Storage
 
 ### macOS
 
