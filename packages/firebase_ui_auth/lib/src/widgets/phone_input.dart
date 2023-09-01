@@ -189,6 +189,8 @@ class PhoneInputState extends State<PhoneInput> {
   }
 
   void _showCountryPicker(BuildContext context) {
+    final l = FirebaseUILocalizations.labelsOf(context);
+
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
@@ -221,7 +223,7 @@ class PhoneInputState extends State<PhoneInput> {
                 ),
               ),
               CupertinoButton(
-                child: const Text('Done'),
+                child: Text(l.doneButtonLabel),
                 onPressed: () => Navigator.pop(context),
               ),
             ],

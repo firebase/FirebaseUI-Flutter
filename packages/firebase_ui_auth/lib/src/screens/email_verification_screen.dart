@@ -167,15 +167,11 @@ class __EmailVerificationScreenContentState
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Align(
-          child: Title(text: 'Verify your email'),
+        Align(
+          child: Title(text: l.verifyEmailTitle),
         ),
         const SizedBox(height: 32),
-        const Text(
-          'A verification email has been sent to your email address. '
-          'Please check your email and click on the link to verify '
-          'your email address.',
-        ),
+        Text(l.verificationEmailSentText),
         const SizedBox(height: 32),
         if (state == EmailVerificationState.pending)
           const Center(child: LoadingIndicator(size: 32, borderWidth: 2))
@@ -193,13 +189,13 @@ class __EmailVerificationScreenContentState
           const Center(child: LoadingIndicator(size: 32, borderWidth: 2)),
         if (state == EmailVerificationState.unverified) ...[
           Text(
-            "We couldn't verify your email address. ",
+            l.verificationFailedText,
             textAlign: TextAlign.center,
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
           const SizedBox(height: 16),
           UniversalButton(
-            text: 'Resend verification email',
+            text: l.resendVerificationEmailButtonLabel,
             onPressed: () {
               controller.sendVerificationEmail(
                 Theme.of(context).platform,

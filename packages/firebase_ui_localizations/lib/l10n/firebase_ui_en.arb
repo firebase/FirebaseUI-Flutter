@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "@@last_modified": "2023-08-31T15:49:19.843264",
+  "@@last_modified": "2023-09-01T13:12:06.523448",
   "accessDisabledErrorText": "Access to this account has been temporarily disabled",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -427,6 +427,61 @@
   "uploadButtonText": "Upload file",
   "@uploadButtonText": {
     "description": "UploadButton label",
+    "placeholders": {}
+  },
+  "verifyEmailTitle": "Verify your email",
+  "@verifyEmailTitle": {
+    "description": "EmailVerificationScreen title",
+    "placeholders": {}
+  },
+  "verificationEmailSentText": "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.",
+  "@verificationEmailSentText": {
+    "description": "Hint text indicating that verification email has been sent",
+    "placeholders": {}
+  },
+  "verificationFailedText": "We couldn't verify your email address. ",
+  "@verificationFailedText": {
+    "description": "Message indicating that something went wrong during email verification",
+    "placeholders": {}
+  },
+  "resendVerificationEmailButtonLabel": "Resend verification email",
+  "@resendVerificationEmailButtonLabel": {
+    "description": "Button label that suggests to resend verification email",
+    "placeholders": {}
+  },
+  "verificationEmailSentTextShort": "Verification email sent",
+  "@verificationEmailSentTextShort": {
+    "description": "Short version of the hint text indicating that verification email has been sent",
+    "placeholders": {}
+  },
+  "emailIsNotVerifiedText": "Email is not verified",
+  "@emailIsNotVerifiedText": {
+    "description": "Message indicating that email is not verified",
+    "placeholders": {}
+  },
+  "waitingForEmailVerificationText": "Waiting for email verification",
+  "@waitingForEmailVerificationText": {
+    "description": "Message indicating that email is being verified",
+    "placeholders": {}
+  },
+  "dismissButtonLabel": "Dismiss",
+  "@dismiss": {
+    "description": "Dissmiss button label",
+    "placeholders": {}
+  },
+  "okButtonLabel": "OK",
+  "@okButtonLabel": {
+    "description": "OK button label",
+    "placeholders": {}
+  },
+  "checkEmailHintText": "Please check your email and click the link to verify your email address.",
+  "@checkEmailHintText": {
+    "description": "Hint text prompting the user to check email for verification link",
+    "placeholders": {}
+  },
+  "doneButtonLabel": "Done",
+  "@doneButtonLabel": {
+    "description": "Done button label",
     "placeholders": {}
   }
 }
