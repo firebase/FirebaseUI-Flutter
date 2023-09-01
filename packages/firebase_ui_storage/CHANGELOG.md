@@ -1,3 +1,10 @@
+## 1.0.0
+
+ - Firebase UI Storage graduated to stable release
+
+ - **FEAT**(ui_storage,ui_localizations): add UploadButton label ([#86](https://github.com/firebase/FirebaseUI-Flutter/issues/86)). ([e13a6b1e](https://github.com/firebase/FirebaseUI-Flutter/commit/e13a6b1ec00c576f95c4f0782e26e00340a8187d))
+ - **DOCS**(ui_storage): add Firebase UI Storage docs ([#92](https://github.com/firebase/FirebaseUI-Flutter/issues/92)). ([4c4e3539](https://github.com/firebase/FirebaseUI-Flutter/commit/4c4e3539c64c7cc7728c6eea8ab91df5a47d5703))
+
 ## 0.1.0-dev.9
 
  - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)
