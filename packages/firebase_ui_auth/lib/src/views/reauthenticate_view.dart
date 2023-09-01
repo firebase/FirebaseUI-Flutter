@@ -22,6 +22,9 @@ class ReauthenticateView extends StatelessWidget {
   /// A label that would be used for the "Sign in" button.
   final String? actionButtonLabelOverride;
 
+  /// {@macro ui.auth.widgets.email_from.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   /// {@macro ui.auth.views.reauthenticate_view}
   const ReauthenticateView({
     super.key,
@@ -29,6 +32,7 @@ class ReauthenticateView extends StatelessWidget {
     this.auth,
     this.onSignedIn,
     this.actionButtonLabelOverride,
+    this.showPasswordVisibilityToggle = false,
   });
 
   @override
@@ -63,6 +67,7 @@ class ReauthenticateView extends StatelessWidget {
         showTitle: false,
         showAuthActionSwitch: false,
         actionButtonLabelOverride: actionButtonLabelOverride,
+        showPasswordVisibilityToggle: showPasswordVisibilityToggle,
       ),
       listener: (oldState, newState, ctrl) {
         if (newState is SignedIn) {

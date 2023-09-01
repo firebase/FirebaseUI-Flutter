@@ -8,6 +8,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:firebase_ui_auth/src/widgets/internal/universal_text_form_field.dart';
+
 import '../test_utils.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
@@ -103,5 +105,53 @@ void main() {
         expect(button, findsOneWidget);
       },
     );
+
+    testWidgets('has password visibility toggle', (tester) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(
+            auth: MockAuth(),
+            action: AuthAction.signIn,
+            showPasswordVisibilityToggle: true,
+          ),
+        ),
+      );
+
+      final toggleFinder = find.byIcon(Icons.visibility);
+      expect(toggleFinder, findsOneWidget);
+    });
+
+    testWidgets('allows to toggle password visibility', (tester) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(
+            auth: MockAuth(),
+            action: AuthAction.signIn,
+            showPasswordVisibilityToggle: true,
+          ),
+        ),
+      );
+
+      final passwordHost = find.byType(PasswordInput);
+      final toggleFinder = find.byIcon(Icons.visibility);
+
+      final textField = find.descendant(
+        of: passwordHost,
+        matching: find.byType(UniversalTextFormField),
+      );
+
+      expect(
+        tester.widget<UniversalTextFormField>(textField).obscureText,
+        isTrue,
+      );
+
+      await tester.tap(toggleFinder);
+      await tester.pump();
+
+      expect(
+        tester.widget<UniversalTextFormField>(textField).obscureText,
+        isFalse,
+      );
+    });
   });
 }
