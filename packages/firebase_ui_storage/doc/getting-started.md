@@ -81,7 +81,7 @@ Future<void> main() async {
 
 Available file naming policies:
 
-- [`KeepOriginalNameUploadPolicy`] – keeps the original file name
+- [`KeepOriginalNameUploadPolicy`] – keeps the original file name (default)
 - [`KeepPathUploadPolicy`] - keeps the original file path
 - [`UuidFileUploadNamingPolicy`] – generates a UUID for each uploaded file
 
