@@ -4,7 +4,10 @@ When loading large amounts of objects from the Firebase Storage, it makes sense 
 
 Firebase UI Storage provides [`StorageListView`] and [`StorageGridView`] widgets that implement pagination logic for you, and allow to load objects from the Firebase Storage in batches while scrolling.
 
-In cases where you want to build a completely custom scroll view, but still have pagination logic handled – you can use [`PaginatedLoadingController`].
+In cases where you want to build a completely custom scroll view, but still have pagination logic handled – you can use `PaginatedLoadingController`.
+
+[`StorageListView`]: https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/list-view.md
+[`StorageGridView`]: https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/grid-view.md
 
 ```dart
 class MyWidget extends StatefulWidget {
