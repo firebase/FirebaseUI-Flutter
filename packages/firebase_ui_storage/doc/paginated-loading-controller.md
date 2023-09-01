@@ -32,7 +32,16 @@ class _MyWidgetState extends State<MyWidget> {
           InitialPageLoading() => const Text('Loading...'),
           PageLoadError(error: final error) => Text('Error: $error'),
           PageLoading() => const Text('Loading...'),
-          PageLoadComplete(items: final items) => MyCustomScrollView(items: items),
+          PageLoadComplete(items: final items) => ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              if (ctrl.shouldLoadNextPage(index)) {
+                ctrl.load();
+              }
+
+              return StorageImage(ref: items[index]);
+            },
+          ),
         };
       },
     );
