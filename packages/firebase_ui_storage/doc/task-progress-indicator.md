@@ -28,7 +28,7 @@ TaskProgressIndicator(task: task);
 
 ## Building custom progress indicators
 
-Firebase UI storage provides and abstract class, that simplifies building custom progress indicators. You can extend `TaskProgressWidget` and override `buildProgressIndicator` to build your own progress indicator:
+Firebase UI storage provides an abstract class that simplifies building custom progress indicators. You can extend `TaskProgressWidget` and override `buildProgressIndicator` to build your own progress indicator:
 
 ```dart
 class MyProgressIndicator extends TaskProgressWidget {
