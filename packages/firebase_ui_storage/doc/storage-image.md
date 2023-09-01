@@ -59,7 +59,7 @@ StorageImage(
 ### Shimmer placeholder
 
 Shimmer placeholder is a combination of the `solidColor` placeholder with a
-[shimmer](<(https://docs.flutter.dev/cookbook/effects/shimmer-loading)>) animation.
+[shimmer](https://docs.flutter.dev/cookbook/effects/shimmer-loading) animation.
 
 ```dart
 StorageImage(
