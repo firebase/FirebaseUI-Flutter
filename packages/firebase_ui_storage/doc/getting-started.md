@@ -39,7 +39,7 @@ For read-only access if you only upload files:
   <true/>
 ```
 
-or read/write access if you want to be able to download files as well:
+For read/write access if you want to be able to download files as well:
 
 ```xml
   <key>com.apple.security.files.user-selected.read-write</key>
