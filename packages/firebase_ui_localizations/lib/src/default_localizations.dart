@@ -269,7 +269,41 @@ abstract class FirebaseUILocalizationLabels {
   String get referenceLabel;
 
   /// `UploadButton` label
-  String get uploadButtonText => "Upload file";
+  String get uploadButtonText;
+
+  /// EmailVerificationScreen title
+  String get verifyEmailTitle;
+
+  /// Hint text indicating that verification email has been sent
+  String get verificationEmailSentText;
+
+  /// Short version of the hint text indicating that verification email has
+  /// been sent
+  String get verificationEmailSentTextShort;
+
+  /// Message indicating that something went wrong during email verification
+  String get verificationFailedText;
+
+  /// Message indicating that email is not verified
+  String get emailIsNotVerifiedText;
+
+  /// Message indicating that email is being verified
+  String get waitingForEmailVerificationText;
+
+  /// Button label that suggests to resend verification email
+  String get resendVerificationEmailButtonLabel;
+
+  /// Hint text prompting the user to check email for verification link
+  String get checkEmailHintText;
+
+  /// Dissmiss button label
+  String get dismissButtonLabel;
+
+  /// OK button label
+  String get okButtonLabel;
+
+  /// Done button label
+  String get doneButtonLabel;
 }
 
 class DefaultLocalizations extends EnLocalizations {

@@ -266,4 +266,41 @@ class IdLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get uploadButtonText => "Upload file";
+
+  @override
+  String get verifyEmailTitle => "Verify your email";
+
+  @override
+  String get verificationEmailSentText =>
+      "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.";
+
+  @override
+  String get verificationFailedText =>
+      "We couldn't verify your email address. ";
+
+  @override
+  String get resendVerificationEmailButtonLabel => "Resend verification email";
+
+  @override
+  String get verificationEmailSentTextShort => "Verification email sent";
+
+  @override
+  String get emailIsNotVerifiedText => "Email is not verified";
+
+  @override
+  String get waitingForEmailVerificationText =>
+      "Waiting for email verification";
+
+  @override
+  String get dismissButtonLabel => "Dismiss";
+
+  @override
+  String get okButtonLabel => "OK";
+
+  @override
+  String get checkEmailHintText =>
+      "Please check your email and click the link to verify your email address.";
+
+  @override
+  String get doneButtonLabel => "Done";
 }
