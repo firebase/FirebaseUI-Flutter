@@ -27,7 +27,7 @@ class MyUploadButton extends StatelessWidget {
 }
 ```
 
-Upload buttons uses `uploadRoot` and `namingPolicy` from [`FirebaseUIStorageConfiguration`](https://pub.dev/documentation/firebase_ui_storage/latest/firebase_ui_storage/FirebaseUIStorageConfiguration-class.html) to determine the location and file name of the uploaded file.
+`UploadButton` uses `uploadRoot` and `namingPolicy` from [`FirebaseUIStorageConfiguration`](https://pub.dev/documentation/firebase_ui_storage/latest/firebase_ui_storage/FirebaseUIStorageConfiguration-class.html) to determine the location and file name of the uploaded file.
 
 ## Showing upload progress
 
