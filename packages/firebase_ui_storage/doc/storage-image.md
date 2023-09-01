@@ -1,6 +1,6 @@
 # StorageImage
 
-A widget that loads and displays an image from the Firebase Storage.
+A widget that loads and displays an image from Firebase Storage.
 
 ## Usage
 
@@ -38,7 +38,7 @@ StorageImage(
 
 ### Loading indicator
 
-Loading indicator placeholder will show a `CircularProgressIndicator` under `MaterialApp` and `CupertinoActivityIndicator` under `CupertinoApp`.
+Loading indicator placeholder will show a `CircularProgressIndicator` under `MaterialApp`, and `CupertinoActivityIndicator` under `CupertinoApp`.
 
 You can customize `size`, `color` and `strokeWidth` of the loading indicator:
 

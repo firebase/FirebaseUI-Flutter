@@ -2,7 +2,7 @@
 
 When loading large amounts of objects from the Firebase Storage, it makes sense to load them in batches, but requires handling of the pagination logic.
 
-`StorageListView` implements pagination logic for you, and allows to load objects from the Firebase Storage in batches while scrolling.
+`StorageListView` implements pagination logic for you, and allows to load objects from Firebase Storage in batches while scrolling.
 
 ## Usage
 
@@ -20,7 +20,7 @@ StorageListView(
 
 ### Custom inital page loading state
 
-When the first page of objects is loading, `StorageListView` will show a `CircularProgressIndicator` under `MaterialApp` and `CupertinoActivityIndicator` under `CupertinoApp`.
+When the first page of objects is loading, `StorageListView` will show a `CircularProgressIndicator` under `MaterialApp`, and `CupertinoActivityIndicator` under `CupertinoApp`.
 
 You can pass `loadingBuilder` to customize the loading state:
 
@@ -60,7 +60,7 @@ StorageListView(
 
 ### Custom scroll views with pagination logic
 
-If you need something more customizable, but stil have pagination logic handled for you, you can use
+If you need something more customizable, but still want pagination logic handled for you, you can use
 [`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/paginated-loading-controller.md)
 
 ---
