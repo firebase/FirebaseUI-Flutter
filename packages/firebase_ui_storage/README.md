@@ -4,171 +4,18 @@
 
 Firebase UI Storage is a set of Flutter widgets and utilities designed to help you build and integrate your user interface with Firebase Storage.
 
-## Installation
+## Documentation
 
-Install dependencies
+- [Getting started](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/getting-started.md)
 
-```sh
-flutter pub add firebase_core firebase_storage firebase_ui_storage
-```
+## Issues
 
-Download Firebase project config
+Please file Firebase UI Storage specific issues, bugs, or feature requests in our [issue tracker].
 
-```sh
-flutterfire configure
-```
+## Contributing
 
-## Configuration
+If you wish to contribute a change to any of the existing plugins in this repo, please review our [contribution guide] and open a [pull request].
 
-This section will walk you through the configuration process of the Firebase UI Storage
-
-### macOS
-
-If you're building for macOS, you will need to add an entitlement for either read-only access if you only upload files:
-
-```xml
-  <key>com.apple.security.files.user-selected.read-only</key>
-  <true/>
-```
-
-or read/write access if you want to be able to download files as well:
-
-```xml
-  <key>com.apple.security.files.user-selected.read-write</key>
-  <true/>
-```
-
-Make sure to add network client entitlement as well:
-
-```xml
-<key>com.apple.security.network.client</key>
-<true/>
-```
-
-### FirebaseUIStorage.configure()
-
-To reduce boilerplate for widgets, `FirebaseUIStroage` has a top-level configuration:
-
-```dart
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_ui_storage/firebase_ui_storage.dart';
-import 'package:flutter/material.dart';
-
-import 'firebase_options.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  final storage = FirebaseStorage.instance;
-  final config = FirebaseUIStorageConfiguration(storage: storage);
-
-  await FirebaseUIStorage.configure(config);
-
-  runApp(const MyApp());
-}
-```
-
-See [API docs](https://pub.dev/documentation/firebase_ui_storage/latest/firebase_ui_storage/FirebaseUIStorageConfiguration-class.html) for more configuration options.
-
-### Overriding configuration
-
-It is possible to override a top-level configuration for a widget subtree:
-
-```dart
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FirebaseUIStorageConfigOverride(
-      config: FirebaseUIStorageConfiguration(
-        uploadRoot: storage.ref('${FirebaseAuth.instance.currentUser.uid}/'),
-        namingPolicy: const UuidFileUploadNamingPolicy(),
-        child: const MyUserPage(),
-      ),
-    );
-  }
-}
-```
-
-## Widgets
-
-### UploadButton
-
-```dart
-class MyUploadPage extends StatelessWidget {
-  const MyUploadPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: UploadButton(
-          mimeTypes: const ['image/png', 'image/jpeg'],
-          onError: (err, stackTrace) {
-            print(err.toString());
-          },
-          onUploadComplete: (ref) {
-            print('File uploaded to ${ref.fullPath}');
-          },
-        ),
-      ),
-    );
-  }
-}
-
-```
-
-### TaskProgressIndicator
-
-```dart
-class MyUploadProgress extends StatelessWidget {
-  final UploadTask task;
-
-  const MyUploadProgress({super.key, required this.task});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(children: [
-        Text('Uploading ${task.snapshot.ref.name}...'),
-        TaskProgressIndicator(task: task),
-      ]),
-    );
-  }
-}
-```
-
-### StorageListView
-
-```dart
-StorageListView(
-  ref: storage.ref('images'),
-  itemBuilder: (context, ref) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: StorageImage(ref: ref),
-    );
-  },
-  loadingBuilder: (context) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  },
-  errorBuilder: (context, error, controller) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('Error: $error'),
-          TextButton(
-            onPressed: () => controller.load(),
-            child: const Text('Retry'),
-          ),
-        ],
-      ),
-    );
-  },
-);
-```
+[issue tracker]: https://github.com/firebase/FirebaseUI-Flutter/issues/new/choose
+[contribution guide]: https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/contributing.md
+[pull request]: https://github.com/firebase/FirebaseUI-Flutter/pulls

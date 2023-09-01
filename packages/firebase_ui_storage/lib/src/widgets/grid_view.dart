@@ -12,6 +12,42 @@ Widget _defaultLoadingBuilder(BuildContext context) {
   return const DefaultLoadingIndicator();
 }
 
+/// /// A [GridView.builder] that automatically handles paginated loading from
+/// [FirebaseStorage].
+///
+/// Example usage:
+///
+/// ```dart
+/// class MyGridView extends StatelessWidget {
+///  const MyGridView({super.key});
+///
+///  @override
+///  Widget build(BuildContext context) {
+///    return StorageGridView(
+///      ref: FirebaseStorage.instance.ref('list'),
+///      itemBuilder: (context, ref) {
+///        return Card(
+///          child: Center(
+///            child: FutureBuilder(
+///              future: ref.getData(),
+///              builder: (context, snapshot) {
+///                if (snapshot.hasError) {
+///                  return Text(snapshot.error.toString());
+///                }
+///                if (snapshot.hasData) {
+///                  return Text(utf8.decode(snapshot.data!));
+///                }
+///
+///                return const CircularProgressIndicator();
+///              },
+///            ),
+///          ),
+///        );
+///      },
+///    );
+///  }
+///}
+/// ```
 class StorageGridView extends StatefulWidget {
   /// The [Reference] to list items from.
   /// If not provided, a [loadingController] must be created and passed.
