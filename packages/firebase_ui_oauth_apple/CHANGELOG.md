@@ -1,3 +1,7 @@
+## 1.2.10
+
+ - Update a dependency to the latest release.
+
 ## 1.2.9
 
  - **FIX**(firebase_ui_oauth_apple): Enables Android as a supported platform for AppleProvider. ([48a1134b](https://github.com/firebase/FirebaseUI-Flutter/commit/48a1134b92a30684464c33adaa6e0f7beab7694e))

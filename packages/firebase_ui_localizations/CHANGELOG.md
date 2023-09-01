@@ -1,3 +1,8 @@
+## 1.6.0
+
+ - **FIX**(ui_localizations,ui_auth): add missing labels ([#87](https://github.com/firebase/FirebaseUI-Flutter/issues/87)). ([be2b0c33](https://github.com/firebase/FirebaseUI-Flutter/commit/be2b0c33f9537f307c2cae97e5f483f695b3ea05))
+ - **FEAT**(ui_storage,ui_localizations): add UploadButton label ([#86](https://github.com/firebase/FirebaseUI-Flutter/issues/86)). ([e13a6b1e](https://github.com/firebase/FirebaseUI-Flutter/commit/e13a6b1ec00c576f95c4f0782e26e00340a8187d))
+
 ## 1.5.3
 
  - **FIX**: update ru translations to remove English duplicates ([#65](https://github.com/firebase/FirebaseUI-Flutter/issues/65)). ([9d813bee](https://github.com/firebase/FirebaseUI-Flutter/commit/9d813beed875654ea9eeab7ea9687508486624fe))

@@ -1,3 +1,9 @@
+## 1.7.0
+
+ - **FIX**(ui_localizations,ui_auth): add missing labels ([#87](https://github.com/firebase/FirebaseUI-Flutter/issues/87)). ([be2b0c33](https://github.com/firebase/FirebaseUI-Flutter/commit/be2b0c33f9537f307c2cae97e5f483f695b3ea05))
+ - **FIX**(ui_auth): Pass correct AuthAction to the footerBuilder ([#70](https://github.com/firebase/FirebaseUI-Flutter/issues/70)). ([1e091cc5](https://github.com/firebase/FirebaseUI-Flutter/commit/1e091cc583f5c976634583315a9d8a1968927498))
+ - **FEAT**(ui_auth): Add "Go Back" button to EmailLinkSignInView ([#63](https://github.com/firebase/FirebaseUI-Flutter/issues/63)). ([326fd27d](https://github.com/firebase/FirebaseUI-Flutter/commit/326fd27d362de0f342062ac68f85ab8ceea005aa))
+
 ## 1.6.5
 
  - Update a dependency to the latest release.

@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_storage` - `v1.0.0`](#firebase_ui_storage---v100)
+ - [`firebase_ui_auth` - `v1.7.0`](#firebase_ui_auth---v170)
+ - [`firebase_ui_localizations` - `v1.6.0`](#firebase_ui_localizations---v160)
+ - [`firebase_ui_oauth` - `v1.4.10`](#firebase_ui_oauth---v1410)
+ - [`firebase_ui_oauth_twitter` - `v1.2.10`](#firebase_ui_oauth_twitter---v1210)
+ - [`firebase_ui_oauth_facebook` - `v1.2.10`](#firebase_ui_oauth_facebook---v1210)
+ - [`firebase_ui_oauth_apple` - `v1.2.10`](#firebase_ui_oauth_apple---v1210)
+ - [`firebase_ui_oauth_google` - `v1.2.10`](#firebase_ui_oauth_google---v1210)
+ - [`firebase_ui_firestore` - `v1.5.10`](#firebase_ui_firestore---v1510)
+ - [`firebase_ui_database` - `v1.3.8`](#firebase_ui_database---v138)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.4.10`
+ - `firebase_ui_oauth_twitter` - `v1.2.10`
+ - `firebase_ui_oauth_facebook` - `v1.2.10`
+ - `firebase_ui_oauth_apple` - `v1.2.10`
+ - `firebase_ui_oauth_google` - `v1.2.10`
+ - `firebase_ui_firestore` - `v1.5.10`
+ - `firebase_ui_database` - `v1.3.8`
+
+---
+
+#### `firebase_ui_storage` - `v1.0.0`
+
+ - Firebase UI Storage graduated to stable release
+
+ - **FEAT**(ui_storage,ui_localizations): add UploadButton label ([#86](https://github.com/firebase/FirebaseUI-Flutter/issues/86)). ([e13a6b1e](https://github.com/firebase/FirebaseUI-Flutter/commit/e13a6b1ec00c576f95c4f0782e26e00340a8187d))
+ - **DOCS**(ui_storage): add Firebase UI Storage docs ([#92](https://github.com/firebase/FirebaseUI-Flutter/issues/92)). ([4c4e3539](https://github.com/firebase/FirebaseUI-Flutter/commit/4c4e3539c64c7cc7728c6eea8ab91df5a47d5703))
+
+#### `firebase_ui_auth` - `v1.7.0`
+
+ - **FIX**(ui_localizations,ui_auth): add missing labels ([#87](https://github.com/firebase/FirebaseUI-Flutter/issues/87)). ([be2b0c33](https://github.com/firebase/FirebaseUI-Flutter/commit/be2b0c33f9537f307c2cae97e5f483f695b3ea05))
+ - **FIX**(ui_auth): Pass correct AuthAction to the footerBuilder ([#70](https://github.com/firebase/FirebaseUI-Flutter/issues/70)). ([1e091cc5](https://github.com/firebase/FirebaseUI-Flutter/commit/1e091cc583f5c976634583315a9d8a1968927498))
+ - **FEAT**(ui_auth): Add "Go Back" button to EmailLinkSignInView ([#63](https://github.com/firebase/FirebaseUI-Flutter/issues/63)). ([326fd27d](https://github.com/firebase/FirebaseUI-Flutter/commit/326fd27d362de0f342062ac68f85ab8ceea005aa))
+
+#### `firebase_ui_localizations` - `v1.6.0`
+
+ - **FIX**(ui_localizations,ui_auth): add missing labels ([#87](https://github.com/firebase/FirebaseUI-Flutter/issues/87)). ([be2b0c33](https://github.com/firebase/FirebaseUI-Flutter/commit/be2b0c33f9537f307c2cae97e5f483f695b3ea05))
+ - **FEAT**(ui_storage,ui_localizations): add UploadButton label ([#86](https://github.com/firebase/FirebaseUI-Flutter/issues/86)). ([e13a6b1e](https://github.com/firebase/FirebaseUI-Flutter/commit/e13a6b1ec00c576f95c4f0782e26e00340a8187d))
+
+
 ## 2023-08-24
 
 ### Changes
