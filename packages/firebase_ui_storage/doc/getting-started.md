@@ -30,7 +30,9 @@ This section will walk you through the configuration process for Firebase UI Sto
 
 ### macOS
 
-If you're building for macOS, you will need to add an entitlement for either read-only access if you only upload files:
+If you're building for macOS, you will need to add an entitlement. 
+
+For read-only access if you only upload files:
 
 ```xml
   <key>com.apple.security.files.user-selected.read-only</key>
