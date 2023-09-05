@@ -12,10 +12,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 ///
 /// See also [FirebaseDatabaseQueryBuilder].
 typedef FirestoreQueryBuilderSnapshotBuilder<T> = Widget Function(
-  BuildContext context,
-  FirestoreQueryBuilderSnapshot<T> snapshot,
-  Widget? child,
-);
+    BuildContext context,
+    FirestoreQueryBuilderSnapshot<T> snapshot,
+    Widget? child,
+    );
 
 /// {@template firebase_ui.firestore_query_builder}
 /// Listens to a query and paginates the result in a way that is compatible with
@@ -172,7 +172,7 @@ class _FirestoreQueryBuilderState<Document>
     final query = widget.query.limit(expectedDocsCount);
 
     _querySubscription = query.snapshots().listen(
-      (event) {
+          (event) {
         setState(() {
           if (nextPage) {
             _snapshot = _snapshot.copyWith(isFetchingMore: false);
@@ -351,19 +351,19 @@ class _Sentinel {
 
 /// A type representing the function passed to [FirestoreListView] for its `itemBuilder`.
 typedef FirestoreItemBuilder<Document> = Widget Function(
-  BuildContext context,
-  QueryDocumentSnapshot<Document> doc,
-);
+    BuildContext context,
+    QueryDocumentSnapshot<Document> doc,
+    );
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingBuilder`.
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirestoreListView] for its `errorBuilder`.
 typedef FirestoreErrorBuilder = Widget Function(
-  BuildContext context,
-  Object error,
-  StackTrace stackTrace,
-);
+    BuildContext context,
+    Object error,
+    StackTrace stackTrace,
+    );
 
 /// A type representing the function passed to [FirestoreListView] for its `emptyBuilder`.
 typedef FirestoreEmptyBuilder = Widget Function(BuildContext context);
@@ -449,57 +449,363 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          key: key,
-          query: query,
-          pageSize: pageSize,
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator());
-            }
+    key: key,
+    query: query,
+    pageSize: pageSize,
+    builder: (context, snapshot, _) {
+      if (snapshot.isFetching) {
+        return loadingBuilder?.call(context) ??
+            const Center(child: CircularProgressIndicator());
+      }
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
-
-            if (snapshot.docs.isEmpty && emptyBuilder != null) {
-              return emptyBuilder(context);
-            }
-
-            return ListView.builder(
-              itemCount: snapshot.docs.length,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == snapshot.docs.length;
-                if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
-
-                final doc = snapshot.docs[index];
-                return itemBuilder(context, doc);
-              },
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              itemExtent: itemExtent,
-              prototypeItem: prototypeItem,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              cacheExtent: cacheExtent,
-              semanticChildCount: semanticChildCount,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
+      if (snapshot.hasError && errorBuilder != null) {
+        return errorBuilder(
+          context,
+          snapshot.error!,
+          snapshot.stackTrace!,
         );
+      }
+
+      if (snapshot.docs.isEmpty && emptyBuilder != null) {
+        return emptyBuilder(context);
+      }
+
+      return ListView.builder(
+        itemCount: snapshot.docs.length,
+        itemBuilder: (context, index) {
+          final isLastItem = index + 1 == snapshot.docs.length;
+          if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
+
+          final doc = snapshot.docs[index];
+          return itemBuilder(context, doc);
+        },
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        controller: controller,
+        primary: primary,
+        physics: physics,
+        shrinkWrap: shrinkWrap,
+        padding: padding,
+        itemExtent: itemExtent,
+        prototypeItem: prototypeItem,
+        addAutomaticKeepAlives: addAutomaticKeepAlives,
+        addRepaintBoundaries: addRepaintBoundaries,
+        addSemanticIndexes: addSemanticIndexes,
+        cacheExtent: cacheExtent,
+        semanticChildCount: semanticChildCount,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        restorationId: restorationId,
+        clipBehavior: clipBehavior,
+      );
+    },
+  );
+
+  /// Shows a separator between list items just as in [ListView.separated]
+  FirestoreListView.separated({
+    Key? key,
+    required Query<Document> query,
+    required FirestoreItemBuilder<Document> itemBuilder,
+    int pageSize = 10,
+    FirestoreLoadingBuilder? loadingBuilder,
+    FirestoreErrorBuilder? errorBuilder,
+    FirestoreEmptyBuilder? emptyBuilder,
+    required IndexedWidgetBuilder separatorBuilder,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    ScrollController? controller,
+    bool? primary,
+    ScrollPhysics? physics,
+    bool shrinkWrap = false,
+    EdgeInsetsGeometry? padding,
+    ChildIndexGetter? findChildIndexCallback,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    double? cacheExtent,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
+    String? restorationId,
+    Clip clipBehavior = Clip.hardEdge,
+  }) : super(
+    key: key,
+    query: query,
+    pageSize: pageSize,
+    builder: (context, snapshot, _) {
+      if (snapshot.isFetching) {
+        return loadingBuilder?.call(context) ??
+            const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError && errorBuilder != null) {
+        return errorBuilder(
+          context,
+          snapshot.error!,
+          snapshot.stackTrace!,
+        );
+      }
+
+      if (snapshot.docs.isEmpty && emptyBuilder != null) {
+        return emptyBuilder(context);
+      }
+
+      return ListView.separated(
+        itemCount: snapshot.docs.length,
+        itemBuilder: (context, index) {
+          final isLastItem = index + 1 == snapshot.docs.length;
+          if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
+
+          final doc = snapshot.docs[index];
+          return itemBuilder(context, doc);
+        },
+        separatorBuilder: separatorBuilder,
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        controller: controller,
+        primary: primary,
+        physics: physics,
+        shrinkWrap: shrinkWrap,
+        padding: padding,
+        findChildIndexCallback: findChildIndexCallback,
+        addAutomaticKeepAlives: addAutomaticKeepAlives,
+        addRepaintBoundaries: addRepaintBoundaries,
+        addSemanticIndexes: addSemanticIndexes,
+        cacheExtent: cacheExtent,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        restorationId: restorationId,
+        clipBehavior: clipBehavior,
+      );
+    },
+  );
+
+  /// Shows a load indicator when the last item is reached
+  FirestoreListView.withLoadingIndicator({
+    Key? key,
+    required Query<Document> query,
+    required FirestoreItemBuilder<Document> itemBuilder,
+    int pageSize = 20,
+    FirestoreLoadingBuilder? loadingBuilder,
+    FirestoreErrorBuilder? errorBuilder,
+    FirestoreEmptyBuilder? emptyBuilder,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    ScrollController? controller,
+    bool? primary,
+    ScrollPhysics? physics,
+    bool shrinkWrap = false,
+    EdgeInsetsGeometry? padding,
+    double? itemExtent,
+    Widget? prototypeItem,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    double? cacheExtent,
+    int? semanticChildCount,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
+    String? restorationId,
+    Clip clipBehavior = Clip.hardEdge,
+  }) : super(
+    key: key,
+    query: query,
+    pageSize: pageSize,
+    builder: (context, snapshot, _) {
+      if (snapshot.isFetching) {
+        return loadingBuilder?.call(context) ??
+            const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError && errorBuilder != null) {
+        return errorBuilder(
+          context,
+          snapshot.error!,
+          snapshot.stackTrace!,
+        );
+      }
+
+      if (snapshot.docs.isEmpty && emptyBuilder != null) {
+        return emptyBuilder(context);
+      }
+
+      final itemCount = snapshot.docs.length;
+
+      onBuild(bool isLast) async {
+        /// if we reached the end of the currently obtained items,
+        /// we try to obtain more items
+        if (snapshot.hasMore && isLast) {
+          /// Tell FirestoreQueryBuilder to try to obtain more items.
+          /// We wait just so we get to see the progress indicator for a
+          /// while.
+          await Future.delayed(
+            const Duration(milliseconds: 500),
+                () => snapshot.fetchMore(),
+          );
+        }
+      }
+
+      return ListView.builder(
+        itemCount: itemCount,
+        itemBuilder: (context, index) {
+          final isLastItem = index + 1 == itemCount;
+          final doc = snapshot.docs[index];
+          return BuildAwareWidget(
+            onBuild: () => onBuild(isLastItem),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                itemBuilder(context, doc),
+                if (snapshot.hasMore && isLastItem)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Center(
+                      child: SizedBox(
+                        width: 30.0,
+                        height: 30.0,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        },
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        controller: controller,
+        primary: primary,
+        physics: physics,
+        shrinkWrap: shrinkWrap,
+        padding: padding,
+        itemExtent: itemExtent,
+        prototypeItem: prototypeItem,
+        addAutomaticKeepAlives: addAutomaticKeepAlives,
+        addRepaintBoundaries: addRepaintBoundaries,
+        addSemanticIndexes: addSemanticIndexes,
+        cacheExtent: cacheExtent,
+        semanticChildCount: semanticChildCount,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        restorationId: restorationId,
+        clipBehavior: clipBehavior,
+      );
+    },
+  );
+
+  /// Shows both a load indicator when the last item is reached and a separator
+  /// between list items
+  FirestoreListView.separatedWithLoadingIndicator({
+    Key? key,
+    required Query<Document> query,
+    required FirestoreItemBuilder<Document> itemBuilder,
+    int pageSize = 15,
+    FirestoreLoadingBuilder? loadingBuilder,
+    FirestoreErrorBuilder? errorBuilder,
+    FirestoreEmptyBuilder? emptyBuilder,
+    required IndexedWidgetBuilder separatorBuilder,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    ScrollController? controller,
+    bool? primary,
+    ScrollPhysics? physics,
+    bool shrinkWrap = false,
+    EdgeInsetsGeometry? padding,
+    ChildIndexGetter? findChildIndexCallback,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    double? cacheExtent,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
+    String? restorationId,
+    Clip clipBehavior = Clip.hardEdge,
+  }) : super(
+    key: key,
+    query: query,
+    pageSize: pageSize,
+    builder: (context, snapshot, _) {
+      if (snapshot.isFetching) {
+        return loadingBuilder?.call(context) ??
+            const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError && errorBuilder != null) {
+        return errorBuilder(
+          context,
+          snapshot.error!,
+          snapshot.stackTrace!,
+        );
+      }
+
+      if (snapshot.docs.isEmpty && emptyBuilder != null) {
+        return emptyBuilder(context);
+      }
+
+      final itemCount = snapshot.docs.length;
+
+      onBuild(bool isLast) async {
+        /// if we reached the end of the currently obtained items,
+        /// we try to obtain more items
+        if (snapshot.hasMore && isLast) {
+          /// Tell FirestoreQueryBuilder to try to obtain more items.
+          /// We wait just so we get to see the progress indicator for a
+          /// while.
+          await Future.delayed(
+            const Duration(milliseconds: 500),
+                () => snapshot.fetchMore(),
+          );
+        }
+      }
+
+      return ListView.separated(
+        itemCount: itemCount,
+        itemBuilder: (context, index) {
+          final isLastItem = index + 1 == itemCount;
+          final doc = snapshot.docs[index];
+          return BuildAwareWidget(
+            onBuild: () => onBuild(isLastItem),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                itemBuilder(context, doc),
+                if (snapshot.hasMore && isLastItem)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Center(
+                      child: SizedBox(
+                        width: 30.0,
+                        height: 30.0,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        },
+        separatorBuilder: separatorBuilder,
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        controller: controller,
+        primary: primary,
+        physics: physics,
+        shrinkWrap: shrinkWrap,
+        padding: padding,
+        findChildIndexCallback: findChildIndexCallback,
+        addAutomaticKeepAlives: addAutomaticKeepAlives,
+        addRepaintBoundaries: addRepaintBoundaries,
+        addSemanticIndexes: addSemanticIndexes,
+        cacheExtent: cacheExtent,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        restorationId: restorationId,
+        clipBehavior: clipBehavior,
+      );
+    },
+  );
 }
 
 /// Listens to an aggregate query and passes the [AsyncSnapshot] to the builder.
@@ -509,9 +815,9 @@ class AggregateQueryBuilder extends StatefulWidget {
 
   /// A builder that is called whenever the query is updated.
   final Widget Function(
-    BuildContext context,
-    AsyncSnapshot<AggregateQuerySnapshot> snapshot,
-  ) builder;
+      BuildContext context,
+      AsyncSnapshot<AggregateQuerySnapshot> snapshot,
+      ) builder;
 
   const AggregateQueryBuilder({
     super.key,
@@ -542,5 +848,40 @@ class _AggregateQueryBuilderState extends State<AggregateQueryBuilder> {
     if (widget.query != oldWidget.query) {
       queryFuture = widget.query.get();
     }
+  }
+}
+
+/// It takes in the child you want to show and calls the
+/// onBuild function when the child's build method is completed. This means
+/// when the child's is created and build method is called for the first time,
+/// we'll get this callback.
+/// Borrowed the idea from the link below and built on it further:
+/// https://www.filledstacks.com/post/how-to-perform-real-time-pagination-with-firestore/?utm_source=pocket_reader
+class BuildAwareWidget extends StatefulWidget {
+  final Function onBuild;
+  final Widget child;
+
+  const BuildAwareWidget({
+    super.key,
+    required this.onBuild,
+    required this.child,
+  });
+
+  @override
+  State<BuildAwareWidget> createState() => _BuildAwareWidgetState();
+}
+
+class _BuildAwareWidgetState extends State<BuildAwareWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      widget.onBuild();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }
