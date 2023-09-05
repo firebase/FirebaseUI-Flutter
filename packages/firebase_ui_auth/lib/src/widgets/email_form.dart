@@ -100,6 +100,37 @@ class EmailForm extends StatelessWidget {
   /// A label that would be used for the "Sign in" button.
   final String? actionButtonLabelOverride;
 
+  /// An object that is being used to apply styling configuration to the email
+  /// form.
+  ///
+  /// Alternatively [FirebaseUITheme] could be used to provide styling
+  /// configuration.
+  /// ```dart
+  /// runApp(
+  ///   const FirebaseUITheme(
+  ///     styles: {
+  ///       EmailFormStyle(signInButtonVariant: ButtonVariant.text),
+  ///     },
+  ///     child: MaterialApp(
+  ///       home: MyScreen(),
+  ///     ),
+  ///   ),
+  /// );
+  ///
+  /// class MyScreen extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) {
+  ///     return Scaffold(
+  ///       appBar: AppBar(
+  ///         title: Text('Email sign in'),
+  ///       ),
+  ///       body: Center(child: EmailForm()),
+  ///     );
+  ///   }
+  /// }
+  /// ```
+  final EmailFormStyle? style;
+
   /// {@macro ui.auth.widgets.email_form}
   const EmailForm({
     super.key,
@@ -109,6 +140,7 @@ class EmailForm extends StatelessWidget {
     this.onSubmit,
     this.email,
     this.actionButtonLabelOverride,
+    this.style,
   });
 
   @override
@@ -120,6 +152,7 @@ class EmailForm extends StatelessWidget {
       email: email,
       onSubmit: onSubmit,
       actionButtonLabelOverride: actionButtonLabelOverride,
+      style: style,
     );
 
     return AuthFlowBuilder<EmailAuthController>(
@@ -143,6 +176,8 @@ class _SignInFormContent extends StatefulWidget {
 
   final String? actionButtonLabelOverride;
 
+  final EmailFormStyle? style;
+
   const _SignInFormContent({
     this.auth,
     this.onSubmit,
@@ -150,6 +185,7 @@ class _SignInFormContent extends StatefulWidget {
     this.email,
     this.provider,
     this.actionButtonLabelOverride,
+    this.style,
   });
 
   @override
@@ -268,10 +304,11 @@ class _SignInFormContentState extends State<_SignInFormContent> {
       Builder(
         builder: (context) {
           final state = AuthState.of(context);
-          final style = FirebaseUIStyle.ofType<EmailFormStyle>(
-            context,
-            const EmailFormStyle(),
-          );
+          final style = widget.style ??
+              FirebaseUIStyle.ofType<EmailFormStyle>(
+                context,
+                const EmailFormStyle(),
+              );
 
           return LoadingButton(
             variant: style.signInButtonVariant,
