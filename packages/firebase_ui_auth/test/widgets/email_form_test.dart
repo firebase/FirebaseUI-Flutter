@@ -42,18 +42,66 @@ void main() {
       );
     });
 
-    testWidgets('respects the EmailFormStyle', (tester) async {
-      await tester.pumpWidget(
-        FirebaseUITheme(
-          styles: const {
-            EmailFormStyle(signInButtonVariant: ButtonVariant.filled)
-          },
-          child: widget,
-        ),
-      );
+    testWidgets(
+      'respects EmailFormStyle passed to FirebaseUITheme',
+      (tester) async {
+        await tester.pumpWidget(
+          FirebaseUITheme(
+            styles: const {
+              EmailFormStyle(signInButtonVariant: ButtonVariant.filled)
+            },
+            child: widget,
+          ),
+        );
 
-      final button = find.byType(ElevatedButton);
-      expect(button, findsOneWidget);
-    });
+        final button = find.byType(ElevatedButton);
+        expect(button, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'respects EmailFormStyle passed via property',
+      (tester) async {
+        await tester.pumpWidget(
+          widget = TestMaterialApp(
+            child: EmailForm(
+              auth: MockAuth(),
+              action: AuthAction.signIn,
+              style: const EmailFormStyle(
+                signInButtonVariant: ButtonVariant.filled,
+              ),
+            ),
+          ),
+        );
+
+        final button = find.byType(ElevatedButton);
+        expect(button, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'EmailFormStyle passed via property is higher priority',
+      (tester) async {
+        await tester.pumpWidget(
+          TestMaterialApp(
+            child: FirebaseUITheme(
+              styles: const {
+                EmailFormStyle(signInButtonVariant: ButtonVariant.text)
+              },
+              child: EmailForm(
+                auth: MockAuth(),
+                action: AuthAction.signIn,
+                style: const EmailFormStyle(
+                  signInButtonVariant: ButtonVariant.filled,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        final button = find.byType(ElevatedButton);
+        expect(button, findsOneWidget);
+      },
+    );
   });
 }
