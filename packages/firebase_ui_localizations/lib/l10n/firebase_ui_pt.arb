@@ -1,6 +1,6 @@
 {
   "@@locale": "pt",
-  "@@last_modified": "2023-09-01T13:12:06.514305",
+  "@@last_modified": "2023-09-06T14:33:29.112429",
   "accessDisabledErrorText": "O acesso a esta conta foi desativado temporariamente",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -482,6 +482,11 @@
   "doneButtonLabel": "Done",
   "@doneButtonLabel": {
     "description": "Done button label",
+    "placeholders": {}
+  },
+  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "@invalidVerificationCodeErrorText": {
+    "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   }
 }

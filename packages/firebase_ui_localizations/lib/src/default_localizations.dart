@@ -304,6 +304,9 @@ abstract class FirebaseUILocalizationLabels {
 
   /// Done button label
   String get doneButtonLabel;
+
+  /// Error text indicating that entered SMS code is invalid
+  String get invalidVerificationCodeErrorText;
 }
 
 class DefaultLocalizations extends EnLocalizations {
