@@ -25,8 +25,7 @@ String? localizedErrorText(
     case 'credential-already-in-use':
       return labels.credentialAlreadyInUseErrorText;
     case 'invalid-verification-code':
-      // TODO(@lesnitsky): localization
-      return 'The code you entered is invalid. Please try again.';
+      return labels.invalidVerificationCodeErrorText;
 
     default:
       return null;

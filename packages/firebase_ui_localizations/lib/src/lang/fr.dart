@@ -312,4 +312,8 @@ class FrLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get doneButtonLabel => "Done";
+
+  @override
+  String get invalidVerificationCodeErrorText =>
+      "The code you entered is invalid. Please try again.";
 }

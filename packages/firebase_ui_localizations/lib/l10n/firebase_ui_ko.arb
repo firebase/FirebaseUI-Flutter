@@ -1,6 +1,6 @@
 {
   "@@locale": "ko",
-  "@@last_modified": "2023-09-01T13:12:06.509561",
+  "@@last_modified": "2023-09-06T14:33:29.109589",
   "accessDisabledErrorText": "이 계정의 액세스가 일시적으로 중지되었습니다.",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -482,6 +482,11 @@
   "doneButtonLabel": "Done",
   "@doneButtonLabel": {
     "description": "Done button label",
+    "placeholders": {}
+  },
+  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "@invalidVerificationCodeErrorText": {
+    "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   }
 }

@@ -1,6 +1,6 @@
 {
   "@@locale": "id",
-  "@@last_modified": "2023-09-01T13:12:06.512030",
+  "@@last_modified": "2023-09-06T14:33:29.113412",
   "accessDisabledErrorText": "Akses ke akun ini telah dinonaktifkan untuk sementara waktu",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -482,6 +482,11 @@
   "doneButtonLabel": "Done",
   "@doneButtonLabel": {
     "description": "Done button label",
+    "placeholders": {}
+  },
+  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "@invalidVerificationCodeErrorText": {
+    "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   }
 }
