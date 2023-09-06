@@ -37,6 +37,28 @@ String? localizedErrorText(
 /// A widget which displays error text for a given Firebase error code.
 /// {@endtemplate}
 class ErrorText extends StatelessWidget {
+  /// A way to customize localized error messages.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// ErrorText.localizeError = (BuildContext context, FirebaseAuthException e) {
+  ///   return switch (e.code) {
+  ///     'user-not-found' => 'Please create an account first.',
+  ///     'credential-already-in-use' => 'This email is already in use.',
+  ///     _ => 'Oh no! Something went wrong.'
+  ///   }
+  /// }
+  static String Function(
+    BuildContext context,
+    FirebaseAuthException exception,
+  )? localizeError;
+
+  /// A way to customize the widget that is used across the library to show
+  /// error hints. By default a localized text is used with a color set to
+  /// [ColorScheme.error] under [MaterialApp] and
+  /// [CupertinoColors.destructiveRed] under [CupertinoApp].
+  static Widget Function(BuildContext context, String message)? builder;
+
   /// An exception that contains error details.
   /// Often this is a [FirebaseAuthException].
   final Exception exception;
@@ -70,12 +92,16 @@ class ErrorText extends StatelessWidget {
     }
 
     if (exception is FirebaseAuthException) {
-      final e = exception as FirebaseAuthException;
-      final code = e.code;
-      final newText = localizedErrorText(code, l) ?? e.message;
+      if (localizeError != null) {
+        text = localizeError!(context, exception as FirebaseAuthException);
+      } else {
+        final e = exception as FirebaseAuthException;
+        final code = e.code;
+        final newText = localizedErrorText(code, l) ?? e.message;
 
-      if (newText != null) {
-        text = newText;
+        if (newText != null) {
+          text = newText;
+        }
       }
     }
 
