@@ -1,3 +1,7 @@
+## 1.6.1
+
+ - **FIX**(ui_auth,ui_localizations): add invalid verification SMS code error label ([#102](https://github.com/firebase/FirebaseUI-Flutter/issues/102)). ([8adc39b9](https://github.com/firebase/FirebaseUI-Flutter/commit/8adc39b94abcf55a4fc0c07850e7e9ec25380d0d))
+
 ## 1.6.0
 
  - **FIX**(ui_localizations,ui_auth): add missing labels ([#87](https://github.com/firebase/FirebaseUI-Flutter/issues/87)). ([be2b0c33](https://github.com/firebase/FirebaseUI-Flutter/commit/be2b0c33f9537f307c2cae97e5f483f695b3ea05))
