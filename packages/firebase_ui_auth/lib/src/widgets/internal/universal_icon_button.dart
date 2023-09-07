@@ -26,6 +26,7 @@ class UniversalIconButton extends PlatformWidget {
   Widget buildCupertino(BuildContext context) {
     return CupertinoButton(
       onPressed: onPressed,
+      padding: EdgeInsets.zero,
       child: Icon(cupertinoIcon, size: size),
     );
   }
