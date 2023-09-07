@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.8.0`](#firebase_ui_auth---v180)
+ - [`firebase_ui_localizations` - `v1.6.1`](#firebase_ui_localizations---v161)
+ - [`firebase_ui_oauth` - `v1.4.11`](#firebase_ui_oauth---v1411)
+ - [`firebase_ui_oauth_facebook` - `v1.2.11`](#firebase_ui_oauth_facebook---v1211)
+ - [`firebase_ui_oauth_twitter` - `v1.2.11`](#firebase_ui_oauth_twitter---v1211)
+ - [`firebase_ui_oauth_apple` - `v1.2.11`](#firebase_ui_oauth_apple---v1211)
+ - [`firebase_ui_oauth_google` - `v1.2.11`](#firebase_ui_oauth_google---v1211)
+ - [`firebase_ui_firestore` - `v1.5.11`](#firebase_ui_firestore---v1511)
+ - [`firebase_ui_database` - `v1.3.9`](#firebase_ui_database---v139)
+ - [`firebase_ui_storage` - `v1.0.1`](#firebase_ui_storage---v101)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.4.11`
+ - `firebase_ui_oauth_facebook` - `v1.2.11`
+ - `firebase_ui_oauth_twitter` - `v1.2.11`
+ - `firebase_ui_oauth_apple` - `v1.2.11`
+ - `firebase_ui_oauth_google` - `v1.2.11`
+ - `firebase_ui_firestore` - `v1.5.11`
+ - `firebase_ui_database` - `v1.3.9`
+ - `firebase_ui_storage` - `v1.0.1`
+
+---
+
+#### `firebase_ui_auth` - `v1.8.0`
+
+ - **FIX**(ui_auth,ui_localizations): add invalid verification SMS code error label ([#102](https://github.com/firebase/FirebaseUI-Flutter/issues/102)). ([8adc39b9](https://github.com/firebase/FirebaseUI-Flutter/commit/8adc39b94abcf55a4fc0c07850e7e9ec25380d0d))
+ - **FIX**(ui_auth): allow to pass EmailFormStyle via property ([#98](https://github.com/firebase/FirebaseUI-Flutter/issues/98)). ([88c31a33](https://github.com/firebase/FirebaseUI-Flutter/commit/88c31a332dc490d5500e81d491ba929b0fe4c5f0))
+ - **FEAT**(ui_auth): allow to toggle password visibility ([#104](https://github.com/firebase/FirebaseUI-Flutter/issues/104)). ([6e3735d9](https://github.com/firebase/FirebaseUI-Flutter/commit/6e3735d9fda3f2415a781ff591a5842864dc2fcf))
+
+#### `firebase_ui_localizations` - `v1.6.1`
+
+ - **FIX**(ui_auth,ui_localizations): add invalid verification SMS code error label ([#102](https://github.com/firebase/FirebaseUI-Flutter/issues/102)). ([8adc39b9](https://github.com/firebase/FirebaseUI-Flutter/commit/8adc39b94abcf55a4fc0c07850e7e9ec25380d0d))
+
+
 ## 2023-09-01
 
 ### Changes
