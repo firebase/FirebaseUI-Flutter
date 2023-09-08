@@ -55,6 +55,9 @@ class LoginView extends StatefulWidget {
   /// A label that would be used for the "Sign in" button.
   final String? actionButtonLabelOverride;
 
+  /// {@macro ui.auth.widgets.email_from.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   /// {@macro ui.auth.views.login_view}
   const LoginView({
     super.key,
@@ -68,6 +71,7 @@ class LoginView extends StatefulWidget {
     this.footerBuilder,
     this.subtitleBuilder,
     this.actionButtonLabelOverride,
+    this.showPasswordVisibilityToggle = false,
   });
 
   @override
@@ -222,6 +226,8 @@ class _LoginViewState extends State<LoginView> {
                   provider: provider,
                   email: widget.email,
                   actionButtonLabelOverride: widget.actionButtonLabelOverride,
+                  showPasswordVisibilityToggle:
+                      widget.showPasswordVisibilityToggle,
                 )
               ] else if (provider is PhoneAuthProvider) ...[
                 const SizedBox(height: 8),

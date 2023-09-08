@@ -23,50 +23,74 @@ class EmailSignUpDialog extends StatelessWidget {
   /// An instance of [EmailAuthProvider] that should be used to authenticate.
   final EmailAuthProvider provider;
 
+  /// {@macro ui.auth.widgets.email_from.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   /// {@macro ui.auth.widget.email_sign_up_dialog}
   const EmailSignUpDialog({
     super.key,
     this.auth,
     required this.provider,
     required this.action,
+    this.showPasswordVisibilityToggle = false,
   });
+
+  AuthStateListenerCallback<EmailAuthController> onAuthStateChanged(
+    BuildContext context,
+  ) {
+    return (AuthState oldState, AuthState newState, _) {
+      if (newState is CredentialLinked) {
+        Navigator.of(context).pop();
+      }
+
+      return null;
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
 
+    return _DialogWrapper(
+      child: Dialog(
+        child: AuthStateListener<EmailAuthController>(
+          listener: onAuthStateChanged(context),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 16),
+                Title(text: l.provideEmail),
+                const SizedBox(height: 32),
+                EmailForm(
+                  auth: auth,
+                  action: action,
+                  provider: provider,
+                  showPasswordVisibilityToggle: showPasswordVisibilityToggle,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DialogWrapper extends StatelessWidget {
+  final Widget child;
+
+  const _DialogWrapper({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
-          child: Dialog(
-            child: AuthStateListener<EmailAuthController>(
-              listener: (oldState, newState, ctrl) {
-                if (newState is CredentialLinked) {
-                  Navigator.of(context).pop();
-                }
-
-                return null;
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 16),
-                    Title(text: l.provideEmail),
-                    const SizedBox(height: 32),
-                    EmailForm(
-                      auth: auth,
-                      action: action,
-                      provider: provider,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          child: child,
         ),
       ),
     );

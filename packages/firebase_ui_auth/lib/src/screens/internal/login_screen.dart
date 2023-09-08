@@ -51,6 +51,9 @@ class LoginScreen extends StatelessWidget {
   final double breakpoint;
   final Set<FirebaseUIStyle>? styles;
 
+  /// {@macro ui.auth.widgets.email_form.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   const LoginScreen({
     super.key,
     required this.action,
@@ -69,6 +72,7 @@ class LoginScreen extends StatelessWidget {
     this.loginViewKey,
     this.breakpoint = 800,
     this.styles,
+    this.showPasswordVisibilityToggle = false,
   });
 
   @override
@@ -87,6 +91,7 @@ class LoginScreen extends StatelessWidget {
           showAuthActionSwitch: showAuthActionSwitch,
           subtitleBuilder: subtitleBuilder,
           footerBuilder: footerBuilder,
+          showPasswordVisibilityToggle: showPasswordVisibilityToggle,
         ),
       ),
     );
