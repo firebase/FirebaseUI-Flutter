@@ -12,6 +12,9 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import '../utils.dart';
 
 void main() {
+  setUpAll(prepare);
+  tearDown(authCleanup);
+
   const labels = DefaultLocalizations();
 
   group('EmailForm', () {
@@ -88,13 +91,14 @@ void main() {
 
         await tester.enterText(inputs.at(0), 'test@test.com');
         await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
 
         await tester.enterText(inputs.at(1), 'password');
         await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
 
         await tester.enterText(inputs.at(2), 'psasword');
         await tester.testTextInput.receiveAction(TextInputAction.done);
-
         await tester.pumpAndSettle();
 
         expect(
@@ -113,15 +117,15 @@ void main() {
 
         await tester.enterText(inputs.at(0), 'test@test.com');
         await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
 
         await tester.enterText(inputs.at(1), 'password');
         await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
 
         await tester.enterText(inputs.at(2), 'password');
         await tester.testTextInput.receiveAction(TextInputAction.done);
-
         await tester.pump();
-        await Future.delayed(const Duration(milliseconds: 1));
 
         expect(find.byType(LoadingIndicator), findsOneWidget);
         await tester.pumpAndSettle();

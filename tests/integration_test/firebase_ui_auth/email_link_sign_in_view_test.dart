@@ -23,6 +23,9 @@ final emailLinkProvider = EmailLinkAuthProvider(
 );
 
 void main() {
+  setUpAll(prepare);
+  tearDown(authCleanup);
+
   const labels = DefaultLocalizations();
 
   group('EmailLinkSignInView', () {

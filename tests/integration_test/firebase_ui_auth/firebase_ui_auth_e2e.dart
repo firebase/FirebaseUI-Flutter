@@ -15,11 +15,7 @@ import '../utils.dart';
 
 Future<void> main() async {
   setUpAll(prepare);
-
-  tearDown(() async {
-    await auth.signOut();
-    await deleteAllAccounts();
-  });
+  tearDown(authCleanup);
 
   email_form.main();
   email_link_sign_in_view.main();

@@ -10,5 +10,7 @@ import '../utils.dart';
 
 void main() {
   setUpAll(prepare);
+  tearDown(authCleanup);
+
   twitter_sign_in.main();
 }

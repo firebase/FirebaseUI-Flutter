@@ -10,5 +10,7 @@ import '../utils.dart';
 
 void main() {
   setUpAll(prepare);
+  tearDown(authCleanup);
+
   google_sign_in.main();
 }

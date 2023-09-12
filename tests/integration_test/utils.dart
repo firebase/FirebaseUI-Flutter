@@ -35,11 +35,18 @@ Future<void> prepare() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAuth.instance.useAuthEmulator(testEmulatorHost, 9099);
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
   auth = FirebaseAuth.instance;
 
-  FirebaseFirestore.instance.useFirestoreEmulator(testEmulatorHost, 8080);
+  FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8081);
   db = FirebaseFirestore.instance;
+
+  await authCleanup();
+}
+
+Future<void> authCleanup() async {
+  await auth.signOut();
+  await deleteAllAccounts();
 }
 
 Future<void> render(WidgetTester tester, Widget widget) async {

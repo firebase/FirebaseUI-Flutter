@@ -10,5 +10,7 @@ import '../utils.dart';
 
 void main() {
   setUpAll(prepare);
+  tearDown(authCleanup);
+
   facebook_sign_in.main();
 }

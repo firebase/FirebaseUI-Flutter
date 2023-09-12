@@ -5,13 +5,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:mockito/mockito.dart';
 import '../utils.dart';
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(prepare);
 
   group('FirestoreQueryBuilder', () {

@@ -16,6 +16,9 @@ import 'package:twitter_login/entity/auth_result.dart' as twe;
 import '../utils.dart';
 
 void main() async {
+  setUpAll(prepare);
+  tearDown(authCleanup);
+
   late TwitterProvider provider = TwitterProvider(
     apiKey: 'apiKey',
     apiSecretKey: 'apiSecretKey',

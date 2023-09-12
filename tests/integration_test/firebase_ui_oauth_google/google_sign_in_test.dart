@@ -15,6 +15,9 @@ import 'package:mockito/mockito.dart';
 import '../utils.dart';
 
 void main() async {
+  setUpAll(prepare);
+  tearDown(authCleanup);
+
   late GoogleProvider provider = GoogleProvider(
     clientId: 'clientId',
     redirectUri: 'redirectUri',

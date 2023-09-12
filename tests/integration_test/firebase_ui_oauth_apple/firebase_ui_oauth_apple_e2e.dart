@@ -10,5 +10,7 @@ import '../utils.dart';
 
 void main() {
   setUpAll(prepare);
+  tearDown(authCleanup);
+
   apple_sign_in.main();
 }
