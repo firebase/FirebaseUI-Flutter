@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 
 void main() {
   const labels = DefaultLocalizations();
@@ -126,17 +126,17 @@ void main() {
         expect(find.byType(LoadingIndicator), findsOneWidget);
         await tester.pumpAndSettle();
 
-        expect(FirebaseAuth.instance.currentUser, isNotNull);
+        expect(auth.currentUser, isNotNull);
       },
     );
 
     testWidgets('shows wrong password error', (tester) async {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: 'test@test.com',
         password: 'password',
       );
 
-      await FirebaseAuth.instance.signOut();
+      await auth.signOut();
 
       await render(tester, const EmailForm(action: AuthAction.signIn));
 
@@ -154,12 +154,12 @@ void main() {
     });
 
     testWidgets('signs in the user', (tester) async {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: 'test@test.com',
         password: 'password',
       );
 
-      await FirebaseAuth.instance.signOut();
+      await auth.signOut();
 
       await render(
         tester,
@@ -207,7 +207,7 @@ void main() {
                 );
 
                 expect(
-                  FirebaseAuth.instance.currentUser!.email,
+                  auth.currentUser!.email,
                   equals('test@test.com'),
                 );
               })
@@ -216,7 +216,7 @@ void main() {
           ),
         );
 
-        await FirebaseAuth.instance.signInAnonymously();
+        await auth.signInAnonymously();
 
         final inputs = find.byType(TextFormField);
 

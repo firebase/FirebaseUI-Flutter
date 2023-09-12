@@ -2,34 +2,37 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
-import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mockito/mockito.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 
 void main() async {
-  late FacebookProvider provider = FacebookProvider(clientId: 'clientId');
+  late GoogleProvider provider = GoogleProvider(
+    clientId: 'clientId',
+    redirectUri: 'redirectUri',
+    scopes: const ['scope1', 'scope2'],
+  );
 
   setUp(() {
-    provider.provider = MockFacebookAuth();
+    provider.provider = MockGoogleSignIn();
   });
 
   const labels = DefaultLocalizations();
 
   group(
-    'Sign in with Facebook button',
+    'Sign in with Google button',
     () {
       testWidgets('has a correct button label', (tester) async {
         await render(tester, OAuthProviderButton(provider: provider));
-        expect(find.text(labels.signInWithFacebookButtonText), findsOneWidget);
+        expect(find.text(labels.signInWithGoogleButtonText), findsOneWidget);
       });
 
       testWidgets(
@@ -44,7 +47,7 @@ void main() async {
           await tester.tap(button);
 
           await tester.pumpAndSettle();
-          verify(provider.provider.login()).called(1);
+          verify(provider.provider.signIn()).called(1);
 
           expect(true, isTrue);
         },
@@ -58,10 +61,10 @@ void main() async {
             OAuthProviderButton(provider: provider),
           );
 
-          when(provider.provider.login()).thenAnswer(
+          when(provider.provider.signIn()).thenAnswer(
             (realInvocation) async {
               await Future.delayed(const Duration(milliseconds: 50));
-              return MockLoginResult();
+              return MockGoogleSignInAccount();
             },
           );
 
@@ -83,10 +86,24 @@ void main() async {
         await tester.tap(button);
         await tester.pumpAndSettle();
 
-        final user = FirebaseAuth.instance.currentUser!;
+        final user = auth.currentUser!;
 
         expect(user.displayName, 'Test User');
         expect(user.email, 'test@test.com');
+      });
+
+      testWidgets('works standalone', (tester) async {
+        await render(
+          tester,
+          const GoogleSignInButton(
+            loadingIndicator: CircularProgressIndicator(),
+            clientId: 'test',
+          ),
+        );
+
+        final button = find.byType(GoogleSignInButton);
+        await tester.tap(button);
+        await tester.pump();
       });
     },
     skip: !provider.supportsPlatform(defaultTargetPlatform),
@@ -103,31 +120,25 @@ void main() async {
 const _jwt =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.m5qYto_Vs5ELTURC8rkD-JAJuoosdQZeuUZ_qFrEiaE';
 
-class MockAccessToken extends Mock implements AccessToken {
+class MockAuthentication extends Mock implements GoogleSignInAuthentication {
   @override
-  String get token => _jwt;
+  final String accessToken = _jwt;
 }
 
-class MockLoginResult extends Mock implements LoginResult {
+// ignore: avoid_implementing_value_types, must_be_immutable
+class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {
   @override
-  LoginStatus get status => LoginStatus.success;
-  @override
-  AccessToken? get accessToken => MockAccessToken();
+  Future<GoogleSignInAuthentication> get authentication async =>
+      MockAuthentication();
 }
 
-class MockFacebookAuth extends Mock implements FacebookAuth {
+class MockGoogleSignIn extends Mock implements GoogleSignIn {
   @override
-  Future<LoginResult> login({
-    List<String>? permissions = const ['email', 'public_profile'],
-    LoginBehavior? loginBehavior = LoginBehavior.dialogOnly,
-  }) async {
+  Future<GoogleSignInAccount?> signIn() async {
     return super.noSuchMethod(
-      Invocation.method(#signIn, [], {
-        #permissions: permissions,
-        #behavior: loginBehavior,
-      }),
-      returnValue: MockLoginResult(),
-      returnValueForMissingStub: MockLoginResult(),
+      Invocation.method(#signIn, []),
+      returnValue: MockGoogleSignInAccount(),
+      returnValueForMissingStub: MockGoogleSignInAccount(),
     );
   }
 }

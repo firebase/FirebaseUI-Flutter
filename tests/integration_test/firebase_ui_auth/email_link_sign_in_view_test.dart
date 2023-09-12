@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 
 final actionCodeSettings = ActionCodeSettings(
   url: 'http://$testEmulatorHost:9099',

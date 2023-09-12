@@ -13,7 +13,7 @@ import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:mockito/mockito.dart';
 import 'package:firebase_ui_oauth_apple/src/provider.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 
 void main() async {
   final provider = AppleProvider();

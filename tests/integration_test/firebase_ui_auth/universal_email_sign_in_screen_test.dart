@@ -13,7 +13,7 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:mockito/mockito.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 
 void main() {
   const labels = DefaultLocalizations();
