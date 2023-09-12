@@ -142,6 +142,9 @@ class OAuthProviderButtonBase extends StatefulWidget {
 
 class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
     implements OAuthListener {
+  @override
+  late final OAuthProvider provider = widget.provider;
+
   double get _height => widget.size + widget._padding * 2;
   late bool isLoading = widget.isLoading;
 
@@ -149,8 +152,8 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   void initState() {
     super.initState();
 
-    widget.provider.auth = widget.auth ?? FirebaseAuth.instance;
-    widget.provider.authListener = this;
+    provider.auth = widget.auth ?? FirebaseAuth.instance;
+    provider.authListener = this;
   }
 
   void _signIn() {
@@ -336,6 +339,10 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
   @override
   void onError(Object error) {
+    setState(() {
+      isLoading = false;
+    });
+
     try {
       defaultOnAuthError(provider, error);
     } on Exception catch (err) {
@@ -360,9 +367,6 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
     super.didUpdateWidget(oldWidget);
   }
-
-  @override
-  OAuthProvider get provider => widget.provider;
 }
 
 class _ButtonContent extends StatelessWidget {
