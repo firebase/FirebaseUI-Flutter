@@ -16,7 +16,7 @@
     "description": "",
     "placeholders": {}
   },
-  "cancelLabel": "cancel",
+  "cancelLabel": "annulla",
   "@cancelLabel": {
     "description": "",
     "placeholders": {}
@@ -369,7 +369,7 @@
     "description": "",
     "placeholders": {}
   },
-  "typeLabel": "type",
+  "typeLabel": "tipo",
   "@typeLabel": {
     "description": "",
     "placeholders": {}
@@ -379,7 +379,7 @@
     "description": "Used as a generic error message when unable to resolve error details from Exception or FirebaseAuthException.",
     "placeholders": {}
   },
-  "updateLabel": "update",
+  "updateLabel": "aggiorna",
   "@updateLabel": {
     "description": "",
     "placeholders": {}
@@ -389,7 +389,7 @@
     "description": "Used as an error message when the account for provided email was not found.",
     "placeholders": {}
   },
-  "valueLabel": "value",
+  "valueLabel": "valore",
   "@valueLabel": {
     "description": "",
     "placeholders": {}
@@ -424,47 +424,47 @@
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
     "placeholders": {}
   },
-  "uploadButtonText": "Upload file",
+  "uploadButtonText": "Invia file",
   "@uploadButtonText": {
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Verify your email",
+  "verifyEmailTitle": "Verifica la tua email",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.",
+  "verificationEmailSentText": "Una mail di verifica è stata inviata al tuo indirizzo email. Prego controlla la tua email e clicca sul link per verificare il tuo indirizzo email.",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "We couldn't verify your email address. ",
+  "verificationFailedText": "Non possiamo verificare il tuo indirizzo email. ",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
   },
-  "resendVerificationEmailButtonLabel": "Resend verification email",
+  "resendVerificationEmailButtonLabel": "Reinvia email di verifica",
   "@resendVerificationEmailButtonLabel": {
     "description": "Button label that suggests to resend verification email",
     "placeholders": {}
   },
-  "verificationEmailSentTextShort": "Verification email sent",
+  "verificationEmailSentTextShort": "Email di verifica inviata",
   "@verificationEmailSentTextShort": {
     "description": "Short version of the hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "emailIsNotVerifiedText": "Email is not verified",
+  "emailIsNotVerifiedText": "L'email non è stata verificata",
   "@emailIsNotVerifiedText": {
     "description": "Message indicating that email is not verified",
     "placeholders": {}
   },
-  "waitingForEmailVerificationText": "Waiting for email verification",
+  "waitingForEmailVerificationText": "In attesa della verifica dell'email",
   "@waitingForEmailVerificationText": {
     "description": "Message indicating that email is being verified",
     "placeholders": {}
   },
-  "dismissButtonLabel": "Dismiss",
+  "dismissButtonLabel": "Dismetti",
   "@dismiss": {
     "description": "Dissmiss button label",
     "placeholders": {}
@@ -474,17 +474,17 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Please check your email and click the link to verify your email address.",
+  "checkEmailHintText": "Prego controlla la tua email e clicca il link per verificare il tuo indirizzo email.",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
   },
-  "doneButtonLabel": "Done",
+  "doneButtonLabel": "Fatto",
   "@doneButtonLabel": {
     "description": "Done button label",
     "placeholders": {}
   },
-  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "invalidVerificationCodeErrorText": "Il codice che hai inserito non è valido. Prego riprova ancora.",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
