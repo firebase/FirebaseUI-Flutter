@@ -2,15 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:flutter_test/flutter_test.dart';
-
 import './google_sign_in_test.dart' as google_sign_in;
 
-import '../utils.dart';
-
 void main() {
-  setUpAll(prepare);
-  tearDown(authCleanup);
-
   google_sign_in.main();
 }

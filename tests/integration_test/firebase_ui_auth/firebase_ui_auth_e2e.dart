@@ -11,12 +11,7 @@ import 'universal_email_sign_in_screen_test.dart'
 import 'phone_verification_test.dart' as phone_verification;
 import 'layout_test.dart' as layout;
 
-import '../utils.dart';
-
 Future<void> main() async {
-  setUpAll(prepare);
-  tearDown(authCleanup);
-
   email_form.main();
   email_link_sign_in_view.main();
   universal_email_sign_in_screen.main();

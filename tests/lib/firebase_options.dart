@@ -49,7 +49,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
     authDomain: 'flutterfire-e2e-tests.firebaseapp.com',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
     measurementId: 'G-JN95N1JV2E',
   );
@@ -59,7 +60,8 @@ class DefaultFirebaseOptions {
     appId: '1:406099696497:android:0d4ed619c031c0ac3574d0',
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
   );
 
@@ -68,10 +70,13 @@ class DefaultFirebaseOptions {
     appId: '1:406099696497:ios:acd9c8e17b5e620e3574d0',
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
-    androidClientId: '406099696497-17qn06u8a0dc717u8ul7s49ampk13lul.apps.googleusercontent.com',
-    iosClientId: '406099696497-mcs94a53ttg7ru556uec2hejel40ej7u.apps.googleusercontent.com',
+    androidClientId:
+        '406099696497-17qn06u8a0dc717u8ul7s49ampk13lul.apps.googleusercontent.com',
+    iosClientId:
+        '406099696497-mcs94a53ttg7ru556uec2hejel40ej7u.apps.googleusercontent.com',
     iosBundleId: 'io.flutter.plugins.firebase.tests',
   );
 
@@ -80,10 +85,13 @@ class DefaultFirebaseOptions {
     appId: '1:406099696497:ios:acd9c8e17b5e620e3574d0',
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
-    androidClientId: '406099696497-17qn06u8a0dc717u8ul7s49ampk13lul.apps.googleusercontent.com',
-    iosClientId: '406099696497-mcs94a53ttg7ru556uec2hejel40ej7u.apps.googleusercontent.com',
+    androidClientId:
+        '406099696497-17qn06u8a0dc717u8ul7s49ampk13lul.apps.googleusercontent.com',
+    iosClientId:
+        '406099696497-mcs94a53ttg7ru556uec2hejel40ej7u.apps.googleusercontent.com',
     iosBundleId: 'io.flutter.plugins.firebase.tests',
   );
 }

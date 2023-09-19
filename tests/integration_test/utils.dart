@@ -37,7 +37,9 @@ Future<void> prepare() async {
   if (_prepared) return;
   _prepared = true;
 
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  if (!kIsWeb) {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  }
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAuth.instance.useAuthEmulator('localhost', 9098);

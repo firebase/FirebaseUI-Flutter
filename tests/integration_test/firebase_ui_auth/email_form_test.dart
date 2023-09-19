@@ -12,9 +12,6 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import '../utils.dart';
 
 void main() {
-  setUpAll(prepare);
-  tearDown(authCleanup);
-
   const labels = DefaultLocalizations();
 
   group('EmailForm', () {

@@ -24,8 +24,6 @@ Future<void> sendSMS(WidgetTester tester, String phoneNumber) async {
 
 void main() {
   const labels = DefaultLocalizations();
-  setUpAll(prepare);
-  tearDown(authCleanup);
 
   group('PhoneInputScreen', () {
     testWidgets('allows to pick country code', (tester) async {

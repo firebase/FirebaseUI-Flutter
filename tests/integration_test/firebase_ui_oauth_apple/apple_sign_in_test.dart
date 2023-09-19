@@ -16,9 +16,6 @@ import 'package:firebase_ui_oauth_apple/src/provider.dart';
 import '../utils.dart';
 
 void main() async {
-  setUpAll(prepare);
-  tearDown(authCleanup);
-
   final provider = AppleProvider();
   late FirebaseAuth auth;
   late MockProvider fbProvider;

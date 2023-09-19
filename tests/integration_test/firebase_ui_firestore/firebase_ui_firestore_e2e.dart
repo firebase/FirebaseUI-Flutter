@@ -7,11 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'firestore_list_view_test.dart' as firestore_list_view_test;
 // import 'firestore_query_builder_test.dart' as firestore_query_builder_test;
 
-import '../utils.dart';
-
 Future<void> main() async {
-  setUpAll(prepare);
-
   firestore_list_view_test.main();
   // TODO: fix query builder tests
   // They run ok when run individually, but fail when run together

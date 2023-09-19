@@ -16,9 +16,6 @@ import 'package:mockito/mockito.dart';
 import '../utils.dart';
 
 void main() {
-  setUpAll(prepare);
-  tearDown(authCleanup);
-
   const labels = DefaultLocalizations();
 
   group('UniversalEmailSignInScreen', () {

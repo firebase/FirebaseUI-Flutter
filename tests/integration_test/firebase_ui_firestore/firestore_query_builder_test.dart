@@ -10,8 +10,6 @@ import 'package:mockito/mockito.dart';
 import '../utils.dart';
 
 void main() {
-  setUpAll(prepare);
-
   group('FirestoreQueryBuilder', () {
     setUp(() async {
       await clearCollection(
