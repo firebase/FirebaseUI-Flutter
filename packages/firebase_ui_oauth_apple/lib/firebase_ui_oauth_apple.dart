@@ -74,6 +74,13 @@ class AppleSignInIconButton extends _AppleSignInButton {
         );
 }
 
+AppleProvider? _mockProvider;
+
+@visibleForTesting
+void mockAppleProvider(AppleProvider provider) {
+  _mockProvider = provider;
+}
+
 class _AppleSignInButton extends StatelessWidget {
   final String label;
   final Widget loadingIndicator;
@@ -110,7 +117,13 @@ class _AppleSignInButton extends StatelessWidget {
         overrideDefaultTapAction = overrideDefaultTapAction ?? false,
         size = size ?? 19;
 
-  AppleProvider get provider => AppleProvider();
+  AppleProvider get provider {
+    if (_mockProvider != null) {
+      return _mockProvider!;
+    }
+
+    return AppleProvider();
+  }
 
   @override
   Widget build(BuildContext context) {

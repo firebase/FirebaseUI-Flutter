@@ -13,12 +13,15 @@ void main() {
   setUpAll(prepare);
 
   group('FirestoreQueryBuilder', () {
+    setUp(() async {
+      await clearCollection(
+        db.collection('flutter-tests/query-builder/works'),
+      );
+    });
+
     testWidgets('fetches initial page', (tester) async {
       final builderSpy = QueryBuilderSpy();
-      final collection = await setupCollection(
-        FirebaseFirestore.instance
-            .collection('flutter-tests/query-builder/works'),
-      );
+      final collection = db.collection('flutter-tests/query-builder/works');
 
       await collection.add({'value': 21});
 
@@ -74,6 +77,7 @@ void main() {
       verifyNoMoreInteractions(builderSpy);
 
       await collection.add({'value': 42});
+      await collection.get();
       await tester.pump();
 
       verify(
@@ -101,10 +105,7 @@ void main() {
 
     testWidgets('defaults to fetching 10 by 10', (tester) async {
       final builderSpy = QueryBuilderSpy();
-      final collection = await setupCollection(
-        FirebaseFirestore.instance
-            .collection('flutter-tests/query-builder/works'),
-      );
+      final collection = db.collection('flutter-tests/query-builder/works');
 
       await fillCollection(collection, 25);
 
@@ -263,289 +264,284 @@ void main() {
       );
     });
 
-    testWidgets('when the query changes, re-fetches from first page',
-        (tester) async {
-      final builderSpy = QueryBuilderSpy();
-      final collection = await setupCollection(
-        FirebaseFirestore.instance
-            .collection('flutter-tests/query-builder/works'),
-      );
+    testWidgets(
+      'when the query changes, re-fetches from first page',
+      (tester) async {
+        final builderSpy = QueryBuilderSpy();
+        final collection = db.collection('flutter-tests/query-builder/works');
 
-      await fillCollection(collection, 25);
+        await fillCollection(collection, 25);
 
-      await tester.pumpWidget(
-        FirestoreQueryBuilder<Map>(
-          query: collection.orderBy('value'),
-          builder: builderSpy,
-        ),
-      );
+        await tester.pumpWidget(
+          FirestoreQueryBuilder<Map>(
+            query: collection.orderBy('value'),
+            builder: builderSpy,
+          ),
+        );
 
-      clearInteractions(builderSpy);
+        clearInteractions(builderSpy);
 
-      await collection.get();
-      await tester.pump();
+        await collection.get();
+        await tester.pump();
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: false,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 10; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: false,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 10; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
+        verifyNoMoreInteractions(builderSpy);
 
-      builderSpy.lastSnapshot!.fetchMore();
-      await tester.pump();
+        builderSpy.lastSnapshot!.fetchMore();
+        await tester.pump();
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(isFetchingNextPage: true),
-          ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
-
-      await collection.get();
-      await tester.pump();
-
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: false,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 20; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(isFetchingNextPage: true),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
+        verifyNoMoreInteractions(builderSpy);
 
-      await tester.pumpWidget(
-        FirestoreQueryBuilder<Map>(
-          query: collection.orderBy('value', descending: true),
-          builder: builderSpy,
-        ),
-      );
+        await collection.get();
+        await tester.pump();
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: true,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 20; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: false,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 20; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
+        verifyNoMoreInteractions(builderSpy);
 
-      await collection.get();
-      await tester.pump();
+        await tester.pumpWidget(
+          FirestoreQueryBuilder<Map>(
+            query: collection.orderBy('value', descending: true),
+            builder: builderSpy,
+          ),
+        );
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: false,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 10; i++)
-                  isQueryDocumentSnapshot(data: {'value': 24 - i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: true,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 20; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
-    });
+        );
+        verifyNoMoreInteractions(builderSpy);
 
-    testWidgets('when the page size changes, re-fetches but preserve progress',
-        (tester) async {
-      final builderSpy = QueryBuilderSpy();
-      final collection = await setupCollection(
-        FirebaseFirestore.instance
-            .collection('flutter-tests/query-builder/works'),
-      );
+        await collection.get();
+        await tester.pump();
 
-      await fillCollection(collection, 25);
-
-      await tester.pumpWidget(
-        FirestoreQueryBuilder<Map>(
-          query: collection.orderBy('value'),
-          builder: builderSpy,
-        ),
-      );
-
-      clearInteractions(builderSpy);
-
-      await collection.get();
-      await tester.pump();
-
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: false,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 10; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: false,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 10; i++)
+                    isQueryDocumentSnapshot(data: {'value': 24 - i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
+        verifyNoMoreInteractions(builderSpy);
+      },
+    );
 
-      builderSpy.lastSnapshot!.fetchMore();
-      await tester.pump();
+    testWidgets(
+      'when the page size changes, re-fetches but preserve progress',
+      (tester) async {
+        final builderSpy = QueryBuilderSpy();
+        final collection = db.collection('flutter-tests/query-builder/works');
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(isFetchingNextPage: true),
+        await fillCollection(collection, 25);
+
+        await tester.pumpWidget(
+          FirestoreQueryBuilder<Map>(
+            query: collection.orderBy('value'),
+            builder: builderSpy,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
 
-      await collection.get();
-      await tester.pump();
+        clearInteractions(builderSpy);
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: false,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 20; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        await collection.get();
+        await tester.pump();
+
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: false,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 10; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
+        verifyNoMoreInteractions(builderSpy);
 
-      await tester.pumpWidget(
-        FirestoreQueryBuilder<Map>(
-          pageSize: 11,
-          query: collection.orderBy('value'),
-          builder: builderSpy,
-        ),
-      );
+        builderSpy.lastSnapshot!.fetchMore();
+        await tester.pump();
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: true,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 20; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(isFetchingNextPage: true),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
+        );
+        verifyNoMoreInteractions(builderSpy);
 
-      await collection.get();
-      await tester.pump();
+        await collection.get();
+        await tester.pump();
 
-      verify(
-        builderSpy(
-          any,
-          captureThat(
-            isQueryBuilderSnapshot(
-              isFetching: false,
-              hasData: true,
-              hasMore: true,
-              docs: [
-                for (var i = 0; i < 22; i++)
-                  isQueryDocumentSnapshot(data: {'value': i}),
-              ],
-              error: null,
-              stackTrace: null,
-              isFetchingNextPage: false,
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: false,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 20; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
             ),
+            null,
           ),
-          null,
-        ),
-      );
-      verifyNoMoreInteractions(builderSpy);
-    });
+        );
+        verifyNoMoreInteractions(builderSpy);
+
+        await tester.pumpWidget(
+          FirestoreQueryBuilder<Map>(
+            pageSize: 11,
+            query: collection.orderBy('value'),
+            builder: builderSpy,
+          ),
+        );
+
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: true,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 20; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
+            ),
+            null,
+          ),
+        );
+        verifyNoMoreInteractions(builderSpy);
+
+        await collection.get();
+        await tester.pump();
+
+        verify(
+          builderSpy(
+            any,
+            captureThat(
+              isQueryBuilderSnapshot(
+                isFetching: false,
+                hasData: true,
+                hasMore: true,
+                docs: [
+                  for (var i = 0; i < 22; i++)
+                    isQueryDocumentSnapshot(data: {'value': i}),
+                ],
+                error: null,
+                stackTrace: null,
+                isFetchingNextPage: false,
+              ),
+            ),
+            null,
+          ),
+        );
+        verifyNoMoreInteractions(builderSpy);
+      },
+    );
 
     testWidgets('calling fetchNextPage twice is no-op', (tester) async {
       final builderSpy = QueryBuilderSpy();
-      final collection = await setupCollection(
-        FirebaseFirestore.instance
-            .collection('flutter-tests/query-builder/works'),
-      );
+      final collection = db.collection('flutter-tests/query-builder/works');
 
       await fillCollection(collection, 25);
 
@@ -637,12 +633,11 @@ void main() {
 
     testWidgets('error after data preserves the data', (tester) async {
       final builderSpy = QueryBuilderSpy();
-      final validCollection = await setupCollection(
-        FirebaseFirestore.instance
-            .collection('flutter-tests/query-builder/works'),
+      final validCollection = db.collection(
+        'flutter-tests/query-builder/works',
       );
-      final unknownCollection =
-          FirebaseFirestore.instance.collection('unknown');
+
+      final unknownCollection = db.collection('unknown');
 
       await fillCollection(validCollection, 25);
 
@@ -741,12 +736,10 @@ void main() {
       'data after error resets hasError/error/stackTrace',
       (tester) async {
         final builderSpy = QueryBuilderSpy();
-        final validCollection = await setupCollection(
-          FirebaseFirestore.instance
-              .collection('flutter-tests/query-builder/works'),
+        final validCollection = db.collection(
+          'flutter-tests/query-builder/works',
         );
-        final unknownCollection =
-            FirebaseFirestore.instance.collection('unknown');
+        final unknownCollection = db.collection('unknown');
 
         await fillCollection(validCollection, 25);
 

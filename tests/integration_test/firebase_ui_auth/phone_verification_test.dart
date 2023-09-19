@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -27,44 +28,36 @@ void main() {
   tearDown(authCleanup);
 
   group('PhoneInputScreen', () {
-    testWidgets(
-      'pick country code',
-      (tester) async {
-        await render(
-          tester,
-          const PhoneInputScreen(),
-        );
+    testWidgets('allows to pick country code', (tester) async {
+      await render(tester, const PhoneInputScreen());
+      await tester.pump();
 
-        await tester.pump();
+      final popUpMenu = find.byWidgetPredicate((widget) {
+        return widget is PopupMenuButton;
+      });
 
-        final popUpMenu = find.byWidgetPredicate((widget) {
-          return widget is PopupMenuButton;
-        });
+      expect(popUpMenu, findsOneWidget);
 
-        expect(popUpMenu, findsOneWidget);
+      await tester.tap(popUpMenu);
+      await tester.pumpAndSettle();
 
-        await tester.tap(popUpMenu);
-        await tester.pumpAndSettle();
+      final australia = find.text('Australia (+61)');
+      expect(australia, findsOneWidget);
 
-        final australia = find.text('Australia (+61)');
-        expect(australia, findsOneWidget);
+      await tester.tap(australia);
+      await tester.pumpAndSettle();
 
-        await tester.tap(australia);
-        await tester.pumpAndSettle();
+      final inputs = find.byType(TextField);
+      expect(inputs, findsNWidgets(2));
 
-        final inputs = find.byType(TextField);
-        expect(inputs, findsNWidgets(2));
+      final elements = inputs.evaluate();
 
-        final elements = inputs.evaluate();
+      final codeInput = elements.first.widget as TextField;
 
-        final codeInput = elements.first.widget as TextField;
-
-        expect(codeInput.decoration!.labelText, labels.countryCode);
-        expect((codeInput.decoration!.prefix! as Text).data, '+');
-        expect(codeInput.controller!.text, '61');
-      },
-      skip: true,
-    );
+      expect(codeInput.decoration!.labelText, labels.countryCode);
+      expect((codeInput.decoration!.prefix! as Text).data, '+');
+      expect(codeInput.controller!.text, '61');
+    });
 
     testWidgets('validates phone number', (tester) async {
       await render(
@@ -166,14 +159,14 @@ void main() {
     testWidgets(
       'signs in if the code is correct',
       (tester) async {
-        final completer = Completer<SignedIn>();
+        final completer = Completer<User>();
 
         await render(
           tester,
           FirebaseUIActions(
             actions: [
-              AuthStateChangeAction<SignedIn>((context, state) {
-                completer.complete(state);
+              AuthStateChangeAction<UserCreated>((context, state) {
+                completer.complete(state.credential.user!);
               }),
               AuthStateChangeAction<AuthFailed>((context, state) {
                 fail("shouldn't fail");
@@ -185,8 +178,6 @@ void main() {
         await sendSMS(tester, '234567890');
 
         final smsCodeInput = find.byType(SMSCodeInput);
-        expect(smsCodeInput, findsOneWidget);
-
         final codes = await getVerificationCodes();
         final code = codes['+1234567890']!;
 
@@ -194,11 +185,11 @@ void main() {
 
         await tester.enterText(smsCodeInput, code);
         await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+        await tester.pump();
 
-        final state = await completer.future;
-        expect(state.user, isNotNull);
-        expect(state.user!.phoneNumber, '+1234567890');
+        final user = await completer.future.timeout(const Duration(seconds: 1));
+
+        expect(user.phoneNumber, '+1234567890');
       },
     );
   });

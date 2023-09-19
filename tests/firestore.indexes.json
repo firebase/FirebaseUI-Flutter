@@ -1,15 +1,15 @@
 {
   "indexes": [
     {
-      "collectionGroup": "firestore-example-app",
+      "collectionGroup": "firebasePerfTest",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "genre",
-          "arrayConfig": "CONTAINS"
+          "fieldPath": "democratic",
+          "order": "ASCENDING"
         },
         {
-          "fieldPath": "rating",
+          "fieldPath": "totalPopulation",
           "order": "ASCENDING"
         }
       ]
@@ -19,40 +19,12 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "genre",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "rating",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "firestore-example-app",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "genre",
-          "arrayConfig": "CONTAINS"
-        },
-        {
           "fieldPath": "title",
           "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "firestore-example-app",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "genre",
-          "arrayConfig": "CONTAINS"
         },
         {
-          "fieldPath": "title",
-          "order": "DESCENDING"
+          "fieldPath": "likes",
+          "order": "ASCENDING"
         }
       ]
     },
@@ -69,13 +41,54 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "playground",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "age",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "foo",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "playground",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "finished_at",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "v6",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "a",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "b",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [
     {
-      "collectionGroup": "sub",
-      "fieldPath": "id",
-      "ttl": false,
+      "collectionGroup": "collectionGroup",
+      "fieldPath": "number",
       "indexes": [
         {
           "order": "ASCENDING",
@@ -96,6 +109,98 @@
         {
           "order": "DESCENDING",
           "queryScope": "COLLECTION_GROUP"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "collectionGroup",
+      "fieldPath": "value",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "group-test",
+      "fieldPath": "foo",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "playground",
+      "fieldPath": "age",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "playground",
+      "fieldPath": "createdDate",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
         }
       ]
     }

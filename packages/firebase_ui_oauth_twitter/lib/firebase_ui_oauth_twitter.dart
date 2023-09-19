@@ -86,6 +86,13 @@ class TwitterSignInIconButton extends _TwitterSignInButton {
         );
 }
 
+TwitterProvider? _mockProvider;
+
+@visibleForTesting
+void setMockTwitterProvider(TwitterProvider provider) {
+  _mockProvider = provider;
+}
+
 class _TwitterSignInButton extends StatelessWidget {
   final String label;
   final Widget loadingIndicator;
@@ -128,11 +135,15 @@ class _TwitterSignInButton extends StatelessWidget {
         overrideDefaultTapAction = overrideDefaultTapAction ?? false,
         size = size ?? 19;
 
-  TwitterProvider get provider => TwitterProvider(
-        apiKey: apiKey,
-        apiSecretKey: apiSecretKey,
-        redirectUri: redirectUri,
-      );
+  TwitterProvider get provider {
+    if (_mockProvider != null) return _mockProvider!;
+
+    return TwitterProvider(
+      apiKey: apiKey,
+      apiSecretKey: apiSecretKey,
+      redirectUri: redirectUri,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

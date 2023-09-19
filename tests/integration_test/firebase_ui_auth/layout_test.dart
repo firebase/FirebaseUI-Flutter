@@ -17,11 +17,10 @@ void main() {
   setUpAll(prepare);
   tearDown(authCleanup);
 
-  group(
-    'Reauthenticate dialog',
-    () {
-      testWidgets("doesn't have an overflow when keyboard is visible",
-          (tester) async {
+  group('Reauthenticate dialog', () {
+    testWidgets(
+      "doesn't have an overflow when keyboard is visible",
+      (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -47,19 +46,30 @@ void main() {
         // No need for an expect.
         // Test will fail if there is an overflow.
         // This is a built-in flutter functionality
-      });
-    },
-  );
+
+        await tester.tap(find.text('cancel'));
+        await tester.pumpAndSettle();
+      },
+    );
+  });
 }
+
+const _user = {
+  'uid': 'uid',
+  'isAnonymous': false,
+  'isEmailVerified': false,
+};
 
 class MockUser extends Mock implements User {
   @override
-  List<UserInfo> get providerData => [
-        UserInfo.fromJson({'providerId': 'password'}),
-        UserInfo.fromJson({'providerId': 'google.com'}),
-        UserInfo.fromJson({'providerId': 'apple.com'}),
-        UserInfo.fromJson({'providerId': 'phone'})
-      ];
+  List<UserInfo> get providerData {
+    return [
+      UserInfo.fromJson({..._user, 'providerId': 'password'}),
+      UserInfo.fromJson({..._user, 'providerId': 'google.com'}),
+      UserInfo.fromJson({..._user, 'providerId': 'apple.com'}),
+      UserInfo.fromJson({..._user, 'providerId': 'phone'})
+    ];
+  }
 }
 
 class MockAuth extends Mock implements FirebaseAuth {

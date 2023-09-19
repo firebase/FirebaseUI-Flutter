@@ -31,14 +31,19 @@ bool get isMobile {
 late FirebaseFirestore db;
 late FirebaseAuth auth;
 
+bool _prepared = false;
+
 Future<void> prepare() async {
+  if (_prepared) return;
+  _prepared = true;
+
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
   auth = FirebaseAuth.instance;
 
-  FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8081);
+  FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   db = FirebaseFirestore.instance;
 
   await authCleanup();
@@ -93,15 +98,17 @@ Future<Map<String, String>> getVerificationCodes() async {
   return codes;
 }
 
-Future<CollectionReference<T>> setupCollection<T>(
+Future<CollectionReference<T>> clearCollection<T>(
   CollectionReference<T> ref,
 ) async {
   final snapshot = await ref.get();
+  if (snapshot.docs.isEmpty) return ref;
 
   await Future.wait([
     for (final doc in snapshot.docs) doc.reference.delete(),
   ]);
 
+  await ref.get(const GetOptions(source: Source.server));
   return ref;
 }
 

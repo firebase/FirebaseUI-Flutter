@@ -16,9 +16,9 @@ import './firebase_ui_oauth_twitter/firebase_ui_oauth_twitter_e2e.dart'
 
 void main() {
   firebase_ui_auth_e2e.main();
-  firebase_ui_firestore_e2e.main();
   firebase_ui_oauth_apple_e2e.main();
   firebase_ui_oauth_facebook_e2e.main();
   firebase_ui_oauth_google_e2e.main();
   firebase_ui_oauth_twitter_e2e.main();
+  firebase_ui_firestore_e2e.main();
 }

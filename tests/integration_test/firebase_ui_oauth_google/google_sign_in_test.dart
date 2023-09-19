@@ -96,6 +96,8 @@ void main() async {
       });
 
       testWidgets('works standalone', (tester) async {
+        setMockGoogleProvider(provider);
+
         await render(
           tester,
           const GoogleSignInButton(

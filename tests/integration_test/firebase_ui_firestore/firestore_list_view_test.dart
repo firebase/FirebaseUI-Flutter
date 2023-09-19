@@ -12,177 +12,181 @@ import '../utils.dart';
 void main() {
   setUpAll(prepare);
 
-  group(
-    'FirestoreListViewBuilder',
-    () {
-      testWidgets('Allows specifying custom error handler', (tester) async {
-        final builderSpy = ListViewBuilderSpy();
-        final collection = db.collection('unknown');
+  group('FirestoreListViewBuilder', () {
+    setUp(() async {
+      await clearCollection(
+        db.collection('flutter-tests/list-view-builder/works'),
+      );
+    });
+
+    testWidgets('Allows specifying custom error handler', (tester) async {
+      final builderSpy = ListViewBuilderSpy();
+      final collection = db.collection('unknown');
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FirestoreListView<Map>(
+              query: collection,
+              errorBuilder: (context, error, stack) {
+                return Text('error: $error');
+              },
+              itemBuilder: builderSpy,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(ListView), findsNothing);
+
+      await tester.pumpAndSettle();
+
+      verifyZeroInteractions(builderSpy);
+
+      expect(
+        find.text(
+          'error: [cloud_firestore/permission-denied] '
+          'The caller does not have permission to execute the specified operation.',
+        ),
+        findsOneWidget,
+      );
+      expect(find.byType(ListView), findsNothing);
+    });
+
+    testWidgets('Allows specifying custom loading handler', (tester) async {
+      final collection = db.collection('flutter-tests/list-view-builder/works');
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FirestoreListView<Map>(
+              query: collection.orderBy('value'),
+              loadingBuilder: (context) => const Text('loading...'),
+              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('loading...'), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+      expect(find.byType(ListView), findsNothing);
+    });
+
+    testWidgets(
+      'By default, shows a progress indicator when loading',
+      (tester) async {
+        final collection = db.collection(
+          'flutter-tests/list-view-builder/works',
+        );
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: FirestoreListView<Map>(
-                query: collection,
-                errorBuilder: (context, error, stack) => Text('error: $error'),
+                query: collection.orderBy('value'),
                 itemBuilder: (context, snapshot) => throw UnimplementedError(),
               ),
             ),
           ),
         );
 
-        verifyZeroInteractions(builderSpy);
-
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.byType(ListView), findsNothing);
+      },
+    );
 
-        await collection.snapshots().first.then((value) {}, onError: (_) {});
+    testWidgets('By default, ignore errors', (tester) async {
+      final builderSpy = ListViewBuilderSpy();
+      final collection = db.collection('unknown');
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FirestoreListView<Map>(
+              query: collection,
+              cacheExtent: 0,
+              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+            ),
+          ),
+        ),
+      );
+
+      verifyZeroInteractions(builderSpy);
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(ListView), findsNothing);
+
+      await collection.snapshots().first.then((value) {}, onError: (_) {});
+      await tester.pump();
+
+      expect(find.byType(ListView), findsOneWidget);
+    });
+
+    testWidgets(
+      'When reaching the end of the list, loads more items',
+      (tester) async {
+        tester.binding.setSurfaceSize(const Size(500, 500));
+
+        final collection = db.collection(
+          'flutter-tests/list-view-builder/works',
+        );
+
+        await fillCollection(collection, 25);
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: FirestoreListView<Map>(
+                query: collection.orderBy('value'),
+                cacheExtent: 0,
+                itemBuilder: (context, snapshot) {
+                  final value = snapshot.data()['value'];
+
+                  return SizedBox(
+                    key: ValueKey(value.toString()),
+                    height: 100,
+                    child: Text(value.toString()),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+
         await tester.pumpAndSettle();
 
-        expect(
-          find.text(
-            'error: [cloud_firestore/permission-denied] '
-            'The caller does not have permission to execute the specified operation.',
-          ),
-          findsOneWidget,
-        );
-        expect(find.byType(ListView), findsNothing);
-      });
+        for (int i = 0; i < 5; i++) {
+          expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
+        }
 
-      testWidgets('Allows specifying custom loading handler', (tester) async {
-        final collection = await setupCollection(
-          db.collection('flutter-tests/list-view-builder/works'),
+        await tester.drag(
+          find.byKey(const ValueKey('4')),
+          const Offset(0, -500),
         );
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FirestoreListView<Map>(
-                query: collection.orderBy('value'),
-                loadingBuilder: (context) => const Text('loading...'),
-                itemBuilder: (context, snapshot) => throw UnimplementedError(),
-              ),
-            ),
-          ),
+        await tester.pumpAndSettle();
+
+        for (int i = 5; i < 9; i++) {
+          expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
+        }
+
+        await tester.drag(
+          find.byKey(const ValueKey('9')),
+          const Offset(0, -500),
         );
 
-        expect(find.text('loading...'), findsOneWidget);
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-        expect(find.byType(ListView), findsNothing);
-      });
+        await tester.pumpAndSettle();
 
-      testWidgets('By default, shows a progress indicator when loading',
-          (tester) async {
-        final collection = await setupCollection(
-          db.collection('flutter-tests/list-view-builder/works'),
-        );
+        for (int i = 10; i < 15; i++) {
+          expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
+        }
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FirestoreListView<Map>(
-                query: collection.orderBy('value'),
-                itemBuilder: (context, snapshot) => throw UnimplementedError(),
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        expect(find.byType(ListView), findsNothing);
-      });
-
-      testWidgets('By default, ignore errors', (tester) async {
-        final builderSpy = ListViewBuilderSpy();
-        final collection = db.collection('unknown');
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FirestoreListView<Map>(
-                query: collection,
-                cacheExtent: 0,
-                itemBuilder: (context, snapshot) => throw UnimplementedError(),
-              ),
-            ),
-          ),
-        );
-
-        verifyZeroInteractions(builderSpy);
-
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        expect(find.byType(ListView), findsNothing);
-
-        await collection.snapshots().first.then((value) {}, onError: (_) {});
-        await tester.pump();
-
-        expect(find.byType(ListView), findsOneWidget);
-      });
-
-      testWidgets(
-        'When reaching the end of the list, loads more items',
-        (tester) async {
-          tester.binding.setSurfaceSize(const Size(500, 500));
-
-          final collection = await setupCollection(
-            db.collection('flutter-tests/list-view-builder/works'),
-          );
-
-          await fillCollection(collection, 25);
-
-          await tester.pumpWidget(
-            MaterialApp(
-              home: Scaffold(
-                body: FirestoreListView<Map>(
-                  query: collection.orderBy('value'),
-                  cacheExtent: 0,
-                  itemBuilder: (context, snapshot) {
-                    final value = snapshot.data()['value'];
-
-                    return SizedBox(
-                      key: ValueKey(value.toString()),
-                      height: 100,
-                      child: Text(value.toString()),
-                    );
-                  },
-                ),
-              ),
-            ),
-          );
-
-          await tester.pumpAndSettle();
-
-          for (int i = 0; i < 5; i++) {
-            expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
-          }
-
-          await tester.drag(
-            find.byKey(const ValueKey('4')),
-            const Offset(0, -500),
-          );
-
-          await tester.pumpAndSettle();
-
-          for (int i = 5; i < 9; i++) {
-            expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
-          }
-
-          await tester.drag(
-            find.byKey(const ValueKey('9')),
-            const Offset(0, -500),
-          );
-
-          await tester.pumpAndSettle();
-
-          for (int i = 10; i < 15; i++) {
-            expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
-          }
-
-          tester.binding.setSurfaceSize(null);
-        },
-      );
-    },
-  );
+        tester.binding.setSurfaceSize(null);
+      },
+    );
+  });
 }
 
 class ListViewBuilderSpy<T> extends Mock {

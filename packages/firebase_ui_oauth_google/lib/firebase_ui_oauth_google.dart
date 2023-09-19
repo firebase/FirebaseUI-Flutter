@@ -86,6 +86,13 @@ class GoogleSignInIconButton extends _GoogleSignInButton {
         );
 }
 
+GoogleProvider? _mockProvider;
+
+@visibleForTesting
+void setMockGoogleProvider(GoogleProvider provider) {
+  _mockProvider = provider;
+}
+
 class _GoogleSignInButton extends StatelessWidget {
   final String label;
   final Widget loadingIndicator;
@@ -128,11 +135,15 @@ class _GoogleSignInButton extends StatelessWidget {
         overrideDefaultTapAction = overrideDefaultTapAction ?? false,
         size = size ?? 19;
 
-  GoogleProvider get provider => GoogleProvider(
-        clientId: clientId,
-        redirectUri: redirectUri,
-        scopes: scopes ?? [],
-      );
+  GoogleProvider get provider {
+    if (_mockProvider != null) return _mockProvider!;
+
+    return GoogleProvider(
+      clientId: clientId,
+      redirectUri: redirectUri,
+      scopes: scopes ?? [],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
