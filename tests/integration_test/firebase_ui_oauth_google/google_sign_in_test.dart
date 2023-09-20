@@ -23,6 +23,7 @@ void main() async {
 
   setUp(() {
     provider.provider = MockGoogleSignIn();
+    setMockGoogleProvider(provider);
   });
 
   const labels = DefaultLocalizations();
@@ -93,8 +94,6 @@ void main() async {
       });
 
       testWidgets('works standalone', (tester) async {
-        setMockGoogleProvider(provider);
-
         await render(
           tester,
           const GoogleSignInButton(

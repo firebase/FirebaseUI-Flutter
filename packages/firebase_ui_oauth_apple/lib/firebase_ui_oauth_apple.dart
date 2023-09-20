@@ -77,7 +77,7 @@ class AppleSignInIconButton extends _AppleSignInButton {
 AppleProvider? _mockProvider;
 
 @visibleForTesting
-void mockAppleProvider(AppleProvider provider) {
+void setMockAppleProvider(AppleProvider provider) {
   _mockProvider = provider;
 }
 

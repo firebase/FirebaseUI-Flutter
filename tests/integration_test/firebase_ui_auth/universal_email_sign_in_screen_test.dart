@@ -44,7 +44,7 @@ void main() {
       expect(find.text(labels.isNotAValidEmailErrorText), findsOneWidget);
     });
 
-    testWidgets('shows RegisterScreen if not providers found', (tester) async {
+    testWidgets('shows RegisterScreen if no providers found', (tester) async {
       await render(
         tester,
         UniversalEmailSignInScreen(
@@ -69,7 +69,7 @@ void main() {
       expect(find.byType(RegisterScreen), findsOneWidget);
     });
 
-    testWidgets('shows SingInScreen with only available providers',
+    testWidgets('shows SignInScreen with only available providers',
         (tester) async {
       await render(
         tester,

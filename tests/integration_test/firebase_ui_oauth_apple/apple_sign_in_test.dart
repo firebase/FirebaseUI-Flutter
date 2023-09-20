@@ -4,6 +4,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,7 +12,6 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:mockito/mockito.dart';
-import 'package:firebase_ui_oauth_apple/src/provider.dart';
 
 import '../utils.dart';
 
@@ -29,6 +29,7 @@ void main() async {
         auth = MockAuth();
         fbProvider = MockProvider();
         provider.firebaseAuthProvider = fbProvider;
+        setMockAppleProvider(provider);
       });
 
       testWidgets('has a correct button label', (tester) async {

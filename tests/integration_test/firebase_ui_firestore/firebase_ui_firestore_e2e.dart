@@ -8,8 +8,10 @@ import 'firestore_list_view_test.dart' as firestore_list_view_test;
 // import 'firestore_query_builder_test.dart' as firestore_query_builder_test;
 
 Future<void> main() async {
-  firestore_list_view_test.main();
-  // TODO: fix query builder tests
-  // They run ok when run individually, but fail when run together
-  // firestore_query_builder_test.main();
+  group('Firestore', () {
+    // TODO: fix query builder tests
+    // They run ok when run individually, but fail when run together
+    // firestore_query_builder_test.main();
+    firestore_list_view_test.main();
+  });
 }

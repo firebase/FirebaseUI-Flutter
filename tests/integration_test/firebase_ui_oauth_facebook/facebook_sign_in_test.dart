@@ -19,6 +19,7 @@ void main() async {
 
   setUp(() {
     provider.provider = MockFacebookAuth();
+    setMockFacebookProvider(provider);
   });
 
   const labels = DefaultLocalizations();

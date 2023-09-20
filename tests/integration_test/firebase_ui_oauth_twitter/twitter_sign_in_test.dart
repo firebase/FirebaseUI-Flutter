@@ -23,6 +23,7 @@ void main() async {
 
   setUp(() {
     provider.provider = MockTwitterLogin();
+    setMockTwitterProvider(provider);
   });
 
   const labels = DefaultLocalizations();
