@@ -67,9 +67,11 @@ jobs:
           sudo npm i -g firebase-tools
       - name: Start Firebase Emulator and proxy
         run: |
-          cd ./tests && \
-          firebase emulators:start & \
-          cd ../emulator_proxy && \
+          cd ./tests
+          echo "Starting Firebase Emulator"
+          firebase emulators:start &
+          cd ../emulator_proxy
+          echo "Starting emulator proxy"
           dart run emulator_proxy:start
       - name: Create and start emulator
         # We use the installed SDK in the macOS image to create and start the emulator
@@ -147,11 +149,13 @@ jobs:
           ccache -s
           flutter build ios --no-codesign --simulator --debug --target=./integration_test/firebase_ui_test.dart --dart-define=CI=true
           ccache -s
-      - name: Start Firebase Emulator
+      - name: Start Firebase Emulator and proxy
         run: |
           cd ./tests
+          echo "Starting Firebase Emulator"
           firebase emulators:start &
           cd ../emulator_proxy
+          echo "Starting emulator proxy"
           dart run emulator_proxy:start
       - name: "E2E Tests"
         working-directory: tests
@@ -222,11 +226,13 @@ jobs:
           ccache -s
           flutter build macos --debug --target=./integration_test/firebase_ui_test.dart --device-id=macos --dart-define=CI=true
           ccache -s
-      - name: Start Firebase Emulator
+      - name: Start Firebase Emulator and proxy
         run: |
           cd ./tests
+          echo "Starting Firebase Emulator"
           firebase emulators:start &
           cd ../emulator_proxy
+          echo "Starting emulator proxy"
           dart run emulator_proxy:start
       - name: "E2E Tests"
         working-directory: tests
