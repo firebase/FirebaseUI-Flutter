@@ -125,7 +125,8 @@ void main() {
     testWidgets(
       'When reaching the end of the list, loads more items',
       (tester) async {
-        tester.binding.setSurfaceSize(const Size(500, 500));
+        await tester.binding.setSurfaceSize(const Size(500, 500));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
 
         final collection = db.collection(
           'flutter-tests/list-view-builder/works',
@@ -135,17 +136,24 @@ void main() {
 
         await tester.pumpWidget(
           MaterialApp(
-            home: Scaffold(
-              body: FirestoreListView<Map>(
+            home: Material(
+              child: FirestoreListView<Map>(
+                physics: const ClampingScrollPhysics(),
                 query: collection.orderBy('value'),
                 cacheExtent: 0,
+                pageSize: 5,
                 itemBuilder: (context, snapshot) {
-                  final value = snapshot.data()['value'];
+                  final v = snapshot.data()['value'] as int;
 
-                  return SizedBox(
-                    key: ValueKey(value.toString()),
+                  return Container(
                     height: 100,
-                    child: Text(value.toString()),
+                    alignment: Alignment.center,
+                    color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                    key: ValueKey(v.toString()),
+                    child: Text(
+                      v.toString(),
+                      textAlign: TextAlign.center,
+                    ),
                   );
                 },
               ),
@@ -162,6 +170,7 @@ void main() {
         await tester.drag(
           find.byKey(const ValueKey('4')),
           const Offset(0, -500),
+          touchSlopY: 0,
         );
 
         await tester.pumpAndSettle();
@@ -173,6 +182,7 @@ void main() {
         await tester.drag(
           find.byKey(const ValueKey('9')),
           const Offset(0, -500),
+          touchSlopY: 0,
         );
 
         await tester.pumpAndSettle();
@@ -180,8 +190,6 @@ void main() {
         for (int i = 10; i < 15; i++) {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
-
-        tester.binding.setSurfaceSize(null);
       },
     );
   });

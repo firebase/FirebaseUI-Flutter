@@ -88,11 +88,11 @@ void main() {
 
         await tester.enterText(inputs.at(0), 'test@test.com');
         await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+        await tester.pump();
 
         await tester.enterText(inputs.at(1), 'password');
         await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+        await tester.pump();
 
         await tester.enterText(inputs.at(2), 'psasword');
         await tester.testTextInput.receiveAction(TextInputAction.done);
