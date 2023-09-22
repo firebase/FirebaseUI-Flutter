@@ -9,3 +9,4 @@ export 'src/universal_scaffold.dart' show UniversalScaffold;
 export 'src/universal_icon.dart' show UniversalIcon;
 export 'src/universal_button.dart' show UniversalButton, ButtonVariant;
 export 'src/loading_button.dart' show LoadingButton;
+export 'src/universal_alert.dart' show UniversalAlert;

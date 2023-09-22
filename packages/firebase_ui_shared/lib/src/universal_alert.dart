@@ -1,0 +1,67 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class UniversalAlert extends StatelessWidget {
+  final void Function() onConfirm;
+  final void Function() onCancel;
+
+  final String title;
+  final String message;
+
+  final String confirmButtonText;
+  final String cancelButtonText;
+
+  const UniversalAlert({
+    super.key,
+    required this.onConfirm,
+    required this.onCancel,
+    required this.title,
+    required this.confirmButtonText,
+    required this.cancelButtonText,
+    required this.message,
+  });
+
+  Widget adaptiveAction({
+    required BuildContext context,
+    required VoidCallback onPressed,
+    required Widget child,
+    bool isDestructiveAction = false,
+  }) {
+    final ThemeData theme = Theme.of(context);
+    switch (theme.platform) {
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return TextButton(onPressed: onPressed, child: child);
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoDialogAction(
+          onPressed: onPressed,
+          isDestructiveAction: isDestructiveAction,
+          child: child,
+        );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog.adaptive(
+      title: Text(title),
+      content: Text(message),
+      actions: [
+        adaptiveAction(
+          context: context,
+          onPressed: onConfirm,
+          child: Text(confirmButtonText),
+          isDestructiveAction: true,
+        ),
+        adaptiveAction(
+          context: context,
+          onPressed: onCancel,
+          child: Text(cancelButtonText),
+        ),
+      ],
+    );
+  }
+}

@@ -176,11 +176,13 @@ class _LinkedProvidersRow extends StatefulWidget {
   final FirebaseAuth? auth;
   final List<AuthProvider> providers;
   final VoidCallback onProviderUnlinked;
+  final bool showUnlinkConfirmationDialog;
 
   const _LinkedProvidersRow({
     this.auth,
     required this.providers,
     required this.onProviderUnlinked,
+    required this.showUnlinkConfirmationDialog,
   });
 
   @override
@@ -207,7 +209,31 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
       error = null;
     });
 
+    bool? confirmed = !widget.showUnlinkConfirmationDialog;
+
+    if (!confirmed) {
+      confirmed = await showAdaptiveDialog<bool?>(
+        context: context,
+        builder: (context) {
+          return UniversalAlert(
+            onConfirm: () {
+              Navigator.of(context).pop(true);
+            },
+            onCancel: () {
+              Navigator.of(context).pop(false);
+            },
+            title: 'Unlink provider',
+            confirmButtonText: 'Unlink',
+            cancelButtonText: 'Cancel',
+            message: 'Are you sure you want to unlink this provider?',
+          );
+        },
+      );
+    }
+
     try {
+      if (!(confirmed ?? false)) return;
+
       final user = widget.auth!.currentUser!;
       await user.unlink(providerId);
       await user.reload();
@@ -712,6 +738,10 @@ class ProfileScreen extends MultiProviderScreen {
   /// are ignored.
   final Widget? avatar;
 
+  /// Indicates wether a confirmation dialog should be shown when the user
+  /// tries to unlink a provider.
+  final bool showUnlinkConfirmationDialog;
+
   const ProfileScreen({
     super.key,
     super.auth,
@@ -726,6 +756,7 @@ class ProfileScreen extends MultiProviderScreen {
     this.cupertinoNavigationBar,
     this.actionCodeSettings,
     this.showMFATile = false,
+    this.showUnlinkConfirmationDialog = false,
   });
 
   Future<bool> _reauthenticate(BuildContext context) {
@@ -819,6 +850,7 @@ class ProfileScreen extends MultiProviderScreen {
                 auth: auth,
                 providers: linkedProviders,
                 onProviderUnlinked: providersScopeKey.rebuild,
+                showUnlinkConfirmationDialog: showUnlinkConfirmationDialog,
               ),
             );
           },
