@@ -42,7 +42,34 @@ Future<void> main() async {
 
 ## macOS entitlements
 
-If you're building for macOS, make sure to add necessary entitlements. Learn more [from the official Flutter documentation](https://docs.flutter.dev/development/platform-integration/macos/building).
+If you're building for macOS, make sure to add necessary entitlements. Learn more [from the official Flutter documentation](https://docs.flutter.dev/platform-integration/macos/building#setting-up-entitlements).
+
+## Writing widget unit tests
+
+If you're writing widget unit tests, you'll need to add the following to your `setUpAll` method:
+
+```dart
+setUpAll(() {
+  setFirebaseUiIsTestMode(true);
+});
+```
+
+Also, you will likely want to mock the `FirebaseAuth` instance:
+
+```dart
+class MockFirebaseAuth extends Mock implements FirebaseAuth {
+  /// mock necessary methods
+}
+```
+
+An instance of `MockFirebaseAuth` can then be passed to Firebase UI widgets:
+
+```dart
+SignInScreen(
+  auth: MockFirebaseAuth(),
+  /// ... other props
+)
+```
 
 ## Next steps
 

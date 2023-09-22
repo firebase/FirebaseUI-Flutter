@@ -95,6 +95,9 @@ class SignInScreen extends MultiProviderScreen {
   /// * [EmailFormStyle]
   final Set<FirebaseUIStyle>? styles;
 
+  /// {@macro ui.auth.widgets.email_form.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   /// {@macro ui.auth.screens.sign_in_screen}
   const SignInScreen({
     super.key,
@@ -114,6 +117,7 @@ class SignInScreen extends MultiProviderScreen {
     this.actions = const [],
     this.breakpoint = 800,
     this.styles,
+    this.showPasswordVisibilityToggle = false,
   });
 
   Future<void> _signInWithDifferentProvider(
@@ -165,6 +169,7 @@ class SignInScreen extends MultiProviderScreen {
         subtitleBuilder: subtitleBuilder,
         footerBuilder: footerBuilder,
         breakpoint: breakpoint,
+        showPasswordVisibilityToggle: showPasswordVisibilityToggle,
       ),
     );
   }
