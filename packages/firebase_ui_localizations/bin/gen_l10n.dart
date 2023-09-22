@@ -74,6 +74,12 @@ void main() async {
   }).expand((element) => element);
 
   await Future.wait([...genOps.cast<Future>()]);
+
+  await generateDefaultLocalizations(
+    labelsByLocale['en']['default'].cast<String, dynamic>(),
+    licenseHeader,
+  );
+
   await generateLanguagesList(labelsByLocale, licenseHeader);
   Process.runSync('dart', ['format', outDir.path]);
 }
@@ -225,4 +231,131 @@ Future<String> getLicenseHeader() async {
       .map((e) {
     return '// $e';
   }).join('\n');
+}
+
+Future<void> generateDefaultLocalizations(
+  Map<String, dynamic> arb,
+  String licenseHeader,
+) async {
+  final labels = arb.entries.where(isLabelEntry).map((e) {
+    final meta = arb['@${e.key}'] ?? {};
+
+    return Label(
+      key: e.key,
+      translation: e.value,
+      description: meta['description'],
+    );
+  }).toList()
+    ..sort((a, b) => a.key.compareTo(b.key));
+
+  final content = await getDefaultLocalizationsContent(labels, licenseHeader);
+  final outFile = File(path.join(outDir.path, 'default_localizations.dart'));
+
+  if (!outFile.existsSync()) {
+    outFile.createSync(recursive: true);
+  }
+
+  final out = outFile.openWrite();
+  out.write(content);
+  await out.flush();
+  await out.close();
+}
+
+Future<String> getDefaultLocalizationsContent(
+  List<Label> labels,
+  String licenseHeader,
+) async {
+  final sb = StringBuffer();
+
+  sb.writeln(licenseHeader);
+  sb.writeln(defaultLocalizationsHeader);
+
+  sb.writeln('abstract class FirebaseUILocalizationLabels {');
+  sb.writeln('  const FirebaseUILocalizationLabels();');
+
+  for (var label in labels) {
+    sb.writeln();
+    if (label.description != null && label.description!.isNotEmpty) {
+      const prefix = '  /// ';
+      for (var line in breakIntoLines(label.description!, 80 - prefix.length)) {
+        sb.writeln('$prefix$line');
+      }
+    }
+    sb.writeln('  String get ${label.key};');
+  }
+
+  sb.writeln('}');
+  sb.writeln();
+
+  sb.writeln(defaultLocalizationsFooter);
+
+  return sb.toString();
+}
+
+const defaultLocalizationsHeader = '''
+
+/*
+ *  THIS FILE IS GENERATED.
+ *  DO NOT MODIFY IT BY HAND UNLESS YOU KNOW WHAT YOU ARE DOING.
+ * 
+ *  See README.md for instructions on how to generate this file.
+ */
+
+import 'package:flutter/material.dart';
+
+import 'lang/en.dart';
+
+/// An abstract class containing all labels that concrete languages should
+/// provide.
+///
+/// The easiest way to override some of these labels is to provide
+/// an object that extends [DefaultLocalizations] and pass it to the
+/// [MaterialApp.localizationsDelegates].
+///
+/// ```dart
+/// import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+///
+/// class LabelOverrides extends DefaultLocalizations {
+///   const LabelOverrides();
+///
+///   @override
+///   String get emailInputLabel => 'Enter your email';
+/// }
+///
+/// MaterialApp(
+///   // ...
+///   localizationsDelegates: [
+///     FirebaseUILocalizations.withDefaultOverrides(const LabelOverrides()),
+///     GlobalMaterialLocalizations.delegate,
+///     GlobalWidgetsLocalizations.delegate,
+///     FirebaseUILocalizations.delegate,
+///   ],
+/// )
+/// ```''';
+
+const defaultLocalizationsFooter = '''
+class DefaultLocalizations extends EnLocalizations {
+  const DefaultLocalizations();
+}
+''';
+
+List<String> breakIntoLines(String string, int lineLength) {
+  final lines = <String>[];
+  final words = string.split(' ');
+
+  var currentLine = StringBuffer();
+  for (var word in words) {
+    if (currentLine.length + word.length > lineLength) {
+      lines.add(currentLine.toString());
+      currentLine = StringBuffer();
+    }
+
+    currentLine.write('$word ');
+  }
+
+  if (currentLine.isNotEmpty) {
+    lines.add(currentLine.toString());
+  }
+
+  return lines;
 }

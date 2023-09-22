@@ -203,6 +203,12 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
     });
   }
 
+  void Function() pop(bool value) {
+    return () {
+      Navigator.of(context).pop(value);
+    };
+  }
+
   Future<void> _unlinkProvider(BuildContext context, String providerId) async {
     setState(() {
       unlinkingProvider = providerId;
@@ -212,20 +218,18 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
     bool? confirmed = !widget.showUnlinkConfirmationDialog;
 
     if (!confirmed) {
+      final l = FirebaseUILocalizations.labelsOf(context);
+
       confirmed = await showAdaptiveDialog<bool?>(
         context: context,
         builder: (context) {
           return UniversalAlert(
-            onConfirm: () {
-              Navigator.of(context).pop(true);
-            },
-            onCancel: () {
-              Navigator.of(context).pop(false);
-            },
-            title: 'Unlink provider',
-            confirmButtonText: 'Unlink',
-            cancelButtonText: 'Cancel',
-            message: 'Are you sure you want to unlink this provider?',
+            onConfirm: pop(true),
+            onCancel: pop(false),
+            title: l.ulinkProviderAlertTitle,
+            confirmButtonText: l.confirmUnlinkButtonLabel,
+            cancelButtonText: l.cancelButtonLabel,
+            message: l.unlinkProviderAlertMessage,
           );
         },
       );

@@ -310,4 +310,17 @@ class ItLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get invalidVerificationCodeErrorText =>
       "Il codice che hai inserito non è valido. Prego riprova ancora.";
+
+  @override
+  String get ulinkProviderAlertTitle => "Unlink provider";
+
+  @override
+  String get confirmUnlinkButtonLabel => "Unlink";
+
+  @override
+  String get cancelButtonLabel => "Cancel";
+
+  @override
+  String get unlinkProviderAlertMessage =>
+      "Are you sure you want to unlink this provider?";
 }
