@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
@@ -60,11 +61,18 @@ class MockDynamicLinks extends Mock implements FirebaseDynamicLinks {
   Stream<PendingDynamicLinkData> get onLink => _linkStream;
 }
 
+class MockApp extends Mock implements FirebaseApp {}
+
 class MockAuth extends Mock implements FirebaseAuth {
   MockUser? user;
 
   @override
   User? get currentUser => user;
+
+  @override
+  FirebaseApp get app => MockApp();
+
+  List<FirebaseApp> get apps => [app];
 
   @override
   Future<UserCredential> signInWithCredential(
