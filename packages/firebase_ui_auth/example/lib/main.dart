@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart'
     hide PhoneAuthProvider, EmailAuthProvider;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_auth/src/screens/display_name_screen.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
@@ -137,23 +138,6 @@ class FirebaseAuthUIExample extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, '/profile');
                   case User(emailVerified: false, email: final String _):
                     Navigator.pushNamed(context, '/verify-email');
-                  case User(displayName: null):
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) {
-                        return Scaffold(
-                          appBar: AppBar(
-                            title: const Text('What is your name?'),
-                          ),
-                          body: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(children: [
-                              SizedBox(height: 10),
-                              EditableUserDisplayName(),
-                            ]),
-                          ),
-                        );
-                      }),
-                    );
                 }
               }),
               mfaAction,
@@ -204,7 +188,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
             actionCodeSettings: actionCodeSettings,
             actions: [
               EmailVerifiedAction(() {
-                Navigator.pushReplacementNamed(context, '/profile');
+                Navigator.pushReplacementNamed(context, '/display-name');
               }),
               AuthCancelledAction((context) {
                 FirebaseUIAuth.signOut(context: context);
@@ -249,13 +233,22 @@ class FirebaseAuthUIExample extends StatelessWidget {
         },
         '/forgot-password': (context) {
           final arguments = ModalRoute.of(context)?.settings.arguments
-          as Map<String, dynamic>?;
+              as Map<String, dynamic>?;
 
           return ForgotPasswordScreen(
             email: arguments?['email'],
             headerMaxExtent: 200,
             headerBuilder: headerIcon(Icons.lock),
             sideBuilder: sideIcon(Icons.lock),
+          );
+        },
+        '/display-name': (context) {
+          return DisplayNameScreen(
+            actions: [
+              DisplayNameChangedAction((context, displayName) {
+                Navigator.pushReplacementNamed(context, '/profile');
+              }),
+            ],
           );
         },
         '/email-link-sign-in': (context) {
