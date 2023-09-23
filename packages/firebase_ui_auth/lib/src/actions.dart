@@ -2,8 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter/material.dart';
 
 /// An abstract class that all actions implement.
 /// The following actions are available:
@@ -82,6 +82,18 @@ class AuthCancelledAction extends FirebaseUIAction {
 
   /// {@macro ui.auth.actions.cancel}
   AuthCancelledAction(this.callback);
+}
+
+/// {@template ui.auth.actions.display_name_changed_action}
+/// An action that is called when the user's display name changes.
+/// You can capture the new display name using this action.
+/// {@endtemplate}
+class DisplayNameChangedAction extends FirebaseUIAction {
+  /// A callback that is being called when the user's display name changes.
+  final void Function(BuildContext context, String newDisplayName) callback;
+
+  /// {@macro ui.auth.actions.display_name_changed_action}
+  DisplayNameChangedAction(this.callback);
 }
 
 /// {@template ui.auth.actions.flutter_fire_ui_actions}
