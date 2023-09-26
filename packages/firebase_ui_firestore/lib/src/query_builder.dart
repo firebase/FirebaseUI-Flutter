@@ -164,14 +164,6 @@ class _FirestoreQueryBuilderState<Document>
     // "build" – most commonly ListView's itemBuilder
     Future.microtask(() => setState(() {}));
 
-    final expectedDocsCount = (_pageCount + 1) * widget.pageSize
-
-        /// The "+1" is used to voluntarily fetch one extra item,
-        /// used to determine whether there is a next page or not.
-        /// This extra item will not be rendered.
-        +
-        1;
-
     final query = (_isInitialized)
         ? widget.query
             .startAfterDocument(_lastQueriedDocument)
