@@ -243,7 +243,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
             borderColor: style.borderColor,
             iconBackgroundColor: style.iconBackgroundColor,
           ),
-          _MaterialForeground(onTap: () => _signIn()),
+          _MaterialForeground(onTap: _signIn),
         ],
       ),
     );

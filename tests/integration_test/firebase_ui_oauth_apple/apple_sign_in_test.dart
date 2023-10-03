@@ -164,11 +164,11 @@ class MockAuth extends Mock implements FirebaseAuth {
   Future<UserCredential> signInWithProvider(Object provider) async {
     return super.noSuchMethod(
       Invocation.method(#signInWithAuthProvider, [provider]),
-      returnValue: Future.delayed(const Duration(milliseconds: 100)).then(
+      returnValue: Future.delayed(const Duration(milliseconds: 500)).then(
         (_) => MockCredential(),
       ),
       returnValueForMissingStub:
-          Future.delayed(const Duration(milliseconds: 100)).then(
+          Future.delayed(const Duration(milliseconds: 500)).then(
         (_) => MockCredential(),
       ),
     );
