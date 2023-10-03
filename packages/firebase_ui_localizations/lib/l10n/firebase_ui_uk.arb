@@ -1,6 +1,6 @@
 {
   "@@locale": "uk",
-  "@@last_modified": "2023-09-06T14:33:29.116420",
+  "@@last_modified": "2023-09-22T14:51:00.795458",
   "accessDisabledErrorText": "Доступ до цього облікового запису тимчасово вимкнено",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -487,6 +487,26 @@
   "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
+    "placeholders": {}
+  },
+  "ulinkProviderAlertTitle": "Unlink provider",
+  "@ulinkProviderAlertTitle": {
+    "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
+    "placeholders": {}
+  },
+  "confirmUnlinkButtonLabel": "Unlink",
+  "@confirmUnlinkButtonLabel": {
+    "description": "Unlink confirmation button label",
+    "placeholders": {}
+  },
+  "cancelButtonLabel": "Cancel",
+  "@cancelButtonLabel": {
+    "description": "Cancel button label",
+    "placeholders": {}
+  },
+  "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
+  "@unlinkProviderAlertMessage": {
+    "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
   }
 }

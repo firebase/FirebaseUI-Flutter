@@ -28,7 +28,7 @@ Future<bool> showReauthenticateDialog({
   final reauthenticated = await showGeneralDialog<bool>(
     context: context,
     barrierDismissible: true,
-    barrierLabel: l.cancelLabel,
+    barrierLabel: l.cancelButtonLabel,
     pageBuilder: (_, __, ___) => FirebaseUIActions.inherit(
       from: context,
       child: ReauthenticateDialog(

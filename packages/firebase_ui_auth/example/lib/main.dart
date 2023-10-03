@@ -267,6 +267,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
             showMFATile: kIsWeb ||
                 platform == TargetPlatform.iOS ||
                 platform == TargetPlatform.android,
+            showUnlinkConfirmationDialog: true,
           );
         },
       },
