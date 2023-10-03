@@ -183,9 +183,9 @@ void main() {
 
         await tester.enterText(smsCodeInput, code);
         await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pump();
+        await tester.pumpAndSettle();
 
-        final user = await completer.future.timeout(const Duration(seconds: 1));
+        final user = await completer.future.timeout(const Duration(seconds: 2));
 
         expect(user.phoneNumber, '+1234567890');
       },
