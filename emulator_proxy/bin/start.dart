@@ -5,7 +5,13 @@
 import 'package:emulator_proxy/emulator_proxy.dart';
 
 Future<void> main(List<String> args) async {
-  final authProxy = EmulatorProxy(proxyPort: 9098, emulatorPort: 9099);
+  final latencyMs = args.isNotEmpty ? int.tryParse(args[0]) : 100;
+
+  final authProxy = EmulatorProxy(
+    proxyPort: 9098,
+    emulatorPort: 9099,
+    latency: Duration(milliseconds: latencyMs ?? 100),
+  );
 
   authProxy.serve();
 }

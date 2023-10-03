@@ -125,38 +125,40 @@ void main() {
     testWidgets(
       'When reaching the end of the list, loads more items',
       (tester) async {
-        await tester.binding.setSurfaceSize(const Size(500, 500));
-        addTearDown(() => tester.binding.setSurfaceSize(null));
+        final ref = db.collection('flutter-tests/list-view-builder/works');
 
-        final collection = db.collection(
-          'flutter-tests/list-view-builder/works',
-        );
-
-        await fillCollection(collection, 25);
+        await fillCollection(ref, 25);
+        late double size;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: FirestoreListView<Map>(
-                physics: const ClampingScrollPhysics(),
-                query: collection.orderBy('value'),
-                cacheExtent: 0,
-                pageSize: 5,
-                itemBuilder: (context, snapshot) {
-                  final v = snapshot.data()['value'] as int;
+              child: Builder(builder: (context) {
+                final mq = MediaQuery.of(context);
+                final h = mq.size.height;
+                size = h / 5;
 
-                  return Container(
-                    height: 100,
-                    alignment: Alignment.center,
-                    color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
-                    key: ValueKey(v.toString()),
-                    child: Text(
-                      v.toString(),
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                },
-              ),
+                return FirestoreListView<Map>(
+                  physics: const ClampingScrollPhysics(),
+                  query: ref.orderBy('value'),
+                  cacheExtent: 0,
+                  pageSize: 5,
+                  itemExtent: size,
+                  itemBuilder: (context, snapshot) {
+                    final v = snapshot.data()['value'] as int;
+
+                    return Container(
+                      alignment: Alignment.center,
+                      color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                      key: ValueKey(v.toString()),
+                      child: Text(
+                        v.toString(),
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                  },
+                );
+              }),
             ),
           ),
         );
@@ -169,7 +171,7 @@ void main() {
 
         await tester.drag(
           find.byKey(const ValueKey('4')),
-          const Offset(0, -500),
+          Offset(0, -size * 5),
           touchSlopY: 0,
         );
 
@@ -181,7 +183,7 @@ void main() {
 
         await tester.drag(
           find.byKey(const ValueKey('9')),
-          const Offset(0, -500),
+          Offset(0, -size * 5),
           touchSlopY: 0,
         );
 
