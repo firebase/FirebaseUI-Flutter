@@ -169,6 +169,9 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
 
+        // allow for more items to be fetcehed
+        await Future.delayed(const Duration(milliseconds: 250));
+
         await tester.drag(
           find.byKey(const ValueKey('4')),
           Offset(0, -size * 5),
@@ -179,6 +182,9 @@ void main() {
         for (int i = 5; i < 9; i++) {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
+
+        // allow for more items to be fetcehed
+        await Future.delayed(const Duration(milliseconds: 250));
 
         await tester.drag(
           find.byKey(const ValueKey('9')),
