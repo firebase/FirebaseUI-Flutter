@@ -170,11 +170,12 @@ void main() {
         }
 
         // allow for more items to be fetcehed
-        await Future.delayed(const Duration(milliseconds: 250));
+        await Future.delayed(const Duration(milliseconds: 500));
 
         await tester.drag(
           find.byKey(const ValueKey('4')),
           Offset(0, -size * 5),
+          touchSlopY: 0,
         );
 
         await tester.pumpAndSettle();
@@ -184,11 +185,12 @@ void main() {
         }
 
         // allow for more items to be fetcehed
-        await Future.delayed(const Duration(milliseconds: 250));
+        await Future.delayed(const Duration(milliseconds: 500));
 
         await tester.drag(
           find.byKey(const ValueKey('9')),
           Offset(0, -size * 5),
+          touchSlopY: 0,
         );
 
         await tester.pumpAndSettle();

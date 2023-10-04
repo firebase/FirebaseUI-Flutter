@@ -72,7 +72,7 @@ jobs:
           firebase emulators:start &
           cd ../emulator_proxy
           echo "Starting emulator proxy"
-          dart run emulator_proxy:start 150 &
+          dart run emulator_proxy:start 100 &
       - name: Create and start emulator
         # We use the installed SDK in the macOS image to create and start the emulator
         run: |
@@ -156,7 +156,7 @@ jobs:
           firebase emulators:start &
           cd ../emulator_proxy
           echo "Starting emulator proxy"
-          dart run emulator_proxy:start 150 &
+          dart run emulator_proxy:start 100 &
       - name: "E2E Tests"
         working-directory: tests
         run: |
@@ -233,7 +233,7 @@ jobs:
           firebase emulators:start &
           cd ../emulator_proxy
           echo "Starting emulator proxy"
-          dart run emulator_proxy:start 150 &
+          dart run emulator_proxy:start 100 &
       - name: "E2E Tests"
         working-directory: tests
         run: flutter test ./integration_test/firebase_ui_test.dart -d macos --dart-define=CI=true
