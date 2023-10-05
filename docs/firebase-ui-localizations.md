@@ -1,4 +1,4 @@
-# Firebase UI LOcalizations
+# Firebase UI Localizations
 
 Firebase UI for Flutter supports localization, so every single label can be customized.
 
