@@ -211,7 +211,7 @@ FirestoreQueryBuilder<Map<String, dynamic>>(
 );
 ```
 
-With more power comes more responsibility:
+### Caveats
 
 1. Within the `itemBuilder` of our `GridView`, we have to manually ensure that we call the `fetchMore()` method on the snapshot when more data is required.
 1. The `FirestoreQueryBuilder` does not provide a list-view based handler, instead you must provide your own implementation.
