@@ -83,6 +83,13 @@ class FacebookSignInIconButton extends _FacebookSignInButton {
         );
 }
 
+FacebookProvider? _mockProvider;
+
+@visibleForTesting
+void setMockFacebookProvider(FacebookProvider provider) {
+  _mockProvider = provider;
+}
+
 class _FacebookSignInButton extends StatelessWidget {
   final String label;
   final Widget loadingIndicator;
@@ -123,10 +130,14 @@ class _FacebookSignInButton extends StatelessWidget {
         overrideDefaultTapAction = overrideDefaultTapAction ?? false,
         size = size ?? 19;
 
-  FacebookProvider get provider => FacebookProvider(
-        clientId: clientId,
-        redirectUri: redirectUri,
-      );
+  FacebookProvider get provider {
+    if (_mockProvider != null) return _mockProvider!;
+
+    return FacebookProvider(
+      clientId: clientId,
+      redirectUri: redirectUri,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
