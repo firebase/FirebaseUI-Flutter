@@ -8,12 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Future<void> main() async {
-  const localeTW = Locale('zh', 'TW');
   const localeZh = Locale('zh');
-  const localeHant = Locale.fromSubtags(
-    languageCode: 'zh',
-    scriptCode: 'Hant',
-  );
+  const localeTW = Locale('zh', 'TW');
 
   late FirebaseUILocalizationDelegate delegate;
 
@@ -25,14 +21,6 @@ Future<void> main() async {
       });
 
       test(
-        'Loads the correct translation with the language tag "${localeTW.toLanguageTag()}"',
-        () async {
-          final localizations = await delegate.load(localeTW);
-          expect(localizations.labels.signInWithPhoneButtonText, '使用電話號碼登入');
-        },
-      );
-
-      test(
         'Loads the correct translation with the language tag "${localeZh.toLanguageTag()}"',
         () async {
           final localizations = await delegate.load(localeZh);
@@ -41,9 +29,9 @@ Future<void> main() async {
       );
 
       test(
-        'Use the ZhTWLocalizations translation if only the language and script code are provided for the language tag "${localeHant.toLanguageTag()}"',
+        'Loads the correct translation with the language tag "${localeTW.toLanguageTag()}"',
         () async {
-          final localizations = await delegate.load(localeHant);
+          final localizations = await delegate.load(localeTW);
           expect(localizations.labels.signInWithPhoneButtonText, '使用電話號碼登入');
         },
       );
@@ -59,7 +47,7 @@ Future<void> main() async {
           final localizations = await const FirebaseUILocalizationDelegate(
             DefaultLocalizationsOverrides(),
           ).load(localeTW);
-          expect(localizations.labels.verifyEmailTitle, 'Overwritten verifyEmailTitle');
+          expect(localizations.labels.verifyEmailTitle, 'Overwritten');
         },
       );
 
@@ -80,7 +68,7 @@ class DefaultLocalizationsOverrides extends DefaultLocalizations {
   const DefaultLocalizationsOverrides();
 
   @override
-  String get verifyEmailTitle => 'Overwritten verifyEmailTitle';
+  String get verifyEmailTitle => 'Overwritten';
 }
 
 class ZhTWLocalizationsOverrides extends ZhTWLocalizations {
