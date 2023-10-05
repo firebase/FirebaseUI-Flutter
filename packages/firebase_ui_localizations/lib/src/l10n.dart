@@ -47,12 +47,14 @@ class FirebaseUILocalizations<T extends FirebaseUILocalizationLabels> {
 
   /// Localization delegate that could be provided to the
   /// [MaterialApp.localizationsDelegates].
-  static FirebaseUILocalizationDelegate delegate = const FirebaseUILocalizationDelegate();
+  static FirebaseUILocalizationDelegate delegate =
+      const FirebaseUILocalizationDelegate();
 
   /// Should be used to override labels provided by the library.
   ///
   /// See [FirebaseUILocalizationLabels].
-  static FirebaseUILocalizationDelegate withDefaultOverrides<T extends DefaultLocalizations>(T overrides) {
+  static FirebaseUILocalizationDelegate
+      withDefaultOverrides<T extends DefaultLocalizations>(T overrides) {
     return FirebaseUILocalizationDelegate<T>(overrides);
   }
 }
@@ -72,7 +74,9 @@ class FirebaseUILocalizationDelegate<T extends FirebaseUILocalizationLabels>
   ]);
 
   @override
-  bool isSupported(Locale locale) => _forceSupportAllLocales || kSupportedLanguages.contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      _forceSupportAllLocales ||
+      kSupportedLanguages.contains(locale.languageCode);
 
   @override
   Future<FirebaseUILocalizations> load(Locale locale) {
