@@ -12,3 +12,4 @@
   - [Theming](./firebase-ui-auth/theming.md)
 - [Firebase UI Localizations](./firebase_ui_localizations.md)
 - [Firebase UI Database](./firebase_ui_database.md)
+- [Firebase UI Storage](./firebase-ui-storage/getting-started.md)
