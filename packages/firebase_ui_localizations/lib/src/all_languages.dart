@@ -50,8 +50,10 @@ final Set<String> kSupportedLanguages = {
   'zh', // Chinese
 };
 
-FirebaseUILocalizationLabels getFirebaseUITranslation(Locale useLocale,
-    [Locale? defaultLocale]) {
+FirebaseUILocalizationLabels getFirebaseUITranslation(
+  Locale useLocale, [
+  Locale? defaultLocale,
+]) {
   final Locale locale;
   if (kSupportedLanguages.contains(useLocale.languageCode)) {
     locale = useLocale;
