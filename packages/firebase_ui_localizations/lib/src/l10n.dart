@@ -36,8 +36,8 @@ class FirebaseUILocalizations<T extends FirebaseUILocalizationLabels> {
       return l;
     }
 
-    final defaultLocalizations = localizations[kDefaultLocale.languageCode]!;
-    return FirebaseUILocalizations(kDefaultLocale, defaultLocalizations);
+    final defaultTranslation = getFirebaseUITranslation(kDefaultLocale);
+    return FirebaseUILocalizations(kDefaultLocale, defaultTranslation);
   }
 
   /// Returns localization labels.
@@ -47,14 +47,12 @@ class FirebaseUILocalizations<T extends FirebaseUILocalizationLabels> {
 
   /// Localization delegate that could be provided to the
   /// [MaterialApp.localizationsDelegates].
-  static FirebaseUILocalizationDelegate delegate =
-      const FirebaseUILocalizationDelegate();
+  static FirebaseUILocalizationDelegate delegate = const FirebaseUILocalizationDelegate();
 
   /// Should be used to override labels provided by the library.
   ///
   /// See [FirebaseUILocalizationLabels].
-  static FirebaseUILocalizationDelegate
-      withDefaultOverrides<T extends DefaultLocalizations>(T overrides) {
+  static FirebaseUILocalizationDelegate withDefaultOverrides<T extends DefaultLocalizations>(T overrides) {
     return FirebaseUILocalizationDelegate<T>(overrides);
   }
 }
@@ -74,32 +72,18 @@ class FirebaseUILocalizationDelegate<T extends FirebaseUILocalizationLabels>
   ]);
 
   @override
-  bool isSupported(Locale locale) {
-    return _forceSupportAllLocales ||
-        localizations.keys.contains(locale.languageCode);
-  }
+  bool isSupported(Locale locale) => _forceSupportAllLocales || kSupportedLanguages.contains(locale.languageCode);
 
   @override
   Future<FirebaseUILocalizations> load(Locale locale) {
-    late FirebaseUILocalizationLabels labels;
+    final translation = getFirebaseUITranslation(locale, kDefaultLocale);
 
-    final key = locale.languageCode;
-    final fullKey = '${key}_${locale.countryCode.toString()}';
-
-    if (localizations.containsKey(fullKey)) {
-      labels = localizations[fullKey]!;
-    } else if (localizations.containsKey(key)) {
-      labels = localizations[key]!;
-    } else {
-      labels = localizations[kDefaultLocale.languageCode]!;
-    }
-
-    final l = FirebaseUILocalizations(
+    final localizations = FirebaseUILocalizations(
       locale,
-      overrides ?? labels,
+      overrides ?? translation,
     );
 
-    return SynchronousFuture<FirebaseUILocalizations>(l);
+    return SynchronousFuture<FirebaseUILocalizations>(localizations);
   }
 
   @override
