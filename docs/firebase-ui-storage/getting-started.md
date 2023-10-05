@@ -30,7 +30,7 @@ This section will walk you through the configuration process for Firebase UI Sto
 
 ### macOS
 
-If you're building for macOS, you will need to add an entitlement. 
+If you're building for macOS, you will need to add an entitlement.
 
 For read-only access if you only upload files:
 
@@ -122,12 +122,12 @@ class MyWidget extends StatelessWidget {
 
 ### Firebase UI Storage widgets
 
-- [`UploadButton`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/upload-button.md)
-- [`TaskProgressIndicator`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/task-progress-indicator.md)
-- [`StorageImage`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/storage-image.md)
-- [`StorageListView`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/list-view.md)
-- [`StorageGridView`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/grid-view.md)
-- [`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/paginated-loading-controller.md)
+- [`UploadButton`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/upload-button.md)
+- [`TaskProgressIndicator`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/task-progress-indicator.md)
+- [`StorageImage`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/storage-image.md)
+- [`StorageListView`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/list-view.md)
+- [`StorageGridView`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/grid-view.md)
+- [`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/paginated-loading-controller.md)
 
 ---
 

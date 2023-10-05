@@ -6,16 +6,16 @@ Firebase UI Storage is a set of Flutter widgets and utilities designed to help y
 
 ## Documentation
 
-- [Getting started](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/getting-started.md)
+- [Getting started](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/getting-started.md)
 - Widgets
 
-  - [`UploadButton`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/upload-button.md)
-  - [`TaskProgressIndicator`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/task-progress-indicator.md)
-  - [`StorageImage`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/storage-image.md)
-  - [`StorageListView`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/list-view.md)
-  - [`StorageGridView`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/grid-view.md)
+  - [`UploadButton`](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/upload-button.md)
+  - [`TaskProgressIndicator`](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/task-progress-indicator.md)
+  - [`StorageImage`](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/storage-image.md)
+  - [`StorageListView`](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/list-view.md)
+  - [`StorageGridView`](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/grid-view.md)
 
-- [`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/paginated-loading-controller.md)
+- [`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-storage/paginated-loading-controller.md)
 
 ## Issues
 
@@ -26,5 +26,5 @@ Please file Firebase UI Storage specific issues, bugs, or feature requests in ou
 If you wish to contribute a change to any of the existing plugins in this repo, please review our [contribution guide] and open a [pull request].
 
 [issue tracker]: https://github.com/firebase/FirebaseUI-Flutter/issues/new/choose
-[contribution guide]: https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/contributing.md
+[contribution guide]: https://github.com/firebase/FirebaseUI-Flutter/blob/main/CONTRIBUTING.md
 [pull request]: https://github.com/firebase/FirebaseUI-Flutter/pulls

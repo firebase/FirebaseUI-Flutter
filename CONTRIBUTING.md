@@ -181,7 +181,7 @@ Some things to keep in mind before publishing the release:
   from people that immediately adopt it, and uncovering and resolving those
   support issues will take more time if you're unavailable.
 
-### Run a release...
+### Run a release
 
 1. Switch to `main` branch locally.
 2. Run `git pull origin main`.

@@ -84,6 +84,6 @@ how to use the package within your Flutter app.
   - [UniversalEmailSignInProvider](./providers/universal-email-sign-in.md) - gets all connected auth providers for a given email.
   - [OAuth](./providers/oauth.md)
 
-- [Localization](../../firebase_ui_localizations/README.md)
+- [Localization](../firebase-ui-localizations.md)
 - [Theming](./theming.md)
 - [Navigation](./navigation.md)

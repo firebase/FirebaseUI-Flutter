@@ -185,14 +185,3 @@ class _CustomUniversalEmailSignInState extends State<CustomUniversalEmailSignIn>
   }
 }
 ```
-
-## Other topics
-
-- [EmaiAuthProvider](./email.md) - allows registering and signing using email and password.
-- [Email verification](./email-verification.md)
-- [EmailLinkAuthProvider](./email-link.md) - allows registering and signing using a link sent to email.
-- [PhoneAuthProvider](./phone.md) - allows registering and signing using a phone number
-- [OAuth](./oauth.md)
-- [Localization](../../../firebase_ui_localizations/README.md)
-- [Theming](../theming.md)
-- [Navigation](../navigation.md)

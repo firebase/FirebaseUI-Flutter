@@ -30,7 +30,7 @@ Does your PR require plugin users to manually update their apps to accommodate y
 
 <!-- Links -->
 [issue database]: https://github.com/firebase/FirebaseUI-Flutter/issues
-[Contributor Guide]: https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/contributing.md
+[Contributor Guide]: https://github.com/firebase/FirebaseUI-Flutter/blob/main/CONTRIBUTING.md
 [Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo
 [pub versioning philosophy]: https://dart.dev/tools/pub/versioning
 [CLA]: https://cla.developers.google.com/

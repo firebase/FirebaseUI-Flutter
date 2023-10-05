@@ -104,5 +104,5 @@ The button will now respect the updated theme data and display a styled button i
 - [UniversalEmailSignInProvider](./providers/universal-email-sign-in.md) - gets all connected auth providers for a given email.
 - [OAuth](./providers/oauth.md)
 
-- [Localization](../../firebase_ui_localizations/README.md)
+- [Localization](../firebase-ui-localizations.md)
 - [Navigation](./navigation.md)
