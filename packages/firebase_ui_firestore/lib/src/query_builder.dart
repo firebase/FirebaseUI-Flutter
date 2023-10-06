@@ -179,8 +179,10 @@ class _FirestoreQueryBuilderState<Document>
             _snapshot = _snapshot.copyWith(isFetching: false);
           }
           _isInitialized = true;
-          _lastQueriedDocument = event.docs.last;
-          _snapshot.docs.addAll(event.docs.toList());
+          if (event.docs.isNotEmpty) {
+            _lastQueriedDocument = event.docs.last;
+            _snapshot.docs.addAll(event.docs.toList());
+          }
 
           _snapshot = _snapshot.copyWith(
             hasData: true,
