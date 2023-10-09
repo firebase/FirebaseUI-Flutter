@@ -5,17 +5,20 @@
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_localizations/src/lang/zh_tw.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Future<void> main() async {
-  const localeZh = Locale('zh');
-  const localeTW = Locale('zh', 'TW');
+const localeZh = Locale('zh');
+const localeTW = Locale('zh', 'TW');
 
+Future<void> main() async {
   late FirebaseUILocalizationDelegate delegate;
 
   group(
     'FirebaseUILocalization loads the appropriate Chinese translation',
     () {
+      localizedText(BuildContext context) => FirebaseUILocalizations.labelsOf(context).signInWithPhoneButtonText;
+
       setUp(() async {
         delegate = const FirebaseUILocalizationDelegate();
       });
@@ -28,11 +31,37 @@ Future<void> main() async {
         },
       );
 
+      testWidgets(
+        'UI test for the "${localeZh.toLanguageTag()}" translation',
+        (tester) async {
+          await tester.pumpWidget(
+            TestMaterialApp(
+              locale: localeZh,
+              localizedText: localizedText,
+            ),
+          );
+          expect(find.text('使用电话号码登录'), findsOneWidget);
+        },
+      );
+
       test(
         'Loads the correct translation with the language tag "${localeTW.toLanguageTag()}"',
         () async {
           final localizations = await delegate.load(localeTW);
           expect(localizations.labels.signInWithPhoneButtonText, '使用電話號碼登入');
+        },
+      );
+
+      testWidgets(
+        'UI test for the "${localeTW.toLanguageTag()}" translation',
+        (tester) async {
+          await tester.pumpWidget(
+            TestMaterialApp(
+              locale: localeTW,
+              localizedText: localizedText,
+            ),
+          );
+          expect(find.text('使用電話號碼登入'), findsOneWidget);
         },
       );
     },
@@ -41,6 +70,8 @@ Future<void> main() async {
   group(
     'Localization override',
     () {
+      localizedText(BuildContext context) => FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
+
       test(
         'Overrides the DefaultLocalizations',
         () async {
@@ -51,6 +82,22 @@ Future<void> main() async {
         },
       );
 
+      testWidgets(
+        'UI test for the default translation override',
+        (tester) async {
+          await tester.pumpWidget(
+            TestMaterialApp(
+              locale: localeZh,
+              localizationsOverride: const FirebaseUILocalizationDelegate(
+                DefaultLocalizationsOverrides(),
+              ),
+              localizedText: localizedText,
+            ),
+          );
+          expect(find.text('Overwritten'), findsOneWidget);
+        },
+      );
+
       test(
         'Overrides the DefaultLocalizations',
         () async {
@@ -58,6 +105,22 @@ Future<void> main() async {
             ZhTWLocalizationsOverrides(),
           ).load(localeTW);
           expect(localizations.labels.verifyEmailTitle, '覆寫標題');
+        },
+      );
+
+      testWidgets(
+        'UI test for the "${localeTW.toLanguageTag()}" translation override',
+        (tester) async {
+          await tester.pumpWidget(
+            TestMaterialApp(
+              locale: localeTW,
+              localizationsOverride: const FirebaseUILocalizationDelegate(
+                ZhTWLocalizationsOverrides(),
+              ),
+              localizedText: localizedText,
+            ),
+          );
+          expect(find.text('覆寫標題'), findsOneWidget);
         },
       );
     },
@@ -76,4 +139,33 @@ class ZhTWLocalizationsOverrides extends ZhTWLocalizations {
 
   @override
   String get verifyEmailTitle => '覆寫標題';
+}
+
+class TestMaterialApp extends StatelessWidget {
+  final Locale locale;
+  final LocalizationsDelegate? localizationsOverride;
+  final String Function(BuildContext context) localizedText;
+
+  const TestMaterialApp({
+    super.key,
+    required this.locale,
+    this.localizationsOverride,
+    required this.localizedText,
+  });
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+        supportedLocales: const [localeZh, localeTW],
+        locale: locale,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          localizationsOverride == null ? FirebaseUILocalizations.delegate : localizationsOverride!,
+        ],
+        home: Builder(
+          builder: (context) => Text(
+            localizedText.call(context),
+          ),
+        ),
+      );
 }
