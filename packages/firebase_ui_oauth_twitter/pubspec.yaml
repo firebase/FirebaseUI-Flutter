@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth: ^4.9.0
+  firebase_auth: ^4.10.1
   firebase_ui_oauth: ^1.4.11
   twitter_login: ^4.3.2
 
