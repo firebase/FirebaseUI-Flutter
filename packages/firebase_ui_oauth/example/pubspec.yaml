@@ -35,11 +35,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.10.1
   firebase_core: ^2.17.0
-  firebase_ui_oauth: ^1.4.11
-  firebase_ui_oauth_apple: ^1.2.11
-  firebase_ui_oauth_facebook: ^1.2.11
-  firebase_ui_oauth_google: ^1.2.11
-  firebase_ui_oauth_twitter: ^1.2.11
+  firebase_ui_oauth: ^1.4.12
+  firebase_ui_oauth_apple: ^1.2.12
+  firebase_ui_oauth_facebook: ^1.2.12
+  firebase_ui_oauth_google: ^1.2.12
+  firebase_ui_oauth_twitter: ^1.2.12
 dev_dependencies:
   flutter_test:
     sdk: flutter
