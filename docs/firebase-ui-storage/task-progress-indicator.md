@@ -13,7 +13,7 @@ UploadTask task = ref.putFile(myFile);
 TaskProgressIndicator(task: task);
 ```
 
-> You can see how to use `TaskProgressIndicator` together with `UploadButton` [here](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/upload-button.md#showing-upload-progress).
+> You can see how to use `TaskProgressIndicator` together with `UploadButton` [here](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/upload-button.md#showing-upload-progress).
 
 `TaskProgressIndicator` also works for download tasks:
 

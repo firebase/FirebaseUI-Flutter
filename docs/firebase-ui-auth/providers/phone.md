@@ -312,14 +312,3 @@ class _CustomPhoneVerificationState extends State<CustomPhoneVerification>
   }
 }
 ```
-
-## Other topics
-
-- [Email verification](./email-verification.md)
-- [EmailLinkAuthProvider](./email-link.md) - allows registering and signing using a link sent to email.
-- [PhoneAuthProvider](./phone.md) - allows registering and signing using a phone number
-- [UniversalEmailSignInProvider](./universal-email-sign-in.md) - gets all connected auth providers for a given email.
-- [OAuth](./oauth.md)
-- [Localization](../../../firebase_ui_localizations/README.md)
-- [Theming](../theming.md)
-- [Navigation](../navigation.md)

@@ -80,7 +80,7 @@ StorageGridView(
 ### Custom scroll views with pagination logic
 
 If you need something more customizable, but still want pagination logic handled for you, you can use
-[`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/doc/paginated-loading-controller.md)
+[`PaginatedLoadingController`](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-storage/paginated-loading-controller.md)
 
 ---
 
