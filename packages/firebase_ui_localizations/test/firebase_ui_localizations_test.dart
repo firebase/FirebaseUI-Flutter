@@ -18,7 +18,8 @@ Future<void> main() async {
     'FirebaseUILocalization loads the appropriate Chinese translation',
     () {
       localizedText(BuildContext context) {
-        return FirebaseUILocalizations.labelsOf(context).signInWithPhoneButtonText;
+        return FirebaseUILocalizations.labelsOf(context)
+            .signInWithPhoneButtonText;
       }
 
       setUp(() async {
@@ -72,7 +73,8 @@ Future<void> main() async {
   group(
     'Localization override',
     () {
-      localizedText(BuildContext context) => FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
+      localizedText(BuildContext context) =>
+          FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
 
       test(
         'Overrides the DefaultLocalizations',
@@ -163,7 +165,9 @@ class TestMaterialApp extends StatelessWidget {
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        localizationsOverride == null ? FirebaseUILocalizations.delegate : localizationsOverride!,
+        localizationsOverride == null
+            ? FirebaseUILocalizations.delegate
+            : localizationsOverride!,
       ],
       home: Builder(
         builder: (context) => Text(
