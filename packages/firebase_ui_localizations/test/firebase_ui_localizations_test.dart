@@ -17,9 +17,9 @@ Future<void> main() async {
   group(
     'FirebaseUILocalization loads the appropriate Chinese translation',
     () {
-      localizedText(BuildContext context) {
-        return FirebaseUILocalizations.labelsOf(context)
-            .signInWithPhoneButtonText;
+      localizeText(BuildContext context) {
+        final labels = FirebaseUILocalizations.labelsOf(context);
+        return labels.signInWithPhoneButtonText;
       }
 
       setUp(() async {
@@ -40,7 +40,7 @@ Future<void> main() async {
           await tester.pumpWidget(
             TestMaterialApp(
               locale: localeZh,
-              localizeText: localizedText,
+              localizeText: localizeText,
             ),
           );
           expect(find.text('使用电话号码登录'), findsOneWidget);
@@ -61,7 +61,7 @@ Future<void> main() async {
           await tester.pumpWidget(
             TestMaterialApp(
               locale: localeTW,
-              localizeText: localizedText,
+              localizeText: localizeText,
             ),
           );
           expect(find.text('使用電話號碼登入'), findsOneWidget);
@@ -73,8 +73,9 @@ Future<void> main() async {
   group(
     'Localization override',
     () {
-      localizedText(BuildContext context) =>
-          FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
+      localizeText(BuildContext context) {
+        return FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
+      }
 
       test(
         'Overrides the DefaultLocalizations',
@@ -95,7 +96,7 @@ Future<void> main() async {
               localizationsOverride: const FirebaseUILocalizationDelegate(
                 DefaultLocalizationsOverrides(),
               ),
-              localizeText: localizedText,
+              localizeText: localizeText,
             ),
           );
           expect(find.text('Overwritten'), findsOneWidget);
@@ -121,7 +122,7 @@ Future<void> main() async {
               localizationsOverride: const FirebaseUILocalizationDelegate(
                 ZhTWLocalizationsOverrides(),
               ),
-              localizeText: localizedText,
+              localizeText: localizeText,
             ),
           );
           expect(find.text('覆寫標題'), findsOneWidget);
