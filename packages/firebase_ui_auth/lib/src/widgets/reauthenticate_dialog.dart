@@ -87,7 +87,7 @@ class ReauthenticateDialog extends StatelessWidget {
                       top: verticalPadding.top,
                     ),
                     child: UniversalButton(
-                      text: l.cancelLabel,
+                      text: l.cancelButtonLabel,
                       variant: ButtonVariant.text,
                       onPressed: () => Navigator.of(context).pop(),
                     ),
