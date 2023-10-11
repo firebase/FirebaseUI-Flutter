@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-09
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.9.0`](#firebase_ui_auth---v190)
+ - [`firebase_ui_localizations` - `v1.7.0`](#firebase_ui_localizations---v170)
+ - [`firebase_ui_oauth` - `v1.4.12`](#firebase_ui_oauth---v1412)
+ - [`firebase_ui_shared` - `v1.4.0`](#firebase_ui_shared---v140)
+ - [`firebase_ui_oauth_twitter` - `v1.2.12`](#firebase_ui_oauth_twitter---v1212)
+ - [`firebase_ui_oauth_facebook` - `v1.2.12`](#firebase_ui_oauth_facebook---v1212)
+ - [`firebase_ui_oauth_apple` - `v1.2.12`](#firebase_ui_oauth_apple---v1212)
+ - [`firebase_ui_oauth_google` - `v1.2.12`](#firebase_ui_oauth_google---v1212)
+ - [`firebase_ui_firestore` - `v1.5.12`](#firebase_ui_firestore---v1512)
+ - [`firebase_ui_database` - `v1.3.10`](#firebase_ui_database---v1310)
+ - [`firebase_ui_storage` - `v1.0.2`](#firebase_ui_storage---v102)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth_twitter` - `v1.2.12`
+ - `firebase_ui_oauth_facebook` - `v1.2.12`
+ - `firebase_ui_oauth_apple` - `v1.2.12`
+ - `firebase_ui_oauth_google` - `v1.2.12`
+ - `firebase_ui_firestore` - `v1.5.12`
+ - `firebase_ui_database` - `v1.3.10`
+ - `firebase_ui_storage` - `v1.0.2`
+
+---
+
+#### `firebase_ui_auth` - `v1.9.0`
+
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FEAT**(ui_auth): add a way to customize ErrorText message ([#119](https://github.com/firebase/FirebaseUI-Flutter/issues/119)). ([a36884d7](https://github.com/firebase/FirebaseUI-Flutter/commit/a36884d73228a33a4c4b061e095f4939bf671d8e))
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
+#### `firebase_ui_localizations` - `v1.7.0`
+
+ - **FIX**(ui_localizations): update italian translations ([#109](https://github.com/firebase/FirebaseUI-Flutter/issues/109)). ([d1c69dcc](https://github.com/firebase/FirebaseUI-Flutter/commit/d1c69dccab50d0a2ed2c44f50a12bf6fdae7f990))
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
+#### `firebase_ui_oauth` - `v1.4.12`
+
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FIX**(firebase_ui_oauth): Fix provider auth listener late init exception ([#107](https://github.com/firebase/FirebaseUI-Flutter/issues/107)). ([0f0fa80e](https://github.com/firebase/FirebaseUI-Flutter/commit/0f0fa80e8d0535864014472927275cc7dea8cebf))
+
+#### `firebase_ui_shared` - `v1.4.0`
+
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
+
 ## 2023-09-07
 
 ### Changes

@@ -1,3 +1,9 @@
+## 1.9.0
+
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FEAT**(ui_auth): add a way to customize ErrorText message ([#119](https://github.com/firebase/FirebaseUI-Flutter/issues/119)). ([a36884d7](https://github.com/firebase/FirebaseUI-Flutter/commit/a36884d73228a33a4c4b061e095f4939bf671d8e))
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
 ## 1.8.0
 
  - **FIX**(ui_auth,ui_localizations): add invalid verification SMS code error label ([#102](https://github.com/firebase/FirebaseUI-Flutter/issues/102)). ([8adc39b9](https://github.com/firebase/FirebaseUI-Flutter/commit/8adc39b94abcf55a4fc0c07850e7e9ec25380d0d))
