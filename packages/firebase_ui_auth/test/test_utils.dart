@@ -25,7 +25,19 @@ class TestMaterialApp extends StatelessWidget {
 
 class MockCredential extends Mock implements UserCredential {}
 
+class MockUserInfo extends Mock implements UserInfo {
+  @override
+  final String providerId;
+
+  MockUserInfo({required this.providerId});
+}
+
 class MockUser extends Mock implements User {
+  @override
+  final List<UserInfo> providerData;
+
+  MockUser({this.providerData = const []});
+
   @override
   Future<UserCredential> linkWithCredential(AuthCredential? credential) async {
     return super.noSuchMethod(
