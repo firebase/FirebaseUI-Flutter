@@ -17,7 +17,8 @@ Future<void> main() async {
   group(
     'FirebaseUILocalization loads the appropriate Chinese translation',
     () {
-      localizedText(BuildContext context) => FirebaseUILocalizations.labelsOf(context).signInWithPhoneButtonText;
+      localizedText(BuildContext context) =>
+          FirebaseUILocalizations.labelsOf(context).signInWithPhoneButtonText;
 
       setUp(() async {
         delegate = const FirebaseUILocalizationDelegate();
@@ -37,7 +38,7 @@ Future<void> main() async {
           await tester.pumpWidget(
             TestMaterialApp(
               locale: localeZh,
-              localizedText: localizedText,
+              localizeText: localizedText,
             ),
           );
           expect(find.text('使用电话号码登录'), findsOneWidget);
@@ -58,7 +59,7 @@ Future<void> main() async {
           await tester.pumpWidget(
             TestMaterialApp(
               locale: localeTW,
-              localizedText: localizedText,
+              localizeText: localizedText,
             ),
           );
           expect(find.text('使用電話號碼登入'), findsOneWidget);
@@ -70,7 +71,8 @@ Future<void> main() async {
   group(
     'Localization override',
     () {
-      localizedText(BuildContext context) => FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
+      localizedText(BuildContext context) =>
+          FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
 
       test(
         'Overrides the DefaultLocalizations',
@@ -91,7 +93,7 @@ Future<void> main() async {
               localizationsOverride: const FirebaseUILocalizationDelegate(
                 DefaultLocalizationsOverrides(),
               ),
-              localizedText: localizedText,
+              localizeText: localizedText,
             ),
           );
           expect(find.text('Overwritten'), findsOneWidget);
@@ -117,7 +119,7 @@ Future<void> main() async {
               localizationsOverride: const FirebaseUILocalizationDelegate(
                 ZhTWLocalizationsOverrides(),
               ),
-              localizedText: localizedText,
+              localizeText: localizedText,
             ),
           );
           expect(find.text('覆寫標題'), findsOneWidget);
@@ -144,28 +146,32 @@ class ZhTWLocalizationsOverrides extends ZhTWLocalizations {
 class TestMaterialApp extends StatelessWidget {
   final Locale locale;
   final LocalizationsDelegate? localizationsOverride;
-  final String Function(BuildContext context) localizedText;
+  final String Function(BuildContext context) localizeText;
 
   const TestMaterialApp({
     super.key,
     required this.locale,
     this.localizationsOverride,
-    required this.localizedText,
+    required this.localizeText,
   });
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        supportedLocales: const [localeZh, localeTW],
-        locale: locale,
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          localizationsOverride == null ? FirebaseUILocalizations.delegate : localizationsOverride!,
-        ],
-        home: Builder(
-          builder: (context) => Text(
-            localizedText.call(context),
-          ),
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      supportedLocales: const [localeZh, localeTW],
+      locale: locale,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        localizationsOverride == null
+            ? FirebaseUILocalizations.delegate
+            : localizationsOverride!,
+      ],
+      home: Builder(
+        builder: (context) => Text(
+          localizeText.call(context),
         ),
-      );
+      ),
+    );
+  }
 }
