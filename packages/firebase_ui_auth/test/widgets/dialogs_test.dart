@@ -3,7 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_auth/src/widgets/reauthenticate_dialog.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../test_utils.dart';
