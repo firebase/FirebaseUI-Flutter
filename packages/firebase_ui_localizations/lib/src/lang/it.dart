@@ -323,4 +323,8 @@ class ItLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get unlinkProviderAlertMessage =>
       "Are you sure you want to unlink this provider?";
+
+  @override
+  String get weakPasswordErrorText =>
+      "Password should be at least 6 characters";
 }

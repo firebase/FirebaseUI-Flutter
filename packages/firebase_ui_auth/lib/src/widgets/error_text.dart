@@ -26,6 +26,8 @@ String? localizedErrorText(
       return labels.credentialAlreadyInUseErrorText;
     case 'invalid-verification-code':
       return labels.invalidVerificationCodeErrorText;
+    case 'weak-password':
+      return labels.weakPasswordErrorText;
 
     default:
       return null;

@@ -80,7 +80,6 @@ void main() async {
     licenseHeader,
   );
 
-  await generateLanguagesList(labelsByLocale, licenseHeader);
   Process.runSync('dart', ['format', outDir.path]);
 }
 
@@ -145,57 +144,6 @@ Future<void> generateLocalizationsClass({
   }
 
   out.writeln('}');
-
-  await out.flush();
-  await out.close();
-}
-
-Future<void> generateLanguagesList(
-  Map<String, dynamic> arb,
-  String licenseHeader,
-) async {
-  final outFile = File(
-    path.join(outDir.path, 'all_languages.dart'),
-  );
-
-  if (!outFile.existsSync()) {
-    outFile.createSync(recursive: true);
-  }
-
-  final out = outFile.openWrite();
-
-  out.writeln(licenseHeader);
-  out.writeln('import "./default_localizations.dart";');
-  out.writeln();
-
-  for (var entry in arb.entries) {
-    final locale = entry.key;
-    final countryCodes = entry.value.keys.where((e) => e != 'default').toList();
-
-    final filename = dartFilename(locale);
-    out.writeln("import 'lang/$filename';");
-
-    for (var countryCode in countryCodes) {
-      out.writeln("import 'lang/${dartFilename(locale, countryCode)}';");
-    }
-  }
-
-  out.writeln();
-  out.writeln('final localizations = <String, FirebaseUILocalizationLabels>{');
-
-  for (var entry in arb.entries) {
-    final locale = entry.key;
-    final countryCodes = entry.value.keys.where((e) => e != 'default').toList();
-
-    out.writeln("  '$locale': const ${dartClassName(locale)}(),");
-
-    for (var countryCode in countryCodes) {
-      final key = '${locale}_${countryCode.toLowerCase()}';
-      out.writeln("  '$key': const ${dartClassName(locale, countryCode)}(),");
-    }
-  }
-
-  out.writeln('};');
 
   await out.flush();
   await out.close();
