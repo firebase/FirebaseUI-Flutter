@@ -1,6 +1,6 @@
 {
   "@@locale": "pt",
-  "@@last_modified": "2023-09-22T14:51:00.784012",
+  "@@last_modified": "2023-10-12T15:27:44.533657",
   "accessDisabledErrorText": "O acesso a esta conta foi desativado temporariamente",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -507,6 +507,11 @@
   "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
+    "placeholders": {}
+  },
+  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "@weakPasswordErrorText": {
+    "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   }
 }

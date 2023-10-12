@@ -335,6 +335,9 @@ abstract class FirebaseUILocalizationLabels {
   /// Message indicating that email is being verified
   String get waitingForEmailVerificationText;
 
+  /// Error text suggesting that used password is too weak
+  String get weakPasswordErrorText;
+
   String get westInitialLabel;
 
   /// Used as an error text of the PasswordInput when provided password is empty

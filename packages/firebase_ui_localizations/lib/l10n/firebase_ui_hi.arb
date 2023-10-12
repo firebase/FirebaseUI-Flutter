@@ -1,6 +1,6 @@
 {
   "@@locale": "hi",
-  "@@last_modified": "2023-09-22T14:51:00.804545",
+  "@@last_modified": "2023-10-12T15:27:44.531280",
   "accessDisabledErrorText": "इस खाते के ऐक्सेस पर, कुछ समय के लिए रोक लगा दी गई है",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -507,6 +507,11 @@
   "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
+    "placeholders": {}
+  },
+  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "@weakPasswordErrorText": {
+    "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   }
 }
