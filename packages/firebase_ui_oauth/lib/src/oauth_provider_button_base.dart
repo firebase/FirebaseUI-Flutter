@@ -345,7 +345,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
   @override
   void onError(Object error) {
-    setState(() {
+    safeSetState(() {
       isLoading = false;
     });
 
