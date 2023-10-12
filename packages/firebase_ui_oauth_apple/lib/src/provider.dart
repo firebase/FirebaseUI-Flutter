@@ -8,6 +8,28 @@ import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import 'theme.dart';
 
+/// A Firebase UI Auth provider which should be used to add Apple Sign In
+/// to your app.
+///
+/// It is recommended to check if the current platform supports Apple Sign In.
+/// This could be achived with `device_info_plus` package.
+///
+/// ```dart
+/// import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+/// import 'package:device_info_plus/device_info_plus.dart';
+///
+/// Future<void> main() async {
+///   WidgetsFlutterBinding.ensureInitialized();
+///
+///   final deviceInfo = DeviceInfoPlugin();
+///   final iosInfo = await deviceInfo.iosInfo;
+///
+///   FirebaseUIAuth.configureProviders([
+///     if ((double.tryParse(iosInfo.systemVersion) ?? 0) >= 13) AppleProvider(),
+///   ]);
+///
+///   runApp(MyApp());
+/// }
 class AppleProvider extends OAuthProvider {
   @override
   final providerId = 'apple.com';
