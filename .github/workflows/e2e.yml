@@ -73,7 +73,7 @@ jobs:
         run: |
           cd ./tests
           echo "Starting Firebase Emulator"
-          firebase emulators:start &
+          ../.github/workflows/scripts/start-firebase-emulator.sh
           cd ../emulator_proxy
           echo "Starting emulator proxy"
           dart run emulator_proxy:start 100 &
@@ -157,7 +157,7 @@ jobs:
         run: |
           cd ./tests
           echo "Starting Firebase Emulator"
-          firebase emulators:start &
+          ../.github/workflows/scripts/start-firebase-emulator.sh
           cd ../emulator_proxy
           echo "Starting emulator proxy"
           dart run emulator_proxy:start 100 &
@@ -234,7 +234,7 @@ jobs:
         run: |
           cd ./tests
           echo "Starting Firebase Emulator"
-          firebase emulators:start &
+          ../.github/workflows/scripts/start-firebase-emulator.sh
           cd ../emulator_proxy
           echo "Starting emulator proxy"
           dart run emulator_proxy:start 100 &
