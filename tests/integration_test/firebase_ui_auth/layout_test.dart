@@ -42,7 +42,7 @@ void main() {
         // Test will fail if there is an overflow.
         // This is a built-in flutter functionality
 
-        await tester.tap(find.text('cancel'));
+        await tester.tap(find.text('Cancel'));
         await tester.pumpAndSettle();
       },
     );
