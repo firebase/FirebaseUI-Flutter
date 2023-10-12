@@ -12,7 +12,7 @@ import 'theme.dart';
 /// to your app.
 ///
 /// It is recommended to check if the current platform supports Apple Sign In.
-/// This could be achived with `device_info_plus` package.
+/// This could be achieved with `device_info_plus` package.
 ///
 /// ```dart
 /// import 'package:firebase_ui_auth/firebase_ui_auth.dart';
