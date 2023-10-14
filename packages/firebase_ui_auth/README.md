@@ -84,16 +84,16 @@ fonts:
 
 ## Docs
 
-Find relevant documentation [here](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase_ui_auth)
+Find relevant documentation [here](https://github.com/firebase/FirebaseUI-Flutter/tree/main/docs/firebase-ui-auth)
 
-- [Getting started](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/README.md)
+- [Getting started](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/README.md)
 - Auth providers.
-  - [Email auth provider](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/providers/email.md) – sign in using email and password.
-  - [Email verification](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/providers/email-verification.md) - verify email.
-  - [Email link sign in](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/providers/email-link.md) - sign in using a link sent to email.
-  - [Phone auth provider](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/providers/phone.md) - sign in using phone number.
-  - [Universal email sign in](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/providers/universal-email-sign-in.md) - resolve connected providers based on email and sign in using one of those.
-  - [OAuth](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase_ui_auth/providers/oauth.md) - sign in using Apple, Google, Facebook or Twitter.
+  - [Email auth provider](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/email.md) – sign in using email and password.
+  - [Email verification](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/email-verification.md) - verify email.
+  - [Email link sign in](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/email-link.md) - sign in using a link sent to email.
+  - [Phone auth provider](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/phone.md) - sign in using phone number.
+  - [Universal email sign in](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/universal-email-sign-in.md) - resolve connected providers based on email and sign in using one of those.
+  - [OAuth](https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/oauth.md) - sign in using Apple, Google, Facebook or Twitter.
 
 ## Issues and feedback
 
