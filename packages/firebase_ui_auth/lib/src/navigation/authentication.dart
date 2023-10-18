@@ -65,7 +65,7 @@ Future<void> showDifferentMethodSignInDialog({
   await showGeneralDialog(
     context: context,
     barrierDismissible: true,
-    barrierLabel: l.cancelLabel,
+    barrierLabel: l.cancelButtonLabel,
     pageBuilder: (context, _, __) => DifferentMethodSignInDialog(
       availableProviders: availableProviders,
       providers: providers,
