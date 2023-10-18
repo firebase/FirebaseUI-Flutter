@@ -21,15 +21,6 @@ void defaultOnAuthError(AuthProvider provider, Object error) {
     return;
   }
 
-  if (error.code == 'account-exists-with-different-credential') {
-    final email = error.email;
-    if (email == null) {
-      throw error;
-    }
-
-    provider.findProvidersForEmail(email, error.credential);
-  }
-
   throw error;
 }
 
@@ -39,7 +30,6 @@ void defaultOnAuthError(AuthProvider provider, Object error) {
 /// - [EmailAuthListener]
 /// - [EmailLinkAuthListener]
 /// - [PhoneAuthListener]
-/// - [UniversalEmailSignInListener]
 abstract class AuthListener {
   /// Current [AuthProvider] that is being used to authenticate the user.
   AuthProvider get provider;
@@ -64,9 +54,17 @@ abstract class AuthListener {
   void onCredentialLinked(AuthCredential credential);
 
   /// Called before an attempt to fetch available providers for the email.
+  @Deprecated(
+    'Email enumeration protection is on by default.'
+    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+  )
   void onBeforeProvidersForEmailFetch();
 
   /// Called when available providers for the email were successfully fetched.
+  @Deprecated(
+    'Email enumeration protection is on by default.'
+    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+  )
   void onDifferentProvidersFound(
     String email,
     List<String> providers,
@@ -139,6 +137,10 @@ abstract class AuthProvider<T extends AuthListener, K extends AuthCredential> {
   }
 
   /// Fetches available providers for the given [email].
+  @Deprecated(
+    'Email enumeration protection is on by default.'
+    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+  )
   void findProvidersForEmail(
     String email, [
     AuthCredential? credential,

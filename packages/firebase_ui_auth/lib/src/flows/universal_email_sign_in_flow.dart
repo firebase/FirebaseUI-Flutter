@@ -6,6 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 /// A controller interface of the [UniversalEmailSignInFlow].
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 abstract class UniversalEmailSignInController extends AuthController {
   /// {@template ui.auth.auth_controller.find_providers_for_email}
   /// Finds providers that can be used to sign in with a provided email.
@@ -20,6 +24,10 @@ abstract class UniversalEmailSignInController extends AuthController {
 /// An auth flow that resolves providers that are accosicatied with the given
 /// email.
 /// {@endtemplate}
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 class UniversalEmailSignInFlow extends AuthFlow<UniversalEmailSignInProvider>
     implements UniversalEmailSignInController, UniversalEmailSignInListener {
   // {@macro ui.auth.flows.universal_email_sign_in_flow}
