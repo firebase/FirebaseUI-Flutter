@@ -3,6 +3,176 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-19
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.9.1`](#firebase_ui_auth---v191)
+ - [`firebase_ui_localizations` - `v1.7.1`](#firebase_ui_localizations---v171)
+ - [`firebase_ui_oauth` - `v1.4.13`](#firebase_ui_oauth---v1413)
+ - [`firebase_ui_oauth_apple` - `v1.2.13`](#firebase_ui_oauth_apple---v1213)
+ - [`firebase_ui_shared` - `v1.4.1`](#firebase_ui_shared---v141)
+ - [`firebase_ui_oauth_twitter` - `v1.2.13`](#firebase_ui_oauth_twitter---v1213)
+ - [`firebase_ui_oauth_facebook` - `v1.2.13`](#firebase_ui_oauth_facebook---v1213)
+ - [`firebase_ui_oauth_google` - `v1.2.13`](#firebase_ui_oauth_google---v1213)
+ - [`firebase_ui_firestore` - `v1.5.13`](#firebase_ui_firestore---v1513)
+ - [`firebase_ui_database` - `v1.3.11`](#firebase_ui_database---v1311)
+ - [`firebase_ui_storage` - `v1.0.3`](#firebase_ui_storage---v103)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth_twitter` - `v1.2.13`
+ - `firebase_ui_oauth_facebook` - `v1.2.13`
+ - `firebase_ui_oauth_google` - `v1.2.13`
+ - `firebase_ui_firestore` - `v1.5.13`
+ - `firebase_ui_database` - `v1.3.11`
+ - `firebase_ui_storage` - `v1.0.3`
+
+---
+
+#### `firebase_ui_auth` - `v1.9.1`
+
+ - **FIX**(ui_auth): deprecate screens and widgets that use fetchSignInMethodsForEmail ([#153](https://github.com/firebase/FirebaseUI-Flutter/issues/153)). ([84ce5fb7](https://github.com/firebase/FirebaseUI-Flutter/commit/84ce5fb7a4c2237932568c3cb85953b112ed04a8))
+ - **FIX**(ui_auth): use capitalized cancel label on dialogs ([#134](https://github.com/firebase/FirebaseUI-Flutter/issues/134)). ([78c1ba9b](https://github.com/firebase/FirebaseUI-Flutter/commit/78c1ba9b20a6691e046bdbc76595fd810867cde5))
+ - **FIX**(ui_localizations): localize weak password error ([#138](https://github.com/firebase/FirebaseUI-Flutter/issues/138)). ([bcfa2be6](https://github.com/firebase/FirebaseUI-Flutter/commit/bcfa2be660454078abc0a542abe3359f23453ca4))
+
+#### `firebase_ui_localizations` - `v1.7.1`
+
+ - **FIX**(ui_localizations): localize weak password error ([#138](https://github.com/firebase/FirebaseUI-Flutter/issues/138)). ([bcfa2be6](https://github.com/firebase/FirebaseUI-Flutter/commit/bcfa2be660454078abc0a542abe3359f23453ca4))
+ - **FIX**(ui_localizations): fix loading Traditional Chinese ([#128](https://github.com/firebase/FirebaseUI-Flutter/issues/128)). ([5e09eab1](https://github.com/firebase/FirebaseUI-Flutter/commit/5e09eab180099f34523b373068d9702ce033ab05))
+
+#### `firebase_ui_oauth` - `v1.4.13`
+
+ - **FIX**(ui_auth): use capitalized cancel label on dialogs ([#134](https://github.com/firebase/FirebaseUI-Flutter/issues/134)). ([78c1ba9b](https://github.com/firebase/FirebaseUI-Flutter/commit/78c1ba9b20a6691e046bdbc76595fd810867cde5))
+
+#### `firebase_ui_oauth_apple` - `v1.2.13`
+
+ - **DOCS**(ui_oauth_apple): add platform support note ([#139](https://github.com/firebase/FirebaseUI-Flutter/issues/139)). ([88b85b83](https://github.com/firebase/FirebaseUI-Flutter/commit/88b85b835ee52355983d95e13bbc68392de44090))
+
+#### `firebase_ui_shared` - `v1.4.1`
+
+ - **FIX**(ui_auth): adaptive AlertDialog for Flutter <3.13 ([#152](https://github.com/firebase/FirebaseUI-Flutter/issues/152)). ([0e93d610](https://github.com/firebase/FirebaseUI-Flutter/commit/0e93d6101be1ebaa4b2ee491362fa7a83c71cb58))
+
+
+## 2023-10-09
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.9.0`](#firebase_ui_auth---v190)
+ - [`firebase_ui_localizations` - `v1.7.0`](#firebase_ui_localizations---v170)
+ - [`firebase_ui_oauth` - `v1.4.12`](#firebase_ui_oauth---v1412)
+ - [`firebase_ui_shared` - `v1.4.0`](#firebase_ui_shared---v140)
+ - [`firebase_ui_oauth_twitter` - `v1.2.12`](#firebase_ui_oauth_twitter---v1212)
+ - [`firebase_ui_oauth_facebook` - `v1.2.12`](#firebase_ui_oauth_facebook---v1212)
+ - [`firebase_ui_oauth_apple` - `v1.2.12`](#firebase_ui_oauth_apple---v1212)
+ - [`firebase_ui_oauth_google` - `v1.2.12`](#firebase_ui_oauth_google---v1212)
+ - [`firebase_ui_firestore` - `v1.5.12`](#firebase_ui_firestore---v1512)
+ - [`firebase_ui_database` - `v1.3.10`](#firebase_ui_database---v1310)
+ - [`firebase_ui_storage` - `v1.0.2`](#firebase_ui_storage---v102)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth_twitter` - `v1.2.12`
+ - `firebase_ui_oauth_facebook` - `v1.2.12`
+ - `firebase_ui_oauth_apple` - `v1.2.12`
+ - `firebase_ui_oauth_google` - `v1.2.12`
+ - `firebase_ui_firestore` - `v1.5.12`
+ - `firebase_ui_database` - `v1.3.10`
+ - `firebase_ui_storage` - `v1.0.2`
+
+---
+
+#### `firebase_ui_auth` - `v1.9.0`
+
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FEAT**(ui_auth): add a way to customize ErrorText message ([#119](https://github.com/firebase/FirebaseUI-Flutter/issues/119)). ([a36884d7](https://github.com/firebase/FirebaseUI-Flutter/commit/a36884d73228a33a4c4b061e095f4939bf671d8e))
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
+#### `firebase_ui_localizations` - `v1.7.0`
+
+ - **FIX**(ui_localizations): update italian translations ([#109](https://github.com/firebase/FirebaseUI-Flutter/issues/109)). ([d1c69dcc](https://github.com/firebase/FirebaseUI-Flutter/commit/d1c69dccab50d0a2ed2c44f50a12bf6fdae7f990))
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
+#### `firebase_ui_oauth` - `v1.4.12`
+
+ - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))
+ - **FIX**(firebase_ui_oauth): Fix provider auth listener late init exception ([#107](https://github.com/firebase/FirebaseUI-Flutter/issues/107)). ([0f0fa80e](https://github.com/firebase/FirebaseUI-Flutter/commit/0f0fa80e8d0535864014472927275cc7dea8cebf))
+
+#### `firebase_ui_shared` - `v1.4.0`
+
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
+
+## 2023-09-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.8.0`](#firebase_ui_auth---v180)
+ - [`firebase_ui_localizations` - `v1.6.1`](#firebase_ui_localizations---v161)
+ - [`firebase_ui_oauth` - `v1.4.11`](#firebase_ui_oauth---v1411)
+ - [`firebase_ui_oauth_facebook` - `v1.2.11`](#firebase_ui_oauth_facebook---v1211)
+ - [`firebase_ui_oauth_twitter` - `v1.2.11`](#firebase_ui_oauth_twitter---v1211)
+ - [`firebase_ui_oauth_apple` - `v1.2.11`](#firebase_ui_oauth_apple---v1211)
+ - [`firebase_ui_oauth_google` - `v1.2.11`](#firebase_ui_oauth_google---v1211)
+ - [`firebase_ui_firestore` - `v1.5.11`](#firebase_ui_firestore---v1511)
+ - [`firebase_ui_database` - `v1.3.9`](#firebase_ui_database---v139)
+ - [`firebase_ui_storage` - `v1.0.1`](#firebase_ui_storage---v101)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.4.11`
+ - `firebase_ui_oauth_facebook` - `v1.2.11`
+ - `firebase_ui_oauth_twitter` - `v1.2.11`
+ - `firebase_ui_oauth_apple` - `v1.2.11`
+ - `firebase_ui_oauth_google` - `v1.2.11`
+ - `firebase_ui_firestore` - `v1.5.11`
+ - `firebase_ui_database` - `v1.3.9`
+ - `firebase_ui_storage` - `v1.0.1`
+
+---
+
+#### `firebase_ui_auth` - `v1.8.0`
+
+ - **FIX**(ui_auth,ui_localizations): add invalid verification SMS code error label ([#102](https://github.com/firebase/FirebaseUI-Flutter/issues/102)). ([8adc39b9](https://github.com/firebase/FirebaseUI-Flutter/commit/8adc39b94abcf55a4fc0c07850e7e9ec25380d0d))
+ - **FIX**(ui_auth): allow to pass EmailFormStyle via property ([#98](https://github.com/firebase/FirebaseUI-Flutter/issues/98)). ([88c31a33](https://github.com/firebase/FirebaseUI-Flutter/commit/88c31a332dc490d5500e81d491ba929b0fe4c5f0))
+ - **FEAT**(ui_auth): allow to toggle password visibility ([#104](https://github.com/firebase/FirebaseUI-Flutter/issues/104)). ([6e3735d9](https://github.com/firebase/FirebaseUI-Flutter/commit/6e3735d9fda3f2415a781ff591a5842864dc2fcf))
+
+#### `firebase_ui_localizations` - `v1.6.1`
+
+ - **FIX**(ui_auth,ui_localizations): add invalid verification SMS code error label ([#102](https://github.com/firebase/FirebaseUI-Flutter/issues/102)). ([8adc39b9](https://github.com/firebase/FirebaseUI-Flutter/commit/8adc39b94abcf55a4fc0c07850e7e9ec25380d0d))
+
+
 ## 2023-09-01
 
 ### Changes

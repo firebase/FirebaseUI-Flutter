@@ -6,22 +6,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_ui_storage/firebase_ui_storage.dart';
 import 'package:firebase_ui_storage_example/firebase_options.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-String get emulatorHost {
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    return '10.0.0.2';
-  }
-
-  return 'localhost';
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseStorage.instance.useStorageEmulator(emulatorHost, 9199);
+  await FirebaseStorage.instance.useStorageEmulator('localhost', 9199);
 
   final storage = FirebaseStorage.instance;
 

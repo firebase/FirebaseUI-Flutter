@@ -1,3 +1,11 @@
+## 1.4.1
+
+ - **FIX**(ui_auth): adaptive AlertDialog for Flutter <3.13 ([#152](https://github.com/firebase/FirebaseUI-Flutter/issues/152)). ([0e93d610](https://github.com/firebase/FirebaseUI-Flutter/commit/0e93d6101be1ebaa4b2ee491362fa7a83c71cb58))
+
+## 1.4.0
+
+ - **FEAT**(ui_auth): show confirmation dialog when trying to unlink a provider ([#116](https://github.com/firebase/FirebaseUI-Flutter/issues/116)). ([8757037b](https://github.com/firebase/FirebaseUI-Flutter/commit/8757037baa3d88ff25b5dc20aab0dc6ba445827b))
+
 ## 1.3.1
 
  - Migrate to a [new repo](https://github.com/firebase/FirebaseUI-Flutter)

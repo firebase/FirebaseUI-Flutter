@@ -1,6 +1,6 @@
 {
   "@@locale": "tr",
-  "@@last_modified": "2023-09-01T13:12:06.517141",
+  "@@last_modified": "2023-10-12T15:27:44.528980",
   "accessDisabledErrorText": "Bu hesaba erişim geçici olarak devre dışı bırakıldı",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -482,6 +482,36 @@
   "doneButtonLabel": "Done",
   "@doneButtonLabel": {
     "description": "Done button label",
+    "placeholders": {}
+  },
+  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "@invalidVerificationCodeErrorText": {
+    "description": "Error text indicating that entered SMS code is invalid",
+    "placeholders": {}
+  },
+  "ulinkProviderAlertTitle": "Unlink provider",
+  "@ulinkProviderAlertTitle": {
+    "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
+    "placeholders": {}
+  },
+  "confirmUnlinkButtonLabel": "Unlink",
+  "@confirmUnlinkButtonLabel": {
+    "description": "Unlink confirmation button label",
+    "placeholders": {}
+  },
+  "cancelButtonLabel": "Cancel",
+  "@cancelButtonLabel": {
+    "description": "Cancel button label",
+    "placeholders": {}
+  },
+  "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
+  "@unlinkProviderAlertMessage": {
+    "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
+    "placeholders": {}
+  },
+  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "@weakPasswordErrorText": {
+    "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   }
 }

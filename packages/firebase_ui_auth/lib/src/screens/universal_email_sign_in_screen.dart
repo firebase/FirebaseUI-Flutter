@@ -9,6 +9,10 @@ import '../widgets/internal/universal_page_route.dart';
 import 'internal/multi_provider_screen.dart';
 
 /// A screen that allows to resolve previously used providers for a given email.
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 class UniversalEmailSignInScreen extends MultiProviderScreen {
   /// A callback that is being called when providers fetch request completed.
   final ProvidersFoundCallback? onProvidersFound;

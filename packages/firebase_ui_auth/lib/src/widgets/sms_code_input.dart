@@ -88,6 +88,12 @@ class _NumberSlotState extends State<_NumberSlot>
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final inputBorder = Theme.of(context).inputDecorationTheme.border;
     final primaryColor = Theme.of(context).colorScheme.primary;

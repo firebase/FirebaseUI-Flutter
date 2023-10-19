@@ -24,6 +24,9 @@ class DifferentMethodSignInView extends StatelessWidget {
   /// the [availableProviders].
   final VoidCallback? onSignedIn;
 
+  /// {@macro ui.auth.widgets.email_from.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   /// {@macro ui.auth.views.different_method_sign_in_view}
   const DifferentMethodSignInView({
     super.key,
@@ -31,6 +34,7 @@ class DifferentMethodSignInView extends StatelessWidget {
     required this.providers,
     this.auth,
     this.onSignedIn,
+    this.showPasswordVisibilityToggle = false,
   });
 
   @override
@@ -59,6 +63,7 @@ class DifferentMethodSignInView extends StatelessWidget {
         action: AuthAction.signIn,
         providers: providers,
         showTitle: false,
+        showPasswordVisibilityToggle: showPasswordVisibilityToggle,
       ),
       listener: (oldState, newState, ctrl) {
         if (newState is SignedIn) {

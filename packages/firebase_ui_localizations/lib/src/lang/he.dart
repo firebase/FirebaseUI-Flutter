@@ -302,4 +302,25 @@ class HeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get doneButtonLabel => "Done";
+
+  @override
+  String get invalidVerificationCodeErrorText =>
+      "The code you entered is invalid. Please try again.";
+
+  @override
+  String get ulinkProviderAlertTitle => "Unlink provider";
+
+  @override
+  String get confirmUnlinkButtonLabel => "Unlink";
+
+  @override
+  String get cancelButtonLabel => "Cancel";
+
+  @override
+  String get unlinkProviderAlertMessage =>
+      "Are you sure you want to unlink this provider?";
+
+  @override
+  String get weakPasswordErrorText =>
+      "Password should be at least 6 characters";
 }

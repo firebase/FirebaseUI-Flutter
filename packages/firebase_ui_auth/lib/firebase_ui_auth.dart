@@ -95,6 +95,13 @@ export 'src/widgets/sign_out_button.dart';
 export 'src/widgets/sms_code_input.dart' show SMSCodeInputState, SMSCodeInput;
 export 'src/widgets/user_avatar.dart';
 
+bool _isTestMode = false;
+
+@visibleForTesting
+void setFirebaseUiIsTestMode(bool isTestMode) {
+  _isTestMode = isTestMode;
+}
+
 class FirebaseUIAuth {
   static final _providers = <FirebaseApp, List<AuthProvider>>{};
   static final _configuredApps = <FirebaseApp, bool>{};
@@ -104,6 +111,7 @@ class FirebaseUIAuth {
   }
 
   static bool isAppConfigured(FirebaseApp app) {
+    if (_isTestMode) return true;
     return _providers.containsKey(app);
   }
 
@@ -111,7 +119,7 @@ class FirebaseUIAuth {
     List<AuthProvider> configs, {
     FirebaseApp? app,
   }) {
-    if (Firebase.apps.isEmpty) {
+    if (!_isTestMode && Firebase.apps.isEmpty) {
       throw Exception(
         'You must call Firebase.initializeApp() '
         'before calling configureProviders()',

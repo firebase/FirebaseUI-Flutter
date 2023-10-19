@@ -142,6 +142,9 @@ class OAuthProviderButtonBase extends StatefulWidget {
 
 class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
     implements OAuthListener {
+  @override
+  late final OAuthProvider provider = widget.provider;
+
   double get _height => widget.size + widget._padding * 2;
   late bool isLoading = widget.isLoading;
 
@@ -149,8 +152,8 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   void initState() {
     super.initState();
 
-    widget.provider.auth = widget.auth ?? FirebaseAuth.instance;
-    widget.provider.authListener = this;
+    provider.auth = widget.auth ?? FirebaseAuth.instance;
+    provider.authListener = this;
   }
 
   void _signIn() {
@@ -243,7 +246,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
             borderColor: style.borderColor,
             iconBackgroundColor: style.iconBackgroundColor,
           ),
-          _MaterialForeground(onTap: () => _signIn()),
+          _MaterialForeground(onTap: _signIn),
         ],
       ),
     );
@@ -283,9 +286,15 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   @override
   FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
 
+  void safeSetState(void Function() update) {
+    if (mounted) {
+      setState(update);
+    }
+  }
+
   @override
   void onCredentialReceived(AuthCredential credential) {
-    setState(() {
+    safeSetState(() {
       isLoading = true;
     });
   }
@@ -297,21 +306,21 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
   @override
   void onBeforeProvidersForEmailFetch() {
-    setState(() {
+    safeSetState(() {
       isLoading = true;
     });
   }
 
   @override
   void onBeforeSignIn() {
-    setState(() {
+    safeSetState(() {
       isLoading = true;
     });
   }
 
   @override
   void onCredentialLinked(AuthCredential credential) {
-    setState(() {
+    safeSetState(() {
       isLoading = false;
     });
   }
@@ -327,7 +336,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
   @override
   void onSignedIn(UserCredential credential) {
-    setState(() {
+    safeSetState(() {
       isLoading = false;
     });
 
@@ -336,6 +345,10 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
   @override
   void onError(Object error) {
+    safeSetState(() {
+      isLoading = false;
+    });
+
     try {
       defaultOnAuthError(provider, error);
     } on Exception catch (err) {
@@ -345,7 +358,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
   @override
   void onCanceled() {
-    setState(() {
+    safeSetState(() {
       isLoading = false;
     });
 
@@ -360,9 +373,6 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
 
     super.didUpdateWidget(oldWidget);
   }
-
-  @override
-  OAuthProvider get provider => widget.provider;
 }
 
 class _ButtonContent extends StatelessWidget {

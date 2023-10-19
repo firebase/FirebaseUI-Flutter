@@ -60,7 +60,7 @@ class DifferentMethodSignInDialog extends StatelessWidget {
                   onSignedIn: onSignedIn,
                 ),
                 UniversalButton(
-                  text: l.cancelLabel,
+                  text: l.cancelButtonLabel,
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ],

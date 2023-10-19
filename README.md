@@ -15,7 +15,6 @@ Firebase UI is a set of plugins for Flutter that allows you to quickly connect c
 | [`firebase_ui_oauth_facebook`](./packages/firebase_ui_oauth_facebook/) | [![pub package](https://img.shields.io/pub/v/firebase_ui_oauth_facebook.svg)](https://pub.dev/packages/firebase_ui_oauth_facebook) |
 | [`firebase_ui_oauth_google`](./packages/firebase_ui_oauth_google/)     | [![pub package](https://img.shields.io/pub/v/firebase_ui_oauth_google.svg)](https://pub.dev/packages/firebase_ui_oauth_google)     |
 | [`firebase_ui_oauth_twitter`](./packages/firebase_ui_oauth_twitter/)   | [![pub package](https://img.shields.io/pub/v/firebase_ui_oauth_twitter.svg)](https://pub.dev/packages/firebase_ui_oauth_twitter)   |
-| [`firebase_ui_shared`](./packages/firebase_ui_shared/)                 | [![pub package](https://img.shields.io/pub/v/firebase_ui_shared.svg)](https://pub.dev/packages/firebase_ui_shared)                 |
 | [`firebase_ui_storage`](./packages/firebase_ui_storage/)               | [![pub package](https://img.shields.io/pub/v/firebase_ui_storage.svg)](https://pub.dev/packages/firebase_ui_storage)               |
 
 ## Issues

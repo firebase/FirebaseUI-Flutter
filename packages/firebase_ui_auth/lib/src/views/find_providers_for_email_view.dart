@@ -11,6 +11,10 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import '../widgets/internal/title.dart';
 
 /// A callback that is being called when providers fetch request is completed.
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 typedef ProvidersFoundCallback = void Function(
   String email,
   List<String> providers,
@@ -19,6 +23,10 @@ typedef ProvidersFoundCallback = void Function(
 /// {@template ui.auth.views.find_providers_for_email_view}
 /// A view that could be used to build a custom [UniversalEmailSignInScreen].
 /// {@endtemplate}
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 class FindProvidersForEmailView extends StatefulWidget {
   final ProvidersFoundCallback? onProvidersFound;
 
@@ -37,6 +45,10 @@ class FindProvidersForEmailView extends StatefulWidget {
       _FindProvidersForEmailViewState();
 }
 
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 class _FindProvidersForEmailViewState extends State<FindProvidersForEmailView> {
   final formKey = GlobalKey<FormState>();
   final emailCtrl = TextEditingController();

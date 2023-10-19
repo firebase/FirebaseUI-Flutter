@@ -27,7 +27,6 @@ class AuthCancelledException implements Exception {
 /// - [EmailLinkFlow]
 /// - [OAuthFlow]
 /// - [PhoneAuthFlow]
-/// - [UniversalEmailSignInFlow]
 ///
 /// See [AuthFlowBuilder] docs to learn how to wire up the auth flow with the
 /// widget tree.

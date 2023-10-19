@@ -20,11 +20,21 @@ String prompt(String tag) {
 
 Future<void> main(List<String> args) async {
   final name = prompt('Label name');
-  final description = prompt('Label description');
-  final englishTranslation = prompt('English translation');
 
   final cwd = Directory.current.path;
   final l10nSrc = Directory(path.join(cwd, 'lib', 'l10n'));
+
+  final enArb = File(path.join(l10nSrc.path, 'firebase_ui_en.arb'));
+  final enContent =
+      jsonDecode(await enArb.readAsString()) as Map<String, dynamic>;
+
+  if (enContent.containsKey(name)) {
+    stderr.writeln('Label "$name" already exists');
+    exit(1);
+  }
+
+  final description = prompt('Label description');
+  final englishTranslation = prompt('English translation');
 
   final files = l10nSrc.listSync().whereType<File>().toList();
   final futures = files.map((e) async {
@@ -48,6 +58,7 @@ Future<Map<String, dynamic>> addLabel(
   String englishTranslation,
 ) async {
   final content = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+
   return {
     ...content,
     "@@last_modified": DateTime.now().toIso8601String(),

@@ -24,6 +24,7 @@ class UniversalTextFormField extends PlatformWidget {
   final bool autocorrect;
   final Widget? prefix;
   final Iterable<String>? autofillHints;
+  final Widget? suffixIcon;
 
   const UniversalTextFormField({
     super.key,
@@ -40,34 +41,49 @@ class UniversalTextFormField extends PlatformWidget {
     this.enableSuggestions,
     this.autocorrect = false,
     this.autofillHints,
+    this.suffixIcon,
   });
 
   @override
   Widget buildCupertino(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 8),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: CupertinoColors.inactiveGray,
+    return Stack(
+      children: [
+        Container(
+          padding: const EdgeInsets.only(bottom: 8),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: CupertinoColors.inactiveGray,
+              ),
+            ),
+          ),
+          child: CupertinoTextFormFieldRow(
+            autocorrect: autocorrect,
+            autofillHints: autofillHints,
+            focusNode: focusNode,
+            padding: EdgeInsets.zero,
+            controller: controller,
+            placeholder: placeholder,
+            validator: validator,
+            onFieldSubmitted: onSubmitted,
+            autofocus: autofocus,
+            inputFormatters: inputFormatters,
+            keyboardType: keyboardType,
+            obscureText: obscureText,
+            prefix: prefix,
           ),
         ),
-      ),
-      child: CupertinoTextFormFieldRow(
-        autocorrect: autocorrect,
-        autofillHints: autofillHints,
-        focusNode: focusNode,
-        padding: EdgeInsets.zero,
-        controller: controller,
-        placeholder: placeholder,
-        validator: validator,
-        onFieldSubmitted: onSubmitted,
-        autofocus: autofocus,
-        inputFormatters: inputFormatters,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        prefix: prefix,
-      ),
+        if (suffixIcon != null)
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: suffixIcon,
+              ),
+            ),
+          ),
+      ],
     );
   }
 
@@ -82,6 +98,7 @@ class UniversalTextFormField extends PlatformWidget {
       decoration: InputDecoration(
         labelText: placeholder,
         prefix: prefix,
+        suffixIcon: suffixIcon,
       ),
       validator: validator,
       onFieldSubmitted: onSubmitted,
