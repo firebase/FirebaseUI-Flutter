@@ -4,8 +4,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 
-class UniversalAlert extends StatelessWidget {
+class UniversalAlert extends PlatformWidget {
   final void Function() onConfirm;
   final void Function() onCancel;
 
@@ -49,8 +50,29 @@ class UniversalAlert extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AlertDialog.adaptive(
+  Widget buildMaterial(BuildContext context) {
+    return AlertDialog(
+      title: Text(title),
+      content: Text(message),
+      actions: [
+        adaptiveAction(
+          context: context,
+          onPressed: onConfirm,
+          child: Text(confirmButtonText),
+          isDestructiveAction: true,
+        ),
+        adaptiveAction(
+          context: context,
+          onPressed: onCancel,
+          child: Text(cancelButtonText),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget buildCupertino(BuildContext context) {
+    return CupertinoAlertDialog(
       title: Text(title),
       content: Text(message),
       actions: [
