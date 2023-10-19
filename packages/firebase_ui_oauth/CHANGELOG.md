@@ -1,3 +1,7 @@
+## 1.4.13
+
+ - **FIX**(ui_auth): use capitalized cancel label on dialogs ([#134](https://github.com/firebase/FirebaseUI-Flutter/issues/134)). ([78c1ba9b](https://github.com/firebase/FirebaseUI-Flutter/commit/78c1ba9b20a6691e046bdbc76595fd810867cde5))
+
 ## 1.4.12
 
  - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))

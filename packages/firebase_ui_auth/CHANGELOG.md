@@ -1,3 +1,9 @@
+## 1.9.1
+
+ - **FIX**(ui_auth): deprecate screens and widgets that use fetchSignInMethodsForEmail ([#153](https://github.com/firebase/FirebaseUI-Flutter/issues/153)). ([84ce5fb7](https://github.com/firebase/FirebaseUI-Flutter/commit/84ce5fb7a4c2237932568c3cb85953b112ed04a8))
+ - **FIX**(ui_auth): use capitalized cancel label on dialogs ([#134](https://github.com/firebase/FirebaseUI-Flutter/issues/134)). ([78c1ba9b](https://github.com/firebase/FirebaseUI-Flutter/commit/78c1ba9b20a6691e046bdbc76595fd810867cde5))
+ - **FIX**(ui_localizations): localize weak password error ([#138](https://github.com/firebase/FirebaseUI-Flutter/issues/138)). ([bcfa2be6](https://github.com/firebase/FirebaseUI-Flutter/commit/bcfa2be660454078abc0a542abe3359f23453ca4))
+
 ## 1.9.0
 
  - **FIX**(ui_auth): add showPasswordVisibilityToggle to the SignInScreen ([#114](https://github.com/firebase/FirebaseUI-Flutter/issues/114)). ([77ed75d3](https://github.com/firebase/FirebaseUI-Flutter/commit/77ed75d3cc61aa09c0e5d204af09b98b3f6f1421))

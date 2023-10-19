@@ -32,8 +32,8 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   firebase_core: ^2.19.0
-  firebase_ui_auth: ^1.9.0
-  firebase_ui_localizations: ^1.7.0
+  firebase_ui_auth: ^1.9.1
+  firebase_ui_localizations: ^1.7.1
   flutter:
     sdk: flutter
   flutter_localizations:

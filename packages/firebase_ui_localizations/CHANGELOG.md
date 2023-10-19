@@ -1,3 +1,8 @@
+## 1.7.1
+
+ - **FIX**(ui_localizations): localize weak password error ([#138](https://github.com/firebase/FirebaseUI-Flutter/issues/138)). ([bcfa2be6](https://github.com/firebase/FirebaseUI-Flutter/commit/bcfa2be660454078abc0a542abe3359f23453ca4))
+ - **FIX**(ui_localizations): fix loading Traditional Chinese ([#128](https://github.com/firebase/FirebaseUI-Flutter/issues/128)). ([5e09eab1](https://github.com/firebase/FirebaseUI-Flutter/commit/5e09eab180099f34523b373068d9702ce033ab05))
+
 ## 1.7.0
 
  - **FIX**(ui_localizations): update italian translations ([#109](https://github.com/firebase/FirebaseUI-Flutter/issues/109)). ([d1c69dcc](https://github.com/firebase/FirebaseUI-Flutter/commit/d1c69dccab50d0a2ed2c44f50a12bf6fdae7f990))
