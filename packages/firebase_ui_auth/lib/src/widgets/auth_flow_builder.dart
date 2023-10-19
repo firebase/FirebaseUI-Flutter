@@ -56,7 +56,6 @@ typedef StateTransitionListener<T extends AuthController> = void Function(
 /// * [EmailLinkFlow]
 /// * [OAuthFlow]
 /// * [PhoneAuthFlow]
-/// * [UniversalEmailSignInFlow].
 ///
 /// An example of how to build a custom email sign up form using
 /// [AuthFlowBuilder]:
@@ -138,7 +137,6 @@ class AuthFlowBuilder<T extends AuthController> extends StatefulWidget {
   /// The following providers are optional to provide:
   /// * [EmailAuthController]
   /// * [PhoneAuthController]
-  /// * [UniversalEmailSignInController]
   final AuthProvider? provider;
 
   /// An optional instance of the [AuthFlow].
@@ -228,7 +226,10 @@ class _AuthFlowBuilderState<T extends AuthController>
         return EmailAuthProvider();
       case PhoneAuthController:
         return PhoneAuthProvider();
+
+      // ignore: deprecated_member_use_from_same_package
       case UniversalEmailSignInController:
+        // ignore: deprecated_member_use_from_same_package
         return UniversalEmailSignInProvider();
       default:
         throw Exception("Can't create $T provider");
@@ -268,7 +269,9 @@ class _AuthFlowBuilderState<T extends AuthController>
         action: widget.action,
         auth: widget.auth,
       );
+      // ignore: deprecated_member_use_from_same_package
     } else if (provider is UniversalEmailSignInProvider) {
+      // ignore: deprecated_member_use_from_same_package
       return UniversalEmailSignInFlow(
         provider: provider,
         action: widget.action,

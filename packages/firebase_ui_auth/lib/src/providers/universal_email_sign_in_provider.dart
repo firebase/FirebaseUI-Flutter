@@ -7,6 +7,10 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 /// A [UniversalEmailSignInFlow] lifecycle listener.
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 abstract class UniversalEmailSignInListener extends AuthListener {
   @override
   void onBeforeProvidersForEmailFetch();
@@ -21,6 +25,10 @@ abstract class UniversalEmailSignInListener extends AuthListener {
 
 /// A provider that resolves available authentication methods for a given
 /// email.
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 class UniversalEmailSignInProvider
     extends AuthProvider<UniversalEmailSignInListener, AuthCredential> {
   @override
