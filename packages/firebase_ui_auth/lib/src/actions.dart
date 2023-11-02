@@ -2,6 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -15,6 +16,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 /// - [SMSCodeRequestedAction]
 /// - [EmailVerifiedAction]
 /// - [ForgotPasswordAction]
+/// = [AccountDeletedAction]
+/// - [DisplayNameChangedAction]
 abstract class FirebaseUIAction {
   /// Looks up an instance of an action of the type [T] provided
   /// via [FirebaseUIActions].
@@ -82,6 +85,32 @@ class AuthCancelledAction extends FirebaseUIAction {
 
   /// {@macro ui.auth.actions.cancel}
   AuthCancelledAction(this.callback);
+}
+
+/// {@template ui.auth.actions.account_deleted}
+/// An action that is being called when user has deleted their account.
+/// {@endtemplate}
+class AccountDeletedAction extends FirebaseUIAction {
+  /// A callback that is being called when user has deleted their account.
+  final void Function(BuildContext context, User user) callback;
+
+  /// {@macro ui.auth.actions.account_deleted}
+  AccountDeletedAction(this.callback);
+}
+
+/// {@template ui.auth.actions.display_name_changed}
+/// An action that is being called when user has changed their display name.
+/// {@endtemplate}
+class DisplayNameChangedAction extends FirebaseUIAction {
+  /// A callback that is being called when user has changed their display name.
+  final void Function(
+    BuildContext context,
+    String? oldName,
+    String newName,
+  ) callback;
+
+  /// {@macro ui.auth.actions.display_name_changed}
+  DisplayNameChangedAction(this.callback);
 }
 
 /// {@template ui.auth.actions.flutter_fire_ui_actions}
