@@ -20,6 +20,7 @@ import 'lang/ko.dart';
 import 'lang/nl.dart';
 import 'lang/pl.dart';
 import 'lang/pt.dart';
+import 'lang/ro.dart';
 import 'lang/ru.dart';
 import 'lang/th.dart';
 import 'lang/tr.dart';
@@ -43,6 +44,7 @@ final Set<String> kSupportedLanguages = {
   'nl', // Dutch Flemish
   'pl', // Polish
   'pt', // Portuguese
+  'ro', // Romanian
   'ru', // Russian
   'th', // Thai
   'tr', // Turkish
@@ -96,6 +98,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const PlLocalizations();
     case 'pt':
       return const PtLocalizations();
+    case 'ro':
+      return const RoLocalizations();
     case 'ru':
       return const RuLocalizations();
     case 'th':
