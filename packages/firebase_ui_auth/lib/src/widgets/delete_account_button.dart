@@ -15,6 +15,34 @@ typedef SignInRequiredCallback = Future<bool> Function();
 
 /// {@template ui.auth.widgets.delete_account_button}
 /// A button that triggers the deletion of the user's account.
+///
+/// If you want to perform an action after the account is deleted, you can
+/// use [AccountDeletedAction].
+///
+/// Example usage:
+/// ```dart
+/// ProfileScreen(
+///   actions: [
+///     AccountDeletedAction((context, user) {
+///       // Do something after the account is deleted.
+///     }),
+///   ],
+/// );
+/// ```
+///
+/// or
+///
+/// ```dart
+/// FirebaseUIActions(
+///   actions: [
+///     AccountDeletedAction((context, user) {
+///       // Do something after the account is deleted.
+///     }),
+///   ],
+///   // MyCustomScreen should use DeleteAccountButton internally.
+///   child: MyCustomScreen(),
+/// )
+/// ```
 /// {@endtemplate}
 class DeleteAccountButton extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
@@ -55,7 +83,13 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     });
 
     try {
+      final user = auth.currentUser!;
       await auth.currentUser?.delete();
+
+      FirebaseUIAction.ofType<AccountDeletedAction>(context)?.callback(
+        context,
+        user,
+      );
       await FirebaseUIAuth.signOut(context: context, auth: auth);
     } on FirebaseAuthException catch (err) {
       if (err.code == 'requires-recent-login') {
