@@ -56,15 +56,18 @@ class AppleProvider extends OAuthProvider {
   void mobileSignIn(AuthAction action) {
     authListener.onBeforeSignIn();
 
-    auth.signInWithProvider(firebaseAuthProvider).then((userCred) {
-      if (action == AuthAction.signIn) {
-        authListener.onSignedIn(userCred);
-      } else {
-        authListener.onCredentialLinked(userCred.credential!);
-      }
-    }).catchError((err) {
-      authListener.onError(err);
-    });
+    if (action == AuthAction.link) {
+      auth.currentUser
+          ?.linkWithProvider(firebaseAuthProvider)
+          .then(_onLinked)
+          .catchError(authListener.onError);
+      return;
+    }
+
+    auth
+        .signInWithProvider(firebaseAuthProvider)
+        .then(authListener.onSignedIn)
+        .catchError(authListener.onError);
   }
 
   @override
@@ -91,5 +94,9 @@ class AppleProvider extends OAuthProvider {
         platform == TargetPlatform.android ||
         platform == TargetPlatform.iOS ||
         platform == TargetPlatform.macOS;
+  }
+
+  void _onLinked(fba.UserCredential userCredential) {
+    authListener.onCredentialLinked(userCredential.credential!);
   }
 }
