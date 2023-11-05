@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuthException;
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 import '../flows/phone_auth_flow.dart';
 
@@ -38,7 +39,7 @@ String? localizedErrorText(
 /// A widget which displays error text for a given Firebase error code.
 /// {@endtemplate}
 class ErrorText extends StatelessWidget {
-  /// A way to customize localized error messages.
+  /// A way to customize localized error messages for [FirebaseAuthException].
   ///
   /// Example usage:
   /// ```dart
@@ -53,6 +54,19 @@ class ErrorText extends StatelessWidget {
     BuildContext context,
     FirebaseAuthException exception,
   )? localizeError;
+
+  /// A way to customize error message for [PlatformException]
+  ///
+  /// Example usage:
+  /// ```dart
+  /// ErrorText.localizePlatformError = (BuildContext context, PlatformException e) {
+  ///   if (e.code == "network_error") return "Please check your internet connection.";
+  ///   return "Oh no! Something went wrong.";
+  /// }
+  static String Function(
+    BuildContext context,
+    PlatformException exception,
+  )? localizePlatformError;
 
   /// A way to customize the widget that is used across the library to show
   /// error hints. By default a localized text is used with a color set to
@@ -104,6 +118,10 @@ class ErrorText extends StatelessWidget {
           text = newText;
         }
       }
+    }
+
+    if (exception is PlatformException && localizePlatformError != null) {
+      text = localizePlatformError!(context, exception as PlatformException);
     }
 
     return Text(
