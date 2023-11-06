@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import "./default_localizations.dart";
 import 'lang/ar.dart';
+import 'lang/da.dart';
 import 'lang/de.dart';
 import 'lang/en.dart';
 import 'lang/es.dart';
@@ -17,10 +18,12 @@ import 'lang/id.dart';
 import 'lang/it.dart';
 import 'lang/ja.dart';
 import 'lang/ko.dart';
+import 'lang/nb.dart';
 import 'lang/nl.dart';
 import 'lang/pl.dart';
 import 'lang/pt.dart';
 import 'lang/ru.dart';
+import 'lang/sv.dart';
 import 'lang/th.dart';
 import 'lang/tr.dart';
 import 'lang/uk.dart';
@@ -48,6 +51,9 @@ final Set<String> kSupportedLanguages = {
   'tr', // Turkish
   'uk', // Ukrainian
   'zh', // Chinese
+  'nb', // Norsk
+  'sv', // Swedish
+  'da', // Danish
 };
 
 FirebaseUILocalizationLabels getFirebaseUITranslation(
@@ -66,6 +72,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const ArLocalizations();
     case 'de':
       return const DeLocalizations();
+    case 'da':
+      return const DaLocalizations();
     case 'en':
       return const EnLocalizations();
     case 'es':
@@ -90,6 +98,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const JaLocalizations();
     case 'ko':
       return const KoLocalizations();
+    case 'nb':
+      return const NbLocalizations();
     case 'nl':
       return const NlLocalizations();
     case 'pl':
@@ -98,6 +108,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const PtLocalizations();
     case 'ru':
       return const RuLocalizations();
+    case 'sv':
+      return const SvLocalizations();
     case 'th':
       return const ThLocalizations();
     case 'tr':

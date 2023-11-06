@@ -1,0 +1,517 @@
+{
+  "@@locale": "nb",
+  "@@last_modified": "2023-10-12T15:27:44.518427",
+  "accessDisabledErrorText": "Tilgang til denne kontoen er midlertidig deaktivert",
+  "@accessDisabledErrorText": {
+    "description": "Brukes som feilmelding når kontoen er blokkert, og brukeren prøver å utføre noen handlinger med kontoen (f.eks. koble fra en legitimasjon).",
+    "placeholders": {}
+  },
+  "arrayLabel": "matrise",
+  "@arrayLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "booleanLabel": "Boolsk",
+  "@booleanLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "cancelLabel": "avbryt",
+  "@cancelLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "chooseACountry": "Velg et land",
+  "@chooseACountry": {
+    "description": "Brukes som etikett for landkodevelgeren.",
+    "placeholders": {}
+  },
+  "confirmPasswordDoesNotMatchErrorText": "Passordene stemmer ikke overens",
+  "@confirmPasswordDoesNotMatchErrorText": {
+    "description": "Brukes som feilmelding når de angitte passordene ikke samsvarer.",
+    "placeholders": {}
+  },
+  "confirmPasswordInputLabel": "Bekreft passord",
+  "@confirmPasswordInputLabel": {
+    "description": "Brukes som etikett for passordinndata som bekrefter et angitt passord.",
+    "placeholders": {}
+  },
+  "confirmPasswordIsRequiredErrorText": "Bekreft passordet ditt",
+  "@confirmPasswordIsRequiredErrorText": {
+    "description": "Brukes som feilmelding når passordinndata brukt for å bekrefte passordet er tom.",
+    "placeholders": {}
+  },
+  "continueText": "Fortsett",
+  "@continueText": {
+    "description": "Brukes som etikett for innsending av knappen som tar brukeren til neste trinn i autentiseringsflyten.",
+    "placeholders": {}
+  },
+  "countryCode": "Kode",
+  "@countryCode": {
+    "description": "Brukes som plassholder for landkodeinndata.",
+    "placeholders": {}
+  },
+  "credentialAlreadyInUseErrorText": "Denne tilbyderen er knyttet til en annen brukerkonto.",
+  "@credentialAlreadyInUseErrorText": {
+    "description": "Feilmelding som vises når brukeren prøver å bruke en OAuth-tilbyder som ikke tilhører den nåværende påloggede brukerkontoen.",
+    "placeholders": {}
+  },
+  "deleteAccount": "Slett konto",
+  "@deleteAccount": {
+    "description": "Brukes som etikett for SlettAccountButton.",
+    "placeholders": {}
+  },
+  "differentMethodsSignInTitleText": "Bruk en av følgende metoder for å logge inn",
+  "@differentMethodsSignInTitleText": {
+    "description": "Brukes som tittel for dialogen som indikerer at det er forskjellige tilgjengelige påloggingsmetoder for en angitt e-postadresse.",
+    "placeholders": {}
+  },
+  "disable": "Deaktiver",
+  "@disable": {
+    "description": "Knappetikett som foreslår å deaktivere tofaktorautentisering (2FA).",
+    "placeholders": {}
+  },
+  "eastInitialLabel": "Ø",
+  "@eastInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "emailInputLabel": "E-post",
+  "@emailInputLabel": {
+    "description": "Brukes som etikett for E-postInput.",
+    "placeholders": {}
+  },
+  "emailIsRequiredErrorText": "E-post er påkrevd",
+  "@emailIsRequiredErrorText": {
+    "description": "Brukes som feilmelding for E-postInput når e-postadressen er tom.",
+    "placeholders": {}
+  },
+  "emailLinkSignInButtonLabel": "Logg inn med magisk lenke",
+  "@emailLinkSignInButtonLabel": {
+    "description": "Brukes som etikett for EmailLinkSignInButton.",
+    "placeholders": {}
+  },
+  "emailTakenErrorText": "En konto med denne e-postadressen eksisterer allerede",
+  "@emailTakenErrorText": {
+    "description": "Brukes som feilmelding når brukeren prøver å registrere seg med en e-postadresse som allerede er i bruk.",
+    "placeholders": {}
+  },
+  "enable": "Aktiver",
+  "@enable": {
+    "description": "Knappetikett som foreslår å aktivere tofaktorautentisering (2FA).",
+    "placeholders": {}
+  },
+  "enableMoreSignInMethods": "Aktiver flere påloggingsmetoder",
+  "@enableMoreSignInMethods": {
+    "description": "Brukes som en ledetekst for å koble til flere tilbydere.",
+    "placeholders": {}
+  },
+  "enterSMSCodeText": "Skriv inn SMS-kode",
+  "@enterSMSCodeText": {
+    "description": "Brukes som etikett for SMSCodeInput.",
+    "placeholders": {}
+  },
+  "findProviderForEmailTitleText": "Skriv inn e-postadressen din for å fortsette",
+  "@findProviderForEmailTitleText": {
+    "description": "Brukes som tittel for FindProvidersForEmailView.",
+    "placeholders": {}
+  },
+  "forgotPasswordButtonLabel": "Glemt passord?",
+  "@forgotPasswordButtonLabel": {
+    "description": "Brukes som etikett for ForgotPasswordButton.",
+    "placeholders": {}
+  },
+  "forgotPasswordHintText": "Oppgi e-postadressen din, så sender vi deg en lenke for å tilbakestille passordet ditt",
+  "@forgotPasswordHintText": {
+    "description": "Brukes som en ledetekst på ForgotPasswordView.",
+    "placeholders": {}
+  },
+  "forgotPasswordViewTitle": "Glemt passord",
+  "@forgotPasswordViewTitle": {
+    "description": "Brukes som tittel for ForgotPasswordView.",
+    "placeholders": {}
+  },
+  "geopointLabel": "geopunkt",
+  "@geopointLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "goBackButtonLabel": "Gå tilbake",
+  "@goBackButtonLabel": {
+    "description": "Brukes som etikett for tilbakeknappen.",
+    "placeholders": {}
+  },
+  "@hashCode": {
+    "description": "Hashkoden for dette objektet.",
+    "placeholders": {}
+  },
+  "invalidCountryCode": "Ugyldig kode",
+  "@invalidCountryCode": {
+    "description": "Brukes som feilmelding når den angitte landskoden er ugyldig.",
+    "placeholders": {}
+  },
+  "isNotAValidEmailErrorText": "Oppgi en gyldig e-postadresse",
+  "@isNotAValidEmailErrorText": {
+    "description": "Brukes som feilmelding for E-postInput hvis den angitte e-postadressen ikke er gyldig.",
+    "placeholders": {}
+  },
+  "latitudeLabel": "breddegrad",
+  "@latitudeLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "linkEmailButtonText": "Neste",
+  "@linkEmailButtonText": {
+    "description": "Brukes som etikett for skjemainnsendingen på EmailForm når AuthAction er AuthAction.link.",
+    "placeholders": {}
+  },
+  "longitudeLabel": "lengdegrad",
+  "@longitudeLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "mapLabel": "kart",
+  "@mapLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "mfaTitle": "To-trinns verifisering",
+  "@mfaTitle": {
+    "description": "Tittel for innstillingene for to-trinns verifisering.",
+    "placeholders": {}
+  },
+  "name": "Navn",
+  "@name": {
+    "description": "Brukes som plassholder for EditableUserDisplayName.",
+    "placeholders": {}
+  },
+  "northInitialLabel": "N",
+  "@northInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "nullLabel": "null",
+  "@nullLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "numberLabel": "nummer",
+  "@numberLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "off": "Av",
+  "@off": {
+    "description": "Etikett som antyder at to-trinns verifisering ikke er aktivert",
+    "placeholders": {}
+  },
+  "on": "På",
+  "@on": {
+    "description": "Etikett som antyder at to-trinns verifisering er aktivert",
+    "placeholders": {}
+  },
+  "passwordInputLabel": "Passord",
+  "@passwordInputLabel": {
+    "description": "Brukes som etikett for PasswordInput.",
+    "placeholders": {}
+  },
+  "passwordIsRequiredErrorText": "Passord er påkrevd",
+  "@passwordIsRequiredErrorText": {
+    "description": "Brukes som feilmelding når PasswordInput er tomt.",
+    "placeholders": {}
+  },
+  "passwordResetEmailSentText": "Vi har sendt deg en e-post med en lenke for å tilbakestille passordet ditt. Sjekk e-posten din.",
+  "@passwordResetEmailSentText": {
+    "description": "Indikerer at e-posten med tilbakestilling av passord er sendt.",
+    "placeholders": {}
+  },
+  "phoneInputLabel": "Telefonnummer",
+  "@phoneInputLabel": {
+    "description": "Brukes som etikett for PhoneInput.",
+    "placeholders": {}
+  },
+  "phoneNumberInvalidErrorText": "Telefonnummeret er ugyldig",
+  "@phoneNumberInvalidErrorText": {
+    "description": "Brukes som feilmelding når PhoneInput inneholder et ugyldig telefonnummer.",
+    "placeholders": {}
+  },
+  "phoneNumberIsRequiredErrorText": "Telefonnummer er påkrevd",
+  "@phoneNumberIsRequiredErrorText": {
+    "description": "Brukes som feilmelding når PhoneInput er tomt.",
+    "placeholders": {}
+  },
+  "phoneVerificationViewTitleText": "Skriv inn telefonnummeret ditt",
+  "@phoneVerificationViewTitleText": {
+    "description": "Brukes som tittel for PhoneInputView.",
+    "placeholders": {}
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Tittel for Profilskjermen.",
+    "placeholders": {}
+  },
+  "provideEmail": "Oppgi e-postadressen og passordet ditt",
+  "@provideEmail": {
+    "description": "Brukes som tittel for EmailSignUpDialog.",
+    "placeholders": {}
+  },
+  "referenceLabel": "referanse",
+  "@referenceLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "registerActionText": "Registrer",
+  "@registerActionText": {
+    "description": "Brukes som etikett for skjemainnsendingen på EmailForm når AuthAction er AuthAction.signUp.",
+    "placeholders": {}
+  },
+  "registerHintText": "Har du ikke en konto?",
+  "@registerHintText": {
+    "description": "Brukes som en ledetekst på LoginView og foreslår å opprette en ny konto.",
+    "placeholders": {}
+  },
+  "registerText": "Registrer",
+  "@registerText": {
+    "description": "Brukes som tittel for LoginView når AuthAction er AuthAction.signUp.",
+    "placeholders": {}
+  },
+  "resetPasswordButtonLabel": "Tilbakestill passord",
+  "@resetPasswordButtonLabel": {
+    "description": "Brukes som etikett for innsendingsknappen på ForgotPasswordView.",
+    "placeholders": {}
+  },
+  "@runtimeType": {
+    "description": "En representasjon av objektets kjøretidstype.",
+    "placeholders": {}
+  },
+  "sendLinkButtonLabel": "Send magisk lenke",
+  "@sendLinkButtonLabel": {
+    "description": "Brukes som etikett for innsendingsknappen på EmailLinkSignInView.",
+    "placeholders": {}
+  },
+  "signInActionText": "Logg inn",
+  "@signInActionText": {
+    "description": "Brukes som etikett for skjemainnsendingen på EmailForm når AuthAction er AuthAction.signIn.",
+    "placeholders": {}
+  },
+  "signInHintText": "Har du allerede en konto?",
+  "@signInHintText": {
+    "description": "Brukes som en ledetekst på LoginView og foreslår å logge inn i stedet for å opprette en ny konto.",
+    "placeholders": {}
+  },
+  "signInMethods": "Påloggingsmetoder",
+  "@signInMethods": {
+    "description": "Brukes som etikett for raden som viser tilkoblede tilbydere.",
+    "placeholders": {}
+  },
+  "signInText": "Logg inn",
+  "@signInText": {
+    "description": "Brukes som tittel for LoginView når AuthAction er AuthAction.signIn.",
+    "placeholders": {}
+  },
+  "signInWithAppleButtonText": "Logg inn med Apple",
+  "@signInWithAppleButtonText": {
+    "description": "Brukes som etikett for OAuthProviderButton for Apple-leverandøren.",
+    "placeholders": {}
+  },
+  "signInWithEmailLinkSentText": "Vi har sendt deg en e-post med en magisk lenke. Sjekk e-posten din og følg lenken for å logge inn.",
+  "@signInWithEmailLinkSentText": {
+    "description": "Indikerer at e-post med en påloggingslenke ble sendt.",
+    "placeholders": {}
+  },
+  "signInWithEmailLinkViewTitleText": "Logg inn med en magisk lenke",
+  "@signInWithEmailLinkViewTitleText": {
+    "description": "Brukes som tittel på EmailLinkSignInView.",
+    "placeholders": {}
+  },
+  "signInWithFacebookButtonText": "Logg inn med Facebook",
+  "@signInWithFacebookButtonText": {
+    "description": "Brukes som etikett for OAuthProviderButton for Facebook-leverandøren.",
+    "placeholders": {}
+  },
+  "signInWithGoogleButtonText": "Logg inn med Google",
+  "@signInWithGoogleButtonText": {
+    "description": "Brukes som etikett for OAuthProviderButton for Google-leverandøren.",
+    "placeholders": {}
+  },
+  "signInWithPhoneButtonText": "Logg inn med telefon",
+  "@signInWithPhoneButtonText": {
+    "description": "Brukes som etikett for PhoneVerificationButton.",
+    "placeholders": {}
+  },
+  "signInWithTwitterButtonText": "Logg inn med Twitter",
+  "@signInWithTwitterButtonText": {
+    "description": "Brukes som etikett for OAuthProviderButton for Twitter-leverandøren.",
+    "placeholders": {}
+  },
+  "signOutButtonText": "Logg ut",
+  "@signOutButtonText": {
+    "description": "Brukes som etikett for SignOutButton.",
+    "placeholders": {}
+  },
+  "smsAutoresolutionFailedError": "Klarte ikke å løse SMS-kode automatisk. Vennligst skriv inn koden manuelt.",
+  "@smsAutoresolutionFailedError": {
+    "description": "Brukes som feilmelding når AutoresolutionFailedException blir kastet.",
+    "placeholders": {}
+  },
+  "southInitialLabel": "S",
+  "@southInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "stringLabel": "streng",
+  "@stringLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "timestampLabel": "tidsstempel",
+  "@timestampLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "typeLabel": "type",
+  "@typeLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "unknownError": "Det oppstod en ukjent feil",
+  "@unknownError": {
+    "description": "Brukes som generell feilmelding når det ikke er mulig å hente feildetaljer fra Exception eller FirebaseAuthException.",
+    "placeholders": {}
+  },
+  "updateLabel": "oppdater",
+  "@updateLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "userNotFoundErrorText": "Kontoen eksisterer ikke",
+  "@userNotFoundErrorText": {
+    "description": "Brukes som feilmelding når kontoen for den oppgitte e-posten ikke ble funnet.",
+    "placeholders": {}
+  },
+  "valueLabel": "verdi",
+  "@valueLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "verifyCodeButtonText": "Bekreft",
+  "@verifyCodeButtonText": {
+    "description": "Brukes som etikett for send-knappen i SMSCodeInputView.",
+    "placeholders": {}
+  },
+  "verifyingSMSCodeText": "Bekrefter SMS-kode...",
+  "@verifyingSMSCodeText": {
+    "description": "Brukes som statusmelding i SMSCodeInput når kodeverifiseringen er i gang.",
+    "placeholders": {}
+  },
+  "verifyItsYouText": "Bekreft at det er deg",
+  "@verifyItsYouText": {
+    "description": "Brukes som tittel for dialogboksen som krever nyautentisering av brukeren ved utførelse av ødeleggende handlinger.",
+    "placeholders": {}
+  },
+  "verifyPhoneNumberButtonText": "Neste",
+  "@verifyPhoneNumberButtonText": {
+    "description": "Brukes som etikett for send-knappen i PhoneInputView.",
+    "placeholders": {}
+  },
+  "westInitialLabel": "W",
+  "@westInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "wrongOrNoPasswordErrorText": "Passordet er ugyldig eller brukeren har ikke et passord",
+  "@wrongOrNoPasswordErrorText": {
+    "description": "Brukes som feilmelding for PasswordInput når det oppgitte passordet er tomt eller ikke er korrekt.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Last opp fil",
+  "@uploadButtonText": {
+    "description": "Etikett for Last opp-knappen",
+    "placeholders": {}
+  },
+  "verifyEmailTitle": "Bekreft e-posten din",
+  "@verifyEmailTitle": {
+    "description": "Tittel for EmailVerificationScreen",
+    "placeholders": {}
+  },
+  "verificationEmailSentText": "En bekreftelses-e-post er sendt til din e-postadresse. Vennligst sjekk e-posten din og klikk på lenken for å bekrefte din e-postadresse.",
+  "@verificationEmailSentText": {
+    "description": "Hint som indikerer at bekreftelses-e-post er sendt",
+    "placeholders": {}
+  },
+  "verificationFailedText": "Vi klarte ikke å bekrefte din e-postadresse. ",
+  "@verificationFailedText": {
+    "description": "Melding som indikerer at det har oppstått feil under e-postbekreftelse",
+    "placeholders": {}
+  },
+  "resendVerificationEmailButtonLabel": "Send bekreftelses-e-post på nytt",
+  "@resendVerificationEmailButtonLabel": {
+    "description": "Etikett for knappen som foreslår å sende bekreftelses-e-post på nytt",
+    "placeholders": {}
+  },
+  "verificationEmailSentTextShort": "Bekreftelses-e-post sendt",
+  "@verificationEmailSentTextShort": {
+    "description": "Forkortet versjon av hint som indikerer at bekreftelses-e-post er sendt",
+    "placeholders": {}
+  },
+  "emailIsNotVerifiedText": "E-posten er ikke bekreftet",
+  "@emailIsNotVerifiedText": {
+    "description": "Melding som indikerer at e-posten ikke er bekreftet",
+    "placeholders": {}
+  },
+  "waitingForEmailVerificationText": "Venter på e-postbekreftelse",
+  "@waitingForEmailVerificationText": {
+    "description": "Melding som indikerer at e-posten blir bekreftet",
+    "placeholders": {}
+  },
+  "dismissButtonLabel": "Avvis",
+  "@dismiss": {
+    "description": "Etikett for avvis-knappen",
+    "placeholders": {}
+  },
+  "okButtonLabel": "OK",
+  "@okButtonLabel": {
+    "description": "Etikett for OK-knappen",
+    "placeholders": {}
+  },
+  "checkEmailHintText": "Vennligst sjekk e-posten din og klikk på lenken for å bekrefte din e-postadresse.",
+  "@checkEmailHintText": {
+    "description": "Hint som oppfordrer brukeren til å sjekke e-posten for bekreftelseslenken",
+    "placeholders": {}
+  },
+  "doneButtonLabel": "Ferdig",
+  "@doneButtonLabel": {
+    "description": "Etikett for Ferdig-knappen",
+    "placeholders": {}
+  },
+  "invalidVerificationCodeErrorText": "Koden du har oppgitt er ugyldig. Vennligst prøv igjen.",
+  "@invalidVerificationCodeErrorText": {
+    "description": "Feilmelding som indikerer at inntastet SMS-kode er ugyldig",
+    "placeholders": {}
+  },
+  "ulinkProviderAlertTitle": "Fjern kobling til leverandør",
+  "@ulinkProviderAlertTitle": {
+    "description": "Tittel som vises i AlertDialog og ber om bekreftelse for å fjerne koblingen til leverandør",
+    "placeholders": {}
+  },
+  "confirmUnlinkButtonLabel": "Fjern kobling",
+  "@confirmUnlinkButtonLabel": {
+    "description": "Etikett for bekreftelsesknappen for å fjerne koblingen",
+    "placeholders": {}
+  },
+  "cancelButtonLabel": "Avbryt",
+  "@cancelButtonLabel": {
+    "description": "Etikett for Avbryt-knappen",
+    "placeholders": {}
+  },
+  "unlinkProviderAlertMessage": "Er du sikker på at du ønsker å fjerne koblingen til denne leverandøren?",
+  "@unlinkProviderAlertMessage": {
+    "description": "Tekst som vises som en melding i AlertDialog som bekrefter fjerning av koblingen til leverandør",
+    "placeholders": {}
+  },
+  "weakPasswordErrorText": "Passordet bør være minst 6 tegn",
+  "@weakPasswordErrorText": {
+    "description": "Feilmelding som antyder at brukte passordet er for svakt",
+    "placeholders": {}
+  }
+}

@@ -1,0 +1,517 @@
+{
+  "@@locale": "sv",
+  "@@last_modified": "2023-10-12T15:27:44.530523",
+  "accessDisabledErrorText": "Åtkomst till detta konto har tillfälligt spärrats",
+  "@accessDisabledErrorText": {
+    "description": "Används som felmeddelande när kontot är blockerat och användaren försöker utföra vissa åtgärder med kontot (t.ex. koppla bort ett autentiseringsbevis).",
+    "placeholders": {}
+  },
+  "arrayLabel": "matris",
+  "@arrayLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "booleanLabel": "boolesk",
+  "@booleanLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "cancelLabel": "avbryt",
+  "@cancelLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "chooseACountry": "Välj ett land",
+  "@chooseACountry": {
+    "description": "Används som etikett för landskodsväljaren.",
+    "placeholders": {}
+  },
+  "confirmPasswordDoesNotMatchErrorText": "Lösenorden matchar inte",
+  "@confirmPasswordDoesNotMatchErrorText": {
+    "description": "Används som felmeddelande när de angivna lösenorden inte matchar.",
+    "placeholders": {}
+  },
+  "confirmPasswordInputLabel": "Bekräfta lösenord",
+  "@confirmPasswordInputLabel": {
+    "description": "Används som etikett för PasswordInput som bekräftar ett angivet lösenord.",
+    "placeholders": {}
+  },
+  "confirmPasswordIsRequiredErrorText": "Bekräfta ditt lösenord",
+  "@confirmPasswordIsRequiredErrorText": {
+    "description": "Används som felmeddelande när PasswordInput som används för att bekräfta lösenordet är tomt.",
+    "placeholders": {}
+  },
+  "continueText": "Fortsätt",
+  "@continueText": {
+    "description": "Används som etikett för knappen som tar användaren till nästa steg i autentiseringsflödet.",
+    "placeholders": {}
+  },
+  "countryCode": "Landskod",
+  "@countryCode": {
+    "description": "Används som platsmarkör för landskodsinmatningen.",
+    "placeholders": {}
+  },
+  "credentialAlreadyInUseErrorText": "Denna leverantör är kopplad till ett annat användarkonto.",
+  "@credentialAlreadyInUseErrorText": {
+    "description": "Felmeddelande som visas när användaren försöker använda en OAuth-leverantör som inte tillhör det nuvarande inloggade användarkontot.",
+    "placeholders": {}
+  },
+  "deleteAccount": "Ta bort konto",
+  "@deleteAccount": {
+    "description": "Används som etikett för DeleteAccountButton.",
+    "placeholders": {}
+  },
+  "differentMethodsSignInTitleText": "Använd en av följande metoder för att logga in",
+  "@differentMethodsSignInTitleText": {
+    "description": "Används som rubrik för dialogrutan som indikerar att det finns olika tillgängliga inloggningsmetoder för en angiven e-postadress.",
+    "placeholders": {}
+  },
+  "disable": "Inaktivera",
+  "@disable": {
+    "description": "Knappetikett som föreslår att inaktivera tvåfaktorsautentisering",
+    "placeholders": {}
+  },
+  "eastInitialLabel": "Ö",
+  "@eastInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "emailInputLabel": "E-post",
+  "@emailInputLabel": {
+    "description": "Används som etikett för EmailInput.",
+    "placeholders": {}
+  },
+  "emailIsRequiredErrorText": "E-postadress krävs",
+  "@emailIsRequiredErrorText": {
+    "description": "Används som felmeddelande för EmailInput när e-postadressen är tom.",
+    "placeholders": {}
+  },
+  "emailLinkSignInButtonLabel": "Logga in med magisk länk",
+  "@emailLinkSignInButtonLabel": {
+    "description": "Används som etikett för knappen EmailLinkSignInButton.",
+    "placeholders": {}
+  },
+  "emailTakenErrorText": "Det finns redan ett konto med denna e-postadress",
+  "@emailTakenErrorText": {
+    "description": "Används som felmeddelande när användaren försöker registrera sig med en e-postadress som redan används.",
+    "placeholders": {}
+  },
+  "enable": "Aktivera",
+  "@enable": {
+    "description": "Knappetikett som föreslår att aktivera tvåfaktorsautentisering",
+    "placeholders": {}
+  },
+  "enableMoreSignInMethods": "Aktivera fler inloggningsmetoder",
+  "@enableMoreSignInMethods": {
+    "description": "Används som en ledtråd för att ansluta fler leverantörer.",
+    "placeholders": {}
+  },
+  "enterSMSCodeText": "Ange SMS-kod",
+  "@enterSMSCodeText": {
+    "description": "Används som etikett för SMSCodeInput.",
+    "placeholders": {}
+  },
+  "findProviderForEmailTitleText": "Ange din e-postadress för att fortsätta",
+  "@findProviderForEmailTitleText": {
+    "description": "Används som rubrik för FindProvidersForEmailView.",
+    "placeholders": {}
+  },
+  "forgotPasswordButtonLabel": "Glömt lösenord?",
+  "@forgotPasswordButtonLabel": {
+    "description": "Används som etikett för ForgotPasswordButton.",
+    "placeholders": {}
+  },
+  "forgotPasswordHintText": "Ange din e-postadress, så skickar vi en länk för att återställa ditt lösenord",
+  "@forgotPasswordHintText": {
+    "description": "Används som en ledtråd på en ForgotPasswordView som föreslår att skapa ett nytt konto.",
+    "placeholders": {}
+  },
+  "forgotPasswordViewTitle": "Glömt lösenord",
+  "@forgotPasswordViewTitle": {
+    "description": "Används som rubrik för ForgotPasswordView.",
+    "placeholders": {}
+  },
+  "geopointLabel": "geopunkt",
+  "@geopointLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "goBackButtonLabel": "Gå tillbaka",
+  "@goBackButtonLabel": {
+    "description": "Används som etikett för bakåtknappen.",
+    "placeholders": {}
+  },
+  "@hashCode": {
+    "description": "Hashkod för den här objektet.",
+    "placeholders": {}
+  },
+  "invalidCountryCode": "Ogiltig kod",
+  "@invalidCountryCode": {
+    "description": "Används som felmeddelande när den angivna landskoden är ogiltig.",
+    "placeholders": {}
+  },
+  "isNotAValidEmailErrorText": "Ange en giltig e-postadress",
+  "@isNotAValidEmailErrorText": {
+    "description": "Används som felmeddelande för EmailInput om den angivna e-postadressen inte är giltig.",
+    "placeholders": {}
+  },
+  "latitudeLabel": "latitud",
+  "@latitudeLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "linkEmailButtonText": "Nästa",
+  "@linkEmailButtonText": {
+    "description": "Används som etikett för knappen för att skicka in EmailForm när AuthAction är AuthAction.link.",
+    "placeholders": {}
+  },
+  "longitudeLabel": "longitud",
+  "@longitudeLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "mapLabel": "karta",
+  "@mapLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "mfaTitle": "Tvåstegsverifikation",
+  "@mfaTitle": {
+    "description": "Titel på inställningar för tvåstegsverifikation.",
+    "placeholders": {}
+  },
+  "name": "Namn",
+  "@name": {
+    "description": "Används som platsmarkör för EditableUserDisplayName.",
+    "placeholders": {}
+  },
+  "northInitialLabel": "N",
+  "@northInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "nullLabel": "null",
+  "@nullLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "numberLabel": "nummer",
+  "@numberLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "off": "Av",
+  "@off": {
+    "description": "Etikett som föreslår att tvåstegsautentisering inte är aktiverad",
+    "placeholders": {}
+  },
+  "on": "På",
+  "@on": {
+    "description": "Etikett som föreslår att tvåstegsautentisering är aktiverad",
+    "placeholders": {}
+  },
+  "passwordInputLabel": "Lösenord",
+  "@passwordInputLabel": {
+    "description": "Används som etikett för PasswordInput.",
+    "placeholders": {}
+  },
+  "passwordIsRequiredErrorText": "Lösenord krävs",
+  "@passwordIsRequiredErrorText": {
+    "description": "Används som felmeddelande när PasswordInput är tomt.",
+    "placeholders": {}
+  },
+  "passwordResetEmailSentText": "Vi har skickat ett e-postmeddelande för att återställa ditt lösenord. Kontrollera din e-post.",
+  "@passwordResetEmailSentText": {
+    "description": "Indikerar att e-postmeddelandet för återställning av lösenord har skickats.",
+    "placeholders": {}
+  },
+  "phoneInputLabel": "Telefonnummer",
+  "@phoneInputLabel": {
+    "description": "Används som etikett för PhoneInput.",
+    "placeholders": {}
+  },
+  "phoneNumberInvalidErrorText": "Telefonnummer är ogiltigt",
+  "@phoneNumberInvalidErrorText": {
+    "description": "Används som felmeddelande när PhoneInput innehåller ett ogiltigt telefonnummer.",
+    "placeholders": {}
+  },
+  "phoneNumberIsRequiredErrorText": "Telefonnummer krävs",
+  "@phoneNumberIsRequiredErrorText": {
+    "description": "Används som felmeddelande när PhoneInput är tomt.",
+    "placeholders": {}
+  },
+  "phoneVerificationViewTitleText": "Ange ditt telefonnummer",
+  "@phoneVerificationViewTitleText": {
+    "description": "Används som rubrik för PhoneInputView.",
+    "placeholders": {}
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "En titel på ProfileScreen.",
+    "placeholders": {}
+  },
+  "provideEmail": "Ange din e-postadress och lösenord",
+  "@provideEmail": {
+    "description": "Används som titel på EmailSignUpDialog.",
+    "placeholders": {}
+  },
+  "referenceLabel": "referens",
+  "@referenceLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "registerActionText": "Registrera",
+  "@registerActionText": {
+    "description": "Används som etikett för knappen Submit i EmailForm när AuthAction är AuthAction.signUp.",
+    "placeholders": {}
+  },
+  "registerHintText": "Har du inget konto?",
+  "@registerHintText": {
+    "description": "Används som en hinttext i LoginView som föreslår att skapa ett nytt konto.",
+    "placeholders": {}
+  },
+  "registerText": "Registrera",
+  "@registerText": {
+    "description": "Används som titel i LoginView när AuthAction är AuthAction.signUp.",
+    "placeholders": {}
+  },
+  "resetPasswordButtonLabel": "Återställ lösenord",
+  "@resetPasswordButtonLabel": {
+    "description": "Används som etikett för knappen Submit i ForgotPasswordView.",
+    "placeholders": {}
+  },
+  "@runtimeType": {
+    "description": "En representation av objektets runtime-typ.",
+    "placeholders": {}
+  },
+  "sendLinkButtonLabel": "Skicka magisk länk",
+  "@sendLinkButtonLabel": {
+    "description": "Används som etikett för knappen Submit på EmailLinkSignInView.",
+    "placeholders": {}
+  },
+  "signInActionText": "Logga in",
+  "@signInActionText": {
+    "description": "Används som etikett för knappen Submit i EmailForm när AuthAction är AuthAction.signIn.",
+    "placeholders": {}
+  },
+  "signInHintText": "Har redan ett konto?",
+  "@signInHintText": {
+    "description": "Används som en hinttext i LoginView som föreslår att logga in istället för att registrera ett nytt konto.",
+    "placeholders": {}
+  },
+  "signInMethods": "Inloggningsmetoder",
+  "@signInMethods": {
+    "description": "Används som etikett för raden som visar anslutna leverantörer.",
+    "placeholders": {}
+  },
+  "signInText": "Logga in",
+  "@signInText": {
+    "description": "Används som titel i LoginView när AuthAction är AuthAction.signIn.",
+    "placeholders": {}
+  },
+  "signInWithAppleButtonText": "Logga in med Apple",
+  "@signInWithAppleButtonText": {
+    "description": "Används som etikett för knappen OAuthProviderButton för Apple-leverantören.",
+    "placeholders": {}
+  },
+  "signInWithEmailLinkSentText": "Vi har skickat ett e-postmeddelande med en magisk länk. Kontrollera din e-post och följ länken för att logga in",
+  "@signInWithEmailLinkSentText": {
+    "description": "Indikerar att ett e-postmeddelande med en inloggningslänk har skickats.",
+    "placeholders": {}
+  },
+  "signInWithEmailLinkViewTitleText": "Logga in med magisk länk",
+  "@signInWithEmailLinkViewTitleText": {
+    "description": "Används som titel på EmailLinkSignInView.",
+    "placeholders": {}
+  },
+  "signInWithFacebookButtonText": "Logga in med Facebook",
+  "@signInWithFacebookButtonText": {
+    "description": "Används som etikett för knappen OAuthProviderButton för Facebook-leverantören.",
+    "placeholders": {}
+  },
+  "signInWithGoogleButtonText": "Logga in med Google",
+  "@signInWithGoogleButtonText": {
+    "description": "Används som etikett för knappen OAuthProviderButton för Google-leverantören.",
+    "placeholders": {}
+  },
+  "signInWithPhoneButtonText": "Logga in med telefon",
+  "@signInWithPhoneButtonText": {
+    "description": "Används som etikett för knappen PhoneVerificationButton.",
+    "placeholders": {}
+  },
+  "signInWithTwitterButtonText": "Logga in med Twitter",
+  "@signInWithTwitterButtonText": {
+    "description": "Används som etikett för knappen OAuthProviderButton för Twitter-leverantören.",
+    "placeholders": {}
+  },
+  "signOutButtonText": "Logga ut",
+  "@signOutButtonText": {
+    "description": "Används som etikett för knappen SignOutButton.",
+    "placeholders": {}
+  },
+  "smsAutoresolutionFailedError": "Misslyckades med att automatiskt lösa SMS-koden. Ange din kod manuellt",
+  "@smsAutoresolutionFailedError": {
+    "description": "Används som felmeddelande när AutoresolutionFailedException kastas.",
+    "placeholders": {}
+  },
+  "southInitialLabel": "S",
+  "@southInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "stringLabel": "sträng",
+  "@stringLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "timestampLabel": "tidsstämpel",
+  "@timestampLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "typeLabel": "typ",
+  "@typeLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "unknownError": "Ett okänt fel har inträffat",
+  "@unknownError": {
+    "description": "Används som ett generiskt felmeddelande när felinformationen inte kan hämtas från Exception eller FirebaseAuthException.",
+    "placeholders": {}
+  },
+  "updateLabel": "uppdatera",
+  "@updateLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "userNotFoundErrorText": "Kontot existerar inte",
+  "@userNotFoundErrorText": {
+    "description": "Används som ett felmeddelande när kontot för den angivna e-postadressen inte hittades.",
+    "placeholders": {}
+  },
+  "valueLabel": "värde",
+  "@valueLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "verifyCodeButtonText": "Verifiera",
+  "@verifyCodeButtonText": {
+    "description": "Används som etikett för knappen Submit på SMSCodeInputView.",
+    "placeholders": {}
+  },
+  "verifyingSMSCodeText": "Verifierar SMS-koden...",
+  "@verifyingSMSCodeText": {
+    "description": "Används som statusmeddelande för SMSCodeInput när kodverifiering pågår.",
+    "placeholders": {}
+  },
+  "verifyItsYouText": "Verifiera att det är du",
+  "@verifyItsYouText": {
+    "description": "Används som titel för dialogrutan som kräver omautentisering av användaren när de utför destruktiva åtgärder.",
+    "placeholders": {}
+  },
+  "verifyPhoneNumberButtonText": "Nästa",
+  "@verifyPhoneNumberButtonText": {
+    "description": "Används som etikett för knappen Submit på PhoneInputView.",
+    "placeholders": {}
+  },
+  "westInitialLabel": "W",
+  "@westInitialLabel": {
+    "description": "",
+    "placeholders": {}
+  },
+  "wrongOrNoPasswordErrorText": "Lösenordet är ogiltigt eller användaren har inget lösenord",
+  "@wrongOrNoPasswordErrorText": {
+    "description": "Används som felmeddelande för PasswordInput när det angivna lösenordet är tomt eller inte korrekt.",
+    "placeholders": {}
+  },
+  "uploadButtonText": "Ladda upp fil",
+  "@uploadButtonText": {
+    "description": "Etikett för UploadButton",
+    "placeholders": {}
+  },
+  "verifyEmailTitle": "Verifiera din e-post",
+  "@verifyEmailTitle": {
+    "description": "Titel på EmailVerificationScreen",
+    "placeholders": {}
+  },
+  "verificationEmailSentText": "Ett verifierings-e-postmeddelande har skickats till din e-postadress. Vänligen kontrollera din e-post och klicka på länken för att verifiera din e-postadress.",
+  "@verificationEmailSentText": {
+    "description": "Tipsmeddelande som indikerar att ett verifierings-e-postmeddelande har skickats",
+    "placeholders": {}
+  },
+  "verificationFailedText": "Vi kunde inte verifiera din e-postadress.",
+  "@verificationFailedText": {
+    "description": "Meddelande som indikerar att något gick fel under e-postverifiering",
+    "placeholders": {}
+  },
+  "resendVerificationEmailButtonLabel": "Skicka verifierings-e-post igen",
+  "@resendVerificationEmailButtonLabel": {
+    "description": "Etikett på knappen som föreslår att skicka verifierings-e-post igen",
+    "placeholders": {}
+  },
+  "verificationEmailSentTextShort": "Verifierings-e-postmeddelande skickat",
+  "@verificationEmailSentTextShort": {
+    "description": "Kort version av tipsmeddelandet som indikerar att ett verifierings-e-postmeddelande har skickats",
+    "placeholders": {}
+  },
+  "emailIsNotVerifiedText": "E-postadressen är inte verifierad",
+  "@emailIsNotVerifiedText": {
+    "description": "Meddelande som indikerar att e-postadressen inte är verifierad",
+    "placeholders": {}
+  },
+  "waitingForEmailVerificationText": "Väntar på e-postverifiering",
+  "@waitingForEmailVerificationText": {
+    "description": "Meddelande som indikerar att e-posten verifieras",
+    "placeholders": {}
+  },
+  "dismissButtonLabel": "Avvisa",
+  "@dismiss": {
+    "description": "Etikett för Avvisa-knappen",
+    "placeholders": {}
+  },
+  "okButtonLabel": "OK",
+  "@okButtonLabel": {
+    "description": "Etikett för OK-knappen",
+    "placeholders": {}
+  },
+  "checkEmailHintText": "Vänligen kontrollera din e-post och klicka på länken för att verifiera din e-postadress.",
+  "@checkEmailHintText": {
+    "description": "Tipsmeddelande som uppmanar användaren att kontrollera e-posten för en verifieringslänk",
+    "placeholders": {}
+  },
+  "doneButtonLabel": "Klart",
+  "@doneButtonLabel": {
+    "description": "Etikett för Klart-knappen",
+    "placeholders": {}
+  },
+  "invalidVerificationCodeErrorText": "Koden du angav är ogiltig. Försök igen.",
+  "@invalidVerificationCodeErrorText": {
+    "description": "Felmeddelande som indikerar att den angivna SMS-koden är ogiltig",
+    "placeholders": {}
+  },
+  "ulinkProviderAlertTitle": "Avlänka leverantör",
+  "@ulinkProviderAlertTitle": {
+    "description": "Titel som visas i en AlertDialog som begär bekräftelse för avlänkning av leverantör",
+    "placeholders": {}
+  },
+  "confirmUnlinkButtonLabel": "Avlänka",
+  "@confirmUnlinkButtonLabel": {
+    "description": "Etikett för knappen som bekräftar avlänkning",
+    "placeholders": {}
+  },
+  "cancelButtonLabel": "Avbryt",
+  "@cancelButtonLabel": {
+    "description": "Etikett för Avbryt-knappen",
+    "placeholders": {}
+  },
+  "unlinkProviderAlertMessage": "Är du säker på att du vill avlänka denna leverantör?",
+  "@unlinkProviderAlertMessage": {
+    "beskrivning": "Text som visas som meddelande i AlertDialog som bekräftar avlänkning av leverantör",
+    "placeholders": {}
+  },
+  "weakPasswordErrorText": "Lösenordet bör vara minst 6 tecken",
+  "@weakPasswordErrorText": {
+    "beskrivning": "Felmeddelande som antyder att det använda lösenordet är för svagt",
+    "placeholders": {}
+  }
+}
