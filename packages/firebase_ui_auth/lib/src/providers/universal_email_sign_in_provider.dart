@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -19,7 +19,7 @@ abstract class UniversalEmailSignInListener extends AuthListener {
   void onDifferentProvidersFound(
     String email,
     List<String> providers,
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   );
 }
 
@@ -30,7 +30,7 @@ abstract class UniversalEmailSignInListener extends AuthListener {
   'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
 )
 class UniversalEmailSignInProvider
-    extends AuthProvider<UniversalEmailSignInListener, AuthCredential> {
+    extends AuthProvider<UniversalEmailSignInListener, fba.AuthCredential> {
   @override
   late UniversalEmailSignInListener authListener;
 

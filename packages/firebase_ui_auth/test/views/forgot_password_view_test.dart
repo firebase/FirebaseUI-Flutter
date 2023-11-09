@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,11 +10,11 @@ import 'package:mockito/mockito.dart';
 
 import '../test_utils.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {
+class MockFirebaseAuth extends Mock implements fba.FirebaseAuth {
   @override
   Future<void> sendPasswordResetEmail({
     String? email,
-    ActionCodeSettings? actionCodeSettings,
+    fba.ActionCodeSettings? actionCodeSettings,
   }) {
     return super.noSuchMethod(
       Invocation.method(
@@ -44,7 +44,7 @@ void main() {
       );
 
       when(auth.sendPasswordResetEmail(email: 'invalid@email')).thenThrow(
-        FirebaseAuthException(
+        fba.FirebaseAuthException(
           message: 'invalid-email',
           code: 'invalid-email',
         ),

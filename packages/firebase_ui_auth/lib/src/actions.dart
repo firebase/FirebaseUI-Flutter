@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -92,7 +92,7 @@ class AuthCancelledAction extends FirebaseUIAction {
 /// {@endtemplate}
 class AccountDeletedAction extends FirebaseUIAction {
   /// A callback that is being called when user has deleted their account.
-  final void Function(BuildContext context, User user) callback;
+  final void Function(BuildContext context, fba.User user) callback;
 
   /// {@macro ui.auth.actions.account_deleted}
   AccountDeletedAction(this.callback);

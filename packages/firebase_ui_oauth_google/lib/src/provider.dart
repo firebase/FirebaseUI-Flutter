@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide OAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -31,7 +31,7 @@ class GoogleProvider extends OAuthProvider {
   late GoogleSignIn provider;
 
   @override
-  final GoogleAuthProvider firebaseAuthProvider = GoogleAuthProvider();
+  final fba.GoogleAuthProvider firebaseAuthProvider = fba.GoogleAuthProvider();
 
   @override
   late final desktopSignInArgs = GoogleSignInArgs(
@@ -77,7 +77,7 @@ class GoogleProvider extends OAuthProvider {
       if (user == null) throw AuthCancelledException();
       return user.authentication;
     }).then((auth) {
-      final credential = GoogleAuthProvider.credential(
+      final credential = fba.GoogleAuthProvider.credential(
         accessToken: auth.accessToken,
         idToken: auth.idToken,
       );
@@ -90,7 +90,7 @@ class GoogleProvider extends OAuthProvider {
 
   @override
   OAuthCredential fromDesktopAuthResult(AuthResult result) {
-    return GoogleAuthProvider.credential(
+    return fba.GoogleAuthProvider.credential(
       idToken: result.idToken,
       accessToken: result.accessToken,
     );

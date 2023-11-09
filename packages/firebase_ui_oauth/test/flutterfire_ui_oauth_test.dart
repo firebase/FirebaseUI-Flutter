@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +99,7 @@ class FakeOAuthProvider extends OAuthProvider {
   }
 }
 
-class FakeAuth extends Fake implements FirebaseAuth {}
+class FakeAuth extends Fake implements fba.FirebaseAuth {}
 
 void main() {
   final provider = FakeOAuthProvider();

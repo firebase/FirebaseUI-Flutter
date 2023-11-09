@@ -5,13 +5,13 @@
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 
 import 'responsive_page.dart';
 
 class LoginScreen extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final AuthAction action;
   final List<AuthProvider> providers;
 

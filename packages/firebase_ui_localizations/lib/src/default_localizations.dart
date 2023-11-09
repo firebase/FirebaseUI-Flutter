@@ -287,7 +287,7 @@ abstract class FirebaseUILocalizationLabels {
   String get ulinkProviderAlertTitle;
 
   /// Used as a generic error message when unable to resolve error details from
-  /// Exception or FirebaseAuthException.
+  /// Exception or fba.FirebaseAuthException.
   String get unknownError;
 
   /// Text that is shown as a message of the AlertDialog confirming provider

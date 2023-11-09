@@ -5,7 +5,7 @@
 export 'src/provider.dart' show GoogleProvider;
 export 'src/theme.dart' show GoogleProviderButtonStyle;
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
@@ -19,7 +19,7 @@ class GoogleSignInButton extends _GoogleSignInButton {
     String? redirectUri,
     List<String>? scopes,
     AuthAction? action,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     bool? isLoading,
     String? label,
     DifferentProvidersFoundCallback? onDifferentProvidersFound,
@@ -56,7 +56,7 @@ class GoogleSignInIconButton extends _GoogleSignInButton {
     required Widget loadingIndicator,
     List<String>? scopes,
     AuthAction? action,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     bool? isLoading,
     DifferentProvidersFoundCallback? onDifferentProvidersFound,
     SignedInCallback? onSignedIn,
@@ -104,7 +104,7 @@ class _GoogleSignInButton extends StatelessWidget {
   final AuthAction? action;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final DifferentProvidersFoundCallback? onDifferentProvidersFound;
   final SignedInCallback? onSignedIn;
   final double size;
@@ -154,7 +154,7 @@ class _GoogleSignInButton extends StatelessWidget {
       loadingIndicator: loadingIndicator,
       isLoading: isLoading,
       action: action,
-      auth: auth ?? FirebaseAuth.instance,
+      auth: auth ?? fba.FirebaseAuth.instance,
       onDifferentProvidersFound: onDifferentProvidersFound,
       onSignedIn: onSignedIn,
       overrideDefaultTapAction: overrideDefaultTapAction,

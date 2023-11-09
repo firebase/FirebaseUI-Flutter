@@ -2,14 +2,14 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final exception = FirebaseAuthException(
+  final exception = fba.FirebaseAuthException(
     code: 'invalid-email',
     message: 'The email address is badly formatted.',
   );
@@ -37,7 +37,7 @@ void main() {
     testWidgets('allows to override error text', (tester) async {
       String localizeError(
         BuildContext context,
-        FirebaseAuthException exception,
+        fba.FirebaseAuthException exception,
       ) {
         expect(exception.code, 'invalid-email');
         return 'Custom error text';

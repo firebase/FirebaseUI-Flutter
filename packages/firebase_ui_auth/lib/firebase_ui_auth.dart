@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide OAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/widgets.dart';
@@ -138,16 +138,16 @@ class FirebaseUIAuth {
     _providers[resolvedApp] = configs;
 
     configs.whereType<OAuthProvider>().forEach((element) {
-      final auth = FirebaseAuth.instanceFor(app: resolvedApp);
+      final auth = fba.FirebaseAuth.instanceFor(app: resolvedApp);
       OAuthProviders.register(auth, element);
     });
   }
 
   static Future<void> signOut({
     BuildContext? context,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
   }) async {
-    final resolvedAuth = auth ?? FirebaseAuth.instance;
+    final resolvedAuth = auth ?? fba.FirebaseAuth.instance;
     await OAuthProviders.signOut(resolvedAuth);
     await resolvedAuth.signOut();
 
