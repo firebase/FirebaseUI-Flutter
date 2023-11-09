@@ -4,8 +4,7 @@
 
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart'
-    show AuthCredential, FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import '../auth_controller.dart';
@@ -65,7 +64,7 @@ typedef StateTransitionListener<T extends AuthController> = void Function(
 /// final passwordCtrl = TextEditingController();
 ///
 /// AuthFlowBuilder<EmailAuthController>(
-///   auth: FirebaseAuth.instance,
+///   auth: fba.FirebaseAuth.instance,
 ///   action: AuthAction.signUp,
 ///   listener: (oldState, newState, ctrl) {
 ///     if (newState is UserCreated) {
@@ -124,7 +123,7 @@ class AuthFlowBuilder<T extends AuthController> extends StatefulWidget {
   final Object? flowKey;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// {@macro ui.auth.auth_action}
   final AuthAction? action;
@@ -151,7 +150,7 @@ class AuthFlowBuilder<T extends AuthController> extends StatefulWidget {
   final Widget? child;
 
   /// A callback that is being called when the auth flow completes.
-  final Function(AuthCredential credential)? onComplete;
+  final Function(fba.AuthCredential credential)? onComplete;
 
   /// {@macro ui.auth.widgets.auth_flow_builder.state_transition_listener}
   final StateTransitionListener<T>? listener;
@@ -200,7 +199,7 @@ class _AuthFlowBuilderState<T extends AuthController>
   @override
   void initState() {
     super.initState();
-    provider.auth = widget.auth ?? FirebaseAuth.instance;
+    provider.auth = widget.auth ?? fba.FirebaseAuth.instance;
 
     flow = widget.flow ?? createFlow();
 

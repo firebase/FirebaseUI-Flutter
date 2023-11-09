@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -10,7 +10,7 @@ abstract class ProviderScreen<T extends AuthProvider> extends StatelessWidget {
   final T? _provider;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   static final _cache = <Type, AuthProvider>{};
 
@@ -21,7 +21,7 @@ abstract class ProviderScreen<T extends AuthProvider> extends StatelessWidget {
       return _cache[T]! as T;
     }
 
-    final auth = this.auth ?? FirebaseAuth.instance;
+    final auth = this.auth ?? fba.FirebaseAuth.instance;
     final configs = FirebaseUIAuth.providersFor(auth.app);
     final config = configs.firstWhere((element) => element is T) as T;
     _cache[T] = config;

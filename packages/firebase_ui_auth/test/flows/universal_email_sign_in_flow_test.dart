@@ -4,7 +4,7 @@
 
 // ignore_for_file: deprecated_member_use_from_same_package
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:mockito/mockito.dart';
@@ -31,7 +31,7 @@ void main() {
     });
 
     group('#findProvidersForEmail', () {
-      test('calls FirebaseAuth#fetchSignInMethodsForEmail', () {
+      test('calls fba.FirebaseAuth#fetchSignInMethodsForEmail', () {
         provider.findProvidersForEmail('test@test.com');
         final invocation = verify(auth.fetchSignInMethodsForEmail(captureAny));
 
@@ -120,7 +120,7 @@ class MockListener extends Mock implements UniversalEmailSignInListener {
   void onDifferentProvidersFound(
     String? email,
     List<String>? providers,
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   ) {
     super.noSuchMethod(
       Invocation.method(
@@ -142,7 +142,7 @@ class MockProvider extends Mock implements UniversalEmailSignInProvider {
   @override
   void findProvidersForEmail(
     String? email, [
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   ]) {
     super.noSuchMethod(
       Invocation.method(

@@ -5,7 +5,7 @@
 export 'src/provider.dart' show AppleProvider;
 export 'src/theme.dart' show AppleProviderButtonStyle;
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
@@ -16,7 +16,7 @@ class AppleSignInButton extends _AppleSignInButton {
     Key? key,
     required Widget loadingIndicator,
     AuthAction? action,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     bool? isLoading,
     String? label,
     DifferentProvidersFoundCallback? onDifferentProvidersFound,
@@ -48,7 +48,7 @@ class AppleSignInIconButton extends _AppleSignInButton {
     Key? key,
     required Widget loadingIndicator,
     AuthAction? action,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     bool? isLoading,
     DifferentProvidersFoundCallback? onDifferentProvidersFound,
     SignedInCallback? onSignedIn,
@@ -92,7 +92,7 @@ class _AppleSignInButton extends StatelessWidget {
   final AuthAction? action;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final DifferentProvidersFoundCallback? onDifferentProvidersFound;
   final SignedInCallback? onSignedIn;
   final double size;
@@ -134,7 +134,7 @@ class _AppleSignInButton extends StatelessWidget {
       loadingIndicator: loadingIndicator,
       isLoading: isLoading,
       action: action,
-      auth: auth ?? FirebaseAuth.instance,
+      auth: auth ?? fba.FirebaseAuth.instance,
       onDifferentProvidersFound: onDifferentProvidersFound,
       onSignedIn: onSignedIn,
       overrideDefaultTapAction: overrideDefaultTapAction,

@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -18,7 +18,7 @@ void main() {
   late EmailLinkFlow flow;
   late EmailLinkAuthController ctrl;
 
-  final actionCodeSettings = ActionCodeSettings(
+  final actionCodeSettings = fba.ActionCodeSettings(
     url: 'https://example.com',
     handleCodeInApp: true,
     androidPackageName: 'com.test.app',
@@ -58,7 +58,7 @@ void main() {
         expect(result.captured, ['test@test.com']);
       });
 
-      test('calls FirebaseAuth#sendSignInLinkToEmail', () {
+      test('calls fba.FirebaseAuth#sendSignInLinkToEmail', () {
         provider.authListener = listener;
         provider.sendLink('test@test.com');
 
@@ -135,12 +135,12 @@ void main() {
 
         final result = verify(listener.onError(captureAny));
         result.called(1);
-        expect(result.captured[0], isA<FirebaseAuthException>());
+        expect(result.captured[0], isA<fba.FirebaseAuthException>());
         expect(result.captured[0].code, 'invalid-email-signin-link');
       });
 
       test(
-        'calls FirebaseAuth#signInWithEmailLink when got a valid sign in link',
+        'calls fba.FirebaseAuth#signInWithEmailLink when got a valid sign in link',
         () async {
           provider.authListener = listener;
           provider.awaitLink('test@test.com');
@@ -329,7 +329,7 @@ class MockProvider extends Mock implements EmailLinkAuthProvider {
 
 class MockListener extends Mock implements EmailLinkAuthListener {
   @override
-  void onSignedIn(UserCredential? credential) {
+  void onSignedIn(fba.UserCredential? credential) {
     super.noSuchMethod(Invocation.method(#onSignedIn, [credential]));
   }
 

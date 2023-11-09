@@ -3,7 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -58,12 +57,12 @@ class PhoneAuthProvider
     /// {@template ui.auth.providers.phone_auth_provider.mfa_session}
     /// Multi-factor session to use for verification
     /// {@endtemplate}
-    MultiFactorSession? multiFactorSession,
+    fba.MultiFactorSession? multiFactorSession,
 
     /// {@template ui.auth.providers.phone_auth_provider.mfa_hint}
     /// Multi-factor session info to use for verification
     /// {@endtemplate}
-    final PhoneMultiFactorInfo? hint,
+    final fba.PhoneMultiFactorInfo? hint,
   }) {
     final phone = phoneNumber ?? hint!.phoneNumber;
     authListener.onSMSCodeRequested(phone);

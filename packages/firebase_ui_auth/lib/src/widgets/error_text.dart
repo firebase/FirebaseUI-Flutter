@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuthException;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class ErrorText extends StatelessWidget {
   ///
   /// Example usage:
   /// ```dart
-  /// ErrorText.localizeError = (BuildContext context, FirebaseAuthException e) {
+  /// ErrorText.localizeError = (BuildContext context, fba.FirebaseAuthException e) {
   ///   return switch (e.code) {
   ///     'user-not-found' => 'Please create an account first.',
   ///     'credential-already-in-use' => 'This email is already in use.',
@@ -52,7 +52,7 @@ class ErrorText extends StatelessWidget {
   /// }
   static String Function(
     BuildContext context,
-    FirebaseAuthException exception,
+    fba.FirebaseAuthException exception,
   )? localizeError;
 
   /// A way to customize error message for [PlatformException]
@@ -106,11 +106,11 @@ class ErrorText extends StatelessWidget {
       text = l.smsAutoresolutionFailedError;
     }
 
-    if (exception is FirebaseAuthException) {
+    if (exception is fba.FirebaseAuthException) {
       if (localizeError != null) {
-        text = localizeError!(context, exception as FirebaseAuthException);
+        text = localizeError!(context, exception as fba.FirebaseAuthException);
       } else {
-        final e = exception as FirebaseAuthException;
+        final e = exception as fba.FirebaseAuthException;
         final code = e.code;
         final newText = localizedErrorText(code, l) ?? e.message;
 

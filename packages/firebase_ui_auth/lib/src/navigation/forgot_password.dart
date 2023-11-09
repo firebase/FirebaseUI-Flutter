@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -13,7 +13,7 @@ Future<void> showForgotPasswordScreen({
   required BuildContext context,
 
   /// {@macro ui.auth.auth_controller.auth}
-  FirebaseAuth? auth,
+  fba.FirebaseAuth? auth,
 
   /// A email that requires password reset.
   String? email,

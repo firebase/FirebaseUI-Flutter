@@ -2,13 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide OAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 @immutable
 class ProviderKey {
-  final FirebaseAuth auth;
+  final fba.FirebaseAuth auth;
   final Type providerType;
 
   const ProviderKey(this.auth, this.providerType);
@@ -25,20 +25,20 @@ class ProviderKey {
 abstract class OAuthProviders {
   static final _providers = <ProviderKey, OAuthProvider>{};
 
-  static void register(FirebaseAuth? auth, OAuthProvider provider) {
-    final resolvedAuth = auth ?? FirebaseAuth.instance;
+  static void register(fba.FirebaseAuth? auth, OAuthProvider provider) {
+    final resolvedAuth = auth ?? fba.FirebaseAuth.instance;
     final key = ProviderKey(resolvedAuth, provider.runtimeType);
 
     _providers[key] = provider;
   }
 
-  static OAuthProvider? resolve(FirebaseAuth? auth, Type providerType) {
-    final resolvedAuth = auth ?? FirebaseAuth.instance;
+  static OAuthProvider? resolve(fba.FirebaseAuth? auth, Type providerType) {
+    final resolvedAuth = auth ?? fba.FirebaseAuth.instance;
     final key = ProviderKey(resolvedAuth, providerType);
     return _providers[key];
   }
 
-  static Iterable<OAuthProvider> providersFor(FirebaseAuth auth) sync* {
+  static Iterable<OAuthProvider> providersFor(fba.FirebaseAuth auth) sync* {
     for (final k in _providers.keys) {
       if (k.auth == auth) {
         yield _providers[k]!;
@@ -46,8 +46,8 @@ abstract class OAuthProviders {
     }
   }
 
-  static Future<void> signOut([FirebaseAuth? auth]) async {
-    final resolvedAuth = auth ?? FirebaseAuth.instance;
+  static Future<void> signOut([fba.FirebaseAuth? auth]) async {
+    final resolvedAuth = auth ?? fba.FirebaseAuth.instance;
     final providers = providersFor(resolvedAuth);
 
     for (final p in providers) {
@@ -56,7 +56,7 @@ abstract class OAuthProviders {
   }
 }
 
-extension OAuthHelpers on User {
+extension OAuthHelpers on fba.User {
   bool isProviderLinked(String providerId) {
     try {
       providerData.firstWhere((e) => e.providerId == providerId);

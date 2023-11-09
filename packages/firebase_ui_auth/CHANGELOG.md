@@ -1,3 +1,8 @@
+## 1.10.0
+
+ - **FEAT**(ui_auth): add more account actions ([#172](https://github.com/firebase/FirebaseUI-Flutter/issues/172)). ([518a6c7b](https://github.com/firebase/FirebaseUI-Flutter/commit/518a6c7b24835134d7943b3fc91a68f125e5a0fb))
+ - **FEAT**(ui_auth): add a way to customize PlatformException text ([#171](https://github.com/firebase/FirebaseUI-Flutter/issues/171)). ([cbe75ca4](https://github.com/firebase/FirebaseUI-Flutter/commit/cbe75ca436bd4aeeb9c9f2e1b9fc067b2e1de279))
+
 ## 1.9.1
 
  - **FIX**(ui_auth): deprecate screens and widgets that use fetchSignInMethodsForEmail ([#153](https://github.com/firebase/FirebaseUI-Flutter/issues/153)). ([84ce5fb7](https://github.com/firebase/FirebaseUI-Flutter/commit/84ce5fb7a4c2237932568c3cb85953b112ed04a8))

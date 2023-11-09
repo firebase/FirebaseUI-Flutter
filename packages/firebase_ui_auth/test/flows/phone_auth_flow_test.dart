@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide PhoneAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -40,7 +40,7 @@ void main() {
         expect(invocation.callCount, 1);
       });
 
-      test('calls FirebaseAuth#verifyPhoneNumber', () async {
+      test('calls fba.FirebaseAuth#verifyPhoneNumber', () async {
         provider.sendVerificationCode(
           phoneNumber: '+123456789',
           action: AuthAction.signIn,
@@ -187,7 +187,7 @@ void main() {
 
     group('#verifySMSCode', () {
       test(
-        'calls FirebaseAuth#signInWithCredential if action is sign in',
+        'calls fba.FirebaseAuth#signInWithCredential if action is sign in',
         () {
           provider.verifySMSCode(
             action: AuthAction.signIn,
@@ -198,9 +198,9 @@ void main() {
           final invocation = verify(auth.signInWithCredential(captureAny));
 
           expect(invocation.callCount, 1);
-          expect(invocation.captured.first, isA<PhoneAuthCredential>());
+          expect(invocation.captured.first, isA<fba.PhoneAuthCredential>());
 
-          final cred = invocation.captured.first as PhoneAuthCredential;
+          final cred = invocation.captured.first as fba.PhoneAuthCredential;
 
           expect(cred.smsCode, '123456');
           expect(cred.verificationId, 'verificationId');
@@ -280,9 +280,9 @@ void main() {
         );
 
         expect(invocation.callCount, 1);
-        expect(invocation.captured.first, isA<PhoneAuthCredential>());
+        expect(invocation.captured.first, isA<fba.PhoneAuthCredential>());
 
-        final cred = invocation.captured.first as PhoneAuthCredential;
+        final cred = invocation.captured.first as fba.PhoneAuthCredential;
 
         expect(cred.smsCode, '123456');
         expect(cred.verificationId, 'verificationId');
@@ -305,9 +305,9 @@ void main() {
           final invocation = verify(listener.onCredentialLinked(captureAny));
 
           expect(invocation.callCount, 1);
-          expect(invocation.captured.first, isA<PhoneAuthCredential>());
+          expect(invocation.captured.first, isA<fba.PhoneAuthCredential>());
 
-          final cred = invocation.captured.first as PhoneAuthCredential;
+          final cred = invocation.captured.first as fba.PhoneAuthCredential;
 
           expect(cred.smsCode, '123456');
           expect(cred.verificationId, 'verificationId');
@@ -367,8 +367,8 @@ class MockProvider extends Mock implements PhoneAuthProvider {
     String? phoneNumber,
     AuthAction? action,
     int? forceResendingToken,
-    MultiFactorSession? multiFactorSession,
-    PhoneMultiFactorInfo? hint,
+    fba.MultiFactorSession? multiFactorSession,
+    fba.PhoneMultiFactorInfo? hint,
   }) {
     super.noSuchMethod(
       Invocation.method(
@@ -390,7 +390,7 @@ class MockProvider extends Mock implements PhoneAuthProvider {
     AuthAction? action,
     String? code,
     String? verificationId,
-    ConfirmationResult? confirmationResult,
+    fba.ConfirmationResult? confirmationResult,
   }) {
     super.noSuchMethod(
       Invocation.method(
@@ -407,9 +407,9 @@ class MockProvider extends Mock implements PhoneAuthProvider {
   }
 }
 
-class MockUserCredential extends Mock implements UserCredential {}
+class MockUserCredential extends Mock implements fba.UserCredential {}
 
-class MockPhoneCredential extends Mock implements PhoneAuthCredential {}
+class MockPhoneCredential extends Mock implements fba.PhoneAuthCredential {}
 
 class MockListener extends Mock implements PhoneAuthListener {
   @override
@@ -436,7 +436,7 @@ class MockListener extends Mock implements PhoneAuthListener {
   }
 
   @override
-  void onCredentialLinked(AuthCredential? credential) {
+  void onCredentialLinked(fba.AuthCredential? credential) {
     super.noSuchMethod(
       Invocation.method(
         #onCredentialLinked,
@@ -446,7 +446,7 @@ class MockListener extends Mock implements PhoneAuthListener {
   }
 
   @override
-  void onVerificationCompleted(PhoneAuthCredential? credential) {
+  void onVerificationCompleted(fba.PhoneAuthCredential? credential) {
     super.noSuchMethod(
       Invocation.method(
         #onVerificationCompleted,
@@ -466,7 +466,7 @@ class MockListener extends Mock implements PhoneAuthListener {
   }
 
   @override
-  void onCredentialReceived(AuthCredential? credential) {
+  void onCredentialReceived(fba.AuthCredential? credential) {
     super.noSuchMethod(
       Invocation.method(
         #onBeforeCredentialLinked,
@@ -476,7 +476,7 @@ class MockListener extends Mock implements PhoneAuthListener {
   }
 
   @override
-  void onSignedIn(UserCredential? credential) {
+  void onSignedIn(fba.UserCredential? credential) {
     super.noSuchMethod(
       Invocation.method(
         #onSignedIn,

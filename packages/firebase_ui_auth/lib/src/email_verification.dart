@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +40,7 @@ enum EmailVerificationState {
 class EmailVerificationController extends ValueNotifier<EmailVerificationState>
     with WidgetsBindingObserver {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth auth;
+  final fba.FirebaseAuth auth;
 
   EmailVerificationController(this.auth)
       : super(EmailVerificationState.unresolved) {
@@ -65,7 +65,7 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   }
 
   /// An instance of user that is currently signed in.
-  User get user => auth.currentUser!;
+  fba.User get user => auth.currentUser!;
 
   /// Current [EmailVerificationState].
   EmailVerificationState get state => value;
@@ -98,7 +98,7 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   /// Sends an email with a link to verify the user's email address.
   Future<void> sendVerificationEmail(
     TargetPlatform platform,
-    ActionCodeSettings? actionCodeSettings,
+    fba.ActionCodeSettings? actionCodeSettings,
   ) async {
     value = EmailVerificationState.sending;
     try {
