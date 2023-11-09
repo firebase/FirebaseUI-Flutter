@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 
 /// {@template ui.auth.auth_action}
@@ -58,7 +58,7 @@ abstract class AuthController {
   /// The [FirebaseAuth] instance used to perform authentication against.
   /// By default, [FirebaseAuth.instance] is used.
   /// {@endtemplate}
-  FirebaseAuth get auth;
+  fba.FirebaseAuth get auth;
 
   /// {@template ui.auth.auth_controller.reset}
   /// Resets the controller to initial state.

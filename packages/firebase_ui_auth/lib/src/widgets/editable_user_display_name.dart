@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
@@ -33,7 +33,7 @@ import 'internal/subtitle.dart';
 /// {@endtemplate}
 class EditableUserDisplayName extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// {@macro ui.auth.widgets.editable_user_display_name}
   const EditableUserDisplayName({
@@ -48,7 +48,7 @@ class EditableUserDisplayName extends StatefulWidget {
 }
 
 class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
-  FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
+  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
   String? get displayName => auth.currentUser?.displayName;
 
   late final ctrl = TextEditingController(text: displayName ?? '');

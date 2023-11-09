@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -12,11 +12,11 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 /// After succesful execution, auth flow should have
 /// [DifferentSignInMethodsFound] state.
 void defaultOnAuthError(AuthProvider provider, Object error) {
-  if (error is! FirebaseAuthException) {
+  if (error is! fba.FirebaseAuthException) {
     throw error;
   }
 
-  if (error is FirebaseAuthMultiFactorException) {
+  if (error is fba.FirebaseAuthMultiFactorException) {
     provider.authListener.onMFARequired(error.resolver);
     return;
   }
@@ -35,7 +35,7 @@ abstract class AuthListener {
   AuthProvider get provider;
 
   /// {@macro ui.auth.auth_controller.auth}
-  FirebaseAuth get auth;
+  fba.FirebaseAuth get auth;
 
   /// Called if an error occured during the authentication process.
   void onError(Object error);
@@ -44,14 +44,14 @@ abstract class AuthListener {
   void onBeforeSignIn();
 
   /// Called if the user has successfully signed in.
-  void onSignedIn(UserCredential credential);
+  void onSignedIn(fba.UserCredential credential);
 
   /// Called before an attempt to link the credential with currently signed in
   /// user account.
-  void onCredentialReceived(AuthCredential credential);
+  void onCredentialReceived(fba.AuthCredential credential);
 
   /// Called if the credential was successfully linked with the user account.
-  void onCredentialLinked(AuthCredential credential);
+  void onCredentialLinked(fba.AuthCredential credential);
 
   /// Called before an attempt to fetch available providers for the email.
   @Deprecated(
@@ -68,23 +68,24 @@ abstract class AuthListener {
   void onDifferentProvidersFound(
     String email,
     List<String> providers,
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   );
 
   /// Called when the user cancells the sign in process.
   void onCanceled();
 
   /// Called when the user has to complete MFA.
-  void onMFARequired(MultiFactorResolver resolver);
+  void onMFARequired(fba.MultiFactorResolver resolver);
 }
 
 /// {@template ui.auth.auth_provider}
 /// An interface that all auth providers should implement.
 /// Contains shared authentication logic.
 /// {@endtemplate}
-abstract class AuthProvider<T extends AuthListener, K extends AuthCredential> {
+abstract class AuthProvider<T extends AuthListener,
+    K extends fba.AuthCredential> {
   /// {@macro ui.auth.auth_controller.auth}
-  late FirebaseAuth auth;
+  late fba.FirebaseAuth auth;
 
   /// {@template ui.auth.auth_provider.auth_listener}
   /// An instance of the [AuthListener] that is used to notify about the
@@ -143,7 +144,7 @@ abstract class AuthProvider<T extends AuthListener, K extends AuthCredential> {
   )
   void findProvidersForEmail(
     String email, [
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   ]) {
     authListener.onBeforeProvidersForEmailFetch();
 

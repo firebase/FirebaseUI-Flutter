@@ -5,7 +5,7 @@
 export 'src/provider.dart' show FacebookProvider;
 export 'src/theme.dart' show FacebookProviderButtonStyle;
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
@@ -19,7 +19,7 @@ class FacebookSignInButton extends _FacebookSignInButton {
     required String clientId,
     String? redirectUri,
     AuthAction? action,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     bool? isLoading,
     String? label,
     DifferentProvidersFoundCallback? onDifferentProvidersFound,
@@ -54,7 +54,7 @@ class FacebookSignInIconButton extends _FacebookSignInButton {
     required String clientId,
     required Widget loadingIndicator,
     AuthAction? action,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     bool? isLoading,
     DifferentProvidersFoundCallback? onDifferentProvidersFound,
     SignedInCallback? onSignedIn,
@@ -101,7 +101,7 @@ class _FacebookSignInButton extends StatelessWidget {
   final AuthAction? action;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final DifferentProvidersFoundCallback? onDifferentProvidersFound;
   final SignedInCallback? onSignedIn;
   final double size;
@@ -148,7 +148,7 @@ class _FacebookSignInButton extends StatelessWidget {
       loadingIndicator: loadingIndicator,
       isLoading: isLoading,
       action: action,
-      auth: auth ?? FirebaseAuth.instance,
+      auth: auth ?? fba.FirebaseAuth.instance,
       onDifferentProvidersFound: onDifferentProvidersFound,
       onSignedIn: onSignedIn,
       overrideDefaultTapAction: overrideDefaultTapAction,

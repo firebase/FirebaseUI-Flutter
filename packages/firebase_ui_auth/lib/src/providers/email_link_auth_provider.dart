@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -21,9 +21,9 @@ abstract class EmailLinkAuthListener extends AuthListener {
 /// sent to the user's email.
 /// {@endtemplate}
 class EmailLinkAuthProvider
-    extends AuthProvider<EmailLinkAuthListener, AuthCredential> {
+    extends AuthProvider<EmailLinkAuthListener, fba.AuthCredential> {
   /// A configuration of the dynamic link.
-  final ActionCodeSettings actionCodeSettings;
+  final fba.ActionCodeSettings actionCodeSettings;
   final FirebaseDynamicLinks _dynamicLinks;
 
   @override
@@ -69,7 +69,7 @@ class EmailLinkAuthProvider
       _signInWithEmailLink(email, link);
     } else {
       authListener.onError(
-        FirebaseAuthException(
+        fba.FirebaseAuthException(
           code: 'invalid-email-signin-link',
           message: 'Invalid email sign in link',
         ),

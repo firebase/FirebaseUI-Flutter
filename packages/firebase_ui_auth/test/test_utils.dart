@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -23,23 +23,25 @@ class TestMaterialApp extends StatelessWidget {
   }
 }
 
-class MockCredential extends Mock implements UserCredential {}
+class MockCredential extends Mock implements fba.UserCredential {}
 
-class MockUserInfo extends Mock implements UserInfo {
+class MockUserInfo extends Mock implements fba.UserInfo {
   @override
   final String providerId;
 
   MockUserInfo({required this.providerId});
 }
 
-class MockUser extends Mock implements User {
+class MockUser extends Mock implements fba.User {
   @override
-  final List<UserInfo> providerData;
+  final List<fba.UserInfo> providerData;
 
   MockUser({this.providerData = const []});
 
   @override
-  Future<UserCredential> linkWithCredential(AuthCredential? credential) async {
+  Future<fba.UserCredential> linkWithCredential(
+    fba.AuthCredential? credential,
+  ) async {
     return super.noSuchMethod(
       Invocation.method(
         #linkWithCredential,
@@ -75,11 +77,11 @@ class MockDynamicLinks extends Mock implements FirebaseDynamicLinks {
 
 class MockApp extends Mock implements FirebaseApp {}
 
-class MockAuth extends Mock implements FirebaseAuth {
+class MockAuth extends Mock implements fba.FirebaseAuth {
   MockUser? user;
 
   @override
-  User? get currentUser => user;
+  fba.User? get currentUser => user;
 
   @override
   FirebaseApp get app => MockApp();
@@ -87,8 +89,8 @@ class MockAuth extends Mock implements FirebaseAuth {
   List<FirebaseApp> get apps => [app];
 
   @override
-  Future<UserCredential> signInWithCredential(
-    AuthCredential? credential,
+  Future<fba.UserCredential> signInWithCredential(
+    fba.AuthCredential? credential,
   ) async {
     return super.noSuchMethod(
       Invocation.method(
@@ -101,7 +103,7 @@ class MockAuth extends Mock implements FirebaseAuth {
   }
 
   @override
-  Future<UserCredential> createUserWithEmailAndPassword({
+  Future<fba.UserCredential> createUserWithEmailAndPassword({
     String? email,
     String? password,
   }) async {
@@ -118,7 +120,7 @@ class MockAuth extends Mock implements FirebaseAuth {
   @override
   Future<void> sendSignInLinkToEmail({
     required String? email,
-    required ActionCodeSettings? actionCodeSettings,
+    required fba.ActionCodeSettings? actionCodeSettings,
   }) async {
     return super.noSuchMethod(
       Invocation.method(
@@ -146,7 +148,7 @@ class MockAuth extends Mock implements FirebaseAuth {
   }
 
   @override
-  Future<UserCredential> signInWithEmailLink({
+  Future<fba.UserCredential> signInWithEmailLink({
     required String? email,
     required String? emailLink,
   }) async {
@@ -179,15 +181,15 @@ class MockAuth extends Mock implements FirebaseAuth {
   @override
   Future<void> verifyPhoneNumber({
     String? phoneNumber,
-    PhoneMultiFactorInfo? multiFactorInfo,
-    PhoneVerificationCompleted? verificationCompleted,
-    PhoneVerificationFailed? verificationFailed,
-    PhoneCodeSent? codeSent,
-    PhoneCodeAutoRetrievalTimeout? codeAutoRetrievalTimeout,
+    fba.PhoneMultiFactorInfo? multiFactorInfo,
+    fba.PhoneVerificationCompleted? verificationCompleted,
+    fba.PhoneVerificationFailed? verificationFailed,
+    fba.PhoneCodeSent? codeSent,
+    fba.PhoneCodeAutoRetrievalTimeout? codeAutoRetrievalTimeout,
     String? autoRetrievedSmsCodeForTesting,
     Duration timeout = const Duration(seconds: 30),
     int? forceResendingToken,
-    MultiFactorSession? multiFactorSession,
+    fba.MultiFactorSession? multiFactorSession,
   }) async {
     super.noSuchMethod(
       Invocation.method(

@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -197,13 +197,13 @@ void main() {
               AuthStateChangeAction<CredentialLinked>((context, state) {
                 expect(state, isA<CredentialLinked>());
                 expect(state.credential, isNotNull);
-                expect(state.credential, isA<EmailAuthCredential>());
+                expect(state.credential, isA<fba.EmailAuthCredential>());
                 expect(
-                  (state.credential as EmailAuthCredential).email,
+                  (state.credential as fba.EmailAuthCredential).email,
                   equals('test@test.com'),
                 );
                 expect(
-                  (state.credential as EmailAuthCredential).password,
+                  (state.credential as fba.EmailAuthCredential).password,
                   equals('password'),
                 );
 

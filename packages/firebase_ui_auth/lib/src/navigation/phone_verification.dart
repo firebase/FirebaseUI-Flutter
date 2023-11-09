@@ -2,8 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, MultiFactorSession, PhoneMultiFactorInfo;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +16,13 @@ Future<void> startPhoneVerification({
   AuthAction? action,
 
   /// {@macro ui.auth.auth_controller.auth}
-  FirebaseAuth? auth,
+  fba.FirebaseAuth? auth,
 
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_session}
-  MultiFactorSession? multiFactorSession,
+  fba.MultiFactorSession? multiFactorSession,
 
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_hint}
-  PhoneMultiFactorInfo? hint,
+  fba.PhoneMultiFactorInfo? hint,
 
   /// Additional actions to pass down to the [PhoneInputScreen].
   List<FirebaseUIAction> actions = const [],

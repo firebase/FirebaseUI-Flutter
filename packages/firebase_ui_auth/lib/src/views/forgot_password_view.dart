@@ -5,8 +5,7 @@
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart' hide Title;
 
-import 'package:firebase_auth/firebase_auth.dart'
-    show ActionCodeSettings, FirebaseAuth, FirebaseAuthException;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import '../widgets/internal/title.dart';
@@ -16,10 +15,10 @@ import '../widgets/internal/title.dart';
 /// {@endtemplate}
 class ForgotPasswordView extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// A configuration object that is used to construct a dynamic link.
-  final ActionCodeSettings? actionCodeSettings;
+  final fba.ActionCodeSettings? actionCodeSettings;
 
   /// Returned widget would be placed under the title.
   final WidgetBuilder? subtitleBuilder;
@@ -50,9 +49,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   final formKey = GlobalKey<FormState>();
   bool emailSent = false;
 
-  FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
+  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
   bool isLoading = false;
-  FirebaseAuthException? exception;
+  fba.FirebaseAuthException? exception;
 
   Future<void> _submit(String email) async {
     setState(() {
@@ -67,7 +66,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       );
 
       emailSent = true;
-    } on FirebaseAuthException catch (e) {
+    } on fba.FirebaseAuthException catch (e) {
       exception = e;
     } finally {
       setState(() => isLoading = false);

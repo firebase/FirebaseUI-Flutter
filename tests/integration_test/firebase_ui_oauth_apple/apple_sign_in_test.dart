@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +17,7 @@ import '../utils.dart';
 
 void main() async {
   final provider = AppleProvider();
-  late FirebaseAuth auth;
+  late fba.FirebaseAuth auth;
   late MockProvider fbProvider;
 
   const labels = DefaultLocalizations();
@@ -141,7 +141,7 @@ class MockListener<T> extends Mock {
   }
 }
 
-class MockUser extends Mock implements User {
+class MockUser extends Mock implements fba.User {
   @override
   String? get displayName => 'Test User';
 
@@ -149,19 +149,19 @@ class MockUser extends Mock implements User {
   String? get email => 'test@test.com';
 }
 
-class MockCredential extends Mock implements UserCredential {
+class MockCredential extends Mock implements fba.UserCredential {
   @override
-  User? get user => MockUser();
+  fba.User? get user => MockUser();
 }
 
-class MockProvider extends Mock implements AppleAuthProvider {}
+class MockProvider extends Mock implements fba.AppleAuthProvider {}
 
 // ignore: avoid_implementing_value_types
 class MockApp extends Mock implements FirebaseApp {}
 
-class MockAuth extends Mock implements FirebaseAuth {
+class MockAuth extends Mock implements fba.FirebaseAuth {
   @override
-  Future<UserCredential> signInWithProvider(Object provider) async {
+  Future<fba.UserCredential> signInWithProvider(Object provider) async {
     return super.noSuchMethod(
       Invocation.method(#signInWithAuthProvider, [provider]),
       returnValue: Future.delayed(const Duration(milliseconds: 500)).then(

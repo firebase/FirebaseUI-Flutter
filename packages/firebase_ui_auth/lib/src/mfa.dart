@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart' hide PhoneAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_auth/src/widgets/internal/universal_page_route.dart';
 import 'package:flutter/scheduler.dart';
@@ -17,13 +17,13 @@ typedef SMSCodeInputScreenBuilder = Widget Function(
   AuthAction action,
 );
 
-Future<UserCredential> startMFAVerification({
+Future<fba.UserCredential> startMFAVerification({
   required BuildContext context,
-  required MultiFactorResolver resolver,
-  FirebaseAuth? auth,
+  required fba.MultiFactorResolver resolver,
+  fba.FirebaseAuth? auth,
   SMSCodeInputScreenBuilder? smsCodeInputScreenBuilder,
 }) async {
-  if (resolver.hints.first is PhoneMultiFactorInfo) {
+  if (resolver.hints.first is fba.PhoneMultiFactorInfo) {
     return startPhoneMFAVerification(
       context: context,
       resolver: resolver,
@@ -34,22 +34,22 @@ Future<UserCredential> startMFAVerification({
   }
 }
 
-Future<UserCredential> startPhoneMFAVerification({
+Future<fba.UserCredential> startPhoneMFAVerification({
   required BuildContext context,
-  required MultiFactorResolver resolver,
-  FirebaseAuth? auth,
+  required fba.MultiFactorResolver resolver,
+  fba.FirebaseAuth? auth,
   SMSCodeInputScreenBuilder? smsCodeInputScreenBuilder,
 }) async {
   final session = resolver.session;
   final hint = resolver.hints.first;
-  final completer = Completer<UserCredential>();
+  final completer = Completer<fba.UserCredential>();
   final navigator = Navigator.of(context);
 
   final provider = PhoneAuthProvider();
-  provider.auth = auth ?? FirebaseAuth.instance;
+  provider.auth = auth ?? fba.FirebaseAuth.instance;
 
   final flow = PhoneAuthFlow(
-    auth: auth ?? FirebaseAuth.instance,
+    auth: auth ?? fba.FirebaseAuth.instance,
     action: AuthAction.none,
     provider: PhoneAuthProvider(),
   );
@@ -60,8 +60,8 @@ Future<UserCredential> startPhoneMFAVerification({
 
   final actions = [
     AuthStateChangeAction<CredentialReceived>((context, inner) {
-      final cred = inner.credential as PhoneAuthCredential;
-      final assertion = PhoneMultiFactorGenerator.getAssertion(cred);
+      final cred = inner.credential as fba.PhoneAuthCredential;
+      final assertion = fba.PhoneMultiFactorGenerator.getAssertion(cred);
       try {
         final cred = resolver.resolveSignIn(assertion);
         completer.complete(cred);
@@ -73,7 +73,7 @@ Future<UserCredential> startPhoneMFAVerification({
 
   SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
     provider.sendVerificationCode(
-      hint: hint as PhoneMultiFactorInfo,
+      hint: hint as fba.PhoneMultiFactorInfo,
       multiFactorSession: session,
       action: AuthAction.none,
     );
