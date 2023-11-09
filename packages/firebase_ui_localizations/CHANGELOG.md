@@ -1,3 +1,7 @@
+## 1.8.0
+
+ - **FEAT**(ui_localizations): Add romanian localization ([#174](https://github.com/firebase/FirebaseUI-Flutter/issues/174)). ([dc9c9cb2](https://github.com/firebase/FirebaseUI-Flutter/commit/dc9c9cb2698e3ab1d1774143b05d48eccde73dfb))
+
 ## 1.7.1
 
  - **FIX**(ui_localizations): localize weak password error ([#138](https://github.com/firebase/FirebaseUI-Flutter/issues/138)). ([bcfa2be6](https://github.com/firebase/FirebaseUI-Flutter/commit/bcfa2be660454078abc0a542abe3359f23453ca4))

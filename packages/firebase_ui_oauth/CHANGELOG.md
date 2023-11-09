@@ -1,3 +1,7 @@
+## 1.4.14
+
+ - Update a dependency to the latest release.
+
 ## 1.4.13
 
  - **FIX**(ui_auth): use capitalized cancel label on dialogs ([#134](https://github.com/firebase/FirebaseUI-Flutter/issues/134)). ([78c1ba9b](https://github.com/firebase/FirebaseUI-Flutter/commit/78c1ba9b20a6691e046bdbc76595fd810867cde5))
