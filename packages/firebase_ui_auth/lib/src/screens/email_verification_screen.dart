@@ -65,6 +65,9 @@ class EmailVerificationScreen extends StatelessWidget {
   /// A configuration object used to construct a dynamic link.
   final ActionCodeSettings? actionCodeSettings;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   /// {@macro ui.auth.screens.email_verification_screen}
   const EmailVerificationScreen({
     super.key,
@@ -76,6 +79,7 @@ class EmailVerificationScreen extends StatelessWidget {
     this.desktopLayoutDirection,
     this.breakpoint = 500,
     this.actionCodeSettings,
+    this.maxWidth = 1200,
   });
 
   @override
@@ -89,7 +93,7 @@ class EmailVerificationScreen extends StatelessWidget {
           headerBuilder: headerBuilder,
           headerMaxExtent: headerMaxExtent,
           sideBuilder: sideBuilder,
-          maxWidth: 1200,
+          maxWidth: maxWidth,
           contentFlex: 2,
           child: Padding(
             padding: const EdgeInsets.all(32),

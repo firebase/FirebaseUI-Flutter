@@ -54,6 +54,9 @@ class LoginScreen extends StatelessWidget {
   /// {@macro ui.auth.widgets.email_form.showPasswordVisibilityToggle}
   final bool showPasswordVisibilityToggle;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const LoginScreen({
     super.key,
     required this.action,
@@ -73,6 +76,7 @@ class LoginScreen extends StatelessWidget {
     this.breakpoint = 800,
     this.styles,
     this.showPasswordVisibilityToggle = false,
+    this.maxWidth,
   });
 
   @override
@@ -102,6 +106,7 @@ class LoginScreen extends StatelessWidget {
       headerBuilder: headerBuilder,
       headerMaxExtent: headerMaxExtent,
       sideBuilder: sideBuilder,
+      maxWidth: maxWidth,
       child: loginContent,
     );
 

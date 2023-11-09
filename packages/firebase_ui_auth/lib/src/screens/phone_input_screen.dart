@@ -70,6 +70,9 @@ class PhoneInputScreen extends StatelessWidget {
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_hint}
   final PhoneMultiFactorInfo? mfaHint;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const PhoneInputScreen({
     super.key,
     this.action,
@@ -84,6 +87,7 @@ class PhoneInputScreen extends StatelessWidget {
     this.breakpoint = 500,
     this.multiFactorSession,
     this.mfaHint,
+    this.maxWidth,
   });
 
   void _next(BuildContext context, AuthAction? action, Object flowKey, _) {
@@ -115,6 +119,7 @@ class PhoneInputScreen extends StatelessWidget {
           headerBuilder: headerBuilder,
           headerMaxExtent: headerMaxExtent,
           breakpoint: breakpoint,
+          maxWidth: maxWidth,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(

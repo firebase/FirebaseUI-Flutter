@@ -87,6 +87,9 @@ class RegisterScreen extends MultiProviderScreen {
   /// * [EmailFormStyle]
   final Set<FirebaseUIStyle>? styles;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const RegisterScreen({
     super.key,
     super.auth,
@@ -104,6 +107,7 @@ class RegisterScreen extends MultiProviderScreen {
     this.footerBuilder,
     this.breakpoint = 800,
     this.styles,
+    this.maxWidth,
   });
 
   @override
@@ -126,6 +130,7 @@ class RegisterScreen extends MultiProviderScreen {
         subtitleBuilder: subtitleBuilder,
         footerBuilder: footerBuilder,
         breakpoint: breakpoint,
+        maxWidth: maxWidth,
       ),
     );
   }
