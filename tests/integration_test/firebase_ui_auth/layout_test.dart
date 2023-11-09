@@ -2,8 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart'
-    hide EmailAuthProvider, PhoneAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -55,19 +54,19 @@ const _user = {
   'isEmailVerified': false,
 };
 
-class MockUser extends Mock implements User {
+class MockUser extends Mock implements fba.User {
   @override
-  List<UserInfo> get providerData {
+  List<fba.UserInfo> get providerData {
     return [
-      UserInfo.fromJson({..._user, 'providerId': 'password'}),
-      UserInfo.fromJson({..._user, 'providerId': 'google.com'}),
-      UserInfo.fromJson({..._user, 'providerId': 'apple.com'}),
-      UserInfo.fromJson({..._user, 'providerId': 'phone'})
+      fba.UserInfo.fromJson({..._user, 'providerId': 'password'}),
+      fba.UserInfo.fromJson({..._user, 'providerId': 'google.com'}),
+      fba.UserInfo.fromJson({..._user, 'providerId': 'apple.com'}),
+      fba.UserInfo.fromJson({..._user, 'providerId': 'phone'})
     ];
   }
 }
 
-class MockAuth extends Mock implements FirebaseAuth {
+class MockAuth extends Mock implements fba.FirebaseAuth {
   @override
-  User? get currentUser => MockUser();
+  fba.User? get currentUser => MockUser();
 }

@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -157,7 +157,7 @@ void main() {
     testWidgets(
       'signs in if the code is correct',
       (tester) async {
-        final completer = Completer<User>();
+        final completer = Completer<fba.User>();
 
         await render(
           tester,

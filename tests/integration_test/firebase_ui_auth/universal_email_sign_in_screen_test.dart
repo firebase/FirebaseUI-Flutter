@@ -4,8 +4,7 @@
 
 // ignore_for_file: deprecated_member_use
 
-import 'package:firebase_auth/firebase_auth.dart'
-    hide EmailAuthProvider, PhoneAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +108,7 @@ void main() {
 // ignore: avoid_implementing_value_types
 class MockApp extends Mock implements FirebaseApp {}
 
-class MockAuth extends Mock implements FirebaseAuth {
+class MockAuth extends Mock implements fba.FirebaseAuth {
   @override
   FirebaseApp get app => MockApp();
 

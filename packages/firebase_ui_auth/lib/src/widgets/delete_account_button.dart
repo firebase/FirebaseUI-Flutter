@@ -2,8 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, FirebaseAuthException;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
@@ -46,7 +45,7 @@ typedef SignInRequiredCallback = Future<bool> Function();
 /// {@endtemplate}
 class DeleteAccountButton extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// A callback tha is called if the [FirebaseAuth] requires the user to
   /// re-authenticate and approve the account deletion. By default,
@@ -74,7 +73,7 @@ class DeleteAccountButton extends StatefulWidget {
 }
 
 class _DeleteAccountButtonState extends State<DeleteAccountButton> {
-  FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
+  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
   bool _isLoading = false;
 
   Future<void> _deleteAccount() async {
@@ -91,7 +90,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
         user,
       );
       await FirebaseUIAuth.signOut(context: context, auth: auth);
-    } on FirebaseAuthException catch (err) {
+    } on fba.FirebaseAuthException catch (err) {
       if (err.code == 'requires-recent-login') {
         if (widget.onSignInRequired != null) {
           final signedIn = await widget.onSignInRequired!();

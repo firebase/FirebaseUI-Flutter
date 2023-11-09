@@ -4,7 +4,7 @@
 
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 import 'internal/responsive_page.dart';
@@ -12,7 +12,7 @@ import 'internal/responsive_page.dart';
 /// A password reset screen.
 class ForgotPasswordScreen extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// A returned widget would be placed under the title of the screen.
   final WidgetBuilder? subtitleBuilder;

@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart' hide Title;
 import 'package:flutter/scheduler.dart';
@@ -26,7 +26,7 @@ class EmailVerifiedAction extends FirebaseUIAction {
 /// {@endtemplate}
 class EmailVerificationScreen extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// {@macro ui.auth.screens.responsive_page.header_builder}
   final HeaderBuilder? headerBuilder;
@@ -63,7 +63,7 @@ class EmailVerificationScreen extends StatelessWidget {
   final double breakpoint;
 
   /// A configuration object used to construct a dynamic link.
-  final ActionCodeSettings? actionCodeSettings;
+  final fba.ActionCodeSettings? actionCodeSettings;
 
   /// {@macro ui.auth.screens.email_verification_screen}
   const EmailVerificationScreen({
@@ -114,8 +114,8 @@ T? _ambiguate<T>(T? value) => value;
 
 class _EmailVerificationScreenContent extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
-  final ActionCodeSettings? actionCodeSettings;
+  final fba.FirebaseAuth? auth;
+  final fba.ActionCodeSettings? actionCodeSettings;
 
   const _EmailVerificationScreenContent({
     required this.auth,
@@ -130,8 +130,8 @@ class _EmailVerificationScreenContent extends StatefulWidget {
 class __EmailVerificationScreenContentState
     extends State<_EmailVerificationScreenContent> {
   late final controller = EmailVerificationController(auth);
-  FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
-  User get user => auth.currentUser!;
+  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
+  fba.User get user => auth.currentUser!;
   bool isLoading = false;
 
   @override

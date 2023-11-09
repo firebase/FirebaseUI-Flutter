@@ -2,20 +2,20 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 abstract class MultiProviderScreen extends Widget {
   final List<AuthProvider>? _providers;
-  final FirebaseAuth? _auth;
-  FirebaseAuth get auth {
-    return _auth ?? FirebaseAuth.instance;
+  final fba.FirebaseAuth? _auth;
+  fba.FirebaseAuth get auth {
+    return _auth ?? fba.FirebaseAuth.instance;
   }
 
   const MultiProviderScreen({
     super.key,
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
     List<AuthProvider>? providers,
   })  : _auth = auth,
         _providers = providers;

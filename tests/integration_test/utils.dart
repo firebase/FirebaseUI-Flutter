@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -29,7 +29,7 @@ bool get isMobile {
 }
 
 late FirebaseFirestore db;
-late FirebaseAuth auth;
+late fba.FirebaseAuth auth;
 
 bool _prepared = false;
 
@@ -42,8 +42,8 @@ Future<void> prepare() async {
   }
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
-  auth = FirebaseAuth.instance;
+  await fba.FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
+  auth = fba.FirebaseAuth.instance;
 
   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   db = FirebaseFirestore.instance;

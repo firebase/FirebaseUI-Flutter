@@ -5,14 +5,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:mockito/mockito.dart';
 
 import 'package:firebase_ui_auth/src/widgets/internal/universal_text_form_field.dart';
 
 import '../test_utils.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+class MockFirebaseAuth extends Mock implements fba.FirebaseAuth {}
 
 void main() {
   group('EmailForm', () {

@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -11,7 +11,7 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 /// {@endtemplate}
 class ReauthenticateView extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// A list of all supported auth providers.
   final List<AuthProvider> providers;
@@ -38,7 +38,7 @@ class ReauthenticateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final linkedProviders =
-        (auth ?? FirebaseAuth.instance).currentUser!.providerData;
+        (auth ?? fba.FirebaseAuth.instance).currentUser!.providerData;
 
     final providersMap = this.providers.fold<Map<String, AuthProvider>>(
       {},
