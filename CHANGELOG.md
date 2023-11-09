@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-09
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.10.0`](#firebase_ui_auth---v1100)
+ - [`firebase_ui_localizations` - `v1.8.0`](#firebase_ui_localizations---v180)
+ - [`firebase_ui_oauth_apple` - `v1.2.14`](#firebase_ui_oauth_apple---v1214)
+ - [`firebase_ui_oauth` - `v1.4.14`](#firebase_ui_oauth---v1414)
+ - [`firebase_ui_oauth_twitter` - `v1.2.14`](#firebase_ui_oauth_twitter---v1214)
+ - [`firebase_ui_oauth_facebook` - `v1.2.14`](#firebase_ui_oauth_facebook---v1214)
+ - [`firebase_ui_oauth_google` - `v1.2.14`](#firebase_ui_oauth_google---v1214)
+ - [`firebase_ui_database` - `v1.3.12`](#firebase_ui_database---v1312)
+ - [`firebase_ui_firestore` - `v1.5.14`](#firebase_ui_firestore---v1514)
+ - [`firebase_ui_storage` - `v1.0.4`](#firebase_ui_storage---v104)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.4.14`
+ - `firebase_ui_oauth_twitter` - `v1.2.14`
+ - `firebase_ui_oauth_facebook` - `v1.2.14`
+ - `firebase_ui_oauth_google` - `v1.2.14`
+ - `firebase_ui_database` - `v1.3.12`
+ - `firebase_ui_firestore` - `v1.5.14`
+ - `firebase_ui_storage` - `v1.0.4`
+
+---
+
+#### `firebase_ui_auth` - `v1.10.0`
+
+ - **FEAT**(ui_auth): add more account actions ([#172](https://github.com/firebase/FirebaseUI-Flutter/issues/172)). ([518a6c7b](https://github.com/firebase/FirebaseUI-Flutter/commit/518a6c7b24835134d7943b3fc91a68f125e5a0fb))
+ - **FEAT**(ui_auth): add a way to customize PlatformException text ([#171](https://github.com/firebase/FirebaseUI-Flutter/issues/171)). ([cbe75ca4](https://github.com/firebase/FirebaseUI-Flutter/commit/cbe75ca436bd4aeeb9c9f2e1b9fc067b2e1de279))
+
+#### `firebase_ui_localizations` - `v1.8.0`
+
+ - **FEAT**(ui_localizations): Add romanian localization ([#174](https://github.com/firebase/FirebaseUI-Flutter/issues/174)). ([dc9c9cb2](https://github.com/firebase/FirebaseUI-Flutter/commit/dc9c9cb2698e3ab1d1774143b05d48eccde73dfb))
+
+#### `firebase_ui_oauth_apple` - `v1.2.14`
+
+ - **FIX**(ui_oauth_apple): fix AuthAction.link for Apple Sign In ([#170](https://github.com/firebase/FirebaseUI-Flutter/issues/170)). ([b69c8edd](https://github.com/firebase/FirebaseUI-Flutter/commit/b69c8eddc0fdf9336a420639200e51f24aab5775))
+
+
 ## 2023-10-19
 
 ### Changes
