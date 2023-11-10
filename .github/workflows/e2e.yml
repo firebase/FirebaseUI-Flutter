@@ -57,6 +57,8 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
+          target: google_apis
+          arch: x86_64
           script: echo "Generated AVD snapshot for caching."
       - name: Firebase Emulator Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
@@ -92,6 +94,8 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
+          target: google_apis
+          arch: x86_64
           script: ./gradlew connectedCheck
       - name: "E2E Tests"
         working-directory: tests
