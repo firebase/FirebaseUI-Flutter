@@ -49,7 +49,7 @@ jobs:
             ~/.android/adb*
           key: avd
 
-      - name: create AVD and generate snapshot for caching
+      - name: Create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -87,7 +87,7 @@ jobs:
           cd ../emulator_proxy
           echo "Starting emulator proxy"
           dart run emulator_proxy:start 100 &
-      - name: Create and start emulator
+      - name: E2E tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 31
@@ -96,11 +96,7 @@ jobs:
           disable-animations: true
           target: google_apis
           arch: x86_64
-          script: ./gradlew connectedCheck
-      - name: "E2E Tests"
-        working-directory: tests
-        run: |
-          flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
+          script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   # ios:
   #   runs-on: macos-latest
