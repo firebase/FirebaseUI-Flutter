@@ -85,6 +85,7 @@ jobs:
           disable-animations: false
           target: google_apis
           arch: x86_64
+          profile: Pixel 5
           script: echo "Generated AVD snapshot for caching."
       - name: E2E Tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -96,7 +97,7 @@ jobs:
           disable-animations: true
           target: google_apis
           arch: x86_64
-          device: pixel_5
+          profile: Pixel 5
           script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   ios:
