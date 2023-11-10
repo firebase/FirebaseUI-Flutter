@@ -29,6 +29,18 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - name: Create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 31
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          target: google_apis
+          arch: x86_64
+          profile: pixel_5
+          script: echo "Generated AVD snapshot for caching."
       - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8
         name: Install Node.js 16
         with:
@@ -75,18 +87,6 @@ jobs:
           cd ../emulator_proxy
           echo "Starting emulator proxy"
           dart run emulator_proxy:start 100 &
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 31
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          target: google_apis
-          arch: x86_64
-          profile: Pixel 5
-          script: echo "Generated AVD snapshot for caching."
       - name: E2E Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -97,7 +97,7 @@ jobs:
           disable-animations: true
           target: google_apis
           arch: x86_64
-          profile: Pixel 5
+          profile: pixel_5
           script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   ios:
