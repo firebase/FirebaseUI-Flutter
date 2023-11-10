@@ -130,9 +130,19 @@ void main() {
     testWidgets(
       'shows error message if invalid code was entered',
       (tester) async {
+        final completer = Completer<void>();
+
         await render(
           tester,
-          const PhoneInputScreen(),
+          AuthStateListener<PhoneAuthController>(
+            listener: (oldState, newState, _) {
+              if (newState is! AuthFailed) return;
+              completer.complete();
+
+              return null;
+            },
+            child: const PhoneInputScreen(),
+          ),
         );
         await sendSMS(tester, '234567890');
 
@@ -148,9 +158,15 @@ void main() {
 
         await tester.enterText(smsCodeInput, invalidCode);
         await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+        await completer.future;
+
+        await tester.pump();
 
         expect(find.byType(ErrorText), findsOneWidget);
+        expect(
+          find.text(labels.invalidVerificationCodeErrorText),
+          findsOneWidget,
+        );
       },
     );
 
