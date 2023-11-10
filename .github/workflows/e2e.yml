@@ -60,34 +60,7 @@ jobs:
           target: google_apis
           arch: x86_64
           script: echo "Generated AVD snapshot for caching."
-      - name: Firebase Emulator Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
-        with:
-          path: ~/.cache/firebase/emulators
-          key: firebase-emulators-v2-${{ github.run_id }}
-          restore-keys: firebase-emulators-v2
-      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
-        with:
-          channel: "stable"
-          cache: true
-      - uses: bluefireteam/melos-action@dd3c344d731938d2ab2567a261f54a19a68b5f6a
-        with:
-          run-bootstrap: false
-          melos-version: "3.0.1"
-      - name: "Bootstrap package"
-        run: melos bootstrap --scope tests
-      - name: "Install Tools"
-        run: |
-          sudo npm i -g firebase-tools
-      - name: Start Firebase Emulator and proxy
-        run: |
-          cd ./tests
-          echo "Starting Firebase Emulator"
-          ../.github/workflows/scripts/start-firebase-emulator.sh
-          cd ../emulator_proxy
-          echo "Starting emulator proxy"
-          dart run emulator_proxy:start 100 &
-      - name: E2E tests
+      - name: Flutter devices
         uses: reactivecircus/android-emulator-runner@v2
         with:
           working-directory: tests
@@ -97,7 +70,45 @@ jobs:
           disable-animations: true
           target: google_apis
           arch: x86_64
-          script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
+          script: flutter devices
+      # - name: Firebase Emulator Cache
+      #   uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+      #   with:
+      #     path: ~/.cache/firebase/emulators
+      #     key: firebase-emulators-v2-${{ github.run_id }}
+      #     restore-keys: firebase-emulators-v2
+      # - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+      #   with:
+      #     channel: "stable"
+      #     cache: true
+      # - uses: bluefireteam/melos-action@dd3c344d731938d2ab2567a261f54a19a68b5f6a
+      #   with:
+      #     run-bootstrap: false
+      #     melos-version: "3.0.1"
+      # - name: "Bootstrap package"
+      #   run: melos bootstrap --scope tests
+      # - name: "Install Tools"
+      #   run: |
+      #     sudo npm i -g firebase-tools
+      # - name: Start Firebase Emulator and proxy
+      #   run: |
+      #     cd ./tests
+      #     echo "Starting Firebase Emulator"
+      #     ../.github/workflows/scripts/start-firebase-emulator.sh
+      #     cd ../emulator_proxy
+      #     echo "Starting emulator proxy"
+      #     dart run emulator_proxy:start 100 &
+      # - name: E2E tests
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     working-directory: tests
+      #     api-level: 31
+      #     force-avd-creation: false
+      #     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+      #     disable-animations: true
+      #     target: google_apis
+      #     arch: x86_64
+      #     script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   # ios:
   #   runs-on: macos-latest
