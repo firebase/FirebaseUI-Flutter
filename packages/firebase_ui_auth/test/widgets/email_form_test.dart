@@ -251,8 +251,11 @@ void main() {
       'verifies that password confirmation matches password',
       (tester) async {
         await tester.pumpWidget(
-          const TestMaterialApp(
-            child: EmailForm(action: AuthAction.signUp),
+          TestMaterialApp(
+            child: EmailForm(
+              auth: MockAuth(),
+              action: AuthAction.signUp,
+            ),
           ),
         );
 
