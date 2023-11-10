@@ -2,6 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -15,6 +16,8 @@ import '../test_utils.dart';
 class MockFirebaseAuth extends Mock implements fba.FirebaseAuth {}
 
 void main() {
+  const labels = DefaultLocalizations();
+
   group('EmailForm', () {
     late Widget widget;
 
@@ -153,5 +156,125 @@ void main() {
         isFalse,
       );
     });
+
+    testWidgets('validates email', (tester) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(
+            auth: MockAuth(),
+          ),
+        ),
+      );
+
+      final inputs = find.byType(TextFormField);
+      final emailInput = inputs.first;
+
+      await tester.enterText(emailInput, 'not a vailid email');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      expect(find.text(labels.isNotAValidEmailErrorText), findsOneWidget);
+    });
+
+    testWidgets('requires password', (tester) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(
+            auth: MockAuth(),
+          ),
+        ),
+      );
+
+      final inputs = find.byType(TextFormField);
+      final emailInput = inputs.first;
+      final passwordInput = inputs.at(1);
+
+      await tester.enterText(emailInput, 'test@test.com');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+
+      await tester.enterText(passwordInput, '');
+      await tester.pumpAndSettle();
+
+      expect(find.text(labels.passwordIsRequiredErrorText), findsOneWidget);
+    });
+
+    testWidgets(
+      'shows password confirmation if action is sign up',
+      (tester) async {
+        await tester.pumpWidget(
+          TestMaterialApp(
+            child: EmailForm(
+              auth: MockAuth(),
+              action: AuthAction.signUp,
+            ),
+          ),
+        );
+
+        final inputs = find.byType(TextFormField);
+        expect(inputs, findsNWidgets(3));
+      },
+    );
+
+    testWidgets(
+      'requires password confirmation',
+      (tester) async {
+        await tester.pumpWidget(
+          TestMaterialApp(
+            child: EmailForm(
+              auth: MockAuth(),
+              action: AuthAction.signUp,
+            ),
+          ),
+        );
+
+        final inputs = find.byType(TextFormField);
+
+        await tester.enterText(inputs.at(0), 'test@test.com');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+
+        await tester.enterText(inputs.at(1), 'password');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+
+        await tester.enterText(inputs.at(2), '');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+
+        await tester.pumpAndSettle();
+
+        expect(
+          find.text(labels.confirmPasswordIsRequiredErrorText),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'verifies that password confirmation matches password',
+      (tester) async {
+        await tester.pumpWidget(
+          const TestMaterialApp(
+            child: EmailForm(action: AuthAction.signUp),
+          ),
+        );
+
+        final inputs = find.byType(TextFormField);
+
+        await tester.enterText(inputs.at(0), 'test@test.com');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        await tester.enterText(inputs.at(1), 'password');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        await tester.enterText(inputs.at(2), 'psasword');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        expect(
+          find.text(labels.confirmPasswordDoesNotMatchErrorText),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }
