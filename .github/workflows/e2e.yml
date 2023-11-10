@@ -96,6 +96,7 @@ jobs:
           disable-animations: true
           target: google_apis
           arch: x86_64
+          device: pixel_5
           script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   # ios:
