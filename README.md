@@ -23,4 +23,4 @@ Please file Firebase UI specific issues, bugs, or feature requests in our [issue
 
 ## Contributing
 
-If you wish to contribute a change to any of the existing plugins in this repo, please review our [contribution guide](./docs/contributing.md) and open a [pull request](https://github.com/firebase/FirebaseUI-Flutter/pulls).
+If you wish to contribute a change to any of the existing plugins in this repo, please review our [contribution guide](https://github.com/firebase/FirebaseUI-Flutter/blob/main/CONTRIBUTING.md) and open a [pull request](https://github.com/firebase/FirebaseUI-Flutter/pulls).
