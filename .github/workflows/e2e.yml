@@ -60,6 +60,10 @@ jobs:
           target: google_apis
           arch: x86_64
           script: echo "Generated AVD snapshot for caching."
+      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+        with:
+          channel: "stable"
+          cache: true
       - name: Flutter devices
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -77,10 +81,6 @@ jobs:
       #     path: ~/.cache/firebase/emulators
       #     key: firebase-emulators-v2-${{ github.run_id }}
       #     restore-keys: firebase-emulators-v2
-      # - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
-      #   with:
-      #     channel: "stable"
-      #     cache: true
       # - uses: bluefireteam/melos-action@dd3c344d731938d2ab2567a261f54a19a68b5f6a
       #   with:
       #     run-bootstrap: false
