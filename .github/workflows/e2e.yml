@@ -21,6 +21,7 @@ on:
       - "**.md"
       - "**.png"
       - "**.jpg"
+  workflow_dispatch:
 
 jobs:
   android:
