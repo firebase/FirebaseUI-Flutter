@@ -21,13 +21,26 @@ on:
       - "**.md"
       - "**.png"
       - "**.jpg"
+  workflow_dispatch:
 
 jobs:
   android:
-    runs-on: macos-13
+    runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - name: Create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 31
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          target: google_apis
+          arch: x86_64
+          profile: pixel_5
+          script: echo "Generated AVD snapshot for caching."
       - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8
         name: Install Node.js 16
         with:
@@ -36,30 +49,27 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "11"
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
-        name: Gradle Cache
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-v4-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: ${{ runner.os }}-gradle-v4
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
-        name: AVD Cache
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: AVD cache
+        uses: actions/cache@v3
         id: avd-cache
         with:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd
+          key: avd-pixel
+      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+        with:
+          channel: "stable"
+          cache: true
       - name: Firebase Emulator Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v2-${{ github.run_id }}
           restore-keys: firebase-emulators-v2
-      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
-        with:
-          channel: "stable"
-          cache: true
       - uses: bluefireteam/melos-action@dd3c344d731938d2ab2567a261f54a19a68b5f6a
         with:
           run-bootstrap: false
@@ -77,29 +87,21 @@ jobs:
           cd ../emulator_proxy
           echo "Starting emulator proxy"
           dart run emulator_proxy:start 100 &
-      - name: Create and start emulator
-        # We use the installed SDK in the macOS image to create and start the emulator
-        run: |
-          echo "List installed packages"
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --list_installed
-
-          echo "Installing system image"
-          echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "system-images;android-33;google_apis;x86_64"
-
-          echo "Creating AVD"
-          echo "no" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd -n test_emulator -k "system-images;android-33;google_apis;x86_64" --force --device "pixel_5"
-
-          echo "Starting emulator"
-          $ANDROID_SDK_ROOT/emulator/emulator -avd test_emulator -no-audio -no-boot-anim -no-window &
-          adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
-      - name: "E2E Tests"
-        working-directory: tests
-        run: |
-          flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
+      - name: E2E Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          working-directory: tests
+          api-level: 31
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          target: google_apis
+          arch: x86_64
+          profile: pixel_5
+          script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   ios:
-    # Dropped down to macos-12 as macos-13 was timing out. This suspected issue:https://github.com/actions/runner-images/issues/8023
-    runs-on: macos-12
+    runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
@@ -176,7 +178,7 @@ jobs:
           flutter test ./integration_test/firebase_ui_test.dart -d "$SIMULATOR" --dart-define=CI=true
 
   macos:
-    runs-on: macos-13
+    runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11

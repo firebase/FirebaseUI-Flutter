@@ -19,7 +19,7 @@ class EmulatorProxy {
 
   Future<void> serve() async {
     final server = await HttpServer.bind(
-      InternetAddress.loopbackIPv4,
+      InternetAddress.anyIPv4,
       proxyPort,
     );
 
