@@ -123,6 +123,8 @@ void main() {
         expect(auth.currentUser!.email, 'test@test.com');
         expect(auth.currentUser!.uid, anonymousUid);
       },
+      // see https://github.com/firebase/FirebaseUI-Flutter/issues/150
+      skip: true,
     );
   });
 }
