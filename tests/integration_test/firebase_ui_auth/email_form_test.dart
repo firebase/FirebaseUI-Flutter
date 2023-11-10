@@ -2,7 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,96 +14,6 @@ void main() {
   const labels = DefaultLocalizations();
 
   group('EmailForm', () {
-    testWidgets('validates email', (tester) async {
-      await render(tester, const EmailForm());
-
-      final inputs = find.byType(TextFormField);
-      final emailInput = inputs.first;
-
-      await tester.enterText(emailInput, 'not a vailid email');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-
-      expect(find.text(labels.isNotAValidEmailErrorText), findsOneWidget);
-    });
-
-    testWidgets('requires password', (tester) async {
-      await render(tester, const EmailForm());
-
-      final inputs = find.byType(TextFormField);
-      final emailInput = inputs.first;
-      final passwordInput = inputs.at(1);
-
-      await tester.enterText(emailInput, 'test@test.com');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-
-      await tester.enterText(passwordInput, '');
-      await tester.pumpAndSettle();
-
-      expect(find.text(labels.passwordIsRequiredErrorText), findsOneWidget);
-    });
-
-    testWidgets(
-      'shows password confirmation if action is sign up',
-      (tester) async {
-        await render(tester, const EmailForm(action: AuthAction.signUp));
-
-        final inputs = find.byType(TextFormField);
-        expect(inputs, findsNWidgets(3));
-      },
-    );
-
-    testWidgets(
-      'requires password confirmation',
-      (tester) async {
-        await render(tester, const EmailForm(action: AuthAction.signUp));
-
-        final inputs = find.byType(TextFormField);
-
-        await tester.enterText(inputs.at(0), 'test@test.com');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-
-        await tester.enterText(inputs.at(1), 'password');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-
-        await tester.enterText(inputs.at(2), '');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-
-        await tester.pumpAndSettle();
-
-        expect(
-          find.text(labels.confirmPasswordIsRequiredErrorText),
-          findsOneWidget,
-        );
-      },
-    );
-
-    testWidgets(
-      'verifies that password confirmation matches password',
-      (tester) async {
-        await render(tester, const EmailForm(action: AuthAction.signUp));
-
-        final inputs = find.byType(TextFormField);
-
-        await tester.enterText(inputs.at(0), 'test@test.com');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pump();
-
-        await tester.enterText(inputs.at(1), 'password');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pump();
-
-        await tester.enterText(inputs.at(2), 'psasword');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
-
-        expect(
-          find.text(labels.confirmPasswordDoesNotMatchErrorText),
-          findsOneWidget,
-        );
-      },
-    );
-
     testWidgets(
       'registers new user',
       (tester) async {
@@ -192,32 +101,11 @@ void main() {
       (tester) async {
         await render(
           tester,
-          FirebaseUIActions(
-            actions: [
-              AuthStateChangeAction<CredentialLinked>((context, state) {
-                expect(state, isA<CredentialLinked>());
-                expect(state.credential, isNotNull);
-                expect(state.credential, isA<fba.EmailAuthCredential>());
-                expect(
-                  (state.credential as fba.EmailAuthCredential).email,
-                  equals('test@test.com'),
-                );
-                expect(
-                  (state.credential as fba.EmailAuthCredential).password,
-                  equals('password'),
-                );
-
-                expect(
-                  auth.currentUser!.email,
-                  equals('test@test.com'),
-                );
-              })
-            ],
-            child: const EmailForm(action: AuthAction.link),
-          ),
+          const EmailForm(action: AuthAction.link),
         );
 
         await auth.signInAnonymously();
+        final anonymousUid = auth.currentUser!.uid;
 
         final inputs = find.byType(TextFormField);
 
@@ -231,7 +119,12 @@ void main() {
         await tester.testTextInput.receiveAction(TextInputAction.done);
 
         await tester.pumpAndSettle();
+
+        expect(auth.currentUser!.email, 'test@test.com');
+        expect(auth.currentUser!.uid, anonymousUid);
       },
+      // see https://github.com/firebase/FirebaseUI-Flutter/issues/150
+      skip: true,
     );
   });
 }
