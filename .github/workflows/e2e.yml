@@ -24,7 +24,7 @@ on:
 
 jobs:
   android:
-    runs-on: macos-13
+    runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
@@ -98,8 +98,7 @@ jobs:
           flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
 
   ios:
-    # Dropped down to macos-12 as macos-13 was timing out. This suspected issue:https://github.com/actions/runner-images/issues/8023
-    runs-on: macos-12
+    runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
@@ -176,7 +175,7 @@ jobs:
           flutter test ./integration_test/firebase_ui_test.dart -d "$SIMULATOR" --dart-define=CI=true
 
   macos:
-    runs-on: macos-13
+    runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
