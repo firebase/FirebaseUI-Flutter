@@ -802,7 +802,7 @@ class ProfileScreen extends MultiProviderScreen {
     final mfaScopeKey = RebuildScopeKey();
     final emailVerificationScopeKey = RebuildScopeKey();
 
-    final user = auth.currentUser!;
+    final user = auth.currentUser;
 
     final avatarWidget = avatar ??
         Align(
@@ -819,10 +819,10 @@ class ProfileScreen extends MultiProviderScreen {
       children: [
         avatarWidget,
         Align(child: EditableUserDisplayName(auth: auth)),
-        if (!user.emailVerified) ...[
+        if (user?.emailVerified == false) ...[
           RebuildScope(
             builder: (context) {
-              if (user.emailVerified) {
+              if (user?.emailVerified == true) {
                 return const SizedBox.shrink();
               }
 
@@ -836,10 +836,15 @@ class ProfileScreen extends MultiProviderScreen {
         ],
         RebuildScope(
           builder: (context) {
-            final user = auth.currentUser!;
-            final linkedProviders = getLinkedProviders(user);
+            final user = auth.currentUser;
+            final List<AuthProvider<AuthListener, fba.AuthCredential>>? linkedProviders;
+            if (user != null) {
+              linkedProviders = getLinkedProviders(user);
+            } else {
+              linkedProviders = null;
+            }
 
-            if (linkedProviders.isEmpty) {
+            if (linkedProviders == null || linkedProviders.isEmpty) {
               return const SizedBox.shrink();
             }
 
@@ -857,10 +862,15 @@ class ProfileScreen extends MultiProviderScreen {
         ),
         RebuildScope(
           builder: (context) {
-            final user = auth.currentUser!;
-            final availableProviders = getAvailableProviders(context, user);
+            final user = auth.currentUser;
+            final List<AuthProvider<AuthListener, fba.AuthCredential>>? availableProviders;
+            if (user != null) {
+              availableProviders = getAvailableProviders(context, user);
+            } else {
+              availableProviders = null;
+            }
 
-            if (availableProviders.isEmpty) {
+            if (availableProviders == null || availableProviders.isEmpty) {
               return const SizedBox.shrink();
             }
 
@@ -878,8 +888,17 @@ class ProfileScreen extends MultiProviderScreen {
         if (showMFATile)
           RebuildScope(
             builder: (context) {
-              final user = auth.currentUser!;
-              final mfa = user.multiFactor;
+              final user = auth.currentUser;
+              final fba.MultiFactor? mfa;
+              if (user != null) {
+                mfa = user.multiFactor;
+              } else {
+                mfa = null;
+              }
+
+              if (mfa == null) {
+                return const SizedBox.shrink();
+              }
 
               return FutureBuilder<List<fba.MultiFactorInfo>>(
                 future: mfa.getEnrolledFactors(),
