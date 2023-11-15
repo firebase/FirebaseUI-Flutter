@@ -6,10 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
 import '../widgets/internal/universal_page_route.dart';
-
 import 'internal/responsive_page.dart';
 
 /// A screen displaying a fully styled phone number entry screen, with a country-code
@@ -107,7 +105,6 @@ class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flowKey = Object();
-    final l = FirebaseUILocalizations.labelsOf(context);
 
     return FirebaseUIActions(
       actions: actions ?? [SMSCodeRequestedAction(_next)],
@@ -132,14 +129,6 @@ class PhoneInputScreen extends StatelessWidget {
                   flowKey: flowKey,
                   multiFactorSession: multiFactorSession,
                   mfaHint: mfaHint,
-                ),
-                const SizedBox(height: 8),
-                UniversalButton(
-                  text: l.goBackButtonLabel,
-                  variant: ButtonVariant.text,
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
                 ),
               ],
             ),

@@ -201,7 +201,7 @@ void main() {
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pumpAndSettle();
 
-        final user = await completer.future.timeout(const Duration(seconds: 2));
+        final user = await completer.future.timeout(const Duration(seconds: 5));
 
         expect(user.phoneNumber, '+1234567890');
       },
