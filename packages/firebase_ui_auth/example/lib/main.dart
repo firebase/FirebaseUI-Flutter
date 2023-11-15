@@ -269,6 +269,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
                 platform == TargetPlatform.iOS ||
                 platform == TargetPlatform.android,
             showUnlinkConfirmationDialog: true,
+            showDeleteConfirmationDialog: true,
           );
         },
       },

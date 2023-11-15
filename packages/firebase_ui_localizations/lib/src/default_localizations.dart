@@ -62,6 +62,15 @@ abstract class FirebaseUILocalizationLabels {
   /// Used as a label of the country code picker dropdown.
   String get chooseACountry;
 
+  /// Delete account confirmation dialog message
+  String get confirmDeleteAccountAlertMessage;
+
+  /// Delete account confirmation dialog title
+  String get confirmDeleteAccountAlertTitle;
+
+  /// Confirm delete account button label
+  String get confirmDeleteAccountButtonLabel;
+
   /// Used as an error text when provided passwords do not match.
   String get confirmPasswordDoesNotMatchErrorText;
 
@@ -287,7 +296,7 @@ abstract class FirebaseUILocalizationLabels {
   String get ulinkProviderAlertTitle;
 
   /// Used as a generic error message when unable to resolve error details from
-  /// Exception or fba.FirebaseAuthException.
+  /// Exception or FirebaseAuthException.
   String get unknownError;
 
   /// Text that is shown as a message of the AlertDialog confirming provider
