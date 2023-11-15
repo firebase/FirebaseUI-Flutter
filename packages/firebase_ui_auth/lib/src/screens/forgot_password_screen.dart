@@ -41,6 +41,9 @@ class ForgotPasswordScreen extends StatelessWidget {
   /// {@macro ui.auth.screens.responsive_page.breakpoint}
   final double breakpoint;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const ForgotPasswordScreen({
     super.key,
     this.auth,
@@ -53,6 +56,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     this.desktopLayoutDirection,
     this.resizeToAvoidBottomInset,
     this.breakpoint = 600,
+    this.maxWidth = 1200,
   });
 
   @override
@@ -72,7 +76,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         headerMaxExtent: headerMaxExtent,
         sideBuilder: sideBuilder,
         breakpoint: breakpoint,
-        maxWidth: 1200,
+        maxWidth: maxWidth,
         contentFlex: 1,
         child: Padding(
           padding: const EdgeInsets.all(32),
