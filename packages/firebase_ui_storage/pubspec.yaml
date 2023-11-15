@@ -17,7 +17,7 @@ dependencies:
   firebase_ui_localizations: ^1.8.0
   firebase_ui_shared: ^1.4.1
   path: ^1.8.2
-  uuid: ^3.0.7
+  uuid: ^4.0.0
   file_selector: ^1.0.1
   flutter_blurhash: ^0.7.0
 
