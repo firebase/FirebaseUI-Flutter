@@ -70,6 +70,7 @@ class FirebaseDatabaseQueryBuilder extends StatefulWidget {
     super.key,
     required this.query,
     required this.builder,
+    this.reverseQuery = false,
     this.pageSize = 10,
     this.child,
   }) : assert(pageSize > 1, 'Cannot have a pageSize lower than 1');
@@ -85,6 +86,9 @@ class FirebaseDatabaseQueryBuilder extends StatefulWidget {
   final int pageSize;
 
   final FirebaseQueryBuilderSnapshotBuilder builder;
+
+  /// Whether to start fetching from the end of the query.
+  final bool reverseQuery;
 
   /// A widget that will be passed to [builder] for optimizations purpose.
   ///
@@ -167,7 +171,12 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
         +
         1;
 
-    final query = widget.query.limitToFirst(expectedDocsCount);
+    final Query query;
+    if (widget.reverseQuery) {
+      query = widget.query.limitToFirst(expectedDocsCount);
+    } else {
+      query = widget.query.limitToLast(expectedDocsCount);
+    }
 
     _querySubscription = query.onValue.listen(
       (event) {
@@ -178,11 +187,20 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
             _snapshot = _snapshot.copyWith(isFetching: false);
           }
 
+          List<DataSnapshot> docs;
+          if (event.snapshot.children.length < expectedDocsCount) {
+            docs = event.snapshot.children.toList();
+          } else {
+            docs = event.snapshot.children.take(expectedDocsCount - 1).toList();
+          }
+
+          if (widget.reverseQuery) {
+            docs = docs.reversed.toList();
+          }
+
           _snapshot = _snapshot.copyWith(
             hasData: true,
-            docs: event.snapshot.children.length < expectedDocsCount
-                ? event.snapshot.children.toList()
-                : event.snapshot.children.take(expectedDocsCount - 1).toList(),
+            docs: docs,
             error: null,
             hasMore: event.snapshot.children.length == expectedDocsCount,
             stackTrace: null,
