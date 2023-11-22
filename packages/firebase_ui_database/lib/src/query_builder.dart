@@ -413,6 +413,7 @@ class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
     Key? key,
     required Query query,
     required FirebaseItemBuilder itemBuilder,
+    super.reverseQuery,
     int pageSize = 10,
     FirebaseLoadingBuilder? loadingBuilder,
     FirebaseErrorBuilder? errorBuilder,
