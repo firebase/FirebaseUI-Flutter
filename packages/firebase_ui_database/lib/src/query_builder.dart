@@ -173,9 +173,9 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
 
     final Query query;
     if (widget.reverseQuery) {
-      query = widget.query.limitToFirst(expectedDocsCount);
-    } else {
       query = widget.query.limitToLast(expectedDocsCount);
+    } else {
+      query = widget.query.limitToFirst(expectedDocsCount);
     }
 
     _querySubscription = query.onValue.listen(
