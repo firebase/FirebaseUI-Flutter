@@ -23,7 +23,7 @@ class OAuthFlow extends AuthFlow<OAuthProvider>
     /// {@macro ui.auth.auth_flow.ctor.provider}
     required OAuthProvider provider,
 
-    /// {@macro @macro ui.auth.auth_action}
+    /// {@macro ui.auth.auth_action}
     AuthAction? action,
 
     /// {@macro ui.auth.auth_controller.auth}
