@@ -82,9 +82,9 @@ abstract class LoadingStateVariant {
 class _SolidColorLoadingStateVariant extends LoadingStateVariant {
   const _SolidColorLoadingStateVariant({
     this.color,
-    Curve? curve,
-    Duration? animationDuration,
-  }) : super(curve: curve, animationDuration: animationDuration);
+    super.curve,
+    super.animationDuration,
+  });
 
   final Color? color;
 }
@@ -93,10 +93,10 @@ class _BlurHashLoadingStateVariant extends LoadingStateVariant {
   final String? value;
 
   const _BlurHashLoadingStateVariant({
-    Curve? curve,
-    Duration? animationDuration,
+    super.curve,
+    super.animationDuration,
     this.value,
-  }) : super(curve: curve, animationDuration: animationDuration);
+  });
 }
 
 class _LoadingIndicatorLoadingStateVariant extends LoadingStateVariant {
