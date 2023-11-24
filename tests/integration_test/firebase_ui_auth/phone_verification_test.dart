@@ -94,12 +94,12 @@ void main() {
           ),
         );
 
-        await sendSMS(tester, '123456789');
+        await sendSMS(tester, '555555555');
 
         await completer.future;
 
         final codes = await getVerificationCodes();
-        expect(codes['+1123456789'], isNotEmpty);
+        expect(codes['+1555555555'], isNotEmpty);
       },
     );
 
@@ -144,13 +144,13 @@ void main() {
             child: const PhoneInputScreen(),
           ),
         );
-        await sendSMS(tester, '234567890');
+        await sendSMS(tester, '555555556');
 
         final smsCodeInput = find.byType(SMSCodeInput);
         expect(smsCodeInput, findsOneWidget);
 
         final codes = await getVerificationCodes();
-        final code = codes['+1234567890']!;
+        final code = codes['+1555555556']!;
         final invalidCode =
             code.split('').map(int.parse).map((v) => (v + 1) % 10).join();
 
@@ -189,11 +189,11 @@ void main() {
             child: const PhoneInputScreen(),
           ),
         );
-        await sendSMS(tester, '234567890');
+        await sendSMS(tester, '555555557');
 
         final smsCodeInput = find.byType(SMSCodeInput);
         final codes = await getVerificationCodes();
-        final code = codes['+1234567890']!;
+        final code = codes['+1555555557']!;
 
         await tester.tap(smsCodeInput);
 
@@ -201,9 +201,11 @@ void main() {
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pumpAndSettle();
 
-        final user = await completer.future.timeout(const Duration(seconds: 5));
+        final user = await completer.future.timeout(
+          const Duration(seconds: 10),
+        );
 
-        expect(user.phoneNumber, '+1234567890');
+        expect(user.phoneNumber, '+1555555557');
       },
     );
   });

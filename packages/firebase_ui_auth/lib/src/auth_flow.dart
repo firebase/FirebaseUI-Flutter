@@ -98,7 +98,7 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
     /// {@macro ui.auth.auth_controller.auth}
     fba.FirebaseAuth? auth,
 
-    /// {@macro @macro ui.auth.auth_action}
+    /// {@macro ui.auth.auth_action}
     AuthAction? action,
   })  : auth = auth ?? fba.FirebaseAuth.instance,
         _action = action,

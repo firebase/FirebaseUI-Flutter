@@ -93,6 +93,7 @@ class SMSCodeInputScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
 
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         _reset();
