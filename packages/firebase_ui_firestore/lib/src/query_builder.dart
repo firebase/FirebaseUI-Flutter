@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -359,8 +360,9 @@ typedef FirestoreItemBuilder<Document> = Widget Function(
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingIndicatorBuilder`.
-typedef FirestoreLoadingIndicatorBuilder = Widget Function(
-    BuildContext context);
+typedef FirestoreFetchingIndicatorBuilder = Widget Function(
+  BuildContext context,
+);
 
 /// A type representing the function passed to [FirestoreListView] for its `errorBuilder`.
 typedef FirestoreErrorBuilder = Widget Function(
@@ -429,13 +431,13 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     Key? key,
     required Query<Document> query,
     required FirestoreItemBuilder<Document> itemBuilder,
-    int? pageSize,
+    int pageSize = 10,
     FirestoreLoadingBuilder? loadingBuilder,
-    FirestoreLoadingIndicatorBuilder? loadingIndicatorBuilder,
+    FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
     FirestoreErrorBuilder? errorBuilder,
     FirestoreEmptyBuilder? emptyBuilder,
     Axis scrollDirection = Axis.vertical,
-    bool showLoadingIndicator = false,
+    bool showFetchingIndicator = false,
     bool reverse = false,
     ScrollController? controller,
     bool? primary,
@@ -457,7 +459,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
   }) : super(
           key: key,
           query: query,
-          pageSize: pageSize ?? (showLoadingIndicator ? 20 : 10),
+          pageSize: pageSize,
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ??
@@ -482,23 +484,16 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               itemCount: itemCount,
               itemBuilder: (context, index) {
                 final isLastItem = index + 1 == itemCount;
-                if (!showLoadingIndicator && isLastItem && snapshot.hasMore) {
+                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
                   snapshot.fetchMore();
                 }
 
                 final doc = snapshot.docs[index];
-                return showLoadingIndicator
-                    ? BuildAwareWidget(
-                        onBuild: () async {
-                          /// if we reached the end of the currently obtained
-                          /// items, we try to obtain more items
+                return showFetchingIndicator
+                    ? OnMountListener(
+                        onMount: () {
                           if (isLastItem && snapshot.hasMore) {
-                            /// We wait just so we get to see the progress
-                            /// indicator for a while.
-                            await Future.delayed(
-                              const Duration(milliseconds: 800),
-                              () => snapshot.fetchMore(),
-                            );
+                            snapshot.fetchMore();
                           }
                         },
                         child: Column(
@@ -506,16 +501,15 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
                           children: [
                             itemBuilder(context, doc),
                             if (isLastItem && snapshot.hasMore)
-                              loadingIndicatorBuilder?.call(context) ??
+                              fetchingIndicatorBuilder?.call(context) ??
                                   const Padding(
                                     padding: EdgeInsets.symmetric(
                                       vertical: 16.0,
                                     ),
                                     child: Center(
-                                      child: SizedBox(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        child: CircularProgressIndicator(),
+                                      child: LoadingIndicator(
+                                        size: 30.0,
+                                        borderWidth: 2.0,
                                       ),
                                     ),
                                   ),
@@ -551,14 +545,14 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     Key? key,
     required Query<Document> query,
     required FirestoreItemBuilder<Document> itemBuilder,
-    int? pageSize,
+    int pageSize = 10,
     FirestoreLoadingBuilder? loadingBuilder,
-    FirestoreLoadingIndicatorBuilder? loadingIndicatorBuilder,
+    FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
     FirestoreErrorBuilder? errorBuilder,
     FirestoreEmptyBuilder? emptyBuilder,
     required IndexedWidgetBuilder separatorBuilder,
     Axis scrollDirection = Axis.vertical,
-    bool showLoadingIndicator = false,
+    bool showFetchingIndicator = false,
     bool reverse = false,
     ScrollController? controller,
     bool? primary,
@@ -578,7 +572,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
   }) : super(
           key: key,
           query: query,
-          pageSize: pageSize ?? (showLoadingIndicator ? 20 : 10),
+          pageSize: pageSize,
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ??
@@ -603,23 +597,16 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               itemCount: itemCount,
               itemBuilder: (context, index) {
                 final isLastItem = index + 1 == itemCount;
-                if (!showLoadingIndicator && isLastItem && snapshot.hasMore) {
+                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
                   snapshot.fetchMore();
                 }
 
                 final doc = snapshot.docs[index];
-                return showLoadingIndicator
-                    ? BuildAwareWidget(
-                        onBuild: () async {
-                          /// if we reached the end of the currently obtained
-                          /// items, we try to obtain more items
+                return showFetchingIndicator
+                    ? OnMountListener(
+                        onMount: () {
                           if (isLastItem && snapshot.hasMore) {
-                            /// We wait just so we get to see the progress
-                            /// indicator for a while.
-                            await Future.delayed(
-                              const Duration(milliseconds: 800),
-                              () => snapshot.fetchMore(),
-                            );
+                            snapshot.fetchMore();
                           }
                         },
                         child: Column(
@@ -627,16 +614,15 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
                           children: [
                             itemBuilder(context, doc),
                             if (isLastItem && snapshot.hasMore)
-                              loadingIndicatorBuilder?.call(context) ??
+                              fetchingIndicatorBuilder?.call(context) ??
                                   const Padding(
                                     padding: EdgeInsets.symmetric(
                                       vertical: 16.0,
                                     ),
                                     child: Center(
-                                      child: SizedBox(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        child: CircularProgressIndicator(),
+                                      child: LoadingIndicator(
+                                        size: 30.0,
+                                        borderWidth: 2.0,
                                       ),
                                     ),
                                   ),
@@ -710,32 +696,37 @@ class _AggregateQueryBuilderState extends State<AggregateQueryBuilder> {
   }
 }
 
-/// It takes in the child you want to show and calls the
-/// onBuild function when the child's build method is completed. This means
-/// when the child's is created and build method is called for the first time,
-/// we'll get this callback.
+/// This widget calls back, via the supplied onMount method, when it gets
+/// mounted.
+/// It also offers the functionality to safely delay the onMount callback by
+/// onMountDelay.
+///
 /// Borrowed the idea from the link below and built on it further:
 /// https://www.filledstacks.com/post/how-to-perform-real-time-pagination-with-firestore/?utm_source=pocket_reader
-class BuildAwareWidget extends StatefulWidget {
-  final Function onBuild;
+class OnMountListener extends StatefulWidget {
+  final Function onMount;
+  final int onMountDelay; // in milliseconds
   final Widget child;
 
-  const BuildAwareWidget({
+  const OnMountListener({
     super.key,
-    required this.onBuild,
+    required this.onMount,
+    this.onMountDelay = 500,
     required this.child,
   });
 
   @override
-  State<BuildAwareWidget> createState() => _BuildAwareWidgetState();
+  State<OnMountListener> createState() => _OnMountListenerState();
 }
 
-class _BuildAwareWidgetState extends State<BuildAwareWidget> {
+class _OnMountListenerState extends State<OnMountListener> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      widget.onBuild();
+      Future.delayed(Duration(milliseconds: widget.onMountDelay), () {
+        if (mounted) widget.onMount();
+      });
     });
   }
 
