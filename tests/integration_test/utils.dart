@@ -44,7 +44,7 @@ Future<void> prepare() async {
   }
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await fba.FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
+  await fba.FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   auth = fba.FirebaseAuth.instance;
 
   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
