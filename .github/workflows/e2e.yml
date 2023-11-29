@@ -91,7 +91,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_5
-          script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
+          script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
 
   ios:
     runs-on: macos-latest
