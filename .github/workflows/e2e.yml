@@ -77,16 +77,9 @@ jobs:
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
       - name: "Install Tools"
-        run: |
-          sudo npm i -g firebase-tools
-      - name: Start Firebase Emulator and proxy
-        run: |
-          cd ./tests
-          echo "Starting Firebase Emulator"
-          ../.github/workflows/scripts/start-firebase-emulator.sh
-          cd ../emulator_proxy
-          echo "Starting emulator proxy"
-          dart run emulator_proxy:start 100 &
+        run: sudo npm i -g firebase-tools
+      - name: Start Firebase Emulator
+        run: ./scripts/start-firebase-emulator.sh
       - name: E2E Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -98,7 +91,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_5
-          script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true
+          script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
 
   ios:
     runs-on: macos-latest
@@ -142,8 +135,7 @@ jobs:
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
       - name: "Install Tools"
-        run: |
-          sudo npm i -g firebase-tools
+        run: sudo npm i -g firebase-tools
       - name: "Build Application"
         working-directory: tests
         run: |
@@ -156,13 +148,7 @@ jobs:
           flutter build ios --no-codesign --simulator --debug --target=./integration_test/firebase_ui_test.dart --dart-define=CI=true
           ccache -s
       - name: Start Firebase Emulator and proxy
-        run: |
-          cd ./tests
-          echo "Starting Firebase Emulator"
-          ../.github/workflows/scripts/start-firebase-emulator.sh
-          cd ../emulator_proxy
-          echo "Starting emulator proxy"
-          dart run emulator_proxy:start 100 &
+        run: ./scripts/start-firebase-emulator.sh
       - name: "E2E Tests"
         working-directory: tests
         run: |
@@ -219,8 +205,7 @@ jobs:
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
       - name: "Install Tools"
-        run: |
-          sudo npm i -g firebase-tools
+        run: sudo npm i -g firebase-tools
       - name: "Build Application"
         working-directory: tests
         run: |
@@ -233,13 +218,7 @@ jobs:
           flutter build macos --debug --target=./integration_test/firebase_ui_test.dart --device-id=macos --dart-define=CI=true
           ccache -s
       - name: Start Firebase Emulator and proxy
-        run: |
-          cd ./tests
-          echo "Starting Firebase Emulator"
-          ../.github/workflows/scripts/start-firebase-emulator.sh
-          cd ../emulator_proxy
-          echo "Starting emulator proxy"
-          dart run emulator_proxy:start 100 &
+        run: ./scripts/start-firebase-emulator.sh
       - name: "E2E Tests"
         working-directory: tests
         run: flutter test ./integration_test/firebase_ui_test.dart -d macos --dart-define=CI=true
