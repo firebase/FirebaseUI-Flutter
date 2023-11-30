@@ -5,6 +5,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as path;
+import 'package:uuid/data.dart';
 import 'package:uuid/uuid.dart';
 
 import 'lib.dart';
@@ -27,7 +28,7 @@ abstract class FileUploadNamingPolicy {
   factory FileUploadNamingPolicy.keepPath() => const KeepPathUploadPolicy();
 
   /// Creates a [UuidFileUploadNamingPolicy]
-  factory FileUploadNamingPolicy.uuid([Map<String, String>? options]) {
+  factory FileUploadNamingPolicy.uuid([V4Options? options]) {
     return UuidFileUploadNamingPolicy(options: options);
   }
 }
@@ -56,7 +57,7 @@ class KeepPathUploadPolicy implements FileUploadNamingPolicy {
 /// preserving file extension.
 class UuidFileUploadNamingPolicy implements FileUploadNamingPolicy {
   final Uuid uuid;
-  final Map<String, dynamic>? options;
+  final V4Options? options;
 
   const UuidFileUploadNamingPolicy({
     this.uuid = const Uuid(),
@@ -66,7 +67,7 @@ class UuidFileUploadNamingPolicy implements FileUploadNamingPolicy {
   @override
   String getUploadFileName(String fullPath) {
     final extension = path.extension(fullPath);
-    final name = uuid.v4(options: options);
+    final name = uuid.v4(config: options);
 
     return '$name$extension';
   }
