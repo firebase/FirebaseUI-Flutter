@@ -3,6 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 import 'dart:ui';
 
+import 'package:firebase_ui_localizations/src/lang/nb.dart';
+
 import "./default_localizations.dart";
 import 'lang/ar.dart';
 import 'lang/de.dart';
@@ -92,6 +94,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const JaLocalizations();
     case 'ko':
       return const KoLocalizations();
+    case 'nb':
+      return const NbLocalizations();
     case 'nl':
       return const NlLocalizations();
     case 'pl':
