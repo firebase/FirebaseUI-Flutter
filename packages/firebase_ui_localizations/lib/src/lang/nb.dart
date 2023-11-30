@@ -11,7 +11,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
       "Tilgang til denne kontoen er midlertidig sperret";
 
   @override
-  String get arrayLabel => "";
+  String get arrayLabel => "array";
 
   @override
   String get booleanLabel => "Boolsk";
