@@ -61,7 +61,7 @@
     "description": "Used as a label of the DeleteAccountButton.",
     "placeholders": {}
   },
-  "differentMethodsSignInTitleText": "Bruk en av disse methodene for å logge inn",
+  "differentMethodsSignInTitleText": "Bruk en av disse metodene for å logge inn",
   "@differentMethodsSignInTitleText": {
     "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
     "placeholders": {}

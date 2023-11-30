@@ -46,7 +46,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get differentMethodsSignInTitleText =>
-      "Bruk en av disse methodene for å logge inn";
+      "Bruk en av disse metodene for å logge inn";
 
   @override
   String get disable => "Deaktiver";
