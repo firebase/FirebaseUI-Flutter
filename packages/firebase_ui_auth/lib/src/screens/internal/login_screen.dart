@@ -5,13 +5,13 @@
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 
 import 'responsive_page.dart';
 
 class LoginScreen extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final AuthAction action;
   final List<AuthProvider> providers;
 
@@ -54,6 +54,9 @@ class LoginScreen extends StatelessWidget {
   /// {@macro ui.auth.widgets.email_form.showPasswordVisibilityToggle}
   final bool showPasswordVisibilityToggle;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const LoginScreen({
     super.key,
     required this.action,
@@ -73,6 +76,7 @@ class LoginScreen extends StatelessWidget {
     this.breakpoint = 800,
     this.styles,
     this.showPasswordVisibilityToggle = false,
+    this.maxWidth,
   });
 
   @override
@@ -102,6 +106,7 @@ class LoginScreen extends StatelessWidget {
       headerBuilder: headerBuilder,
       headerMaxExtent: headerMaxExtent,
       sideBuilder: sideBuilder,
+      maxWidth: maxWidth,
       child: loginContent,
     );
 

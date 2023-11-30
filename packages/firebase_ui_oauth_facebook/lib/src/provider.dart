@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide OAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -34,7 +34,7 @@ class FacebookProvider extends OAuthProvider {
     switch (result.status) {
       case LoginStatus.success:
         final token = result.accessToken!.token;
-        final credential = FacebookAuthProvider.credential(token);
+        final credential = fba.FacebookAuthProvider.credential(token);
 
         onCredentialReceived(credential, action);
         break;
@@ -53,11 +53,12 @@ class FacebookProvider extends OAuthProvider {
 
   @override
   OAuthCredential fromDesktopAuthResult(AuthResult result) {
-    return FacebookAuthProvider.credential(result.accessToken!);
+    return fba.FacebookAuthProvider.credential(result.accessToken!);
   }
 
   @override
-  FacebookAuthProvider get firebaseAuthProvider => FacebookAuthProvider();
+  fba.FacebookAuthProvider get firebaseAuthProvider =>
+      fba.FacebookAuthProvider();
 
   @override
   Future<void> logOutProvider() async {

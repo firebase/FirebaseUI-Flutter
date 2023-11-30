@@ -33,7 +33,7 @@ final emailLinkProviderConfig = EmailLinkAuthProvider(
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
@@ -269,6 +269,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
                 platform == TargetPlatform.iOS ||
                 platform == TargetPlatform.android,
             showUnlinkConfirmationDialog: true,
+            showDeleteConfirmationDialog: true,
           );
         },
       },

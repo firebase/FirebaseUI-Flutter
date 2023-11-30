@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/widgets.dart' hide Title;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -24,7 +24,7 @@ typedef PhoneNumberSubmitCallback = void Function(String phoneNumber);
 /// {@endtemplate}
 class PhoneInputView extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// {@macro ui.auth.auth_action}
   final AuthAction? action;
@@ -46,10 +46,10 @@ class PhoneInputView extends StatefulWidget {
   final WidgetBuilder? footerBuilder;
 
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_session}
-  final MultiFactorSession? multiFactorSession;
+  final fba.MultiFactorSession? multiFactorSession;
 
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_hint}
-  final PhoneMultiFactorInfo? mfaHint;
+  final fba.PhoneMultiFactorInfo? mfaHint;
 
   /// {@macro ui.auth.views.phone_input_view}
   const PhoneInputView({
@@ -141,6 +141,14 @@ class _PhoneInputViewState extends State<PhoneInputView> {
               ErrorText(exception: state.exception),
               const SizedBox(height: 8),
             ],
+            const SizedBox(height: 8),
+            UniversalButton(
+              text: l.goBackButtonLabel,
+              variant: ButtonVariant.text,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
             if (widget.footerBuilder != null) widget.footerBuilder!(context),
           ],
         );

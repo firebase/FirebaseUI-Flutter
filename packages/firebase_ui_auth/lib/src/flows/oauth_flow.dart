@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide OAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/foundation.dart' show TargetPlatform;
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
@@ -23,11 +23,11 @@ class OAuthFlow extends AuthFlow<OAuthProvider>
     /// {@macro ui.auth.auth_flow.ctor.provider}
     required OAuthProvider provider,
 
-    /// {@macro @macro ui.auth.auth_action}
+    /// {@macro ui.auth.auth_action}
     AuthAction? action,
 
     /// {@macro ui.auth.auth_controller.auth}
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
   }) : super(
           action: action,
           auth: auth,

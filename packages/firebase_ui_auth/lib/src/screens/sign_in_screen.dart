@@ -98,6 +98,9 @@ class SignInScreen extends MultiProviderScreen {
   /// {@macro ui.auth.widgets.email_form.showPasswordVisibilityToggle}
   final bool showPasswordVisibilityToggle;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   /// {@macro ui.auth.screens.sign_in_screen}
   const SignInScreen({
     super.key,
@@ -118,6 +121,7 @@ class SignInScreen extends MultiProviderScreen {
     this.breakpoint = 800,
     this.styles,
     this.showPasswordVisibilityToggle = false,
+    this.maxWidth,
   });
 
   Future<void> _signInWithDifferentProvider(
@@ -170,6 +174,7 @@ class SignInScreen extends MultiProviderScreen {
         footerBuilder: footerBuilder,
         breakpoint: breakpoint,
         showPasswordVisibilityToggle: showPasswordVisibilityToggle,
+        maxWidth: maxWidth,
       ),
     );
   }

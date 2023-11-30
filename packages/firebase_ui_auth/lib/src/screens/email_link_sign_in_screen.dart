@@ -43,6 +43,9 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
   /// {@macro ui.auth.screens.responsive_page.breakpoint}
   final double breakpoint;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const EmailLinkSignInScreen({
     super.key,
     super.auth,
@@ -53,6 +56,7 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
     this.sideBuilder,
     this.desktopLayoutDirection,
     this.breakpoint = 500,
+    this.maxWidth = 1200,
   });
 
   @override
@@ -62,7 +66,7 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
         breakpoint: breakpoint,
         headerBuilder: headerBuilder,
         headerMaxExtent: headerMaxExtent,
-        maxWidth: 1200,
+        maxWidth: maxWidth,
         sideBuilder: sideBuilder,
         desktopLayoutDirection: desktopLayoutDirection,
         child: Padding(

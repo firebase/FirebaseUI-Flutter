@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:desktop_webview_auth/desktop_webview_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -18,10 +18,10 @@ mixin PlatformSignInMixin {
   dynamic get firebaseAuthProvider;
 
   /// Creates [OAuthCredential] based on [AuthResult].
-  OAuthCredential fromDesktopAuthResult(AuthResult result);
+  fba.OAuthCredential fromDesktopAuthResult(AuthResult result);
 
   /// {@macro ui.auth.auth_provider.on_credential_received}
-  void onCredentialReceived(OAuthCredential credential, AuthAction action);
+  void onCredentialReceived(fba.OAuthCredential credential, AuthAction action);
 
   /// {@template ui.oauth.platform_sign_in_mixin.platform_sign_in}
   /// Redirects the flow to the [mobileSignIn] or [desktopSignIn] based

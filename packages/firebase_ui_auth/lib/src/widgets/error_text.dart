@@ -2,10 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuthException;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 import '../flows/phone_auth_flow.dart';
 
@@ -38,21 +39,36 @@ String? localizedErrorText(
 /// A widget which displays error text for a given Firebase error code.
 /// {@endtemplate}
 class ErrorText extends StatelessWidget {
-  /// A way to customize localized error messages.
+  /// A way to customize localized error messages for [FirebaseAuthException].
   ///
   /// Example usage:
   /// ```dart
   /// ErrorText.localizeError = (BuildContext context, FirebaseAuthException e) {
+  ///   final defaultLabels = FirebaseUILocalizations.labelsOf(context);
+  ///
   ///   return switch (e.code) {
   ///     'user-not-found' => 'Please create an account first.',
   ///     'credential-already-in-use' => 'This email is already in use.',
-  ///     _ => 'Oh no! Something went wrong.'
+  ///     _ => localizedErrorText(e.code, defaultLabels) ?? 'Oh no! Something went wrong.',
   ///   }
   /// }
   static String Function(
     BuildContext context,
-    FirebaseAuthException exception,
+    fba.FirebaseAuthException exception,
   )? localizeError;
+
+  /// A way to customize error message for [PlatformException]
+  ///
+  /// Example usage:
+  /// ```dart
+  /// ErrorText.localizePlatformError = (BuildContext context, PlatformException e) {
+  ///   if (e.code == "network_error") return "Please check your internet connection.";
+  ///   return "Oh no! Something went wrong.";
+  /// }
+  static String Function(
+    BuildContext context,
+    PlatformException exception,
+  )? localizePlatformError;
 
   /// A way to customize the widget that is used across the library to show
   /// error hints. By default a localized text is used with a color set to
@@ -92,11 +108,11 @@ class ErrorText extends StatelessWidget {
       text = l.smsAutoresolutionFailedError;
     }
 
-    if (exception is FirebaseAuthException) {
+    if (exception is fba.FirebaseAuthException) {
       if (localizeError != null) {
-        text = localizeError!(context, exception as FirebaseAuthException);
+        text = localizeError!(context, exception as fba.FirebaseAuthException);
       } else {
-        final e = exception as FirebaseAuthException;
+        final e = exception as fba.FirebaseAuthException;
         final code = e.code;
         final newText = localizedErrorText(code, l) ?? e.message;
 
@@ -104,6 +120,10 @@ class ErrorText extends StatelessWidget {
           text = newText;
         }
       }
+    }
+
+    if (exception is PlatformException && localizePlatformError != null) {
+      text = localizePlatformError!(context, exception as PlatformException);
     }
 
     return Text(

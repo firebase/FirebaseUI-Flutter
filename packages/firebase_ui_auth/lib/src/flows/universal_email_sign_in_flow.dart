@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 /// A controller interface of the [UniversalEmailSignInFlow].
@@ -36,9 +36,9 @@ class UniversalEmailSignInFlow extends AuthFlow<UniversalEmailSignInProvider>
     required UniversalEmailSignInProvider provider,
 
     /// {@macro ui.auth.auth_controller.auth}
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
 
-    /// {@macro @macro ui.auth.auth_action}
+    /// {@macro ui.auth.auth_action}
     AuthAction? action,
   }) : super(
           initialState: const Uninitialized(),

@@ -4,7 +4,7 @@
 
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 import 'internal/responsive_page.dart';
@@ -12,7 +12,7 @@ import 'internal/responsive_page.dart';
 /// A password reset screen.
 class ForgotPasswordScreen extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// A returned widget would be placed under the title of the screen.
   final WidgetBuilder? subtitleBuilder;
@@ -41,6 +41,9 @@ class ForgotPasswordScreen extends StatelessWidget {
   /// {@macro ui.auth.screens.responsive_page.breakpoint}
   final double breakpoint;
 
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
+
   const ForgotPasswordScreen({
     super.key,
     this.auth,
@@ -53,6 +56,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     this.desktopLayoutDirection,
     this.resizeToAvoidBottomInset,
     this.breakpoint = 600,
+    this.maxWidth = 1200,
   });
 
   @override
@@ -72,7 +76,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         headerMaxExtent: headerMaxExtent,
         sideBuilder: sideBuilder,
         breakpoint: breakpoint,
-        maxWidth: 1200,
+        maxWidth: maxWidth,
         contentFlex: 1,
         child: Padding(
           padding: const EdgeInsets.all(32),

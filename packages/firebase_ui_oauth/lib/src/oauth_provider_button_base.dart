@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' hide OAuthProvider;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,13 +20,13 @@ typedef ErrorBuilder = Widget Function(Exception e);
 /// {@endtemplate}
 typedef DifferentProvidersFoundCallback = void Function(
   List<String> providers,
-  AuthCredential? credential,
+  fba.AuthCredential? credential,
 );
 
 /// {@template ui.oauth.oauth_provider_button_base.signed_in_callback}
 /// A callback that is being called when the user signs in.
 /// {@endtemplate}
-typedef SignedInCallback = void Function(UserCredential credential);
+typedef SignedInCallback = void Function(fba.UserCredential credential);
 
 /// {@template ui.oauth.oauth_provider_button_base}
 /// A base widget that allows authentication using OAuth providers.
@@ -53,14 +53,14 @@ class OAuthProviderButtonBase extends StatefulWidget {
   final AuthAction? action;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// {@template ui.oauth.oauth_provider_button.on_tap}
   /// A callback that is being called when the button is tapped.
   /// {@endtemplate}
   final void Function()? onTap;
 
-  /// {@template ui.oauth.oauth_provider}
+  /// {@macro ui.oauth.oauth_provider}
   final OAuthProvider provider;
 
   /// {@macro ui.oauth.oauth_provider_button_base.different_providers_found_callback}
@@ -69,12 +69,12 @@ class OAuthProviderButtonBase extends StatefulWidget {
   /// {@macro ui.oauth.oauth_provider_button_base.signed_in_callback}
   final SignedInCallback? onSignedIn;
 
-  /// {@macro ui.oauth.oauth_provider_button_base.on_error}
+  /// {@template ui.oauth.oauth_provider_button_base.on_error}
   /// A callback that is being called when an error occurs.
   /// {@endtemplate}
   final void Function(Exception exception)? onError;
 
-  /// {@macro ui.oauth.oauth_provider_button_base.on_cancelled}
+  /// {@template ui.oauth.oauth_provider_button_base.on_cancelled}
   /// A callback that is being called when the user cancels the sign in.
   /// {@endtemplate}
   final VoidCallback? onCancelled;
@@ -152,7 +152,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   void initState() {
     super.initState();
 
-    provider.auth = widget.auth ?? FirebaseAuth.instance;
+    provider.auth = widget.auth ?? fba.FirebaseAuth.instance;
     provider.authListener = this;
   }
 
@@ -284,7 +284,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   }
 
   @override
-  FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
+  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
 
   void safeSetState(void Function() update) {
     if (mounted) {
@@ -293,14 +293,14 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   }
 
   @override
-  void onCredentialReceived(AuthCredential credential) {
+  void onCredentialReceived(fba.AuthCredential credential) {
     safeSetState(() {
       isLoading = true;
     });
   }
 
   @override
-  void onMFARequired(MultiFactorResolver resolver) {
+  void onMFARequired(fba.MultiFactorResolver resolver) {
     startMFAVerification(context: context, resolver: resolver);
   }
 
@@ -319,7 +319,7 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   }
 
   @override
-  void onCredentialLinked(AuthCredential credential) {
+  void onCredentialLinked(fba.AuthCredential credential) {
     safeSetState(() {
       isLoading = false;
     });
@@ -329,13 +329,13 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   void onDifferentProvidersFound(
     String email,
     List<String> providers,
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   ) {
     widget.onDifferentProvidersFound?.call(providers, credential);
   }
 
   @override
-  void onSignedIn(UserCredential credential) {
+  void onSignedIn(fba.UserCredential credential) {
     safeSetState(() {
       isLoading = false;
     });

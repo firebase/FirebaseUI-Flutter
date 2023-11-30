@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 
 /// {@template ui.auth.widgets.user_avatar}
@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 /// {@endtemplate}
 class UserAvatar extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// {@template ui.auth.widgets.user_avatar.size}
   /// A size of the avatar.
@@ -45,7 +45,7 @@ class UserAvatar extends StatefulWidget {
 }
 
 class _UserAvatarState extends State<UserAvatar> {
-  FirebaseAuth get auth => widget.auth ?? FirebaseAuth.instance;
+  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
   ShapeBorder get shape => widget.shape ?? const CircleBorder();
   Color get placeholderColor => widget.placeholderColor ?? Colors.grey;
   double get size => widget.size ?? 120;

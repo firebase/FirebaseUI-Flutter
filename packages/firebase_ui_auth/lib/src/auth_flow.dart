@@ -7,7 +7,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 /// An exception that is being thrown when user cancels the authentication
@@ -34,7 +34,7 @@ class AuthCancelledException implements Exception {
 class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
     implements AuthController, AuthListener {
   @override
-  FirebaseAuth auth;
+  fba.FirebaseAuth auth;
 
   /// An initial auth state. Usually [Uninitialized], but varies for different
   /// auth flows.
@@ -96,20 +96,20 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
     required T provider,
 
     /// {@macro ui.auth.auth_controller.auth}
-    FirebaseAuth? auth,
+    fba.FirebaseAuth? auth,
 
-    /// {@macro @macro ui.auth.auth_action}
+    /// {@macro ui.auth.auth_action}
     AuthAction? action,
-  })  : auth = auth ?? FirebaseAuth.instance,
+  })  : auth = auth ?? fba.FirebaseAuth.instance,
         _action = action,
         _provider = provider,
         super(initialState) {
     _provider.authListener = this;
-    _provider.auth = auth ?? FirebaseAuth.instance;
+    _provider.auth = auth ?? fba.FirebaseAuth.instance;
   }
 
   @override
-  void onCredentialReceived(AuthCredential credential) {
+  void onCredentialReceived(fba.AuthCredential credential) {
     value = CredentialReceived(credential);
   }
 
@@ -124,7 +124,7 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   }
 
   @override
-  void onCredentialLinked(AuthCredential credential) {
+  void onCredentialLinked(fba.AuthCredential credential) {
     value = CredentialLinked(credential, auth.currentUser!);
   }
 
@@ -132,7 +132,7 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   void onDifferentProvidersFound(
     String email,
     List<String> providers,
-    AuthCredential? credential,
+    fba.AuthCredential? credential,
   ) {
     value = DifferentSignInMethodsFound(
       email,
@@ -142,7 +142,7 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   }
 
   @override
-  void onSignedIn(UserCredential credential) {
+  void onSignedIn(fba.UserCredential credential) {
     if (credential.additionalUserInfo?.isNewUser ?? false) {
       value = UserCreated(credential);
     } else {
@@ -173,7 +173,7 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   }
 
   @override
-  void onMFARequired(MultiFactorResolver resolver) {
+  void onMFARequired(fba.MultiFactorResolver resolver) {
     value = MFARequired(resolver);
   }
 }

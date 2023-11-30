@@ -2,15 +2,12 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, MultiFactorSession, PhoneMultiFactorInfo;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
 import '../widgets/internal/universal_page_route.dart';
-
 import 'internal/responsive_page.dart';
 
 /// A screen displaying a fully styled phone number entry screen, with a country-code
@@ -41,7 +38,7 @@ class PhoneInputScreen extends StatelessWidget {
   final List<FirebaseUIAction>? actions;
 
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
 
   /// A returned widget would be placed under the title of the screen.
   final WidgetBuilder? subtitleBuilder;
@@ -65,10 +62,13 @@ class PhoneInputScreen extends StatelessWidget {
   final double breakpoint;
 
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_session}
-  final MultiFactorSession? multiFactorSession;
+  final fba.MultiFactorSession? multiFactorSession;
 
   /// {@macro ui.auth.providers.phone_auth_provider.mfa_hint}
-  final PhoneMultiFactorInfo? mfaHint;
+  final fba.PhoneMultiFactorInfo? mfaHint;
+
+  /// {@macro ui.auth.screens.responsive_page.max_width}
+  final double? maxWidth;
 
   const PhoneInputScreen({
     super.key,
@@ -84,6 +84,7 @@ class PhoneInputScreen extends StatelessWidget {
     this.breakpoint = 500,
     this.multiFactorSession,
     this.mfaHint,
+    this.maxWidth,
   });
 
   void _next(BuildContext context, AuthAction? action, Object flowKey, _) {
@@ -104,7 +105,6 @@ class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flowKey = Object();
-    final l = FirebaseUILocalizations.labelsOf(context);
 
     return FirebaseUIActions(
       actions: actions ?? [SMSCodeRequestedAction(_next)],
@@ -115,6 +115,7 @@ class PhoneInputScreen extends StatelessWidget {
           headerBuilder: headerBuilder,
           headerMaxExtent: headerMaxExtent,
           breakpoint: breakpoint,
+          maxWidth: maxWidth,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -128,14 +129,6 @@ class PhoneInputScreen extends StatelessWidget {
                   flowKey: flowKey,
                   multiFactorSession: multiFactorSession,
                   mfaHint: mfaHint,
-                ),
-                const SizedBox(height: 8),
-                UniversalButton(
-                  text: l.goBackButtonLabel,
-                  variant: ButtonVariant.text,
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
                 ),
               ],
             ),

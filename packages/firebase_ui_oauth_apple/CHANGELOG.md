@@ -1,3 +1,7 @@
+## 1.2.14
+
+ - **FIX**(ui_oauth_apple): fix AuthAction.link for Apple Sign In ([#170](https://github.com/firebase/FirebaseUI-Flutter/issues/170)). ([b69c8edd](https://github.com/firebase/FirebaseUI-Flutter/commit/b69c8eddc0fdf9336a420639200e51f24aab5775))
+
 ## 1.2.13
 
  - **DOCS**(ui_oauth_apple): add platform support note ([#139](https://github.com/firebase/FirebaseUI-Flutter/issues/139)). ([88b85b83](https://github.com/firebase/FirebaseUI-Flutter/commit/88b85b835ee52355983d95e13bbc68392de44090))

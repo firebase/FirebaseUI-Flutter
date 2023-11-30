@@ -328,4 +328,14 @@ class UkLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get weakPasswordErrorText =>
       "Password should be at least 6 characters";
+
+  @override
+  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+
+  @override
+  String get confirmDeleteAccountAlertMessage =>
+      "Are you sure you want to delete your account?";
+
+  @override
+  String get confirmDeleteAccountButtonLabel => "Yes, delete";
 }

@@ -2,15 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart'
-    show
-        ActionCodeSettings,
-        FirebaseAuth,
-        FirebaseAuthException,
-        MultiFactorInfo,
-        PhoneAuthCredential,
-        PhoneMultiFactorGenerator,
-        User;
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart'
@@ -27,7 +19,7 @@ import 'internal/multi_provider_screen.dart';
 
 class _AvailableProvidersRow extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final List<AuthProvider> providers;
   final VoidCallback onProviderLinked;
 
@@ -75,7 +67,7 @@ class _AvailableProvidersRowState extends State<_AvailableProvidersRow> {
         );
     }
 
-    await (widget.auth ?? FirebaseAuth.instance).currentUser!.reload();
+    await (widget.auth ?? fba.FirebaseAuth.instance).currentUser!.reload();
   }
 
   @override
@@ -173,7 +165,7 @@ class _EditButton extends StatelessWidget {
 
 class _LinkedProvidersRow extends StatefulWidget {
   /// {@macro ui.auth.auth_controller.auth}
-  final FirebaseAuth? auth;
+  final fba.FirebaseAuth? auth;
   final List<AuthProvider> providers;
   final VoidCallback onProviderUnlinked;
   final bool showUnlinkConfirmationDialog;
@@ -192,7 +184,7 @@ class _LinkedProvidersRow extends StatefulWidget {
 class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
   bool isEditing = false;
   String? unlinkingProvider;
-  FirebaseAuthException? error;
+  fba.FirebaseAuthException? error;
 
   final size = 32.0;
 
@@ -246,7 +238,7 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
         widget.onProviderUnlinked();
         isEditing = false;
       });
-    } on FirebaseAuthException catch (e) {
+    } on fba.FirebaseAuthException catch (e) {
       setState(() {
         error = e;
       });
@@ -349,8 +341,8 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
 }
 
 class _EmailVerificationBadge extends StatefulWidget {
-  final FirebaseAuth auth;
-  final ActionCodeSettings? actionCodeSettings;
+  final fba.FirebaseAuth auth;
+  final fba.ActionCodeSettings? actionCodeSettings;
   const _EmailVerificationBadge({
     required this.auth,
     this.actionCodeSettings,
@@ -370,7 +362,7 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
 
   EmailVerificationState get state => service.state;
 
-  User get user {
+  fba.User get user {
     return widget.auth.currentUser!;
   }
 
@@ -473,7 +465,7 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
 
 class _MFABadge extends StatelessWidget {
   final bool enrolled;
-  final FirebaseAuth auth;
+  final fba.FirebaseAuth auth;
   final VoidCallback onToggled;
   final List<AuthProvider> providers;
 
@@ -510,7 +502,7 @@ class _MFABadge extends StatelessWidget {
 
 class _MFAToggle extends StatefulWidget {
   final bool enrolled;
-  final FirebaseAuth auth;
+  final fba.FirebaseAuth auth;
   final VoidCallback? onToggled;
   final List<AuthProvider> providers;
 
@@ -620,8 +612,8 @@ class _MFAToggleState extends State<_MFAToggle> {
       auth: widget.auth,
       actions: [
         AuthStateChangeAction<CredentialReceived>((context, state) async {
-          final cred = state.credential as PhoneAuthCredential;
-          final assertion = PhoneMultiFactorGenerator.getAssertion(cred);
+          final cred = state.credential as fba.PhoneAuthCredential;
+          final assertion = fba.PhoneMultiFactorGenerator.getAssertion(cred);
 
           try {
             await mfa.enroll(assertion);
@@ -732,7 +724,7 @@ class ProfileScreen extends MultiProviderScreen {
 
   /// A configuration object used to construct a dynamic link for email
   /// verification.
-  final ActionCodeSettings? actionCodeSettings;
+  final fba.ActionCodeSettings? actionCodeSettings;
 
   /// Indicates whether MFA tile should be shown.
   final bool showMFATile;
@@ -745,6 +737,9 @@ class ProfileScreen extends MultiProviderScreen {
   /// Indicates wether a confirmation dialog should be shown when the user
   /// tries to unlink a provider.
   final bool showUnlinkConfirmationDialog;
+
+  /// {@macro ui.auth.widgets.delete_account_button.show_delete_confirmation_dialog}
+  final bool showDeleteConfirmationDialog;
 
   const ProfileScreen({
     super.key,
@@ -761,6 +756,7 @@ class ProfileScreen extends MultiProviderScreen {
     this.actionCodeSettings,
     this.showMFATile = false,
     this.showUnlinkConfirmationDialog = false,
+    this.showDeleteConfirmationDialog = false,
   });
 
   Future<bool> _reauthenticate(BuildContext context) {
@@ -775,13 +771,16 @@ class ProfileScreen extends MultiProviderScreen {
     );
   }
 
-  List<AuthProvider> getLinkedProviders(User user) {
+  List<AuthProvider> getLinkedProviders(fba.User user) {
     return providers
         .where((provider) => user.isProviderLinked(provider.providerId))
         .toList();
   }
 
-  List<AuthProvider> getAvailableProviders(BuildContext context, User user) {
+  List<AuthProvider> getAvailableProviders(
+    BuildContext context,
+    fba.User user,
+  ) {
     final platform = Theme.of(context).platform;
 
     return providers
@@ -886,7 +885,7 @@ class ProfileScreen extends MultiProviderScreen {
               final user = auth.currentUser!;
               final mfa = user.multiFactor;
 
-              return FutureBuilder<List<MultiFactorInfo>>(
+              return FutureBuilder<List<fba.MultiFactorInfo>>(
                 future: mfa.getEnrolledFactors(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
@@ -918,6 +917,7 @@ class ProfileScreen extends MultiProviderScreen {
         const SizedBox(height: 8),
         DeleteAccountButton(
           auth: auth,
+          showDeleteConfirmationDialog: showDeleteConfirmationDialog,
           onSignInRequired: () {
             return _reauthenticate(context);
           },
