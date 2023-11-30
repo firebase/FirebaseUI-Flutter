@@ -6,8 +6,7 @@
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
     "placeholders": {}
   },
-  "arrayLabel": "tabell",
-  "arrayLabel": "",
+  "arrayLabel": "array",
   "@arrayLabel": {
     "description": "",
     "placeholders": {}
