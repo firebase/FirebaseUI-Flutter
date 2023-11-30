@@ -738,6 +738,9 @@ class ProfileScreen extends MultiProviderScreen {
   /// tries to unlink a provider.
   final bool showUnlinkConfirmationDialog;
 
+  /// {@macro ui.auth.widgets.delete_account_button.show_delete_confirmation_dialog}
+  final bool showDeleteConfirmationDialog;
+
   const ProfileScreen({
     super.key,
     super.auth,
@@ -753,6 +756,7 @@ class ProfileScreen extends MultiProviderScreen {
     this.actionCodeSettings,
     this.showMFATile = false,
     this.showUnlinkConfirmationDialog = false,
+    this.showDeleteConfirmationDialog = false,
   });
 
   Future<bool> _reauthenticate(BuildContext context) {
@@ -913,6 +917,7 @@ class ProfileScreen extends MultiProviderScreen {
         const SizedBox(height: 8),
         DeleteAccountButton(
           auth: auth,
+          showDeleteConfirmationDialog: showDeleteConfirmationDialog,
           onSignInRequired: () {
             return _reauthenticate(context);
           },

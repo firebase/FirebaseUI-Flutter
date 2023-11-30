@@ -1,6 +1,6 @@
 {
   "@@locale": "ko",
-  "@@last_modified": "2023-10-12T15:27:44.523502",
+  "@@last_modified": "2023-11-16T00:26:53.951316",
   "accessDisabledErrorText": "이 계정의 액세스가 일시적으로 중지되었습니다.",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -512,6 +512,21 @@
   "weakPasswordErrorText": "Password should be at least 6 characters",
   "@weakPasswordErrorText": {
     "description": "Error text suggesting that used password is too weak",
+    "placeholders": {}
+  },
+  "confirmDeleteAccountAlertTitle": "Confirm account deletion",
+  "@confirmDeleteAccountAlertTitle": {
+    "description": "Delete account confirmation dialog title",
+    "placeholders": {}
+  },
+  "confirmDeleteAccountAlertMessage": "Are you sure you want to delete your account?",
+  "@confirmDeleteAccountAlertMessage": {
+    "description": "Delete account confirmation dialog message",
+    "placeholders": {}
+  },
+  "confirmDeleteAccountButtonLabel": "Yes, delete",
+  "@confirmDeleteAccountButtonLabel": {
+    "description": "Confirm delete account button label",
     "placeholders": {}
   }
 }
