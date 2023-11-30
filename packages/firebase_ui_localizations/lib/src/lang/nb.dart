@@ -39,20 +39,20 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get credentialAlreadyInUseErrorText =>
-      "Denne tilbyderen er knyttet til en annen brukerkonto.";
+      "Denne tilbyderen er assosiert med en annen brukerkonto.";
 
   @override
-  String get deleteAccount => "Slette konto";
+  String get deleteAccount => "Slett konto";
 
   @override
   String get differentMethodsSignInTitleText =>
-      "Bruk en av følgende metoder for å logge inn";
+      "Bruk en av disse methodene for å logge inn";
 
   @override
   String get disable => "Deaktiver";
 
   @override
-  String get eastInitialLabel => "E";
+  String get eastInitialLabel => "Ø";
 
   @override
   String get emailInputLabel => "E-post";
@@ -78,7 +78,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get findProviderForEmailTitleText =>
-      "Skriver inn e-posten din for å fortsette";
+      "Skriv inn e-postadresse for å fortsette";
 
   @override
   String get forgotPasswordButtonLabel => "Glemt passord?";
@@ -94,13 +94,13 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
   String get geopointLabel => "geopoint";
 
   @override
-  String get goBackButtonLabel => "Forrige";
+  String get goBackButtonLabel => "Tilbake";
 
   @override
-  String get invalidCountryCode => "Ugyldig kode";
+  String get invalidCountryCode => "Ugyldig landkode";
 
   @override
-  String get isNotAValidEmailErrorText => "E-postadressen er ikke gyldig";
+  String get isNotAValidEmailErrorText => "Oppgi en gyldig e-postadresse";
 
   @override
   String get latitudeLabel => "breddegrad";
@@ -143,7 +143,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get passwordResetEmailSentText =>
-      "Vi har sendt deg en e-post med en lenke for å tilbakestille passordet ditt. Sjekk e-post.";
+      "Vi har sendt deg en e-post med en lenke for å tilbakestille passordet ditt. Vennligst sjekk e-post.";
 
   @override
   String get phoneInputLabel => "Telefonnummer";
@@ -210,7 +210,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
   String get signInWithGoogleButtonText => "Logg inn med Google";
 
   @override
-  String get signInWithPhoneButtonText => "Logg inn med telefonnummer";
+  String get signInWithPhoneButtonText => "Logg inn med telefon";
 
   @override
   String get signInWithTwitterButtonText => "Logg inn med Twitter";
@@ -259,7 +259,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
   String get verifyPhoneNumberButtonText => "Neste";
 
   @override
-  String get westInitialLabel => "W";
+  String get westInitialLabel => "V";
 
   @override
   String get wrongOrNoPasswordErrorText =>
@@ -273,7 +273,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get verificationEmailSentText =>
-      "Vi har sendt deg en e-post med en lenke for å bekrefte e-postadressen din. Sjekk e-posten din og følg lenken for å bekrefte e-postadresse.";
+      "Vi har sendt deg en e-post for å bekrefte e-postadressen din. Vennligst sjekk e-post og følg lenke for å bekrefte e-postadresse.";
 
   @override
   String get verificationFailedText =>
@@ -299,7 +299,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get checkEmailHintText =>
-      "Sjekk e-posten din og klikk på lenken for å bekrefte e-postadresse.";
+      "Vennligst sjekk e-post og klikk på lenken for å bekrefte e-postadressen din.";
 
   @override
   String get doneButtonLabel => "Ferdig";
@@ -309,16 +309,17 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
       "Koden du skrev inn er ugyldig. Prøv igjen.";
 
   @override
-  String get ulinkProviderAlertTitle => "Deaktiver tilbyder";
+  String get ulinkProviderAlertTitle => "Frakoble tilbyder";
 
   @override
-  String get confirmUnlinkButtonLabel => "Deaktiver";
+  String get confirmUnlinkButtonLabel => "Frakoble";
 
   @override
   String get cancelButtonLabel => "Avbryt";
 
   @override
-  String get unlinkProviderAlertMessage => "";
+  String get unlinkProviderAlertMessage =>
+      "Er du sikker på at du vil koble fra tilbyderen?";
 
   @override
   String get weakPasswordErrorText => "Passordet må bestå av minst 6 tegn";

@@ -51,17 +51,17 @@
     "description": "Used as a placeholder of the country code input.",
     "placeholders": {}
   },
-  "credentialAlreadyInUseErrorText": "Denne tilbyderen er knyttet til en annen brukerkonto.",
+  "credentialAlreadyInUseErrorText": "Denne tilbyderen er assosiert med en annen brukerkonto.",
   "@credentialAlreadyInUseErrorText": {
     "description": "Error text that is show when user tries to use an OAuth provider that doesn't belong to currently signed in user account.",
     "placeholders": {}
   },
-  "deleteAccount": "Slette konto",
+  "deleteAccount": "Slett konto",
   "@deleteAccount": {
     "description": "Used as a label of the DeleteAccountButton.",
     "placeholders": {}
   },
-  "differentMethodsSignInTitleText": "Bruk en av følgende metoder for å logge inn",
+  "differentMethodsSignInTitleText": "Bruk en av disse methodene for å logge inn",
   "@differentMethodsSignInTitleText": {
     "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
     "placeholders": {}
@@ -71,7 +71,7 @@
     "description": "Button label that suggests to disable 2FA",
     "placeholders": {}
   },
-  "eastInitialLabel": "E",
+  "eastInitialLabel": "Ø",
   "@eastInitialLabel": {
     "description": "",
     "placeholders": {}
@@ -111,7 +111,7 @@
     "description": "Used as a label of the SMSCodeInput.",
     "placeholders": {}
   },
-  "findProviderForEmailTitleText": "Skriver inn e-posten din for å fortsette",
+  "findProviderForEmailTitleText": "Skriv inn e-postadresse for å fortsette",
   "@findProviderForEmailTitleText": {
     "description": "Used as a title of the FindProvidersForEmailView.",
     "placeholders": {}
@@ -136,7 +136,7 @@
     "description": "",
     "placeholders": {}
   },
-  "goBackButtonLabel": "Forrige",
+  "goBackButtonLabel": "Tilbake",
   "@goBackButtonLabel": {
     "description": "Used as a label of the back button.",
     "placeholders": {}
@@ -145,12 +145,12 @@
     "description": "The hash code for this object.",
     "placeholders": {}
   },
-  "invalidCountryCode": "Ugyldig kode",
+  "invalidCountryCode": "Ugyldig landkode",
   "@invalidCountryCode": {
     "description": "Used as an error text when provide country code is invalid.",
     "placeholders": {}
   },
-  "isNotAValidEmailErrorText": "E-postadressen er ikke gyldig",
+  "isNotAValidEmailErrorText": "Oppgi en gyldig e-postadresse",
   "@isNotAValidEmailErrorText": {
     "description": "Used as an error text of the EmailInput if the provided email is not valid.",
     "placeholders": {}
@@ -220,7 +220,7 @@
     "description": "Used as an error text when PasswordInput is empty.",
     "placeholders": {}
   },
-  "passwordResetEmailSentText": "Vi har sendt deg en e-post med en lenke for å tilbakestille passordet ditt. Sjekk e-post.",
+  "passwordResetEmailSentText": "Vi har sendt deg en e-post med en lenke for å tilbakestille passordet ditt. Vennligst sjekk e-post.",
   "@passwordResetEmailSentText": {
     "description": "Indicates that the password reset email was sent.",
     "placeholders": {}
@@ -334,7 +334,7 @@
     "description": "Used as a label of the OAuthProviderButton for Google provider.",
     "placeholders": {}
   },
-  "signInWithPhoneButtonText": "Logg inn med telefonnummer",
+  "signInWithPhoneButtonText": "Logg inn med telefon",
   "@signInWithPhoneButtonText": {
     "description": "Used as a label of the PhoneVerificationButton.",
     "placeholders": {}
@@ -414,7 +414,7 @@
     "description": "Used as a label of the submit button of the PhoneInputView.",
     "placeholders": {}
   },
-  "westInitialLabel": "W",
+  "westInitialLabel": "V",
   "@westInitialLabel": {
     "description": "",
     "placeholders": {}
@@ -434,7 +434,7 @@
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "Vi har sendt deg en e-post med en lenke for å bekrefte e-postadressen din. Sjekk e-posten din og følg lenken for å bekrefte e-postadresse.",
+  "verificationEmailSentText": "Vi har sendt deg en e-post for å bekrefte e-postadressen din. Vennligst sjekk e-post og følg lenke for å bekrefte e-postadresse.",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
@@ -465,8 +465,8 @@
     "placeholders": {}
   },
   "dismissButtonLabel": "Avbryt",
-  "@dismiss": {
-    "description": "Dissmiss button label",
+  "@dismissButtonLabel": {
+    "description": "Dismiss button label",
     "placeholders": {}
   },
   "okButtonLabel": "OK",
@@ -474,7 +474,7 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Sjekk e-posten din og klikk på lenken for å bekrefte e-postadresse.",
+  "checkEmailHintText": "Vennligst sjekk e-post og klikk på lenken for å bekrefte e-postadressen din.",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
@@ -489,12 +489,12 @@
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   },
-  "ulinkProviderAlertTitle": "Deaktiver tilbyder",
+  "ulinkProviderAlertTitle": "Frakoble tilbyder",
   "@ulinkProviderAlertTitle": {
     "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
     "placeholders": {}
   },
-  "confirmUnlinkButtonLabel": "Deaktiver",
+  "confirmUnlinkButtonLabel": "Frakoble",
   "@confirmUnlinkButtonLabel": {
     "description": "Unlink confirmation button label",
     "placeholders": {}
@@ -504,7 +504,7 @@
     "description": "Cancel button label",
     "placeholders": {}
   },
-  "unlinkProviderAlertMessage": "",
+  "unlinkProviderAlertMessage": "Er du sikker på at du vil koble fra tilbyderen?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
