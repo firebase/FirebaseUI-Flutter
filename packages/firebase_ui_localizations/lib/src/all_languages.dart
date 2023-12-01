@@ -3,8 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 import 'dart:ui';
 
-import 'package:firebase_ui_localizations/src/lang/nb.dart';
-
 import "./default_localizations.dart";
 import 'lang/ar.dart';
 import 'lang/de.dart';
@@ -19,6 +17,7 @@ import 'lang/id.dart';
 import 'lang/it.dart';
 import 'lang/ja.dart';
 import 'lang/ko.dart';
+import 'lang/nb.dart';
 import 'lang/nl.dart';
 import 'lang/pl.dart';
 import 'lang/pt.dart';
