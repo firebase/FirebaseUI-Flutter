@@ -25,7 +25,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - name: "Run Analyze"
@@ -39,7 +39,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - name: "Pub Check"
@@ -55,7 +55,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - name: "flutter pub get"
@@ -71,7 +71,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - uses: Homebrew/actions/setup-homebrew@master
@@ -107,7 +107,7 @@ jobs:
       - name: Install Dart
         uses: dart-lang/setup-dart@v1
       - name: Install Melos
-        uses: bluefireteam/melos-action@v2
+        uses: bluefireteam/melos-action@v3
         with:
           run-bootstrap: false
           melos-version: "3.0.1"
