@@ -10,6 +10,8 @@ command:
   version:
     linkToCommits: true
     workspaceChangelog: true
+    changelogCommitBodies:
+      include: true
 
   bootstrap:
     runPubGetInParallel: false

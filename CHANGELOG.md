@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-30
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`firebase_ui_storage` - `v2.0.0`](#firebase_ui_storage---v200)
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.11.0`](#firebase_ui_auth---v1110)
+ - [`firebase_ui_localizations` - `v1.9.0`](#firebase_ui_localizations---v190)
+ - [`firebase_ui_oauth` - `v1.4.15`](#firebase_ui_oauth---v1415)
+ - [`firebase_ui_oauth_twitter` - `v1.2.15`](#firebase_ui_oauth_twitter---v1215)
+ - [`firebase_ui_oauth_facebook` - `v1.2.15`](#firebase_ui_oauth_facebook---v1215)
+ - [`firebase_ui_oauth_apple` - `v1.2.15`](#firebase_ui_oauth_apple---v1215)
+ - [`firebase_ui_oauth_google` - `v1.2.15`](#firebase_ui_oauth_google---v1215)
+ - [`firebase_ui_firestore` - `v1.5.15`](#firebase_ui_firestore---v1515)
+ - [`firebase_ui_database` - `v1.3.13`](#firebase_ui_database---v1313)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.4.15`
+ - `firebase_ui_oauth_twitter` - `v1.2.15`
+ - `firebase_ui_oauth_facebook` - `v1.2.15`
+ - `firebase_ui_oauth_apple` - `v1.2.15`
+ - `firebase_ui_oauth_google` - `v1.2.15`
+ - `firebase_ui_firestore` - `v1.5.15`
+ - `firebase_ui_database` - `v1.3.13`
+
+---
+
+#### `firebase_ui_storage` - `v2.0.0`
+
+ - **BREAKING** **FEAT**(ui_storage): upgrade uuid dependency to ^4.0.0 ([#188](https://github.com/firebase/FirebaseUI-Flutter/issues/188)). ([e85c5166](https://github.com/firebase/FirebaseUI-Flutter/commit/e85c516697c850544b280e48e62dca788a4818ae))
+
+    `UuidFileUploadNamingPolicy` and respective factory constructor `FileUploadNamingPolicy.uuid` now accept `V4Options?`, instead of `Map<String, dynamic>?`.
+    
+    Here's an example migration:
+    
+    ```diff
+    final config = FirebaseUIStorageConfiguration(
+      storage: storage,
+    -  namingPolicy: FileUploadNamingPolicy.uuid({ 'rng': CryptoRNG() }),
+    +  namingPolicy: FileUploadNamingPolicy.uuid(V4Options(null, CryptoRNG())),
+    );
+    
+    await FirebaseUIStorage.configure(config);
+    ```
+
+
+#### `firebase_ui_auth` - `v1.11.0`
+
+ - **FIX**(ui_auth): correctly position phone input screen footer ([#183](https://github.com/firebase/FirebaseUI-Flutter/issues/183)). ([d5e2338d](https://github.com/firebase/FirebaseUI-Flutter/commit/d5e2338df4fbbed69c7526ecc1d4559730c43d03))
+ - **FIX**(ui_auth): make maxWidth configurable on all screens ([#178](https://github.com/firebase/FirebaseUI-Flutter/issues/178)). ([c5e77c27](https://github.com/firebase/FirebaseUI-Flutter/commit/c5e77c2705a4237fec489bcdd6b94c85a91e481c))
+ - **FEAT**(ui_auth): export `localizedErrorText` ([#189](https://github.com/firebase/FirebaseUI-Flutter/issues/189)). ([ab89f5cf](https://github.com/firebase/FirebaseUI-Flutter/commit/ab89f5cfa215be771e06abc9a94a65f821e2ce8d))
+ - **FEAT**(ui_auth): confirm account deletion ([#187](https://github.com/firebase/FirebaseUI-Flutter/issues/187)). ([053a96ee](https://github.com/firebase/FirebaseUI-Flutter/commit/053a96eeedfc74c20ab3e73605dae42676b85a96))
+
+#### `firebase_ui_localizations` - `v1.9.0`
+
+ - **FEAT**(ui_auth): confirm account deletion ([#187](https://github.com/firebase/FirebaseUI-Flutter/issues/187)). ([053a96ee](https://github.com/firebase/FirebaseUI-Flutter/commit/053a96eeedfc74c20ab3e73605dae42676b85a96))
+
+
 ## 2023-11-09
 
 ### Changes

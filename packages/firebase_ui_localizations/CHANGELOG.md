@@ -1,3 +1,7 @@
+## 1.9.0
+
+ - **FEAT**(ui_auth): confirm account deletion ([#187](https://github.com/firebase/FirebaseUI-Flutter/issues/187)). ([053a96ee](https://github.com/firebase/FirebaseUI-Flutter/commit/053a96eeedfc74c20ab3e73605dae42676b85a96))
+
 ## 1.8.0
 
  - **FEAT**(ui_localizations): Add romanian localization ([#174](https://github.com/firebase/FirebaseUI-Flutter/issues/174)). ([dc9c9cb2](https://github.com/firebase/FirebaseUI-Flutter/commit/dc9c9cb2698e3ab1d1774143b05d48eccde73dfb))

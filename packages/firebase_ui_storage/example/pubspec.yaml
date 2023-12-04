@@ -7,11 +7,11 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  cupertino_icons: ^1.0.3
-  file_picker: ^5.2.11
-  firebase_core: ^2.19.0
-  firebase_storage: ^11.2.5
-  firebase_ui_storage: ^1.0.4
+  cupertino_icons: ^1.0.6
+  file_picker: ^6.1.1
+  firebase_core: ^2.24.0
+  firebase_storage: ^11.5.3
+  firebase_ui_storage: ^2.0.0
   firebase_ui_shared: ^1.4.1
 
   flutter:
@@ -20,7 +20,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true

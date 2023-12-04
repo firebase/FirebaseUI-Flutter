@@ -26,7 +26,7 @@ void main() {
       await tester.pumpWidget(
         FirestoreQueryBuilder<Map>(
           query: collection.orderBy('value'),
-          builder: builderSpy,
+          builder: builderSpy.call,
         ),
       );
 
@@ -110,7 +110,7 @@ void main() {
       await tester.pumpWidget(
         FirestoreQueryBuilder<Map>(
           query: collection.orderBy('value'),
-          builder: builderSpy,
+          builder: builderSpy.call,
         ),
       );
 
@@ -273,7 +273,7 @@ void main() {
         await tester.pumpWidget(
           FirestoreQueryBuilder<Map>(
             query: collection.orderBy('value'),
-            builder: builderSpy,
+            builder: builderSpy.call,
           ),
         );
 
@@ -346,7 +346,7 @@ void main() {
         await tester.pumpWidget(
           FirestoreQueryBuilder<Map>(
             query: collection.orderBy('value', descending: true),
-            builder: builderSpy,
+            builder: builderSpy.call,
           ),
         );
 
@@ -410,7 +410,7 @@ void main() {
         await tester.pumpWidget(
           FirestoreQueryBuilder<Map>(
             query: collection.orderBy('value'),
-            builder: builderSpy,
+            builder: builderSpy.call,
           ),
         );
 
@@ -484,7 +484,7 @@ void main() {
           FirestoreQueryBuilder<Map>(
             pageSize: 11,
             query: collection.orderBy('value'),
-            builder: builderSpy,
+            builder: builderSpy.call,
           ),
         );
 
@@ -546,7 +546,7 @@ void main() {
       await tester.pumpWidget(
         FirestoreQueryBuilder<Map>(
           query: collection.orderBy('value'),
-          builder: builderSpy,
+          builder: builderSpy.call,
         ),
       );
 
@@ -642,7 +642,7 @@ void main() {
       await tester.pumpWidget(
         FirestoreQueryBuilder<Map>(
           query: validCollection.orderBy('value'),
-          builder: builderSpy,
+          builder: builderSpy.call,
         ),
       );
 
@@ -676,7 +676,7 @@ void main() {
       await tester.pumpWidget(
         FirestoreQueryBuilder<Map>(
           query: unknownCollection,
-          builder: builderSpy,
+          builder: builderSpy.call,
         ),
       );
 
@@ -744,7 +744,7 @@ void main() {
         await tester.pumpWidget(
           FirestoreQueryBuilder<Map>(
             query: unknownCollection,
-            builder: builderSpy,
+            builder: builderSpy.call,
           ),
         );
 
@@ -794,7 +794,7 @@ void main() {
         await tester.pumpWidget(
           FirestoreQueryBuilder<Map>(
             query: validCollection.orderBy('value'),
-            builder: builderSpy,
+            builder: builderSpy.call,
           ),
         );
 

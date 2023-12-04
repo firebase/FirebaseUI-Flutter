@@ -1,3 +1,10 @@
+## 1.11.0
+
+ - **FIX**(ui_auth): correctly position phone input screen footer ([#183](https://github.com/firebase/FirebaseUI-Flutter/issues/183)). ([d5e2338d](https://github.com/firebase/FirebaseUI-Flutter/commit/d5e2338df4fbbed69c7526ecc1d4559730c43d03))
+ - **FIX**(ui_auth): make maxWidth configurable on all screens ([#178](https://github.com/firebase/FirebaseUI-Flutter/issues/178)). ([c5e77c27](https://github.com/firebase/FirebaseUI-Flutter/commit/c5e77c2705a4237fec489bcdd6b94c85a91e481c))
+ - **FEAT**(ui_auth): export `localizedErrorText` ([#189](https://github.com/firebase/FirebaseUI-Flutter/issues/189)). ([ab89f5cf](https://github.com/firebase/FirebaseUI-Flutter/commit/ab89f5cfa215be771e06abc9a94a65f821e2ce8d))
+ - **FEAT**(ui_auth): confirm account deletion ([#187](https://github.com/firebase/FirebaseUI-Flutter/issues/187)). ([053a96ee](https://github.com/firebase/FirebaseUI-Flutter/commit/053a96eeedfc74c20ab3e73605dae42676b85a96))
+
 ## 1.10.0
 
  - **FEAT**(ui_auth): add more account actions ([#172](https://github.com/firebase/FirebaseUI-Flutter/issues/172)). ([518a6c7b](https://github.com/firebase/FirebaseUI-Flutter/commit/518a6c7b24835134d7943b3fc91a68f125e5a0fb))
