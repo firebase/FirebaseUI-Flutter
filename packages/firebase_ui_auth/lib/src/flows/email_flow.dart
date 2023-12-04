@@ -35,14 +35,12 @@ class EmailAuthFlow extends AuthFlow<EmailAuthProvider>
     required this.provider,
 
     /// {@macro ui.auth.auth_controller.auth}
-    fba.FirebaseAuth? auth,
+    super.auth,
 
     /// {@macro ui.auth.auth_action}
-    AuthAction? action,
+    super.action,
   }) : super(
-          action: action,
           initialState: AwaitingEmailAndPassword(),
-          auth: auth,
           provider: provider,
         );
 

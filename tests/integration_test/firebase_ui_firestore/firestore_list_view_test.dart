@@ -29,7 +29,7 @@ void main() {
               errorBuilder: (context, error, stack) {
                 return Text('error: $error');
               },
-              itemBuilder: builderSpy,
+              itemBuilder: builderSpy.call,
             ),
           ),
         ),

@@ -35,13 +35,13 @@ class SettingsChip extends StatelessWidget {
         onTapDown: (_) => onTap(),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-          child: Text(
-            label,
-            style: TextStyle(color: isActive ? Colors.white : Colors.black),
-          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: isActive ? Colors.blue : Colors.grey[200],
+          ),
+          child: Text(
+            label,
+            style: TextStyle(color: isActive ? Colors.white : Colors.black),
           ),
         ),
       ),
