@@ -323,4 +323,14 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get weakPasswordErrorText => "Passordet må bestå av minst 6 tegn";
+
+  @override
+  String get confirmDeleteAccountAlertTitle => "Bekreft sletting av konto";
+
+  @override
+  String get confirmDeleteAccountAlertMessage =>
+      "Er du sikker på at du vil slette kontoen din?";
+
+  @override
+  String get confirmDeleteAccountButtonLabel => "Ja, slett";
 }
