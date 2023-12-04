@@ -180,7 +180,9 @@ class _FlutterfireUIAuthActionsElement extends InheritedElement {
       listener: (oldState, newState, controller) {
         for (final action in widget.actions) {
           if (action is AuthStateChangeAction && action.matches(newState)) {
+            _controllerRegistry[newState] = controller;
             action.invoke(this, newState);
+            _controllerRegistry.remove(newState);
           }
         }
 
@@ -189,4 +191,39 @@ class _FlutterfireUIAuthActionsElement extends InheritedElement {
       child: super.build(),
     );
   }
+}
+
+final _controllerRegistry = <AuthState, AuthController>{};
+
+/// Allows getting an [AuthController] that caused an [AuthState] transition.
+/// Calling [getControllerForState] is only allowed from a [FirebaseUIAction]
+/// callback:
+///
+/// ```dart
+/// SignInScreen(
+///   actions: [
+///     AuthStateChangeAction<SignedIn>((context, state) {
+///       final ctrl = getControllerForState(state);
+///
+///       if (ctrl is EmailAuthController) {
+///          print('email was used for authentication');
+///       }
+///
+///
+///       Navigator.of(context).pushReplacementNamed('/profile');
+///     }
+///   ]
+/// );
+/// ```
+AuthController getControllerForState(AuthState state) {
+  final ctrl = _controllerRegistry[state];
+
+  if (ctrl == null) {
+    throw StateError(
+      'Quering controller for an auth state is only allowed '
+      'from FirebaseUIAction callback',
+    );
+  }
+
+  return ctrl;
 }
