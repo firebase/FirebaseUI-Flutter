@@ -58,6 +58,16 @@ Future<void> authCleanup() async {
   await deleteAllAccounts();
 }
 
+bool _testsSetUp = false;
+
+void setUpTests() {
+  if (_testsSetUp) return;
+
+  setUpAll(prepare);
+  tearDown(authCleanup);
+  _testsSetUp = true;
+}
+
 Future<void> render(WidgetTester tester, Widget widget) async {
   await tester.pumpWidget(
     MaterialApp(
