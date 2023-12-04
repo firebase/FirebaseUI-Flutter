@@ -60,7 +60,7 @@ class OAuthProviderButtonBase extends StatefulWidget {
   /// {@endtemplate}
   final void Function()? onTap;
 
-  /// {@template ui.oauth.oauth_provider}
+  /// {@macro ui.oauth.oauth_provider}
   final OAuthProvider provider;
 
   /// {@macro ui.oauth.oauth_provider_button_base.different_providers_found_callback}
@@ -69,12 +69,12 @@ class OAuthProviderButtonBase extends StatefulWidget {
   /// {@macro ui.oauth.oauth_provider_button_base.signed_in_callback}
   final SignedInCallback? onSignedIn;
 
-  /// {@macro ui.oauth.oauth_provider_button_base.on_error}
+  /// {@template ui.oauth.oauth_provider_button_base.on_error}
   /// A callback that is being called when an error occurs.
   /// {@endtemplate}
   final void Function(Exception exception)? onError;
 
-  /// {@macro ui.oauth.oauth_provider_button_base.on_cancelled}
+  /// {@template ui.oauth.oauth_provider_button_base.on_cancelled}
   /// A callback that is being called when the user cancels the sign in.
   /// {@endtemplate}
   final VoidCallback? onCancelled;

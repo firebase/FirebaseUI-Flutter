@@ -410,11 +410,11 @@ typedef FirebaseErrorBuilder = Widget Function(
 class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
   /// {@macro firebase_ui.firebase_database_list_view}
   FirebaseDatabaseListView({
-    Key? key,
-    required Query query,
+    super.key,
+    required super.query,
     required FirebaseItemBuilder itemBuilder,
     super.reverseQuery,
-    int pageSize = 10,
+    super.pageSize,
     FirebaseLoadingBuilder? loadingBuilder,
     FirebaseErrorBuilder? errorBuilder,
     Axis scrollDirection = Axis.vertical,
@@ -437,9 +437,6 @@ class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          key: key,
-          query: query,
-          pageSize: pageSize,
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ??

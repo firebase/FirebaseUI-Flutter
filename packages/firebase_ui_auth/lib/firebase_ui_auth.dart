@@ -81,7 +81,7 @@ export 'src/widgets/email_form.dart'
 export 'src/widgets/email_input.dart';
 export 'src/widgets/email_link_sign_in_button.dart';
 export 'src/widgets/email_sign_up_dialog.dart';
-export 'src/widgets/error_text.dart' show ErrorText;
+export 'src/widgets/error_text.dart' show ErrorText, localizedErrorText;
 export 'src/widgets/forgot_password_button.dart';
 export 'src/widgets/internal/oauth_provider_button.dart'
     show OAuthProviderButton, OAuthButtonVariant;

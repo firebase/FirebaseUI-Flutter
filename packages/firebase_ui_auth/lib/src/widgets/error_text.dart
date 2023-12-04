@@ -43,11 +43,13 @@ class ErrorText extends StatelessWidget {
   ///
   /// Example usage:
   /// ```dart
-  /// ErrorText.localizeError = (BuildContext context, fba.FirebaseAuthException e) {
+  /// ErrorText.localizeError = (BuildContext context, FirebaseAuthException e) {
+  ///   final defaultLabels = FirebaseUILocalizations.labelsOf(context);
+  ///
   ///   return switch (e.code) {
   ///     'user-not-found' => 'Please create an account first.',
   ///     'credential-already-in-use' => 'This email is already in use.',
-  ///     _ => 'Oh no! Something went wrong.'
+  ///     _ => localizedErrorText(e.code, defaultLabels) ?? 'Oh no! Something went wrong.',
   ///   }
   /// }
   static String Function(

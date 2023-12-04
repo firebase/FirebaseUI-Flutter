@@ -328,4 +328,14 @@ class RoLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get weakPasswordErrorText =>
       "Parola trebuie să aibă cel puțin 6 caractere";
+
+  @override
+  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+
+  @override
+  String get confirmDeleteAccountAlertMessage =>
+      "Are you sure you want to delete your account?";
+
+  @override
+  String get confirmDeleteAccountButtonLabel => "Yes, delete";
 }

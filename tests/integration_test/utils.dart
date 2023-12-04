@@ -2,7 +2,9 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
@@ -42,7 +44,7 @@ Future<void> prepare() async {
   }
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await fba.FirebaseAuth.instance.useAuthEmulator('localhost', 9098);
+  await fba.FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   auth = fba.FirebaseAuth.instance;
 
   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
@@ -71,11 +73,41 @@ Future<void> render(WidgetTester tester, Widget widget) async {
   );
 }
 
+Future<http.Response> retry(Future<http.Response> Function() fn) async {
+  var delay = const Duration(milliseconds: 100);
+  int attempts = 0;
+  int maxAttempts = 5;
+
+  final completer = Completer<http.Response>();
+
+  await Future.doWhile(() async {
+    try {
+      final res = await fn();
+      completer.complete(res);
+      return false;
+    } catch (e) {
+      if (attempts >= maxAttempts) {
+        completer.completeError(e);
+        return false;
+      }
+
+      stdout.writeln('Request failed: $e');
+      stdout.writeln('retrying in $delay');
+      await Future.delayed(delay);
+      delay *= 2;
+      attempts++;
+      return true;
+    }
+  });
+
+  return completer.future;
+}
+
 Future<void> deleteAllAccounts() async {
   final id = DefaultFirebaseOptions.currentPlatform.projectId;
   final uriString =
       'http://$testEmulatorHost:9099/emulator/v1/projects/$id/accounts';
-  final res = await http.delete(Uri.parse(uriString));
+  final res = await retry(() => http.delete(Uri.parse(uriString)));
 
   if (res.statusCode != 200) throw Exception('Delete failed');
 }
@@ -84,7 +116,7 @@ Future<Map<String, String>> getVerificationCodes() async {
   final id = DefaultFirebaseOptions.currentPlatform.projectId;
   final uriString =
       'http://$testEmulatorHost:9099/emulator/v1/projects/$id/verificationCodes';
-  final res = await http.get(Uri.parse(uriString));
+  final res = await retry(() => http.get(Uri.parse(uriString)));
 
   final body = json.decode(res.body);
   final codes = (body['verificationCodes'] as List).fold<Map<String, String>>(

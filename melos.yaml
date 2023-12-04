@@ -10,6 +10,8 @@ command:
   version:
     linkToCommits: true
     workspaceChangelog: true
+    changelogCommitBodies:
+      include: true
 
   bootstrap:
     runPubGetInParallel: false
@@ -66,6 +68,10 @@ scripts:
     packageFilters:
       dirExists:
         - test
+
+  test:e2e:
+    working-directory: tests
+    run: flutter test integration_test/firebase_ui_test.dart -r github
 
   # Additional cleanup lifecycle script, executed when `melos clean` is run.
   postclean: >
@@ -139,3 +145,6 @@ scripts:
         --ignore "**/flutter/generated_plugin_registrant.cc" \
         .
     description: Add a license header to all necessary files.
+
+  emulator:start:
+    run: firebase emulators:start --only firestore,auth,functions,storage --import=./emulators-data --export-on-exit=./emulators-data
