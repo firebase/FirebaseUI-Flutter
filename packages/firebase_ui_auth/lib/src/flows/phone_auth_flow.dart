@@ -105,18 +105,15 @@ class PhoneAuthFlow extends AuthFlow<PhoneAuthProvider>
   /// {@macro ui.auth.flows.phone_auth_flow}
   PhoneAuthFlow({
     /// {@macro ui.auth.auth_flow.ctor.provider}
-    required PhoneAuthProvider provider,
+    required super.provider,
 
     /// {@macro ui.auth.auth_controller.auth}
-    fba.FirebaseAuth? auth,
+    super.auth,
 
-    /// {@macro @macro ui.auth.auth_action}
-    AuthAction? action,
+    /// {@macro ui.auth.auth_action}
+    super.action,
   }) : super(
-          auth: auth,
           initialState: AwaitingPhoneNumber(),
-          action: action,
-          provider: provider,
         );
 
   @override

@@ -21,34 +21,34 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  cupertino_icons: ^1.0.2
-  firebase_auth: ^4.11.1
-  firebase_core: ^2.19.0
+  cupertino_icons: ^1.0.6
+  firebase_auth: ^4.15.0
+  firebase_core: ^2.24.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  firebase_ui_auth: ^1.10.0
-  firebase_ui_localizations: ^1.8.0
-  firebase_ui_oauth: ^1.4.14
-  firebase_ui_oauth_apple: ^1.2.14
-  firebase_ui_oauth_facebook: ^1.2.14
-  firebase_ui_oauth_google: ^1.2.14
-  firebase_ui_oauth_twitter: ^1.2.14
+  firebase_ui_auth: ^1.11.0
+  firebase_ui_localizations: ^1.9.0
+  firebase_ui_oauth: ^1.4.15
+  firebase_ui_oauth_apple: ^1.2.15
+  firebase_ui_oauth_facebook: ^1.2.15
+  firebase_ui_oauth_google: ^1.2.15
+  firebase_ui_oauth_twitter: ^1.2.15
 dev_dependencies:
-  drive: ^1.0.0-1.0.nullsafety.1
+  drive: ^1.0.0-1.0.nullsafety.5
   firebase_ui_shared: ^1.4.1
-  flutter_facebook_auth: ^6.0.1
+  flutter_facebook_auth: ^6.0.3
   flutter_driver:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  google_sign_in: ^6.1.0
-  http: ^1.1.0
+  flutter_lints: ^3.0.1
+  google_sign_in: ^6.1.6
+  http: ^1.1.2
   integration_test:
     sdk: flutter
-  twitter_login: ^4.3.2
+  twitter_login: ^4.4.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
