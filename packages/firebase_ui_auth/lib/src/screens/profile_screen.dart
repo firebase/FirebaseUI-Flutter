@@ -181,7 +181,16 @@ class _LinkedProvidersRow extends StatefulWidget {
   State<_LinkedProvidersRow> createState() => _LinkedProvidersRowState();
 }
 
-class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
+class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {   
+    Future showAdaptiveDialog<T>({
+     required BuildContext context,
+     required WidgetBuilder builder,
+   }) async {
+     return showDialog<T>(
+       context: context,
+       builder: builder,
+     );
+   } 
   bool isEditing = false;
   String? unlinkingProvider;
   fba.FirebaseAuthException? error;
