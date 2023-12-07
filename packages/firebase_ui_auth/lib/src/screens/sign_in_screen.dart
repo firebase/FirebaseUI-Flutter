@@ -126,8 +126,10 @@ class SignInScreen extends MultiProviderScreen {
 
   Future<void> _signInWithDifferentProvider(
     BuildContext context,
+    // ignore: deprecated_member_use_from_same_package
     DifferentSignInMethodsFound state,
   ) async {
+    // ignore: deprecated_member_use_from_same_package
     await showDifferentMethodSignInDialog(
       availableProviders: state.methods,
       providers: providers,
@@ -145,6 +147,7 @@ class SignInScreen extends MultiProviderScreen {
   Widget build(BuildContext context) {
     final handlesDifferentSignInMethod = this
         .actions
+        // ignore: deprecated_member_use_from_same_package
         .whereType<AuthStateChangeAction<DifferentSignInMethodsFound>>()
         .isNotEmpty;
 

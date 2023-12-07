@@ -29,6 +29,7 @@ export 'src/auth_state.dart'
         SigningIn,
         UserCreated,
         AuthFailed,
+        // ignore: deprecated_member_use_from_same_package
         DifferentSignInMethodsFound,
         MFARequired;
 export 'src/email_verification.dart';
