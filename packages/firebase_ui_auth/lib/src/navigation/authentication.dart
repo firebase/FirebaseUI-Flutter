@@ -45,6 +45,10 @@ Future<bool> showReauthenticateDialog({
 }
 
 /// Shows [DifferentMethodSignInDialog].
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 Future<void> showDifferentMethodSignInDialog({
   required BuildContext context,
 
