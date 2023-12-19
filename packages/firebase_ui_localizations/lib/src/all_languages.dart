@@ -17,6 +17,7 @@ import 'lang/id.dart';
 import 'lang/it.dart';
 import 'lang/ja.dart';
 import 'lang/ko.dart';
+import 'lang/nb.dart';
 import 'lang/nl.dart';
 import 'lang/pl.dart';
 import 'lang/pt.dart';
@@ -92,6 +93,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const JaLocalizations();
     case 'ko':
       return const KoLocalizations();
+    case 'nb':
+      return const NbLocalizations();
     case 'nl':
       return const NlLocalizations();
     case 'pl':

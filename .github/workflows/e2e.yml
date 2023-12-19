@@ -42,9 +42,9 @@ jobs:
           profile: pixel_5
           script: echo "Generated AVD snapshot for caching."
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
-        name: Install Node.js 16
+        name: Install Node.js
         with:
-          node-version: "16"
+          node-version: "18"
       - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
         with:
           distribution: "temurin"
@@ -99,9 +99,9 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
-        name: Install Node.js 16
+        name: Install Node.js
         with:
-          node-version: "16"
+          node-version: "18"
       - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
         with:
           distribution: "temurin"
@@ -169,9 +169,9 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
-        name: Install Node.js 16
+        name: Install Node.js
         with:
-          node-version: "16"
+          node-version: "18"
       - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
         with:
           distribution: "temurin"
