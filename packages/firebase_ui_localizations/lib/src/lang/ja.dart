@@ -190,7 +190,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get signInText => "ログイン";
 
   @override
-  String get signInWithAppleButtonText => "Apple アカウントでログイン";
+  String get signInWithAppleButtonText => "Apple でサインイン";
 
   @override
   String get signInWithEmailLinkSentText =>
@@ -261,73 +261,66 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get wrongOrNoPasswordErrorText => "パスワードが無効か、ユーザーにパスワードが設定されていません";
 
   @override
-  String get uploadButtonText => "Upload file";
+  String get uploadButtonText => "ファイルをアップロード";
 
   @override
-  String get verifyEmailTitle => "Verify your email";
+  String get verifyEmailTitle => "メールを確認";
 
   @override
   String get verificationEmailSentText =>
-      "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.";
+      "あなたのメールアドレスに確認メールが送信されました。メールを確認し、リンクをクリックしてメールアドレスを確認してください。";
 
   @override
-  String get verificationFailedText =>
-      "We couldn't verify your email address. ";
+  String get verificationFailedText => "メールアドレスを確認できませんでした。";
 
   @override
-  String get resendVerificationEmailButtonLabel => "Resend verification email";
+  String get resendVerificationEmailButtonLabel => "確認メールを再送する";
 
   @override
-  String get verificationEmailSentTextShort => "Verification email sent";
+  String get verificationEmailSentTextShort => "確認メールが送信されました";
 
   @override
-  String get emailIsNotVerifiedText => "Email is not verified";
+  String get emailIsNotVerifiedText => "メールは確認されていません";
 
   @override
-  String get waitingForEmailVerificationText =>
-      "Waiting for email verification";
+  String get waitingForEmailVerificationText => "メールの確認を待っています";
 
   @override
-  String get dismissButtonLabel => "Dismiss";
+  String get dismissButtonLabel => "閉じる";
 
   @override
   String get okButtonLabel => "OK";
 
   @override
-  String get checkEmailHintText =>
-      "Please check your email and click the link to verify your email address.";
+  String get checkEmailHintText => "メールを確認し、リンクをクリックしてメールアドレスを確認してください。";
 
   @override
-  String get doneButtonLabel => "Done";
+  String get doneButtonLabel => "完了";
 
   @override
-  String get invalidVerificationCodeErrorText =>
-      "The code you entered is invalid. Please try again.";
+  String get invalidVerificationCodeErrorText => "入力したコードが無効です。もう一度お試しください。";
 
   @override
-  String get ulinkProviderAlertTitle => "Unlink provider";
+  String get ulinkProviderAlertTitle => "プロバイダーのリンク解除";
 
   @override
-  String get confirmUnlinkButtonLabel => "Unlink";
+  String get confirmUnlinkButtonLabel => "リンク解除";
 
   @override
-  String get cancelButtonLabel => "Cancel";
+  String get cancelButtonLabel => "キャンセル";
 
   @override
-  String get unlinkProviderAlertMessage =>
-      "Are you sure you want to unlink this provider?";
+  String get unlinkProviderAlertMessage => "プロバイダーのリンクを解除してもよろしいですか？";
 
   @override
-  String get weakPasswordErrorText =>
-      "Password should be at least 6 characters";
+  String get weakPasswordErrorText => "パスワードは少なくとも6文字である必要があります";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+  String get confirmDeleteAccountAlertTitle => "アカウント削除の確認";
 
   @override
-  String get confirmDeleteAccountAlertMessage =>
-      "Are you sure you want to delete your account?";
+  String get confirmDeleteAccountAlertMessage => "アカウントを削除してもよろしいですか？";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+  String get confirmDeleteAccountButtonLabel => "はい、削除する";
 }
