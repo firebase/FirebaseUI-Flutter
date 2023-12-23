@@ -1,0 +1,532 @@
+{
+    "@@locale": "vi",
+    "@@last_modified": "2023-11-16T00:26:53.966433",
+    "accessDisabledErrorText": "Tài khoản này đã bị tạm thời vô hiệu hóa",
+    "@accessDisabledErrorText": {
+        "description": "Sử dụng như một thông báo lỗi khi tài khoản bị chặn và người dùng cố gắng thực hiện một số hành động với tài khoản (ví dụ: hủy liên kết một thông tin xác thực).",
+        "placeholders": {}
+    },
+    "arrayLabel": "mảng",
+    "@arrayLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "booleanLabel": "Boolean",
+    "@booleanLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "cancelLabel": "hủy",
+    "@cancelLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "chooseACountry": "Chọn một quốc gia",
+    "@chooseACountry": {
+        "description": "Sử dụng như một nhãn của hộp thoại chọn mã quốc gia.",
+        "placeholders": {}
+    },
+    "confirmPasswordDoesNotMatchErrorText": "Mật khẩu không khớp",
+    "@confirmPasswordDoesNotMatchErrorText": {
+        "description": "Sử dụng như một văn bản lỗi khi các mật khẩu cung cấp không khớp.",
+        "placeholders": {}
+    },
+    "confirmPasswordInputLabel": "Xác nhận mật khẩu",
+    "@confirmPasswordInputLabel": {
+        "description": "Sử dụng như một nhãn của ô Nhập mật khẩu xác nhận.",
+        "placeholders": {}
+    },
+    "confirmPasswordIsRequiredErrorText": "Vui lòng xác nhận mật khẩu của bạn",
+    "@confirmPasswordIsRequiredErrorText": {
+        "description": "Sử dụng như một văn bản lỗi khi ô Nhập mật khẩu dùng để xác nhận mật khẩu là trống.",
+        "placeholders": {}
+    },
+    "continueText": "Tiếp tục",
+    "@continueText": {
+        "description": "Sử dụng như một nhãn của nút gửi để chuyển người dùng đến bước tiếp theo của luồng xác thực.",
+        "placeholders": {}
+    },
+    "countryCode": "Mã",
+    "@countryCode": {
+        "description": "Sử dụng như một chỗ trống của ô nhập mã quốc gia.",
+        "placeholders": {}
+    },
+    "credentialAlreadyInUseErrorText": "Nhà cung cấp này đã được liên kết với một tài khoản người dùng khác.",
+    "@credentialAlreadyInUseErrorText": {
+        "description": "Văn bản lỗi được hiển thị khi người dùng cố gắng sử dụng một nhà cung cấp OAuth không thuộc sở hữu của tài khoản người dùng đang đăng nhập.",
+        "placeholders": {}
+    },
+    "deleteAccount": "Xóa tài khoản",
+    "@deleteAccount": {
+        "description": "Sử dụng như một nhãn của nút Xóa TàiKhoan.",
+        "placeholders": {}
+    },
+    "differentMethodsSignInTitleText": "Sử dụng một trong các phương thức sau để đăng nhập",
+    "@differentMethodsSignInTitleText": {
+        "description": "Sử dụng như một tiêu đề của hộp thoại chỉ ra rằng có các phương thức đăng nhập khác nhau có sẵn cho một địa chỉ email cung cấp.",
+        "placeholders": {}
+    },
+    "disable": "Tắt",
+    "@disable": {
+        "description": "Nhãn nút gợi ý tắt xác thực 2 bước",
+        "placeholders": {}
+    },
+    "eastInitialLabel": "Đ",
+    "@eastInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "emailInputLabel": "Email",
+    "@emailInputLabel": {
+        "description": "Sử dụng như một nhãn của Ô Nhập Email.",
+        "placeholders": {}
+    },
+    "emailIsRequiredErrorText": "Email là bắt buộc",
+    "@emailIsRequiredErrorText": {
+        "description": "Sử dụng như một văn bản lỗi của Ô Nhập Email khi email trống.",
+        "placeholders": {}
+    },
+    "emailLinkSignInButtonLabel": "Đăng nhập bằng liên kết phép màu",
+    "@emailLinkSignInButtonLabel": {
+        "description": "Sử dụng như một nhãn của Nút Đăng nhập qua EmailLink.",
+        "placeholders": {}
+    },
+    "emailTakenErrorText": "Một tài khoản với email này đã tồn tại",
+    "@emailTakenErrorText": {
+        "description": "Sử dụng như một thông báo lỗi khi người dùng cố gắng đăng ký với một địa chỉ email đã sử dụng.",
+        "placeholders": {}
+    },
+    "enable": "Bật",
+    "@enable": {
+        "description": "Nhãn nút gợi ý bật xác thực 2 bước",
+        "placeholders": {}
+    },
+    "enableMoreSignInMethods": "Bật thêm phương thức đăng nhập",
+    "@enableMoreSignInMethods": {
+        "description": "Sử dụng như gợi ý để kết nối thêm các nhà cung cấp.",
+        "placeholders": {}
+    },
+    "enterSMSCodeText": "Nhập mã SMS",
+    "@enterSMSCodeText": {
+        "description": "Sử dụng như một nhãn của Ô Nhập MãSMS.",
+        "placeholders": {}
+    },
+    "findProviderForEmailTitleText": "Nhập email để tiếp tục",
+    "@findProviderForEmailTitleText": {
+        "description": "Sử dụng như một tiêu đề của FindProvidersForEmailView.",
+        "placeholders": {}
+    },
+    "forgotPasswordButtonLabel": "Quên mật khẩu?",
+    "@forgotPasswordButtonLabel": {
+        "description": "Sử dụng như một nhãn của Nút QuênMậtKhau.",
+        "placeholders": {}
+    },
+    "forgotPasswordHintText": "Cung cấp email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn",
+    "@forgotPasswordHintText": {
+        "description": "Sử dụng như một gợi ý trên ForgotPasswordView.",
+        "placeholders": {}
+    },
+    "forgotPasswordViewTitle": "Quên mật khẩu",
+    "@forgotPasswordViewTitle": {
+        "description": "Sử dụng như một tiêu đề của ForgotPasswordView.",
+        "placeholders": {}
+    },
+    "geopointLabel": "điểm địa lý",
+    "@geopointLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "goBackButtonLabel": "Quay lại",
+    "@goBackButtonLabel": {
+        "description": "Sử dụng như một nhãn của nút quay lại.",
+        "placeholders": {}
+    },
+    "@hashCode": {
+        "description": "Mã băm cho đối tượng này.",
+        "placeholders": {}
+    },
+    "invalidCountryCode": "Mã không hợp lệ",
+    "@invalidCountryCode": {
+        "description": "Sử dụng như một văn bản lỗi khi mã quốc gia cung cấp không hợp lệ.",
+        "placeholders": {}
+    },
+    "isNotAValidEmailErrorText": "Hãy cung cấp một email hợp lệ",
+    "@isNotAValidEmailErrorText": {
+        "description": "Sử dụng như một văn bản lỗi của Ô Nhập Email nếu email cung cấp không hợp lệ.",
+        "placeholders": {}
+    },
+    "latitudeLabel": "vĩ độ",
+    "@latitudeLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "linkEmailButtonText": "Tiếp theo",
+    "@linkEmailButtonText": {
+        "description": "Sử dụng như một nhãn của nút gửi EmailForm khi AuthAction là AuthAction.link.",
+        "placeholders": {}
+    },
+    "longitudeLabel": "kinh độ",
+    "@longitudeLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "mapLabel": "bản đồ",
+    "@mapLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "mfaTitle": "Xác thực 2 bước",
+    "@mfaTitle": {
+        "description": "Tiêu đề của ô cài đặt xác thực 2 bước.",
+        "placeholders": {}
+    },
+    "name": "Tên",
+    "@name": {
+        "description": "Sử dụng như một chỗ trống của EditableUserDisplayName.",
+        "placeholders": {}
+    },
+    "northInitialLabel": "B",
+    "@northInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "nullLabel": "null",
+    "@nullLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "numberLabel": "số",
+    "@numberLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "off": "Tắt",
+    "@off": {
+        "description": "Nhãn gợi ý rằng xác thực 2 bước không được bật",
+        "placeholders": {}
+    },
+    "on": "Bật",
+    "@on": {
+        "description": "Nhãn gợi ý rằng xác thực 2 bước đã được bật",
+        "placeholders": {}
+    },
+    "passwordInputLabel": "Mật khẩu",
+    "@passwordInputLabel": {
+        "description": "Sử dụng như một nhãn của Ô Nhập Mật khẩu.",
+        "placeholders": {}
+    },
+    "passwordIsRequiredErrorText": "Mật khẩu là bắt buộc",
+    "@passwordIsRequiredErrorText": {
+        "description": "Sử dụng như một văn bản lỗi khi Ô Nhập Mật khẩu trống.",
+        "placeholders": {}
+    },
+    "passwordResetEmailSentText": "Chúng tôi đã gửi cho bạn một email với liên kết để đặt lại mật khẩu của bạn. Vui lòng kiểm tra email của bạn.",
+    "@passwordResetEmailSentText": {
+        "description": "Chỉ ra rằng email đặt lại mật khẩu đã được gửi.",
+        "placeholders": {}
+    },
+    "phoneInputLabel": "Số điện thoại",
+    "@phoneInputLabel": {
+        "description": "Sử dụng như một nhãn của Ô Nhập Số điện thoại.",
+        "placeholders": {}
+    },
+    "phoneNumberInvalidErrorText": "Số điện thoại không hợp lệ",
+    "@phoneNumberInvalidErrorText": {
+        "description": "Sử dụng như một văn bản lỗi khi Ô Nhập Số điện thoại chứa một số điện thoại không hợp lệ.",
+        "placeholders": {}
+    },
+    "phoneNumberIsRequiredErrorText": "Số điện thoại là bắt buộc",
+    "@phoneNumberIsRequiredErrorText": {
+        "description": "Sử dụng như một văn bản lỗi khi Ô Nhập Số điện thoại trống.",
+        "placeholders": {}
+    },
+    "phoneVerificationViewTitleText": "Nhập số điện thoại của bạn",
+    "@phoneVerificationViewTitleText": {
+        "description": "Sử dụng như một tiêu đề của PhoneInputView.",
+        "placeholders": {}
+    },
+    "profile": "Hồ sơ",
+    "@profile": {
+        "description": "Tiêu đề của Màn hình Hồ sơ.",
+        "placeholders": {}
+    },
+    "provideEmail": "Cung cấp email và mật khẩu của bạn",
+    "@provideEmail": {
+        "description": "Sử dụng như một tiêu đề của EmailSignUpDialog.",
+        "placeholders": {}
+    },
+    "referenceLabel": "tham chiếu",
+    "@referenceLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "registerActionText": "Đăng ký",
+    "@registerActionText": {
+        "description": "Được sử dụng làm nhãn của nút gửi trong EmailForm khi AuthAction là AuthAction.signUp.",
+        "placeholders": {}
+    },
+    "registerHintText": "Chưa có tài khoản?",
+    "@registerHintText": {
+        "description": "Được sử dụng như một gợi ý tạo tài khoản mới trong LoginView.",
+        "placeholders": {}
+    },
+    "registerText": "Đăng ký",
+    "@registerText": {
+        "description": "Được sử dụng làm tiêu đề của LoginView khi AuthAction là AuthAction.signUp.",
+        "placeholders": {}
+    },
+    "resetPasswordButtonLabel": "Đặt lại mật khẩu",
+    "@resetPasswordButtonLabel": {
+        "description": "Được sử dụng làm nhãn của nút gửi trong ForgotPasswordView.",
+        "placeholders": {}
+    },
+    "@runtimeType": {
+        "description": "Biểu diễn kiểu thời gian chạy của đối tượng.",
+        "placeholders": {}
+    },
+    "sendLinkButtonLabel": "Gửi liên kết ma thuật",
+    "@sendLinkButtonLabel": {
+        "description": "Được sử dụng làm nhãn của nút gửi trong EmailLinkSignInView.",
+        "placeholders": {}
+    },
+    "signInActionText": "Đăng nhập",
+    "@signInActionText": {
+        "description": "Được sử dụng làm nhãn của nút gửi trong EmailForm khi AuthAction là AuthAction.signIn.",
+        "placeholders": {}
+    },
+    "signInHintText": "Đã có tài khoản?",
+    "@signInHintText": {
+        "description": "Được sử dụng như một gợi ý đăng nhập thay vì đăng ký tài khoản mới trong LoginView.",
+        "placeholders": {}
+    },
+    "signInMethods": "Phương thức đăng nhập",
+    "@signInMethods": {
+        "description": "Được sử dụng làm nhãn cho dòng hiển thị các nhà cung cấp được kết nối.",
+        "placeholders": {}
+    },
+    "signInText": "Đăng nhập",
+    "@signInText": {
+        "description": "Được sử dụng làm tiêu đề của LoginView khi AuthAction là AuthAction.signIn.",
+        "placeholders": {}
+    },
+    "signInWithAppleButtonText": "Đăng nhập bằng Apple",
+    "@signInWithAppleButtonText": {
+        "description": "Được sử dụng như một nhãn của OAuthProviderButton cho nhà cung cấp Apple.",
+        "placeholders": {}
+    },
+    "signInWithEmailLinkSentText": "Chúng tôi đã gửi cho bạn một email với một liên kết ma thuật. Kiểm tra email của bạn và theo liên kết để đăng nhập.",
+    "@signInWithEmailLinkSentText": {
+        "description": "Chỉ định rằng email với liên kết đăng nhập đã được gửi đi.",
+        "placeholders": {}
+    },
+    "signInWithEmailLinkViewTitleText": "Đăng nhập bằng liên kết ma thuật",
+    "@signInWithEmailLinkViewTitleText": {
+        "description": "Được sử dụng làm tiêu đề trên EmailLinkSignInView.",
+        "placeholders": {}
+    },
+    "signInWithFacebookButtonText": "Đăng nhập bằng Facebook",
+    "@signInWithFacebookButtonText": {
+        "description": "Được sử dụng như một nhãn của OAuthProviderButton cho nhà cung cấp Facebook.",
+        "placeholders": {}
+    },
+    "signInWithGoogleButtonText": "Đăng nhập bằng Google",
+    "@signInWithGoogleButtonText": {
+        "description": "Được sử dụng như một nhãn của OAuthProviderButton cho nhà cung cấp Google.",
+        "placeholders": {}
+    },
+    "signInWithPhoneButtonText": "Đăng nhập bằng điện thoại",
+    "@signInWithPhoneButtonText": {
+        "description": "Được sử dụng như một nhãn của PhoneVerificationButton.",
+        "placeholders": {}
+    },
+    "signInWithTwitterButtonText": "Đăng nhập bằng Twitter",
+    "@signInWithTwitterButtonText": {
+        "description": "Được sử dụng như một nhãn của OAuthProviderButton cho nhà cung cấp Twitter.",
+        "placeholders": {}
+    },
+    "signOutButtonText": "Đăng xuất",
+    "@signOutButtonText": {
+        "description": "Được sử dụng làm nhãn của nút SignOutButton.",
+        "placeholders": {}
+    },
+    "smsAutoresolutionFailedError": "Không thể giải quyết mã xác minh SMS tự động. Vui lòng nhập mã của bạn thủ công.",
+    "@smsAutoresolutionFailedError": {
+        "description": "Được sử dụng làm văn bản lỗi khi AutoresolutionFailedException được ném ra.",
+        "placeholders": {}
+    },
+    "southInitialLabel": "S",
+    "@southInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "stringLabel": "chuỗi",
+    "@stringLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "timestampLabel": "mốc thời gian",
+    "@timestampLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "typeLabel": "kiểu",
+    "@typeLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "unknownError": "Đã xảy ra một lỗi không xác định",
+    "@unknownError": {
+        "description": "Được sử dụng làm thông báo lỗi chung khi không thể giải quyết chi tiết lỗi từ Exception hoặc FirebaseAuthException.",
+        "placeholders": {}
+    },
+    "updateLabel": "cập nhật",
+    "@updateLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "userNotFoundErrorText": "Tài khoản không tồn tại",
+    "@userNotFoundErrorText": {
+        "description": "Được sử dụng làm thông báo lỗi khi tài khoản cho địa chỉ email cung cấp không được tìm thấy.",
+        "placeholders": {}
+    },
+    "valueLabel": "giá trị",
+    "@valueLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "verifyCodeButtonText": "Xác minh",
+    "@verifyCodeButtonText": {
+        "description": "Được sử dụng như một nhãn của nút gửi trong SMSCodeInputView.",
+        "placeholders": {}
+    },
+    "verifyingSMSCodeText": "Đang xác minh mã SMS...",
+    "@verifyingSMSCodeText": {
+        "description": "Được sử dụng như một văn bản trạng thái của SMSCodeInput khi quá trình xác minh mã đang diễn ra.",
+        "placeholders": {}
+    },
+    "verifyItsYouText": "Xác minh rằng đó là bạn",
+    "@verifyItsYouText": {
+        "description": "Được sử dụng làm tiêu đề của hộp thoại yêu cầu xác minh lại người dùng khi thực hiện các hành động phá hủy.",
+        "placeholders": {}
+    },
+    "verifyPhoneNumberButtonText": "Tiếp theo",
+    "@verifyPhoneNumberButtonText": {
+        "description": "Được sử dụng như một nhãn của nút gửi trong PhoneInputView.",
+        "placeholders": {}
+    },
+    "westInitialLabel": "W",
+    "@westInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "wrongOrNoPasswordErrorText": "Mật khẩu không hợp lệ hoặc người dùng không có mật khẩu",
+    "@wrongOrNoPasswordErrorText": {
+        "description": "Được sử dụng làm văn bản lỗi của PasswordInput khi mật khẩu cung cấp là trống hoặc không chính xác.",
+        "placeholders": {}
+    },
+    "uploadButtonText": "Tải lên tệp",
+    "@uploadButtonText": {
+        "description": "Nhãn của UploadButton",
+        "placeholders": {}
+    },
+    "verifyEmailTitle": "Xác minh địa chỉ email của bạn",
+    "@verifyEmailTitle": {
+        "description": "Tiêu đề của màn hình EmailVerificationScreen",
+        "placeholders": {}
+    },
+    "verificationEmailSentText": "Một email xác minh đã được gửi đến địa chỉ email của bạn. Vui lòng kiểm tra email của bạn và nhấp vào liên kết để xác minh địa chỉ email của bạn.",
+    "@verificationEmailSentText": {
+        "description": "Gợi ý văn bản cho biết email xác minh đã được gửi đi",
+        "placeholders": {}
+    },
+    "verificationFailedText": "Chúng tôi không thể xác minh địa chỉ email của bạn. ",
+    "@verificationFailedText": {
+        "description": "Thông báo cho biết có điều gì đó đã sai trong quá trình xác minh email",
+        "placeholders": {}
+    },
+    "resendVerificationEmailButtonLabel": "Gửi lại email xác minh",
+    "@resendVerificationEmailButtonLabel": {
+        "description": "Nhãn nút gợi ý gửi lại email xác minh",
+        "placeholders": {}
+    },
+    "verificationEmailSentTextShort": "Email xác minh đã được gửi đi",
+    "@verificationEmailSentTextShort": {
+        "description": "Phiên bản ngắn của gợi ý văn bản cho biết email xác minh đã được gửi đi",
+        "placeholders": {}
+    },
+    "emailIsNotVerifiedText": "Email chưa được xác minh",
+    "@emailIsNotVerifiedText": {
+        "description": "Thông báo cho biết email chưa được xác minh",
+        "placeholders": {}
+    },
+    "waitingForEmailVerificationText": "Đang chờ xác minh email",
+    "@waitingForEmailVerificationText": {
+        "description": "Thông báo cho biết email đang được xác minh",
+        "placeholders": {}
+    },
+    "dismissButtonLabel": "Bỏ qua",
+    "@dismiss": {
+        "description": "Nhãn nút Bỏ qua",
+        "placeholders": {}
+    },
+    "okButtonLabel": "OK",
+    "@okButtonLabel": {
+        "description": "Nhãn nút OK",
+        "placeholders": {}
+    },
+    "checkEmailHintText": "Vui lòng kiểm tra email của bạn và nhấp vào liên kết để xác minh địa chỉ email của bạn.",
+    "@checkEmailHintText": {
+        "description": "Gợi ý văn bản yêu cầu người dùng kiểm tra email để lấy liên kết xác minh",
+        "placeholders": {}
+    },
+    "doneButtonLabel": "Hoàn tất",
+    "@doneButtonLabel": {
+        "description": "Nhãn nút Hoàn tất",
+        "placeholders": {}
+    },
+    "invalidVerificationCodeErrorText": "Mã bạn nhập không hợp lệ. Vui lòng thử lại.",
+    "@invalidVerificationCodeErrorText": {
+        "description": "Văn bản lỗi chỉ định rằng mã SMS đã nhập không hợp lệ",
+        "placeholders": {}
+    },
+    "unlinkProviderAlertTitle": "Hủy liên kết nhà cung cấp",
+    "@ulinkProviderAlertTitle": {
+        "description": "Tiêu đề được hiển thị trong AlertDialog yêu cầu xác nhận hủy liên kết nhà cung cấp",
+        "placeholders": {}
+    },
+    "confirmUnlinkButtonLabel": "Hủy liên kết",
+    "@confirmUnlinkButtonLabel": {
+        "description": "Nhãn nút xác nhận hủy liên kết",
+        "placeholders": {}
+    },
+    "cancelButtonLabel": "Hủy",
+    "@cancelButtonLabel": {
+        "description": "Nhãn nút Hủy",
+        "placeholders": {}
+    },
+    "unlinkProviderAlertMessage": "Bạn có chắc chắn muốn hủy liên kết với nhà cung cấp này không?",
+    "@unlinkProviderAlertMessage": {
+        "description": "Văn bản hiển thị như một thông điệp của AlertDialog xác nhận hủy liên kết nhà cung cấp",
+        "placeholders": {}
+    },
+    "weakPasswordErrorText": "Mật khẩu phải có ít nhất 6 ký tự",
+    "@weakPasswordErrorText": {
+        "description": "Văn bản lỗi gợi ý rằng mật khẩu đã sử dụng quá yếu",
+        "placeholders": {}
+    },
+    "confirmDeleteAccountAlertTitle": "Xác nhận xóa tài khoản",
+    "@confirmDeleteAccountAlertTitle": {
+        "description": "Tiêu đề hộp thoại xác nhận xóa tài khoản",
+        "placeholders": {}
+    },
+    "confirmDeleteAccountAlertMessage": "Bạn có chắc chắn muốn xóa tài khoản của bạn không?",
+    "@confirmDeleteAccountAlertMessage": {
+        "description": "Nội dung hộp thoại xác nhận xóa tài khoản",
+        "placeholders": {}
+    },
+    "confirmDeleteAccountButtonLabel": "Có, xóa",
+    "@confirmDeleteAccountButtonLabel": {
+        "description": "Nhãn nút xác nhận xóa tài khoản",
+        "placeholders": {}
+    }
+}
