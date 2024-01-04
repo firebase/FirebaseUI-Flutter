@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**(ui_firestore): implemented separators and fetching indicator ([#99](https://github.com/firebase/FirebaseUI-Flutter/issues/99)). ([d8d8bf59](https://github.com/firebase/FirebaseUI-Flutter/commit/d8d8bf594273618e866545172e57c10409f3a78f))
+
 ## 1.5.15
 
  - Update a dependency to the latest release.

@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-01-04
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.12.0`](#firebase_ui_auth---v1120)
+ - [`firebase_ui_database` - `v1.4.0`](#firebase_ui_database---v140)
+ - [`firebase_ui_firestore` - `v1.6.0`](#firebase_ui_firestore---v160)
+ - [`firebase_ui_localizations` - `v1.10.0`](#firebase_ui_localizations---v1100)
+ - [`firebase_ui_oauth` - `v1.4.16`](#firebase_ui_oauth---v1416)
+ - [`firebase_ui_oauth_twitter` - `v1.2.16`](#firebase_ui_oauth_twitter---v1216)
+ - [`firebase_ui_oauth_facebook` - `v1.2.16`](#firebase_ui_oauth_facebook---v1216)
+ - [`firebase_ui_oauth_apple` - `v1.2.16`](#firebase_ui_oauth_apple---v1216)
+ - [`firebase_ui_oauth_google` - `v1.2.16`](#firebase_ui_oauth_google---v1216)
+ - [`firebase_ui_storage` - `v2.0.1`](#firebase_ui_storage---v201)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.4.16`
+ - `firebase_ui_oauth_twitter` - `v1.2.16`
+ - `firebase_ui_oauth_facebook` - `v1.2.16`
+ - `firebase_ui_oauth_apple` - `v1.2.16`
+ - `firebase_ui_oauth_google` - `v1.2.16`
+ - `firebase_ui_storage` - `v2.0.1`
+
+---
+
+#### `firebase_ui_auth` - `v1.12.0`
+
+ - **FIX**(ui_auth): correctly handle phone auth in showReauthenticateDialog ([#209](https://github.com/firebase/FirebaseUI-Flutter/issues/209)). ([c0612cfd](https://github.com/firebase/FirebaseUI-Flutter/commit/c0612cfd71dc5ea2448ba73882b39a9766b97a98))
+ - **FIX**(ui_auth): deprecate email enumeration protection affected APIs ([#210](https://github.com/firebase/FirebaseUI-Flutter/issues/210)). ([eed65674](https://github.com/firebase/FirebaseUI-Flutter/commit/eed656748caa12eb31d7a9677a16bf6b1d129b77))
+ - **FEAT**(ui_auth): add a way to get an AuthController for AuthState ([#207](https://github.com/firebase/FirebaseUI-Flutter/issues/207)). ([0816bfd4](https://github.com/firebase/FirebaseUI-Flutter/commit/0816bfd4a1acfbe390d9725d48892b0831e99679))
+
+#### `firebase_ui_database` - `v1.4.0`
+
+ - **FEAT**(firebase_ui_database): Allow reversing the database query ([#193](https://github.com/firebase/FirebaseUI-Flutter/issues/193)). ([0588812b](https://github.com/firebase/FirebaseUI-Flutter/commit/0588812beac550afcf8dba2cabde28f258a90ed1))
+
+#### `firebase_ui_firestore` - `v1.6.0`
+
+ - **FEAT**(ui_firestore): implemented separators and fetching indicator ([#99](https://github.com/firebase/FirebaseUI-Flutter/issues/99)). ([d8d8bf59](https://github.com/firebase/FirebaseUI-Flutter/commit/d8d8bf594273618e866545172e57c10409f3a78f))
+
+#### `firebase_ui_localizations` - `v1.10.0`
+
+ - **FEAT**(ui_localizations): Add Norwegian (NB) localization ([#191](https://github.com/firebase/FirebaseUI-Flutter/issues/191)). ([715ab1b8](https://github.com/firebase/FirebaseUI-Flutter/commit/715ab1b8ab7df536da50177e75d6d0632ecdf83c))
+
+
 ## 2023-11-30
 
 ### Changes

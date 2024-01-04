@@ -1,3 +1,7 @@
+## 1.10.0
+
+ - **FEAT**(ui_localizations): Add Norwegian (NB) localization ([#191](https://github.com/firebase/FirebaseUI-Flutter/issues/191)). ([715ab1b8](https://github.com/firebase/FirebaseUI-Flutter/commit/715ab1b8ab7df536da50177e75d6d0632ecdf83c))
+
 ## 1.9.0
 
  - **FEAT**(ui_auth): confirm account deletion ([#187](https://github.com/firebase/FirebaseUI-Flutter/issues/187)). ([053a96ee](https://github.com/firebase/FirebaseUI-Flutter/commit/053a96eeedfc74c20ab3e73605dae42676b85a96))
