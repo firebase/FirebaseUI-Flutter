@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   collection: ^1.18.0
-  firebase_database: ^10.3.6
+  firebase_database: ^10.3.8
   firebase_ui_localizations: ^1.9.0
   flutter:
     sdk: flutter
