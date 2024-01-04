@@ -24,6 +24,9 @@ class ReauthenticateDialog extends StatelessWidget {
   /// A callback that is being called when the user has successfully signed in.
   final VoidCallback? onSignedIn;
 
+  /// {@macro ui.auth.views.reauthenticate_view.on_phone_verified}
+  final VoidCallback? onPhoneVerfifed;
+
   /// A label that would be used for the "Sign in" button.
   final String? actionButtonLabelOverride;
 
@@ -34,6 +37,7 @@ class ReauthenticateDialog extends StatelessWidget {
     this.auth,
     this.onSignedIn,
     this.actionButtonLabelOverride,
+    this.onPhoneVerfifed,
   });
 
   @override
@@ -47,6 +51,7 @@ class ReauthenticateDialog extends StatelessWidget {
       auth: auth,
       providers: providers,
       onSignedIn: onSignedIn,
+      onPhoneVerfifed: onPhoneVerfifed,
       actionButtonLabelOverride: actionButtonLabelOverride,
     );
 

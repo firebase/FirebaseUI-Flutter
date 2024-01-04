@@ -4,7 +4,6 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
@@ -58,6 +57,16 @@ Future<void> authCleanup() async {
   await deleteAllAccounts();
 }
 
+bool _testsSetUp = false;
+
+void setUpTests() {
+  if (_testsSetUp) return;
+
+  setUpAll(prepare);
+  tearDown(authCleanup);
+  _testsSetUp = true;
+}
+
 Future<void> render(WidgetTester tester, Widget widget) async {
   await tester.pumpWidget(
     MaterialApp(
@@ -73,12 +82,11 @@ Future<void> render(WidgetTester tester, Widget widget) async {
   );
 }
 
-Future<http.Response> retry(Future<http.Response> Function() fn) async {
+Future<T> retry<T>(Future<T> Function() fn, [int maxAttempts = 5]) async {
   var delay = const Duration(milliseconds: 100);
   int attempts = 0;
-  int maxAttempts = 5;
 
-  final completer = Completer<http.Response>();
+  final completer = Completer<T>();
 
   await Future.doWhile(() async {
     try {
@@ -91,8 +99,8 @@ Future<http.Response> retry(Future<http.Response> Function() fn) async {
         return false;
       }
 
-      stdout.writeln('Request failed: $e');
-      stdout.writeln('retrying in $delay');
+      debugPrint('Request failed: $e');
+      debugPrint('retrying in $delay');
       await Future.delayed(delay);
       delay *= 2;
       attempts++;
@@ -112,24 +120,32 @@ Future<void> deleteAllAccounts() async {
   if (res.statusCode != 200) throw Exception('Delete failed');
 }
 
-Future<Map<String, String>> getVerificationCodes() async {
+Future<String> getVerificationCode(String phoneNumber) async {
   final id = DefaultFirebaseOptions.currentPlatform.projectId;
   final uriString =
       'http://$testEmulatorHost:9099/emulator/v1/projects/$id/verificationCodes';
-  final res = await retry(() => http.get(Uri.parse(uriString)));
+  final code = await retry(() async {
+    final res = await http.get(Uri.parse(uriString));
+    final body = json.decode(res.body);
 
-  final body = json.decode(res.body);
-  final codes = (body['verificationCodes'] as List).fold<Map<String, String>>(
-    {},
-    (acc, value) {
-      return {
-        ...acc,
-        value['phoneNumber']: value['code'],
-      };
-    },
-  );
+    final codes = (body['verificationCodes'] as List).fold<Map<String, String>>(
+      {},
+      (acc, value) {
+        return {
+          ...acc,
+          value['phoneNumber']: value['code'],
+        };
+      },
+    );
 
-  return codes;
+    if (codes[phoneNumber] == null) {
+      throw Exception('Code not found');
+    }
+
+    return codes[phoneNumber]!;
+  }, 6);
+
+  return code;
 }
 
 Future<CollectionReference<T>> clearCollection<T>(

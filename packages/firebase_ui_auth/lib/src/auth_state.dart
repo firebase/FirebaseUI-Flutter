@@ -160,6 +160,10 @@ class UserCreated extends AuthState {
 ///
 /// See [AuthState] docs for usage examples.
 /// {@endtemplate}
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 class DifferentSignInMethodsFound extends AuthState {
   /// An email that has different auth providers associated with.
   final String email;
