@@ -514,17 +514,17 @@
     "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertTitle": "Confirm account deletion",
+  "confirmDeleteAccountAlertTitle": "Confirmă ștergerea contului",
   "@confirmDeleteAccountAlertTitle": {
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": "Are you sure you want to delete your account?",
+  "confirmDeleteAccountAlertMessage": "Ești sigur că vrei să îți ștergi contul?",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
   },
-  "confirmDeleteAccountButtonLabel": "Yes, delete",
+  "confirmDeleteAccountButtonLabel": "Da, șterge",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
     "placeholders": {}
