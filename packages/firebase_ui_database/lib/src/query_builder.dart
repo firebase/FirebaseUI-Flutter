@@ -187,20 +187,18 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
             _snapshot = _snapshot.copyWith(isFetching: false);
           }
 
-          List<DataSnapshot> docs;
-          if (event.snapshot.children.length < expectedDocsCount) {
-            docs = event.snapshot.children.toList();
-          } else {
-            docs = event.snapshot.children.take(expectedDocsCount - 1).toList();
+          Iterable<DataSnapshot> docs = event.snapshot.children;
+          if (widget.reverseQuery) {
+            docs = docs.toList().reversed;
           }
 
-          if (widget.reverseQuery) {
-            docs = docs.reversed.toList();
+          if (event.snapshot.children.length >= expectedDocsCount) {
+            docs = docs.take(expectedDocsCount - 1);
           }
 
           _snapshot = _snapshot.copyWith(
             hasData: true,
-            docs: docs,
+            docs: docs.toList(),
             error: null,
             hasMore: event.snapshot.children.length == expectedDocsCount,
             stackTrace: null,
