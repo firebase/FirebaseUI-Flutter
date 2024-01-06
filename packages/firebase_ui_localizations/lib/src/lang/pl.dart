@@ -336,4 +336,7 @@ class PlLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "Wyślij email weryfikacyjny";
 }

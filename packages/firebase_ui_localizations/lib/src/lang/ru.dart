@@ -336,4 +336,7 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "Отправить письмо с подтверждением";
 }

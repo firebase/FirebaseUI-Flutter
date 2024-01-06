@@ -336,4 +336,7 @@ class TrLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "Doğrulama e-postası gönderildi";
 }

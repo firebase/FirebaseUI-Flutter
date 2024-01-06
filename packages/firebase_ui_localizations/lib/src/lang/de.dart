@@ -337,4 +337,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "Senden Sie E-Mail-Verifizierung";
 }

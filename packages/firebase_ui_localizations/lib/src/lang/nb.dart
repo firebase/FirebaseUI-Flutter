@@ -333,4 +333,7 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Ja, slett";
+
+  @override
+  String get sentVerificationEmailLabel => "Send bekreftelses-e-post";
 }
