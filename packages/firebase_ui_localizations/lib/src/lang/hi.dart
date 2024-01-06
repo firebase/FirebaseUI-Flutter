@@ -336,4 +336,7 @@ class HiLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "सत्यापन ईमेल भेजें";
 }

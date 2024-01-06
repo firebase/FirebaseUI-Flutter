@@ -326,4 +326,7 @@ class ZhLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "已发送验证电子邮件";
 }

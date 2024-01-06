@@ -334,4 +334,7 @@ class HuLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "Küldj megerősítő e-mailt";
 }

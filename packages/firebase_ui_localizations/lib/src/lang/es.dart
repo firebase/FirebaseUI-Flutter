@@ -342,4 +342,8 @@ class EsLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel =>
+      "Envia un correo electronico de verificación";
 }
