@@ -1,4 +1,4 @@
-// Copyright 2023, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2024, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -330,12 +330,12 @@ class RoLocalizations extends FirebaseUILocalizationLabels {
       "Parola trebuie să aibă cel puțin 6 caractere";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+  String get confirmDeleteAccountAlertTitle => "Confirmă ștergerea contului";
 
   @override
   String get confirmDeleteAccountAlertMessage =>
-      "Are you sure you want to delete your account?";
+      "Ești sigur că vrei să îți ștergi contul?";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+  String get confirmDeleteAccountButtonLabel => "Da, șterge";
 }
