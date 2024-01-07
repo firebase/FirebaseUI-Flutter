@@ -322,5 +322,5 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get confirmDeleteAccountAlertMessage => "アカウントを削除してもよろしいですか？";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "はい、削除する";
+  String get confirmDeleteAccountButtonLabel => "はい、削除します";
 }
