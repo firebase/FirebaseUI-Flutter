@@ -309,7 +309,7 @@
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInWithAppleButtonText": "Apple アカウントでログイン",
+  "signInWithAppleButtonText": "Apple でサインイン",
   "@signInWithAppleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
@@ -424,47 +424,47 @@
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
     "placeholders": {}
   },
-  "uploadButtonText": "Upload file",
+  "uploadButtonText": "ファイルをアップロード",
   "@uploadButtonText": {
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Verify your email",
+  "verifyEmailTitle": "メールを確認",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.",
+  "verificationEmailSentText": "あなたのメールアドレスに確認メールが送信されました。メールを確認し、リンクをクリックしてメールアドレスを確認してください。",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "We couldn't verify your email address. ",
+  "verificationFailedText": "メールアドレスを確認できませんでした。",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
   },
-  "resendVerificationEmailButtonLabel": "Resend verification email",
+  "resendVerificationEmailButtonLabel": "確認メールを再送する",
   "@resendVerificationEmailButtonLabel": {
     "description": "Button label that suggests to resend verification email",
     "placeholders": {}
   },
-  "verificationEmailSentTextShort": "Verification email sent",
+  "verificationEmailSentTextShort": "確認メールが送信されました",
   "@verificationEmailSentTextShort": {
     "description": "Short version of the hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "emailIsNotVerifiedText": "Email is not verified",
+  "emailIsNotVerifiedText": "メールは確認されていません",
   "@emailIsNotVerifiedText": {
     "description": "Message indicating that email is not verified",
     "placeholders": {}
   },
-  "waitingForEmailVerificationText": "Waiting for email verification",
+  "waitingForEmailVerificationText": "メールの確認を待っています",
   "@waitingForEmailVerificationText": {
     "description": "Message indicating that email is being verified",
     "placeholders": {}
   },
-  "dismissButtonLabel": "Dismiss",
+  "dismissButtonLabel": "閉じる",
   "@dismiss": {
     "description": "Dissmiss button label",
     "placeholders": {}
@@ -474,57 +474,57 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Please check your email and click the link to verify your email address.",
+  "checkEmailHintText": "メールを確認し、リンクをクリックしてメールアドレスを確認してください。",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
   },
-  "doneButtonLabel": "Done",
+  "doneButtonLabel": "完了",
   "@doneButtonLabel": {
     "description": "Done button label",
     "placeholders": {}
   },
-  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "invalidVerificationCodeErrorText": "入力したコードが無効です。もう一度お試しください。",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   },
-  "ulinkProviderAlertTitle": "Unlink provider",
+  "ulinkProviderAlertTitle": "プロバイダーのリンク解除",
   "@ulinkProviderAlertTitle": {
     "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
     "placeholders": {}
   },
-  "confirmUnlinkButtonLabel": "Unlink",
+  "confirmUnlinkButtonLabel": "リンク解除",
   "@confirmUnlinkButtonLabel": {
     "description": "Unlink confirmation button label",
     "placeholders": {}
   },
-  "cancelButtonLabel": "Cancel",
+  "cancelButtonLabel": "キャンセル",
   "@cancelButtonLabel": {
     "description": "Cancel button label",
     "placeholders": {}
   },
-  "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
+  "unlinkProviderAlertMessage": "プロバイダーのリンクを解除してもよろしいですか？",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
   },
-  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "weakPasswordErrorText": "パスワードは少なくとも6文字である必要があります",
   "@weakPasswordErrorText": {
     "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertTitle": "Confirm account deletion",
+  "confirmDeleteAccountAlertTitle": "アカウント削除の確認",
   "@confirmDeleteAccountAlertTitle": {
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": "Are you sure you want to delete your account?",
+  "confirmDeleteAccountAlertMessage": "アカウントを削除してもよろしいですか？",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
   },
-  "confirmDeleteAccountButtonLabel": "Yes, delete",
+  "confirmDeleteAccountButtonLabel": "はい、削除します",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
     "placeholders": {}
