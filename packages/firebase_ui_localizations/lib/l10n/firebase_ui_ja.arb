@@ -524,7 +524,7 @@
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
   },
-  "confirmDeleteAccountButtonLabel": "はい、削除する",
+  "confirmDeleteAccountButtonLabel": "はい、削除します",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
     "placeholders": {}
