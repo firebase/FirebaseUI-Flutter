@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-01-09
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_firestore` - `v1.6.1`](#firebase_ui_firestore---v161)
+ - [`firebase_ui_localizations` - `v1.10.1`](#firebase_ui_localizations---v1101)
+ - [`firebase_ui_auth` - `v1.12.1`](#firebase_ui_auth---v1121)
+ - [`firebase_ui_storage` - `v2.0.2`](#firebase_ui_storage---v202)
+ - [`firebase_ui_database` - `v1.4.1`](#firebase_ui_database---v141)
+ - [`firebase_ui_oauth` - `v1.4.17`](#firebase_ui_oauth---v1417)
+ - [`firebase_ui_oauth_facebook` - `v1.2.17`](#firebase_ui_oauth_facebook---v1217)
+ - [`firebase_ui_oauth_twitter` - `v1.2.17`](#firebase_ui_oauth_twitter---v1217)
+ - [`firebase_ui_oauth_apple` - `v1.2.17`](#firebase_ui_oauth_apple---v1217)
+ - [`firebase_ui_oauth_google` - `v1.2.17`](#firebase_ui_oauth_google---v1217)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_auth` - `v1.12.1`
+ - `firebase_ui_storage` - `v2.0.2`
+ - `firebase_ui_database` - `v1.4.1`
+ - `firebase_ui_oauth` - `v1.4.17`
+ - `firebase_ui_oauth_facebook` - `v1.2.17`
+ - `firebase_ui_oauth_twitter` - `v1.2.17`
+ - `firebase_ui_oauth_apple` - `v1.2.17`
+ - `firebase_ui_oauth_google` - `v1.2.17`
+
+---
+
+#### `firebase_ui_firestore` - `v1.6.1`
+
+ - **FIX**(ui_firestore): null-assert count for aggregate query ([#246](https://github.com/firebase/FirebaseUI-Flutter/issues/246)). ([8afbe368](https://github.com/firebase/FirebaseUI-Flutter/commit/8afbe36824ec481055dcbf0558e0611bab712553))
+
+#### `firebase_ui_localizations` - `v1.10.1`
+
+ - **FIX**: Update translation strings in RO for confirm account deletion ([#219](https://github.com/firebase/FirebaseUI-Flutter/issues/219)). ([704b34ea](https://github.com/firebase/FirebaseUI-Flutter/commit/704b34ea174ecf3a78357de0236156f4d17a6ba5))
+
+
 ## 2024-01-04
 
 ### Changes

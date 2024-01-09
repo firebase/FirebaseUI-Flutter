@@ -1,3 +1,7 @@
+## 1.12.1
+
+ - Update a dependency to the latest release.
+
 ## 1.12.0
 
  - **FIX**(ui_auth): correctly handle phone auth in showReauthenticateDialog ([#209](https://github.com/firebase/FirebaseUI-Flutter/issues/209)). ([c0612cfd](https://github.com/firebase/FirebaseUI-Flutter/commit/c0612cfd71dc5ea2448ba73882b39a9766b97a98))
