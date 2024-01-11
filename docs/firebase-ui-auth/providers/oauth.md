@@ -35,7 +35,7 @@ Now all pre-built screens that support multiple providers (such as `RegisterScre
 
 The configuration requires the `clientId` property (which can be found in the Firebase Console) to be set for seamless cross-platform support.
 
-For iOS and macOS, `clientId` could be found on `GoogleService-Info.plist` available under Firebase project settings.
+For iOS and macOS, `clientId` can be found in the `GoogleService-Info.plist` file available in the Firebase console under Firebase project settings.
 
 For example, if your `GoogleService-Info.plist` looks like this:
 
