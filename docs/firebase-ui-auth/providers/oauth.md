@@ -77,7 +77,7 @@ For Linux and Windows, `clientId` should be set to a web client id:
 ![Google app client ID](../images/ui-google-provider-client-id.png)
 
 ```dart
-const iOsClientId = 'your-client-id.apps.googleusercontent.com';
+const iOSClientId = 'your-client-id.apps.googleusercontent.com';
 const webClientId = 'your-web-client-id.apps.googleusercontent.com';
 
 String get googleClientId {
