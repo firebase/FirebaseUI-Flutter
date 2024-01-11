@@ -44,8 +44,8 @@ For example, if your `GoogleService-Info.plist` looks like this:
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>your-client-id.apps.googleusercontent.com</string>
+  <key>CLIENT_ID</key>
+  <string>your-client-id.apps.googleusercontent.com</string>
   <!-- more keys -->
 </dict>
 ```
