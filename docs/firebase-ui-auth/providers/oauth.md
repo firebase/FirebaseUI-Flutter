@@ -59,17 +59,17 @@ GoogleProvider(clientId: 'your-client-id.apps.googleusercontent.com'),
 Additionally, you need to add the following to your `Info.plist` file:
 
 ```xml
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.your-client-id</string>
-			</array>
-		</dict>
-	</array>
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.googleusercontent.apps.your-client-id</string>
+    </array>
+  </dict>
+</array>
 ```
 
 For Linux and Windows, `clientId` should be set to a web client id:
