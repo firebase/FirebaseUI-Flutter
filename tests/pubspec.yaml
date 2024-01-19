@@ -26,6 +26,8 @@ dependencies:
   http: ^1.1.2
   google_sign_in: ^6.2.1
   firebase_ui_shared: ^1.4.1
+  firebase_database: ^10.4.0
+  firebase_ui_database: ^1.4.1
 
 dev_dependencies:
   flutter_test:
