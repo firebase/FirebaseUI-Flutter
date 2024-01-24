@@ -14,10 +14,6 @@ import '../widgets/internal/title.dart';
 /// A dialog that is shown when the user tries to sign in with a provider that
 /// wasn't previously used, but there are other providers for a given email.
 /// {@endtemplate}
-@Deprecated(
-  'Email enumeration protection is on by default.'
-  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-)
 class DifferentMethodSignInDialog extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
   final fba.FirebaseAuth? auth;

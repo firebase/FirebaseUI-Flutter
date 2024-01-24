@@ -89,16 +89,6 @@ class GoogleProvider extends OAuthProvider {
   }
 
   @override
-  void desktopSignIn(AuthAction action) {
-    // google_sign_in supports macOS, so mobile auth flow works.
-    if (defaultTargetPlatform == TargetPlatform.macOS) {
-      mobileSignIn(action);
-    } else {
-      super.desktopSignIn(action);
-    }
-  }
-
-  @override
   OAuthCredential fromDesktopAuthResult(AuthResult result) {
     return fba.GoogleAuthProvider.credential(
       idToken: result.idToken,
@@ -109,8 +99,7 @@ class GoogleProvider extends OAuthProvider {
   @override
   Future<void> logOutProvider() async {
     if (defaultTargetPlatform == TargetPlatform.android ||
-        defaultTargetPlatform == TargetPlatform.iOS ||
-        defaultTargetPlatform == TargetPlatform.macOS) {
+        defaultTargetPlatform == TargetPlatform.iOS) {
       await provider.signOut();
     }
   }

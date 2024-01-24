@@ -19,14 +19,6 @@ class ReauthenticateView extends StatelessWidget {
   /// A callback that is being called when the user has successfuly signed in.
   final VoidCallback? onSignedIn;
 
-  /// {@template ui.auth.views.reauthenticate_view.on_phone_verified}
-  /// A callback that is only called if a phone number is used to reauthenticate.
-  /// Called before [onSignedIn].
-  /// If not provided, [PhoneInputScreen] and [SMSCodeInputScreen] will be popped.
-  /// Otherwise, it's up to the user to handle navigation logic.
-  /// {@endtemplate}
-  final VoidCallback? onPhoneVerfifed;
-
   /// A label that would be used for the "Sign in" button.
   final String? actionButtonLabelOverride;
 
@@ -41,7 +33,6 @@ class ReauthenticateView extends StatelessWidget {
     this.onSignedIn,
     this.actionButtonLabelOverride,
     this.showPasswordVisibilityToggle = false,
-    this.onPhoneVerfifed,
   });
 
   @override
@@ -69,27 +60,7 @@ class ReauthenticateView extends StatelessWidget {
       }
     }
 
-    final m = ModalRoute.of(context);
-
-    final onSignedInAction = AuthStateChangeAction<SignedIn>((context, state) {
-      if (getControllerForState(state) is PhoneAuthController) {
-        if (onPhoneVerfifed != null) {
-          onPhoneVerfifed?.call();
-        } else {
-          // Phone verification flow pushes new routes, so we need to pop them.
-          Navigator.of(context).popUntil((route) {
-            return route == m;
-          });
-        }
-      }
-
-      onSignedIn?.call();
-    });
-
-    return FirebaseUIActions(
-      actions: [
-        onSignedInAction,
-      ],
+    return AuthStateListener(
       child: LoginView(
         action: AuthAction.signIn,
         providers: providers,
@@ -98,6 +69,13 @@ class ReauthenticateView extends StatelessWidget {
         actionButtonLabelOverride: actionButtonLabelOverride,
         showPasswordVisibilityToggle: showPasswordVisibilityToggle,
       ),
+      listener: (oldState, newState, ctrl) {
+        if (newState is SignedIn) {
+          onSignedIn?.call();
+        }
+
+        return false;
+      },
     );
   }
 }

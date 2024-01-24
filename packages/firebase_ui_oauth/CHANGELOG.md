@@ -1,11 +1,3 @@
-## 1.4.17
-
- - Update a dependency to the latest release.
-
-## 1.4.16
-
- - Update a dependency to the latest release.
-
 ## 1.4.15
 
  - Update a dependency to the latest release.

@@ -10,10 +10,6 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 /// A view that renders a list of providers that were previously used by the
 /// user to authenticate.
 /// {@endtemplate}
-@Deprecated(
-  'Email enumeration protection is on by default.'
-  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-)
 class DifferentMethodSignInView extends StatelessWidget {
   /// {@macro ui.auth.auth_controller.auth}
   final fba.FirebaseAuth? auth;

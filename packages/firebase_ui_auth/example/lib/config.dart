@@ -2,18 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// ignore_for_file: do_not_use_environment, constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: do_not_use_environment, constant_identifier_names
 
-import 'package:flutter/foundation.dart';
-
-String get GOOGLE_CLIENT_ID {
-  if (defaultTargetPlatform == TargetPlatform.macOS) {
-    return '406099696497-65v1b9ffv6sgfqngfjab5ol5qdikh2rm.apps.googleusercontent.com';
-  } else {
-    return '448618578101-sg12d2qin42cpr00f8b0gehs5s7inm0v.apps.googleusercontent.com';
-  }
-}
-
+const GOOGLE_CLIENT_ID =
+    '448618578101-sg12d2qin42cpr00f8b0gehs5s7inm0v.apps.googleusercontent.com';
 const GOOGLE_REDIRECT_URI =
     'https://react-native-firebase-testing.firebaseapp.com/__/auth/handler';
 

@@ -6,8 +6,11 @@ import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
-/// Default error handler that starts MFA flow
-/// if [FirebaseAuthMultiFactorException] is thrown.
+/// Default error handler that fetches available providers if
+/// `account-exists-with-different-credential` was thrown.
+///
+/// After succesful execution, auth flow should have
+/// [DifferentSignInMethodsFound] state.
 void defaultOnAuthError(AuthProvider provider, Object error) {
   if (error is! fba.FirebaseAuthException) {
     throw error;

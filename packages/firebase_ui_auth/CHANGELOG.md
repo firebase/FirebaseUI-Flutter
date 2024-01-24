@@ -1,13 +1,3 @@
-## 1.12.1
-
- - Update a dependency to the latest release.
-
-## 1.12.0
-
- - **FIX**(ui_auth): correctly handle phone auth in showReauthenticateDialog ([#209](https://github.com/firebase/FirebaseUI-Flutter/issues/209)). ([c0612cfd](https://github.com/firebase/FirebaseUI-Flutter/commit/c0612cfd71dc5ea2448ba73882b39a9766b97a98))
- - **FIX**(ui_auth): deprecate email enumeration protection affected APIs ([#210](https://github.com/firebase/FirebaseUI-Flutter/issues/210)). ([eed65674](https://github.com/firebase/FirebaseUI-Flutter/commit/eed656748caa12eb31d7a9677a16bf6b1d129b77))
- - **FEAT**(ui_auth): add a way to get an AuthController for AuthState ([#207](https://github.com/firebase/FirebaseUI-Flutter/issues/207)). ([0816bfd4](https://github.com/firebase/FirebaseUI-Flutter/commit/0816bfd4a1acfbe390d9725d48892b0831e99679))
-
 ## 1.11.0
 
  - **FIX**(ui_auth): correctly position phone input screen footer ([#183](https://github.com/firebase/FirebaseUI-Flutter/issues/183)). ([d5e2338d](https://github.com/firebase/FirebaseUI-Flutter/commit/d5e2338df4fbbed69c7526ecc1d4559730c43d03))
