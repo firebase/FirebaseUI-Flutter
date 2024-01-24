@@ -29,17 +29,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_ui_firestore: ^1.5.15
-  cloud_firestore: ^4.13.3
+  firebase_ui_firestore: ^1.6.1
+  cloud_firestore: ^4.13.6
   cupertino_icons: ^1.0.6
-  firebase_core: ^2.24.0
+  firebase_core: ^2.24.2
 dev_dependencies:
   drive: ^1.0.0-1.0.nullsafety.5
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  mockito: ^5.4.3
+  mockito: ^5.4.4
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

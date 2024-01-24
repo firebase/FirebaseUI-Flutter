@@ -24,6 +24,7 @@ Future<void> sendSMS(WidgetTester tester, String phoneNumber) async {
 
 void main() {
   const labels = DefaultLocalizations();
+  setUpTests();
 
   group('PhoneInputScreen', () {
     testWidgets('allows to pick country code', (tester) async {
@@ -98,8 +99,8 @@ void main() {
 
         await completer.future;
 
-        final codes = await getVerificationCodes();
-        expect(codes['+1555555555'], isNotEmpty);
+        final code = await getVerificationCode('+1555555555');
+        expect(code, isNotEmpty);
       },
     );
 
@@ -149,14 +150,14 @@ void main() {
         final smsCodeInput = find.byType(SMSCodeInput);
         expect(smsCodeInput, findsOneWidget);
 
-        final codes = await getVerificationCodes();
-        final code = codes['+1555555556']!;
+        final code = await getVerificationCode('+1555555556');
         final invalidCode =
             code.split('').map(int.parse).map((v) => (v + 1) % 10).join();
 
         await tester.tap(smsCodeInput);
 
         await tester.enterText(smsCodeInput, invalidCode);
+        await tester.pumpAndSettle();
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await completer.future;
 
@@ -192,8 +193,7 @@ void main() {
         await sendSMS(tester, '555555557');
 
         final smsCodeInput = find.byType(SMSCodeInput);
-        final codes = await getVerificationCodes();
-        final code = codes['+1555555557']!;
+        final code = await getVerificationCode('+1555555557');
 
         await tester.tap(smsCodeInput);
 
@@ -206,6 +206,81 @@ void main() {
         );
 
         expect(user.phoneNumber, '+1555555557');
+      },
+    );
+  });
+
+  group('showReauthenticateDialog', () {
+    testWidgets(
+      'can reauthenticate using phone number',
+      (tester) async {
+        final credCompleter = Completer<fba.PhoneAuthCredential>();
+
+        await auth.verifyPhoneNumber(
+          phoneNumber: '+1555555558',
+          verificationCompleted: credCompleter.complete,
+          verificationFailed: credCompleter.completeError,
+          codeSent: (verificationId, _) async {
+            final code = await getVerificationCode('+1555555558');
+
+            final credential = fba.PhoneAuthProvider.credential(
+              verificationId: verificationId,
+              smsCode: code,
+            );
+
+            credCompleter.complete(credential);
+          },
+          codeAutoRetrievalTimeout: (_) {},
+        );
+
+        final cred = await credCompleter.future;
+        await auth.signInWithCredential(cred);
+
+        final reauthenticationCompleter = Completer<void>();
+        // emulator doesn't return a new sms code if the same phone number is
+        // used within 30(?) seconds.
+        await Future.delayed(const Duration(seconds: 30));
+        bool onPhoneVerifiedCalled = false;
+
+        await render(
+          tester,
+          Builder(builder: (context) {
+            return ElevatedButton(
+              onPressed: () {
+                showReauthenticateDialog(
+                  context: context,
+                  providers: [PhoneAuthProvider()],
+                  onSignedIn: () => reauthenticationCompleter.complete(),
+                  onPhoneVerfifed: () => onPhoneVerifiedCalled = true,
+                );
+              },
+              child: const Text('Reauthenticate'),
+            );
+          }),
+        );
+
+        await tester.tap(find.byType(ElevatedButton));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('Sign in with phone'));
+        await tester.pumpAndSettle();
+
+        await sendSMS(tester, '555555558');
+
+        final smsCodeInput = find.byType(SMSCodeInput);
+        final code = await getVerificationCode('+1555555558');
+
+        await tester.tap(smsCodeInput);
+        await tester.enterText(smsCodeInput, code);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        final future = reauthenticationCompleter.future.timeout(
+          const Duration(seconds: 5),
+        );
+
+        expect(future, completes);
+        expect(onPhoneVerifiedCalled, isTrue);
       },
     );
   });

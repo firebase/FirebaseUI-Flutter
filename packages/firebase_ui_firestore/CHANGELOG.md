@@ -1,3 +1,11 @@
+## 1.6.1
+
+ - **FIX**(ui_firestore): null-assert count for aggregate query ([#246](https://github.com/firebase/FirebaseUI-Flutter/issues/246)). ([8afbe368](https://github.com/firebase/FirebaseUI-Flutter/commit/8afbe36824ec481055dcbf0558e0611bab712553))
+
+## 1.6.0
+
+ - **FEAT**(ui_firestore): implemented separators and fetching indicator ([#99](https://github.com/firebase/FirebaseUI-Flutter/issues/99)). ([d8d8bf59](https://github.com/firebase/FirebaseUI-Flutter/commit/d8d8bf594273618e866545172e57c10409f3a78f))
+
 ## 1.5.15
 
  - Update a dependency to the latest release.
