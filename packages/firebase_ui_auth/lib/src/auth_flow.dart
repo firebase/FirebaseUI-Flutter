@@ -129,6 +129,11 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   }
 
   @override
+  @Deprecated(
+    'Email enumeration protection is on by default.'
+    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+  )
+  @override
   void onDifferentProvidersFound(
     String email,
     List<String> providers,

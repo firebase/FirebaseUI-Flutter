@@ -20,6 +20,9 @@ Future<bool> showReauthenticateDialog({
   /// A callback that is being called after user has successfully signed in.
   VoidCallback? onSignedIn,
 
+  /// {@macro ui.auth.views.reauthenticate_view.on_phone_verified}
+  VoidCallback? onPhoneVerfifed,
+
   /// A label that would be used for the "Sign in" button.
   String? actionButtonLabelOverride,
 }) async {
@@ -34,8 +37,9 @@ Future<bool> showReauthenticateDialog({
       child: ReauthenticateDialog(
         providers: providers,
         auth: auth,
-        onSignedIn: onSignedIn,
+        onSignedIn: onSignedIn ?? () => Navigator.of(context).pop(true),
         actionButtonLabelOverride: actionButtonLabelOverride,
+        onPhoneVerfifed: onPhoneVerfifed,
       ),
     ),
   );
@@ -45,6 +49,10 @@ Future<bool> showReauthenticateDialog({
 }
 
 /// Shows [DifferentMethodSignInDialog].
+@Deprecated(
+  'Email enumeration protection is on by default.'
+  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
+)
 Future<void> showDifferentMethodSignInDialog({
   required BuildContext context,
 

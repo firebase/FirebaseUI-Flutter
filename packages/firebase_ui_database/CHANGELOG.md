@@ -1,3 +1,11 @@
+## 1.4.1
+
+ - Update a dependency to the latest release.
+
+## 1.4.0
+
+ - **FEAT**(firebase_ui_database): Allow reversing the database query ([#193](https://github.com/firebase/FirebaseUI-Flutter/issues/193)). ([0588812b](https://github.com/firebase/FirebaseUI-Flutter/commit/0588812beac550afcf8dba2cabde28f258a90ed1))
+
 ## 1.3.13
 
  - Update a dependency to the latest release.
