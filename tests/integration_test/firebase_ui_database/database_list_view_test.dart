@@ -203,7 +203,7 @@ void main() {
     );
 
     testWidgets(
-      'Allow reversing the database query',
+      'Allows reversing the database query',
       (tester) async {
         final ref = rtdb.ref().child(_kTestPath);
 
