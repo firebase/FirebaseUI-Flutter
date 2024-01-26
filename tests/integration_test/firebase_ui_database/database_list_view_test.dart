@@ -247,7 +247,7 @@ void main() {
         await tester.pumpAndSettle();
 
         for (int i = 24; i >= 20; i--) {
-          expect(find.text(i.toString()), findsOneWidget);
+          expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
     );
