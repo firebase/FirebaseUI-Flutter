@@ -1,0 +1,10 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "flutter-tests": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

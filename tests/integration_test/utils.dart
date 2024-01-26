@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ bool get isMobile {
 
 late FirebaseFirestore db;
 late fba.FirebaseAuth auth;
+late FirebaseDatabase rtdb;
 
 bool _prepared = false;
 
@@ -48,6 +50,10 @@ Future<void> prepare() async {
 
   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   db = FirebaseFirestore.instance;
+
+  FirebaseDatabase.instance.useDatabaseEmulator('localhost', 9000);
+
+  rtdb = FirebaseDatabase.instance;
 
   await authCleanup();
 }
@@ -160,6 +166,14 @@ Future<CollectionReference<T>> clearCollection<T>(
 
   await ref.get(const GetOptions(source: Source.server));
   return ref;
+}
+
+Future<void> clearReference(
+    DatabaseReference ref,
+    ) async {
+  final snapshot = await ref.get();
+  if (!snapshot.exists) return;
+  await ref.remove();
 }
 
 extension<T> on TypeMatcher<T> {
