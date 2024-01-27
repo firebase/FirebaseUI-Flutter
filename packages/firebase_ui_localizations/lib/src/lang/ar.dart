@@ -197,8 +197,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get signInText => "تسجيل الدخول";
 
   @override
-  String get signInWithAppleButtonText =>
-      "تسجيل الدخول باستخدام حساب على Apple";
+  String get signInWithAppleButtonText => "تسجيل الدخول باستخدام Apple";
 
   @override
   String get signInWithEmailLinkSentText =>
