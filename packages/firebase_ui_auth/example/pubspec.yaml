@@ -22,8 +22,8 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.6
-  firebase_auth: ^4.15.3
-  firebase_core: ^2.24.2
+  firebase_auth: ^4.17.0
+  firebase_core: ^2.25.0
   flutter:
     sdk: flutter
   flutter_localizations:
