@@ -25,6 +25,7 @@ on:
 
 jobs:
   android:
+    # currently macos-12
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
@@ -60,6 +61,16 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-pixel
+      - name: Clear Caches Optionally
+        if: "${{ github.event.inputs.clearCaches != '' }}"
+        shell: bash
+        run: |
+          du -sk ~/.gradle
+          du -sk ~/.android
+          rm -fr ~/.gradle
+          rm -fr ~/.android
+          du -sk ~/.gradle || echo ~/.gradle is gone
+          du -sk ~/.android || echo ~/.android is gone
       - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
         with:
           channel: "stable"
