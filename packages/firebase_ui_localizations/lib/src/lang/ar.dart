@@ -340,4 +340,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "ارسل ايميل التفعيل";
 }

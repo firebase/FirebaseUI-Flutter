@@ -326,4 +326,7 @@ class ZhTWLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sentVerificationEmailLabel => "已發送驗證電子郵件";
 }
