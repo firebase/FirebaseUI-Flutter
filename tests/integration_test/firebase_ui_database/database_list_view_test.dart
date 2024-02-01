@@ -208,6 +208,56 @@ void main() {
         }
       },
     );
+
+    testWidgets(
+      'Allows reversing the database query',
+      (tester) async {
+        final ref = rtdb.ref().child(_kTestPath);
+
+        await fillReference(ref, 25);
+        late double size;
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Material(
+              child: Builder(builder: (context) {
+                final mq = MediaQuery.of(context);
+                final h = mq.size.height;
+                size = h / 5;
+
+                return FirebaseDatabaseListView(
+                  physics: const ClampingScrollPhysics(),
+                  query: ref.orderByValue(),
+                  reverseQuery: true,
+                  cacheExtent: 0,
+                  pageSize: 5,
+                  itemExtent: size,
+                  itemBuilder: (context, snapshot) {
+                    final v = snapshot.value as int;
+
+                    return Container(
+                      alignment: Alignment.center,
+                      color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                      key: ValueKey(v.toString()),
+                      child: Text(
+                        v.toString(),
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+
+        await tester.pumpAndSettle();
+
+        for (int i = 24; i >= 20; i--) {
+          expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
+        }
+      },
+    );
   });
 }
 
