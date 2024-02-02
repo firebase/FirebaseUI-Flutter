@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -358,6 +359,11 @@ typedef FirestoreItemBuilder<Document> = Widget Function(
 /// A type representing the function passed to [FirestoreListView] for its `loadingBuilder`.
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
 
+/// A type representing the function passed to [FirestoreListView] for its `loadingIndicatorBuilder`.
+typedef FirestoreFetchingIndicatorBuilder = Widget Function(
+  BuildContext context,
+);
+
 /// A type representing the function passed to [FirestoreListView] for its `errorBuilder`.
 typedef FirestoreErrorBuilder = Widget Function(
   BuildContext context,
@@ -427,9 +433,11 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     required FirestoreItemBuilder<Document> itemBuilder,
     super.pageSize,
     FirestoreLoadingBuilder? loadingBuilder,
+    FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
     FirestoreErrorBuilder? errorBuilder,
     FirestoreEmptyBuilder? emptyBuilder,
     Axis scrollDirection = Axis.vertical,
+    bool showFetchingIndicator = false,
     bool reverse = false,
     ScrollController? controller,
     bool? primary,
@@ -467,14 +475,45 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               return emptyBuilder(context);
             }
 
+            final itemCount = snapshot.docs.length;
+
             return ListView.builder(
-              itemCount: snapshot.docs.length,
+              itemCount: itemCount,
               itemBuilder: (context, index) {
-                final isLastItem = index + 1 == snapshot.docs.length;
-                if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
+                final isLastItem = index + 1 == itemCount;
+                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+                  snapshot.fetchMore();
+                }
 
                 final doc = snapshot.docs[index];
-                return itemBuilder(context, doc);
+                return showFetchingIndicator
+                    ? OnMountListener(
+                        onMount: () {
+                          if (isLastItem && snapshot.hasMore) {
+                            snapshot.fetchMore();
+                          }
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            itemBuilder(context, doc),
+                            if (isLastItem && snapshot.hasMore)
+                              fetchingIndicatorBuilder?.call(context) ??
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 16.0,
+                                    ),
+                                    child: Center(
+                                      child: LoadingIndicator(
+                                        size: 30.0,
+                                        borderWidth: 2.0,
+                                      ),
+                                    ),
+                                  ),
+                          ],
+                        ),
+                      )
+                    : itemBuilder(context, doc);
               },
               scrollDirection: scrollDirection,
               reverse: reverse,
@@ -490,6 +529,115 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               addSemanticIndexes: addSemanticIndexes,
               cacheExtent: cacheExtent,
               semanticChildCount: semanticChildCount,
+              dragStartBehavior: dragStartBehavior,
+              keyboardDismissBehavior: keyboardDismissBehavior,
+              restorationId: restorationId,
+              clipBehavior: clipBehavior,
+            );
+          },
+        );
+
+  /// Shows a separator between list items just as in [ListView.separated]
+  FirestoreListView.separated({
+    super.key,
+    required super.query,
+    required FirestoreItemBuilder<Document> itemBuilder,
+    super.pageSize,
+    FirestoreLoadingBuilder? loadingBuilder,
+    FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
+    FirestoreErrorBuilder? errorBuilder,
+    FirestoreEmptyBuilder? emptyBuilder,
+    required IndexedWidgetBuilder separatorBuilder,
+    Axis scrollDirection = Axis.vertical,
+    bool showFetchingIndicator = false,
+    bool reverse = false,
+    ScrollController? controller,
+    bool? primary,
+    ScrollPhysics? physics,
+    bool shrinkWrap = false,
+    EdgeInsetsGeometry? padding,
+    ChildIndexGetter? findChildIndexCallback,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    double? cacheExtent,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
+    String? restorationId,
+    Clip clipBehavior = Clip.hardEdge,
+  }) : super(
+          builder: (context, snapshot, _) {
+            if (snapshot.isFetching) {
+              return loadingBuilder?.call(context) ??
+                  const Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasError && errorBuilder != null) {
+              return errorBuilder(
+                context,
+                snapshot.error!,
+                snapshot.stackTrace!,
+              );
+            }
+
+            if (snapshot.docs.isEmpty && emptyBuilder != null) {
+              return emptyBuilder(context);
+            }
+
+            final itemCount = snapshot.docs.length;
+
+            return ListView.separated(
+              itemCount: itemCount,
+              itemBuilder: (context, index) {
+                final isLastItem = index + 1 == itemCount;
+                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+                  snapshot.fetchMore();
+                }
+
+                final doc = snapshot.docs[index];
+                return showFetchingIndicator
+                    ? OnMountListener(
+                        onMount: () {
+                          if (isLastItem && snapshot.hasMore) {
+                            snapshot.fetchMore();
+                          }
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            itemBuilder(context, doc),
+                            if (isLastItem && snapshot.hasMore)
+                              fetchingIndicatorBuilder?.call(context) ??
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 16.0,
+                                    ),
+                                    child: Center(
+                                      child: LoadingIndicator(
+                                        size: 30.0,
+                                        borderWidth: 2.0,
+                                      ),
+                                    ),
+                                  ),
+                          ],
+                        ),
+                      )
+                    : itemBuilder(context, doc);
+              },
+              separatorBuilder: separatorBuilder,
+              scrollDirection: scrollDirection,
+              reverse: reverse,
+              controller: controller,
+              primary: primary,
+              physics: physics,
+              shrinkWrap: shrinkWrap,
+              padding: padding,
+              findChildIndexCallback: findChildIndexCallback,
+              addAutomaticKeepAlives: addAutomaticKeepAlives,
+              addRepaintBoundaries: addRepaintBoundaries,
+              addSemanticIndexes: addSemanticIndexes,
+              cacheExtent: cacheExtent,
               dragStartBehavior: dragStartBehavior,
               keyboardDismissBehavior: keyboardDismissBehavior,
               restorationId: restorationId,
@@ -539,5 +687,45 @@ class _AggregateQueryBuilderState extends State<AggregateQueryBuilder> {
     if (widget.query != oldWidget.query) {
       queryFuture = widget.query.get();
     }
+  }
+}
+
+/// This widget calls back, via the supplied onMount method, when it gets
+/// mounted.
+/// It also offers the functionality to safely delay the onMount callback by
+/// onMountDelay.
+///
+/// Borrowed the idea from the link below and built on it further:
+/// https://www.filledstacks.com/post/how-to-perform-real-time-pagination-with-firestore/?utm_source=pocket_reader
+class OnMountListener extends StatefulWidget {
+  final Function onMount;
+  final int onMountDelay; // in milliseconds
+  final Widget child;
+
+  const OnMountListener({
+    super.key,
+    required this.onMount,
+    this.onMountDelay = 500,
+    required this.child,
+  });
+
+  @override
+  State<OnMountListener> createState() => _OnMountListenerState();
+}
+
+class _OnMountListenerState extends State<OnMountListener> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Future.delayed(Duration(milliseconds: widget.onMountDelay), () {
+        if (mounted) widget.onMount();
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }

@@ -25,6 +25,7 @@ on:
 
 jobs:
   android:
+    # currently macos-12
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
@@ -41,7 +42,7 @@ jobs:
           arch: x86_64
           profile: pixel_5
           script: echo "Generated AVD snapshot for caching."
-      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
         name: Install Node.js
         with:
           node-version: "18"
@@ -60,6 +61,16 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-pixel
+      - name: Clear Caches Optionally
+        if: "${{ github.event.inputs.clearCaches != '' }}"
+        shell: bash
+        run: |
+          du -sk ~/.gradle
+          du -sk ~/.android
+          rm -fr ~/.gradle
+          rm -fr ~/.android
+          du -sk ~/.gradle || echo ~/.gradle is gone
+          du -sk ~/.android || echo ~/.android is gone
       - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
         with:
           channel: "stable"
@@ -98,7 +109,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
         name: Install Node.js
         with:
           node-version: "18"
@@ -168,7 +179,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
         name: Install Node.js
         with:
           node-version: "18"

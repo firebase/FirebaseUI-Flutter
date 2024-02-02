@@ -4,11 +4,11 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +32,7 @@ bool get isMobile {
 
 late FirebaseFirestore db;
 late fba.FirebaseAuth auth;
+late FirebaseDatabase rtdb;
 
 bool _prepared = false;
 
@@ -49,6 +50,10 @@ Future<void> prepare() async {
 
   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   db = FirebaseFirestore.instance;
+
+  FirebaseDatabase.instance.useDatabaseEmulator('localhost', 9000);
+
+  rtdb = FirebaseDatabase.instance;
 
   await authCleanup();
 }
@@ -83,12 +88,11 @@ Future<void> render(WidgetTester tester, Widget widget) async {
   );
 }
 
-Future<http.Response> retry(Future<http.Response> Function() fn) async {
+Future<T> retry<T>(Future<T> Function() fn, [int maxAttempts = 5]) async {
   var delay = const Duration(milliseconds: 100);
   int attempts = 0;
-  int maxAttempts = 5;
 
-  final completer = Completer<http.Response>();
+  final completer = Completer<T>();
 
   await Future.doWhile(() async {
     try {
@@ -101,8 +105,8 @@ Future<http.Response> retry(Future<http.Response> Function() fn) async {
         return false;
       }
 
-      stdout.writeln('Request failed: $e');
-      stdout.writeln('retrying in $delay');
+      debugPrint('Request failed: $e');
+      debugPrint('retrying in $delay');
       await Future.delayed(delay);
       delay *= 2;
       attempts++;
@@ -122,24 +126,32 @@ Future<void> deleteAllAccounts() async {
   if (res.statusCode != 200) throw Exception('Delete failed');
 }
 
-Future<Map<String, String>> getVerificationCodes() async {
+Future<String> getVerificationCode(String phoneNumber) async {
   final id = DefaultFirebaseOptions.currentPlatform.projectId;
   final uriString =
       'http://$testEmulatorHost:9099/emulator/v1/projects/$id/verificationCodes';
-  final res = await retry(() => http.get(Uri.parse(uriString)));
+  final code = await retry(() async {
+    final res = await http.get(Uri.parse(uriString));
+    final body = json.decode(res.body);
 
-  final body = json.decode(res.body);
-  final codes = (body['verificationCodes'] as List).fold<Map<String, String>>(
-    {},
-    (acc, value) {
-      return {
-        ...acc,
-        value['phoneNumber']: value['code'],
-      };
-    },
-  );
+    final codes = (body['verificationCodes'] as List).fold<Map<String, String>>(
+      {},
+      (acc, value) {
+        return {
+          ...acc,
+          value['phoneNumber']: value['code'],
+        };
+      },
+    );
 
-  return codes;
+    if (codes[phoneNumber] == null) {
+      throw Exception('Code not found');
+    }
+
+    return codes[phoneNumber]!;
+  }, 6);
+
+  return code;
 }
 
 Future<CollectionReference<T>> clearCollection<T>(
@@ -154,6 +166,14 @@ Future<CollectionReference<T>> clearCollection<T>(
 
   await ref.get(const GetOptions(source: Source.server));
   return ref;
+}
+
+Future<void> clearReference(
+    DatabaseReference ref,
+    ) async {
+  final snapshot = await ref.get();
+  if (!snapshot.exists) return;
+  await ref.remove();
 }
 
 extension<T> on TypeMatcher<T> {
