@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 typedef DeleteFailedCallback = void Function(Exception exception);
 typedef SignInRequiredCallback = Future<bool> Function();
+typedef ActionsBeforeDeleteCallback = Future<bool> Function();
 
 /// {@template ui.auth.widgets.delete_account_button}
 /// A button that triggers the deletion of the user's account.
@@ -55,6 +56,9 @@ class DeleteAccountButton extends StatefulWidget {
   /// A callback that is called if the account deletion fails.
   final DeleteFailedCallback? onDeleteFailed;
 
+  /// A callback that is called before the account is deleted.
+  final ActionsBeforeDeleteCallback? actionsBeforeDelete;
+
   /// {@macro ui.shared.widgets.button_variant}
   final ButtonVariant variant;
 
@@ -69,6 +73,7 @@ class DeleteAccountButton extends StatefulWidget {
     this.auth,
     this.onSignInRequired,
     this.onDeleteFailed,
+    this.actionsBeforeDelete,
     this.variant = ButtonVariant.filled,
     this.showDeleteConfirmationDialog = false,
   });
@@ -112,6 +117,13 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     });
 
     try {
+      if (widget.actionsBeforeDelete != null) {
+        final proceed = await widget.actionsBeforeDelete!();
+        if (!proceed) {
+          throw Exception('Can not complete actions before delete.');
+        }
+      }
+
       final user = auth.currentUser!;
       await auth.currentUser?.delete();
 
