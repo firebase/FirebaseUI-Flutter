@@ -309,7 +309,7 @@
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInWithAppleButtonText": "تسجيل الدخول باستخدام حساب على Apple",
+  "signInWithAppleButtonText": "تسجيل الدخول باستخدام Apple",
   "@signInWithAppleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
