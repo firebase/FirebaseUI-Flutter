@@ -1,3 +1,8 @@
+## 1.10.2
+
+ - **FIX**(ui_localizations): Add missing generated translation file. ([ca15feb6](https://github.com/firebase/FirebaseUI-Flutter/commit/ca15feb69b0d1699fc21f831ddbb1e8f87795e9b))
+ - **FIX**: Arabic translation of Sign In With Apple button label. ([085dc6de](https://github.com/firebase/FirebaseUI-Flutter/commit/085dc6de7090d4eb85f8d3953b5e9c037e35541a))
+
 ## 1.10.1
 
  - **FIX**: Update translation strings in RO for confirm account deletion ([#219](https://github.com/firebase/FirebaseUI-Flutter/issues/219)). ([704b34ea](https://github.com/firebase/FirebaseUI-Flutter/commit/704b34ea174ecf3a78357de0236156f4d17a6ba5))

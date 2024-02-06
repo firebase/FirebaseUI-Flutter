@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.13.0`](#firebase_ui_auth---v1130)
+ - [`firebase_ui_localizations` - `v1.10.2`](#firebase_ui_localizations---v1102)
+ - [`firebase_ui_oauth` - `v1.5.0`](#firebase_ui_oauth---v150)
+ - [`firebase_ui_oauth_google` - `v1.3.0`](#firebase_ui_oauth_google---v130)
+ - [`firebase_ui_oauth_facebook` - `v1.2.18`](#firebase_ui_oauth_facebook---v1218)
+ - [`firebase_ui_oauth_twitter` - `v1.2.18`](#firebase_ui_oauth_twitter---v1218)
+ - [`firebase_ui_oauth_apple` - `v1.2.18`](#firebase_ui_oauth_apple---v1218)
+ - [`firebase_ui_firestore` - `v1.6.2`](#firebase_ui_firestore---v162)
+ - [`firebase_ui_database` - `v1.4.2`](#firebase_ui_database---v142)
+ - [`firebase_ui_storage` - `v2.0.3`](#firebase_ui_storage---v203)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth_facebook` - `v1.2.18`
+ - `firebase_ui_oauth_twitter` - `v1.2.18`
+ - `firebase_ui_oauth_apple` - `v1.2.18`
+ - `firebase_ui_firestore` - `v1.6.2`
+ - `firebase_ui_storage` - `v2.0.3`
+
+---
+
+#### `firebase_ui_auth` - `v1.13.0`
+
+ - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))
+
+#### `firebase_ui_localizations` - `v1.10.2`
+
+ - **FIX**(ui_localizations): Add missing generated translation file. ([ca15feb6](https://github.com/firebase/FirebaseUI-Flutter/commit/ca15feb69b0d1699fc21f831ddbb1e8f87795e9b))
+ - **FIX**: Arabic translation of Sign In With Apple button label. ([085dc6de](https://github.com/firebase/FirebaseUI-Flutter/commit/085dc6de7090d4eb85f8d3953b5e9c037e35541a))
+
+#### `firebase_ui_oauth` - `v1.5.0`
+
+ - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))
+
+#### `firebase_ui_oauth_google` - `v1.3.0`
+
+ - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))
+
+#### `firebase_ui_database` - `v1.4.2`
+
+ - **FIX**:(firebase_ui_database): Perform list operations in correct order ([213](https://github.com/firebase/FirebaseUI-Flutter/pull/213))
+
 ## 2024-01-09
 
 ### Changes
