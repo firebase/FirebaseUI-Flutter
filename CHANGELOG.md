@@ -57,7 +57,7 @@ Packages with dependency updates only:
 
 #### `firebase_ui_database` - `v1.4.2`
 
- - **FIX**:(firebase_ui_database): Perform list operations in correct order ([d2d5309](https://github.com/firebase/FirebaseUI-Flutter/commit/d2d5309811fa93fa517752f5d03cc69f15657be7))
+ - **FIX**:(firebase_ui_database): Perform list operations in correct order ([213](https://github.com/firebase/FirebaseUI-Flutter/pull/213))
 
 ## 2024-01-09
 
