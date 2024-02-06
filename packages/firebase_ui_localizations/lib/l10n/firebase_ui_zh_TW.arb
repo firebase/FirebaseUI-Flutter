@@ -529,8 +529,8 @@
     "description": "Confirm delete account button label",
     "placeholders": {}
   },
-  "sendVerificationEmailButtonText": "Send verification email",
-  "@sendVerificationEmailButtonText": {
+  "sendVerificationEmailLabel": "Send verification email",
+  "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
     "placeholders": {}
   }

@@ -336,5 +336,5 @@ class IdLocalizations extends FirebaseUILocalizationLabels {
   String get confirmDeleteAccountButtonLabel => "Yes, delete";
 
   @override
-  String get sendVerificationEmailButtonText => "Send verification email";
+  String get sendVerificationEmailLabel => "Send verification email";
 }

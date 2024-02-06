@@ -325,5 +325,5 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get confirmDeleteAccountButtonLabel => "はい、削除します";
 
   @override
-  String get sendVerificationEmailButtonText => "Send verification email";
+  String get sendVerificationEmailLabel => "Send verification email";
 }

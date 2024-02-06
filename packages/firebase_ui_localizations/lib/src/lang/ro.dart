@@ -340,5 +340,5 @@ class RoLocalizations extends FirebaseUILocalizationLabels {
   String get confirmDeleteAccountButtonLabel => "Da, șterge";
 
   @override
-  String get sendVerificationEmailButtonText => "Send verification email";
+  String get sendVerificationEmailLabel => "Send verification email";
 }

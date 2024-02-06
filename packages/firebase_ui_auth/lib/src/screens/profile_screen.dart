@@ -439,7 +439,7 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
                 if (state != EmailVerificationState.sent)
                   LoadingButton(
                     isLoading: state == EmailVerificationState.sending,
-                    label: l.sendVerificationEmailButtonText,
+                    label: l.sendVerificationEmailLabel,
                     onTap: () {
                       service.sendVerificationEmail(
                         platform,
