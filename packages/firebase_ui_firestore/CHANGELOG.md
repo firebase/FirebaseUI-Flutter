@@ -1,3 +1,7 @@
+## 1.6.2
+
+ - Update a dependency to the latest release.
+
 ## 1.6.1
 
  - **FIX**(ui_firestore): null-assert count for aggregate query ([#246](https://github.com/firebase/FirebaseUI-Flutter/issues/246)). ([8afbe368](https://github.com/firebase/FirebaseUI-Flutter/commit/8afbe36824ec481055dcbf0558e0611bab712553))
