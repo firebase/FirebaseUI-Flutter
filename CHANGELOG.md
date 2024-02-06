@@ -34,7 +34,6 @@ Packages with dependency updates only:
  - `firebase_ui_oauth_twitter` - `v1.2.18`
  - `firebase_ui_oauth_apple` - `v1.2.18`
  - `firebase_ui_firestore` - `v1.6.2`
- - `firebase_ui_database` - `v1.4.2`
  - `firebase_ui_storage` - `v2.0.3`
 
 ---
@@ -56,6 +55,9 @@ Packages with dependency updates only:
 
  - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))
 
+#### `firebase_ui_database` - `v1.4.5`
+
+ - **FIX**:(firebase_ui_database): Perform list operations in correct order ([d2d5309](https://github.com/firebase/FirebaseUI-Flutter/commit/d2d5309811fa93fa517752f5d03cc69f15657be7))
 
 ## 2024-01-09
 
