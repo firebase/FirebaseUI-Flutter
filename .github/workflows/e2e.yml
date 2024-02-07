@@ -25,23 +25,10 @@ on:
 
 jobs:
   android:
-    # currently macos-12
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 31
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          target: google_apis
-          arch: x86_64
-          profile: pixel_5
-          script: echo "Generated AVD snapshot for caching."
       - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
         name: Install Node.js
         with:
@@ -49,10 +36,14 @@ jobs:
       - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
         with:
           distribution: "temurin"
-          java-version: "11"
+          java-version: "17"
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
       - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
-
+        uses: gradle/actions/setup-gradle@v3
       - name: AVD cache
         uses: actions/cache@v3
         id: avd-cache
@@ -60,17 +51,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-pixel
-      - name: Clear Caches Optionally
-        if: "${{ github.event.inputs.clearCaches != '' }}"
-        shell: bash
-        run: |
-          du -sk ~/.gradle
-          du -sk ~/.android
-          rm -fr ~/.gradle
-          rm -fr ~/.android
-          du -sk ~/.gradle || echo ~/.gradle is gone
-          du -sk ~/.android || echo ~/.android is gone
+          key: avd-ubuntu
       - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
         with:
           channel: "stable"
@@ -96,13 +77,10 @@ jobs:
         with:
           working-directory: tests
           api-level: 31
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
           target: google_apis
           arch: x86_64
           profile: pixel_5
-          script: flutter devices && flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
+          script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
 
   ios:
     runs-on: macos-latest
