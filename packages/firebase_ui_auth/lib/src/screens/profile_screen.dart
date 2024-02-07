@@ -754,6 +754,7 @@ class ProfileScreen extends MultiProviderScreen {
     this.appBar,
     this.cupertinoNavigationBar,
     this.actionCodeSettings,
+    this.showSignInMethods = true,
     this.showMFATile = false,
     this.showUnlinkConfirmationDialog = false,
     this.showDeleteConfirmationDialog = false,
@@ -859,26 +860,27 @@ class ProfileScreen extends MultiProviderScreen {
           },
           scopeKey: providersScopeKey,
         ),
-        RebuildScope(
-          builder: (context) {
-            final user = auth.currentUser!;
-            final availableProviders = getAvailableProviders(context, user);
-
-            if (availableProviders.isEmpty) {
-              return const SizedBox.shrink();
-            }
-
-            return Padding(
-              padding: const EdgeInsets.only(top: 32),
-              child: _AvailableProvidersRow(
-                auth: auth,
-                providers: availableProviders,
-                onProviderLinked: providersScopeKey.rebuild,
-              ),
-            );
-          },
-          scopeKey: providersScopeKey,
-        ),
+        if (showSignInMethods)
+            RebuildScope(
+              builder: (context) {
+                final user = auth.currentUser!;
+                final availableProviders = getAvailableProviders(context, user);
+    
+                if (availableProviders.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+    
+                return Padding(
+                  padding: const EdgeInsets.only(top: 32),
+                  child: _AvailableProvidersRow(
+                    auth: auth,
+                    providers: availableProviders,
+                    onProviderLinked: providersScopeKey.rebuild,
+                  ),
+                );
+              },
+              scopeKey: providersScopeKey,
+            ),
         if (showMFATile)
           RebuildScope(
             builder: (context) {
