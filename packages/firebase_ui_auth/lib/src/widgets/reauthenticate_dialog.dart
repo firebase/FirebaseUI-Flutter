@@ -70,20 +70,23 @@ class ReauthenticateDialog extends StatelessWidget {
                     child: Title(text: l.verifyItsYouText),
                   ),
                   const SizedBox(height: 16),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.shortestSide / 1.5,
-                    ),
-                    child: Scrollbar(
-                      thumbVisibility: true,
-                      trackVisibility: true,
-                      child: ListView(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        children: [
-                          reauthenticateView,
-                          const SizedBox(height: 16),
-                        ],
+                  Expanded(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight:
+                        MediaQuery.of(context).size.shortestSide / 1.5,
+                      ),
+                      child: Scrollbar(
+                        thumbVisibility: true,
+                        trackVisibility: true,
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          children: [
+                            reauthenticateView,
+                            const SizedBox(height: 16),
+                          ],
+                        ),
                       ),
                     ),
                   ),
