@@ -142,6 +142,7 @@ jobs:
           ccache -s
       - name: Start Firebase Emulator and proxy
         run: |
+          sudo chown -R 501:20 "/Users/runner/.npm"
           cd functions/
           npm i
           npm run build
@@ -216,6 +217,7 @@ jobs:
           ccache -s
       - name: Start Firebase Emulator and proxy
         run: |
+          sudo chown -R 501:20 "/Users/runner/.npm"
           cd functions/
           npm i
           npm run build
