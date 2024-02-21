@@ -74,7 +74,7 @@ class ReauthenticateDialog extends StatelessWidget {
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
                         maxHeight:
-                        MediaQuery.of(context).size.shortestSide / 1.5,
+                            MediaQuery.of(context).size.shortestSide / 1.5,
                       ),
                       child: Scrollbar(
                         thumbVisibility: true,
