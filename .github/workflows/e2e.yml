@@ -145,6 +145,7 @@ jobs:
           cd functions/
           npm i
           npm run build
+          sudo chown -R 501:20 "/Users/runner/.npm"
           ../scripts/start-firebase-emulator.sh
       - name: "E2E Tests"
         working-directory: tests
@@ -219,6 +220,7 @@ jobs:
           cd functions/
           npm i
           npm run build
+          sudo chown -R 501:20 "/Users/runner/.npm"
           ../scripts/start-firebase-emulator.sh
       - name: "E2E Tests"
         working-directory: tests
