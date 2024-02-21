@@ -56,6 +56,8 @@ jobs:
         with:
           channel: "stable"
           cache: true
+      - name: "Install Tools"
+        run: sudo npm i -g firebase-tools
       - name: Firebase Emulator Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -68,10 +70,12 @@ jobs:
           melos-version: "3.0.1"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
-      - name: "Install Tools"
-        run: sudo npm i -g firebase-tools
       - name: Start Firebase Emulator
-        run: ./scripts/start-firebase-emulator.sh
+        run: |
+          cd functions/
+          npm i
+          npm run build
+          ../scripts/start-firebase-emulator.sh
       - name: E2E Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -107,6 +111,8 @@ jobs:
           path: tests/ios/Pods
           key: ${{ runner.os }}-pods-v3-${{ hashFiles('tests/ios/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-ios-pods-v2
+      - name: "Install Tools"
+        run: sudo npm i -g firebase-tools
       - name: Firebase Emulator Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -123,8 +129,6 @@ jobs:
           melos-version: "3.0.1"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
-      - name: "Install Tools"
-        run: sudo npm i -g firebase-tools
       - name: "Build Application"
         working-directory: tests
         run: |
@@ -137,7 +141,11 @@ jobs:
           flutter build ios --no-codesign --simulator --debug --target=./integration_test/firebase_ui_test.dart --dart-define=CI=true
           ccache -s
       - name: Start Firebase Emulator and proxy
-        run: ./scripts/start-firebase-emulator.sh
+        run: |
+          cd functions/
+          npm i
+          npm run build
+          ../scripts/start-firebase-emulator.sh
       - name: "E2E Tests"
         working-directory: tests
         run: |
@@ -177,6 +185,8 @@ jobs:
           path: tests/macos/Pods
           key: ${{ runner.os }}-pods-v2-${{ hashFiles('tests/macos/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-macos-pods-v1
+      - name: "Install Tools"
+        run: sudo npm i -g firebase-tools
       - name: Cache Firebase Emulator
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -193,8 +203,6 @@ jobs:
           melos-version: "3.0.1"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
-      - name: "Install Tools"
-        run: sudo npm i -g firebase-tools
       - name: "Build Application"
         working-directory: tests
         run: |
@@ -207,7 +215,11 @@ jobs:
           flutter build macos --debug --target=./integration_test/firebase_ui_test.dart --device-id=macos --dart-define=CI=true
           ccache -s
       - name: Start Firebase Emulator and proxy
-        run: ./scripts/start-firebase-emulator.sh
+        run: |
+          cd functions/
+          npm i
+          npm run build
+          ../scripts/start-firebase-emulator.sh
       - name: "E2E Tests"
         working-directory: tests
         run: flutter test ./integration_test/firebase_ui_test.dart -d macos --dart-define=CI=true

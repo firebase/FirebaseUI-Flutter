@@ -40,7 +40,7 @@ GeneratedPluginRegistrant.m
 GeneratedPluginRegistrant.java
 GeneratedPluginRegistrant.swift
 generated_plugin_registrant.dart
-
+generated_plugin_registrant.cc
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
