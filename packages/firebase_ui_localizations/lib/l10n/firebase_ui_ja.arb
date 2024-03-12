@@ -61,7 +61,7 @@
     "description": "Used as a label of the DeleteAccountButton.",
     "placeholders": {}
   },
-  "differentMethodsSignInTitleText": "次のいずれかの方法を使用してログインします",
+  "differentMethodsSignInTitleText": "次のいずれかの方法を使用してサインインします",
   "@differentMethodsSignInTitleText": {
     "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
     "placeholders": {}
@@ -86,7 +86,7 @@
     "description": "Used as an error text of the EmailInput when the email is empty.",
     "placeholders": {}
   },
-  "emailLinkSignInButtonLabel": "マジックリンクでログイン",
+  "emailLinkSignInButtonLabel": "マジックリンクでサインイン",
   "@emailLinkSignInButtonLabel": {
     "description": "Used as a label of the EmailLinkSignInButton.",
     "placeholders": {}
@@ -101,7 +101,7 @@
     "description": "Button label that suggests to enable 2FA",
     "placeholders": {}
   },
-  "enableMoreSignInMethods": "その他のログイン方法を有効にします",
+  "enableMoreSignInMethods": "その他のサインイン方法を有効にします",
   "@enableMoreSignInMethods": {
     "description": "Used as a hint to connect more providers.",
     "placeholders": {}
@@ -289,7 +289,7 @@
     "description": "Used as a label of the submit button on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInActionText": "ログイン",
+  "signInActionText": "サインイン",
   "@signInActionText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signIn.",
     "placeholders": {}
@@ -299,12 +299,12 @@
     "description": "Used as a hint text of the LoginView suggesting to sign in instead of registering a new account.",
     "placeholders": {}
   },
-  "signInMethods": "ログイン方法",
+  "signInMethods": "サインイン方法",
   "@signInMethods": {
     "description": "Used as a label of the row showing connected providers.",
     "placeholders": {}
   },
-  "signInText": "ログイン",
+  "signInText": "サインイン",
   "@signInText": {
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
@@ -314,32 +314,32 @@
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
   },
-  "signInWithEmailLinkSentText": "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してログインしてください",
+  "signInWithEmailLinkSentText": "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してサインインしてください",
   "@signInWithEmailLinkSentText": {
     "description": "Indicates that email with a sign in link was sent.",
     "placeholders": {}
   },
-  "signInWithEmailLinkViewTitleText": "マジックリンクでログイン",
+  "signInWithEmailLinkViewTitleText": "マジックリンクでサインイン",
   "@signInWithEmailLinkViewTitleText": {
     "description": "Used as a title on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInWithFacebookButtonText": "Facebook でログイン",
+  "signInWithFacebookButtonText": "Facebook でサインイン",
   "@signInWithFacebookButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Facebook provider.",
     "placeholders": {}
   },
-  "signInWithGoogleButtonText": "Google でログイン",
+  "signInWithGoogleButtonText": "Google でサインイン",
   "@signInWithGoogleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Google provider.",
     "placeholders": {}
   },
-  "signInWithPhoneButtonText": "携帯電話を使用してログイン",
+  "signInWithPhoneButtonText": "携帯電話を使用してサインイン",
   "@signInWithPhoneButtonText": {
     "description": "Used as a label of the PhoneVerificationButton.",
     "placeholders": {}
   },
-  "signInWithTwitterButtonText": "Twitter でログイン",
+  "signInWithTwitterButtonText": "Twitter でサインイン",
   "@signInWithTwitterButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Twitter provider.",
     "placeholders": {}

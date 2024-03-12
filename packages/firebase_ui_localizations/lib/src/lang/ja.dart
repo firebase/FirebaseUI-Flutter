@@ -44,7 +44,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get deleteAccount => "アカウントを削除";
 
   @override
-  String get differentMethodsSignInTitleText => "次のいずれかの方法を使用してログインします";
+  String get differentMethodsSignInTitleText => "次のいずれかの方法を使用してサインインします";
 
   @override
   String get disable => "無効にする";
@@ -59,7 +59,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get emailIsRequiredErrorText => "メールアドレスは必須です";
 
   @override
-  String get emailLinkSignInButtonLabel => "マジックリンクでログイン";
+  String get emailLinkSignInButtonLabel => "マジックリンクでサインイン";
 
   @override
   String get emailTakenErrorText => "このようなメールアドレスを持つアカウントはすでに存在します";
@@ -68,7 +68,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get enable => "有効にする";
 
   @override
-  String get enableMoreSignInMethods => "その他のログイン方法を有効にします";
+  String get enableMoreSignInMethods => "その他のサインイン方法を有効にします";
 
   @override
   String get enterSMSCodeText => "SMS コードを入力";
@@ -178,38 +178,38 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get sendLinkButtonLabel => "マジックリンクで送信";
 
   @override
-  String get signInActionText => "ログイン";
+  String get signInActionText => "サインイン";
 
   @override
   String get signInHintText => "すでにアカウントをお持ちの場合";
 
   @override
-  String get signInMethods => "ログイン方法";
+  String get signInMethods => "サインイン方法";
 
   @override
-  String get signInText => "ログイン";
+  String get signInText => "サインイン";
 
   @override
   String get signInWithAppleButtonText => "Apple でサインイン";
 
   @override
   String get signInWithEmailLinkSentText =>
-      "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してログインしてください";
+      "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してサインインしてください";
 
   @override
-  String get signInWithEmailLinkViewTitleText => "マジックリンクでログイン";
+  String get signInWithEmailLinkViewTitleText => "マジックリンクでサインイン";
 
   @override
-  String get signInWithFacebookButtonText => "Facebook でログイン";
+  String get signInWithFacebookButtonText => "Facebook でサインイン";
 
   @override
-  String get signInWithGoogleButtonText => "Google でログイン";
+  String get signInWithGoogleButtonText => "Google でサインイン";
 
   @override
-  String get signInWithPhoneButtonText => "携帯電話を使用してログイン";
+  String get signInWithPhoneButtonText => "携帯電話を使用してサインイン";
 
   @override
-  String get signInWithTwitterButtonText => "Twitter でログイン";
+  String get signInWithTwitterButtonText => "Twitter でサインイン";
 
   @override
   String get signOutButtonText => "ログアウト";
