@@ -32,4 +32,8 @@ mixin PlatformSignInMixin {
           .catchError(authListener.onError);
     }
   }
+
+  void desktopSignIn(AuthAction action) {
+    // No desktop sign in for web
+  }
 }
