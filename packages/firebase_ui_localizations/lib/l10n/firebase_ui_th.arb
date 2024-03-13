@@ -1,6 +1,6 @@
 {
   "@@locale": "th",
-  "@@last_modified": "2023-11-16T00:26:53.962240",
+  "@@last_modified": "2024-02-04T10:25:05.118670",
   "accessDisabledErrorText": "มีการปิดใช้สิทธิ์เข้าถึงบัญชีนี้ชั่วคราว",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -527,6 +527,11 @@
   "confirmDeleteAccountButtonLabel": "Yes, delete",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
+    "placeholders": {}
+  },
+  "sendVerificationEmailLabel": "Send verification email",
+  "@sendVerificationEmailLabel": {
+    "description": "Used as a button label to send a verification email",
     "placeholders": {}
   }
 }
