@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_oauth` - `v1.5.1`](#firebase_ui_oauth---v151)
+ - [`firebase_ui_oauth_facebook` - `v1.2.19`](#firebase_ui_oauth_facebook---v1219)
+ - [`firebase_ui_oauth_twitter` - `v1.2.19`](#firebase_ui_oauth_twitter---v1219)
+ - [`firebase_ui_auth` - `v1.13.1`](#firebase_ui_auth---v1131)
+ - [`firebase_ui_oauth_google` - `v1.3.1`](#firebase_ui_oauth_google---v131)
+ - [`firebase_ui_oauth_apple` - `v1.2.19`](#firebase_ui_oauth_apple---v1219)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth_facebook` - `v1.2.19`
+ - `firebase_ui_oauth_twitter` - `v1.2.19`
+ - `firebase_ui_auth` - `v1.13.1`
+ - `firebase_ui_oauth_google` - `v1.3.1`
+ - `firebase_ui_oauth_apple` - `v1.2.19`
+
+---
+
+#### `firebase_ui_oauth` - `v1.5.1`
+
+ - **FIX**(auth): `desktopSignIn()` method required in web mixin ([#294](https://github.com/firebase/FirebaseUI-Flutter/issues/294)). ([65568934](https://github.com/firebase/FirebaseUI-Flutter/commit/655689344bbf4fc7e8a6911ce67a3ce896079235))
+
+
 ## 2024-02-06
 
 ### Changes
