@@ -33,7 +33,7 @@ jobs:
         name: Install Node.js
         with:
           node-version: "18"
-      - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
+      - uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8
         with:
           distribution: "temurin"
           java-version: "17"
@@ -95,11 +95,11 @@ jobs:
         name: Install Node.js
         with:
           node-version: "18"
-      - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
+      - uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8
         with:
           distribution: "temurin"
           java-version: "11"
-      - uses: hendrikmuhs/ccache-action@6d1841ec156c39a52b1b23a810da917ab98da1f4
+      - uses: hendrikmuhs/ccache-action@faf867a11c028c0b483fb2ae72b6fc8f7d842714
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-ios-v3
@@ -170,11 +170,11 @@ jobs:
         name: Install Node.js
         with:
           node-version: "18"
-      - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93
+      - uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8
         with:
           distribution: "temurin"
           java-version: "11"
-      - uses: hendrikmuhs/ccache-action@6d1841ec156c39a52b1b23a810da917ab98da1f4
+      - uses: hendrikmuhs/ccache-action@faf867a11c028c0b483fb2ae72b6fc8f7d842714
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-macos-v2
