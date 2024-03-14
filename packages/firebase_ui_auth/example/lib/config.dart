@@ -9,6 +9,8 @@ import 'package:flutter/foundation.dart';
 String get GOOGLE_CLIENT_ID {
   if (defaultTargetPlatform == TargetPlatform.macOS) {
     return '406099696497-65v1b9ffv6sgfqngfjab5ol5qdikh2rm.apps.googleusercontent.com';
+  } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+    return '406099696497-65v1b9ffv6sgfqngfjab5ol5qdikh2rm.apps.googleusercontent.com';
   } else if (defaultTargetPlatform == TargetPlatform.windows) {
     return '406099696497-a12gakvts4epfk5pkio7dphc1anjiggc.apps.googleusercontent.com';
   } else {
