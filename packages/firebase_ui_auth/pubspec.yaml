@@ -29,9 +29,6 @@ dev_dependencies:
   mockito: ^5.4.4
 
 false_secrets:
-  - "/example/**/google-services.json"
-  - "/example/**/firebase_options.dart"
-  - "/example/**/GoogleService-Info.plist"
-  - "example/lib/config.dart"
+  - example/**
 
 flutter:
