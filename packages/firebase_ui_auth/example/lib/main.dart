@@ -275,7 +275,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
       },
       title: 'Firebase UI demo',
       debugShowCheckedModeBanner: false,
-      supportedLocales:const [ Locale('en')],
+      supportedLocales: const [Locale('en')],
       localizationsDelegates: [
         FirebaseUILocalizations.withDefaultOverrides(const LabelOverrides()),
         GlobalMaterialLocalizations.delegate,
