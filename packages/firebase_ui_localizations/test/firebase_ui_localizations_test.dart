@@ -118,7 +118,8 @@ Future<void> main() async {
         (tester) async {
           await tester.pumpWidget(
             TestMaterialApp(
-              locale: localeTW,
+              // Test that 'en' labels are overridden by `ZhTWLocalizationsOverrides` overrides
+              locale: const Locale('en'),
               localizationsOverride: const FirebaseUILocalizationDelegate(
                 ZhTWLocalizationsOverrides(),
               ),
