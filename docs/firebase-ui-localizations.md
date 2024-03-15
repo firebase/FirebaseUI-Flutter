@@ -13,14 +13,16 @@ dependencies:
 
 ## Usage
 
-If your app supports only a single language, and you want to override labels – you will need to provide a custom class that implements [`DefaultLocalizations`](https://pub.dev/documentation/firebase_ui_localizations/latest/DefaultLocalizations-class.html),
-for example:
+If your app supports only a single language, and you want to override labels – you will need to provide a custom class that implements one of the [exposed localizations](https://github.com/firebase/FirebaseUI-Flutter/blob/main/packages/firebase_ui_localizations/lib/src/lang).
+
+For example, we could override the Spanish localization class and customize the email and password labels:
 
 ```dart
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
-class LabelOverrides extends DefaultLocalizations {
+// EsLocalizations is a class that provides Spanish labels. We override it here:
+class LabelOverrides extends EsLocalizations {
   const LabelOverrides();
 
   @override
