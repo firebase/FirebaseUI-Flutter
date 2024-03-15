@@ -1,6 +1,6 @@
 {
   "@@locale": "nb",
-  "@@last_modified": "2023-11-19T12:18:00.518427",
+  "@@last_modified": "2024-02-04T10:25:05.116670",
   "accessDisabledErrorText": "Tilgang til denne kontoen er midlertidig sperret",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -527,6 +527,11 @@
   "confirmDeleteAccountButtonLabel": "Ja, slett",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
+    "placeholders": {}
+  },
+  "sendVerificationEmailLabel": "Send verification email",
+  "@sendVerificationEmailLabel": {
+    "description": "Used as a button label to send a verification email",
     "placeholders": {}
   }
 }
