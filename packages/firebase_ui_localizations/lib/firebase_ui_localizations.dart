@@ -7,3 +7,5 @@ export 'src/l10n.dart'
 
 export 'src/default_localizations.dart'
     show DefaultLocalizations, FirebaseUILocalizationLabels;
+
+export 'src/all_localizations.dart';

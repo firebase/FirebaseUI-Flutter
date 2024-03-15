@@ -4,30 +4,7 @@
 import 'dart:ui';
 
 import "./default_localizations.dart";
-import 'lang/ar.dart';
-import 'lang/de.dart';
-import 'lang/en.dart';
-import 'lang/es.dart';
-import 'lang/es_419.dart';
-import 'lang/fr.dart';
-import 'lang/he.dart';
-import 'lang/hi.dart';
-import 'lang/hu.dart';
-import 'lang/id.dart';
-import 'lang/it.dart';
-import 'lang/ja.dart';
-import 'lang/ko.dart';
-import 'lang/nb.dart';
-import 'lang/nl.dart';
-import 'lang/pl.dart';
-import 'lang/pt.dart';
-import 'lang/ro.dart';
-import 'lang/ru.dart';
-import 'lang/th.dart';
-import 'lang/tr.dart';
-import 'lang/uk.dart';
-import 'lang/zh.dart';
-import 'lang/zh_tw.dart';
+import 'all_localizations.dart';
 
 final Set<String> kSupportedLanguages = {
   'ar', // Arabic
