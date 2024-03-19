@@ -3,7 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
-import 'package:firebase_ui_localizations/src/lang/zh_tw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -118,7 +117,8 @@ Future<void> main() async {
         (tester) async {
           await tester.pumpWidget(
             TestMaterialApp(
-              locale: localeTW,
+              // Test that 'en' labels are overridden by `ZhTWLocalizationsOverrides` overrides
+              locale: const Locale('en'),
               localizationsOverride: const FirebaseUILocalizationDelegate(
                 ZhTWLocalizationsOverrides(),
               ),

@@ -5,7 +5,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'all_languages.dart';
+import 'get_localization.dart';
 import 'default_localizations.dart';
 
 const kDefaultLocale = Locale('en');
@@ -54,7 +54,8 @@ class FirebaseUILocalizations<T extends FirebaseUILocalizationLabels> {
   ///
   /// See [FirebaseUILocalizationLabels].
   static FirebaseUILocalizationDelegate
-      withDefaultOverrides<T extends DefaultLocalizations>(T overrides) {
+      withDefaultOverrides<T extends FirebaseUILocalizationLabels>(
+          T overrides) {
     return FirebaseUILocalizationDelegate<T>(overrides);
   }
 }
