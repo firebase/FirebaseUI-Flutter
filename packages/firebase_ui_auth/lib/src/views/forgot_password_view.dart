@@ -54,6 +54,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   fba.FirebaseAuthException? exception;
 
   Future<void> _submit(String email) async {
+    if (isLoading) {
+      return;
+    }
+
     setState(() {
       exception = null;
       isLoading = true;
