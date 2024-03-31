@@ -27,6 +27,7 @@ final Set<String> kSupportedLanguages = {
   'th', // Thai
   'tr', // Turkish
   'uk', // Ukrainian
+  'vi', // Vietnamese
   'zh', // Chinese
 };
 
