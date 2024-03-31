@@ -89,6 +89,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const TrLocalizations();
     case 'uk':
       return const UkLocalizations();
+    case 'vi':
+      return const ViLocalizations();
     case 'zh':
       switch (locale.scriptCode) {
         case 'Hant':
