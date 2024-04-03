@@ -271,7 +271,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
   String get uploadButtonText => "Datei hochladen";
 
   @override
-  String get verifyEmailTitle => "Bestägigen Sie Ihre Email";
+  String get verifyEmailTitle => "Bestätigen Sie Ihre Email";
 
   @override
   String get verificationEmailSentText =>
