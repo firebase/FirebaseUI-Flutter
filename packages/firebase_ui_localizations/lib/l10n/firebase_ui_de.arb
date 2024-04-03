@@ -429,7 +429,7 @@
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Bestägigen Sie Ihre Email",
+  "verifyEmailTitle": "Bestätigen Sie Ihre Email",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
