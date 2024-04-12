@@ -88,18 +88,18 @@ void main() {
     );
 
     testWidgets("doesn't sendPasswordResetEmail on loading", (tester) async {
-        await tester.pumpWidget(widget);
+      await tester.pumpWidget(widget);
 
-        final input = find.byType(TextField);
-        await tester.enterText(input, 'delay@email.com');
-        
-        final button = find.byType(LoadingButton);
-        await tester.tap(button);
-        await tester.tap(button);
-        await tester.pumpAndSettle();
+      final input = find.byType(TextField);
+      await tester.enterText(input, 'delay@email.com');
 
-        expect(find.byType(ErrorText), findsNothing);
-        verify(auth.sendPasswordResetEmail(email:'delay@email.com')).called(1);
+      final button = find.byType(LoadingButton);
+      await tester.tap(button);
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ErrorText), findsNothing);
+      verify(auth.sendPasswordResetEmail(email: 'delay@email.com')).called(1);
     });
   });
 }
