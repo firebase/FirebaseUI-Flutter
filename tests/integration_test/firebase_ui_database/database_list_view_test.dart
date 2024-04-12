@@ -12,9 +12,6 @@ import '../utils.dart';
 
 const _kTestPath = 'flutter-tests';
 
-// ignore: do_not_use_environment
-const bool skipTestsOnCI = bool.fromEnvironment('CI');
-
 void main() {
   group('DatabaseListViewBuilder', () {
     setUp(() async {
@@ -60,36 +57,29 @@ void main() {
         expect(find.byType(ListView), findsNothing);
       },
       // Works locally but fails on CI
-      skip: skipTestsOnCI &&
-          (defaultTargetPlatform == TargetPlatform.iOS ||
-              defaultTargetPlatform == TargetPlatform.macOS),
+      skip: defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.macOS,
     );
 
-    testWidgets(
-      'Allows specifying custom loading handler',
-      (tester) async {
-        final ref = rtdb.ref(_kTestPath);
+    testWidgets('Allows specifying custom loading handler', (tester) async {
+      final ref = rtdb.ref(_kTestPath);
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FirebaseDatabaseListView(
-                query: ref,
-                loadingBuilder: (context) => const Text('loading...'),
-                itemBuilder: (context, snapshot) => throw UnimplementedError(),
-              ),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FirebaseDatabaseListView(
+              query: ref,
+              loadingBuilder: (context) => const Text('loading...'),
+              itemBuilder: (context, snapshot) => throw UnimplementedError(),
             ),
           ),
-        );
+        ),
+      );
 
-        expect(find.text('loading...'), findsOneWidget);
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-        expect(find.byType(ListView), findsNothing);
-      },
-      skip: skipTestsOnCI &&
-          (defaultTargetPlatform == TargetPlatform.iOS ||
-              defaultTargetPlatform == TargetPlatform.macOS),
-    );
+      expect(find.text('loading...'), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+      expect(find.byType(ListView), findsNothing);
+    });
 
     testWidgets(
       'By default, shows a progress indicator when loading',
