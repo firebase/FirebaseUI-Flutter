@@ -87,6 +87,9 @@ class RegisterScreen extends MultiProviderScreen {
   /// * [EmailFormStyle]
   final Set<FirebaseUIStyle>? styles;
 
+  /// {@macro ui.auth.widgets.email_form.showPasswordVisibilityToggle}
+  final bool showPasswordVisibilityToggle;
+
   /// {@macro ui.auth.screens.responsive_page.max_width}
   final double? maxWidth;
 
@@ -107,6 +110,7 @@ class RegisterScreen extends MultiProviderScreen {
     this.footerBuilder,
     this.breakpoint = 800,
     this.styles,
+    this.showPasswordVisibilityToggle = false,
     this.maxWidth,
   });
 
@@ -130,6 +134,7 @@ class RegisterScreen extends MultiProviderScreen {
         subtitleBuilder: subtitleBuilder,
         footerBuilder: footerBuilder,
         breakpoint: breakpoint,
+        showPasswordVisibilityToggle: showPasswordVisibilityToggle,
         maxWidth: maxWidth,
       ),
     );
