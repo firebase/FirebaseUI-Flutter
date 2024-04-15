@@ -38,13 +38,13 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get credentialAlreadyInUseErrorText =>
-      "このプロバイダは、すでに別のユーザー アカウントに関連付けられています。";
+      "このプロバイダは、すでに別のユーザーアカウントに関連付けられています。";
 
   @override
   String get deleteAccount => "アカウントを削除";
 
   @override
-  String get differentMethodsSignInTitleText => "次のいずれかの方法を使用してログインします";
+  String get differentMethodsSignInTitleText => "次のいずれかの方法を使用してサインインします";
 
   @override
   String get disable => "無効にする";
@@ -59,7 +59,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get emailIsRequiredErrorText => "メールアドレスは必須です";
 
   @override
-  String get emailLinkSignInButtonLabel => "マジックリンクでログイン";
+  String get emailLinkSignInButtonLabel => "マジックリンクでサインイン";
 
   @override
   String get emailTakenErrorText => "このようなメールアドレスを持つアカウントはすでに存在します";
@@ -68,10 +68,10 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get enable => "有効にする";
 
   @override
-  String get enableMoreSignInMethods => "その他のログイン方法を有効にします";
+  String get enableMoreSignInMethods => "その他のサインイン方法を有効にします";
 
   @override
-  String get enterSMSCodeText => "SMS コードを入力";
+  String get enterSMSCodeText => "SMSコードを入力";
 
   @override
   String get findProviderForEmailTitleText => "メールアドレスを入力して続行";
@@ -111,7 +111,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get mapLabel => "地図";
 
   @override
-  String get mfaTitle => "2 段階認証プロセス";
+  String get mfaTitle => "2段階認証プロセス";
 
   @override
   String get name => "名前";
@@ -178,38 +178,38 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get sendLinkButtonLabel => "マジックリンクで送信";
 
   @override
-  String get signInActionText => "ログイン";
+  String get signInActionText => "サインイン";
 
   @override
   String get signInHintText => "すでにアカウントをお持ちの場合";
 
   @override
-  String get signInMethods => "ログイン方法";
+  String get signInMethods => "サインイン方法";
 
   @override
-  String get signInText => "ログイン";
+  String get signInText => "サインイン";
 
   @override
-  String get signInWithAppleButtonText => "Apple でサインイン";
+  String get signInWithAppleButtonText => "Appleでサインイン";
 
   @override
   String get signInWithEmailLinkSentText =>
-      "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してログインしてください";
+      "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してサインインしてください";
 
   @override
-  String get signInWithEmailLinkViewTitleText => "マジックリンクでログイン";
+  String get signInWithEmailLinkViewTitleText => "マジックリンクでサインイン";
 
   @override
-  String get signInWithFacebookButtonText => "Facebook でログイン";
+  String get signInWithFacebookButtonText => "Facebookでサインイン";
 
   @override
-  String get signInWithGoogleButtonText => "Google でログイン";
+  String get signInWithGoogleButtonText => "Googleでサインイン";
 
   @override
-  String get signInWithPhoneButtonText => "携帯電話を使用してログイン";
+  String get signInWithPhoneButtonText => "携帯電話を使用してサインイン";
 
   @override
-  String get signInWithTwitterButtonText => "Twitter でログイン";
+  String get signInWithTwitterButtonText => "Twitterでサインイン";
 
   @override
   String get signOutButtonText => "ログアウト";
@@ -246,7 +246,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get verifyCodeButtonText => "確認";
 
   @override
-  String get verifyingSMSCodeText => "SMS コードを確認しています...";
+  String get verifyingSMSCodeText => "SMSコードを確認しています...";
 
   @override
   String get verifyItsYouText => "ご本人確認";
