@@ -283,7 +283,7 @@ class _SignInFormContentState extends State<_SignInFormContent> {
               } else {
                 showForgotPasswordScreen(
                   context: context,
-                  email: emailCtrl.text,
+                  email: widget.email ?? emailCtrl.text,
                   auth: widget.auth,
                 );
               }
