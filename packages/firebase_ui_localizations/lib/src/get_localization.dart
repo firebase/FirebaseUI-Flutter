@@ -11,6 +11,7 @@ final Set<String> kSupportedLanguages = {
   'de', // German
   'en', // English
   'es', // Spanish Castilian
+  'fi', // Finnish
   'fr', // French
   'he', // Hebrew
   'hi', // Hindi
