@@ -99,7 +99,7 @@ Future<void> main() async {
   );
 
   testWidgets(
-    'FirestoreDataTable without default dell dialog editor is render as expected',
+    'FirestoreDataTable without default dell dialog editor is rendering as expected',
     (WidgetTester tester) async {
       await tester.pumpWidget(
         _dataTableBuilder(
