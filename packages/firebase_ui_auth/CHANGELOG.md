@@ -1,3 +1,13 @@
+## 1.14.0
+
+ - **FIX**(auth): `ForgotPasswordScreen` display email within input box ([#336](https://github.com/firebase/FirebaseUI-Flutter/issues/336)). ([ad666666](https://github.com/firebase/FirebaseUI-Flutter/commit/ad666666b05c637d5bdf4d041c29a1eeac63d528))
+ - **FIX**(firebase_ui_auth): `sendPasswordResetEmail` should not be executed when `isLoading=true` ([#315](https://github.com/firebase/FirebaseUI-Flutter/issues/315)). ([955e5c28](https://github.com/firebase/FirebaseUI-Flutter/commit/955e5c286ea5835defe0bd922428102e98f9e8d7))
+ - **FIX**(ui_auth): Fixed a momentary form display after signing in with EmailLinkAuth. ([#318](https://github.com/firebase/FirebaseUI-Flutter/issues/318)). ([3e37d143](https://github.com/firebase/FirebaseUI-Flutter/commit/3e37d1435a4df12c41b9dd857cec67848b2af2c3))
+ - **FIX**(firebase_ui_localizations): expose all Firebase UI localizations for overriding ([#309](https://github.com/firebase/FirebaseUI-Flutter/issues/309)). ([e4567478](https://github.com/firebase/FirebaseUI-Flutter/commit/e4567478205f2b88b54aa21af6429fb1c7c81564))
+ - **FEAT**(firebase_ui_auth): add `showPasswordVisibilityToggle` to `RegisterScreen` ([#297](https://github.com/firebase/FirebaseUI-Flutter/issues/297)). ([6ec3ec1e](https://github.com/firebase/FirebaseUI-Flutter/commit/6ec3ec1edf584fe9f94142ceb7fbdeac57846678))
+ - **FEAT**(firebase_ui_localizations): support for `sendVerificationEmailLabel()` label ([#280](https://github.com/firebase/FirebaseUI-Flutter/issues/280)). ([95be915d](https://github.com/firebase/FirebaseUI-Flutter/commit/95be915d162c6fb5dfdc6a8ad3298c2002d38dbf))
+ - **DOCS**: Added superkey to example widget ([#326](https://github.com/firebase/FirebaseUI-Flutter/issues/326)). ([dd5507e1](https://github.com/firebase/FirebaseUI-Flutter/commit/dd5507e1953d9095a60e4cc127d0b8e72790a4ce))
+
 ## 1.13.1
 
  - Update a dependency to the latest release.
