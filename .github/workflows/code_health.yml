@@ -64,7 +64,8 @@ jobs:
             "flutter pub get"
 
   format:
-    runs-on: ubuntu-latest
+    # switch back to ubuntu-latest when swiftformat is working again
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4.1.1
       - uses: subosito/flutter-action@v2
