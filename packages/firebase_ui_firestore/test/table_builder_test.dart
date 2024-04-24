@@ -346,6 +346,7 @@ class MockCollection extends Mock
   @override
   Stream<QuerySnapshot<Map<String, Object?>>> snapshots({
     bool includeMetadataChanges = false,
+    ListenSource source = ListenSource.defaultSource,
   }) {
     return super.noSuchMethod(
       Invocation.method(#snapshots, null, {
@@ -478,6 +479,7 @@ class MockQuery extends Mock implements Query<Map<String, Object?>> {
   @override
   Stream<Snapshot> snapshots({
     bool? includeMetadataChanges = false,
+    ListenSource source = ListenSource.defaultSource,
   }) {
     return super.noSuchMethod(
       Invocation.method(#snapshots, null, {
