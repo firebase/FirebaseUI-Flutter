@@ -17,7 +17,7 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
   String get booleanLabel => "Totuusarvo";
 
   @override
-  String get cancelLabel => "peru";
+  String get cancelLabel => "peruuta ";
 
   @override
   String get chooseACountry => "Valitse maa";
@@ -39,7 +39,7 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get credentialAlreadyInUseErrorText =>
-      "Tämä käyttäjätunnus on liitetty jo toiseen tiliin.";
+      "Tämä käyttäjänimi on liitetty jo toiseen tiliin.";
 
   @override
   String get deleteAccount => "Poista tili";
@@ -99,7 +99,7 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
   String get invalidCountryCode => "Virheellinen maakoodi";
 
   @override
-  String get isNotAValidEmailErrorText => "Anna kelvollinen sähköpostiosoite";
+  String get isNotAValidEmailErrorText => "Virheellinen sähköposti";
 
   @override
   String get latitudeLabel => "leveysaste";
@@ -123,7 +123,7 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
   String get northInitialLabel => "P";
 
   @override
-  String get nullLabel => "tyhjä";
+  String get nullLabel => "null";
 
   @override
   String get numberLabel => "numero";
@@ -154,7 +154,7 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
   String get phoneNumberIsRequiredErrorText => "Puhelinnumero vaaditaan";
 
   @override
-  String get phoneVerificationViewTitleText => "Anna Puhelinnumerosi";
+  String get phoneVerificationViewTitleText => "Anna puhelinnumero";
 
   @override
   String get profile => "Käyttäjäprofiili";
@@ -197,7 +197,7 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get signInWithEmailLinkSentText =>
-      "Olemme lähettäneet sinulle kirjautumislinkin sisäältävän sähköpostiviestin. Tarkista sähköpostisi ja kirjaudu sisään linkin avulla.";
+      "Olemme lähettäneet sinulle kirjautumislinkin sisältävän sähköpostiviestin. Tarkista sähköpostisi ja kirjaudu sisään linkin avulla.";
 
   @override
   String get signInWithEmailLinkViewTitleText =>
@@ -311,17 +311,17 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
       "Antamasi koodi on virheellinen. Yritä uudelleen.";
 
   @override
-  String get ulinkProviderAlertTitle => "Poista kirjautmistavan linkitys";
+  String get ulinkProviderAlertTitle => "Poista kirjautumistavan linkitys";
 
   @override
   String get confirmUnlinkButtonLabel => "Poista linkitys";
 
   @override
-  String get cancelButtonLabel => "Peru";
+  String get cancelButtonLabel => "Peruuta";
 
   @override
   String get unlinkProviderAlertMessage =>
-      "Haluatko varmasti poistaa tåmån kirjautmistavan linkityksen";
+      "Haluatko varmasti poistaa tämän kirjautumistavan linkityksen?";
 
   @override
   String get weakPasswordErrorText =>
@@ -338,5 +338,5 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
   String get confirmDeleteAccountButtonLabel => "Vahvista poisto";
 
   @override
-  String get sendVerificationEmailLabel => "Lähetä vshvistussähköpsti";
+  String get sendVerificationEmailLabel => "Lähetä vahvistussähköposti";
 }

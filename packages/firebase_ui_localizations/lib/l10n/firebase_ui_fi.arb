@@ -1,6 +1,6 @@
 {
   "@@locale": "fi",
-  "@@last_modified": "2024-04-17T10:25:05.107668",
+  "@@last_modified": "2025-04-17T14:19:00.000000",
   "accessDisabledErrorText": "Pääsy tähän tiliin on väliaikaisesti estetty",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -16,7 +16,7 @@
     "description": "",
     "placeholders": {}
   },
-  "cancelLabel": "peru",
+  "cancelLabel": "peruuta ",
   "@cancelLabel": {
     "description": "",
     "placeholders": {}
@@ -51,7 +51,7 @@
     "description": "Used as a placeholder of the country code input.",
     "placeholders": {}
   },
-  "credentialAlreadyInUseErrorText": "Tämä käyttäjätunnus on liitetty jo toiseen tiliin.",
+  "credentialAlreadyInUseErrorText": "Tämä käyttäjänimi on liitetty jo toiseen tiliin.",
   "@credentialAlreadyInUseErrorText": {
     "description": "Error text that is show when user tries to use an OAuth provider that doesn't belong to currently signed in user account.",
     "placeholders": {}
@@ -150,7 +150,7 @@
     "description": "Used as an error text when provide country code is invalid.",
     "placeholders": {}
   },
-  "isNotAValidEmailErrorText": "Anna kelvollinen sähköpostiosoite",
+  "isNotAValidEmailErrorText": "Virheellinen sähköposti",
   "@isNotAValidEmailErrorText": {
     "description": "Used as an error text of the EmailInput if the provided email is not valid.",
     "placeholders": {}
@@ -190,7 +190,7 @@
     "description": "",
     "placeholders": {}
   },
-  "nullLabel": "tyhjä",
+  "nullLabel": "null",
   "@nullLabel": {
     "description": "",
     "placeholders": {}
@@ -240,7 +240,7 @@
     "description": "Used as an error text when PhoneInput is empty.",
     "placeholders": {}
   },
-  "phoneVerificationViewTitleText": "Anna Puhelinnumerosi",
+  "phoneVerificationViewTitleText": "Anna puhelinnumero",
   "@phoneVerificationViewTitleText": {
     "description": "Used as a title of the PhoneInputView.",
     "placeholders": {}
@@ -314,7 +314,7 @@
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
   },
-  "signInWithEmailLinkSentText": "Olemme lähettäneet sinulle kirjautumislinkin sisäältävän sähköpostiviestin. Tarkista sähköpostisi ja kirjaudu sisään linkin avulla.",
+  "signInWithEmailLinkSentText": "Olemme lähettäneet sinulle kirjautumislinkin sisältävän sähköpostiviestin. Tarkista sähköpostisi ja kirjaudu sisään linkin avulla.",
   "@signInWithEmailLinkSentText": {
     "description": "Indicates that email with a sign in link was sent.",
     "placeholders": {}
@@ -489,7 +489,7 @@
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   },
-  "ulinkProviderAlertTitle": "Poista kirjautmistavan linkitys",
+  "ulinkProviderAlertTitle": "Poista kirjautumistavan linkitys",
   "@ulinkProviderAlertTitle": {
     "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
     "placeholders": {}
@@ -499,12 +499,12 @@
     "description": "Unlink confirmation button label",
     "placeholders": {}
   },
-  "cancelButtonLabel": "Peru",
+  "cancelButtonLabel": "Peruuta",
   "@cancelButtonLabel": {
     "description": "Cancel button label",
     "placeholders": {}
   },
-  "unlinkProviderAlertMessage": "Haluatko varmasti poistaa tåmån kirjautmistavan linkityksen",
+  "unlinkProviderAlertMessage": "Haluatko varmasti poistaa tämän kirjautumistavan linkityksen?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
@@ -529,7 +529,7 @@
     "description": "Confirm delete account button label",
     "placeholders": {}
   },
-  "sendVerificationEmailLabel": "Lähetä vshvistussähköpsti",
+  "sendVerificationEmailLabel": "Lähetä vahvistussähköposti",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
     "placeholders": {}
