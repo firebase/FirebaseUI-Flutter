@@ -7,6 +7,7 @@ export 'lang/de.dart';
 export 'lang/en.dart';
 export 'lang/es.dart';
 export 'lang/es_419.dart';
+export 'lang/fi.dart';
 export 'lang/fr.dart';
 export 'lang/he.dart';
 export 'lang/hi.dart';
