@@ -11,6 +11,7 @@ final Set<String> kSupportedLanguages = {
   'de', // German
   'en', // English
   'es', // Spanish Castilian
+  'fi', // Finnish
   'fr', // French
   'he', // Hebrew
   'hi', // Hindi
@@ -56,6 +57,9 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const EsLocalizations();
     case 'fr':
       return const FrLocalizations();
+    case 'fi':
+      return const FiLocalizations();
+
     case 'he':
       return const HeLocalizations();
     case 'hi':
