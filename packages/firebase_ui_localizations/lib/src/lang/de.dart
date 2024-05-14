@@ -275,7 +275,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get verificationEmailSentText =>
-      "Eine Bestätigungsmail wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie die Emails und klicken Sie auf den Link zum Bestätigen.";
+      "Eine Bestätigungsmail wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie die E-Mails und klicken Sie auf den Link zum Bestätigen.";
 
   @override
   String get verificationFailedText =>
@@ -283,7 +283,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get resendVerificationEmailButtonLabel =>
-      "Sende Bestätigungs Email erneut";
+      "Sende Bestätigungsmail erneut";
 
   @override
   String get verificationEmailSentTextShort => "Bestätigungsmail gesendet";
@@ -292,7 +292,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
   String get emailIsNotVerifiedText => "E-Mail ist noch nicht bestätigt";
 
   @override
-  String get waitingForEmailVerificationText => "Warte auf Email Bestätigung";
+  String get waitingForEmailVerificationText => "Warte auf E-Mail-Bestätigung";
 
   @override
   String get dismissButtonLabel => "Verwerfen";
