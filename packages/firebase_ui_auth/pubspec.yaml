@@ -1,6 +1,6 @@
 name: firebase_ui_auth
 description: Pre-built widgets library that are integrated with the variety of the Firebase Auth providers.
-version: 1.13.1
+version: 1.14.0
 repository: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_auth
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_auth
 
@@ -13,8 +13,8 @@ dependencies:
   firebase_auth: ^4.17.5
   firebase_core: ^2.25.4
   firebase_dynamic_links: ^5.4.14
-  firebase_ui_localizations: ^1.10.2
-  firebase_ui_oauth: ^1.5.1
+  firebase_ui_localizations: ^1.11.0
+  firebase_ui_oauth: ^1.5.2
   firebase_ui_shared: ^1.4.1
   flutter:
     sdk: flutter
@@ -29,9 +29,6 @@ dev_dependencies:
   mockito: ^5.4.4
 
 false_secrets:
-  - "/example/**/google-services.json"
-  - "/example/**/firebase_options.dart"
-  - "/example/**/GoogleService-Info.plist"
-  - "example/lib/config.dart"
+  - example/**
 
 flutter:

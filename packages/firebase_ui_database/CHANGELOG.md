@@ -1,3 +1,7 @@
+## 1.4.3
+
+ - Update a dependency to the latest release.
+
 ## 1.4.2
 
  - **FIX**:(firebase_ui_database): Perform list operations in correct order ([213](https://github.com/firebase/FirebaseUI-Flutter/pull/213))

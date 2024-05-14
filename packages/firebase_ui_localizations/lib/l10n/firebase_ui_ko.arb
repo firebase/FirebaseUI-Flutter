@@ -1,6 +1,6 @@
 {
   "@@locale": "ko",
-  "@@last_modified": "2023-11-16T00:26:53.951316",
+  "@@last_modified": "2024-02-04T10:25:05.115670",
   "accessDisabledErrorText": "이 계정의 액세스가 일시적으로 중지되었습니다.",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -527,6 +527,11 @@
   "confirmDeleteAccountButtonLabel": "Yes, delete",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
+    "placeholders": {}
+  },
+  "sendVerificationEmailLabel": "Send verification email",
+  "@sendVerificationEmailLabel": {
+    "description": "Used as a button label to send a verification email",
     "placeholders": {}
   }
 }

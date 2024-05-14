@@ -82,7 +82,7 @@ const webClientId = 'your-web-client-id.apps.googleusercontent.com';
 
 String get googleClientId {
   return switch (defaultTargetPlatform) {
-    TargetPlatfrom.iOS || TargetPlatform.macOS => iOSClientId,
+    TargetPlatform.iOS || TargetPlatform.macOS => iOSClientId,
     _ => webClientId,
   }
 }
