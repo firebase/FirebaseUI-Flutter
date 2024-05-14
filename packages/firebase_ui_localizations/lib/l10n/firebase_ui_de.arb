@@ -429,37 +429,37 @@
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Bestätigen Sie Ihre Email",
+  "verifyEmailTitle": "Bestätigen Sie Ihre E-Mail",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "Eine Bestätigungs Email wurde an Ihre Email Adresse versendet. Bitte prüfen Sie die Email und klicken auf den Link zum Bestätigen.",
+  "verificationEmailSentText": "Eine Bestätigungsmail wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie die E-Mails und klicken Sie auf den Link zum Bestätigen.",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "Wir konnten Ihre Email Adresse nicht bestätigen.",
+  "verificationFailedText": "Wir konnten Ihre E-Mail-Adresse nicht bestätigen.",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
   },
-  "resendVerificationEmailButtonLabel": "Sende Bestätigungs Email erneut",
+  "resendVerificationEmailButtonLabel": "Sende Bestätigungsmail erneut",
   "@resendVerificationEmailButtonLabel": {
     "description": "Button label that suggests to resend verification email",
     "placeholders": {}
   },
-  "verificationEmailSentTextShort": "Bestätigungs Email gesendet",
+  "verificationEmailSentTextShort": "Bestätigungsmail gesendet",
   "@verificationEmailSentTextShort": {
     "description": "Short version of the hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "emailIsNotVerifiedText": "Email ist noch nicht bestätigt",
+  "emailIsNotVerifiedText": "E-Mail ist noch nicht bestätigt",
   "@emailIsNotVerifiedText": {
     "description": "Message indicating that email is not verified",
     "placeholders": {}
   },
-  "waitingForEmailVerificationText": "Warte auf Email Bestätigung",
+  "waitingForEmailVerificationText": "Warte auf E-Mail-Bestätigung",
   "@waitingForEmailVerificationText": {
     "description": "Message indicating that email is being verified",
     "placeholders": {}
@@ -474,7 +474,7 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Bitte prüfen Sie Ihre Emails und klicken den Link um die Email Adresse zu bestätigen.",
+  "checkEmailHintText": "Bitte prüfen Sie Ihre E-Mails und klicken Sie auf den Link, um die E-Mail-Adresse zu bestätigen.",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
@@ -514,12 +514,12 @@
     "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertTitle": "Bestätige Account Löschung",
+  "confirmDeleteAccountAlertTitle": "Bestätige Kontolöschung",
   "@confirmDeleteAccountAlertTitle": {
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": "Sind Sie sicher, dass Sie den Account löschen möchten?",
+  "confirmDeleteAccountAlertMessage": "Sind Sie sicher, dass Sie das Konto löschen möchten?",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
@@ -529,7 +529,7 @@
     "description": "Confirm delete account button label",
     "placeholders": {}
   },
-  "sendVerificationEmailLabel": "Sende Verifikations-Email",
+  "sendVerificationEmailLabel": "Verifizierungs-E-Mail senden",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
     "placeholders": {}

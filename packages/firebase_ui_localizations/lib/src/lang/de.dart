@@ -271,25 +271,25 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
   String get uploadButtonText => "Datei hochladen";
 
   @override
-  String get verifyEmailTitle => "Bestätigen Sie Ihre Email";
+  String get verifyEmailTitle => "Bestätigen Sie Ihre E-Mail";
 
   @override
   String get verificationEmailSentText =>
-      "Eine Bestätigungs Email wurde an Ihre Email Adresse versendet. Bitte prüfen Sie die Email und klicken auf den Link zum Bestätigen.";
+      "Eine Bestätigungsmail wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie die Emails und klicken Sie auf den Link zum Bestätigen.";
 
   @override
   String get verificationFailedText =>
-      "Wir konnten Ihre Email Adresse nicht bestätigen.";
+      "Wir konnten Ihre E-Mail-Adresse nicht bestätigen.";
 
   @override
   String get resendVerificationEmailButtonLabel =>
       "Sende Bestätigungs Email erneut";
 
   @override
-  String get verificationEmailSentTextShort => "Bestätigungs Email gesendet";
+  String get verificationEmailSentTextShort => "Bestätigungsmail gesendet";
 
   @override
-  String get emailIsNotVerifiedText => "Email ist noch nicht bestätigt";
+  String get emailIsNotVerifiedText => "E-Mail ist noch nicht bestätigt";
 
   @override
   String get waitingForEmailVerificationText => "Warte auf Email Bestätigung";
@@ -302,7 +302,7 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get checkEmailHintText =>
-      "Bitte prüfen Sie Ihre Emails und klicken den Link um die Email Adresse zu bestätigen.";
+      "Bitte prüfen Sie Ihre E-Mails und klicken Sie auf den Link, um die E-Mail-Adresse zu bestätigen.";
 
   @override
   String get doneButtonLabel => "Erledigt";
@@ -328,15 +328,15 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
   String get weakPasswordErrorText => "Passwort muss mind. 6 Zeichen enthalten";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Bestätige Account Löschung";
+  String get confirmDeleteAccountAlertTitle => "Bestätige Kontolöschung";
 
   @override
   String get confirmDeleteAccountAlertMessage =>
-      "Sind Sie sicher, dass Sie den Account löschen möchten?";
+      "Sind Sie sicher, dass Sie das Konto löschen möchten?";
 
   @override
   String get confirmDeleteAccountButtonLabel => "Ja, löschen";
 
   @override
-  String get sendVerificationEmailLabel => "Sende Verifikations-Email";
+  String get sendVerificationEmailLabel => "Verifizierungs-E-Mail senden";
 }
