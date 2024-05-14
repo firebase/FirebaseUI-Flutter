@@ -92,7 +92,7 @@ class PhoneInput extends StatefulWidget {
   final String? initialCountryCode;
 
   /// Whether the phone input text field should be focused as soon as it's visible.
-  final bool? autofocus;
+  final bool autoFocus;
 
   /// Returns a phone number from the [PhoneInput] that was provided a [key].
   static String? getPhoneNumber(GlobalKey<PhoneInputState> key) {
@@ -109,7 +109,7 @@ class PhoneInput extends StatefulWidget {
   const PhoneInput({
     super.key,
     this.initialCountryCode,
-    this.autofocus,
+    this.autoFocus = true,
     this.onSubmit,
   });
 
@@ -322,7 +322,7 @@ class PhoneInputState extends State<PhoneInput> {
                       autofillHints: const [
                         AutofillHints.telephoneNumberNational
                       ],
-                      autofocus: widget.autofocus ?? true,
+                      autofocus: widget.autoFocus,
                       focusNode: numberFocusNode,
                       controller: numberController,
                       placeholder: l.phoneInputLabel,
