@@ -82,7 +82,8 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
   fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
   bool _isLoading = false;
 
-  void Function() pop<T>(BuildContext context, T result) => () => Navigator.of(context).pop(result);
+  void Function() pop<T>(BuildContext context, T result) =>
+      () => Navigator.of(context).pop(result);
 
   Future<void> _deleteAccount() async {
     bool? confirmed = !widget.showDeleteConfirmationDialog;
