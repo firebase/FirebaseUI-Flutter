@@ -111,6 +111,7 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
 
     if (_isMobile(platform)) {
       value = EmailVerificationState.pending;
+      // ignore: deprecated_member_use
       final linkData = await FirebaseDynamicLinks.instance.onLink.first;
 
       try {
