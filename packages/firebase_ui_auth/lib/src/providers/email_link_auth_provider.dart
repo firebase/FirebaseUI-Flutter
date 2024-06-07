@@ -1,6 +1,7 @@
 // Copyright 2022, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
+// ignore_for_file: deprecated_member_use
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -12,7 +13,7 @@ abstract class EmailLinkAuthListener extends AuthListener {
   /// Called when the link being is sent to the user's [email].
   void onBeforeLinkSent(String email);
 
-  /// Called when the link was sucessfully sent to the [email].
+  /// Called when the link was successfully sent to the [email].
   void onLinkSent(String email);
 }
 
@@ -24,6 +25,7 @@ class EmailLinkAuthProvider
     extends AuthProvider<EmailLinkAuthListener, fba.AuthCredential> {
   /// A configuration of the dynamic link.
   final fba.ActionCodeSettings actionCodeSettings;
+
   final FirebaseDynamicLinks _dynamicLinks;
 
   @override
@@ -39,13 +41,13 @@ class EmailLinkAuthProvider
   }
 
   /// {@macro ui.auth.providers.email_link_auth_provider}
-  EmailLinkAuthProvider({
-    required this.actionCodeSettings,
+  EmailLinkAuthProvider(
+      {required this.actionCodeSettings,
 
-    /// An instance of the [FirebaseDynamicLinks] that should be used to handle
-    /// the link. By default [FirebaseDynamicLinks.instance] is used.
-    FirebaseDynamicLinks? dynamicLinks,
-  }) : _dynamicLinks = dynamicLinks ?? FirebaseDynamicLinks.instance;
+      /// An instance of the [FirebaseDynamicLinks] that should be used to handle
+      /// the link. By default [FirebaseDynamicLinks.instance] is used.
+      FirebaseDynamicLinks? dynamicLinks})
+      : _dynamicLinks = dynamicLinks ?? FirebaseDynamicLinks.instance;
 
   /// Sends a link to the [email].
   void sendLink(String email) {

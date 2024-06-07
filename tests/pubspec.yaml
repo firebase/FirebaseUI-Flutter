@@ -10,8 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  firebase_auth: ^4.17.5
-  firebase_core: ^2.25.4
+  firebase_auth: ^5.0.0
+  firebase_core: ^3.0.0
   firebase_ui_auth: ^1.14.0
   firebase_ui_localizations: ^1.11.0
   firebase_ui_oauth_apple: ^1.2.20
@@ -21,12 +21,12 @@ dependencies:
   flutter_facebook_auth: ^6.0.3
   twitter_login: ^4.4.2
   firebase_ui_oauth_twitter: ^1.2.20
-  cloud_firestore: ^4.15.5
+  cloud_firestore: ^5.0.0
   firebase_ui_firestore: ^1.6.3
   http: ^1.1.2
   google_sign_in: ^6.2.1
   firebase_ui_shared: ^1.4.1
-  firebase_database: ^10.4.6
+  firebase_database: ^11.0.0
   firebase_ui_database: ^1.4.3
 
 dev_dependencies:

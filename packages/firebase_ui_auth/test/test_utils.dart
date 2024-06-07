@@ -68,6 +68,7 @@ class MockLinksStream extends Mock implements Stream<PendingDynamicLinkData> {
   }
 }
 
+// ignore: deprecated_member_use
 class MockDynamicLinks extends Mock implements FirebaseDynamicLinks {
   static final _linkStream = MockLinksStream();
 
