@@ -1,3 +1,8 @@
+## 1.15.0
+
+ - **FIX**(ui_auth): fix confirmation dialog for delete account button ([#346](https://github.com/firebase/FirebaseUI-Flutter/issues/346)). ([4fd041d1](https://github.com/firebase/FirebaseUI-Flutter/commit/4fd041d12756084da6e4e3e7232c0dd35fc3593c))
+ - **FEAT**(firebase_ui_auth): add autofocus property to PhoneInput widget ([#334](https://github.com/firebase/FirebaseUI-Flutter/issues/334)). ([eb9e2bd1](https://github.com/firebase/FirebaseUI-Flutter/commit/eb9e2bd1e04be52472b70354dd253a362c3b49c2))
+
 ## 1.14.0
 
  - **FIX**(auth): `ForgotPasswordScreen` display email within input box ([#336](https://github.com/firebase/FirebaseUI-Flutter/issues/336)). ([ad666666](https://github.com/firebase/FirebaseUI-Flutter/commit/ad666666b05c637d5bdf4d041c29a1eeac63d528))
