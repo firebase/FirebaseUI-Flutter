@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-06-12
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.15.0`](#firebase_ui_auth---v1150)
+ - [`firebase_ui_localizations` - `v1.12.0`](#firebase_ui_localizations---v1120)
+ - [`firebase_ui_oauth` - `v1.5.3`](#firebase_ui_oauth---v153)
+ - [`firebase_ui_oauth_facebook` - `v1.2.21`](#firebase_ui_oauth_facebook---v1221)
+ - [`firebase_ui_oauth_twitter` - `v1.2.21`](#firebase_ui_oauth_twitter---v1221)
+ - [`firebase_ui_oauth_apple` - `v1.2.21`](#firebase_ui_oauth_apple---v1221)
+ - [`firebase_ui_oauth_google` - `v1.3.3`](#firebase_ui_oauth_google---v133)
+ - [`firebase_ui_firestore` - `v1.6.4`](#firebase_ui_firestore---v164)
+ - [`firebase_ui_storage` - `v2.0.5`](#firebase_ui_storage---v205)
+ - [`firebase_ui_database` - `v1.4.4`](#firebase_ui_database---v144)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_oauth` - `v1.5.3`
+ - `firebase_ui_oauth_facebook` - `v1.2.21`
+ - `firebase_ui_oauth_twitter` - `v1.2.21`
+ - `firebase_ui_oauth_apple` - `v1.2.21`
+ - `firebase_ui_oauth_google` - `v1.3.3`
+ - `firebase_ui_firestore` - `v1.6.4`
+ - `firebase_ui_storage` - `v2.0.5`
+ - `firebase_ui_database` - `v1.4.4`
+
+---
+
+#### `firebase_ui_auth` - `v1.15.0`
+
+ - **FIX**(ui_auth): fix confirmation dialog for delete account button ([#346](https://github.com/firebase/FirebaseUI-Flutter/issues/346)). ([4fd041d1](https://github.com/firebase/FirebaseUI-Flutter/commit/4fd041d12756084da6e4e3e7232c0dd35fc3593c))
+ - **FEAT**(firebase_ui_auth): add autofocus property to PhoneInput widget ([#334](https://github.com/firebase/FirebaseUI-Flutter/issues/334)). ([eb9e2bd1](https://github.com/firebase/FirebaseUI-Flutter/commit/eb9e2bd1e04be52472b70354dd253a362c3b49c2))
+
+#### `firebase_ui_localizations` - `v1.12.0`
+
+ - **FIX**(ui_localizations): Add missing 'nb' language code to kSupportedLanguages ([#350](https://github.com/firebase/FirebaseUI-Flutter/issues/350)). ([3fbfded0](https://github.com/firebase/FirebaseUI-Flutter/commit/3fbfded079b8dbe54b15d805ed5be5836e0d1ff7))
+ - **FEAT**(firebase_ui_localizations): Further German translations for auth labels that were still in English ([#319](https://github.com/firebase/FirebaseUI-Flutter/issues/319)). ([2f96686c](https://github.com/firebase/FirebaseUI-Flutter/commit/2f96686cb5dcbba2ad1cd02354ccc3b95af3ca5f))
+ - **FEAT**(firebase_ui_localizations): Add Finnish language localization labels ([#332](https://github.com/firebase/FirebaseUI-Flutter/issues/332)). ([848b66cf](https://github.com/firebase/FirebaseUI-Flutter/commit/848b66cfc6bd7a84d57e94d0c6bcab8713ab9313))
+
+
 ## 2024-04-24
 
 ### Changes
