@@ -25,5 +25,6 @@ export 'lang/ru.dart';
 export 'lang/th.dart';
 export 'lang/tr.dart';
 export 'lang/uk.dart';
+export 'lang/vi.dart';
 export 'lang/zh.dart';
 export 'lang/zh_tw.dart';
