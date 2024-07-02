@@ -20,26 +20,26 @@ void main(List<String> args) async {
 
   final pubspecFilePaths = findPubspecFiles(Directory.current);
 
-  final listOfFuture = <Future>[];
+  final listOfFutures = <Future>[];
   for (final filePath in pubspecFilePaths) {
     final future = updatePubspecFile(filePath, latestVersions);
-    listOfFuture.add(future);
+    listOfFutures.add(future);
   }
 
-  listOfFuture.add(
+  listOfFutures.add(
     updatePodfileVersion(
       iosSdkVersion,
       './tests/ios/Podfile',
     ),
   );
-  listOfFuture.add(
+  listOfFutures.add(
     updatePodfileVersion(
       iosSdkVersion,
       './tests/macos/Podfile',
     ),
   );
 
-  await Future.wait(listOfFuture);
+  await Future.wait(listOfFutures);
 
   print(
     'All dependencies updated, please double check they are the latest, commit and push the changes.',
