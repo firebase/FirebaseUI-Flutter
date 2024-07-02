@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
-void main(List<String> args) async {
+Future<void> main(List<String> args) async {
   const bomPath =
       'https://raw.githubusercontent.com/firebase/flutterfire/master/scripts/versions.json';
   final http = HttpClient();
@@ -47,7 +47,9 @@ void main(List<String> args) async {
 }
 
 Future<void> updatePubspecFile(
-    String filePath, Map<String, dynamic> latestVersions) async {
+  String filePath,
+  Map<String, dynamic> latestVersions,
+) async {
   final content = await File(filePath).readAsString();
   final yamlEditor = YamlEditor(content);
   final pubspec = loadYaml(content) as YamlMap;
@@ -89,7 +91,9 @@ List<String> findPubspecFiles(Directory root) {
 }
 
 Future<void> updatePodfileVersion(
-    String iosSdkVersion, String podfilePath) async {
+  String iosSdkVersion,
+  String podfilePath,
+) async {
   final podfile = File(podfilePath);
   if (!await podfile.exists()) {
     throw Exception('Podfile not found at $podfilePath');
@@ -97,7 +101,6 @@ Future<void> updatePodfileVersion(
 
   String content = await podfile.readAsString();
 
-  // Update the version
   final updatedContent = content.replaceAllMapped(
     RegExp(
         r"pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '\d+\.\d+\.\d+'"),
@@ -105,8 +108,8 @@ Future<void> updatePodfileVersion(
         "pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '$iosSdkVersion'",
   );
 
-  // Write the updated content back to the Podfile
   await podfile.writeAsString(updatedContent);
 
-  print('Updated Podfile Firestore framework on path: $podfilePath to version: $iosSdkVersion');
+  print(
+      'Updated Podfile Firestore framework on path: $podfilePath to version: $iosSdkVersion');
 }
