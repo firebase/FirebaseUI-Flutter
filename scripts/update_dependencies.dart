@@ -108,5 +108,5 @@ Future<void> updatePodfileVersion(
   // Write the updated content back to the Podfile
   await podfile.writeAsString(updatedContent);
 
-  print('Updated Podfile Firestore framework on path" $podfilePath to version $iosSdkVersion');
+  print('Updated Podfile Firestore framework on path: $podfilePath to version: $iosSdkVersion');
 }
