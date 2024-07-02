@@ -40,6 +40,10 @@ void main(List<String> args) async {
   );
 
   await Future.wait(listOfFuture);
+
+  print(
+    'All dependencies updated, please double check they are the latest, commit and push the changes.',
+  );
 }
 
 Future<void> updatePubspecFile(
@@ -104,5 +108,5 @@ Future<void> updatePodfileVersion(
   // Write the updated content back to the Podfile
   await podfile.writeAsString(updatedContent);
 
-  print('Updated Podfile version to $iosSdkVersion');
+  print('Updated Podfile Firestore framework on path" $podfilePath to version $iosSdkVersion');
 }
