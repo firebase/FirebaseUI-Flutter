@@ -105,6 +105,9 @@ class _FirestoreQueryBuilderState<Document>
 
   var _pageCount = 0;
 
+  bool _isInitialized = false;
+  late DocumentSnapshot<Document> _lastQueriedDocument;
+
   late var _snapshot = _QueryBuilderSnapshot<Document>._(
     docs: [],
     error: null,
@@ -162,15 +165,11 @@ class _FirestoreQueryBuilderState<Document>
     // "build" – most commonly ListView's itemBuilder
     Future.microtask(() => setState(() {}));
 
-    final expectedDocsCount = (_pageCount + 1) * widget.pageSize
-
-        /// The "+1" is used to voluntarily fetch one extra item,
-        /// used to determine whether there is a next page or not.
-        /// This extra item will not be rendered.
-        +
-        1;
-
-    final query = widget.query.limit(expectedDocsCount);
+    final query = (_isInitialized)
+        ? widget.query
+            .startAfterDocument(_lastQueriedDocument)
+            .limit(widget.pageSize)
+        : widget.query.limit(widget.pageSize);
 
     _querySubscription = query.snapshots().listen(
       (event) {
@@ -180,14 +179,17 @@ class _FirestoreQueryBuilderState<Document>
           } else {
             _snapshot = _snapshot.copyWith(isFetching: false);
           }
+          _isInitialized = true;
+          if (event.docs.isNotEmpty) {
+            _lastQueriedDocument = event.docs.last;
+            _snapshot.docs.addAll(event.docs.toList());
+          }
 
           _snapshot = _snapshot.copyWith(
             hasData: true,
-            docs: event.size < expectedDocsCount
-                ? event.docs
-                : event.docs.take(expectedDocsCount - 1).toList(),
+            docs: _snapshot.docs,
             error: null,
-            hasMore: event.size == expectedDocsCount,
+            hasMore: event.size != 0,
             stackTrace: null,
             hasError: false,
           );
