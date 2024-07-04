@@ -271,28 +271,29 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get uploadButtonText => "Upload file";
 
   @override
-  String get verifyEmailTitle => "Verify your email";
+  String get verifyEmailTitle => "Verique seu email";
 
   @override
   String get verificationEmailSentText =>
-      "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.";
+      "Um email de verificação foi enviado para seu endereço de email. Verifique seu email e clique no link para verificar seu endereço de email.";
 
   @override
   String get verificationFailedText =>
-      "We couldn't verify your email address. ";
+      "Não conseguimos verificar seu endereço de email. ";
 
   @override
-  String get resendVerificationEmailButtonLabel => "Resend verification email";
+  String get resendVerificationEmailButtonLabel =>
+      "Enviar email de verificação novamente";
 
   @override
-  String get verificationEmailSentTextShort => "Verification email sent";
+  String get verificationEmailSentTextShort => "Email de verificação enviado";
 
   @override
-  String get emailIsNotVerifiedText => "Email is not verified";
+  String get emailIsNotVerifiedText => "Email não está verificado";
 
   @override
   String get waitingForEmailVerificationText =>
-      "Waiting for email verification";
+      "Aguardando por verificação de email";
 
   @override
   String get dismissButtonLabel => "Dismiss";
@@ -302,14 +303,14 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get checkEmailHintText =>
-      "Please check your email and click the link to verify your email address.";
+      "Verifique seu email e clique no link para validar seu endereço de email.";
 
   @override
-  String get doneButtonLabel => "Done";
+  String get doneButtonLabel => "Pronto";
 
   @override
   String get invalidVerificationCodeErrorText =>
-      "The code you entered is invalid. Please try again.";
+      "O código que você digitou é invalido. Por favor, tente novamente.";
 
   @override
   String get ulinkProviderAlertTitle => "Unlink provider";
@@ -318,7 +319,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get confirmUnlinkButtonLabel => "Unlink";
 
   @override
-  String get cancelButtonLabel => "Cancel";
+  String get cancelButtonLabel => "Cancelar";
 
   @override
   String get unlinkProviderAlertMessage =>
@@ -329,15 +330,15 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
       "Password should be at least 6 characters";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+  String get confirmDeleteAccountAlertTitle => "Confirmar deleção de conta";
 
   @override
   String get confirmDeleteAccountAlertMessage =>
-      "Are you sure you want to delete your account?";
+      "Você realmente deseja apagar sua conta?";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+  String get confirmDeleteAccountButtonLabel => "Sim, apagar";
 
   @override
-  String get sendVerificationEmailLabel => "Send verification email";
+  String get sendVerificationEmailLabel => "Enviar email de verificação";
 }
