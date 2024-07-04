@@ -484,7 +484,7 @@
     "description": "Done button label",
     "placeholders": {}
   },
-  "invalidVerificationCodeErrorText": "O código que você digitou é invalido. Por favor, tente novamente.",
+  "invalidVerificationCodeErrorText": "O código que você digitou é inválido. Por favor, tente novamente.",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}

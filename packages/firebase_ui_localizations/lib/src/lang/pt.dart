@@ -310,7 +310,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get invalidVerificationCodeErrorText =>
-      "O código que você digitou é invalido. Por favor, tente novamente.";
+      "O código que você digitou é inválido. Por favor, tente novamente.";
 
   @override
   String get ulinkProviderAlertTitle => "Unlink provider";
