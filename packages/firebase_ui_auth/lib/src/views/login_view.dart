@@ -58,6 +58,14 @@ class LoginView extends StatefulWidget {
   /// {@macro ui.auth.widgets.email_from.showPasswordVisibilityToggle}
   final bool showPasswordVisibilityToggle;
 
+    /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? emailTextEditingController;
+
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? passwordTextEditingController;
+
   /// {@macro ui.auth.views.login_view}
   const LoginView({
     super.key,
@@ -72,6 +80,8 @@ class LoginView extends StatefulWidget {
     this.subtitleBuilder,
     this.actionButtonLabelOverride,
     this.showPasswordVisibilityToggle = false,
+    this.emailTextEditingController,
+    this.passwordTextEditingController,
   });
 
   @override
@@ -220,6 +230,8 @@ class _LoginViewState extends State<LoginView> {
               if (provider is EmailAuthProvider) ...[
                 const SizedBox(height: 8),
                 EmailForm(
+                  passwordTextEditingController: widget.passwordTextEditingController,
+                  emailTextEditingController: widget.emailTextEditingController,
                   key: ValueKey(_action),
                   auth: widget.auth,
                   action: _action,
