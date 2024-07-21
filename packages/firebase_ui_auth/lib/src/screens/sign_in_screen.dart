@@ -102,10 +102,20 @@ class SignInScreen extends MultiProviderScreen {
   final double? maxWidth;
 
   /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller 
+  final TextEditingController? emailTextEditingController;
+
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller 
+  final TextEditingController? passwordTextEditingController;
+
+  /// {@macro ui.auth.screens.sign_in_screen}
   const SignInScreen({
     super.key,
     super.providers,
     super.auth,
+    this.emailTextEditingController,
+    this.passwordTextEditingController,
     this.headerMaxExtent,
     this.headerBuilder,
     this.sideBuilder,
@@ -161,6 +171,8 @@ class SignInScreen extends MultiProviderScreen {
       actions: actions,
       child: LoginScreen(
         styles: styles,
+        emailTextEditingController: emailTextEditingController,
+        passwordTextEditingController: passwordTextEditingController,
         loginViewKey: loginViewKey,
         action: AuthAction.signIn,
         providers: providers,

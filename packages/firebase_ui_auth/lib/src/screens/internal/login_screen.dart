@@ -57,6 +57,14 @@ class LoginScreen extends StatelessWidget {
   /// {@macro ui.auth.screens.responsive_page.max_width}
   final double? maxWidth;
 
+    /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? emailTextEditingController;
+
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? passwordTextEditingController;
+
   const LoginScreen({
     super.key,
     required this.action,
@@ -77,6 +85,8 @@ class LoginScreen extends StatelessWidget {
     this.styles,
     this.showPasswordVisibilityToggle = false,
     this.maxWidth,
+    this.emailTextEditingController,
+    this.passwordTextEditingController,
   });
 
   @override
@@ -86,6 +96,8 @@ class LoginScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: LoginView(
+          emailTextEditingController: emailTextEditingController,
+          passwordTextEditingController: passwordTextEditingController,
           key: loginViewKey,
           action: action,
           auth: auth,
