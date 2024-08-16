@@ -1,6 +1,6 @@
 {
   "@@locale": "ja",
-  "@@last_modified": "2023-11-16T00:26:53.969833",
+  "@@last_modified": "2024-02-04T10:25:05.113670",
   "accessDisabledErrorText": "このアカウントへのアクセスが一時的に無効になっています",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -51,7 +51,7 @@
     "description": "Used as a placeholder of the country code input.",
     "placeholders": {}
   },
-  "credentialAlreadyInUseErrorText": "このプロバイダは、すでに別のユーザー アカウントに関連付けられています。",
+  "credentialAlreadyInUseErrorText": "このプロバイダは、すでに別のユーザーアカウントに関連付けられています。",
   "@credentialAlreadyInUseErrorText": {
     "description": "Error text that is show when user tries to use an OAuth provider that doesn't belong to currently signed in user account.",
     "placeholders": {}
@@ -61,7 +61,7 @@
     "description": "Used as a label of the DeleteAccountButton.",
     "placeholders": {}
   },
-  "differentMethodsSignInTitleText": "次のいずれかの方法を使用してログインします",
+  "differentMethodsSignInTitleText": "次のいずれかの方法を使用してサインインします",
   "@differentMethodsSignInTitleText": {
     "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
     "placeholders": {}
@@ -86,7 +86,7 @@
     "description": "Used as an error text of the EmailInput when the email is empty.",
     "placeholders": {}
   },
-  "emailLinkSignInButtonLabel": "マジックリンクでログイン",
+  "emailLinkSignInButtonLabel": "マジックリンクでサインイン",
   "@emailLinkSignInButtonLabel": {
     "description": "Used as a label of the EmailLinkSignInButton.",
     "placeholders": {}
@@ -101,7 +101,7 @@
     "description": "Button label that suggests to enable 2FA",
     "placeholders": {}
   },
-  "enableMoreSignInMethods": "その他のログイン方法を有効にします",
+  "enableMoreSignInMethods": "その他のサインイン方法を有効にします",
   "@enableMoreSignInMethods": {
     "description": "Used as a hint to connect more providers.",
     "placeholders": {}
@@ -175,7 +175,7 @@
     "description": "",
     "placeholders": {}
   },
-  "mfaTitle": "2 段階認証プロセス",
+  "mfaTitle": "2段階認証プロセス",
   "@mfaTitle": {
     "description": "2-step verification settings tile title.",
     "placeholders": {}
@@ -289,7 +289,7 @@
     "description": "Used as a label of the submit button on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInActionText": "ログイン",
+  "signInActionText": "サインイン",
   "@signInActionText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signIn.",
     "placeholders": {}
@@ -299,47 +299,47 @@
     "description": "Used as a hint text of the LoginView suggesting to sign in instead of registering a new account.",
     "placeholders": {}
   },
-  "signInMethods": "ログイン方法",
+  "signInMethods": "サインイン方法",
   "@signInMethods": {
     "description": "Used as a label of the row showing connected providers.",
     "placeholders": {}
   },
-  "signInText": "ログイン",
+  "signInText": "サインイン",
   "@signInText": {
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInWithAppleButtonText": "Apple でサインイン",
+  "signInWithAppleButtonText": "Appleでサインイン",
   "@signInWithAppleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
   },
-  "signInWithEmailLinkSentText": "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してログインしてください",
+  "signInWithEmailLinkSentText": "マジックリンクをメールでお送りしました。メールを確認し、リンクを使用してサインインしてください",
   "@signInWithEmailLinkSentText": {
     "description": "Indicates that email with a sign in link was sent.",
     "placeholders": {}
   },
-  "signInWithEmailLinkViewTitleText": "マジックリンクでログイン",
+  "signInWithEmailLinkViewTitleText": "マジックリンクでサインイン",
   "@signInWithEmailLinkViewTitleText": {
     "description": "Used as a title on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInWithFacebookButtonText": "Facebook でログイン",
+  "signInWithFacebookButtonText": "Facebookでサインイン",
   "@signInWithFacebookButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Facebook provider.",
     "placeholders": {}
   },
-  "signInWithGoogleButtonText": "Google でログイン",
+  "signInWithGoogleButtonText": "Googleでサインイン",
   "@signInWithGoogleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Google provider.",
     "placeholders": {}
   },
-  "signInWithPhoneButtonText": "携帯電話を使用してログイン",
+  "signInWithPhoneButtonText": "携帯電話を使用してサインイン",
   "@signInWithPhoneButtonText": {
     "description": "Used as a label of the PhoneVerificationButton.",
     "placeholders": {}
   },
-  "signInWithTwitterButtonText": "Twitter でログイン",
+  "signInWithTwitterButtonText": "Twitterでサインイン",
   "@signInWithTwitterButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Twitter provider.",
     "placeholders": {}
@@ -349,7 +349,7 @@
     "description": "Used as a label of the SignOutButton.",
     "placeholders": {}
   },
-  "smsAutoresolutionFailedError": "SMS コードを自動で解決できませんでした。コードを手動で入力してください",
+  "smsAutoresolutionFailedError": "SMSコードを自動で解決できませんでした。コードを手動で入力してください",
   "@smsAutoresolutionFailedError": {
     "description": "Used as an error text when AutoresolutionFailedException is being thrown.",
     "placeholders": {}
@@ -399,7 +399,7 @@
     "description": "Used as a label of the submit button of the SMSCodeInputView.",
     "placeholders": {}
   },
-  "verifyingSMSCodeText": "SMS コードを確認しています...",
+  "verifyingSMSCodeText": "SMSコードを確認しています...",
   "@verifyingSMSCodeText": {
     "description": "Used as a status text of the SMSCodeInput when code verification is in progress.",
     "placeholders": {}
@@ -527,6 +527,11 @@
   "confirmDeleteAccountButtonLabel": "はい、削除します",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
+    "placeholders": {}
+  },
+  "sendVerificationEmailLabel": "Send verification email",
+  "@sendVerificationEmailLabel": {
+    "description": "Used as a button label to send a verification email",
     "placeholders": {}
   }
 }

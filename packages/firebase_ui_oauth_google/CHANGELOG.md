@@ -1,3 +1,15 @@
+## 1.3.3
+
+ - Update a dependency to the latest release.
+
+## 1.3.2
+
+ - Update a dependency to the latest release.
+
+## 1.3.1
+
+ - Update a dependency to the latest release.
+
 ## 1.3.0
 
  - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))

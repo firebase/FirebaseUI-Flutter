@@ -1,142 +1,142 @@
 {
-  "@@locale": "uk",
-  "@@last_modified": "2024-02-04T10:25:05.119669",
-  "accessDisabledErrorText": "Доступ до цього облікового запису тимчасово вимкнено",
+  "@@locale": "fi",
+  "@@last_modified": "2025-04-17T14:19:00.000000",
+  "accessDisabledErrorText": "Pääsy tähän tiliin on väliaikaisesti estetty",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
     "placeholders": {}
   },
-  "arrayLabel": "масив",
+  "arrayLabel": "taulukko",
   "@arrayLabel": {
     "description": "",
     "placeholders": {}
   },
-  "booleanLabel": "логічне значення",
+  "booleanLabel": "Totuusarvo",
   "@booleanLabel": {
     "description": "",
     "placeholders": {}
   },
-  "cancelLabel": "скасувати",
+  "cancelLabel": "peruuta ",
   "@cancelLabel": {
     "description": "",
     "placeholders": {}
   },
-  "chooseACountry": "Вибрати країну",
+  "chooseACountry": "Valitse maa",
   "@chooseACountry": {
     "description": "Used as a label of the country code picker dropdown.",
     "placeholders": {}
   },
-  "confirmPasswordDoesNotMatchErrorText": "Паролі не збігаються",
+  "confirmPasswordDoesNotMatchErrorText": "Salasanat eivät täsmää",
   "@confirmPasswordDoesNotMatchErrorText": {
     "description": "Used as an error text when provided passwords do not match.",
     "placeholders": {}
   },
-  "confirmPasswordInputLabel": "Підтвердьте пароль",
+  "confirmPasswordInputLabel": "Vahvista salasana",
   "@confirmPasswordInputLabel": {
     "description": "Used as a label of the PasswordInput that confirms a provided password.",
     "placeholders": {}
   },
-  "confirmPasswordIsRequiredErrorText": "Підтвердьте пароль",
+  "confirmPasswordIsRequiredErrorText": "Vahvista salasanasi",
   "@confirmPasswordIsRequiredErrorText": {
     "description": "Used as an error text when PasswordInput used to confirm the password is empty.",
     "placeholders": {}
   },
-  "continueText": "Продовжити",
+  "continueText": "Jatka",
   "@continueText": {
     "description": "Used as a label of the submit button that takes the user to the next step of the authenticatiion flow.",
     "placeholders": {}
   },
-  "countryCode": "Код",
+  "countryCode": "Maakoodi",
   "@countryCode": {
     "description": "Used as a placeholder of the country code input.",
     "placeholders": {}
   },
-  "credentialAlreadyInUseErrorText": "Цей постачальник уже зв’язаний з іншим обліковим записом користувача.",
+  "credentialAlreadyInUseErrorText": "Tämä käyttäjänimi on liitetty jo toiseen tiliin.",
   "@credentialAlreadyInUseErrorText": {
     "description": "Error text that is show when user tries to use an OAuth provider that doesn't belong to currently signed in user account.",
     "placeholders": {}
   },
-  "deleteAccount": "Видалити обліковий запис",
+  "deleteAccount": "Poista tili",
   "@deleteAccount": {
     "description": "Used as a label of the DeleteAccountButton.",
     "placeholders": {}
   },
-  "differentMethodsSignInTitleText": "Увійдіть за допомогою одного з наведених нижче способів",
+  "differentMethodsSignInTitleText": "Kirjaudu sisään käyttämällä jotakin seuraavista tavoista",
   "@differentMethodsSignInTitleText": {
     "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
     "placeholders": {}
   },
-  "disable": "Вимкнути",
+  "disable": "Poista käytöstä",
   "@disable": {
     "description": "Button label that suggests to disable 2FA",
     "placeholders": {}
   },
-  "eastInitialLabel": "схід",
+  "eastInitialLabel": "I",
   "@eastInitialLabel": {
     "description": "",
     "placeholders": {}
   },
-  "emailInputLabel": "Електронна адреса",
+  "emailInputLabel": "Sähköposti",
   "@emailInputLabel": {
     "description": "Used as a label of the EmailInput.",
     "placeholders": {}
   },
-  "emailIsRequiredErrorText": "Укажіть електронну адресу",
+  "emailIsRequiredErrorText": "Sähköposti vaaditaan",
   "@emailIsRequiredErrorText": {
     "description": "Used as an error text of the EmailInput when the email is empty.",
     "placeholders": {}
   },
-  "emailLinkSignInButtonLabel": "Увійти за допомогою посилання для реєстрації",
+  "emailLinkSignInButtonLabel": "Kirjaudu sähköpostiin linkillä",
   "@emailLinkSignInButtonLabel": {
     "description": "Used as a label of the EmailLinkSignInButton.",
     "placeholders": {}
   },
-  "emailTakenErrorText": "Обліковий запис із такою електронною адресою вже існує",
+  "emailTakenErrorText": "Tällä sähköpostilla on jo olemassa tili",
   "@emailTakenErrorText": {
     "description": "Used as an error message when the user tries to sign up with an email that is already used.",
     "placeholders": {}
   },
-  "enable": "Увімкнути",
+  "enable": "Ota käyttöön",
   "@enable": {
     "description": "Button label that suggests to enable 2FA",
     "placeholders": {}
   },
-  "enableMoreSignInMethods": "Підключіть більше способів увійти в обліковий запис",
+  "enableMoreSignInMethods": "Ota käyttöön lisää kirjautumistapoja",
   "@enableMoreSignInMethods": {
     "description": "Used as a hint to connect more providers.",
     "placeholders": {}
   },
-  "enterSMSCodeText": "Введіть код з SMS",
+  "enterSMSCodeText": "Syötä tekstiviestikoodi",
   "@enterSMSCodeText": {
     "description": "Used as a label of the SMSCodeInput.",
     "placeholders": {}
   },
-  "findProviderForEmailTitleText": "Щоб продовжити, введіть свою електронну адресу",
+  "findProviderForEmailTitleText": "Anna sähköpostiosoitteesi jatkaaksesi",
   "@findProviderForEmailTitleText": {
     "description": "Used as a title of the FindProvidersForEmailView.",
     "placeholders": {}
   },
-  "forgotPasswordButtonLabel": "Забули пароль?",
+  "forgotPasswordButtonLabel": "Unohditko salasanasi?",
   "@forgotPasswordButtonLabel": {
     "description": "Used as a label of the ForgotPasswordButton.",
     "placeholders": {}
   },
-  "forgotPasswordHintText": "Укажіть свою електронну адресу, і ми надішлемо вам посилання для скидання пароля",
+  "forgotPasswordHintText": "Anna sähköpostiosoitteesi, niin lähetämme sinulle linkin salasanan palauttamiseksi",
   "@forgotPasswordHintText": {
     "description": "Used as a hint on a ForgotPasswordView.",
     "placeholders": {}
   },
-  "forgotPasswordViewTitle": "Забули пароль",
+  "forgotPasswordViewTitle": "Unohtunut salasana",
   "@forgotPasswordViewTitle": {
     "description": "Used as a title of the ForgotPasswordView.",
     "placeholders": {}
   },
-  "geopointLabel": "geopoint",
+  "geopointLabel": "maantieteellinen piste",
   "@geopointLabel": {
     "description": "",
     "placeholders": {}
   },
-  "goBackButtonLabel": "Назад",
+  "goBackButtonLabel": "Takaisin",
   "@goBackButtonLabel": {
     "description": "Used as a label of the back button.",
     "placeholders": {}
@@ -145,47 +145,47 @@
     "description": "The hash code for this object.",
     "placeholders": {}
   },
-  "invalidCountryCode": "Недійсний код",
+  "invalidCountryCode": "Virheellinen maakoodi",
   "@invalidCountryCode": {
     "description": "Used as an error text when provide country code is invalid.",
     "placeholders": {}
   },
-  "isNotAValidEmailErrorText": "Укажіть дійсну електронну адресу",
+  "isNotAValidEmailErrorText": "Virheellinen sähköposti",
   "@isNotAValidEmailErrorText": {
     "description": "Used as an error text of the EmailInput if the provided email is not valid.",
     "placeholders": {}
   },
-  "latitudeLabel": "широта",
+  "latitudeLabel": "leveysaste",
   "@latitudeLabel": {
     "description": "",
     "placeholders": {}
   },
-  "linkEmailButtonText": "Далі",
+  "linkEmailButtonText": "Seuraava",
   "@linkEmailButtonText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.link.",
     "placeholders": {}
   },
-  "longitudeLabel": "довгота",
+  "longitudeLabel": "pituusaste",
   "@longitudeLabel": {
     "description": "",
     "placeholders": {}
   },
-  "mapLabel": "карта",
+  "mapLabel": "kartta",
   "@mapLabel": {
     "description": "",
     "placeholders": {}
   },
-  "mfaTitle": "Двохетапна перевірка",
+  "mfaTitle": "Kaksivaiheinen tunnistus",
   "@mfaTitle": {
     "description": "2-step verification settings tile title.",
     "placeholders": {}
   },
-  "name": "Ім’я",
+  "name": "Nimi",
   "@name": {
     "description": "Used as a placeholder of the EditableUserDisplayName.",
     "placeholders": {}
   },
-  "northInitialLabel": "північ",
+  "northInitialLabel": "P",
   "@northInitialLabel": {
     "description": "",
     "placeholders": {}
@@ -195,87 +195,87 @@
     "description": "",
     "placeholders": {}
   },
-  "numberLabel": "число",
+  "numberLabel": "numero",
   "@numberLabel": {
     "description": "",
     "placeholders": {}
   },
-  "off": "Вимкнено",
+  "off": "Pois",
   "@off": {
     "description": "Label that suggests that 2-step verification is not enabled",
     "placeholders": {}
   },
-  "on": "Увімкнено",
+  "on": "Päällä",
   "@on": {
     "description": "Label that suggests that 2-step verification is enabled",
     "placeholders": {}
   },
-  "passwordInputLabel": "Пароль",
+  "passwordInputLabel": "Salasana",
   "@passwordInputLabel": {
     "description": "Used as a label of the PasswordInput.",
     "placeholders": {}
   },
-  "passwordIsRequiredErrorText": "Укажіть пароль",
+  "passwordIsRequiredErrorText": "Salasana vaaditaan",
   "@passwordIsRequiredErrorText": {
     "description": "Used as an error text when PasswordInput is empty.",
     "placeholders": {}
   },
-  "passwordResetEmailSentText": "Ми надіслали вам лист із посиланням для скидання пароля. Перевірте електронну пошту.",
+  "passwordResetEmailSentText": "Olemme lähettäneet sinulle sähköpostiviestin, jossa on linkki salasanan vaihtamiseksi. Tarkista sähköpostisi.",
   "@passwordResetEmailSentText": {
     "description": "Indicates that the password reset email was sent.",
     "placeholders": {}
   },
-  "phoneInputLabel": "Номер телефону",
+  "phoneInputLabel": "Puhelinnumero",
   "@phoneInputLabel": {
     "description": "Used as a label of the PhoneInput.",
     "placeholders": {}
   },
-  "phoneNumberInvalidErrorText": "Недійсний номер телефону",
+  "phoneNumberInvalidErrorText": "Virheellinen puhelinnumero",
   "@phoneNumberInvalidErrorText": {
     "description": "Used as an error text when PhoneInput contains an invalid phone number.",
     "placeholders": {}
   },
-  "phoneNumberIsRequiredErrorText": "Укажіть номер телефону",
+  "phoneNumberIsRequiredErrorText": "Puhelinnumero vaaditaan",
   "@phoneNumberIsRequiredErrorText": {
     "description": "Used as an error text when PhoneInput is empty.",
     "placeholders": {}
   },
-  "phoneVerificationViewTitleText": "Укажіть номер телефону",
+  "phoneVerificationViewTitleText": "Anna puhelinnumero",
   "@phoneVerificationViewTitleText": {
     "description": "Used as a title of the PhoneInputView.",
     "placeholders": {}
   },
-  "profile": "Профіль",
+  "profile": "Käyttäjäprofiili",
   "@profile": {
     "description": "A title of the ProfileScreen.",
     "placeholders": {}
   },
-  "provideEmail": "Укажіть електронну адресу й пароль",
+  "provideEmail": "Anna sähköpostiosoitteesi ja salasanasi",
   "@provideEmail": {
     "description": "Used as a title of the EmailSignUpDialog.",
     "placeholders": {}
   },
-  "referenceLabel": "згадка",
+  "referenceLabel": "viittaus",
   "@referenceLabel": {
     "description": "",
     "placeholders": {}
   },
-  "registerActionText": "Зареєструватися",
+  "registerActionText": "Rekisteröidy",
   "@registerActionText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signUp.",
     "placeholders": {}
   },
-  "registerHintText": "Не маєте облікового запису?",
+  "registerHintText": "Eikö sinulla ole tiliä?",
   "@registerHintText": {
     "description": "Used as a hint text of the LoginView suggesting to create a new account.",
     "placeholders": {}
   },
-  "registerText": "Зареєструватися",
+  "registerText": "Rekisteröidy",
   "@registerText": {
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signUp.",
     "placeholders": {}
   },
-  "resetPasswordButtonLabel": "Скинути пароль",
+  "resetPasswordButtonLabel": "Vaihda salasana",
   "@resetPasswordButtonLabel": {
     "description": "Used as a label of submit button of the ForgotPasswordView.",
     "placeholders": {}
@@ -284,188 +284,188 @@
     "description": "A representation of the runtime type of the object.",
     "placeholders": {}
   },
-  "sendLinkButtonLabel": "Надіслати посилання для реєстрації",
+  "sendLinkButtonLabel": "Lähetä kirjautumislinkki",
   "@sendLinkButtonLabel": {
     "description": "Used as a label of the submit button on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInActionText": "Увійти",
+  "signInActionText": "Kirjaudu",
   "@signInActionText": {
     "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInHintText": "Уже маєте обліковий запис?",
+  "signInHintText": "Onko sinulla jo tili?",
   "@signInHintText": {
     "description": "Used as a hint text of the LoginView suggesting to sign in instead of registering a new account.",
     "placeholders": {}
   },
-  "signInMethods": "Способи входу",
+  "signInMethods": "Kirjautumistavat",
   "@signInMethods": {
     "description": "Used as a label of the row showing connected providers.",
     "placeholders": {}
   },
-  "signInText": "Увійти",
+  "signInText": "Kirjaudu",
   "@signInText": {
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInWithAppleButtonText": "Увійти через обліковий запис Apple",
+  "signInWithAppleButtonText": "Kirjaudu Apple ID:llä",
   "@signInWithAppleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
   },
-  "signInWithEmailLinkSentText": "Ми надіслали вам лист із посиланням для реєстрації. Перевірте електронну пошту та перейдіть за посиланням, щоб увійти.",
+  "signInWithEmailLinkSentText": "Olemme lähettäneet sinulle kirjautumislinkin sisältävän sähköpostiviestin. Tarkista sähköpostisi ja kirjaudu sisään linkin avulla.",
   "@signInWithEmailLinkSentText": {
     "description": "Indicates that email with a sign in link was sent.",
     "placeholders": {}
   },
-  "signInWithEmailLinkViewTitleText": "Увійти за допомогою посилання для реєстрації",
+  "signInWithEmailLinkViewTitleText": "Kirjaudu kirjautumislinkin avulla",
   "@signInWithEmailLinkViewTitleText": {
     "description": "Used as a title on the EmailLinkSignInView.",
     "placeholders": {}
   },
-  "signInWithFacebookButtonText": "Увійти через Facebook",
+  "signInWithFacebookButtonText": "Kirjaudu Facebook tunnuksilla",
   "@signInWithFacebookButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Facebook provider.",
     "placeholders": {}
   },
-  "signInWithGoogleButtonText": "Увійти через Google",
+  "signInWithGoogleButtonText": "Kirjaudu Google tilillä",
   "@signInWithGoogleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Google provider.",
     "placeholders": {}
   },
-  "signInWithPhoneButtonText": "Увійти за допомогою телефона",
+  "signInWithPhoneButtonText": "Kirjaudu puhelimella",
   "@signInWithPhoneButtonText": {
     "description": "Used as a label of the PhoneVerificationButton.",
     "placeholders": {}
   },
-  "signInWithTwitterButtonText": "Увійти через Twitter",
+  "signInWithTwitterButtonText": "Kirjaudu X (Twitter) tilillä",
   "@signInWithTwitterButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Twitter provider.",
     "placeholders": {}
   },
-  "signOutButtonText": "Вийти",
+  "signOutButtonText": "Kirjaudu ulos",
   "@signOutButtonText": {
     "description": "Used as a label of the SignOutButton.",
     "placeholders": {}
   },
-  "smsAutoresolutionFailedError": "Не вдалось автоматично розпізнати код у SMS. Введіть його вручну.",
+  "smsAutoresolutionFailedError": "Tekstiviestikoodin automaattista tunnistamista ei voitu suorittaa. Syötä koodi manuaalisesti.",
   "@smsAutoresolutionFailedError": {
     "description": "Used as an error text when AutoresolutionFailedException is being thrown.",
     "placeholders": {}
   },
-  "southInitialLabel": "південь",
+  "southInitialLabel": "E",
   "@southInitialLabel": {
     "description": "",
     "placeholders": {}
   },
-  "stringLabel": "сегмент",
+  "stringLabel": "merkkijono",
   "@stringLabel": {
     "description": "",
     "placeholders": {}
   },
-  "timestampLabel": "позначка часу",
+  "timestampLabel": "aikaleima",
   "@timestampLabel": {
     "description": "",
     "placeholders": {}
   },
-  "typeLabel": "тип",
+  "typeLabel": "tyyppi",
   "@typeLabel": {
     "description": "",
     "placeholders": {}
   },
-  "unknownError": "Сталася невідома помилка",
+  "unknownError": "Tuntematon virhe",
   "@unknownError": {
     "description": "Used as a generic error message when unable to resolve error details from Exception or FirebaseAuthException.",
     "placeholders": {}
   },
-  "updateLabel": "оновити",
+  "updateLabel": "päivitä",
   "@updateLabel": {
     "description": "",
     "placeholders": {}
   },
-  "userNotFoundErrorText": "Обліковий запис не існує",
+  "userNotFoundErrorText": "Tiliä ei löydy",
   "@userNotFoundErrorText": {
     "description": "Used as an error message when the account for provided email was not found.",
     "placeholders": {}
   },
-  "valueLabel": "значення",
+  "valueLabel": "arvo",
   "@valueLabel": {
     "description": "",
     "placeholders": {}
   },
-  "verifyCodeButtonText": "Підтвердити",
+  "verifyCodeButtonText": "Vahvista",
   "@verifyCodeButtonText": {
     "description": "Used as a label of the submit button of the SMSCodeInputView.",
     "placeholders": {}
   },
-  "verifyingSMSCodeText": "Підтвердження коду в SMS…",
+  "verifyingSMSCodeText": "Vahvistetaan tekstiviestikoodia...",
   "@verifyingSMSCodeText": {
     "description": "Used as a status text of the SMSCodeInput when code verification is in progress.",
     "placeholders": {}
   },
-  "verifyItsYouText": "Підтвердьте свою особу",
+  "verifyItsYouText": "Vahvista, että olet sinä",
   "@verifyItsYouText": {
     "description": "Used as a title of the dialog that requires re-authentication of the user when performing destructive actions.",
     "placeholders": {}
   },
-  "verifyPhoneNumberButtonText": "Далі",
+  "verifyPhoneNumberButtonText": "Seuraava",
   "@verifyPhoneNumberButtonText": {
     "description": "Used as a label of the submit button of the PhoneInputView.",
     "placeholders": {}
   },
-  "westInitialLabel": "захід",
+  "westInitialLabel": "L",
   "@westInitialLabel": {
     "description": "",
     "placeholders": {}
   },
-  "wrongOrNoPasswordErrorText": "У користувача немає пароля або він недійсний",
+  "wrongOrNoPasswordErrorText": "Salasana on virheellinen tai käyttäjällä ei ole salasanaa",
   "@wrongOrNoPasswordErrorText": {
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
     "placeholders": {}
   },
-  "uploadButtonText": "Upload file",
+  "uploadButtonText": "Lataa tiedosto",
   "@uploadButtonText": {
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Verify your email",
+  "verifyEmailTitle": "Vahvista sähköpostiosoitteesi",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.",
+  "verificationEmailSentText": "Vahvistussähköposti on lähetetty sähköpostiosoitteeseesi. Tarkista sähköpostisi ja napsauta linkkiä vahvistaaksesi sähköpostiosoitteesi.",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "We couldn't verify your email address. ",
+  "verificationFailedText": "Emme voineet vahvistaa sähköpostiosoitettasi.",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
   },
-  "resendVerificationEmailButtonLabel": "Resend verification email",
+  "resendVerificationEmailButtonLabel": "Lähetä vahvistussähköposti uudelleen",
   "@resendVerificationEmailButtonLabel": {
     "description": "Button label that suggests to resend verification email",
     "placeholders": {}
   },
-  "verificationEmailSentTextShort": "Verification email sent",
+  "verificationEmailSentTextShort": "Vahvistussähköposti lähetetty",
   "@verificationEmailSentTextShort": {
     "description": "Short version of the hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "emailIsNotVerifiedText": "Email is not verified",
+  "emailIsNotVerifiedText": "Sähköpostia ei ole vahvistettu",
   "@emailIsNotVerifiedText": {
     "description": "Message indicating that email is not verified",
     "placeholders": {}
   },
-  "waitingForEmailVerificationText": "Waiting for email verification",
+  "waitingForEmailVerificationText": "Odotetaan sähköpostin vahvistusta",
   "@waitingForEmailVerificationText": {
     "description": "Message indicating that email is being verified",
     "placeholders": {}
   },
-  "dismissButtonLabel": "Dismiss",
-  "@dismiss": {
+  "dismissButtonLabel": "Hylkää",
+  "@dismissButtonLabel": {
     "description": "Dissmiss button label",
     "placeholders": {}
   },
@@ -474,62 +474,62 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Please check your email and click the link to verify your email address.",
+  "checkEmailHintText": "Tarkista sähköpostisi ja napsauta linkkiä vahvistaaksesi sähköpostiosoitteesi.",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
   },
-  "doneButtonLabel": "Done",
+  "doneButtonLabel": "Valmis",
   "@doneButtonLabel": {
     "description": "Done button label",
     "placeholders": {}
   },
-  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "invalidVerificationCodeErrorText": "Antamasi koodi on virheellinen. Yritä uudelleen.",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   },
-  "ulinkProviderAlertTitle": "Unlink provider",
+  "ulinkProviderAlertTitle": "Poista kirjautumistavan linkitys",
   "@ulinkProviderAlertTitle": {
     "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
     "placeholders": {}
   },
-  "confirmUnlinkButtonLabel": "Unlink",
+  "confirmUnlinkButtonLabel": "Poista linkitys",
   "@confirmUnlinkButtonLabel": {
     "description": "Unlink confirmation button label",
     "placeholders": {}
   },
-  "cancelButtonLabel": "Cancel",
+  "cancelButtonLabel": "Peruuta",
   "@cancelButtonLabel": {
     "description": "Cancel button label",
     "placeholders": {}
   },
-  "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
+  "unlinkProviderAlertMessage": "Haluatko varmasti poistaa tämän kirjautumistavan linkityksen?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
   },
-  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "weakPasswordErrorText": "Salasanan pitää sisältää vähintään kuusi merkkiä",
   "@weakPasswordErrorText": {
     "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertTitle": "Confirm account deletion",
+  "confirmDeleteAccountAlertTitle": "Vahvista tilin poistaminen",
   "@confirmDeleteAccountAlertTitle": {
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": "Are you sure you want to delete your account?",
+  "confirmDeleteAccountAlertMessage": "Oletko varma, että haluat poistaa tilin?",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
   },
-  "confirmDeleteAccountButtonLabel": "Yes, delete",
+  "confirmDeleteAccountButtonLabel": "Vahvista poisto",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
     "placeholders": {}
   },
-  "sendVerificationEmailLabel": "Send verification email",
+  "sendVerificationEmailLabel": "Lähetä vahvistussähköposti",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
     "placeholders": {}

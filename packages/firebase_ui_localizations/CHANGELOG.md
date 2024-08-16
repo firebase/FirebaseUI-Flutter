@@ -1,3 +1,15 @@
+## 1.12.0
+
+ - **FIX**(ui_localizations): Add missing 'nb' language code to kSupportedLanguages ([#350](https://github.com/firebase/FirebaseUI-Flutter/issues/350)). ([3fbfded0](https://github.com/firebase/FirebaseUI-Flutter/commit/3fbfded079b8dbe54b15d805ed5be5836e0d1ff7))
+ - **FEAT**(firebase_ui_localizations): Further German translations for auth labels that were still in English ([#319](https://github.com/firebase/FirebaseUI-Flutter/issues/319)). ([2f96686c](https://github.com/firebase/FirebaseUI-Flutter/commit/2f96686cb5dcbba2ad1cd02354ccc3b95af3ca5f))
+ - **FEAT**(firebase_ui_localizations): Add Finnish language localization labels ([#332](https://github.com/firebase/FirebaseUI-Flutter/issues/332)). ([848b66cf](https://github.com/firebase/FirebaseUI-Flutter/commit/848b66cfc6bd7a84d57e94d0c6bcab8713ab9313))
+
+## 1.11.0
+
+ - **FIX**(ui_localizations): In the Japanese file, change "login" to "sign and improve translations ([#304](https://github.com/firebase/FirebaseUI-Flutter/issues/304)). ([ae01e9f1](https://github.com/firebase/FirebaseUI-Flutter/commit/ae01e9f13dbd4d5b357c1124be39f9cc44ccb9ee))
+ - **FIX**(firebase_ui_localizations): expose all Firebase UI localizations for overriding ([#309](https://github.com/firebase/FirebaseUI-Flutter/issues/309)). ([e4567478](https://github.com/firebase/FirebaseUI-Flutter/commit/e4567478205f2b88b54aa21af6429fb1c7c81564))
+ - **FEAT**(firebase_ui_localizations): support for `sendVerificationEmailLabel()` label ([#280](https://github.com/firebase/FirebaseUI-Flutter/issues/280)). ([95be915d](https://github.com/firebase/FirebaseUI-Flutter/commit/95be915d162c6fb5dfdc6a8ad3298c2002d38dbf))
+
 ## 1.10.2
 
  - **FIX**(ui_localizations): Add missing generated translation file. ([ca15feb6](https://github.com/firebase/FirebaseUI-Flutter/commit/ca15feb69b0d1699fc21f831ddbb1e8f87795e9b))

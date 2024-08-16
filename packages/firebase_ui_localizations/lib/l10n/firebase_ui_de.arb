@@ -1,6 +1,6 @@
 {
   "@@locale": "de",
-  "@@last_modified": "2023-11-16T00:26:53.960802",
+  "@@last_modified": "2024-02-04T10:25:05.099040",
   "accessDisabledErrorText": "Der Zugriff auf dieses Konto wurde vorübergehend gesperrt",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -424,47 +424,47 @@
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
     "placeholders": {}
   },
-  "uploadButtonText": "Upload file",
+  "uploadButtonText": "Datei hochladen",
   "@uploadButtonText": {
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Verify your email",
+  "verifyEmailTitle": "Bestätigen Sie Ihre E-Mail",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.",
+  "verificationEmailSentText": "Eine Bestätigungsmail wurde an Ihre E-Mail-Adresse versendet. Bitte prüfen Sie die E-Mails und klicken Sie auf den Link zum Bestätigen.",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "We couldn't verify your email address. ",
+  "verificationFailedText": "Wir konnten Ihre E-Mail-Adresse nicht bestätigen.",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
   },
-  "resendVerificationEmailButtonLabel": "Resend verification email",
+  "resendVerificationEmailButtonLabel": "Sende Bestätigungsmail erneut",
   "@resendVerificationEmailButtonLabel": {
     "description": "Button label that suggests to resend verification email",
     "placeholders": {}
   },
-  "verificationEmailSentTextShort": "Verification email sent",
+  "verificationEmailSentTextShort": "Bestätigungsmail gesendet",
   "@verificationEmailSentTextShort": {
     "description": "Short version of the hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "emailIsNotVerifiedText": "Email is not verified",
+  "emailIsNotVerifiedText": "E-Mail ist noch nicht bestätigt",
   "@emailIsNotVerifiedText": {
     "description": "Message indicating that email is not verified",
     "placeholders": {}
   },
-  "waitingForEmailVerificationText": "Waiting for email verification",
+  "waitingForEmailVerificationText": "Warte auf E-Mail-Bestätigung",
   "@waitingForEmailVerificationText": {
     "description": "Message indicating that email is being verified",
     "placeholders": {}
   },
-  "dismissButtonLabel": "Dismiss",
+  "dismissButtonLabel": "Verwerfen",
   "@dismiss": {
     "description": "Dissmiss button label",
     "placeholders": {}
@@ -474,59 +474,64 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Please check your email and click the link to verify your email address.",
+  "checkEmailHintText": "Bitte prüfen Sie Ihre E-Mails und klicken Sie auf den Link, um die E-Mail-Adresse zu bestätigen.",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
   },
-  "doneButtonLabel": "Done",
+  "doneButtonLabel": "Erledigt",
   "@doneButtonLabel": {
     "description": "Done button label",
     "placeholders": {}
   },
-  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "invalidVerificationCodeErrorText": "Der eingegebene Code ist ungültig. Versuchen Sie es erneut.",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   },
-  "ulinkProviderAlertTitle": "Unlink provider",
+  "ulinkProviderAlertTitle": "Provider trennen",
   "@ulinkProviderAlertTitle": {
     "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
     "placeholders": {}
   },
-  "confirmUnlinkButtonLabel": "Unlink",
+  "confirmUnlinkButtonLabel": "Trennen",
   "@confirmUnlinkButtonLabel": {
     "description": "Unlink confirmation button label",
     "placeholders": {}
   },
-  "cancelButtonLabel": "Cancel",
+  "cancelButtonLabel": "Abbrechen",
   "@cancelButtonLabel": {
     "description": "Cancel button label",
     "placeholders": {}
   },
-  "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
+  "unlinkProviderAlertMessage": "Sind Sie sicher, dass Sie diesen Provider trennen möchten?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
   },
-  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "weakPasswordErrorText": "Passwort muss mind. 6 Zeichen enthalten",
   "@weakPasswordErrorText": {
     "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertTitle": "Confirm account deletion",
+  "confirmDeleteAccountAlertTitle": "Bestätige Kontolöschung",
   "@confirmDeleteAccountAlertTitle": {
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": "Are you sure you want to delete your account?",
+  "confirmDeleteAccountAlertMessage": "Sind Sie sicher, dass Sie das Konto löschen möchten?",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
   },
-  "confirmDeleteAccountButtonLabel": "Yes, delete",
+  "confirmDeleteAccountButtonLabel": "Ja, löschen",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
+    "placeholders": {}
+  },
+  "sendVerificationEmailLabel": "Verifizierungs-E-Mail senden",
+  "@sendVerificationEmailLabel": {
+    "description": "Used as a button label to send a verification email",
     "placeholders": {}
   }
 }

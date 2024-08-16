@@ -1,3 +1,15 @@
+## 1.5.3
+
+ - Update a dependency to the latest release.
+
+## 1.5.2
+
+ - Update a dependency to the latest release.
+
+## 1.5.1
+
+ - **FIX**(auth): `desktopSignIn()` method required in web mixin ([#294](https://github.com/firebase/FirebaseUI-Flutter/issues/294)). ([65568934](https://github.com/firebase/FirebaseUI-Flutter/commit/655689344bbf4fc7e8a6911ce67a3ce896079235))
+
 ## 1.5.0
 
  - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))
