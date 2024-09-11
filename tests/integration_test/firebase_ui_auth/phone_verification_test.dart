@@ -5,6 +5,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -283,7 +284,7 @@ void main() {
         expect(onPhoneVerifiedCalled, isTrue);
       },
       // passes locally but fails in CI
-      skip:  isCI
+      skip:  isCI && defaultTargetPlatform == TargetPlatform.android,
     );
   });
 }
