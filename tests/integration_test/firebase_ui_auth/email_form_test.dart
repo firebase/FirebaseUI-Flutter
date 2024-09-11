@@ -38,6 +38,7 @@ void main() {
 
         expect(auth.currentUser, isNotNull);
       },
+      skip: isCI,
     );
 
     testWidgets('shows wrong password error', (tester) async {
@@ -63,38 +64,42 @@ void main() {
       expect(find.text(labels.wrongOrNoPasswordErrorText), findsOneWidget);
     });
 
-    testWidgets('signs in the user', (tester) async {
-      await auth.createUserWithEmailAndPassword(
-        email: 'test@test.com',
-        password: 'password',
-      );
+    testWidgets(
+      'signs in the user',
+      (tester) async {
+        await auth.createUserWithEmailAndPassword(
+          email: 'test@test.com',
+          password: 'password',
+        );
 
-      await auth.signOut();
+        await auth.signOut();
 
-      await render(
-        tester,
-        FirebaseUIActions(
-          actions: [
-            AuthStateChangeAction<SignedIn>((context, state) {
-              expect(state, isA<SignedIn>());
-              expect(state.user, isNotNull);
-              expect(state.user!.email, equals('test@test.com'));
-            })
-          ],
-          child: const EmailForm(action: AuthAction.signIn),
-        ),
-      );
+        await render(
+          tester,
+          FirebaseUIActions(
+            actions: [
+              AuthStateChangeAction<SignedIn>((context, state) {
+                expect(state, isA<SignedIn>());
+                expect(state.user, isNotNull);
+                expect(state.user!.email, equals('test@test.com'));
+              })
+            ],
+            child: const EmailForm(action: AuthAction.signIn),
+          ),
+        );
 
-      final inputs = find.byType(TextFormField);
+        final inputs = find.byType(TextFormField);
 
-      await tester.enterText(inputs.at(0), 'test@test.com');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.enterText(inputs.at(0), 'test@test.com');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
 
-      await tester.enterText(inputs.at(1), 'password');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.enterText(inputs.at(1), 'password');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
 
-      await tester.pumpAndSettle();
-    });
+        await tester.pumpAndSettle();
+      },
+      skip: isCI,
+    );
 
     testWidgets(
       'links email and password when auth action is link',

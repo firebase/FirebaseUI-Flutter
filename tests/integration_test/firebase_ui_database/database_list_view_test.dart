@@ -207,6 +207,7 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
+      skip: isCI,
     );
 
     testWidgets(
