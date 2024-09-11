@@ -18,7 +18,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:tests/firebase_options.dart';
 
 // Github Actions environment variable
-final isCI = const String.fromEnvironment('CODESPACES').isNotEmpty;
+final isCI = const String.fromEnvironment('CI').isNotEmpty;
 
 String get testEmulatorHost {
   if (defaultTargetPlatform == TargetPlatform.android && !kIsWeb) {
