@@ -10,7 +10,7 @@ import 'package:yaml_edit/yaml_edit.dart';
 
 Future<void> main(List<String> args) async {
   const bomPath =
-      'https://raw.githubusercontent.com/firebase/flutterfire/master/scripts/versions.json';
+      'https://raw.githubusercontent.com/firebase/flutterfire/main/scripts/versions.json';
   final http = HttpClient();
   final request = await http.getUrl(Uri.parse(bomPath));
   final response = await request.close(); // sends the request
