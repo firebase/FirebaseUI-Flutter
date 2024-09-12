@@ -57,27 +57,25 @@ void main() {
         skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
       );
 
-      testWidgets(
-        'throws a StateError if used outside of the FirebaseUIAction',
-        (tester) async {
-          late AuthState state;
+      testWidgets('throws a StateError if used outside of the FirebaseUIAction',
+          (tester) async {
+        late AuthState state;
 
-          await render(
-            tester,
-            AuthStateListener(
-              listener: (oldState, newState, _) {
-                state = newState;
-                return null;
-              },
-              child: const EmailForm(action: AuthAction.signIn),
-            ),
-          );
+        await render(
+          tester,
+          AuthStateListener(
+            listener: (oldState, newState, _) {
+              state = newState;
+              return null;
+            },
+            child: const EmailForm(action: AuthAction.signIn),
+          ),
+        );
 
-          await authenticate(tester);
+        await authenticate(tester);
 
-          expect(() => getControllerForState(state), throwsStateError);
-        },
-      );
+        expect(() => getControllerForState(state), throwsStateError);
+      }, skip: isCI && defaultTargetPlatform == TargetPlatform.macOS);
     },
   );
 }

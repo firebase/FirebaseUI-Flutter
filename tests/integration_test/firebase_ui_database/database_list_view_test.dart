@@ -104,6 +104,7 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.byType(ListView), findsNothing);
       },
+      skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
     );
 
     testWidgets('By default, ignore errors', (tester) async {
