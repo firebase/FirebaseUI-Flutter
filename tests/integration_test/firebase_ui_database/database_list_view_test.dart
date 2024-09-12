@@ -107,34 +107,36 @@ void main() {
       skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
     );
 
-    testWidgets('By default, ignore errors', (tester) async {
-      final builderSpy = ListViewBuilderSpy();
-      final ref = rtdb.ref(_kTestPath);
+    testWidgets(
+      'By default, ignore errors',
+      (tester) async {
+        final builderSpy = ListViewBuilderSpy();
+        final ref = rtdb.ref(_kTestPath);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: FirebaseDatabaseListView(
-              query: ref,
-              cacheExtent: 0,
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: FirebaseDatabaseListView(
+                query: ref,
+                cacheExtent: 0,
+                itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      verifyZeroInteractions(builderSpy);
+        verifyZeroInteractions(builderSpy);
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(find.byType(ListView), findsNothing);
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+        expect(find.byType(ListView), findsNothing);
 
-      await ref.onValue.first.then((value) {}, onError: (_) {});
+        await ref.onValue.first.then((value) {}, onError: (_) {});
 
-      await tester.pump();
+        await tester.pump();
 
-      expect(find.byType(ListView), findsOneWidget);
-    },
-    skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
+        expect(find.byType(ListView), findsOneWidget);
+      },
+      skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
     );
 
     testWidgets(
