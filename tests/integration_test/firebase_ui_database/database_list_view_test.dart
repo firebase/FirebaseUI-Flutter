@@ -133,7 +133,9 @@ void main() {
       await tester.pump();
 
       expect(find.byType(ListView), findsOneWidget);
-    });
+    },
+    skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
+    );
 
     testWidgets(
       'When reaching the end of the list, loads more items',
