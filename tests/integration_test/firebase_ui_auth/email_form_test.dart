@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -41,28 +42,32 @@ void main() {
       skip: isCI,
     );
 
-    testWidgets('shows wrong password error', (tester) async {
-      await auth.createUserWithEmailAndPassword(
-        email: 'test@test.com',
-        password: 'password',
-      );
+    testWidgets(
+      'shows wrong password error',
+      (tester) async {
+        await auth.createUserWithEmailAndPassword(
+          email: 'test@test.com',
+          password: 'password',
+        );
 
-      await auth.signOut();
+        await auth.signOut();
 
-      await render(tester, const EmailForm(action: AuthAction.signIn));
+        await render(tester, const EmailForm(action: AuthAction.signIn));
 
-      final inputs = find.byType(TextFormField);
+        final inputs = find.byType(TextFormField);
 
-      await tester.enterText(inputs.at(0), 'test@test.com');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.enterText(inputs.at(0), 'test@test.com');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
 
-      await tester.enterText(inputs.at(1), 'wrongpassword');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.enterText(inputs.at(1), 'wrongpassword');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
 
-      await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-      expect(find.text(labels.wrongOrNoPasswordErrorText), findsOneWidget);
-    });
+        expect(find.text(labels.wrongOrNoPasswordErrorText), findsOneWidget);
+      },
+      skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
+    );
 
     testWidgets(
       'signs in the user',

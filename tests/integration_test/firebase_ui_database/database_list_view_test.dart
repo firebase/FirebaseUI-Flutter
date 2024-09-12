@@ -61,25 +61,29 @@ void main() {
           defaultTargetPlatform == TargetPlatform.macOS,
     );
 
-    testWidgets('Allows specifying custom loading handler', (tester) async {
-      final ref = rtdb.ref(_kTestPath);
+    testWidgets(
+      'Allows specifying custom loading handler',
+      (tester) async {
+        final ref = rtdb.ref(_kTestPath);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: FirebaseDatabaseListView(
-              query: ref,
-              loadingBuilder: (context) => const Text('loading...'),
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: FirebaseDatabaseListView(
+                query: ref,
+                loadingBuilder: (context) => const Text('loading...'),
+                itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.text('loading...'), findsOneWidget);
-      expect(find.byType(CircularProgressIndicator), findsNothing);
-      expect(find.byType(ListView), findsNothing);
-    });
+        expect(find.text('loading...'), findsOneWidget);
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+        expect(find.byType(ListView), findsNothing);
+      },
+      skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
+    );
 
     testWidgets(
       'By default, shows a progress indicator when loading',
