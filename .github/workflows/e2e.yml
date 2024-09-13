@@ -129,6 +129,10 @@ jobs:
           melos-version: "3.0.1"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
+      - name: Clean up previous build artifacts
+        run: |
+          rm -rf build
+          rm -rf .dart_tool
       - name: "Build Application"
         working-directory: tests
         run: |
