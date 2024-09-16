@@ -216,7 +216,7 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
-      skip: isCI,
+      skip: isCI && (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.android),
     );
 
     testWidgets(
