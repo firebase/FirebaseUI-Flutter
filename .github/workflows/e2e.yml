@@ -116,7 +116,7 @@ jobs:
             /usr/local/share/powershell \
             /usr/share/dotnet
           df -h /
-      - uses: hendrikmuhs/ccache-action@faf867a11c028c0b483fb2ae72b6fc8f7d842714
+      - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-ios-v3
@@ -195,7 +195,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "11"
-      - uses: hendrikmuhs/ccache-action@faf867a11c028c0b483fb2ae72b6fc8f7d842714
+      - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-macos-v2
