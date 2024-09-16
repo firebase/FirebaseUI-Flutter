@@ -521,8 +521,7 @@ class _EditModalButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = FirebaseUILocalizations.labelsOf(context);
 
-    return ButtonBar(
-      mainAxisSize: MainAxisSize.min,
+    return OverflowBar(
       alignment: MainAxisAlignment.end,
       children: [
         TextButton(
