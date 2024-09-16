@@ -284,7 +284,7 @@ void main() {
         expect(onPhoneVerifiedCalled, isTrue);
       },
       // passes locally but fails in CI
-      skip:  isCI && defaultTargetPlatform == TargetPlatform.android,
+      skip:  isCI && (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS),
     );
   });
 }

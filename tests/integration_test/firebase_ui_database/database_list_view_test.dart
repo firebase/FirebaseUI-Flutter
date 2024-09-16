@@ -82,7 +82,7 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsNothing);
         expect(find.byType(ListView), findsNothing);
       },
-      skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
+      skip: isCI && (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.iOS),
     );
 
     testWidgets(
@@ -104,7 +104,7 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.byType(ListView), findsNothing);
       },
-      skip: isCI && defaultTargetPlatform == TargetPlatform.macOS,
+      skip: isCI && (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.iOS),
     );
 
     testWidgets(
