@@ -99,6 +99,23 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "11"
+      - name: 'Free up space'
+        run: |
+          sudo rm -rf \
+            /usr/local/share/.cache \
+            /Users/runner/Library/Caches \
+            /Users/runner/Library/Developer/Xcode/DerivedData \
+            /Users/runner/Library/Developer/CoreSimulator/Caches \
+            /opt/microsoft/msedge \
+            /opt/microsoft/powershell \
+            /opt/pipx \
+            /usr/lib/mono \
+            /usr/local/julia* \
+            /usr/local/lib/android \
+            /usr/local/share/chromium \
+            /usr/local/share/powershell \
+            /usr/share/dotnet
+          df -h /
       - uses: hendrikmuhs/ccache-action@faf867a11c028c0b483fb2ae72b6fc8f7d842714
         name: Xcode Compile Cache
         with:
@@ -129,6 +146,10 @@ jobs:
           melos-version: "3.0.1"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
+      - name: Clean up previous build artifacts
+        run: |
+          rm -rf build
+          rm -rf .dart_tool
       - name: "Build Application"
         working-directory: tests
         run: |
