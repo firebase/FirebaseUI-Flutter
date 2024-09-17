@@ -69,6 +69,16 @@ scripts:
       dirExists:
         - test
 
+  test:build:web:
+    run: |
+      melos exec -c 1 --fail-fast -- \
+        "cd example && flutter build web"
+    description: |
+      Build all example apps for web platform
+    packageFilters:
+      dirExists:
+        - example
+
   test:e2e:
     working-directory: tests
     run: flutter test integration_test/firebase_ui_test.dart -r github
@@ -148,3 +158,5 @@ scripts:
 
   emulator:start:
     run: firebase emulators:start --only firestore,auth,functions,storage,database --import=./emulators-data --export-on-exit=./emulators-data
+  update-dependencies:
+    run: dart scripts/update_dependencies.dart
