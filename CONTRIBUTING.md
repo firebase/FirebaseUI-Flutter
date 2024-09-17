@@ -145,6 +145,12 @@ Once the Firebase Emulator is up and running, execute the following Melos comman
 melos test:e2e
 ```
 
+If multiple devices are connected, you need to specify the target device by running the following command:
+
+```bash
+melos test:e2e -- <device-id>
+```
+
 Before submitting your PR, please provide evidence of running the E2E tests on macOS, Android, and iOS by sharing terminal output or screenshots. This demonstrates that the few E2E tests skipped in CI run successfully locally, which will enhance the review process for your PR.
 
 
