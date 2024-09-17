@@ -45,7 +45,7 @@ class App extends StatelessWidget {
 
 Once opened, it triggers a verification email to be sent and will wait for a dynamic link to be received by the app (on supported platforms).
 
-Note: `EmailVerifiedAction` does not poll the verification state in realtime. Is only fired after the user has verified their email and the application has resumed. This represents a typical user flow (leave the app and check email). In development, it's necessary to suspend and resume the app for `EmailVerifiedAction` to be called.
+Note: `EmailVerifiedAction` does not poll the verification state in realtime. Is only fired after the user has verified their email and the application has resumed. This represents a typical user flow (leave the app and check email). In development (i.e. iOS simulator), it is necessary to suspend and resume the app for `EmailVerifiedAction` to be called (e.g. by minimising app and reopening in app switcher).
 
 ## Using `EmailVerificationController`
 
