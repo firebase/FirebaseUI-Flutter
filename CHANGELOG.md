@@ -3,6 +3,74 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-09-30
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v1.16.0`](#firebase_ui_auth---v1160)
+ - [`firebase_ui_database` - `v1.5.0`](#firebase_ui_database---v150)
+ - [`firebase_ui_firestore` - `v1.7.0`](#firebase_ui_firestore---v170)
+ - [`firebase_ui_localizations` - `v1.13.0`](#firebase_ui_localizations---v1130)
+ - [`firebase_ui_oauth` - `v1.6.0`](#firebase_ui_oauth---v160)
+ - [`firebase_ui_oauth_apple` - `v1.3.0`](#firebase_ui_oauth_apple---v130)
+ - [`firebase_ui_oauth_facebook` - `v1.3.0`](#firebase_ui_oauth_facebook---v130)
+ - [`firebase_ui_oauth_google` - `v1.4.0`](#firebase_ui_oauth_google---v140)
+ - [`firebase_ui_oauth_twitter` - `v1.3.0`](#firebase_ui_oauth_twitter---v130)
+ - [`firebase_ui_storage` - `v2.1.0`](#firebase_ui_storage---v210)
+
+---
+
+#### `firebase_ui_auth` - `v1.16.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_database` - `v1.5.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+ - **FEAT**(database,firestore): updated default loading indicator to be platform adaptive ([#399](https://github.com/firebase/FirebaseUI-Flutter/issues/399)). ([c034d56a](https://github.com/firebase/FirebaseUI-Flutter/commit/c034d56aac9b6f5be7bba5a70c549ffb89b8f4e4))
+
+#### `firebase_ui_firestore` - `v1.7.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+ - **FEAT**(database,firestore): updated default loading indicator to be platform adaptive ([#399](https://github.com/firebase/FirebaseUI-Flutter/issues/399)). ([c034d56a](https://github.com/firebase/FirebaseUI-Flutter/commit/c034d56aac9b6f5be7bba5a70c549ffb89b8f4e4))
+
+#### `firebase_ui_localizations` - `v1.13.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_oauth` - `v1.6.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_oauth_apple` - `v1.3.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_oauth_facebook` - `v1.3.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_oauth_google` - `v1.4.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_oauth_twitter` - `v1.3.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+#### `firebase_ui_storage` - `v2.1.0`
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+
 ## 2024-06-12
 
 ### Changes

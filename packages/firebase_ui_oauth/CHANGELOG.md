@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
 ## 1.5.3
 
  - Update a dependency to the latest release.
