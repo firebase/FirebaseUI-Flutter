@@ -32,3 +32,12 @@ jobs:
           labels: 'blocked: customer-response'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  label-new-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add 'Needs Attention' label to new issue
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: 'Needs Attention'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
