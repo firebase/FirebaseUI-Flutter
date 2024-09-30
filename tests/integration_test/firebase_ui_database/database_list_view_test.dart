@@ -61,25 +61,31 @@ void main() {
           defaultTargetPlatform == TargetPlatform.macOS,
     );
 
-    testWidgets('Allows specifying custom loading handler', (tester) async {
-      final ref = rtdb.ref(_kTestPath);
+    testWidgets(
+      'Allows specifying custom loading handler',
+      (tester) async {
+        final ref = rtdb.ref(_kTestPath);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: FirebaseDatabaseListView(
-              query: ref,
-              loadingBuilder: (context) => const Text('loading...'),
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: FirebaseDatabaseListView(
+                query: ref,
+                loadingBuilder: (context) => const Text('loading...'),
+                itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.text('loading...'), findsOneWidget);
-      expect(find.byType(CircularProgressIndicator), findsNothing);
-      expect(find.byType(ListView), findsNothing);
-    });
+        expect(find.text('loading...'), findsOneWidget);
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+        expect(find.byType(ListView), findsNothing);
+      },
+      skip: isCI &&
+          (defaultTargetPlatform == TargetPlatform.macOS ||
+              defaultTargetPlatform == TargetPlatform.iOS),
+    );
 
     testWidgets(
       'By default, shows a progress indicator when loading',
@@ -100,35 +106,44 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.byType(ListView), findsNothing);
       },
+      skip: isCI &&
+          (defaultTargetPlatform == TargetPlatform.macOS ||
+              defaultTargetPlatform == TargetPlatform.iOS),
     );
 
-    testWidgets('By default, ignore errors', (tester) async {
-      final builderSpy = ListViewBuilderSpy();
-      final ref = rtdb.ref(_kTestPath);
+    testWidgets(
+      'By default, ignore errors',
+      (tester) async {
+        final builderSpy = ListViewBuilderSpy();
+        final ref = rtdb.ref(_kTestPath);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: FirebaseDatabaseListView(
-              query: ref,
-              cacheExtent: 0,
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: FirebaseDatabaseListView(
+                query: ref,
+                cacheExtent: 0,
+                itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      verifyZeroInteractions(builderSpy);
+        verifyZeroInteractions(builderSpy);
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(find.byType(ListView), findsNothing);
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+        expect(find.byType(ListView), findsNothing);
 
-      await ref.onValue.first.then((value) {}, onError: (_) {});
+        await ref.onValue.first.then((value) {}, onError: (_) {});
 
-      await tester.pump();
+        await tester.pump();
 
-      expect(find.byType(ListView), findsOneWidget);
-    });
+        expect(find.byType(ListView), findsOneWidget);
+      },
+      skip: isCI &&
+          (defaultTargetPlatform == TargetPlatform.macOS ||
+              defaultTargetPlatform == TargetPlatform.iOS),
+    );
 
     testWidgets(
       'When reaching the end of the list, loads more items',
@@ -207,6 +222,10 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
+      skip: isCI &&
+          (defaultTargetPlatform == TargetPlatform.macOS ||
+              defaultTargetPlatform == TargetPlatform.android ||
+              defaultTargetPlatform == TargetPlatform.iOS),
     );
 
     testWidgets(
@@ -257,6 +276,7 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
+      skip: isCI && (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.iOS),
     );
   });
 }

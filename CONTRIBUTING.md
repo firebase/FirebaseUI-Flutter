@@ -128,6 +128,32 @@ guide. For example, for a fix to the `firebase_ui_auth` plugin:
 Plugins tests are run automatically on contributions using GitHub Actions. Depending on
 your code contributions, various tests will be run against your updated code automatically.
 
+### End-to-end (e2e) tests
+
+E2e tests are those which directly communicate with Firebase, whose results cannot be mocked. 
+These tests require the Firebase Emulator.
+
+To start the Firebase Emulator, run this command:
+
+```bash
+firebase emulator:start
+```
+
+Once the Firebase Emulator is up and running, execute the following Melos command from the terminal:
+
+```bash
+melos test:e2e
+```
+
+If multiple devices are connected, you need to specify the target device by running the following command:
+
+```bash
+melos test:e2e -- <device-id>
+```
+
+Before submitting your PR, please provide evidence of running the E2E tests on macOS, Android, and iOS by sharing terminal output or screenshots. This demonstrates that the few E2E tests skipped in CI run successfully locally, which will enhance the review process for your PR.
+
+
 Once you've gotten an LGTM from a project maintainer and once your PR has received
 the green light from all our automated testing, wait for one the package maintainers
 to merge the pull request.
