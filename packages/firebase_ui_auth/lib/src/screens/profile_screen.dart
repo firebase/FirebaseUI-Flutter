@@ -387,7 +387,7 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.yellow,
+              color: Colors.yellow.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
