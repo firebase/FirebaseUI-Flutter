@@ -741,6 +741,12 @@ class ProfileScreen extends MultiProviderScreen {
   /// {@macro ui.auth.widgets.delete_account_button.show_delete_confirmation_dialog}
   final bool showDeleteConfirmationDialog;
 
+  /// Indicates whether the username field should be shown.
+  final bool showUsernameField;
+
+  /// Indicates whether the user avatar should be shown.
+  final bool showAvatar;
+
   const ProfileScreen({
     super.key,
     super.auth,
@@ -757,6 +763,8 @@ class ProfileScreen extends MultiProviderScreen {
     this.showMFATile = false,
     this.showUnlinkConfirmationDialog = false,
     this.showDeleteConfirmationDialog = false,
+    this.showUsernameField = true,
+    this.showAvatar = true,
   });
 
   Future<bool> _reauthenticate(BuildContext context) {
@@ -821,8 +829,9 @@ class ProfileScreen extends MultiProviderScreen {
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        avatarWidget,
-        Align(child: EditableUserDisplayName(auth: auth)),
+        if (showAvatar) avatarWidget,
+        if (showUsernameField)
+          Align(child: EditableUserDisplayName(auth: auth)),
         if (!user.emailVerified) ...[
           RebuildScope(
             builder: (context) {
