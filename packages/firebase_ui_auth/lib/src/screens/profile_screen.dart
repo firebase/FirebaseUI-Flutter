@@ -354,7 +354,7 @@ class _EmailVerificationBadge extends StatefulWidget {
 }
 
 class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
-  late final service;
+  late final EmailVerificationController service;
   late final VoidCallback listener;
 
   @override
