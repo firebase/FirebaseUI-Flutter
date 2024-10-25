@@ -71,7 +71,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get enableMoreSignInMethods => "その他のサインイン方法を有効にします";
 
   @override
-  String get enterSMSCodeText => "SMSコードを入力";
+  String get enterSMSCodeText => "SMS コードを入力";
 
   @override
   String get findProviderForEmailTitleText => "メールアドレスを入力して続行";
@@ -216,7 +216,7 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get smsAutoresolutionFailedError =>
-      "SMS コードを自動で解決できませんでした。コードを手動で入力してください";
+      "SMSコードを自動で解決できませんでした。コードを手動で入力してください";
 
   @override
   String get southInitialLabel => "S";
