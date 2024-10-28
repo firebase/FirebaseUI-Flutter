@@ -1,3 +1,48 @@
+## 2.1.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+## 2.0.5
+
+ - Update a dependency to the latest release.
+
+## 2.0.4
+
+ - Update a dependency to the latest release.
+
+## 2.0.3
+
+ - Update a dependency to the latest release.
+
+## 2.0.2
+
+ - Update a dependency to the latest release.
+
+## 2.0.1
+
+ - Update a dependency to the latest release.
+
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**(ui_storage): upgrade uuid dependency to ^4.0.0 ([#188](https://github.com/firebase/FirebaseUI-Flutter/issues/188)). ([e85c5166](https://github.com/firebase/FirebaseUI-Flutter/commit/e85c516697c850544b280e48e62dca788a4818ae))
+
+    `UuidFileUploadNamingPolicy` and respective factory constructor `FileUploadNamingPolicy.uuid` now accept `V4Options?`, instead of `Map<String, dynamic>?`.
+    
+    Here's an example migration:
+    
+    ```diff
+    final config = FirebaseUIStorageConfiguration(
+      storage: storage,
+    -  namingPolicy: FileUploadNamingPolicy.uuid({ 'rng': CryptoRNG() }),
+    +  namingPolicy: FileUploadNamingPolicy.uuid(V4Options(null, CryptoRNG())),
+    );
+    
+    await FirebaseUIStorage.configure(config);
+    ```
+
+
 ## 1.0.4
 
  - Update a dependency to the latest release.

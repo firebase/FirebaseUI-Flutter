@@ -1,3 +1,35 @@
+## 1.4.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+## 1.3.3
+
+ - Update a dependency to the latest release.
+
+## 1.3.2
+
+ - Update a dependency to the latest release.
+
+## 1.3.1
+
+ - Update a dependency to the latest release.
+
+## 1.3.0
+
+ - **FEAT**(ui_auth): use google_sign_in on macOS ([#255](https://github.com/firebase/FirebaseUI-Flutter/issues/255)). ([72571a0d](https://github.com/firebase/FirebaseUI-Flutter/commit/72571a0dd20181cabfc1f63d52e903e754399496))
+
+## 1.2.17
+
+ - Update a dependency to the latest release.
+
+## 1.2.16
+
+ - Update a dependency to the latest release.
+
+## 1.2.15
+
+ - Update a dependency to the latest release.
+
 ## 1.2.14
 
  - Update a dependency to the latest release.

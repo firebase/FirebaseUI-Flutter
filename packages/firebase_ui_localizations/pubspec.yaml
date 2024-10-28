@@ -1,6 +1,6 @@
 name: firebase_ui_localizations
 description: Localization package for firebase_ui_auth, firebase_ui_firestore and firebase_ui_database
-version: 1.8.0
+version: 1.13.0
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_localizations
 
 false_secrets:
@@ -15,12 +15,12 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  path: ^1.8.2
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -35,7 +35,58 @@ Now all pre-built screens that support multiple providers (such as `RegisterScre
 
 The configuration requires the `clientId` property (which can be found in the Firebase Console) to be set for seamless cross-platform support.
 
+For iOS and macOS, `clientId` can be found in the `GoogleService-Info.plist` file available in the Firebase console under Firebase project settings.
+
+For example, if your `GoogleService-Info.plist` looks like this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CLIENT_ID</key>
+  <string>your-client-id.apps.googleusercontent.com</string>
+  <!-- more keys -->
+</dict>
+```
+
+you should set `clientId` to `your-client-id.apps.googleusercontent.com`:
+
+```dart
+GoogleProvider(clientId: 'your-client-id.apps.googleusercontent.com'),
+```
+
+Additionally, you need to add the following to your `Info.plist` file:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.googleusercontent.apps.your-client-id</string>
+    </array>
+  </dict>
+</array>
+```
+
+For Linux and Windows, `clientId` should be set to a web client id:
+
 ![Google app client ID](../images/ui-google-provider-client-id.png)
+
+```dart
+const iOSClientId = 'your-client-id.apps.googleusercontent.com';
+const webClientId = 'your-web-client-id.apps.googleusercontent.com';
+
+String get googleClientId {
+  return switch (defaultTargetPlatform) {
+    TargetPlatform.iOS || TargetPlatform.macOS => iOSClientId,
+    _ => webClientId,
+  }
+}
+```
 
 See [Custom screens section](#custom-screens) to learn how to use a button on your custom screen.
 

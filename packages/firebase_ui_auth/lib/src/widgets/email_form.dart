@@ -277,13 +277,14 @@ class _SignInFormContentState extends State<_SignInFormContent> {
             onPressed: () {
               final navAction =
                   FirebaseUIAction.ofType<ForgotPasswordAction>(context);
+              final email = widget.email ?? emailCtrl.text;
 
               if (navAction != null) {
-                navAction.callback(context, emailCtrl.text);
+                navAction.callback(context, email);
               } else {
                 showForgotPasswordScreen(
                   context: context,
-                  email: emailCtrl.text,
+                  email: email,
                   auth: widget.auth,
                 );
               }

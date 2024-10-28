@@ -20,12 +20,12 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.7
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - name: "Run Analyze"
@@ -34,12 +34,12 @@ jobs:
   pub_dry_run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.7
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - name: "Pub Check"
@@ -50,12 +50,12 @@ jobs:
   pub_get_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.7
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - name: "flutter pub get"
@@ -64,14 +64,15 @@ jobs:
             "flutter pub get"
 
   format:
-    runs-on: ubuntu-latest
+    # switch back to ubuntu-latest when swiftformat is working again
+    runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.7
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@v2
+      - uses: bluefireteam/melos-action@v3
         with:
           melos-version: "3.0.1"
       - uses: Homebrew/actions/setup-homebrew@master
@@ -88,26 +89,26 @@ jobs:
       - name: "Dart, Java and Objective-C "
         run: |
           flutter pub global run flutter_plugin_tools format
-          ./.github/workflows/scripts/validate-formatting.sh
+          ./scripts/validate-formatting.sh
       - name: "Swift"
         if: ${{ success() || failure() }}
         run: |
           swiftformat .
-          ./.github/workflows/scripts/validate-formatting.sh
+          ./scripts/validate-formatting.sh
 
   check-files-license-headers:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4.1.1
-      - uses: actions/setup-go@v4
+      - uses: actions/checkout@v4.1.7
+      - uses: actions/setup-go@v5
         with:
           go-version: "^1.13.1"
       - run: go install github.com/google/addlicense@latest
       - name: Install Dart
         uses: dart-lang/setup-dart@v1
       - name: Install Melos
-        uses: bluefireteam/melos-action@v2
+        uses: bluefireteam/melos-action@v3
         with:
           run-bootstrap: false
           melos-version: "3.0.1"

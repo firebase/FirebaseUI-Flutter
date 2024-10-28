@@ -1,6 +1,6 @@
 name: firebase_ui_firestore
 description: Pre-built widgets and utilites that make it easy to integrate Firebase Firestore into your Flutter app.
-version: 1.5.14
+version: 1.7.0
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_firestore
 
 environment:
@@ -8,16 +8,17 @@ environment:
   flutter: ">=3.3.0"
 
 dependencies:
-  cloud_firestore: ^4.11.0
-  firebase_ui_localizations: ^1.8.0
+  cloud_firestore: ^5.4.3
+  firebase_ui_localizations: ^1.13.0
+  firebase_ui_shared: ^1.4.1
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  mockito: ^5.3.0
+  flutter_lints: ^3.0.1
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

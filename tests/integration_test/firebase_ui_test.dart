@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import './firebase_ui_auth/firebase_ui_auth_e2e.dart' as firebase_ui_auth_e2e;
+
 import './firebase_ui_firestore/firebase_ui_firestore_e2e.dart'
     as firebase_ui_firestore_e2e;
 import './firebase_ui_oauth_apple/firebase_ui_oauth_apple_e2e.dart'
@@ -16,14 +17,12 @@ import './firebase_ui_oauth_google/firebase_ui_oauth_google_e2e.dart'
     as firebase_ui_oauth_google_e2e;
 import './firebase_ui_oauth_twitter/firebase_ui_oauth_twitter_e2e.dart'
     as firebase_ui_oauth_twitter_e2e;
-
+import './firebase_ui_database/firebase_ui_database.dart' as firebase_ui_database;
 import 'utils.dart';
 
 void main() {
+  setUpTests();
   group('Firebase UI', () {
-    setUpAll(prepare);
-    tearDown(authCleanup);
-
     firebase_ui_auth_e2e.main();
 
     if (defaultTargetPlatform != TargetPlatform.macOS) {
@@ -33,7 +32,7 @@ void main() {
       firebase_ui_oauth_twitter_e2e.main();
       // TODO: add desktop tests
     }
-
+    firebase_ui_database.main();
     firebase_ui_firestore_e2e.main();
   });
 }

@@ -2,7 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
@@ -35,15 +34,13 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
   /// {@macro ui.auth.flows.email_link_flow}
   EmailLinkFlow({
     /// {@macro ui.auth.auth_controller.auth}
-    fba.FirebaseAuth? auth,
+    super.auth,
 
     /// {@macro ui.auth.auth_flow.ctor.provider}
-    required EmailLinkAuthProvider provider,
+    required super.provider,
   }) : super(
           action: AuthAction.signIn,
-          auth: auth,
           initialState: const Uninitialized(),
-          provider: provider,
         );
 
   @override

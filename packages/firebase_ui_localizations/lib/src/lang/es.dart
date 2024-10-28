@@ -1,4 +1,4 @@
-// Copyright 2023, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2024, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -332,4 +332,17 @@ class EsLocalizations extends FirebaseUILocalizationLabels {
   @override
   String get weakPasswordErrorText =>
       "Password should be at least 6 characters";
+
+  @override
+  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+
+  @override
+  String get confirmDeleteAccountAlertMessage =>
+      "Are you sure you want to delete your account?";
+
+  @override
+  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+
+  @override
+  String get sendVerificationEmailLabel => "Send verification email";
 }

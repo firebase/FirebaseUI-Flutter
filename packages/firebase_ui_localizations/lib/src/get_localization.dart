@@ -4,35 +4,14 @@
 import 'dart:ui';
 
 import "./default_localizations.dart";
-import 'lang/ar.dart';
-import 'lang/de.dart';
-import 'lang/en.dart';
-import 'lang/es.dart';
-import 'lang/es_419.dart';
-import 'lang/fr.dart';
-import 'lang/he.dart';
-import 'lang/hi.dart';
-import 'lang/hu.dart';
-import 'lang/id.dart';
-import 'lang/it.dart';
-import 'lang/ja.dart';
-import 'lang/ko.dart';
-import 'lang/nl.dart';
-import 'lang/pl.dart';
-import 'lang/pt.dart';
-import 'lang/ro.dart';
-import 'lang/ru.dart';
-import 'lang/th.dart';
-import 'lang/tr.dart';
-import 'lang/uk.dart';
-import 'lang/zh.dart';
-import 'lang/zh_tw.dart';
+import 'all_localizations.dart';
 
 final Set<String> kSupportedLanguages = {
   'ar', // Arabic
   'de', // German
   'en', // English
   'es', // Spanish Castilian
+  'fi', // Finnish
   'fr', // French
   'he', // Hebrew
   'hi', // Hindi
@@ -42,6 +21,7 @@ final Set<String> kSupportedLanguages = {
   'ja', // Japanese
   'ko', // Korean
   'nl', // Dutch Flemish
+  'nb', // Norwegian Bokmål
   'pl', // Polish
   'pt', // Portuguese
   'ro', // Romanian
@@ -78,6 +58,9 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const EsLocalizations();
     case 'fr':
       return const FrLocalizations();
+    case 'fi':
+      return const FiLocalizations();
+
     case 'he':
       return const HeLocalizations();
     case 'hi':
@@ -92,6 +75,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const JaLocalizations();
     case 'ko':
       return const KoLocalizations();
+    case 'nb':
+      return const NbLocalizations();
     case 'nl':
       return const NlLocalizations();
     case 'pl':

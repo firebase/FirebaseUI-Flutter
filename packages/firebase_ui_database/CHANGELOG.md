@@ -1,3 +1,32 @@
+## 1.5.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+ - **FEAT**(database,firestore): updated default loading indicator to be platform adaptive ([#399](https://github.com/firebase/FirebaseUI-Flutter/issues/399)). ([c034d56a](https://github.com/firebase/FirebaseUI-Flutter/commit/c034d56aac9b6f5be7bba5a70c549ffb89b8f4e4))
+
+## 1.4.4
+
+ - Update a dependency to the latest release.
+
+## 1.4.3
+
+ - Update a dependency to the latest release.
+
+## 1.4.2
+
+ - **FIX**:(firebase_ui_database): Perform list operations in correct order ([213](https://github.com/firebase/FirebaseUI-Flutter/pull/213))
+
+## 1.4.1
+
+ - Update a dependency to the latest release.
+
+## 1.4.0
+
+ - **FEAT**(firebase_ui_database): Allow reversing the database query ([#193](https://github.com/firebase/FirebaseUI-Flutter/issues/193)). ([0588812b](https://github.com/firebase/FirebaseUI-Flutter/commit/0588812beac550afcf8dba2cabde28f258a90ed1))
+
+## 1.3.13
+
+ - Update a dependency to the latest release.
+
 ## 1.3.12
 
  - Update a dependency to the latest release.

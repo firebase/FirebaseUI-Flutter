@@ -31,23 +31,4 @@ void main() {
       expect(find.text('Cancel'), findsOneWidget);
     });
   });
-
-  group('$DifferentMethodSignInDialog', () {
-    testWidgets('has capitalized Cancel label', (tester) async {
-      await tester.pumpWidget(
-        TestMaterialApp(
-          child: DifferentMethodSignInDialog(
-            auth: auth,
-            availableProviders: const ['email', 'phone'],
-            providers: [
-              EmailAuthProvider(),
-              PhoneAuthProvider(),
-            ],
-          ),
-        ),
-      );
-
-      expect(find.text('Cancel'), findsOneWidget);
-    });
-  });
 }

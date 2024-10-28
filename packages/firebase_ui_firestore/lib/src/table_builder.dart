@@ -521,8 +521,7 @@ class _EditModalButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = FirebaseUILocalizations.labelsOf(context);
 
-    return ButtonBar(
-      mainAxisSize: MainAxisSize.min,
+    return OverflowBar(
       alignment: MainAxisAlignment.end,
       children: [
         TextButton(
@@ -871,7 +870,7 @@ class _Source extends DataTableSource {
 
   @override
   int get rowCount {
-    if (_aggregateSnapshot?.count != null) return _aggregateSnapshot!.count;
+    if (_aggregateSnapshot?.count != null) return _aggregateSnapshot!.count!;
     // Emitting an extra item during load or before reaching the end
     // allows the DataTable to show a spinner during load & let the user
     // navigate to next page

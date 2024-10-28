@@ -120,20 +120,20 @@ class UniversalButton extends PlatformWidget {
     ButtonStyle? style;
 
     if (materialColor != null) {
-      MaterialStateColor? foregroundColor;
-      MaterialStateColor? backgroundColor;
+      WidgetStateColor? foregroundColor;
+      WidgetStateColor? backgroundColor;
 
       if (variant == ButtonVariant.text) {
-        foregroundColor = MaterialStateColor.resolveWith((_) => materialColor!);
+        foregroundColor = WidgetStateColor.resolveWith((_) => materialColor!);
       } else {
-        foregroundColor = MaterialStateColor.resolveWith((_) => contentColor!);
-        backgroundColor = MaterialStateColor.resolveWith((_) => materialColor!);
+        foregroundColor = WidgetStateColor.resolveWith((_) => contentColor!);
+        backgroundColor = WidgetStateColor.resolveWith((_) => materialColor!);
       }
 
       style = ButtonStyle(
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
-        overlayColor: MaterialStateColor.resolveWith(
+        overlayColor: WidgetStateColor.resolveWith(
           (states) => materialColor!.withAlpha(20),
         ),
       );

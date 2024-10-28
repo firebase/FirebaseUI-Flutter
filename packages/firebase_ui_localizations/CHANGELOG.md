@@ -1,3 +1,36 @@
+## 1.13.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
+## 1.12.0
+
+ - **FIX**(ui_localizations): Add missing 'nb' language code to kSupportedLanguages ([#350](https://github.com/firebase/FirebaseUI-Flutter/issues/350)). ([3fbfded0](https://github.com/firebase/FirebaseUI-Flutter/commit/3fbfded079b8dbe54b15d805ed5be5836e0d1ff7))
+ - **FEAT**(firebase_ui_localizations): Further German translations for auth labels that were still in English ([#319](https://github.com/firebase/FirebaseUI-Flutter/issues/319)). ([2f96686c](https://github.com/firebase/FirebaseUI-Flutter/commit/2f96686cb5dcbba2ad1cd02354ccc3b95af3ca5f))
+ - **FEAT**(firebase_ui_localizations): Add Finnish language localization labels ([#332](https://github.com/firebase/FirebaseUI-Flutter/issues/332)). ([848b66cf](https://github.com/firebase/FirebaseUI-Flutter/commit/848b66cfc6bd7a84d57e94d0c6bcab8713ab9313))
+
+## 1.11.0
+
+ - **FIX**(ui_localizations): In the Japanese file, change "login" to "sign and improve translations ([#304](https://github.com/firebase/FirebaseUI-Flutter/issues/304)). ([ae01e9f1](https://github.com/firebase/FirebaseUI-Flutter/commit/ae01e9f13dbd4d5b357c1124be39f9cc44ccb9ee))
+ - **FIX**(firebase_ui_localizations): expose all Firebase UI localizations for overriding ([#309](https://github.com/firebase/FirebaseUI-Flutter/issues/309)). ([e4567478](https://github.com/firebase/FirebaseUI-Flutter/commit/e4567478205f2b88b54aa21af6429fb1c7c81564))
+ - **FEAT**(firebase_ui_localizations): support for `sendVerificationEmailLabel()` label ([#280](https://github.com/firebase/FirebaseUI-Flutter/issues/280)). ([95be915d](https://github.com/firebase/FirebaseUI-Flutter/commit/95be915d162c6fb5dfdc6a8ad3298c2002d38dbf))
+
+## 1.10.2
+
+ - **FIX**(ui_localizations): Add missing generated translation file. ([ca15feb6](https://github.com/firebase/FirebaseUI-Flutter/commit/ca15feb69b0d1699fc21f831ddbb1e8f87795e9b))
+ - **FIX**: Arabic translation of Sign In With Apple button label. ([085dc6de](https://github.com/firebase/FirebaseUI-Flutter/commit/085dc6de7090d4eb85f8d3953b5e9c037e35541a))
+
+## 1.10.1
+
+ - **FIX**: Update translation strings in RO for confirm account deletion ([#219](https://github.com/firebase/FirebaseUI-Flutter/issues/219)). ([704b34ea](https://github.com/firebase/FirebaseUI-Flutter/commit/704b34ea174ecf3a78357de0236156f4d17a6ba5))
+
+## 1.10.0
+
+ - **FEAT**(ui_localizations): Add Norwegian (NB) localization ([#191](https://github.com/firebase/FirebaseUI-Flutter/issues/191)). ([715ab1b8](https://github.com/firebase/FirebaseUI-Flutter/commit/715ab1b8ab7df536da50177e75d6d0632ecdf83c))
+
+## 1.9.0
+
+ - **FEAT**(ui_auth): confirm account deletion ([#187](https://github.com/firebase/FirebaseUI-Flutter/issues/187)). ([053a96ee](https://github.com/firebase/FirebaseUI-Flutter/commit/053a96eeedfc74c20ab3e73605dae42676b85a96))
+
 ## 1.8.0
 
  - **FEAT**(ui_localizations): Add romanian localization ([#174](https://github.com/firebase/FirebaseUI-Flutter/issues/174)). ([dc9c9cb2](https://github.com/firebase/FirebaseUI-Flutter/commit/dc9c9cb2698e3ab1d1774143b05d48eccde73dfb))

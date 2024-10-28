@@ -70,6 +70,7 @@ class FirebaseDatabaseQueryBuilder extends StatefulWidget {
     super.key,
     required this.query,
     required this.builder,
+    this.reverseQuery = false,
     this.pageSize = 10,
     this.child,
   }) : assert(pageSize > 1, 'Cannot have a pageSize lower than 1');
@@ -85,6 +86,9 @@ class FirebaseDatabaseQueryBuilder extends StatefulWidget {
   final int pageSize;
 
   final FirebaseQueryBuilderSnapshotBuilder builder;
+
+  /// Whether to start fetching from the end of the query.
+  final bool reverseQuery;
 
   /// A widget that will be passed to [builder] for optimizations purpose.
   ///
@@ -167,7 +171,12 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
         +
         1;
 
-    final query = widget.query.limitToFirst(expectedDocsCount);
+    final Query query;
+    if (widget.reverseQuery) {
+      query = widget.query.limitToLast(expectedDocsCount);
+    } else {
+      query = widget.query.limitToFirst(expectedDocsCount);
+    }
 
     _querySubscription = query.onValue.listen(
       (event) {
@@ -178,11 +187,18 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
             _snapshot = _snapshot.copyWith(isFetching: false);
           }
 
+          Iterable<DataSnapshot> docs = event.snapshot.children;
+          if (widget.reverseQuery) {
+            docs = docs.toList().reversed;
+          }
+
+          if (event.snapshot.children.length >= expectedDocsCount) {
+            docs = docs.take(expectedDocsCount - 1);
+          }
+
           _snapshot = _snapshot.copyWith(
             hasData: true,
-            docs: event.snapshot.children.length < expectedDocsCount
-                ? event.snapshot.children.toList()
-                : event.snapshot.children.take(expectedDocsCount - 1).toList(),
+            docs: docs.toList(),
             error: null,
             hasMore: event.snapshot.children.length == expectedDocsCount,
             stackTrace: null,
@@ -392,10 +408,11 @@ typedef FirebaseErrorBuilder = Widget Function(
 class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
   /// {@macro firebase_ui.firebase_database_list_view}
   FirebaseDatabaseListView({
-    Key? key,
-    required Query query,
+    super.key,
+    required super.query,
     required FirebaseItemBuilder itemBuilder,
-    int pageSize = 10,
+    super.reverseQuery,
+    super.pageSize,
     FirebaseLoadingBuilder? loadingBuilder,
     FirebaseErrorBuilder? errorBuilder,
     Axis scrollDirection = Axis.vertical,
@@ -418,13 +435,10 @@ class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          key: key,
-          query: query,
-          pageSize: pageSize,
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator());
+                  const Center(child: CircularProgressIndicator.adaptive());
             }
 
             if (snapshot.hasError && errorBuilder != null) {

@@ -58,6 +58,11 @@ class DeleteAccountButton extends StatefulWidget {
   /// {@macro ui.shared.widgets.button_variant}
   final ButtonVariant variant;
 
+  /// {@template ui.auth.widgets.delete_account_button.show_delete_confirmation_dialog}
+  /// If `true`, the user will be asked to confirm the account deletion.
+  /// {@endtemplate}
+  final bool showDeleteConfirmationDialog;
+
   /// {@macro ui.auth.widgets.delete_account_button}
   const DeleteAccountButton({
     super.key,
@@ -65,6 +70,7 @@ class DeleteAccountButton extends StatefulWidget {
     this.onSignInRequired,
     this.onDeleteFailed,
     this.variant = ButtonVariant.filled,
+    this.showDeleteConfirmationDialog = false,
   });
 
   @override
@@ -76,7 +82,32 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
   fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
   bool _isLoading = false;
 
+  void Function() pop<T>(BuildContext context, T result) =>
+      () => Navigator.of(context).pop(result);
+
   Future<void> _deleteAccount() async {
+    bool? confirmed = !widget.showDeleteConfirmationDialog;
+
+    if (!confirmed) {
+      final l = FirebaseUILocalizations.labelsOf(context);
+
+      confirmed = await showCupertinoDialog<bool?>(
+        context: context,
+        builder: (context) {
+          return UniversalAlert(
+            onConfirm: pop(context, true),
+            onCancel: pop(context, false),
+            title: l.confirmDeleteAccountAlertTitle,
+            confirmButtonText: l.confirmDeleteAccountButtonLabel,
+            cancelButtonText: l.cancelButtonLabel,
+            message: l.confirmDeleteAccountAlertMessage,
+          );
+        },
+      );
+    }
+
+    if (!(confirmed ?? false)) return;
+
     setState(() {
       _isLoading = true;
     });
