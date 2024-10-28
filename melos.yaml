@@ -69,9 +69,19 @@ scripts:
       dirExists:
         - test
 
+  test:build:web:
+    run: |
+      melos exec -c 1 --fail-fast -- \
+        "cd example && flutter build web"
+    description: |
+      Build all example apps for web platform
+    packageFilters:
+      dirExists:
+        - example
+
   test:e2e:
     working-directory: tests
-    run: flutter test integration_test/firebase_ui_test.dart -r github
+    run: cd tests && flutter test integration_test/firebase_ui_test.dart -r github -d 
 
   # Additional cleanup lifecycle script, executed when `melos clean` is run.
   postclean: >
