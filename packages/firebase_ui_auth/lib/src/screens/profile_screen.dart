@@ -195,11 +195,8 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
     });
   }
 
-  void Function() pop(bool value) {
-    return () {
-      Navigator.of(context).pop(value);
-    };
-  }
+  void Function() pop<T>(BuildContext context, T result) =>
+      () => Navigator.of(context).pop(result);
 
   Future<void> _unlinkProvider(BuildContext context, String providerId) async {
     setState(() {
@@ -216,8 +213,8 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
         context: context,
         builder: (context) {
           return UniversalAlert(
-            onConfirm: pop(true),
-            onCancel: pop(false),
+            onConfirm: pop(context, true),
+            onCancel: pop(context, false),
             title: l.ulinkProviderAlertTitle,
             confirmButtonText: l.confirmUnlinkButtonLabel,
             cancelButtonText: l.cancelButtonLabel,
@@ -387,7 +384,7 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.yellow,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
