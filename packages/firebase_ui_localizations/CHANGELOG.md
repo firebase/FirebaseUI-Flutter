@@ -1,3 +1,7 @@
+## 1.13.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
 ## 1.12.0
 
  - **FIX**(ui_localizations): Add missing 'nb' language code to kSupportedLanguages ([#350](https://github.com/firebase/FirebaseUI-Flutter/issues/350)). ([3fbfded0](https://github.com/firebase/FirebaseUI-Flutter/commit/3fbfded079b8dbe54b15d805ed5be5836e0d1ff7))

@@ -460,7 +460,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator());
+                  const Center(child: CircularProgressIndicator.adaptive());
             }
 
             if (snapshot.hasError && errorBuilder != null) {
@@ -570,7 +570,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator());
+                  const Center(child: CircularProgressIndicator.adaptive());
             }
 
             if (snapshot.hasError && errorBuilder != null) {

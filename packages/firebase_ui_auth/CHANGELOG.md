@@ -1,3 +1,7 @@
+## 1.16.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
 ## 1.15.0
 
  - **FIX**(ui_auth): fix confirmation dialog for delete account button ([#346](https://github.com/firebase/FirebaseUI-Flutter/issues/346)). ([4fd041d1](https://github.com/firebase/FirebaseUI-Flutter/commit/4fd041d12756084da6e4e3e7232c0dd35fc3593c))
