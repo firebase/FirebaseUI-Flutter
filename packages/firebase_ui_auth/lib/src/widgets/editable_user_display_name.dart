@@ -70,12 +70,13 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
         _isLoading = true;
       });
 
+      final previousDisplayName = displayName;
       await auth.currentUser?.updateDisplayName(ctrl.text);
       await auth.currentUser?.reload();
 
       FirebaseUIAction.ofType<DisplayNameChangedAction>(context)?.callback(
         context,
-        displayName,
+        previousDisplayName,
         ctrl.text,
       );
     } finally {
