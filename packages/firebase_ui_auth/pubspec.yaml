@@ -10,9 +10,9 @@ environment:
 
 dependencies:
   email_validator: ^2.1.17
-  firebase_auth: ^5.3.1
-  firebase_core: ^3.6.0
-  firebase_dynamic_links: ^6.0.8
+  firebase_auth: ^5.3.2
+  firebase_core: ^3.7.0
+  firebase_dynamic_links: ^6.0.9
   firebase_ui_localizations: ^1.13.0
   firebase_ui_oauth: ^1.6.0
   firebase_ui_shared: ^1.4.1
