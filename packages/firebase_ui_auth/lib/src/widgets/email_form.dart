@@ -100,6 +100,14 @@ class EmailForm extends StatelessWidget {
   /// A label that would be used for the "Sign in" button.
   final String? actionButtonLabelOverride;
 
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? emailTextEditingController;
+
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? passwordTextEditingController;
+
   /// An object that is being used to apply styling configuration to the email
   /// form.
   ///
@@ -140,6 +148,8 @@ class EmailForm extends StatelessWidget {
   const EmailForm({
     super.key,
     this.action,
+    this.emailTextEditingController,
+    this.passwordTextEditingController,
     this.auth,
     this.provider,
     this.onSubmit,
@@ -160,6 +170,8 @@ class EmailForm extends StatelessWidget {
       actionButtonLabelOverride: actionButtonLabelOverride,
       style: style,
       showPasswordVisibilityToggle: showPasswordVisibilityToggle,
+      emailTextEditingController: emailTextEditingController,
+      passwordTextEditingController: passwordTextEditingController,
     );
 
     return AuthFlowBuilder<EmailAuthController>(
@@ -186,6 +198,14 @@ class _SignInFormContent extends StatefulWidget {
 
   final EmailFormStyle? style;
 
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? emailTextEditingController;
+
+  /// {@macro ui.auth.screens.sign_in_screen}
+  /// Email text editing controller
+  final TextEditingController? passwordTextEditingController;
+
   const _SignInFormContent({
     this.auth,
     this.onSubmit,
@@ -195,6 +215,8 @@ class _SignInFormContent extends StatefulWidget {
     this.actionButtonLabelOverride,
     this.style,
     this.showPasswordVisibilityToggle = false,
+    this.emailTextEditingController,
+    this.passwordTextEditingController,
   });
 
   @override
@@ -202,14 +224,22 @@ class _SignInFormContent extends StatefulWidget {
 }
 
 class _SignInFormContentState extends State<_SignInFormContent> {
-  final emailCtrl = TextEditingController();
-  final passwordCtrl = TextEditingController();
+  late final TextEditingController emailCtrl;
+  late final TextEditingController passwordCtrl;
   final confirmPasswordCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    emailCtrl = widget.emailTextEditingController ?? TextEditingController();
+    passwordCtrl =
+        widget.passwordTextEditingController ?? TextEditingController();
+    super.initState();
+  }
 
   String _chooseButtonLabel() {
     final ctrl = AuthController.ofType<EmailAuthController>(context);
