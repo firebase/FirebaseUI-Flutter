@@ -351,11 +351,27 @@ class _EmailVerificationBadge extends StatefulWidget {
 }
 
 class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
-  late final service = EmailVerificationController(widget.auth)
-    ..addListener(() {
-      setState(() {});
-    })
-    ..reload();
+  late final EmailVerificationController service;
+  late final VoidCallback listener;
+
+  @override
+  void initState() {
+    super.initState();
+    listener = () {
+      if (mounted) {
+        setState(() {});
+      }
+    };
+    service = EmailVerificationController(widget.auth)
+      ..addListener(listener)
+      ..reload();
+  }
+
+  @override
+  void dispose() {
+    service.removeListener(listener);
+    super.dispose();
+  }
 
   EmailVerificationState get state => service.state;
 
