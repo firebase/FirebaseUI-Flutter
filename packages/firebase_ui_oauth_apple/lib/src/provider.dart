@@ -56,7 +56,7 @@ class AppleProvider extends OAuthProvider {
   void mobileSignIn(AuthAction action) {
     authListener.onBeforeSignIn();
 
-    if (action == AuthAction.link) {
+    if (action == AuthAction.link || shouldUpgradeAnonymous) {
       auth.currentUser
           ?.linkWithProvider(firebaseAuthProvider)
           .then(_onLinked)
