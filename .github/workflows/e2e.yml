@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
         name: Install Node.js
         with:
@@ -90,7 +90,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
         name: Install Node.js
         with:
@@ -186,7 +186,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
         name: Install Node.js
         with:
@@ -250,7 +250,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb
       - uses: subosito/flutter-action@2783a3f08e1baf891508463f8c6653c258246225
         with:
           channel: 'stable'
