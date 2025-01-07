@@ -20,6 +20,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  flutter_svg: ^2.0.16
   meta: ^1.10.0
 
 dev_dependencies:
