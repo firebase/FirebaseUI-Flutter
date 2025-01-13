@@ -24,7 +24,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace "io.flutter.plugins.firebase.tests"
-    compileSdkVersion flutter.compileSdkVersion
+    // use "flutter.compileSdkVersion" and bump AGP once twitter_login has released v4.4.3: https://github.com/0maru/twitter_login/issues/139
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
