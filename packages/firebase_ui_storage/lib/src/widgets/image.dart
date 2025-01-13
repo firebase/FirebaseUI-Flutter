@@ -438,7 +438,13 @@ class _SolidColorLoadingStateVariantPlaceholder extends StatelessWidget {
       return color!;
     }
 
-    return Theme.of(context).colorScheme.surfaceTint.withOpacity(0.12);
+    final themeColor = Theme.of(context).colorScheme.surfaceTint;
+    return themeColor.withValues(
+      red: themeColor.r,
+      green: themeColor.g,
+      blue: themeColor.b,
+      alpha: (0.12 * 255),
+    );
   }
 
   @override
@@ -588,8 +594,20 @@ class __ShimmerLoadingStateVariantPlaceholderState
 
   @override
   Widget build(BuildContext context) {
-    final a = Theme.of(context).colorScheme.surfaceTint.withOpacity(0.12);
-    final b = Theme.of(context).colorScheme.surfaceTint.withOpacity(0.24);
+    final themeColor = Theme.of(context).colorScheme.surfaceTint;
+    final a = themeColor.withValues(
+      red: themeColor.r,
+      green: themeColor.g,
+      blue: themeColor.b,
+      alpha: (0.12 * 255),
+    );
+
+    final b = themeColor.withValues(
+      red: themeColor.r,
+      green: themeColor.g,
+      blue: themeColor.b,
+      alpha: (0.24 * 255),
+    );
 
     final (lighter, darker) = switch (Theme.of(context).brightness) {
       Brightness.light => (a, b),
