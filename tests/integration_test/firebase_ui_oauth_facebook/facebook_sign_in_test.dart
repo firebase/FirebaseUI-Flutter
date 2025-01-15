@@ -105,7 +105,7 @@ const _jwt =
 
 class MockAccessToken extends Mock implements AccessToken {
   @override
-  String get token => _jwt;
+  String get tokenString => _jwt;
 }
 
 class MockLoginResult extends Mock implements LoginResult {
@@ -118,8 +118,10 @@ class MockLoginResult extends Mock implements LoginResult {
 class MockFacebookAuth extends Mock implements FacebookAuth {
   @override
   Future<LoginResult> login({
-    List<String>? permissions = const ['email', 'public_profile'],
-    LoginBehavior? loginBehavior = LoginBehavior.dialogOnly,
+    List<String> permissions = const ['email', 'public_profile'],
+    LoginBehavior loginBehavior = LoginBehavior.dialogOnly,
+    LoginTracking loginTracking = LoginTracking.enabled,
+    String? nonce,
   }) async {
     return super.noSuchMethod(
       Invocation.method(#signIn, [], {
