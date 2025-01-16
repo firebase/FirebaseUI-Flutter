@@ -58,6 +58,12 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       reload();
