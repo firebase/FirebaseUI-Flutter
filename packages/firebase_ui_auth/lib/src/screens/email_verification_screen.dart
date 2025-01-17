@@ -146,19 +146,21 @@ class __EmailVerificationScreenContentState
   }
 
   void _sendEmailVerification(_) {
-    controller
-      ..addListener(() {
-        setState(() {});
+    controller.addListener(() {
+      setState(() {});
 
-        if (state == EmailVerificationState.verified) {
-          final action = FirebaseUIAction.ofType<EmailVerifiedAction>(context);
-          action?.callback();
-        }
-      })
-      ..sendVerificationEmail(
+      if (state == EmailVerificationState.verified) {
+        final action = FirebaseUIAction.ofType<EmailVerifiedAction>(context);
+        action?.callback();
+      }
+    });
+
+    if (state != EmailVerificationState.verified) {
+      controller.sendVerificationEmail(
         Theme.of(context).platform,
         widget.actionCodeSettings,
       );
+    }
   }
 
   EmailVerificationState get state => controller.state;
