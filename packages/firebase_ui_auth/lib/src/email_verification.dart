@@ -92,6 +92,9 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   /// Reloads firebase user and updates the [state].
   Future<void> reload() async {
     await user.reload();
+    if (_disposed) {
+      return;
+    }
 
     if (user.email == null) {
       value = EmailVerificationState.unresolved;
