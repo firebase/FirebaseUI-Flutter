@@ -33,7 +33,7 @@ jobs:
         name: Install Node.js
         with:
           node-version: "18"
-      - uses: actions/setup-java@b36c23c0d998641eff861008f374ee103c25ac73
+      - uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12
         with:
           distribution: "temurin"
           java-version: "17"
@@ -95,7 +95,7 @@ jobs:
         name: Install Node.js
         with:
           node-version: "18"
-      - uses: actions/setup-java@b36c23c0d998641eff861008f374ee103c25ac73
+      - uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12
         with:
           distribution: "temurin"
           java-version: "11"
@@ -191,7 +191,7 @@ jobs:
         name: Install Node.js
         with:
           node-version: "18"
-      - uses: actions/setup-java@b36c23c0d998641eff861008f374ee103c25ac73
+      - uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12
         with:
           distribution: "temurin"
           java-version: "11"
