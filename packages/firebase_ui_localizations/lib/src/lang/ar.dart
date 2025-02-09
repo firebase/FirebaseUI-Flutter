@@ -99,7 +99,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get goBackButtonLabel => "العودة";
 
   @override
-  String get invalidCountryCode => "مفتاح الدولة غبر صحيح";
+  String get invalidCountryCode => "مفتاح الدولة غير صحيح";
 
   @override
   String get isNotAValidEmailErrorText => "الرجاء إدخال بريد إلكتروني صالح";
@@ -196,11 +196,11 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get signInText => "تسجيل الدخول";
 
   @override
-  String get signInWithAppleButtonText => "تسجيل الدخول باستخدام Apple";
+  String get signInWithAppleButtonText => "تسجيل الدخول عبر Apple";
 
   @override
   String get signInWithEmailLinkSentText =>
-      "تم إرسال رابط مخصص للاستخدام مرة واحدة إلى عنوان بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط لتسجيل الدخول.";
+      "تم إرسال رابط مخصص للاستخدام مرة واحدة إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط لتسجيل الدخول.";
 
   @override
   String get signInWithEmailLinkViewTitleText =>
@@ -279,7 +279,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
       "تم إرسال بريد إلكتروني للتحقق من بريدك الإلكتروني إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من بريدك الإلكتروني.";
 
   @override
-  String get verificationFailedText => "تعذر التحقق من عنوان بريدك الإلكتروني.";
+  String get verificationFailedText => "تعذر التحقق من بريدك الإلكتروني.";
 
   @override
   String get resendVerificationEmailButtonLabel => "إعادة إرسال رابط التحقق";
@@ -302,7 +302,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get checkEmailHintText =>
-      "يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من عنوان بريدك الإلكتروني.";
+      "يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من بريدك الإلكتروني.";
 
   @override
   String get doneButtonLabel => "المتابعة";

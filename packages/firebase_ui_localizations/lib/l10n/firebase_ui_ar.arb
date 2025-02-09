@@ -145,7 +145,7 @@
     "description": "The hash code for this object.",
     "placeholders": {}
   },
-  "invalidCountryCode": "مفتاح الدولة غبر صحيح",
+  "invalidCountryCode": "مفتاح الدولة غير صحيح",
   "@invalidCountryCode": {
     "description": "Used as an error text when provide country code is invalid.",
     "placeholders": {}
@@ -309,12 +309,12 @@
     "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
     "placeholders": {}
   },
-  "signInWithAppleButtonText": "تسجيل الدخول باستخدام Apple",
+  "signInWithAppleButtonText": "تسجيل الدخول عبر Apple",
   "@signInWithAppleButtonText": {
     "description": "Used as a label of the OAuthProviderButton for Apple provider.",
     "placeholders": {}
   },
-  "signInWithEmailLinkSentText": "تم إرسال رابط مخصص للاستخدام مرة واحدة إلى عنوان بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط لتسجيل الدخول.",
+  "signInWithEmailLinkSentText": "تم إرسال رابط مخصص للاستخدام مرة واحدة إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط لتسجيل الدخول.",
   "@signInWithEmailLinkSentText": {
     "description": "Indicates that email with a sign in link was sent.",
     "placeholders": {}
@@ -439,7 +439,7 @@
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "تعذر التحقق من عنوان بريدك الإلكتروني.",
+  "verificationFailedText": "تعذر التحقق من بريدك الإلكتروني.",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
@@ -474,7 +474,7 @@
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من عنوان بريدك الإلكتروني.",
+  "checkEmailHintText": "يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من بريدك الإلكتروني.",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
