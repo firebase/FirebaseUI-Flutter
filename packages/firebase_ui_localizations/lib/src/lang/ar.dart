@@ -1,4 +1,4 @@
-// Copyright 2024, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -8,35 +8,35 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get accessDisabledErrorText =>
-      "تم إيقاف إذن الوصول إلى هذا الحساب مؤقتًا.";
+      "تم تعطيل الوصول إلى هذا الحساب مؤقتًا.";
 
   @override
-  String get arrayLabel => "مصفوفة";
+  String get arrayLabel => "list";
 
   @override
-  String get booleanLabel => "قيمة منطقية";
+  String get booleanLabel => "boolean";
 
   @override
   String get cancelLabel => "إلغاء";
 
   @override
-  String get chooseACountry => "اختيار بلد";
+  String get chooseACountry => "اختر دولة";
 
   @override
-  String get confirmPasswordDoesNotMatchErrorText =>
-      "كلمتا المرور غير متطابقتَين.";
+  String get confirmPasswordDoesNotMatchErrorText => "كلمة المرور غير متطابقة.";
 
   @override
   String get confirmPasswordInputLabel => "تأكيد كلمة المرور";
 
   @override
-  String get confirmPasswordIsRequiredErrorText => "تأكيد كلمة المرور";
+  String get confirmPasswordIsRequiredErrorText =>
+      "الرجاء إدخال تأكيد كلمة المرور.";
 
   @override
   String get continueText => "المتابعة";
 
   @override
-  String get countryCode => "الرمز";
+  String get countryCode => "مفتاح الدولة";
 
   @override
   String get credentialAlreadyInUseErrorText =>
@@ -50,24 +50,23 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
       "يمكنك استخدام إحدى الطرق التالية لتسجيل الدخول";
 
   @override
-  String get disable => "إيقاف";
+  String get disable => "إيقاف تفعيل";
 
   @override
   String get eastInitialLabel => "شرق";
 
   @override
-  String get emailInputLabel => "عنوان البريد الإلكتروني";
+  String get emailInputLabel => "البريد الإلكتروني";
 
   @override
-  String get emailIsRequiredErrorText => "يجب إدخال عنوان بريد إلكتروني.";
+  String get emailIsRequiredErrorText => "الرجاءإدخال البريد الإلكتروني.";
 
   @override
   String get emailLinkSignInButtonLabel =>
       "تسجيل الدخول باستخدام رابط مخصص للاستخدام مرة واحدة";
 
   @override
-  String get emailTakenErrorText =>
-      "هناك حساب يستخدم عنوان البريد الإلكتروني نفسه.";
+  String get emailTakenErrorText => "هناك حساب يستخدم البريد الإلكتروني نفسه.";
 
   @override
   String get enable => "تفعيل";
@@ -81,56 +80,56 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get findProviderForEmailTitleText =>
-      "إدخال عنوان البريد الإلكتروني للمتابعة";
+      "إدخال البريد الإلكتروني للمتابعة";
 
   @override
   String get forgotPasswordButtonLabel => "هل نسيت كلمة المرور؟";
 
   @override
   String get forgotPasswordHintText =>
-      "أدخِل عنوان بريدك الإلكتروني وسنرسل إليك رابطًا لإعادة ضبط كلمة المرور.";
+      "قم بإدخال البريد الإلكتروني لاستعادة كلمة المرور";
 
   @override
-  String get forgotPasswordViewTitle => "هل نسيت كلمة المرور؟";
+  String get forgotPasswordViewTitle => "إستعادة كلمة المرور";
 
   @override
-  String get geopointLabel => "نقطة جغرافية";
+  String get geopointLabel => "geoPoint";
 
   @override
-  String get goBackButtonLabel => "الرجوع";
+  String get goBackButtonLabel => "العودة";
 
   @override
-  String get invalidCountryCode => "رمز غير صحيح";
+  String get invalidCountryCode => "مفتاح الدولة غبر صحيح";
 
   @override
-  String get isNotAValidEmailErrorText => "يجب إدخال عنوان بريد إلكتروني صالح.";
+  String get isNotAValidEmailErrorText => "الرجاء إدخال بريد إلكتروني صالح";
 
   @override
   String get latitudeLabel => "خط العرض";
 
   @override
-  String get linkEmailButtonText => "التالي";
+  String get linkEmailButtonText => "المتابعة";
 
   @override
   String get longitudeLabel => "خط الطول";
 
   @override
-  String get mapLabel => "الخريطة";
+  String get mapLabel => "map";
 
   @override
   String get mfaTitle => "التحقق بخطوتين";
 
   @override
-  String get name => "الاسم";
+  String get name => "الإسم";
 
   @override
   String get northInitialLabel => "شمال";
 
   @override
-  String get nullLabel => "قيمة فارغة";
+  String get nullLabel => "null";
 
   @override
-  String get numberLabel => "رقم";
+  String get numberLabel => "number";
 
   @override
   String get off => "غير مفعَّل";
@@ -142,11 +141,11 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get passwordInputLabel => "كلمة المرور";
 
   @override
-  String get passwordIsRequiredErrorText => "كلمة المرور مطلوبة.";
+  String get passwordIsRequiredErrorText => "الرجاء إدخال كلمة المرور.";
 
   @override
   String get passwordResetEmailSentText =>
-      "أرسلنا إليك رسالة إلكترونية تتضمن رابطًا لإعادة ضبط كلمة المرور. يُرجى التحقق من بريدك الإلكتروني.";
+      "تم إرسال بريد إلكتروني لإستعادة كلمة المرور إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط لإستعادة كلمة المرور.";
 
   @override
   String get phoneInputLabel => "رقم الهاتف";
@@ -155,7 +154,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get phoneNumberInvalidErrorText => "رقم الهاتف غير صالح";
 
   @override
-  String get phoneNumberIsRequiredErrorText => "يجب إدخال رقم الهاتف.";
+  String get phoneNumberIsRequiredErrorText => "الرجاء إدخال رقم هاتف.";
 
   @override
   String get phoneVerificationViewTitleText => "إدخال رقم هاتفك";
@@ -164,31 +163,31 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get profile => "الملف الشخصي";
 
   @override
-  String get provideEmail => "إدخال عنوان بريدك الإلكتروني وكلمة المرور";
+  String get provideEmail => "تسجيل الدخول";
 
   @override
-  String get referenceLabel => "مرجع";
+  String get referenceLabel => "reference";
 
   @override
-  String get registerActionText => "التسجيل";
+  String get registerActionText => "إنشاء حساب جديد";
 
   @override
   String get registerHintText => "ليس لديك حساب؟";
 
   @override
-  String get registerText => "التسجيل";
+  String get registerText => "إنشاء حساب جديد";
 
   @override
-  String get resetPasswordButtonLabel => "إعادة ضبط كلمة المرور";
+  String get resetPasswordButtonLabel => "إستعادة كلمة المرور";
 
   @override
-  String get sendLinkButtonLabel => "إرسال رابط للاستخدام مرة واحدة";
+  String get sendLinkButtonLabel => "إرسال رابط مخصص للاستخدام مرة واحدة";
 
   @override
   String get signInActionText => "تسجيل الدخول";
 
   @override
-  String get signInHintText => "هل سبق أن أنشأت حسابًا؟";
+  String get signInHintText => "لديك حساب بالفعل ؟";
 
   @override
   String get signInMethods => "طُرق تسجيل الدخول";
@@ -201,7 +200,7 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get signInWithEmailLinkSentText =>
-      "أرسلنا إليك رسالة إلكترونية تتضمن رابطًا مخصصًا للاستخدام مرة واحدة. يُرجى التحقق من بريدك الوارد والنقر على الرابط لتسجيل الدخول.";
+      "تم إرسال رابط مخصص للاستخدام مرة واحدة إلى عنوان بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط لتسجيل الدخول.";
 
   @override
   String get signInWithEmailLinkViewTitleText =>
@@ -230,13 +229,13 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get southInitialLabel => "جنوب";
 
   @override
-  String get stringLabel => "السلسلة";
+  String get stringLabel => "string";
 
   @override
-  String get timestampLabel => "الطابع الزمني";
+  String get timestampLabel => "timestamp";
 
   @override
-  String get typeLabel => "النوع";
+  String get typeLabel => "type";
 
   @override
   String get unknownError => "حدث خطأ غير معروف.";
@@ -257,89 +256,88 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get verifyingSMSCodeText => "جارٍ إثبات صحة رمز SMS...";
 
   @override
-  String get verifyItsYouText => "إثبات هويتك";
+  String get verifyItsYouText => "إثبات الهوية";
 
   @override
-  String get verifyPhoneNumberButtonText => "التالي";
+  String get verifyPhoneNumberButtonText => "المتابعة";
 
   @override
   String get westInitialLabel => "غرب";
 
   @override
   String get wrongOrNoPasswordErrorText =>
-      "كلمة المرور غير صالحة أو لم يُدخِل المستخدم كلمة مرور.";
+      "كلمة المرور غير صالحة أو أن المستخدم لم يقم بتعيين كلمة مرور.";
 
   @override
-  String get uploadButtonText => "Upload file";
+  String get uploadButtonText => "رفع ملف";
 
   @override
-  String get verifyEmailTitle => "Verify your email";
+  String get verifyEmailTitle => "التحقق من البريد الإلكتروني";
 
   @override
   String get verificationEmailSentText =>
-      "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.";
+      "تم إرسال بريد إلكتروني للتحقق من بريدك الإلكتروني إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من بريدك الإلكتروني.";
 
   @override
-  String get verificationFailedText =>
-      "We couldn't verify your email address. ";
+  String get verificationFailedText => "تعذر التحقق من عنوان بريدك الإلكتروني.";
 
   @override
-  String get resendVerificationEmailButtonLabel => "Resend verification email";
+  String get resendVerificationEmailButtonLabel => "إعادة إرسال رابط التحقق";
 
   @override
-  String get verificationEmailSentTextShort => "Verification email sent";
+  String get verificationEmailSentTextShort => "تم الإرسال";
 
   @override
-  String get emailIsNotVerifiedText => "Email is not verified";
+  String get emailIsNotVerifiedText => "لم يتم التحقق من البريد الإلكتروني";
 
   @override
   String get waitingForEmailVerificationText =>
-      "Waiting for email verification";
+      "بانتظار التحقق من البريد الإلكتروني";
 
   @override
-  String get dismissButtonLabel => "Dismiss";
+  String get dismissButtonLabel => "إغلاق";
 
   @override
-  String get okButtonLabel => "OK";
+  String get okButtonLabel => "المتابعة";
 
   @override
   String get checkEmailHintText =>
-      "Please check your email and click the link to verify your email address.";
+      "يرجى التحقق من بريدك الإلكتروني والنقر على الرابط للتحقق من عنوان بريدك الإلكتروني.";
 
   @override
-  String get doneButtonLabel => "Done";
+  String get doneButtonLabel => "المتابعة";
 
   @override
   String get invalidVerificationCodeErrorText =>
-      "The code you entered is invalid. Please try again.";
+      "رمز SMS المدخل غير صالح. يرجى المحاولة مرة أخرى.";
 
   @override
-  String get ulinkProviderAlertTitle => "Unlink provider";
+  String get ulinkProviderAlertTitle => "إلغاء الربط";
 
   @override
-  String get confirmUnlinkButtonLabel => "Unlink";
+  String get confirmUnlinkButtonLabel => "تأكيد";
 
   @override
-  String get cancelButtonLabel => "Cancel";
+  String get cancelButtonLabel => "إلغاء";
 
   @override
   String get unlinkProviderAlertMessage =>
-      "Are you sure you want to unlink this provider?";
+      "هل أنت متأكد من رغبتك في إلغاء الربط؟";
 
   @override
   String get weakPasswordErrorText =>
-      "Password should be at least 6 characters";
+      "كلمة المرور ضعيفة، يجب أن تتكون كلمة المرور من 6 أحرف على الأقل";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+  String get confirmDeleteAccountAlertTitle => "حذف الحساب";
 
   @override
   String get confirmDeleteAccountAlertMessage =>
-      "Are you sure you want to delete your account?";
+      "هل أنت متأكد من رغبتك في حذف حسابك؟";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+  String get confirmDeleteAccountButtonLabel => "تأكيد";
 
   @override
-  String get sendVerificationEmailLabel => "Send verification email";
+  String get sendVerificationEmailLabel => "إرسال رابط التحقق";
 }
