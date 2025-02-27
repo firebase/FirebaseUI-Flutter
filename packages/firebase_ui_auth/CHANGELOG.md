@@ -1,3 +1,13 @@
+## 1.16.1
+
+ - **FIX**: replace deprecated API and bump FlutterFire dependencies ([#453](https://github.com/firebase/FirebaseUI-Flutter/issues/453)). ([530be48a](https://github.com/firebase/FirebaseUI-Flutter/commit/530be48a4710387832f98059bd34ce07bba1778c))
+ - **FIX**(auth): remove listener on dispose and only call setState when mounted ([#419](https://github.com/firebase/FirebaseUI-Flutter/issues/419)). ([91c982b5](https://github.com/firebase/FirebaseUI-Flutter/commit/91c982b5bec13b2698b0b83d5885b46cbf0c9b77))
+ - **FIX**(auth): ensure previous display name is provided to callback ([#431](https://github.com/firebase/FirebaseUI-Flutter/issues/431)). ([662717d7](https://github.com/firebase/FirebaseUI-Flutter/commit/662717d7a8f55d0fd4a1c5d4d8bac56a52e6e783))
+ - **FIX**(ui_auth): fix confirmation dialog for unlink account button in profile screen ([#373](https://github.com/firebase/FirebaseUI-Flutter/issues/373)). ([0e3a7c49](https://github.com/firebase/FirebaseUI-Flutter/commit/0e3a7c4912de4cba1fa6e8fe3d99e1ae2e8a8286))
+ - **FIX**(auth): using theme color instead of hardcoded value ([#416](https://github.com/firebase/FirebaseUI-Flutter/issues/416)). ([d183d87e](https://github.com/firebase/FirebaseUI-Flutter/commit/d183d87e61086c34e8e18233dfc99873b863e7d8))
+ - **FIX**(ui_auth): make light text on _EmailVerificationBadge legible ([#196](https://github.com/firebase/FirebaseUI-Flutter/issues/196)). ([72530e52](https://github.com/firebase/FirebaseUI-Flutter/commit/72530e522f141eb12b74c13b99b4460e6da3d140))
+ - **DOCS**(firebase_ui_auth): Handle `UserCreated` event in `README` example ([#422](https://github.com/firebase/FirebaseUI-Flutter/issues/422)). ([bd1d5ecf](https://github.com/firebase/FirebaseUI-Flutter/commit/bd1d5ecf24d4a33d180543e6d58271b495c0131d))
+
 ## 1.16.0
 
  - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))

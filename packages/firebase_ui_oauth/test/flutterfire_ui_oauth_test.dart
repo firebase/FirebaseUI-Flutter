@@ -138,7 +138,10 @@ void main() {
       final expectedColor = style.backgroundColor.getValue(Brightness.dark);
 
       final containerFinder = find.byWidgetPredicate((widget) {
-        return widget is Material && widget.color!.value == expectedColor.value;
+        return widget is Material &&
+            widget.color!.r == expectedColor.r &&
+            widget.color!.g == expectedColor.g &&
+            widget.color!.b == expectedColor.b;
       });
 
       expect(containerFinder, findsOneWidget);
@@ -150,8 +153,9 @@ void main() {
       final textFinder = find.byWidgetPredicate(
         (widget) =>
             widget is Text &&
-            widget.style!.color!.value ==
-                style.color.getValue(Brightness.dark).value,
+            widget.style!.color!.r == style.color.getValue(Brightness.dark).r &&
+            widget.style!.color!.g == style.color.getValue(Brightness.dark).g &&
+            widget.style!.color!.b == style.color.getValue(Brightness.dark).b,
       );
 
       expect(textFinder, findsOneWidget);
