@@ -9,8 +9,6 @@ import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'social_icons.dart';
-
 const GOOGLE_PROVIDER_ID = 'google.com';
 const APPLE_PROVIDER_ID = 'apple.com';
 const TWITTER_PROVIDER_ID = 'twitter.com';
