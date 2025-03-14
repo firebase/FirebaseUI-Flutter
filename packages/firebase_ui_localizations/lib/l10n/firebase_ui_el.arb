@@ -1,0 +1,529 @@
+{
+    "@@locale": "el",
+    "@@last_modified": "2024-02-04T10:25:05.107668",
+    "accessDisabledErrorText": "Η πρόσβαση σε αυτόν τον λογαριασμό έχει απενεργοποιηθεί προσωρινά",
+    "@accessDisabledErrorText": {
+        "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
+        "placeholders": {}
+    },
+    "arrayLabel": "array",
+    "@arrayLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "booleanLabel": "Boolean",
+    "@booleanLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "cancelLabel": "ακύρωση",
+    "@cancelLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "chooseACountry": "Επιλέξτε μια χώρα",
+    "@chooseACountry": {
+        "description": "Used as a label of the country code picker dropdown.",
+        "placeholders": {}
+    },
+    "confirmPasswordDoesNotMatchErrorText": "Οι κωδικοί δεν ταιριάζουν",
+    "@confirmPasswordDoesNotMatchErrorText": {
+        "description": "Used as an error text when provided passwords do not match.",
+        "placeholders": {}
+    },
+    "confirmPasswordInputLabel": "Επιβεβαίωση κωδικού πρόσβασης",
+    "@confirmPasswordInputLabel": {
+        "description": "Used as a label of the PasswordInput that confirms a provided password.",
+        "placeholders": {}
+    },
+    "confirmPasswordIsRequiredErrorText": "Επιβεβαιώστε τον κωδικό σας",
+    "@confirmPasswordIsRequiredErrorText": {
+        "description": "Used as an error text when PasswordInput used to confirm the password is empty.",
+        "placeholders": {}
+    },
+    "continueText": "Συνέχεια",
+    "@continueText": {
+        "description": "Used as a label of the submit button that takes the user to the next step of the authenticatiion flow.",
+        "placeholders": {}
+    },
+    "countryCode": "Κωδικός χώρας",
+    "@countryCode": {
+        "description": "Used as a placeholder of the country code input.",
+        "placeholders": {}
+    },
+    "credentialAlreadyInUseErrorText": "Αυτός ο πάροχος είναι συνδεδεμένος με διαφορετικό λογαριασμό χρήστη.",
+    "@credentialAlreadyInUseErrorText": {
+        "description": "Error text that is show when user tries to use an OAuth provider that doesn't belong to currently signed in user account.",
+        "placeholders": {}
+    },
+    "deleteAccount": "Διαγραφή λογαριασμού",
+    "@deleteAccount": {
+        "description": "Used as a label of the DeleteAccountButton.",
+        "placeholders": {}
+    },
+    "differentMethodsSignInTitleText": "Χρησιμοποιήστε μία από τις παρακάτω μεθόδους για να συνδεθείτε",
+    "@differentMethodsSignInTitleText": {
+        "description": "Used as a title of the dialog that indicates that there are different available sign in methods for a provided email.",
+        "placeholders": {}
+    },
+    "disable": "Απενεργοποίηση",
+    "@disable": {
+        "description": "Button label that suggests to disable 2FA",
+        "placeholders": {}
+    },
+    "eastInitialLabel": "Α",
+    "@eastInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "emailInputLabel": "Email",
+    "@emailInputLabel": {
+        "description": "Used as a label of the EmailInput.",
+        "placeholders": {}
+    },
+    "emailIsRequiredErrorText": "Το email είναι υποχρεωτικό",
+    "@emailIsRequiredErrorText": {
+        "description": "Used as an error text of the EmailInput when the email is empty.",
+        "placeholders": {}
+    },
+    "emailLinkSignInButtonLabel": "Σύνδεση με μαγικό σύνδεσμο",
+    "@emailLinkSignInButtonLabel": {
+        "description": "Used as a label of the EmailLinkSignInButton.",
+        "placeholders": {}
+    },
+    "emailTakenErrorText": "Υπάρχει ήδη λογαριασμός με αυτό το email",
+    "@emailTakenErrorText": {
+        "description": "Used as an error message when the user tries to sign up with an email that is already used.",
+        "placeholders": {}
+    },
+    "enable": "Ενεργοποίηση",
+    "@enable": {
+        "description": "Button label that suggests to enable 2FA",
+        "placeholders": {}
+    },
+    "enableMoreSignInMethods": "Ενεργοποιήστε περισσότερες μεθόδους σύνδεσης",
+    "@enableMoreSignInMethods": {
+        "description": "Used as a hint to connect more providers.",
+        "placeholders": {}
+    },
+    "enterSMSCodeText": "Εισαγάγετε τον κωδικό SMS",
+    "@enterSMSCodeText": {
+        "description": "Used as a label of the SMSCodeInput.",
+        "placeholders": {}
+    },
+    "findProviderForEmailTitleText": "Εισαγάγετε το email σας για να συνεχίσετε",
+    "@findProviderForEmailTitleText": {
+        "description": "Used as a title of the FindProvidersForEmailView.",
+        "placeholders": {}
+    },
+    "forgotPasswordButtonLabel": "Ξεχάσατε τον κωδικό πρόσβασης;",
+    "@forgotPasswordButtonLabel": {
+        "description": "Used as a label of the ForgotPasswordButton.",
+        "placeholders": {}
+    },
+    "forgotPasswordHintText": "Δώστε το email σας και θα σας στείλουμε έναν σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας",
+    "@forgotPasswordHintText": {
+        "description": "Used as a hint on a ForgotPasswordView.",
+        "placeholders": {}
+    },
+    "forgotPasswordViewTitle": "Ξεχάσατε τον κωδικό πρόσβασης",
+    "@forgotPasswordViewTitle": {
+        "description": "Used as a title of the ForgotPasswordView.",
+        "placeholders": {}
+    },
+    "geopointLabel": "geopoint",
+    "@geopointLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "goBackButtonLabel": "Επιστροφή",
+    "@goBackButtonLabel": {
+        "description": "Used as a label of the back button.",
+        "placeholders": {}
+    },
+    "invalidCountryCode": "Invalid code",
+    "@invalidCountryCode": {
+        "description": "Used as an error text when provide country code is invalid.",
+        "placeholders": {}
+    },
+    "isNotAValidEmailErrorText": "Δώστε ένα έγκυρο email",
+    "@isNotAValidEmailErrorText": {
+        "description": "Used as an error text of the EmailInput if the provided email is not valid.",
+        "placeholders": {}
+    },
+    "latitudeLabel": "latitude",
+    "@latitudeLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "linkEmailButtonText": "Επόμενο",
+    "@linkEmailButtonText": {
+        "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.link.",
+        "placeholders": {}
+    },
+    "longitudeLabel": "longitude",
+    "@longitudeLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "mapLabel": "χάρτης",
+    "@mapLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "mfaTitle": "Επαλήθευση 2 Βημάτων",
+    "@mfaTitle": {
+        "description": "2-step verification settings tile title.",
+        "placeholders": {}
+    },
+    "name": "Όνομα",
+    "@name": {
+        "description": "Used as a placeholder of the EditableUserDisplayName.",
+        "placeholders": {}
+    },
+    "northInitialLabel": "Β",
+    "@northInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "nullLabel": "null",
+    "@nullLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "numberLabel": "number",
+    "@numberLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "off": "Off",
+    "@off": {
+        "description": "Label that suggests that 2-step verification is not enabled",
+        "placeholders": {}
+    },
+    "on": "On",
+    "@on": {
+        "description": "Label that suggests that 2-step verification is enabled",
+        "placeholders": {}
+    },
+    "passwordInputLabel": "Κωδικός πρόσβασης",
+    "@passwordInputLabel": {
+        "description": "Used as a label of the PasswordInput.",
+        "placeholders": {}
+    },
+    "passwordIsRequiredErrorText": "Ο κωδικός πρόσβασης είναι υποχρεωτικός",
+    "@passwordIsRequiredErrorText": {
+        "description": "Used as an error text when PasswordInput is empty.",
+        "placeholders": {}
+    },
+    "passwordResetEmailSentText": "Σας έχουμε στείλει ένα email με έναν σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας. Παρακαλούμε ελέγξτε τα email σας.",
+    "@passwordResetEmailSentText": {
+        "description": "Indicates that the password reset email was sent.",
+        "placeholders": {}
+    },
+    "phoneInputLabel": "Αριθμός τηλεφώνου",
+    "@phoneInputLabel": {
+        "description": "Used as a label of the PhoneInput.",
+        "placeholders": {}
+    },
+    "phoneNumberInvalidErrorText": "Ο αριθμός τηλεφώνου δεν είναι έγκυρος",
+    "@phoneNumberInvalidErrorText": {
+        "description": "Used as an error text when PhoneInput contains an invalid phone number.",
+        "placeholders": {}
+    },
+    "phoneNumberIsRequiredErrorText": "Ο αριθμός τηλεφώνου είναι υποχρεωτικός",
+    "@phoneNumberIsRequiredErrorText": {
+        "description": "Used as an error text when PhoneInput is empty.",
+        "placeholders": {}
+    },
+    "phoneVerificationViewTitleText": "Εισαγάγετε τον αριθμό τηλεφώνου σας",
+    "@phoneVerificationViewTitleText": {
+        "description": "Used as a title of the PhoneInputView.",
+        "placeholders": {}
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "A title of the ProfileScreen.",
+        "placeholders": {}
+    },
+    "provideEmail": "Δώστε το email και τον κωδικό πρόσβασής σας",
+    "@provideEmail": {
+        "description": "Used as a title of the EmailSignUpDialog.",
+        "placeholders": {}
+    },
+    "referenceLabel": "παραπομπή",
+    "@referenceLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "registerActionText": "Εγγραφή",
+    "@registerActionText": {
+        "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signUp.",
+        "placeholders": {}
+    },
+    "registerHintText": "Δεν έχετε λογαριασμό;",
+    "@registerHintText": {
+        "description": "Used as a hint text of the LoginView suggesting to create a new account.",
+        "placeholders": {}
+    },
+    "registerText": "Εγγραφή",
+    "@registerText": {
+        "description": "Used as a title of the LoginView when AuthAction is AuthAction.signUp.",
+        "placeholders": {}
+    },
+    "resetPasswordButtonLabel": "Επαναφορά κωδικού πρόσβασης",
+    "@resetPasswordButtonLabel": {
+        "description": "Used as a label of submit button of the ForgotPasswordView.",
+        "placeholders": {}
+    },
+    "sendLinkButtonLabel": "Αποστολή μαγικού συνδέσμου",
+    "@sendLinkButtonLabel": {
+        "description": "Used as a label of the submit button on the EmailLinkSignInView.",
+        "placeholders": {}
+    },
+    "signInActionText": "Σύνδεση",
+    "@signInActionText": {
+        "description": "Used as a label of the EmailForm submit button when the AuthAction is AuthAction.signIn.",
+        "placeholders": {}
+    },
+    "signInHintText": "Έχετε ήδη λογαριασμό;",
+    "@signInHintText": {
+        "description": "Used as a hint text of the LoginView suggesting to sign in instead of registering a new account.",
+        "placeholders": {}
+    },
+    "signInMethods": "Μέθοδοι σύνδεσης",
+    "@signInMethods": {
+        "description": "Used as a label of the row showing connected providers.",
+        "placeholders": {}
+    },
+    "signInText": "Σύνδεση",
+    "@signInText": {
+        "description": "Used as a title of the LoginView when AuthAction is AuthAction.signIn.",
+        "placeholders": {}
+    },
+    "signInWithAppleButtonText": "Σύνδεση με Apple",
+    "@signInWithAppleButtonText": {
+        "description": "Used as a label of the OAuthProviderButton for Apple provider.",
+        "placeholders": {}
+    },
+    "signInWithEmailLinkSentText": "Σας έχουμε στείλει ένα email με έναν μαγικό σύνδεσμο. Ελέγξτε το email σας και ακολουθήστε τον σύνδεσμο για να συνδεθείτε",
+    "@signInWithEmailLinkSentText": {
+        "description": "Indicates that email with a sign in link was sent.",
+        "placeholders": {}
+    },
+    "signInWithEmailLinkViewTitleText": "Σύνδεση με μαγικό σύνδεσμο",
+    "@signInWithEmailLinkViewTitleText": {
+        "description": "Used as a title on the EmailLinkSignInView.",
+        "placeholders": {}
+    },
+    "signInWithFacebookButtonText": "Σύνδεση με Facebook",
+    "@signInWithFacebookButtonText": {
+        "description": "Used as a label of the OAuthProviderButton for Facebook provider.",
+        "placeholders": {}
+    },
+    "signInWithGoogleButtonText": "Σύνδεση με Google",
+    "@signInWithGoogleButtonText": {
+        "description": "Used as a label of the OAuthProviderButton for Google provider.",
+        "placeholders": {}
+    },
+    "signInWithPhoneButtonText": "Σύνδεση με τηλέφωνο",
+    "@signInWithPhoneButtonText": {
+        "description": "Used as a label of the PhoneVerificationButton.",
+        "placeholders": {}
+    },
+    "signInWithTwitterButtonText": "Σύνδεση με Twitter",
+    "@signInWithTwitterButtonText": {
+        "description": "Used as a label of the OAuthProviderButton for Twitter provider.",
+        "placeholders": {}
+    },
+    "signOutButtonText": "Αποσύνδεση",
+    "@signOutButtonText": {
+        "description": "Used as a label of the SignOutButton.",
+        "placeholders": {}
+    },
+    "smsAutoresolutionFailedError": "Αδυναμία αυτόματης επίλυσης του κωδικού SMS. Εισαγάγετε τον κωδικό σας με μη αυτόματο τρόπο",
+    "@smsAutoresolutionFailedError": {
+        "description": "Used as an error text when AutoresolutionFailedException is being thrown.",
+        "placeholders": {}
+    },
+    "southInitialLabel": "Ν",
+    "@southInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "stringLabel": "string",
+    "@stringLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "timestampLabel": "timestamp",
+    "@timestampLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "typeLabel": "type",
+    "@typeLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "unknownError": "Παρουσιάστηκε ένα άγνωστο σφάλμα",
+    "@unknownError": {
+        "description": "Used as a generic error message when unable to resolve error details from Exception or FirebaseAuthException.",
+        "placeholders": {}
+    },
+    "updateLabel": "update",
+    "@updateLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "userNotFoundErrorText": "Ο λογαριασμός δεν υπάρχει",
+    "@userNotFoundErrorText": {
+        "description": "Used as an error message when the account for provided email was not found.",
+        "placeholders": {}
+    },
+    "valueLabel": "value",
+    "@valueLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "verifyCodeButtonText": "Επιβεβαίωση",
+    "@verifyCodeButtonText": {
+        "description": "Used as a label of the submit button of the SMSCodeInputView.",
+        "placeholders": {}
+    },
+    "verifyingSMSCodeText": "Επαλήθευση κωδικού SMS…",
+    "@verifyingSMSCodeText": {
+        "description": "Used as a status text of the SMSCodeInput when code verification is in progress.",
+        "placeholders": {}
+    },
+    "verifyItsYouText": "Επιβεβαιώστε ότι είστε εσείς",
+    "@verifyItsYouText": {
+        "description": "Used as a title of the dialog that requires re-authentication of the user when performing destructive actions.",
+        "placeholders": {}
+    },
+    "verifyPhoneNumberButtonText": "Επόμενο",
+    "@verifyPhoneNumberButtonText": {
+        "description": "Used as a label of the submit button of the PhoneInputView.",
+        "placeholders": {}
+    },
+    "westInitialLabel": "Δ",
+    "@westInitialLabel": {
+        "description": "",
+        "placeholders": {}
+    },
+    "wrongOrNoPasswordErrorText": "Ο κωδικός πρόσβασης δεν είναι έγκυρος ή ο χρήστης δεν έχει κωδικό πρόσβασης",
+    "@wrongOrNoPasswordErrorText": {
+        "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
+        "placeholders": {}
+    },
+    "uploadButtonText": "Ανέβασμα αρχείου",
+    "@uploadButtonText": {
+        "description": "UploadButton label",
+        "placeholders": {}
+    },
+    "verifyEmailTitle": "Επαληθεύστε το email σας",
+    "@verifyEmailTitle": {
+        "description": "EmailVerificationScreen title",
+        "placeholders": {}
+    },
+    "verificationEmailSentText": "Ένα email επαλήθευσης έχει σταλεί στην διεύθυνση email σας. Παρακαλώ ελέγξτε το email σας και πατήστε στον σύνδεσμο για να επαληθεύσετε τη διεύθυνση email σας.",
+    "@verificationEmailSentText": {
+        "description": "Hint text indicating that verification email has been sent",
+        "placeholders": {}
+    },
+    "verificationFailedText": "Δεν μπορέσαμε να επαληθεύσουμε τη διεύθυνση email σας.",
+    "@verificationFailedText": {
+        "description": "Message indicating that something went wrong during email verification",
+        "placeholders": {}
+    },
+    "resendVerificationEmailButtonLabel": "Επανάληψη αποστολής email επαλήθευσης",
+    "@resendVerificationEmailButtonLabel": {
+        "description": "Button label that suggests to resend verification email",
+        "placeholders": {}
+    },
+    "verificationEmailSentTextShort": "Email επαλήθευσης εστάλη",
+    "@verificationEmailSentTextShort": {
+        "description": "Short version of the hint text indicating that verification email has been sent",
+        "placeholders": {}
+    },
+    "emailIsNotVerifiedText": "Το email δεν έχει επαληθευτεί",
+    "@emailIsNotVerifiedText": {
+        "description": "Message indicating that email is not verified",
+        "placeholders": {}
+    },
+    "waitingForEmailVerificationText": "Αναμονή για επαλήθευση email",
+    "@waitingForEmailVerificationText": {
+        "description": "Message indicating that email is being verified",
+        "placeholders": {}
+    },
+    "dismissButtonLabel": "Παράβλεψη",
+    "@dismissButtonLabel": {
+        "description": "Dissmiss button label",
+        "placeholders": {}
+    },
+    "okButtonLabel": "Εντάξει",
+    "@okButtonLabel": {
+        "description": "OK button label",
+        "placeholders": {}
+    },
+    "checkEmailHintText": "Παρακαλούμε ελέγξτε το email σας και κάντε κλικ στον σύνδεσμο για να επαληθεύσετε τη διεύθυνση email σας.",
+    "@checkEmailHintText": {
+        "description": "Hint text prompting the user to check email for verification link",
+        "placeholders": {}
+    },
+    "doneButtonLabel": "Ολοκληρώθηκε",
+    "@doneButtonLabel": {
+        "description": "Done button label",
+        "placeholders": {}
+    },
+    "invalidVerificationCodeErrorText": "Ο κωδικός που εισαγάγατε είναι μη έγκυρος. Προσπαθήστε ξανά.",
+    "@invalidVerificationCodeErrorText": {
+        "description": "Error text indicating that entered SMS code is invalid",
+        "placeholders": {}
+    },
+    "ulinkProviderAlertTitle": "Αποσύνδεση παρόχου",
+    "@ulinkProviderAlertTitle": {
+        "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
+        "placeholders": {}
+    },
+    "confirmUnlinkButtonLabel": "Αποσύνδεση",
+    "@confirmUnlinkButtonLabel": {
+        "description": "Unlink confirmation button label",
+        "placeholders": {}
+    },
+    "cancelButtonLabel": "Άκυρο",
+    "@cancelButtonLabel": {
+        "description": "Cancel button label",
+        "placeholders": {}
+    },
+    "unlinkProviderAlertMessage": "Είστε σίγουροι ότι θέλετε να αποσυνδέσετε αυτόν τον πάροχο;",
+    "@unlinkProviderAlertMessage": {
+        "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
+        "placeholders": {}
+    },
+    "weakPasswordErrorText": "Ο κωδικός πρόσβασης πρέπει να έχει τουλάχιστον 6 χαρακτήρες",
+    "@weakPasswordErrorText": {
+        "description": "Error text suggesting that used password is too weak",
+        "placeholders": {}
+    },
+    "confirmDeleteAccountAlertTitle": "Επιβεβαίωση διαγραφής λογαριασμού",
+    "@confirmDeleteAccountAlertTitle": {
+        "description": "Delete account confirmation dialog title",
+        "placeholders": {}
+    },
+    "confirmDeleteAccountAlertMessage": "Είστε σίγουροι ότι θέλετε να διαγράψετε τον λογαριασμό σας;",
+    "@confirmDeleteAccountAlertMessage": {
+        "description": "Delete account confirmation dialog message",
+        "placeholders": {}
+    },
+    "confirmDeleteAccountButtonLabel": "Ναι, διαγραφή",
+    "@confirmDeleteAccountButtonLabel": {
+        "description": "Confirm delete account button label",
+        "placeholders": {}
+    },
+    "sendVerificationEmailLabel": "Αποστολή email επαλήθευσης",
+    "@sendVerificationEmailLabel": {
+        "description": "Used as a button label to send a verification email",
+        "placeholders": {}
+    }
+}

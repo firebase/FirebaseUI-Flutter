@@ -9,6 +9,7 @@ import 'all_localizations.dart';
 final Set<String> kSupportedLanguages = {
   'ar', // Arabic
   'de', // German
+  'el', // Greek
   'en', // English
   'es', // Spanish Castilian
   'fi', // Finnish
@@ -48,6 +49,8 @@ FirebaseUILocalizationLabels getFirebaseUITranslation(
       return const ArLocalizations();
     case 'de':
       return const DeLocalizations();
+    case 'el':
+      return const ElLocalizations();
     case 'en':
       return const EnLocalizations();
     case 'es':

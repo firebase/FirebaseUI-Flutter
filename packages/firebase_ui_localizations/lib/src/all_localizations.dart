@@ -4,6 +4,7 @@
 
 export 'lang/ar.dart';
 export 'lang/de.dart';
+export 'lang/el.dart';
 export 'lang/en.dart';
 export 'lang/es.dart';
 export 'lang/es_419.dart';
