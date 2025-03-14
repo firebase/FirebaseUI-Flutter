@@ -48,11 +48,6 @@ Future<fba.UserCredential?> startPhoneMFAVerification({
   final hint = resolver.hints.first;
   var completer = Completer<fba.UserCredential?>();
 
-  completer.future.catchError((e) {
-    onError?.call(e as FirebaseException);
-    return null;
-  });
-
   final navigator = Navigator.of(context);
 
   final provider = PhoneAuthProvider();
@@ -66,12 +61,23 @@ Future<fba.UserCredential?> startPhoneMFAVerification({
 
   provider.authListener = flow;
 
+  completer.future.catchError((e) {
+    onError?.call(e as FirebaseException);
+    flow.onError(e);
+    return null;
+  });
+
   final flowKey = Object();
 
   final actions = [
     AuthStateChangeAction<CredentialReceived>((context, inner) {
       if (completer.isCompleted) {
         completer = Completer<fba.UserCredential>();
+        completer.future.catchError((e) {
+          onError?.call(e as FirebaseException);
+          flow.onError(e);
+          return null;
+        });
       }
 
       final cred = inner.credential as fba.PhoneAuthCredential;
