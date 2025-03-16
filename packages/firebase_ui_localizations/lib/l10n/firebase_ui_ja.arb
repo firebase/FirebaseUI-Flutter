@@ -529,7 +529,7 @@
     "description": "Confirm delete account button label",
     "placeholders": {}
   },
-  "sendVerificationEmailLabel": "Send verification email",
+  "sendVerificationEmailLabel": "検証メールを送信",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
     "placeholders": {}
