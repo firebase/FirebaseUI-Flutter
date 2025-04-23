@@ -4,10 +4,10 @@
 
 // ignore_for_file: constant_identifier_names
 
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'social_icons.dart';
 
 const GOOGLE_PROVIDER_ID = 'google.com';
 const APPLE_PROVIDER_ID = 'apple.com';
@@ -22,31 +22,51 @@ const PASSWORD_PROVIDER_ID = 'password';
 /// final icon = providerIcon(context, 'google.com');
 /// Icon(icon);
 /// ```
-IconData providerIcon(BuildContext context, String providerId) {
+Widget providerIcon(BuildContext context, AuthProvider provider) {
+  final providerId = provider.providerId;
   final isCupertino = CupertinoUserInterfaceLevel.maybeOf(context) != null;
 
+  final IconData? data;
   switch (providerId) {
     case GOOGLE_PROVIDER_ID:
-      return SocialIcons.google;
+      data = SocialIcons.google;
+      break;
     case APPLE_PROVIDER_ID:
-      return SocialIcons.apple;
+      data = SocialIcons.apple;
+      break;
     case TWITTER_PROVIDER_ID:
-      return SocialIcons.twitter;
+      data = SocialIcons.twitter;
+      break;
     case FACEBOOK_PROVIDER_ID:
-      return SocialIcons.facebook;
+      data = SocialIcons.facebook;
+      break;
     case PHONE_PROVIDER_ID:
       if (isCupertino) {
-        return CupertinoIcons.phone;
+        data = CupertinoIcons.phone;
       } else {
-        return Icons.phone;
+        data = Icons.phone;
       }
+      break;
     case PASSWORD_PROVIDER_ID:
       if (isCupertino) {
-        return CupertinoIcons.mail;
+        data = CupertinoIcons.mail;
       } else {
-        return Icons.email_outlined;
+        data = Icons.email_outlined;
       }
+      break;
     default:
-      throw Exception('Unknown provider: $providerId');
+      data = null;
   }
+
+  if (data != null) {
+    return Icon(data);
+  }
+
+  if (provider is OAuthProvider) {
+    final brightness =
+        CupertinoTheme.of(context).brightness ?? Theme.of(context).brightness;
+    return provider.style.iconWidget.getValue(brightness);
+  }
+
+  throw Exception('Unknown provider: $providerId');
 }
