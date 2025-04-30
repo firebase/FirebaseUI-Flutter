@@ -4,10 +4,10 @@
 
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// A function that builds a widget from a [FirestoreQueryBuilderSnapshot]
 ///
@@ -354,6 +354,7 @@ class _Sentinel {
 typedef FirestoreItemBuilder<Document> = Widget Function(
   BuildContext context,
   QueryDocumentSnapshot<Document> doc,
+  int index,
 );
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingBuilder`.
@@ -496,7 +497,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            itemBuilder(context, doc),
+                            itemBuilder(context, doc, index),
                             if (isLastItem && snapshot.hasMore)
                               fetchingIndicatorBuilder?.call(context) ??
                                   const Padding(
@@ -513,7 +514,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
                           ],
                         ),
                       )
-                    : itemBuilder(context, doc);
+                    : itemBuilder(context, doc, index);
               },
               scrollDirection: scrollDirection,
               reverse: reverse,
@@ -606,7 +607,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            itemBuilder(context, doc),
+                            itemBuilder(context, doc, index),
                             if (isLastItem && snapshot.hasMore)
                               fetchingIndicatorBuilder?.call(context) ??
                                   const Padding(
@@ -623,7 +624,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
                           ],
                         ),
                       )
-                    : itemBuilder(context, doc);
+                    : itemBuilder(context, doc, index);
               },
               separatorBuilder: separatorBuilder,
               scrollDirection: scrollDirection,
