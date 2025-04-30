@@ -413,7 +413,7 @@ typedef FirestoreEmptyBuilder = Widget Function(BuildContext context);
 /// ```dart
 /// FirestoreListView<Movie>(
 ///   query: moviesCollection.orderBy('title'),
-///   itemBuilder: (context, snapshot) {
+///   itemBuilder: (context, snapshot, index) {
 ///     Movie movie = snapshot.data();
 ///     return Text(movie.title);
 ///   },

@@ -35,7 +35,7 @@ class FirebaseUIFirestoreExample extends StatelessWidget {
         body: FirestoreListView<User>(
           query: collection,
           padding: const EdgeInsets.all(8.0),
-          itemBuilder: (context, snapshot) {
+          itemBuilder: (context, snapshot, index) {
             final user = snapshot.data();
             return Column(
               children: [
