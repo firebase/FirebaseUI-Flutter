@@ -1,4 +1,4 @@
-// Copyright 2024, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -47,7 +47,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get differentMethodsSignInTitleText =>
-      "Uso um dos métodos a seguir para fazer login";
+      "Use um dos métodos a seguir para fazer login";
 
   @override
   String get disable => "Desativar";
@@ -56,16 +56,16 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get eastInitialLabel => "E";
 
   @override
-  String get emailInputLabel => "E-mail";
+  String get emailInputLabel => "Email";
 
   @override
-  String get emailIsRequiredErrorText => "O e-mail é obrigatório";
+  String get emailIsRequiredErrorText => "O email é obrigatório";
 
   @override
   String get emailLinkSignInButtonLabel => "Fazer login com um link mágico";
 
   @override
-  String get emailTakenErrorText => "Já existe uma conta com este e-mail";
+  String get emailTakenErrorText => "Já existe uma conta com este email";
 
   @override
   String get enable => "Ativar";
@@ -74,18 +74,17 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get enableMoreSignInMethods => "Ative mais métodos de login";
 
   @override
-  String get enterSMSCodeText => "Informar o código SMS";
+  String get enterSMSCodeText => "Introduza o código SMS";
 
   @override
-  String get findProviderForEmailTitleText =>
-      "Insira seu e-mail para continuar";
+  String get findProviderForEmailTitleText => "Insira seu email para continuar";
 
   @override
   String get forgotPasswordButtonLabel => "Esqueceu a senha?";
 
   @override
   String get forgotPasswordHintText =>
-      "Forneça seu e-mail. Depois disso, vamos enviar uma mensagem com um link para redefinir sua senha";
+      "Forneça seu email. Depois disso, vamos enviar uma mensagem com um link para redefinir sua senha";
 
   @override
   String get forgotPasswordViewTitle => "Esqueci a senha";
@@ -100,7 +99,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get invalidCountryCode => "Código inválido";
 
   @override
-  String get isNotAValidEmailErrorText => "Forneça um e-mail válido";
+  String get isNotAValidEmailErrorText => "Forneça um email válido";
 
   @override
   String get latitudeLabel => "latitude";
@@ -143,7 +142,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get passwordResetEmailSentText =>
-      "Enviamos para seu e-mail um link que permite redefinir sua senha. Confira sua caixa de entrada.";
+      "Enviámos para seu email um link que permite redefinir sua senha. Confira sua caixa de entrada.";
 
   @override
   String get phoneInputLabel => "Número de telefone";
@@ -162,7 +161,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get profile => "Perfil";
 
   @override
-  String get provideEmail => "Forneça seu e-mail e senha";
+  String get provideEmail => "Forneça seu email e senha";
 
   @override
   String get referenceLabel => "referência";
@@ -199,7 +198,7 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get signInWithEmailLinkSentText =>
-      "Enviamos um link mágico para seu e-mail. Confira sua caixa de entrada e clique nesse link para fazer login";
+      "Enviámos um link mágico para seu email. Confira sua caixa de entrada e clique nesse link para fazer login";
 
   @override
   String get signInWithEmailLinkViewTitleText =>
@@ -268,76 +267,77 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
       "A senha é inválida ou o usuário não tem uma senha";
 
   @override
-  String get uploadButtonText => "Upload file";
+  String get uploadButtonText => "Carregue ficheiro";
 
   @override
-  String get verifyEmailTitle => "Verify your email";
+  String get verifyEmailTitle => "Verifique o seu email";
 
   @override
   String get verificationEmailSentText =>
-      "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.";
+      "Um email de verificação foi enviado para seu email. Confira sua caixa de entrada e clique no link para verificar o seu endereço de email.";
 
   @override
   String get verificationFailedText =>
-      "We couldn't verify your email address. ";
+      "Não conseguimos verificar seu endereço de email. ";
 
   @override
-  String get resendVerificationEmailButtonLabel => "Resend verification email";
+  String get resendVerificationEmailButtonLabel =>
+      "Reenviar email de verificação";
 
   @override
-  String get verificationEmailSentTextShort => "Verification email sent";
+  String get verificationEmailSentTextShort => "Email de verificação enviado";
 
   @override
-  String get emailIsNotVerifiedText => "Email is not verified";
+  String get emailIsNotVerifiedText => "Email não está verificado";
 
   @override
   String get waitingForEmailVerificationText =>
-      "Waiting for email verification";
+      "Aguardando verificação do email";
 
   @override
-  String get dismissButtonLabel => "Dismiss";
+  String get dismissButtonLabel => "Ignorar";
 
   @override
   String get okButtonLabel => "OK";
 
   @override
   String get checkEmailHintText =>
-      "Please check your email and click the link to verify your email address.";
+      "Por favor confira sua caixa de entrada e clique no link para verificar seu endereço de email.";
 
   @override
-  String get doneButtonLabel => "Done";
+  String get doneButtonLabel => "Feito";
 
   @override
   String get invalidVerificationCodeErrorText =>
-      "The code you entered is invalid. Please try again.";
+      "O código que inseriu é inválido. Por favor tente novamente.";
 
   @override
-  String get ulinkProviderAlertTitle => "Unlink provider";
+  String get ulinkProviderAlertTitle => "Desassociar provedor";
 
   @override
-  String get confirmUnlinkButtonLabel => "Unlink";
+  String get confirmUnlinkButtonLabel => "Desassociar";
 
   @override
-  String get cancelButtonLabel => "Cancel";
+  String get cancelButtonLabel => "Cancelar";
 
   @override
   String get unlinkProviderAlertMessage =>
-      "Are you sure you want to unlink this provider?";
+      "Tem a certeza que quer desassociar este provedor?";
 
   @override
   String get weakPasswordErrorText =>
-      "Password should be at least 6 characters";
+      "A senha deve ter pelo menos 6 caracteres";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+  String get confirmDeleteAccountAlertTitle => "Confirmar eliminação de conta";
 
   @override
   String get confirmDeleteAccountAlertMessage =>
-      "Are you sure you want to delete your account?";
+      "Tem a certeza que quer eliminar sua conta?";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+  String get confirmDeleteAccountButtonLabel => "Sim, eliminar";
 
   @override
-  String get sendVerificationEmailLabel => "Send verification email";
+  String get sendVerificationEmailLabel => "Enviar email de verificação";
 }

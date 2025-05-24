@@ -519,7 +519,7 @@
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": Tem a certeza que quer eliminar sua conta?",
+  "confirmDeleteAccountAlertMessage": "Tem a certeza que quer eliminar sua conta?",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
