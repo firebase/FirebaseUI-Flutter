@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   desktop_webview_auth: ^0.0.14
-  firebase_auth: ^5.4.0
+  firebase_auth: ^5.5.4
   firebase_ui_auth: ^1.16.1
   firebase_ui_shared: ^1.4.1
   flutter_svg: ^2.0.9

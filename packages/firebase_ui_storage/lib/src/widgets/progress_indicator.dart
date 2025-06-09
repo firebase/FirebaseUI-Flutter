@@ -47,6 +47,7 @@ class _BindTaskWidget extends StatelessWidget {
         } else {
           final taskSnapshot = snapshot.requireData;
           progress = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes;
+          if (progress.isNaN) progress = 0;
         }
 
         return builder(context, progress);
