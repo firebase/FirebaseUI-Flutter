@@ -13,7 +13,7 @@ false_secrets:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_storage: ^12.4.0
+  firebase_storage: ^12.4.6
   firebase_ui_localizations: ^1.13.1
   firebase_ui_shared: ^1.4.1
   path: ^1.8.3
