@@ -1,3 +1,7 @@
+## 1.14.0
+
+ - **FEAT**: Add missing translation values ([#507](https://github.com/firebase/FirebaseUI-Flutter/issues/507)). ([fc0e3da0](https://github.com/firebase/FirebaseUI-Flutter/commit/fc0e3da07388b624e049c3878cbf03f6817a840f))
+
 ## 1.13.1
 
  - **FIX**: replace deprecated API and bump FlutterFire dependencies ([#453](https://github.com/firebase/FirebaseUI-Flutter/issues/453)). ([530be48a](https://github.com/firebase/FirebaseUI-Flutter/commit/530be48a4710387832f98059bd34ce07bba1778c))

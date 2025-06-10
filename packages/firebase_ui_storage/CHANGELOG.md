@@ -1,3 +1,7 @@
+## 2.1.2
+
+ - **FIX**: progress is NaN when both bytesTransferred & totalBytes are 0 ([#491](https://github.com/firebase/FirebaseUI-Flutter/issues/491)). ([95b5f53a](https://github.com/firebase/FirebaseUI-Flutter/commit/95b5f53a35c06d5f4ac2b8f714400fd1f05524ab))
+
 ## 2.1.1
 
  - **FIX**: replace deprecated API and bump FlutterFire dependencies ([#453](https://github.com/firebase/FirebaseUI-Flutter/issues/453)). ([530be48a](https://github.com/firebase/FirebaseUI-Flutter/commit/530be48a4710387832f98059bd34ce07bba1778c))
