@@ -9,6 +9,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Defines the view type for the FirestoreView widget
+enum FirestoreViewType {
+  /// ListView presentation
+  list,
+
+  /// GridView presentation
+  grid,
+}
+
 /// A function that builds a widget from a [FirestoreQueryBuilderSnapshot]
 ///
 /// See also [FirebaseDatabaseQueryBuilder].
@@ -350,68 +359,38 @@ class _Sentinel {
   const _Sentinel();
 }
 
-/// A type representing the function passed to [FirestoreListView] for its `itemBuilder`.
+/// A type representing the function passed to [FirestoreView] for its `itemBuilder`.
 typedef FirestoreItemBuilder<Document> = Widget Function(
   BuildContext context,
   QueryDocumentSnapshot<Document> doc,
 );
 
-/// A type representing the function passed to [FirestoreListView] for its `loadingBuilder`.
+/// A type representing the function passed to [FirestoreView] for its `loadingBuilder`.
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
 
-/// A type representing the function passed to [FirestoreListView] for its `loadingIndicatorBuilder`.
+/// A type representing the function passed to [FirestoreView] for its `loadingIndicatorBuilder`.
 typedef FirestoreFetchingIndicatorBuilder = Widget Function(
   BuildContext context,
 );
 
-/// A type representing the function passed to [FirestoreListView] for its `errorBuilder`.
+/// A type representing the function passed to [FirestoreView] for its `errorBuilder`.
 typedef FirestoreErrorBuilder = Widget Function(
   BuildContext context,
   Object error,
   StackTrace stackTrace,
 );
 
-/// A type representing the function passed to [FirestoreListView] for its `emptyBuilder`.
+/// A type representing the function passed to [FirestoreView] for its `emptyBuilder`.
 typedef FirestoreEmptyBuilder = Widget Function(BuildContext context);
 
-/// {@template firebase_ui.firestorelistview}
-/// A [ListView.builder] that obtains its items from a Firestore query.
+/// {@template firebase_ui.firestoreview}
+/// A unified widget that can display Firestore query results in either ListView or GridView format.
 ///
-/// As an example, consider the following collection:
-///
+/// Example usage:
 /// ```dart
-/// class Movie {
-///   Movie({required this.title, required this.genre});
-///
-///   Movie.fromJson(Map<String, Object?> json)
-///     : this(
-///         title: json['title']! as String,
-///         genre: json['genre']! as String,
-///       );
-///
-///   final String title;
-///   final String genre;
-///
-///   Map<String, Object?> toJson() {
-///     return {
-///       'title': title,
-///       'genre': genre,
-///     };
-///   }
-/// }
-///
-/// final moviesCollection = FirebaseFirestore.instance.collection('movies').withConverter<Movie>(
-///      fromFirestore: (snapshot, _) => Movie.fromJson(snapshot.data()!),
-///      toFirestore: (movie, _) => movie.toJson(),
-///    );
-/// ```
-///
-///
-/// Using [FirestoreListView], we can now show the list of movies by writing:
-///
-/// ```dart
-/// FirestoreListView<Movie>(
+/// FirestoreView<Movie>(
 ///   query: moviesCollection.orderBy('title'),
+///   viewType: FirestoreViewType.list, // or FirestoreViewType.grid
 ///   itemBuilder: (context, snapshot) {
 ///     Movie movie = snapshot.data();
 ///     return Text(movie.title);
@@ -419,24 +398,23 @@ typedef FirestoreEmptyBuilder = Widget Function(BuildContext context);
 /// )
 /// ```
 ///
-/// For advanced UI use-cases, consider switching to [FirestoreQueryBuilder].
+/// For grid view, you can specify grid-specific parameters like crossAxisCount.
 /// {@endtemplate}
 /// {@subCategory service:firestore}
 /// {@subCategory type:widget}
-/// {@subCategory description:A widget that listens to a query and display the items using a ListView}
-/// {@subCategory img:https://place-hold.it/400x150}
-class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
-  /// {@macro firebase_ui.firestorelistview}
-  FirestoreListView({
+/// {@subCategory description:A widget that listens to a query and displays items using either ListView or GridView}
+class FirestoreView<Document> extends FirestoreQueryBuilder<Document> {
+  /// {@macro firebase_ui.firestoreview}
+  FirestoreView({
     super.key,
     required super.query,
     required FirestoreItemBuilder<Document> itemBuilder,
+    required FirestoreViewType viewType,
     super.pageSize,
     FirestoreLoadingBuilder? loadingBuilder,
     FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
     FirestoreErrorBuilder? errorBuilder,
     FirestoreEmptyBuilder? emptyBuilder,
-    Axis scrollDirection = Axis.vertical,
     bool showFetchingIndicator = false,
     bool reverse = false,
     ScrollController? controller,
@@ -444,6 +422,8 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     ScrollPhysics? physics,
     bool shrinkWrap = false,
     EdgeInsetsGeometry? padding,
+
+    // ListView specific parameters
     double? itemExtent,
     Widget? prototypeItem,
     bool addAutomaticKeepAlives = true,
@@ -456,6 +436,18 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
         ScrollViewKeyboardDismissBehavior.manual,
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
+
+    // ListView.separated specific
+    IndexedWidgetBuilder? separatorBuilder,
+
+    // GridView specific parameters
+    int crossAxisCount = 2,
+    double childAspectRatio = 1.0,
+    double crossAxisSpacing = 10.0,
+    double mainAxisSpacing = 10.0,
+
+    // Scroll direction for both views
+    Axis scrollDirection = Axis.vertical,
   }) : super(
           builder: (context, snapshot, _) {
             if (snapshot.isFetching) {
@@ -477,44 +469,97 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
 
             final itemCount = snapshot.docs.length;
 
+      // Logic for determining grid item count with potential loading indicator
+      final effectiveItemCount = showFetchingIndicator && snapshot.hasMore && viewType == FirestoreViewType.grid
+          ? itemCount + 1
+          : itemCount;
+
+      // Common item builder for both list and grid
+      Widget buildItem(int index) {
+        // Handle fetching more items when near the end
+        final isLastItem = index + 1 == effectiveItemCount;
+
+        // If we're showing a grid and at the loading indicator position
+        if (viewType == FirestoreViewType.grid && showFetchingIndicator && index == itemCount) {
+          if (snapshot.hasMore) {
+            snapshot.fetchMore();
+            return fetchingIndicatorBuilder?.call(context) ??
+                const Center(child: CircularProgressIndicator.adaptive());
+          } else {
+            // If no more items, don't show the loader
+            return const SizedBox.shrink();
+          }
+        }
+
+        // Fetch more if we're at the last item and not showing indicator
+        if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+          snapshot.fetchMore();
+        }
+
+        final doc = snapshot.docs[index];
+
+        if (showFetchingIndicator && viewType == FirestoreViewType.list) {
+          return OnMountListener(
+            onMount: () {
+              if (isLastItem && snapshot.hasMore) {
+                snapshot.fetchMore();
+              }
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                itemBuilder(context, doc),
+                if (isLastItem && snapshot.hasMore)
+                  fetchingIndicatorBuilder?.call(context) ??
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 16.0,
+                        ),
+                        child: Center(
+                          child: LoadingIndicator(
+                            size: 30.0,
+                            borderWidth: 2.0,
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          );
+        } else {
+          return itemBuilder(context, doc);
+        }
+      }
+
+      // Choose the appropriate view based on viewType
+      switch (viewType) {
+        case FirestoreViewType.list:
+          if (separatorBuilder != null) {
+            // ListView.separated implementation
+            return ListView.separated(
+              itemCount: itemCount,
+              itemBuilder: (context, index) => buildItem(index),
+              separatorBuilder: separatorBuilder,
+              scrollDirection: scrollDirection,
+              reverse: reverse,
+              controller: controller,
+              primary: primary,
+              physics: physics,
+              shrinkWrap: shrinkWrap,
+              padding: padding,
+              addAutomaticKeepAlives: addAutomaticKeepAlives,
+              addRepaintBoundaries: addRepaintBoundaries,
+              addSemanticIndexes: addSemanticIndexes,
+              cacheExtent: cacheExtent,
+              dragStartBehavior: dragStartBehavior,
+              keyboardDismissBehavior: keyboardDismissBehavior,
+              restorationId: restorationId,
+              clipBehavior: clipBehavior,
+            );
+          } else {
+            // Regular ListView implementation
             return ListView.builder(
               itemCount: itemCount,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == itemCount;
-                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
-                  snapshot.fetchMore();
-                }
-
-                final doc = snapshot.docs[index];
-                return showFetchingIndicator
-                    ? OnMountListener(
-                        onMount: () {
-                          if (isLastItem && snapshot.hasMore) {
-                            snapshot.fetchMore();
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            itemBuilder(context, doc),
-                            if (isLastItem && snapshot.hasMore)
-                              fetchingIndicatorBuilder?.call(context) ??
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                    ),
-                                    child: Center(
-                                      child: LoadingIndicator(
-                                        size: 30.0,
-                                        borderWidth: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : itemBuilder(context, doc);
-              },
+              itemBuilder: (context, index) => buildItem(index),
               scrollDirection: scrollDirection,
               reverse: reverse,
               controller: controller,
@@ -534,118 +579,103 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               restorationId: restorationId,
               clipBehavior: clipBehavior,
             );
-          },
-        );
+          }
 
-  /// Shows a separator between list items just as in [ListView.separated]
-  FirestoreListView.separated({
+        case FirestoreViewType.grid:
+        // GridView implementation
+          return GridView.builder(
+            padding: padding,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: childAspectRatio,
+              crossAxisSpacing: crossAxisSpacing,
+              mainAxisSpacing: mainAxisSpacing,
+            ),
+            itemCount: effectiveItemCount,
+            shrinkWrap: shrinkWrap,
+            physics: physics,
+            controller: controller,
+            primary: primary,
+            scrollDirection: scrollDirection,
+            itemBuilder: (context, index) => buildItem(index),
+          );
+      }
+    },
+  );
+}
+
+/// Legacy class kept for backward compatibility
+@Deprecated('Use FirestoreView with FirestoreViewType.list instead')
+class FirestoreListView<Document> extends FirestoreView<Document> {
+  /// Creates a list view backed by a Firestore query
+  FirestoreListView({
     super.key,
     required super.query,
     required FirestoreItemBuilder<Document> itemBuilder,
     super.pageSize,
-    FirestoreLoadingBuilder? loadingBuilder,
-    FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
-    FirestoreErrorBuilder? errorBuilder,
-    FirestoreEmptyBuilder? emptyBuilder,
-    required IndexedWidgetBuilder separatorBuilder,
-    Axis scrollDirection = Axis.vertical,
-    bool showFetchingIndicator = false,
-    bool reverse = false,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics,
-    bool shrinkWrap = false,
-    EdgeInsetsGeometry? padding,
-    ChildIndexGetter? findChildIndexCallback,
-    bool addAutomaticKeepAlives = true,
-    bool addRepaintBoundaries = true,
-    bool addSemanticIndexes = true,
-    double? cacheExtent,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
-        ScrollViewKeyboardDismissBehavior.manual,
-    String? restorationId,
-    Clip clipBehavior = Clip.hardEdge,
+    super.loadingBuilder,
+    super.fetchingIndicatorBuilder,
+    super.errorBuilder,
+    super.emptyBuilder,
+    super.scrollDirection,
+    super.showFetchingIndicator,
+    super.reverse,
+    super.controller,
+    super.primary,
+    super.physics,
+    super.shrinkWrap,
+    super.padding,
+    super.itemExtent,
+    super.prototypeItem,
+    super.addAutomaticKeepAlives,
+    super.addRepaintBoundaries,
+    super.addSemanticIndexes,
+    super.cacheExtent,
+    super.semanticChildCount,
+    super.dragStartBehavior,
+    super.keyboardDismissBehavior,
+    super.restorationId,
+    super.clipBehavior,
   }) : super(
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator.adaptive());
-            }
+    viewType: FirestoreViewType.list,
+    itemBuilder: itemBuilder,
+  );
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
-
-            if (snapshot.docs.isEmpty && emptyBuilder != null) {
-              return emptyBuilder(context);
-            }
-
-            final itemCount = snapshot.docs.length;
-
-            return ListView.separated(
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == itemCount;
-                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
-                  snapshot.fetchMore();
-                }
-
-                final doc = snapshot.docs[index];
-                return showFetchingIndicator
-                    ? OnMountListener(
-                        onMount: () {
-                          if (isLastItem && snapshot.hasMore) {
-                            snapshot.fetchMore();
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            itemBuilder(context, doc),
-                            if (isLastItem && snapshot.hasMore)
-                              fetchingIndicatorBuilder?.call(context) ??
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                    ),
-                                    child: Center(
-                                      child: LoadingIndicator(
-                                        size: 30.0,
-                                        borderWidth: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : itemBuilder(context, doc);
-              },
-              separatorBuilder: separatorBuilder,
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              findChildIndexCallback: findChildIndexCallback,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              cacheExtent: cacheExtent,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
-        );
+  /// Creates a separated list view backed by a Firestore query
+  FirestoreListView.separated({
+    super.key,
+    required super.query,
+    required FirestoreItemBuilder<Document> itemBuilder,
+    required IndexedWidgetBuilder separatorBuilder,
+    super.pageSize,
+    super.loadingBuilder,
+    super.fetchingIndicatorBuilder,
+    super.errorBuilder,
+    super.emptyBuilder,
+    super.scrollDirection,
+    super.showFetchingIndicator,
+    super.reverse,
+    super.controller,
+    super.primary,
+    super.physics,
+    super.shrinkWrap,
+    super.padding,
+    super.addAutomaticKeepAlives,
+    super.addRepaintBoundaries,
+    super.addSemanticIndexes,
+    super.cacheExtent,
+    super.dragStartBehavior,
+    super.keyboardDismissBehavior,
+    super.restorationId,
+    super.clipBehavior,
+    ChildIndexGetter? findChildIndexCallback,
+  }) : super(
+    viewType: FirestoreViewType.list,
+    itemBuilder: itemBuilder,
+    separatorBuilder: separatorBuilder,
+  );
 }
+
 
 /// Listens to an aggregate query and passes the [AsyncSnapshot] to the builder.
 class AggregateQueryBuilder extends StatefulWidget {
