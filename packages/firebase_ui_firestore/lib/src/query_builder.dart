@@ -72,6 +72,7 @@ class FirestoreQueryBuilder<Document> extends StatefulWidget {
     required this.query,
     required this.builder,
     this.pageSize = 10,
+    this.includeMetadataChanges = false,
     this.child,
   }) : assert(pageSize > 1, 'Cannot have a pageSize lower than 1');
 
@@ -84,6 +85,10 @@ class FirestoreQueryBuilder<Document> extends StatefulWidget {
   ///
   /// When it changes, the current progress will be preserved.
   final int pageSize;
+
+  /// Whether to include metadata changes in the query.
+  /// Defaults to false.
+  final bool includeMetadataChanges;
 
   final FirestoreQueryBuilderSnapshotBuilder<Document> builder;
 
@@ -172,7 +177,9 @@ class _FirestoreQueryBuilderState<Document>
 
     final query = widget.query.limit(expectedDocsCount);
 
-    _querySubscription = query.snapshots().listen(
+    _querySubscription = query
+        .snapshots(includeMetadataChanges: widget.includeMetadataChanges)
+        .listen(
       (event) {
         setState(() {
           if (nextPage) {
@@ -432,6 +439,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     required super.query,
     required FirestoreItemBuilder<Document> itemBuilder,
     super.pageSize,
+    super.includeMetadataChanges,
     FirestoreLoadingBuilder? loadingBuilder,
     FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
     FirestoreErrorBuilder? errorBuilder,
@@ -543,6 +551,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     required super.query,
     required FirestoreItemBuilder<Document> itemBuilder,
     super.pageSize,
+    super.includeMetadataChanges,
     FirestoreLoadingBuilder? loadingBuilder,
     FirestoreFetchingIndicatorBuilder? fetchingIndicatorBuilder,
     FirestoreErrorBuilder? errorBuilder,
