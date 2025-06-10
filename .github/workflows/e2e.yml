@@ -168,7 +168,7 @@ jobs:
           npm i
           npm run build
           ../scripts/start-firebase-emulator.sh
-      - uses: futureware-tech/simulator-action@bde6805eedaeaba7775a9959970edc7d8bf10c4d
+      - uses: futureware-tech/simulator-action@d7d71f46661576907b12f85b402a61b6650d0e57
         id: simulator
         with:
           # List of available simulators: https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md#installed-simulators
