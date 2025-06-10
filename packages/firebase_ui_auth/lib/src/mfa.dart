@@ -5,6 +5,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_auth/src/widgets/internal/universal_page_route.dart';
 import 'package:flutter/scheduler.dart';
@@ -17,32 +18,36 @@ typedef SMSCodeInputScreenBuilder = Widget Function(
   AuthAction action,
 );
 
-Future<fba.UserCredential> startMFAVerification({
+Future<fba.UserCredential?> startMFAVerification({
   required BuildContext context,
   required fba.MultiFactorResolver resolver,
   fba.FirebaseAuth? auth,
   SMSCodeInputScreenBuilder? smsCodeInputScreenBuilder,
+  void Function(FirebaseException e)? onError,
 }) async {
   if (resolver.hints.first is fba.PhoneMultiFactorInfo) {
     return startPhoneMFAVerification(
       context: context,
       resolver: resolver,
       auth: auth,
+      onError: onError,
     );
   } else {
     throw Exception('Unsupported MFA type');
   }
 }
 
-Future<fba.UserCredential> startPhoneMFAVerification({
+Future<fba.UserCredential?> startPhoneMFAVerification({
   required BuildContext context,
   required fba.MultiFactorResolver resolver,
   fba.FirebaseAuth? auth,
   SMSCodeInputScreenBuilder? smsCodeInputScreenBuilder,
+  void Function(FirebaseException e)? onError,
 }) async {
   final session = resolver.session;
   final hint = resolver.hints.first;
-  final completer = Completer<fba.UserCredential>();
+  var completer = Completer<fba.UserCredential?>();
+
   final navigator = Navigator.of(context);
 
   final provider = PhoneAuthProvider();
@@ -56,10 +61,25 @@ Future<fba.UserCredential> startPhoneMFAVerification({
 
   provider.authListener = flow;
 
+  completer.future.catchError((e) {
+    onError?.call(e as FirebaseException);
+    flow.onError(e);
+    return null;
+  });
+
   final flowKey = Object();
 
   final actions = [
     AuthStateChangeAction<CredentialReceived>((context, inner) {
+      if (completer.isCompleted) {
+        completer = Completer<fba.UserCredential>();
+        completer.future.catchError((e) {
+          onError?.call(e as FirebaseException);
+          flow.onError(e);
+          return null;
+        });
+      }
+
       final cred = inner.credential as fba.PhoneAuthCredential;
       final assertion = fba.PhoneMultiFactorGenerator.getAssertion(cred);
       try {
