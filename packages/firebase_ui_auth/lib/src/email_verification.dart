@@ -125,10 +125,8 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
     if (_isMobile(platform)) {
       value = EmailVerificationState.pending;
 
-      // Cancel any existing subscription
       _linkSubscription?.cancel();
 
-      // Listen for incoming app links
       _linkSubscription = _appLinks.uriLinkStream.listen(
         (Uri uri) async {
           try {
