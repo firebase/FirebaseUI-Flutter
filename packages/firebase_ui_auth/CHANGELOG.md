@@ -1,3 +1,8 @@
+## 1.17.0
+
+ - **FIX**: bump FF dependencies to latest ([#520](https://github.com/firebase/FirebaseUI-Flutter/issues/520)). ([ac4f1fdd](https://github.com/firebase/FirebaseUI-Flutter/commit/ac4f1fddcee04b020a6384ac74f2571bccafe44e))
+ - **FEAT**(firebase_ui_auth): Use icon from OAuth provider as a fallback in ProfileScreen ([#474](https://github.com/firebase/FirebaseUI-Flutter/issues/474)). ([55f04ebb](https://github.com/firebase/FirebaseUI-Flutter/commit/55f04ebbf29fcc7f8abe11df1b4e7dfaf04028f5))
+
 ## 1.16.1
 
  - **FIX**: replace deprecated API and bump FlutterFire dependencies ([#453](https://github.com/firebase/FirebaseUI-Flutter/issues/453)). ([530be48a](https://github.com/firebase/FirebaseUI-Flutter/commit/530be48a4710387832f98059bd34ce07bba1778c))
