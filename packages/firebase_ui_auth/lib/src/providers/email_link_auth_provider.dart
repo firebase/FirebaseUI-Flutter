@@ -84,17 +84,14 @@ class EmailLinkAuthProvider
   /// Listens for incoming app links and handles email authentication.
   /// Should be called after [EmailLinkAuthListener.onLinkSent] was called.
   void awaitLink(String email) {
-    // Cancel any existing subscription
     _linkSubscription?.cancel();
 
-    // Listen for incoming links
     _linkSubscription = _appLinks.uriLinkStream.listen(
       (Uri uri) => _onLinkReceived(email, uri),
       onError: (error) => authListener.onError(error),
     );
   }
 
-  /// Stops listening for incoming links
   void dispose() {
     _linkSubscription?.cancel();
     _linkSubscription = null;
