@@ -14,7 +14,7 @@ void main() {
   late EmailLinkAuthProvider provider;
   late MockListener listener;
   late MockAuth auth;
-  late MockDynamicLinks dynamicLinks;
+  late MockAppLinks appLinks;
   late EmailLinkFlow flow;
   late EmailLinkAuthController ctrl;
 
@@ -27,11 +27,11 @@ void main() {
   setUp(() {
     auth = MockAuth();
     listener = MockListener();
-    dynamicLinks = MockDynamicLinks();
+    appLinks = MockAppLinks();
 
     provider = EmailLinkAuthProvider(
       actionCodeSettings: actionCodeSettings,
-      dynamicLinks: dynamicLinks,
+      appLinks: appLinks,
     );
 
     flow = EmailLinkFlow(
@@ -114,10 +114,13 @@ void main() {
 
     group('#awaitLink', () {
       test(
-        'waits for a link from dynamic links and calls onBeforeSignIn',
+        'waits for a link from app links and calls onBeforeSignIn',
         () async {
           provider.authListener = listener;
           provider.awaitLink('test@test.com');
+
+          // Simulate receiving an app link
+          MockUriStream.addLink(Uri.parse('https://test.com'));
 
           await untilCalled(listener.onBeforeSignIn());
 
@@ -130,6 +133,9 @@ void main() {
         provider.awaitLink('test@test.com');
 
         when(auth.isSignInWithEmailLink(any)).thenReturn(false);
+
+        // Simulate receiving an invalid app link
+        MockUriStream.addLink(Uri.parse('https://invalid-link.com'));
 
         await untilCalled(listener.onError(any));
 
@@ -144,6 +150,9 @@ void main() {
         () async {
           provider.authListener = listener;
           provider.awaitLink('test@test.com');
+
+          // Simulate receiving a valid app link
+          MockUriStream.addLink(Uri.parse('https://test.com'));
 
           await untilCalled(listener.onBeforeSignIn());
 
@@ -165,6 +174,9 @@ void main() {
         provider.authListener = listener;
         provider.awaitLink('test@test.com');
 
+        // Simulate receiving a valid app link
+        MockUriStream.addLink(Uri.parse('https://test.com'));
+
         await untilCalled(listener.onSignedIn(any));
         final result = verify(listener.onSignedIn(captureAny));
 
@@ -184,6 +196,9 @@ void main() {
         ).thenThrow(exception);
 
         provider.awaitLink('test@test.com');
+
+        // Simulate receiving a valid app link
+        MockUriStream.addLink(Uri.parse('https://test.com'));
 
         await untilCalled(listener.onError(any));
         final result = verify(listener.onError(captureAny));

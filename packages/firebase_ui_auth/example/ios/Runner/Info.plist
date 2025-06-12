@@ -47,6 +47,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+  <key>FlutterDeepLinkingEnabled</key>
+  <false/>
 	<key>CFBundleURLTypes</key>
     <array>
     	<dict>
