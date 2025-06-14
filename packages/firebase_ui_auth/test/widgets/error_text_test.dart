@@ -23,7 +23,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: ErrorText(exception: exception),
-          localizationsDelegates: [
+          localizationsDelegates: const [
             FirebaseUILocalizations.delegate,
           ],
         ),
@@ -48,7 +48,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: ErrorText(exception: exception),
-          localizationsDelegates: [
+          localizationsDelegates: const [
             FirebaseUILocalizations.delegate,
           ],
         ),
