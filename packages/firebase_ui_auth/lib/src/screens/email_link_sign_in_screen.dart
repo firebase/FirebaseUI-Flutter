@@ -61,7 +61,7 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return UniversalScaffold(
+    final child = UniversalScaffold(
       body: ResponsivePage(
         breakpoint: breakpoint,
         headerBuilder: headerBuilder,
@@ -77,6 +77,11 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
           ),
         ),
       ),
+    );
+
+    return FirebaseUIActions(
+      actions: actions ?? const [],
+      child: child,
     );
   }
 }

@@ -3,8 +3,9 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 /// All possible states of the email verification process.
 enum EmailVerificationState {
@@ -22,7 +23,7 @@ enum EmailVerificationState {
   sending,
 
   /// A state that indicates that user needs to follow the link and the app
-  /// awaits a valid dynamic link.
+  /// awaits a valid deep link.
   pending,
 
   /// A state that indicates that the verification email was successfully sent.
@@ -42,8 +43,12 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   /// {@macro ui.auth.auth_controller.auth}
   final fba.FirebaseAuth auth;
 
-  EmailVerificationController(this.auth)
-      : super(EmailVerificationState.unresolved) {
+  final AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
+  EmailVerificationController(this.auth, {AppLinks? appLinks})
+      : _appLinks = appLinks ?? AppLinks(),
+        super(EmailVerificationState.unresolved) {
     final user = auth.currentUser;
 
     if (user != null) {
@@ -55,6 +60,13 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
     }
 
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -93,6 +105,7 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   /// Indicates that email verification process was cancelled.
   void dismiss() {
     value = EmailVerificationState.dismissed;
+    _linkSubscription?.cancel();
   }
 
   /// Sends an email with a link to verify the user's email address.
@@ -111,19 +124,32 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
 
     if (_isMobile(platform)) {
       value = EmailVerificationState.pending;
-      // ignore: deprecated_member_use
-      final linkData = await FirebaseDynamicLinks.instance.onLink.first;
 
-      try {
-        final code = linkData.link.queryParameters['oobCode']!;
-        await auth.checkActionCode(code);
-        await auth.applyActionCode(code);
-        await user.reload();
-        value = EmailVerificationState.verified;
-      } on Exception catch (err) {
-        error = err;
-        value = EmailVerificationState.failed;
-      }
+      _linkSubscription?.cancel();
+
+      _linkSubscription = _appLinks.uriLinkStream.listen(
+        (Uri uri) async {
+          try {
+            final code = uri.queryParameters['oobCode'];
+            if (code != null) {
+              await auth.checkActionCode(code);
+              await auth.applyActionCode(code);
+              await user.reload();
+              value = EmailVerificationState.verified;
+              _linkSubscription?.cancel();
+            }
+          } on Exception catch (err) {
+            error = err;
+            value = EmailVerificationState.failed;
+            _linkSubscription?.cancel();
+          }
+        },
+        onError: (error) {
+          this.error = error is Exception ? error : Exception(error.toString());
+          value = EmailVerificationState.failed;
+          _linkSubscription?.cancel();
+        },
+      );
     } else {
       value = EmailVerificationState.sent;
     }
