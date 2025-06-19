@@ -145,6 +145,12 @@ class __EmailVerificationScreenContentState
     super.initState();
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   void _sendEmailVerification(_) {
     controller
       ..addListener(() {
