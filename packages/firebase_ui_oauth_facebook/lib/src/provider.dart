@@ -33,7 +33,7 @@ class FacebookProvider extends OAuthProvider {
   void _handleResult(LoginResult result, AuthAction action) {
     switch (result.status) {
       case LoginStatus.success:
-        final token = result.accessToken!.token;
+        final token = result.accessToken!.tokenString;
         final credential = fba.FacebookAuthProvider.credential(token);
 
         onCredentialReceived(credential, action);
