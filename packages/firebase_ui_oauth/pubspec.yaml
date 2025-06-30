@@ -1,6 +1,6 @@
 name: firebase_ui_oauth
 description: Firebase UI widgets for authentication & OAuth
-version: 1.6.1
+version: 1.7.0
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_oauth
 
 environment:
@@ -9,8 +9,8 @@ environment:
 
 dependencies:
   desktop_webview_auth: ^0.0.14
-  firebase_auth: ^5.4.0
-  firebase_ui_auth: ^1.16.1
+  firebase_auth: ^5.6.0
+  firebase_ui_auth: ^1.17.0
   firebase_ui_shared: ^1.4.1
   flutter_svg: ^2.0.9
   flutter:
