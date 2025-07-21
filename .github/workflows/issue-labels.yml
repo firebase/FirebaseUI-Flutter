@@ -8,7 +8,10 @@ on:
 
 jobs:
   label-op-response:
+    if: github.event_name == 'issue_comment'
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Check if the comment is from the OP
         id: check-op
@@ -37,6 +40,8 @@ jobs:
   label-new-issue:
     if: github.event.action == 'opened'
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Add 'Needs Attention' label to new issue
         uses: actions-ecosystem/action-add-labels@v1
