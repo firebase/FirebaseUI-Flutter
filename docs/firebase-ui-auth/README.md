@@ -17,8 +17,6 @@ Install dependencies
 ```sh
 flutter pub add firebase_core
 flutter pub add firebase_auth
-# required for email link sign in and email verification
-flutter pub add firebase_dynamic_links
 flutter pub add firebase_ui_auth
 ```
 
