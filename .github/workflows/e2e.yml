@@ -87,7 +87,7 @@ jobs:
           script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
 
   ios:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
@@ -185,7 +185,7 @@ jobs:
           flutter test ./integration_test/firebase_ui_test.dart -d "$SIMULATOR" --dart-define=CI=true
 
   macos:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
