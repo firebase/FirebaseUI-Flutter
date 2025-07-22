@@ -48,19 +48,4 @@ post_install do |installer|
       end
     end
   end
-  
-  # Fix Swift 6.0 'sending' keyword compatibility issues
-  firebase_encoder_file = 'Pods/FirebaseSharedSwift/FirebaseSharedSwift/Sources/third_party/FirebaseDataEncoder/FirebaseDataEncoder.swift'
-  if File.exist?(firebase_encoder_file)
-    text = File.read(firebase_encoder_file)
-    new_contents = text.gsub('throws -> sending Any', 'throws -> Any')
-    File.open(firebase_encoder_file, "w") { |file| file.puts new_contents }
-  end
-  
-  firebase_lock_file = 'Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/Utilities/FIRAllocatedUnfairLock.swift'
-  if File.exist?(firebase_lock_file)
-    text = File.read(firebase_lock_file)
-    new_contents = text.gsub('initialState: sending State', 'initialState: State')
-    File.open(firebase_lock_file, "w") { |file| file.puts new_contents }
-  end
 end
