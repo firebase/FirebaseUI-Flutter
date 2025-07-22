@@ -4,9 +4,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
+import 'dart:async';
 
 class TestMaterialApp extends StatelessWidget {
   final Widget child;
@@ -53,27 +54,52 @@ class MockUser extends Mock implements fba.User {
   }
 }
 
-class MockLinksStream extends Mock implements Stream<PendingDynamicLinkData> {
+class MockUriStream extends Mock implements Stream<Uri> {
+  static final StreamController<Uri> _controller =
+      StreamController<Uri>.broadcast();
+
   @override
-  Future<PendingDynamicLinkData> get first async {
-    return super.noSuchMethod(
-      Invocation.getter(#first),
-      returnValue: PendingDynamicLinkData(
-        link: Uri.parse('https://test.com'),
-      ),
-      returnValueForMissingStub: PendingDynamicLinkData(
-        link: Uri.parse('https://test.com'),
-      ),
+  StreamSubscription<Uri> listen(
+    void Function(Uri)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) {
+    return _controller.stream.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError,
     );
+  }
+
+  static void addLink(Uri uri) {
+    _controller.add(uri);
+  }
+
+  static void addError(Object error) {
+    _controller.addError(error);
+  }
+
+  static void close() {
+    _controller.close();
   }
 }
 
-// ignore: deprecated_member_use
-class MockDynamicLinks extends Mock implements FirebaseDynamicLinks {
-  static final _linkStream = MockLinksStream();
+class MockAppLinks extends Mock implements AppLinks {
+  static final _uriStream = MockUriStream();
 
   @override
-  Stream<PendingDynamicLinkData> get onLink => _linkStream;
+  Stream<Uri> get uriLinkStream => _uriStream;
+
+  @override
+  Future<Uri?> getInitialLink() async {
+    return super.noSuchMethod(
+      Invocation.method(#getInitialLink, []),
+      returnValue: null,
+      returnValueForMissingStub: null,
+    );
+  }
 }
 
 class MockApp extends Mock implements FirebaseApp {}

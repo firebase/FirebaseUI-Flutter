@@ -13,18 +13,18 @@ import '../test_utils.dart';
 void main() {
   const labels = DefaultLocalizations();
   late MockAuth auth;
-  late MockDynamicLinks dynamicLinks;
+  late MockAppLinks appLinks;
   late EmailLinkAuthProvider emailLinkProvider;
 
   setUp(() {
     auth = MockAuth();
-    dynamicLinks = MockDynamicLinks();
+    appLinks = MockAppLinks();
     final actionCodeSettings = fba.ActionCodeSettings(
       url: 'https://example.com',
     );
     emailLinkProvider = EmailLinkAuthProvider(
       actionCodeSettings: actionCodeSettings,
-      dynamicLinks: dynamicLinks,
+      appLinks: appLinks,
     );
   });
 
