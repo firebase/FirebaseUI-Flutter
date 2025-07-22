@@ -58,6 +58,13 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       reload();
@@ -73,6 +80,11 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   /// Contains an [Exception] if [state] is [EmailVerificationState.failed].
   Exception? error;
 
+  /// Controller might be disposed while [sendVerificationEmail] is waiting for
+  /// a future to complete. This flag is used to inform the method that it
+  /// should terminate early.
+  bool _disposed = false;
+
   bool _isMobile(TargetPlatform platform) {
     return platform == TargetPlatform.android || platform == TargetPlatform.iOS;
   }
@@ -80,6 +92,9 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   /// Reloads firebase user and updates the [state].
   Future<void> reload() async {
     await user.reload();
+    if (_disposed) {
+      return;
+    }
 
     if (user.email == null) {
       value = EmailVerificationState.unresolved;
@@ -103,7 +118,15 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
     value = EmailVerificationState.sending;
     try {
       await user.sendEmailVerification(actionCodeSettings);
+      // Controller might be disposed while waiting for the future to complete.
+      // In this case, avoid updating its value, as it would cause an exception.
+      if (_disposed) {
+        return;
+      }
     } on Exception catch (e) {
+      if (_disposed) {
+        return;
+      }
       error = e;
       value = EmailVerificationState.failed;
       return;
@@ -113,12 +136,27 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
       value = EmailVerificationState.pending;
       // ignore: deprecated_member_use
       final linkData = await FirebaseDynamicLinks.instance.onLink.first;
+      if (_disposed) {
+        return;
+      }
 
       try {
         final code = linkData.link.queryParameters['oobCode']!;
         await auth.checkActionCode(code);
+        if (_disposed) {
+          return;
+        }
+
         await auth.applyActionCode(code);
+        if (_disposed) {
+          return;
+        }
+
         await user.reload();
+        if (_disposed) {
+          return;
+        }
+
         value = EmailVerificationState.verified;
       } on Exception catch (err) {
         error = err;
