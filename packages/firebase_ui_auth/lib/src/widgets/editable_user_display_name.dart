@@ -3,9 +3,9 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../actions.dart';
@@ -140,11 +140,14 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
         ),
       );
     } else {
-      textField = TextField(
-        autofocus: true,
-        controller: ctrl,
-        decoration: InputDecoration(hintText: l.name, labelText: l.name),
-        onSubmitted: (_) => _finishEditing(),
+      textField = Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5.5),
+        child: TextField(
+          autofocus: true,
+          controller: ctrl,
+          decoration: InputDecoration(hintText: l.name, labelText: l.name),
+          onSubmitted: (_) => _finishEditing(),
+        ),
       );
     }
 
