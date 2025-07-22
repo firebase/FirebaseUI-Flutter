@@ -91,8 +91,6 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
         name: Install Node.js
         with:
@@ -189,8 +187,6 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
         name: Install Node.js
         with:
