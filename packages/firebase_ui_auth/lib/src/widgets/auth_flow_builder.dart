@@ -2,10 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
+import 'package:flutter/widgets.dart';
 
 import '../auth_controller.dart';
 import '../auth_state.dart';
@@ -225,11 +225,6 @@ class _AuthFlowBuilderState<T extends AuthController>
         return EmailAuthProvider();
       case PhoneAuthController:
         return PhoneAuthProvider();
-
-      // ignore: deprecated_member_use_from_same_package
-      case UniversalEmailSignInController:
-        // ignore: deprecated_member_use_from_same_package
-        return UniversalEmailSignInProvider();
       default:
         throw Exception("Can't create $T provider");
     }
@@ -269,13 +264,6 @@ class _AuthFlowBuilderState<T extends AuthController>
         auth: widget.auth,
       );
       // ignore: deprecated_member_use_from_same_package
-    } else if (provider is UniversalEmailSignInProvider) {
-      // ignore: deprecated_member_use_from_same_package
-      return UniversalEmailSignInFlow(
-        provider: provider,
-        action: widget.action,
-        auth: widget.auth,
-      );
     } else {
       throw Exception('Unknown provider $provider');
     }

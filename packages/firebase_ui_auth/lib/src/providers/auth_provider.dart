@@ -3,8 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:flutter/material.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter/material.dart';
 
 /// Default error handler that starts MFA flow
 /// if [FirebaseAuthMultiFactorException] is thrown.
@@ -132,29 +132,6 @@ abstract class AuthProvider<T extends AuthListener,
     } catch (err) {
       authListener.onError(err);
     }
-  }
-
-  /// Fetches available providers for the given [email].
-  @Deprecated(
-    'Email enumeration protection is on by default.'
-    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-  )
-  void findProvidersForEmail(
-    String email, [
-    fba.AuthCredential? credential,
-  ]) {
-    authListener.onBeforeProvidersForEmailFetch();
-
-    auth
-        .fetchSignInMethodsForEmail(email)
-        .then(
-          (methods) => authListener.onDifferentProvidersFound(
-            email,
-            methods,
-            credential,
-          ),
-        )
-        .catchError(authListener.onError);
   }
 
   /// {@template ui.auth.auth_provider.on_credential_received}

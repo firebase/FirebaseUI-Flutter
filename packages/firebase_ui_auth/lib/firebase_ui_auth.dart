@@ -7,11 +7,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/widgets.dart';
 
-export 'package:firebase_ui_shared/firebase_ui_shared.dart' show ButtonVariant;
-
 import 'src/actions.dart';
 import 'src/oauth_providers.dart';
 import 'src/providers/auth_provider.dart';
+
+export 'package:firebase_ui_shared/firebase_ui_shared.dart' show ButtonVariant;
 
 export 'src/actions.dart';
 export 'src/auth_controller.dart' show AuthAction, AuthController;
@@ -37,7 +37,6 @@ export 'src/flows/email_flow.dart';
 export 'src/flows/email_link_flow.dart';
 export 'src/flows/oauth_flow.dart' show OAuthController, OAuthFlow;
 export 'src/flows/phone_auth_flow.dart';
-export 'src/flows/universal_email_sign_in_flow.dart';
 // ignore_for_file: use_build_context_synchronously
 
 export 'src/mfa.dart' show startMFAVerification;
@@ -62,12 +61,10 @@ export 'src/screens/profile_screen.dart' show ProfileScreen;
 export 'src/screens/register_screen.dart';
 export 'src/screens/sign_in_screen.dart';
 export 'src/screens/sms_code_input_screen.dart';
-export 'src/screens/universal_email_sign_in_screen.dart';
 export 'src/styling/style.dart' show FirebaseUIStyle;
 export 'src/styling/theme.dart' show FirebaseUITheme;
 export 'src/views/different_method_sign_in_view.dart';
 export 'src/views/email_link_sign_in_view.dart';
-export 'src/views/find_providers_for_email_view.dart';
 export 'src/views/forgot_password_view.dart';
 export 'src/views/login_view.dart';
 export 'src/views/phone_input_view.dart';
