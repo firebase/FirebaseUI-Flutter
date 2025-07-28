@@ -34,6 +34,7 @@ Packages with other changes:
  - **FIX**: bump FF dependencies to latest ([#526](https://github.com/firebase/FirebaseUI-Flutter/issues/526)). ([9f355bfc](https://github.com/firebase/FirebaseUI-Flutter/commit/9f355bfcda8319c9ed4786e1e3da91babb4f5229))
  - **FEAT**(firebase_ui_auth): Override the default deletion modal. ([#493](https://github.com/firebase/FirebaseUI-Flutter/issues/493)). ([97210905](https://github.com/firebase/FirebaseUI-Flutter/commit/97210905daaa1536e9fd849a4480a20d547b8ccf))
  - **BREAKING** **FEAT**(auth): Remove Dynamic Links, replace with app-links. ([#522](https://github.com/firebase/FirebaseUI-Flutter/issues/522)). ([b32ec609](https://github.com/firebase/FirebaseUI-Flutter/commit/b32ec6091da05d2f72188c3f335a2b6b954567ec))
+   - Dynamic Links has been stripped out, please ensure you follow this [migration guide to setup Firebase Hosting](firebase.google.com/support/guides/app-links-universal-links) to replace it. 
 
 #### `firebase_ui_database` - `v1.5.3`
 
