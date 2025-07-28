@@ -87,7 +87,7 @@ jobs:
           script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
 
   ios:
-    runs-on: macos-latest
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
@@ -126,8 +126,8 @@ jobs:
         id: pods-cache
         with:
           path: tests/ios/Pods
-          key: ${{ runner.os }}-pods-v3-${{ hashFiles('tests/ios/Podfile.lock') }}
-          restore-keys: ${{ runner.os }}-ios-pods-v2
+          key: ${{ runner.os }}-pods-v4-${{ hashFiles('tests/ios/Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-ios-pods-v3
       - name: "Install Tools"
         run: sudo npm i -g firebase-tools
       - name: Firebase Emulator Cache
@@ -172,7 +172,7 @@ jobs:
         id: simulator
         with:
           # List of available simulators: https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md#installed-simulators
-          model: "iPhone 15"
+          model: "iPhone 16"
       - name: "E2E Tests"
         working-directory: tests
         env:
@@ -183,7 +183,7 @@ jobs:
           flutter test ./integration_test/firebase_ui_test.dart -d "$SIMULATOR" --dart-define=CI=true
 
   macos:
-    runs-on: macos-latest
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
@@ -205,8 +205,8 @@ jobs:
         id: pods-cache
         with:
           path: tests/macos/Pods
-          key: ${{ runner.os }}-pods-v2-${{ hashFiles('tests/macos/Podfile.lock') }}
-          restore-keys: ${{ runner.os }}-macos-pods-v1
+          key: ${{ runner.os }}-pods-v4-${{ hashFiles('tests/macos/Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-macos-pods-v3
       - name: "Install Tools"
         run: sudo npm i -g firebase-tools
       - name: Cache Firebase Emulator
