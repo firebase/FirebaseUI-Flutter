@@ -23,7 +23,7 @@ final actionCodeSettings = ActionCodeSettings(
   url: 'https://flutterfire-e2e-tests.firebaseapp.com',
   handleCodeInApp: true,
   androidMinimumVersion: '1',
-  androidPackageName: 'io.flutter.plugins.firebase_ui.firebase_ui_example',
+  androidPackageName: 'io.flutter.plugins.firebase_ui_example',
   iOSBundleId: 'io.flutter.plugins.fireabaseUiExample',
 );
 final emailLinkProviderConfig = EmailLinkAuthProvider(
@@ -245,7 +245,7 @@ class FirebaseAuthUIExample extends StatelessWidget {
           return EmailLinkSignInScreen(
             actions: [
               AuthStateChangeAction<SignedIn>((context, state) {
-                Navigator.pushReplacementNamed(context, '/');
+                Navigator.pushReplacementNamed(context, '/profile');
               }),
             ],
             provider: emailLinkProviderConfig,
