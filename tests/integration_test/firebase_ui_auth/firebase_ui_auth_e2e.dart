@@ -5,19 +5,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'actions_test.dart' as actions;
 import 'email_form_test.dart' as email_form;
 import 'email_link_sign_in_view_test.dart' as email_link_sign_in_view;
-import 'universal_email_sign_in_screen_test.dart'
-    as universal_email_sign_in_screen;
-import 'phone_verification_test.dart' as phone_verification;
 import 'layout_test.dart' as layout;
-import 'actions_test.dart' as actions;
+import 'phone_verification_test.dart' as phone_verification;
 
 Future<void> main() async {
   group('Auth', () {
     email_form.main();
     email_link_sign_in_view.main();
-    universal_email_sign_in_screen.main();
     actions.main();
 
     switch (defaultTargetPlatform) {
