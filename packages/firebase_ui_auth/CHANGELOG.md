@@ -1,3 +1,14 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**(firebase_ui_auth): Add padding between avatar and display name form ([#524](https://github.com/firebase/FirebaseUI-Flutter/issues/524)). ([2747c1ae](https://github.com/firebase/FirebaseUI-Flutter/commit/2747c1ae2869f2c6988cfab819d2885f75913494))
+ - **FIX**(firebase_ui_auth): Avoid redundant confirmation on account deletion ([#494](https://github.com/firebase/FirebaseUI-Flutter/issues/494)). ([e2626d24](https://github.com/firebase/FirebaseUI-Flutter/commit/e2626d244aabe70ba98ea6200a71e980e87c37b5))
+ - **FIX**: bump FF dependencies to latest ([#526](https://github.com/firebase/FirebaseUI-Flutter/issues/526)). ([9f355bfc](https://github.com/firebase/FirebaseUI-Flutter/commit/9f355bfcda8319c9ed4786e1e3da91babb4f5229))
+ - **FEAT**(firebase_ui_auth): Override the default deletion modal. ([#493](https://github.com/firebase/FirebaseUI-Flutter/issues/493)). ([97210905](https://github.com/firebase/FirebaseUI-Flutter/commit/97210905daaa1536e9fd849a4480a20d547b8ccf))
+ - **BREAKING** **FEAT**(auth): Remove Dynamic Links, replace with app-links. ([#522](https://github.com/firebase/FirebaseUI-Flutter/issues/522)). ([b32ec609](https://github.com/firebase/FirebaseUI-Flutter/commit/b32ec6091da05d2f72188c3f335a2b6b954567ec))
+   - Dynamic Links has been stripped out, please ensure you follow this [migration guide to setup Firebase Hosting](firebase.google.com/support/guides/app-links-universal-links) to replace it. 
+
 ## 1.17.0
 
  - **FIX**: bump FF dependencies to latest ([#520](https://github.com/firebase/FirebaseUI-Flutter/issues/520)). ([ac4f1fdd](https://github.com/firebase/FirebaseUI-Flutter/commit/ac4f1fddcee04b020a6384ac74f2571bccafe44e))
