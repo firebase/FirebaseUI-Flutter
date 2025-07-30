@@ -51,8 +51,6 @@ class FirebaseDatabaseDataTable extends StatefulWidget {
     this.actions,
     this.sortColumnIndex,
     this.sortAscending = true,
-    @Deprecated('Migrate to use dataRowMinHeight and dataRowMaxHeight instead.')
-    double? dataRowHeight,
     double? dataRowMinHeight,
     double? dataRowMaxHeight,
     this.headingRowHeight = 56.0,
@@ -69,10 +67,8 @@ class FirebaseDatabaseDataTable extends StatefulWidget {
           columnLabels is LinkedHashMap,
           'only LinkedHashMap are supported as header',
         ), // using an assert instead of a type because `<A, B>{}` types as `Map` but is an instance of `LinkedHashMap`
-        dataRowMinHeight =
-            dataRowHeight ?? dataRowMinHeight ?? kMinInteractiveDimension,
-        dataRowMaxHeight =
-            dataRowHeight ?? dataRowMaxHeight ?? kMinInteractiveDimension;
+        dataRowMinHeight = dataRowMinHeight ?? kMinInteractiveDimension,
+        dataRowMaxHeight = dataRowMaxHeight ?? kMinInteractiveDimension;
 
   /// The firestore query that will be displayed
   final Query query;

@@ -305,13 +305,6 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   }
 
   @override
-  void onBeforeProvidersForEmailFetch() {
-    safeSetState(() {
-      isLoading = true;
-    });
-  }
-
-  @override
   void onBeforeSignIn() {
     safeSetState(() {
       isLoading = true;
@@ -323,15 +316,6 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
     safeSetState(() {
       isLoading = false;
     });
-  }
-
-  @override
-  void onDifferentProvidersFound(
-    String email,
-    List<String> providers,
-    fba.AuthCredential? credential,
-  ) {
-    widget.onDifferentProvidersFound?.call(providers, credential);
   }
 
   @override

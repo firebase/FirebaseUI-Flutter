@@ -50,25 +50,7 @@ abstract class AuthListener {
   /// Called if the credential was successfully linked with the user account.
   void onCredentialLinked(fba.AuthCredential credential);
 
-  /// Called before an attempt to fetch available providers for the email.
-  @Deprecated(
-    'Email enumeration protection is on by default.'
-    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-  )
-  void onBeforeProvidersForEmailFetch();
-
-  /// Called when available providers for the email were successfully fetched.
-  @Deprecated(
-    'Email enumeration protection is on by default.'
-    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-  )
-  void onDifferentProvidersFound(
-    String email,
-    List<String> providers,
-    fba.AuthCredential? credential,
-  );
-
-  /// Called when the user cancells the sign in process.
+  /// Called when the user cancels the sign in process.
   void onCanceled();
 
   /// Called when the user has to complete MFA.
@@ -132,29 +114,6 @@ abstract class AuthProvider<T extends AuthListener,
     } catch (err) {
       authListener.onError(err);
     }
-  }
-
-  /// Fetches available providers for the given [email].
-  @Deprecated(
-    'Email enumeration protection is on by default.'
-    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-  )
-  void findProvidersForEmail(
-    String email, [
-    fba.AuthCredential? credential,
-  ]) {
-    authListener.onBeforeProvidersForEmailFetch();
-
-    auth
-        .fetchSignInMethodsForEmail(email)
-        .then(
-          (methods) => authListener.onDifferentProvidersFound(
-            email,
-            methods,
-            credential,
-          ),
-        )
-        .catchError(authListener.onError);
   }
 
   /// {@template ui.auth.auth_provider.on_credential_received}

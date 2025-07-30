@@ -19,7 +19,6 @@ export 'src/auth_flow.dart';
 export 'src/auth_state.dart'
     show
         Uninitialized,
-        FetchingProvidersForEmail,
         AuthStateListenerCallback,
         AuthState,
         AuthStateListener,
@@ -29,16 +28,12 @@ export 'src/auth_state.dart'
         SigningIn,
         UserCreated,
         AuthFailed,
-        // ignore: deprecated_member_use_from_same_package
-        DifferentSignInMethodsFound,
         MFARequired;
 export 'src/email_verification.dart';
 export 'src/flows/email_flow.dart';
 export 'src/flows/email_link_flow.dart';
 export 'src/flows/oauth_flow.dart' show OAuthController, OAuthFlow;
 export 'src/flows/phone_auth_flow.dart';
-export 'src/flows/universal_email_sign_in_flow.dart';
-// ignore_for_file: use_build_context_synchronously
 
 export 'src/mfa.dart' show startMFAVerification;
 export 'src/navigation/authentication.dart';
@@ -51,7 +46,6 @@ export 'src/providers/auth_provider.dart';
 export 'src/providers/email_auth_provider.dart';
 export 'src/providers/email_link_auth_provider.dart';
 export 'src/providers/phone_auth_provider.dart';
-export 'src/providers/universal_email_sign_in_provider.dart';
 export 'src/screens/email_link_sign_in_screen.dart';
 export 'src/screens/email_verification_screen.dart';
 export 'src/screens/forgot_password_screen.dart';
@@ -62,12 +56,9 @@ export 'src/screens/profile_screen.dart' show ProfileScreen;
 export 'src/screens/register_screen.dart';
 export 'src/screens/sign_in_screen.dart';
 export 'src/screens/sms_code_input_screen.dart';
-export 'src/screens/universal_email_sign_in_screen.dart';
 export 'src/styling/style.dart' show FirebaseUIStyle;
 export 'src/styling/theme.dart' show FirebaseUITheme;
-export 'src/views/different_method_sign_in_view.dart';
 export 'src/views/email_link_sign_in_view.dart';
-export 'src/views/find_providers_for_email_view.dart';
 export 'src/views/forgot_password_view.dart';
 export 'src/views/login_view.dart';
 export 'src/views/phone_input_view.dart';
@@ -75,7 +66,6 @@ export 'src/views/reauthenticate_view.dart';
 export 'src/views/sms_code_input_view.dart';
 export 'src/widgets/auth_flow_builder.dart';
 export 'src/widgets/delete_account_button.dart';
-export 'src/widgets/different_method_sign_in_dialog.dart';
 export 'src/widgets/editable_user_display_name.dart';
 export 'src/widgets/email_form.dart'
     show EmailForm, ForgotPasswordAction, EmailFormStyle;

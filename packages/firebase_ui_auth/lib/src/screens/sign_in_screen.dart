@@ -124,37 +124,10 @@ class SignInScreen extends MultiProviderScreen {
     this.maxWidth,
   });
 
-  Future<void> _signInWithDifferentProvider(
-    BuildContext context,
-    // ignore: deprecated_member_use_from_same_package
-    DifferentSignInMethodsFound state,
-  ) async {
-    // ignore: deprecated_member_use_from_same_package
-    await showDifferentMethodSignInDialog(
-      availableProviders: state.methods,
-      providers: providers,
-      context: context,
-      auth: auth,
-      onSignedIn: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    await auth.currentUser!.linkWithCredential(state.credential!);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final handlesDifferentSignInMethod = this
-        .actions
-        // ignore: deprecated_member_use_from_same_package
-        .whereType<AuthStateChangeAction<DifferentSignInMethodsFound>>()
-        .isNotEmpty;
-
     final actions = [
       ...this.actions,
-      if (!handlesDifferentSignInMethod)
-        AuthStateChangeAction(_signInWithDifferentProvider)
     ];
 
     return FirebaseUIActions(

@@ -225,11 +225,6 @@ class _AuthFlowBuilderState<T extends AuthController>
         return EmailAuthProvider();
       case PhoneAuthController:
         return PhoneAuthProvider();
-
-      // ignore: deprecated_member_use_from_same_package
-      case UniversalEmailSignInController:
-        // ignore: deprecated_member_use_from_same_package
-        return UniversalEmailSignInProvider();
       default:
         throw Exception("Can't create $T provider");
     }
@@ -264,14 +259,6 @@ class _AuthFlowBuilderState<T extends AuthController>
       );
     } else if (provider is PhoneAuthProvider) {
       return PhoneAuthFlow(
-        provider: provider,
-        action: widget.action,
-        auth: widget.auth,
-      );
-      // ignore: deprecated_member_use_from_same_package
-    } else if (provider is UniversalEmailSignInProvider) {
-      // ignore: deprecated_member_use_from_same_package
-      return UniversalEmailSignInFlow(
         provider: provider,
         action: widget.action,
         auth: widget.auth,
