@@ -154,43 +154,6 @@ class UserCreated extends AuthState {
   UserCreated(this.credential);
 }
 
-/// {@template ui.auth.auth_state.different_sign_in_methods_found}
-/// An [AuthState] that indicates that there are different auth providers
-/// associated with an email that was used to authenticate.
-///
-/// See [AuthState] docs for usage examples.
-/// {@endtemplate}
-@Deprecated(
-  'Email enumeration protection is on by default.'
-  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-)
-class DifferentSignInMethodsFound extends AuthState {
-  /// An email that has different auth providers associated with.
-  final String email;
-
-  /// An instance of the auth credential that was obtained during sign in flow.
-  /// Could be used to link with the user account after a sign in using on of
-  /// the available [methods].
-  final AuthCredential? credential;
-
-  /// A list of provider ids that were found for the [email].
-  final List<String> methods;
-
-  /// {@macro ui.auth.auth_state.different_sign_in_methods_found}
-  DifferentSignInMethodsFound(this.email, this.methods, this.credential);
-}
-
-/// {@template ui.auth.auth_state.fetching_providers_for_email}
-/// An [AuthState] that indicates that there is a lookup of available providers
-/// for an email in progress.
-///
-/// See [AuthState] docs for usage examples.
-/// {@endtemplate}
-class FetchingProvidersForEmail extends AuthState {
-  /// {@macro ui.auth.auth_state.fetching_providers_for_email}
-  const FetchingProvidersForEmail();
-}
-
 /// {@template ui.auth.auth_state.mfa_required}
 /// An [AuthState] that indicates that multi-factor authentication is required.
 /// {@endtemplate}
