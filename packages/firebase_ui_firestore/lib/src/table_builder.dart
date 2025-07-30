@@ -68,11 +68,6 @@ class FirestoreDataTable extends StatefulWidget {
     this.actions,
     this.sortColumnIndex,
     this.sortAscending = true,
-    @Deprecated(
-      'Migrate to use dataRowMinHeight and dataRowMaxHeight instead. '
-      'This feature was deprecated after v3.7.0-5.0.pre.',
-    )
-    double? dataRowHeight,
     double? dataRowMinHeight,
     double? dataRowMaxHeight,
     this.headingRowHeight = 56.0,
@@ -93,10 +88,8 @@ class FirestoreDataTable extends StatefulWidget {
           columnLabels is LinkedHashMap,
           'only LinkedHashMap are supported as header',
         ),
-        dataRowMinHeight =
-            dataRowHeight ?? dataRowMinHeight ?? kMinInteractiveDimension,
-        dataRowMaxHeight =
-            dataRowHeight ?? dataRowMaxHeight ?? kMinInteractiveDimension;
+        dataRowMinHeight = dataRowMinHeight ?? kMinInteractiveDimension,
+        dataRowMaxHeight = dataRowMaxHeight ?? kMinInteractiveDimension;
 
   /// When specified, the builder will be used to display your own widget for the cell
   final CellBuilder? cellBuilder;
