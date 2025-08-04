@@ -50,6 +50,7 @@ Packages with other changes:
 #### `firebase_ui_oauth` - `v2.0.0`
 
  - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+ - **BREAKING** **FEAT**: Removed all API associated with `fetchSignInMethodsForEmail()` which has been removed from FlutterFire. Removed `onBeforeProvidersForEmailFetch()` & `onDifferentProvidersFound()`.
 
 #### `firebase_ui_oauth_apple` - `v2.0.0`
 
