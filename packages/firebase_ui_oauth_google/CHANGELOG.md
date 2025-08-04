@@ -1,3 +1,9 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
 ## 1.4.3
 
  - **FIX**: bump FF dependencies to latest ([#526](https://github.com/firebase/FirebaseUI-Flutter/issues/526)). ([9f355bfc](https://github.com/firebase/FirebaseUI-Flutter/commit/9f355bfcda8319c9ed4786e1e3da91babb4f5229))
