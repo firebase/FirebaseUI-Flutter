@@ -41,6 +41,7 @@ Packages with other changes:
 #### `firebase_ui_firestore` - `v2.0.0`
 
  - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+- **BREAKING** **FEAT**: removed `dataRowHeight` from `FirestoreDataTable`. Please use `dataRowMinHeight` & `dataRowMaxHeight`.
 
 #### `firebase_ui_localizations` - `v2.0.0`
 
