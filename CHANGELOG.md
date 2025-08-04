@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-08-04
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`firebase_ui_auth` - `v3.0.0`](#firebase_ui_auth---v300)
+ - [`firebase_ui_database` - `v2.0.0`](#firebase_ui_database---v200)
+ - [`firebase_ui_firestore` - `v2.0.0`](#firebase_ui_firestore---v200)
+ - [`firebase_ui_localizations` - `v2.0.0`](#firebase_ui_localizations---v200)
+ - [`firebase_ui_oauth` - `v2.0.0`](#firebase_ui_oauth---v200)
+ - [`firebase_ui_oauth_apple` - `v2.0.0`](#firebase_ui_oauth_apple---v200)
+ - [`firebase_ui_oauth_facebook` - `v2.0.0`](#firebase_ui_oauth_facebook---v200)
+ - [`firebase_ui_oauth_google` - `v2.0.0`](#firebase_ui_oauth_google---v200)
+ - [`firebase_ui_oauth_twitter` - `v2.0.0`](#firebase_ui_oauth_twitter---v200)
+ - [`firebase_ui_storage` - `v3.0.0`](#firebase_ui_storage---v300)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `firebase_ui_auth` - `v3.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+- **BREAKING** **FEAT**: Removed all API associated with `fetchSignInMethodsForEmail()` which has been removed from FlutterFire. This includes these methods: `AuthFlow.onBeforeProvidersForEmailFetch()`, `AuthFlow.onDifferentProvidersFound()`, `showDifferentMethodSignInDialog()`, `AuthProvider.onBeforeProvidersForEmailFetch()`, `AuthProvider.onDifferentProvidersFound()`, `AuthProvider.findProvidersForEmail()`. These classes: `DifferentSignInMethodsFound`, `FetchingProvidersForEmail`, `UniversalEmailSignInController`, `UniversalEmailSignInListener`, `UniversalEmailSignInScreen`, `DifferentMethodSignInView`, `FindProvidersForEmailView`, `DifferentMethodSignInDialog`.
+
+#### `firebase_ui_database` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+ - **BREAKING** **FEAT**: removed `dataRowHeight` from `FirebaseDatabaseDataTable`. Please use `dataRowMinHeight` & `dataRowMaxHeight`.
+
+#### `firebase_ui_firestore` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+- **BREAKING** **FEAT**: removed `dataRowHeight` from `FirestoreDataTable`. Please use `dataRowMinHeight` & `dataRowMaxHeight`.
+
+#### `firebase_ui_localizations` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+#### `firebase_ui_oauth` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+ - **BREAKING** **FEAT**: Removed all API associated with `fetchSignInMethodsForEmail()` which has been removed from FlutterFire. Removed `onBeforeProvidersForEmailFetch()` & `onDifferentProvidersFound()`.
+
+#### `firebase_ui_oauth_apple` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+#### `firebase_ui_oauth_facebook` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+#### `firebase_ui_oauth_google` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+#### `firebase_ui_oauth_twitter` - `v2.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+#### `firebase_ui_storage` - `v3.0.0`
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+
 ## 2025-07-28
 
 ### Changes
