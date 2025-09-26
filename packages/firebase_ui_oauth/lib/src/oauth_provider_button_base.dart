@@ -478,7 +478,10 @@ class _ButtonContent extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text.rich(text),
+                  child: Text.rich(
+                    text,
+                    style: text.style,
+                  ),
                 ),
               );
             },
