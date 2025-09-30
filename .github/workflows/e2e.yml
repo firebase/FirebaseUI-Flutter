@@ -70,6 +70,9 @@ jobs:
           melos-version: "3.0.1"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
+        # needed because twitter_login plugin doesn't have a namespace defined and he hasn't released a new version yet: https://github.com/0maru/twitter_login/issues/139
+      - name: Patch twitter_login plugin
+        run: ./scripts/patch-twitter-login.sh
       - name: Start Firebase Emulator
         run: |
           cd functions/
