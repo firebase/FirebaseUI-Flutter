@@ -140,12 +140,7 @@ scripts:
         --ignore "**/*.rb" \
         --ignore "**/*.txt" \
         --ignore "**/*.cmake" \
-        --ignore "**/Runner/AppDelegate.swift" \
-        --ignore "**/Runner/MainFlutterWindow.swift" \
-        --ignore "**/Runner/Runner-Bridging-Header.h" \
-        --ignore "**/Runner/AppDelegate.h" \
-        --ignore "**/Runner/AppDelegate.m" \
-        --ignore "**/Runner/main.m" \
+        --ignore "**/Runner/**/*" \
         --ignore "**/MainActivity.kt" \
         --ignore "**/MainActivity.java" \
         --ignore "**/FlutterMultiDexApplication.java" \
@@ -153,6 +148,12 @@ scripts:
         --ignore "**/Pods/**" \
         --ignore "**/flutter/generated_plugin_registrant.*" \
         --ignore "**/example/windows/**/*" \
+        --ignore "**/Flutter/**/*" \
+        --ignore "**/build/**/*" \
+        --ignore "**/.dart_tool/**/*" \
+        --ignore "**/flutter/plugins/**/*" \
+        --ignore "**/build.gradle" \
+        --ignore "**/settings.gradle" \
         .
     description: Add a license header to all necessary files.
 
