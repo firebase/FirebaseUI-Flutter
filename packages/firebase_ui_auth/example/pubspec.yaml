@@ -40,7 +40,7 @@ dependencies:
 dev_dependencies:
   drive: ^1.0.0-1.0.nullsafety.5
   firebase_ui_shared: ^1.4.1
-  flutter_facebook_auth: ^6.0.3
+  flutter_facebook_auth: ^7.1.2
   flutter_driver:
     sdk: flutter
   flutter_test:

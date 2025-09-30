@@ -18,7 +18,7 @@ dependencies:
   firebase_ui_oauth_facebook: ^2.0.0
   firebase_ui_oauth_google: ^2.0.0
   firebase_ui_oauth: ^2.0.0
-  flutter_facebook_auth: ^6.0.3
+  flutter_facebook_auth: ^7.1.2
   twitter_login: ^4.4.2
   firebase_ui_oauth_twitter: ^2.0.0
   cloud_firestore: ^6.0.0
