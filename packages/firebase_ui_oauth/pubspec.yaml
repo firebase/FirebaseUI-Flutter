@@ -8,7 +8,7 @@ environment:
   flutter: ">=3.3.0"
 
 dependencies:
-  desktop_webview_auth: ^0.0.14
+  desktop_webview_auth: ^0.0.16
   firebase_auth: ^6.1.0
   firebase_ui_auth: ^3.0.1
   firebase_ui_shared: ^1.4.2
