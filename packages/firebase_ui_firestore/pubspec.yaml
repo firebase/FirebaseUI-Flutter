@@ -8,7 +8,7 @@ environment:
   flutter: ">=3.3.0"
 
 dependencies:
-  cloud_firestore: ^6.0.2
+  cloud_firestore: ^6.0.3
   firebase_ui_localizations: ^2.0.1
   firebase_ui_shared: ^1.4.2
   flutter:
