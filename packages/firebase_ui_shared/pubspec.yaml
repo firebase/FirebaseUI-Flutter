@@ -1,6 +1,6 @@
 name: firebase_ui_shared
 description: Abstractions and widgets that are used across Firebase UI packages.
-version: 1.4.1
+version: 1.4.2
 homepage: https://github.com/firebase/FirebaseUI-Flutter/packages/firebase_ui_shared
 
 environment:

@@ -11,8 +11,8 @@ dependencies:
   file_picker: ^6.1.1
   firebase_core: ^4.1.1
   firebase_storage: ^13.0.2
-  firebase_ui_storage: ^3.0.0
-  firebase_ui_shared: ^1.4.1
+  firebase_ui_storage: ^3.0.1
+  firebase_ui_shared: ^1.4.2
 
   flutter:
     sdk: flutter

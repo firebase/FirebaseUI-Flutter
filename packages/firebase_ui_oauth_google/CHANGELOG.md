@@ -1,3 +1,7 @@
+## 2.0.1
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
 ## 2.0.0
 
 > Note: This release has breaking changes.

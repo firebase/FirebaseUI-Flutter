@@ -29,7 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_ui_firestore: ^2.0.0
+  firebase_ui_firestore: ^2.0.1
   cloud_firestore: ^6.0.2
   cupertino_icons: ^1.0.6
   firebase_core: ^4.1.1
