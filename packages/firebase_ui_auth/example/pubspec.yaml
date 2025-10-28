@@ -22,24 +22,24 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.6
-  firebase_auth: ^6.1.0
-  firebase_core: ^4.1.1
+  firebase_auth: ^6.1.1
+  firebase_core: ^4.2.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  firebase_ui_auth: ^3.0.0
-  firebase_ui_localizations: ^2.0.0
-  firebase_ui_oauth: ^2.0.0
-  firebase_ui_oauth_apple: ^2.0.0
-  firebase_ui_oauth_facebook: ^2.0.0
-  firebase_ui_oauth_google: ^2.0.0
-  firebase_ui_oauth_twitter: ^2.0.0
+  firebase_ui_auth: ^3.0.1
+  firebase_ui_localizations: ^2.0.1
+  firebase_ui_oauth: ^2.0.1
+  firebase_ui_oauth_apple: ^2.0.1
+  firebase_ui_oauth_facebook: ^2.0.1
+  firebase_ui_oauth_google: ^2.0.1
+  firebase_ui_oauth_twitter: ^2.0.1
   # This and twitter oauth package need to depend on git main directly due to namespace build error on android.
   twitter_login: ^4.4.2
 dev_dependencies:
   drive: ^1.0.0-1.0.nullsafety.5
-  firebase_ui_shared: ^1.4.1
+  firebase_ui_shared: ^1.4.2
   flutter_facebook_auth: ^6.0.3
   flutter_driver:
     sdk: flutter

@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-10-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_auth` - `v3.0.1`](#firebase_ui_auth---v301)
+ - [`firebase_ui_database` - `v2.0.1`](#firebase_ui_database---v201)
+ - [`firebase_ui_firestore` - `v2.0.1`](#firebase_ui_firestore---v201)
+ - [`firebase_ui_localizations` - `v2.0.1`](#firebase_ui_localizations---v201)
+ - [`firebase_ui_oauth` - `v2.0.1`](#firebase_ui_oauth---v201)
+ - [`firebase_ui_oauth_apple` - `v2.0.1`](#firebase_ui_oauth_apple---v201)
+ - [`firebase_ui_oauth_facebook` - `v2.0.1`](#firebase_ui_oauth_facebook---v201)
+ - [`firebase_ui_oauth_google` - `v2.0.1`](#firebase_ui_oauth_google---v201)
+ - [`firebase_ui_oauth_twitter` - `v2.0.1`](#firebase_ui_oauth_twitter---v201)
+ - [`firebase_ui_shared` - `v1.4.2`](#firebase_ui_shared---v142)
+ - [`firebase_ui_storage` - `v3.0.1`](#firebase_ui_storage---v301)
+
+---
+
+#### `firebase_ui_auth` - `v3.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
+#### `firebase_ui_database` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
+#### `firebase_ui_firestore` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
+#### `firebase_ui_localizations` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+#### `firebase_ui_oauth` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
+#### `firebase_ui_oauth_apple` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+#### `firebase_ui_oauth_facebook` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+#### `firebase_ui_oauth_google` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+#### `firebase_ui_oauth_twitter` - `v2.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+#### `firebase_ui_shared` - `v1.4.2`
+
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
+#### `firebase_ui_storage` - `v3.0.1`
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+
 ## 2025-08-04
 
 ### Changes

@@ -1,6 +1,6 @@
 name: firebase_ui_database
 description: Pre-built widgets and utilites that make it easy to integrate Firebase Realtime Database into your Flutter app.
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_database
 
 environment:
@@ -9,8 +9,8 @@ environment:
 
 dependencies:
   collection: ^1.18.0
-  firebase_database: ^12.0.2
-  firebase_ui_localizations: ^2.0.0
+  firebase_database: ^12.0.3
+  firebase_ui_localizations: ^2.0.1
   flutter:
     sdk: flutter
 

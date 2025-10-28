@@ -9,10 +9,10 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.6
   file_picker: ^6.1.1
-  firebase_core: ^4.1.1
-  firebase_storage: ^13.0.2
-  firebase_ui_storage: ^3.0.0
-  firebase_ui_shared: ^1.4.1
+  firebase_core: ^4.2.0
+  firebase_storage: ^13.0.3
+  firebase_ui_storage: ^3.0.1
+  firebase_ui_shared: ^1.4.2
 
   flutter:
     sdk: flutter
