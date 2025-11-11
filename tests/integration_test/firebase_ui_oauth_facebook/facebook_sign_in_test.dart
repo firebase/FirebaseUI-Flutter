@@ -104,7 +104,6 @@ const _jwt =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.m5qYto_Vs5ELTURC8rkD-JAJuoosdQZeuUZ_qFrEiaE';
 
 class MockAccessToken extends Mock implements AccessToken {
-  @override
   String get token => _jwt;
 }
 
@@ -118,13 +117,17 @@ class MockLoginResult extends Mock implements LoginResult {
 class MockFacebookAuth extends Mock implements FacebookAuth {
   @override
   Future<LoginResult> login({
-    List<String>? permissions = const ['email', 'public_profile'],
-    LoginBehavior? loginBehavior = LoginBehavior.dialogOnly,
+    List<String> permissions = const ['email', 'public_profile'],
+    LoginBehavior loginBehavior = LoginBehavior.dialogOnly,
+    LoginTracking loginTracking = LoginTracking.enabled,
+    String? nonce,
   }) async {
     return super.noSuchMethod(
       Invocation.method(#signIn, [], {
         #permissions: permissions,
-        #behavior: loginBehavior,
+        #loginBehavior: loginBehavior,
+        #loginTracking: loginTracking,
+        #nonce: nonce,
       }),
       returnValue: MockLoginResult(),
       returnValueForMissingStub: MockLoginResult(),
