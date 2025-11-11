@@ -36,7 +36,6 @@ class FacebookProvider extends OAuthProvider {
   });
 
   /// Generates a cryptographically secure random nonce for limited login
-  @visibleForTesting
   String _generateNonce([int length = 32]) {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -46,7 +45,6 @@ class FacebookProvider extends OAuthProvider {
   }
 
   /// Returns the SHA256 hash of the given string
-  @visibleForTesting
   String _sha256ofString(String input) {
     final bytes = utf8.encode(input);
     final digest = sha256.convert(bytes);
@@ -54,7 +52,6 @@ class FacebookProvider extends OAuthProvider {
   }
 
   /// Checks if tracking permission has been granted on iOS
-  @visibleForTesting
   Future<bool> _hasTrackingPermission() async {
     // Only check on iOS
     if (defaultTargetPlatform != TargetPlatform.iOS) {
@@ -70,7 +67,6 @@ class FacebookProvider extends OAuthProvider {
     }
   }
 
-  @visibleForTesting
   void _handleResult(LoginResult result, AuthAction action) {
     switch (result.status) {
       case LoginStatus.success:

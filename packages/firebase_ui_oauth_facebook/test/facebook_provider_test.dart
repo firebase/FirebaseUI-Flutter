@@ -3,7 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_facebook/src/provider.dart';
@@ -344,40 +343,29 @@ class MockAccessToken implements AccessToken {
     required this.type,
   });
 
-  @override
   String get applicationId => 'test-app-id';
 
-  @override
   String? get dataAccessExpirationTime => null;
 
-  @override
   List<String> get declinedPermissions => [];
 
-  @override
   List<String> get expiredPermissions => [];
 
-  @override
   DateTime get expires => DateTime.now().add(const Duration(hours: 1));
 
-  @override
   String? get graphDomain => null;
 
-  @override
   bool get isExpired => false;
 
-  @override
   DateTime get lastRefresh => DateTime.now();
 
-  @override
   List<String> get grantedPermissions => ['email', 'public_profile'];
 
-  @override
   String get userId => 'test-user-id';
 
   @override
   Map<String, dynamic> toJson() => {};
 
-  @override
   String get token => tokenString;
 
   // Add any other required fields from AccessToken interface
@@ -399,6 +387,5 @@ class MockLoginResult implements LoginResult {
     this.message,
   });
 
-  @override
   Map<String, dynamic> toJson() => {};
 }
