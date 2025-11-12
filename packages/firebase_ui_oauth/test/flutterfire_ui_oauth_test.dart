@@ -205,11 +205,13 @@ void main() {
           home: Scaffold(
             body: Row(
               children: [
-                OAuthProviderButtonBase(
-                  provider: provider,
-                  auth: FakeAuth(),
-                  label: 'Sign in with Fake provider',
-                  loadingIndicator: const CircularProgressIndicator(),
+                Expanded(
+                  child: OAuthProviderButtonBase(
+                    provider: provider,
+                    auth: FakeAuth(),
+                    label: 'Sign in with Fake provider',
+                    loadingIndicator: const CircularProgressIndicator(),
+                  ),
                 )
               ],
             ),
