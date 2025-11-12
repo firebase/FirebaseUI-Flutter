@@ -21,6 +21,7 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
+  app_tracking_transparency: ^2.0.6
   cupertino_icons: ^1.0.6
   firebase_auth: ^6.1.1
   firebase_core: ^4.2.0
@@ -40,7 +41,7 @@ dependencies:
 dev_dependencies:
   drive: ^1.0.0-1.0.nullsafety.5
   firebase_ui_shared: ^1.4.2
-  flutter_facebook_auth: ^6.0.3
+  flutter_facebook_auth: ^7.1.2
   flutter_driver:
     sdk: flutter
   flutter_test:
@@ -59,6 +60,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  config:
+    enable-swift-package-manager: false
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
