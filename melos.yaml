@@ -158,6 +158,6 @@ scripts:
     description: Add a license header to all necessary files.
 
   emulator:start:
-    run: firebase emulators:start --only firestore,auth,functions,storage,database --import=./emulators-data --export-on-exit=./emulators-data
+    run: firebase emulators:start --only firestore,auth,functions,storage,database --project flutterfire-e2e-tests --import=./emulators-data --export-on-exit=./emulators-data
   update-dependencies:
     run: dart scripts/update_dependencies.dart
