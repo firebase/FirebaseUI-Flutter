@@ -104,7 +104,11 @@ const _jwt =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.m5qYto_Vs5ELTURC8rkD-JAJuoosdQZeuUZ_qFrEiaE';
 
 class MockAccessToken extends Mock implements AccessToken {
-  String get token => _jwt;
+  @override
+  String get tokenString => _jwt;
+
+  @override
+  AccessTokenType get type => AccessTokenType.classic;
 }
 
 class MockLoginResult extends Mock implements LoginResult {
