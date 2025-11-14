@@ -1,6 +1,6 @@
 {
   "@@locale": "th",
-  "@@last_modified": "2024-02-04T10:25:05.118670",
+  "@@last_modified": "2025-11-14T16:58:00.000000",
   "accessDisabledErrorText": "มีการปิดใช้สิทธิ์เข้าถึงบัญชีนี้ชั่วคราว",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -220,7 +220,7 @@
     "description": "Used as an error text when PasswordInput is empty.",
     "placeholders": {}
   },
-  "passwordResetEmailSentText": "เราส่งอีเมลพร้อมกับลิงก์รีเซ็ตรหัสผ่านให้คุณแล้ว โปรดตรวจสอบอีเมลของคุณ",
+  "passwordResetEmailSentText": "เราได้ส่งอีเมลพร้อมกับลิงก์รีเซ็ตรหัสผ่านให้คุณแล้ว โปรดตรวจสอบอีเมลของคุณ",
   "@passwordResetEmailSentText": {
     "description": "Indicates that the password reset email was sent.",
     "placeholders": {}
@@ -424,112 +424,112 @@
     "description": "Used as an error text of the PasswordInput when provided password is empty or is not correct.",
     "placeholders": {}
   },
-  "uploadButtonText": "Upload file",
+  "uploadButtonText": "อัปโหลดไฟล์",
   "@uploadButtonText": {
     "description": "UploadButton label",
     "placeholders": {}
   },
-  "verifyEmailTitle": "Verify your email",
+  "verifyEmailTitle": "ยืนยันอีเมลของคุณ",
   "@verifyEmailTitle": {
     "description": "EmailVerificationScreen title",
     "placeholders": {}
   },
-  "verificationEmailSentText": "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.",
+  "verificationEmailSentText": "เราได้ส่งอีเมลยืนยันไปยังที่อยู่อีเมลของคุณแล้ว โปรดตรวจสอบอีเมลของคุณและคลิกที่ลิงก์เพื่อยืนยันอีเมลของคุณ",
   "@verificationEmailSentText": {
     "description": "Hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "verificationFailedText": "We couldn't verify your email address. ",
+  "verificationFailedText": "เราไม่สามารถยืนยันอีเมลของคุณได้",
   "@verificationFailedText": {
     "description": "Message indicating that something went wrong during email verification",
     "placeholders": {}
   },
-  "resendVerificationEmailButtonLabel": "Resend verification email",
+  "resendVerificationEmailButtonLabel": "ส่งอีเมลยืนยันอีกครั้ง",
   "@resendVerificationEmailButtonLabel": {
     "description": "Button label that suggests to resend verification email",
     "placeholders": {}
   },
-  "verificationEmailSentTextShort": "Verification email sent",
+  "verificationEmailSentTextShort": "ส่งอีเมลยืนยันแล้ว",
   "@verificationEmailSentTextShort": {
     "description": "Short version of the hint text indicating that verification email has been sent",
     "placeholders": {}
   },
-  "emailIsNotVerifiedText": "Email is not verified",
+  "emailIsNotVerifiedText": "ยังไม่ได้ยืนยันอีเมล",
   "@emailIsNotVerifiedText": {
     "description": "Message indicating that email is not verified",
     "placeholders": {}
   },
-  "waitingForEmailVerificationText": "Waiting for email verification",
+  "waitingForEmailVerificationText": "กำลังรอยืนยันอีเมล",
   "@waitingForEmailVerificationText": {
     "description": "Message indicating that email is being verified",
     "placeholders": {}
   },
-  "dismissButtonLabel": "Dismiss",
+  "dismissButtonLabel": "ปิด",
   "@dismiss": {
     "description": "Dissmiss button label",
     "placeholders": {}
   },
-  "okButtonLabel": "OK",
+  "okButtonLabel": "ตกลง",
   "@okButtonLabel": {
     "description": "OK button label",
     "placeholders": {}
   },
-  "checkEmailHintText": "Please check your email and click the link to verify your email address.",
+  "checkEmailHintText": "โปรดตรวจสอบอีเมลของคุณและคลิกที่ลิงก์เพื่อยืนยันอีเมลของคุณ",
   "@checkEmailHintText": {
     "description": "Hint text prompting the user to check email for verification link",
     "placeholders": {}
   },
-  "doneButtonLabel": "Done",
+  "doneButtonLabel": "เสร็จสิ้น",
   "@doneButtonLabel": {
     "description": "Done button label",
     "placeholders": {}
   },
-  "invalidVerificationCodeErrorText": "The code you entered is invalid. Please try again.",
+  "invalidVerificationCodeErrorText": "รหัสที่คุณป้อนไม่ถูกต้อง โปรดลองอีกครั้ง",
   "@invalidVerificationCodeErrorText": {
     "description": "Error text indicating that entered SMS code is invalid",
     "placeholders": {}
   },
-  "ulinkProviderAlertTitle": "Unlink provider",
+  "ulinkProviderAlertTitle": "ยกเลิกการเชื่อมต่อผู้ให้บริการ",
   "@ulinkProviderAlertTitle": {
     "description": "Title that is shown in AlertDialog asking for provider unlink confirmation",
     "placeholders": {}
   },
-  "confirmUnlinkButtonLabel": "Unlink",
+  "confirmUnlinkButtonLabel": "ยกเลิกการเชื่อมต่อ",
   "@confirmUnlinkButtonLabel": {
     "description": "Unlink confirmation button label",
     "placeholders": {}
   },
-  "cancelButtonLabel": "Cancel",
+  "cancelButtonLabel": "ยกเลิก",
   "@cancelButtonLabel": {
     "description": "Cancel button label",
     "placeholders": {}
   },
-  "unlinkProviderAlertMessage": "Are you sure you want to unlink this provider?",
+  "unlinkProviderAlertMessage": "คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการเชื่อมต่อผู้ให้บริการนี้?",
   "@unlinkProviderAlertMessage": {
     "description": "Text that is shown as a message of the AlertDialog confirming provider unlink",
     "placeholders": {}
   },
-  "weakPasswordErrorText": "Password should be at least 6 characters",
+  "weakPasswordErrorText": "รหัสผ่านควรมีความยาวอย่างน้อย 6 ตัวอักษร",
   "@weakPasswordErrorText": {
     "description": "Error text suggesting that used password is too weak",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertTitle": "Confirm account deletion",
+  "confirmDeleteAccountAlertTitle": "ยืนยันการลบบัญชี",
   "@confirmDeleteAccountAlertTitle": {
     "description": "Delete account confirmation dialog title",
     "placeholders": {}
   },
-  "confirmDeleteAccountAlertMessage": "Are you sure you want to delete your account?",
+  "confirmDeleteAccountAlertMessage": "คุณแน่ใจใช่ไหมว่าต้องการลบบัญชีของคุณ?",
   "@confirmDeleteAccountAlertMessage": {
     "description": "Delete account confirmation dialog message",
     "placeholders": {}
   },
-  "confirmDeleteAccountButtonLabel": "Yes, delete",
+  "confirmDeleteAccountButtonLabel": "ใช่, ลบเลย",
   "@confirmDeleteAccountButtonLabel": {
     "description": "Confirm delete account button label",
     "placeholders": {}
   },
-  "sendVerificationEmailLabel": "Send verification email",
+  "sendVerificationEmailLabel": "ส่งอีเมลยืนยัน",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
     "placeholders": {}

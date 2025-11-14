@@ -141,7 +141,7 @@ class ThLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get passwordResetEmailSentText =>
-      "เราส่งอีเมลพร้อมกับลิงก์รีเซ็ตรหัสผ่านให้คุณแล้ว โปรดตรวจสอบอีเมลของคุณ";
+      "เราได้ส่งอีเมลพร้อมกับลิงก์รีเซ็ตรหัสผ่านให้คุณแล้ว โปรดตรวจสอบอีเมลของคุณ";
 
   @override
   String get phoneInputLabel => "หมายเลขโทรศัพท์";
@@ -264,76 +264,74 @@ class ThLocalizations extends FirebaseUILocalizationLabels {
       "รหัสผ่านไม่ถูกต้องหรือผู้ใช้ไม่มีรหัสผ่าน";
 
   @override
-  String get uploadButtonText => "Upload file";
+  String get uploadButtonText => "อัปโหลดไฟล์";
 
   @override
-  String get verifyEmailTitle => "Verify your email";
+  String get verifyEmailTitle => "ยืนยันอีเมลของคุณ";
 
   @override
   String get verificationEmailSentText =>
-      "A verification email has been sent to your email address. Please check your email and click on the link to verify your email address.";
+      "เราได้ส่งอีเมลยืนยันไปยังที่อยู่อีเมลของคุณแล้ว โปรดตรวจสอบอีเมลของคุณและคลิกที่ลิงก์เพื่อยืนยันอีเมลของคุณ";
 
   @override
-  String get verificationFailedText =>
-      "We couldn't verify your email address. ";
+  String get verificationFailedText => "เราไม่สามารถยืนยันอีเมลของคุณได้";
 
   @override
-  String get resendVerificationEmailButtonLabel => "Resend verification email";
+  String get resendVerificationEmailButtonLabel => "ส่งอีเมลยืนยันอีกครั้ง";
 
   @override
-  String get verificationEmailSentTextShort => "Verification email sent";
+  String get verificationEmailSentTextShort => "ส่งอีเมลยืนยันแล้ว";
 
   @override
-  String get emailIsNotVerifiedText => "Email is not verified";
+  String get emailIsNotVerifiedText => "ยังไม่ได้ยืนยันอีเมล";
 
   @override
-  String get waitingForEmailVerificationText =>
-      "Waiting for email verification";
+  String get waitingForEmailVerificationText => "กำลังรอยืนยันอีเมล";
 
   @override
-  String get dismissButtonLabel => "Dismiss";
+  String get dismissButtonLabel => "ปิด";
 
   @override
-  String get okButtonLabel => "OK";
+  String get okButtonLabel => "ตกลง";
 
   @override
   String get checkEmailHintText =>
-      "Please check your email and click the link to verify your email address.";
+      "โปรดตรวจสอบอีเมลของคุณและคลิกที่ลิงก์เพื่อยืนยันอีเมลของคุณ";
 
   @override
-  String get doneButtonLabel => "Done";
+  String get doneButtonLabel => "เสร็จสิ้น";
 
   @override
   String get invalidVerificationCodeErrorText =>
-      "The code you entered is invalid. Please try again.";
+      "รหัสที่คุณป้อนไม่ถูกต้อง โปรดลองอีกครั้ง";
 
   @override
-  String get ulinkProviderAlertTitle => "Unlink provider";
+  String get ulinkProviderAlertTitle => "ยกเลิกการเชื่อมต่อผู้ให้บริการ";
 
   @override
-  String get confirmUnlinkButtonLabel => "Unlink";
+  String get confirmUnlinkButtonLabel => "ยกเลิกการเชื่อมต่อ";
 
   @override
-  String get cancelButtonLabel => "Cancel";
+  String get cancelButtonLabel => "ยกเลิก";
 
   @override
   String get unlinkProviderAlertMessage =>
-      "Are you sure you want to unlink this provider?";
+      "คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการเชื่อมต่อผู้ให้บริการนี้?";
 
   @override
   String get weakPasswordErrorText =>
-      "Password should be at least 6 characters";
+      "รหัสผ่านควรมีความยาวอย่างน้อย 6 ตัวอักษร";
 
   @override
-  String get confirmDeleteAccountAlertTitle => "Confirm account deletion";
+  String get confirmDeleteAccountAlertTitle => "ยืนยันการลบบัญชี";
 
   @override
   String get confirmDeleteAccountAlertMessage =>
-      "Are you sure you want to delete your account?";
+      "คุณแน่ใจใช่ไหมว่าต้องการลบบัญชีของคุณ?";
 
   @override
-  String get confirmDeleteAccountButtonLabel => "Yes, delete";
+  String get confirmDeleteAccountButtonLabel => "ใช่, ลบเลย";
 
   @override
-  String get sendVerificationEmailLabel => "Send verification email";
+  String get sendVerificationEmailLabel => "ส่งอีเมลยืนยัน";
 }
