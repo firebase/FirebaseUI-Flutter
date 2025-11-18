@@ -1,3 +1,17 @@
+## 3.0.1
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+## 2.1.3
+
+ - **FIX**: bump FF dependencies to latest ([#526](https://github.com/firebase/FirebaseUI-Flutter/issues/526)). ([9f355bfc](https://github.com/firebase/FirebaseUI-Flutter/commit/9f355bfcda8319c9ed4786e1e3da91babb4f5229))
+
 ## 2.1.2
 
  - **FIX**: bump FF dependencies to latest ([#520](https://github.com/firebase/FirebaseUI-Flutter/issues/520)). ([ac4f1fdd](https://github.com/firebase/FirebaseUI-Flutter/commit/ac4f1fddcee04b020a6384ac74f2571bccafe44e))

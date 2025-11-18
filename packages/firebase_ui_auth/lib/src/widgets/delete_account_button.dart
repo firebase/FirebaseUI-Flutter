@@ -63,6 +63,11 @@ class DeleteAccountButton extends StatefulWidget {
   /// {@endtemplate}
   final bool showDeleteConfirmationDialog;
 
+  /// {@template ui.auth.widgets.delete_account_button.delete_confirmation}
+  /// A callback to replace the default account deletion modal.
+  /// {@endtemplate}
+  final Future<bool> Function(BuildContext context)? deleteConfirmation;
+
   /// {@macro ui.auth.widgets.delete_account_button}
   const DeleteAccountButton({
     super.key,
@@ -71,6 +76,7 @@ class DeleteAccountButton extends StatefulWidget {
     this.onDeleteFailed,
     this.variant = ButtonVariant.filled,
     this.showDeleteConfirmationDialog = false,
+    this.deleteConfirmation,
   });
 
   @override
@@ -91,19 +97,23 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     if (!confirmed) {
       final l = FirebaseUILocalizations.labelsOf(context);
 
-      confirmed = await showCupertinoDialog<bool?>(
-        context: context,
-        builder: (context) {
-          return UniversalAlert(
-            onConfirm: pop(context, true),
-            onCancel: pop(context, false),
-            title: l.confirmDeleteAccountAlertTitle,
-            confirmButtonText: l.confirmDeleteAccountButtonLabel,
-            cancelButtonText: l.cancelButtonLabel,
-            message: l.confirmDeleteAccountAlertMessage,
-          );
-        },
-      );
+      if (widget.deleteConfirmation != null) {
+        confirmed = await widget.deleteConfirmation!(context);
+      } else {
+        confirmed = await showCupertinoDialog<bool?>(
+          context: context,
+          builder: (context) {
+            return UniversalAlert(
+              onConfirm: pop(context, true),
+              onCancel: pop(context, false),
+              title: l.confirmDeleteAccountAlertTitle,
+              confirmButtonText: l.confirmDeleteAccountButtonLabel,
+              cancelButtonText: l.cancelButtonLabel,
+              message: l.confirmDeleteAccountAlertMessage,
+            );
+          },
+        );
+      }
     }
 
     if (!(confirmed ?? false)) return;

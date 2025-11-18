@@ -194,18 +194,6 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
   }
 
   @override
-  Future<List<String>> fetchSignInMethodsForEmail(String? email) async {
-    return super.noSuchMethod(
-      Invocation.method(
-        #fetchSignInMethodsForEmail,
-        [email],
-      ),
-      returnValue: <String>['phone'],
-      returnValueForMissingStub: <String>['phone'],
-    );
-  }
-
-  @override
   Future<void> verifyPhoneNumber({
     String? phoneNumber,
     fba.PhoneMultiFactorInfo? multiFactorInfo,

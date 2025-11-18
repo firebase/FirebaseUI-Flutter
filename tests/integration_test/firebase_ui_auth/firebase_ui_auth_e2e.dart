@@ -8,6 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'actions_test.dart' as actions;
 import 'email_form_test.dart' as email_form;
 import 'email_link_sign_in_view_test.dart' as email_link_sign_in_view;
+
+import 'phone_verification_test.dart' as phone_verification;
 import 'layout_test.dart' as layout;
 import 'phone_verification_test.dart' as phone_verification;
 
