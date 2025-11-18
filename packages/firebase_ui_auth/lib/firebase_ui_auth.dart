@@ -7,11 +7,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/widgets.dart';
 
+export 'package:firebase_ui_shared/firebase_ui_shared.dart' show ButtonVariant;
+
 import 'src/actions.dart';
 import 'src/oauth_providers.dart';
 import 'src/providers/auth_provider.dart';
-
-export 'package:firebase_ui_shared/firebase_ui_shared.dart' show ButtonVariant;
 
 export 'src/actions.dart';
 export 'src/auth_controller.dart' show AuthAction, AuthController;
@@ -34,7 +34,6 @@ export 'src/flows/email_flow.dart';
 export 'src/flows/email_link_flow.dart';
 export 'src/flows/oauth_flow.dart' show OAuthController, OAuthFlow;
 export 'src/flows/phone_auth_flow.dart';
-// ignore_for_file: use_build_context_synchronously
 
 export 'src/mfa.dart' show startMFAVerification;
 export 'src/navigation/authentication.dart';

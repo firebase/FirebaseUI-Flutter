@@ -2,10 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import '../auth_controller.dart';
 import '../auth_state.dart';
@@ -263,7 +263,6 @@ class _AuthFlowBuilderState<T extends AuthController>
         action: widget.action,
         auth: widget.auth,
       );
-      // ignore: deprecated_member_use_from_same_package
     } else {
       throw Exception('Unknown provider $provider');
     }
