@@ -1,17 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.flutter.plugins.firebase_ui_example">
+   <uses-permission android:name="android.permission.INTERNET"/>
+   <queries>
+    <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+  </queries>
    <application
         android:label="firebase_ui_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
         <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
-        <meta-data 
-            android:name="com.facebook.sdk.ApplicationId" 
-            android:value="@string/facebook_app_id"/>
-        <meta-data 
-            android:name="com.facebook.sdk.ClientToken" 
-            android:value="@string/facebook_client_token"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 
         <activity
             android:name=".MainActivity"

@@ -14,6 +14,7 @@ import 'package:firebase_ui_oauth_twitter/firebase_ui_oauth_twitter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 import 'config.dart';
 import 'decorations.dart';
@@ -33,7 +34,7 @@ final emailLinkProviderConfig = EmailLinkAuthProvider(
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
@@ -112,6 +113,8 @@ class FirebaseAuthUIExample extends StatelessWidget {
       initialRoute: initialRoute,
       routes: {
         '/': (context) {
+          final platform = Theme.of(context).platform;
+
           return SignInScreen(
             actions: [
               ForgotPasswordAction((context, email) {
@@ -168,14 +171,20 @@ class FirebaseAuthUIExample extends StatelessWidget {
                 _ => throw Exception('Invalid action: $action'),
               };
 
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Text(
-                    'By $actionText, you agree to our terms and conditions.',
-                    style: const TextStyle(color: Colors.grey),
+              return Column(
+                children: [
+                  if (platform == TargetPlatform.iOS)
+                    const AppTrackingTransparencyCard(),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text(
+                        'By $actionText, you agree to our terms and conditions.',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               );
             },
           );
@@ -282,6 +291,96 @@ class FirebaseAuthUIExample extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         FirebaseUILocalizations.delegate,
       ],
+    );
+  }
+}
+
+class AppTrackingTransparencyCard extends StatefulWidget {
+  const AppTrackingTransparencyCard({super.key});
+
+  @override
+  State<AppTrackingTransparencyCard> createState() =>
+      _AppTrackingTransparencyCardState();
+}
+
+class _AppTrackingTransparencyCardState
+    extends State<AppTrackingTransparencyCard> {
+  bool _isAllowed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkTrackingStatus();
+  }
+
+  Future<void> _checkTrackingStatus() async {
+    try {
+      final status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      setState(() {
+        _isAllowed = status == TrackingStatus.authorized;
+      });
+    } catch (e) {
+      // Handle error silently
+    }
+  }
+
+  Future<void> _onToggleChanged(bool value) async {
+    if (value && !_isAllowed) {
+      // Request permission when toggling on
+      try {
+        final status =
+            await AppTrackingTransparency.requestTrackingAuthorization();
+        if (mounted) {
+          setState(() {
+            _isAllowed = status == TrackingStatus.authorized;
+          });
+
+          if (status != TrackingStatus.authorized) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Tracking permission denied. Enable in Settings > Privacy & Security > Tracking',
+                ),
+                duration: Duration(seconds: 4),
+              ),
+            );
+          }
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error requesting permission: $e')),
+          );
+        }
+      }
+    } else if (!value && _isAllowed) {
+      // Can't turn off programmatically - show message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'To disable tracking, go to Settings > Privacy & Security > Tracking',
+          ),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('App tracking allowed'),
+          const SizedBox(width: 12),
+          Switch(
+            value: _isAllowed,
+            onChanged: _onToggleChanged,
+          ),
+        ],
+      ),
     );
   }
 }
