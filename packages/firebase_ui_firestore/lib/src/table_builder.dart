@@ -547,7 +547,7 @@ class _PropertyTypeDropdown extends StatelessWidget {
     final localizations = FirebaseUILocalizations.labelsOf(context);
 
     return DropdownButtonFormField<_PropertyType?>(
-      initialValue: formState?.type,
+      value: formState?.type,
       decoration: InputDecoration(labelText: localizations.typeLabel),
       items: [
         DropdownMenuItem(
