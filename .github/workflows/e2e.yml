@@ -45,7 +45,7 @@ jobs:
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v3
       - name: AVD cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: avd-cache
         with:
           path: |
@@ -59,7 +59,7 @@ jobs:
       - name: "Install Tools"
         run: sudo npm i -g firebase-tools
       - name: Firebase Emulator Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v2-${{ github.run_id }}
@@ -124,7 +124,7 @@ jobs:
         with:
           key: ${{ runner.os }}-ios-v3
           max-size: 700M
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         name: Pods Cache
         id: pods-cache
         with:
@@ -134,7 +134,7 @@ jobs:
       - name: "Install Tools"
         run: sudo npm i -g firebase-tools
       - name: Firebase Emulator Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v1-${{ github.run_id }}
@@ -203,7 +203,7 @@ jobs:
         with:
           key: ${{ runner.os }}-macos-v2
           max-size: 700M
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         name: Pods Cache
         id: pods-cache
         with:
@@ -213,7 +213,7 @@ jobs:
       - name: "Install Tools"
         run: sudo npm i -g firebase-tools
       - name: Cache Firebase Emulator
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v1-${{ github.run_id }}
