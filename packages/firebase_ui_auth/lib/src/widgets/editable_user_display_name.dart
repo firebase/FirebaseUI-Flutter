@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,7 +49,10 @@ class EditableUserDisplayName extends StatefulWidget {
 }
 
 class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
-  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
+  fba.FirebaseAuth get auth =>
+      widget.auth ??
+      FirebaseAuthProvider.maybeOf(context) ??
+      fba.FirebaseAuth.instance;
   String? get displayName => auth.currentUser?.displayName;
 
   late final ctrl = TextEditingController(text: displayName ?? '');

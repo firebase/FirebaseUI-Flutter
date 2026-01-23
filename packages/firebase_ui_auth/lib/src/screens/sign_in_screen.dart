@@ -101,6 +101,12 @@ class SignInScreen extends MultiProviderScreen {
   /// {@macro ui.auth.screens.responsive_page.max_width}
   final double? maxWidth;
 
+  /// A builder that allows to customize the order and appearance of the providers.
+  ///
+  /// If not provided, the default explicit order is used:
+  /// Email, Phone, Email Link, OAuth.
+  final ProvidersBuilder? providersBuilder;
+
   /// {@macro ui.auth.screens.sign_in_screen}
   const SignInScreen({
     super.key,
@@ -122,6 +128,7 @@ class SignInScreen extends MultiProviderScreen {
     this.styles,
     this.showPasswordVisibilityToggle = false,
     this.maxWidth,
+    this.providersBuilder,
   });
 
   @override
@@ -151,6 +158,7 @@ class SignInScreen extends MultiProviderScreen {
         breakpoint: breakpoint,
         showPasswordVisibilityToggle: showPasswordVisibilityToggle,
         maxWidth: maxWidth,
+        providersBuilder: providersBuilder,
       ),
     );
   }

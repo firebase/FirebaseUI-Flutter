@@ -199,9 +199,13 @@ class _AuthFlowBuilderState<T extends AuthController>
   @override
   void initState() {
     super.initState();
-    provider.auth = widget.auth ?? fba.FirebaseAuth.instance;
+    final resolvedAuth = widget.auth ??
+        FirebaseAuthProvider.findAuth(context) ??
+        fba.FirebaseAuth.instance;
 
-    flow = widget.flow ?? createFlow();
+    provider.auth = resolvedAuth;
+
+    flow = widget.flow ?? createFlow(resolvedAuth);
 
     if (widget.flowKey != null) {
       AuthFlowBuilder._flows[widget.flowKey!] = flow;
@@ -230,7 +234,7 @@ class _AuthFlowBuilderState<T extends AuthController>
     }
   }
 
-  AuthFlow createFlow() {
+  AuthFlow createFlow(fba.FirebaseAuth auth) {
     if (widget.flowKey != null) {
       final existingFlow = AuthFlowBuilder._flows[widget.flowKey!];
       if (existingFlow != null) {
@@ -244,24 +248,24 @@ class _AuthFlowBuilderState<T extends AuthController>
       return EmailAuthFlow(
         provider: provider,
         action: widget.action,
-        auth: widget.auth,
+        auth: auth,
       );
     } else if (provider is EmailLinkAuthProvider) {
       return EmailLinkFlow(
         provider: provider,
-        auth: widget.auth,
+        auth: auth,
       );
     } else if (provider is OAuthProvider) {
       return OAuthFlow(
         provider: provider,
         action: widget.action,
-        auth: widget.auth,
+        auth: auth,
       );
     } else if (provider is PhoneAuthProvider) {
       return PhoneAuthFlow(
         provider: provider,
         action: widget.action,
-        auth: widget.auth,
+        auth: auth,
       );
     } else {
       throw Exception('Unknown provider $provider');

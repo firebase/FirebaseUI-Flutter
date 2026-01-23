@@ -2,6 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -61,6 +62,8 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = this.auth ?? FirebaseAuthProvider.maybeOf(context) ?? fba.FirebaseAuth.instance;
+
     final child = UniversalScaffold(
       body: ResponsivePage(
         breakpoint: breakpoint,
@@ -79,9 +82,12 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
       ),
     );
 
-    return FirebaseUIActions(
-      actions: actions ?? const [],
-      child: child,
+    return FirebaseAuthProvider(
+      auth: auth,
+      child: FirebaseUIActions(
+        actions: actions ?? const [],
+        child: child,
+      ),
     );
   }
 }

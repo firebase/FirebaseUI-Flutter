@@ -34,11 +34,16 @@ class PhoneVerificationButton extends StatelessWidget {
 
   void _onPressed(BuildContext context) {
     final a = FirebaseUIAction.ofType<VerifyPhoneAction>(context);
+    final resolvedAuth = auth ?? FirebaseAuthProvider.maybeOf(context);
 
     if (a != null) {
       a.callback(context, action);
     } else {
-      startPhoneVerification(context: context, action: action, auth: auth);
+      startPhoneVerification(
+        context: context,
+        action: action,
+        auth: resolvedAuth,
+      );
     }
   }
 
