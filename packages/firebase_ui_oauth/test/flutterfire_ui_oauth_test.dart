@@ -221,5 +221,73 @@ void main() {
 
       expect(find.byType(LayoutFlowAwarePadding), findsOneWidget);
     });
+
+    testWidgets('triggers AuthStateChangeAction via AuthFlowBuilder', (tester) async {
+      final actionCalled = <SignedIn>[];
+      final provider = TestOAuthProvider();
+      final auth = MockAuth();
+      provider.auth = auth;
+
+      await tester.pumpWidget(
+        DefaultAssetBundle(
+          bundle: FakeAssetBundle(),
+          child: MaterialApp(
+            home: Scaffold(
+              body: FirebaseUIActions(
+                actions: [
+                  AuthStateChangeAction<SignedIn>((context, state) {
+                    actionCalled.add(state);
+                  }),
+                ],
+                child: Center(
+                  child: AuthFlowBuilder<OAuthController>(
+                    provider: provider,
+                    auth: auth,
+                    builder: (context, state, ctrl, child) {
+                      return OAuthProviderButtonBase(
+                        provider: provider,
+                        auth: auth,
+                        label: 'Sign in with Test provider',
+                        loadingIndicator: const CircularProgressIndicator(),
+                        onTap: () => ctrl.signIn(Theme.of(context).platform),
+                        overrideDefaultTapAction: true, // Simulating the fix
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Sign in with Test provider'), warnIfMissed: false);
+      await tester.pump();
+
+      expect(actionCalled, hasLength(1));
+    });
   });
 }
+
+class TestOAuthProvider extends FakeOAuthProvider {
+  @override
+  void mobileSignIn(AuthAction action) {
+    authListener.onBeforeSignIn();
+    authListener.onSignedIn(MockUserCredential());
+  }
+}
+
+class MockAuth extends Fake implements fba.FirebaseAuth {
+  @override
+  fba.User? get currentUser => null;
+}
+
+class MockUserCredential extends Fake implements fba.UserCredential {
+  @override
+  fba.User? get user => MockUser();
+  @override
+  fba.AdditionalUserInfo? get additionalUserInfo => null;
+}
+
+class MockUser extends Fake implements fba.User {}
+

@@ -14,7 +14,8 @@ import 'src/oauth_providers.dart';
 import 'src/providers/auth_provider.dart';
 
 export 'src/actions.dart';
-export 'src/auth_controller.dart' show AuthAction, AuthController;
+export 'src/auth_controller.dart'
+    show AuthAction, AuthController, AuthControllerProvider, FirebaseAuthProvider;
 export 'src/auth_flow.dart';
 export 'src/auth_state.dart'
     show

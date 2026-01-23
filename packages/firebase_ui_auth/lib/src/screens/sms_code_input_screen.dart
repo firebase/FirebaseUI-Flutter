@@ -92,49 +92,53 @@ class SMSCodeInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
+    final auth = this.auth ?? FirebaseAuthProvider.maybeOf(context) ?? fba.FirebaseAuth.instance;
 
     // ignore: deprecated_member_use
-    return WillPopScope(
-      onWillPop: () async {
-        _reset();
-        return true;
-      },
-      child: FirebaseUIActions(
-        actions: actions ?? const [],
-        child: UniversalScaffold(
-          body: Center(
-            child: ResponsivePage(
-              breakpoint: breakpoint,
-              maxWidth: maxWidth,
-              desktopLayoutDirection: desktopLayoutDirection,
-              sideBuilder: sideBuilder,
-              headerBuilder: headerBuilder,
-              headerMaxExtent: headerMaxExtent,
-              contentFlex: contentFlex,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SMSCodeInputView(
-                    auth: auth,
-                    action: action,
-                    flowKey: flowKey,
-                    onCodeVerified: () {
-                      if (actions != null) return;
+    return FirebaseAuthProvider(
+      auth: auth,
+      child: WillPopScope(
+        onWillPop: () async {
+          _reset();
+          return true;
+        },
+        child: FirebaseUIActions(
+          actions: actions ?? const [],
+          child: UniversalScaffold(
+            body: Center(
+              child: ResponsivePage(
+                breakpoint: breakpoint,
+                maxWidth: maxWidth,
+                desktopLayoutDirection: desktopLayoutDirection,
+                sideBuilder: sideBuilder,
+                headerBuilder: headerBuilder,
+                headerMaxExtent: headerMaxExtent,
+                contentFlex: contentFlex,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SMSCodeInputView(
+                      auth: auth,
+                      action: action,
+                      flowKey: flowKey,
+                      onCodeVerified: () {
+                        if (actions != null) return;
 
-                      Navigator.of(context).popUntil((route) {
-                        return route.isFirst;
-                      });
-                    },
-                  ),
-                  UniversalButton(
-                    variant: ButtonVariant.text,
-                    text: l.goBackButtonLabel,
-                    onPressed: () {
-                      _reset();
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
+                        Navigator.of(context).popUntil((route) {
+                          return route.isFirst;
+                        });
+                      },
+                    ),
+                    UniversalButton(
+                      variant: ButtonVariant.text,
+                      text: l.goBackButtonLabel,
+                      onPressed: () {
+                        _reset();
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),

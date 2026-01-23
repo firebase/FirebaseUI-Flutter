@@ -84,22 +84,27 @@ class EmailVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FirebaseUIActions(
-      actions: actions,
-      child: UniversalScaffold(
-        body: ResponsivePage(
-          breakpoint: breakpoint,
-          desktopLayoutDirection: desktopLayoutDirection,
-          headerBuilder: headerBuilder,
-          headerMaxExtent: headerMaxExtent,
-          sideBuilder: sideBuilder,
-          maxWidth: maxWidth,
-          contentFlex: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: _EmailVerificationScreenContent(
-              auth: auth,
-              actionCodeSettings: actionCodeSettings,
+    final auth = this.auth ?? FirebaseAuthProvider.maybeOf(context) ?? fba.FirebaseAuth.instance;
+
+    return FirebaseAuthProvider(
+      auth: auth,
+      child: FirebaseUIActions(
+        actions: actions,
+        child: UniversalScaffold(
+          body: ResponsivePage(
+            breakpoint: breakpoint,
+            desktopLayoutDirection: desktopLayoutDirection,
+            headerBuilder: headerBuilder,
+            headerMaxExtent: headerMaxExtent,
+            sideBuilder: sideBuilder,
+            maxWidth: maxWidth,
+            contentFlex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: _EmailVerificationScreenContent(
+                auth: auth,
+                actionCodeSettings: actionCodeSettings,
+              ),
             ),
           ),
         ),

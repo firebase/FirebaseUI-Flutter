@@ -85,7 +85,10 @@ class DeleteAccountButton extends StatefulWidget {
 }
 
 class _DeleteAccountButtonState extends State<DeleteAccountButton> {
-  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
+  fba.FirebaseAuth get auth =>
+      widget.auth ??
+      FirebaseAuthProvider.maybeOf(context) ??
+      fba.FirebaseAuth.instance;
   bool _isLoading = false;
 
   void Function() pop<T>(BuildContext context, T result) =>

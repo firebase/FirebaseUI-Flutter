@@ -61,6 +61,8 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = this.auth ?? FirebaseAuthProvider.maybeOf(context) ?? fba.FirebaseAuth.instance;
+
     final child = ForgotPasswordView(
       auth: auth,
       email: email,
@@ -68,19 +70,22 @@ class ForgotPasswordScreen extends StatelessWidget {
       subtitleBuilder: subtitleBuilder,
     );
 
-    return UniversalScaffold(
-      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      body: ResponsivePage(
-        desktopLayoutDirection: desktopLayoutDirection,
-        headerBuilder: headerBuilder,
-        headerMaxExtent: headerMaxExtent,
-        sideBuilder: sideBuilder,
-        breakpoint: breakpoint,
-        maxWidth: maxWidth,
-        contentFlex: 1,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: child,
+    return FirebaseAuthProvider(
+      auth: auth,
+      child: UniversalScaffold(
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        body: ResponsivePage(
+          desktopLayoutDirection: desktopLayoutDirection,
+          headerBuilder: headerBuilder,
+          headerMaxExtent: headerMaxExtent,
+          sideBuilder: sideBuilder,
+          breakpoint: breakpoint,
+          maxWidth: maxWidth,
+          contentFlex: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: child,
+          ),
         ),
       ),
     );

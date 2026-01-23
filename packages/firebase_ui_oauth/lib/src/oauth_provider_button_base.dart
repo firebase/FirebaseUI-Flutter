@@ -152,8 +152,13 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   void initState() {
     super.initState();
 
-    provider.auth = widget.auth ?? fba.FirebaseAuth.instance;
-    provider.authListener = this;
+    provider.auth = widget.auth ??
+        FirebaseAuthProvider.findAuth(context) ??
+        fba.FirebaseAuth.instance;
+
+    if (!widget.overrideDefaultTapAction) {
+      provider.authListener = this;
+    }
   }
 
   void _signIn() {

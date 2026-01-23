@@ -93,6 +93,12 @@ class RegisterScreen extends MultiProviderScreen {
   /// {@macro ui.auth.screens.responsive_page.max_width}
   final double? maxWidth;
 
+  /// A builder that allows to customize the order and appearance of the providers.
+  ///
+  /// If not provided, the default explicit order is used:
+  /// Email, Phone, Email Link, OAuth.
+  final ProvidersBuilder? providersBuilder;
+
   const RegisterScreen({
     super.key,
     super.auth,
@@ -112,6 +118,7 @@ class RegisterScreen extends MultiProviderScreen {
     this.styles,
     this.showPasswordVisibilityToggle = false,
     this.maxWidth,
+    this.providersBuilder,
   });
 
   @override
@@ -136,6 +143,7 @@ class RegisterScreen extends MultiProviderScreen {
         breakpoint: breakpoint,
         showPasswordVisibilityToggle: showPasswordVisibilityToggle,
         maxWidth: maxWidth,
+        providersBuilder: providersBuilder,
       ),
     );
   }

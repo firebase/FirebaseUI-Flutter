@@ -57,6 +57,9 @@ class LoginScreen extends StatelessWidget {
   /// {@macro ui.auth.screens.responsive_page.max_width}
   final double? maxWidth;
 
+  /// A builder that allows to customize the order and appearance of the providers.
+  final ProvidersBuilder? providersBuilder;
+
   const LoginScreen({
     super.key,
     required this.action,
@@ -77,6 +80,7 @@ class LoginScreen extends StatelessWidget {
     this.styles,
     this.showPasswordVisibilityToggle = false,
     this.maxWidth,
+    this.providersBuilder,
   });
 
   @override
@@ -96,6 +100,7 @@ class LoginScreen extends StatelessWidget {
           subtitleBuilder: subtitleBuilder,
           footerBuilder: footerBuilder,
           showPasswordVisibilityToggle: showPasswordVisibilityToggle,
+          providersBuilder: providersBuilder,
         ),
       ),
     );

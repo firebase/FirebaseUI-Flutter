@@ -29,12 +29,13 @@ class SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
+    final resolvedAuth = auth ?? FirebaseAuthProvider.maybeOf(context);
 
     return UniversalButton(
       text: l.signOutButtonText,
       onPressed: () => FirebaseUIAuth.signOut(
         context: context,
-        auth: auth,
+        auth: resolvedAuth,
       ),
       cupertinoIcon: CupertinoIcons.arrow_right_circle,
       materialIcon: Icons.logout,
