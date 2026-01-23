@@ -88,3 +88,48 @@ class AuthControllerProvider extends InheritedWidget {
     return ctrl != oldWidget.ctrl || action != oldWidget.action;
   }
 }
+
+/// A widget that provides an instance of [fba.FirebaseAuth] down the widget tree.
+class FirebaseAuthProvider extends InheritedWidget {
+  /// An instance of [fba.FirebaseAuth] to provide.
+  final fba.FirebaseAuth auth;
+
+  const FirebaseAuthProvider({
+    super.key,
+    required this.auth,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(FirebaseAuthProvider oldWidget) {
+    return auth != oldWidget.auth;
+  }
+
+  /// Looks up an instance of [fba.FirebaseAuth] in the widget tree.
+  static fba.FirebaseAuth? maybeOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<FirebaseAuthProvider>()
+        ?.auth;
+  }
+
+  /// Looks up an instance of [fba.FirebaseAuth] in the widget tree without
+  /// registering a dependency.
+  static fba.FirebaseAuth? findAuth(BuildContext context) {
+    return context.getInheritedWidgetOfExactType<FirebaseAuthProvider>()?.auth;
+  }
+
+  /// Looks up an instance of [fba.FirebaseAuth] in the widget tree.
+  /// Throws an [Exception] if no [FirebaseAuthProvider] was found.
+  static fba.FirebaseAuth of(BuildContext context) {
+    final auth = maybeOf(context);
+
+    if (auth == null) {
+      throw Exception(
+        'No FirebaseAuthProvider found. '
+        'Make sure to wrap your code with FirebaseAuthProvider',
+      );
+    }
+
+    return auth;
+  }
+}

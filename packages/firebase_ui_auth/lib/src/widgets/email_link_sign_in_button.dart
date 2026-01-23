@@ -32,6 +32,7 @@ class EmailLinkSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
+    final resolvedAuth = auth ?? FirebaseAuthProvider.maybeOf(context);
 
     return UniversalButton(
       text: l.emailLinkSignInButtonLabel,
@@ -48,7 +49,10 @@ class EmailLinkSignInButton extends StatelessWidget {
               builder: (_) {
                 return FirebaseUIActions.inherit(
                   from: context,
-                  child: EmailLinkSignInScreen(auth: auth, provider: provider),
+                  child: EmailLinkSignInScreen(
+                    auth: resolvedAuth,
+                    provider: provider,
+                  ),
                 );
               },
             ),
