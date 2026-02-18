@@ -57,14 +57,18 @@ jobs:
         if: matrix.target == 'html'
         run: |
           melos exec \
-            --scope=${{ matrix.package }}* \
+            --scope=${MATRIX_PACKAGE}* \
             --dir-exists="test" \
             --fail-fast -- "flutter test --platform chrome"
+        env:
+          MATRIX_PACKAGE: ${{ matrix.package }}
 
       - name: Run unit tests
         if: matrix.target == 'io'
         run: |
           melos exec \
-            --scope=${{ matrix.package }}* \
+            --scope=${MATRIX_PACKAGE}* \
             --dir-exists="test" \
             --fail-fast -- "flutter test"
+        env:
+          MATRIX_PACKAGE: ${{ matrix.package }}
