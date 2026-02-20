@@ -61,6 +61,9 @@ class ScreenElement extends ComponentElement {
 
   @override
   Widget build() {
-    return widget.build(this);
+    return FirebaseAuthProvider(
+      auth: widget.auth,
+      child: widget.build(this),
+    );
   }
 }

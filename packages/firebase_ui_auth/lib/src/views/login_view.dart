@@ -18,6 +18,12 @@ typedef AuthViewContentBuilder = Widget Function(
   AuthAction action,
 );
 
+typedef ProvidersBuilder = List<Widget> Function(
+  BuildContext context,
+  List<AuthProvider> providers,
+  AuthAction action,
+);
+
 /// {@template ui.auth.views.login_view}
 /// A view that could be used to build a custom [SignInScreen] or
 /// [RegisterScreen].
@@ -58,6 +64,12 @@ class LoginView extends StatefulWidget {
   /// {@macro ui.auth.widgets.email_from.showPasswordVisibilityToggle}
   final bool showPasswordVisibilityToggle;
 
+  /// A builder that allows to customize the order and appearance of the providers.
+  ///
+  /// If not provided, the default explicit order is used:
+  /// Email, Phone, Email Link, OAuth.
+  final ProvidersBuilder? providersBuilder;
+
   /// {@macro ui.auth.views.login_view}
   const LoginView({
     super.key,
@@ -72,6 +84,7 @@ class LoginView extends StatefulWidget {
     this.subtitleBuilder,
     this.actionButtonLabelOverride,
     this.showPasswordVisibilityToggle = false,
+    this.providersBuilder,
   });
 
   @override
@@ -204,53 +217,92 @@ class _LoginViewState extends State<LoginView> {
     super.didUpdateWidget(oldWidget);
   }
 
+  Widget? _buildProviderWidget(TargetPlatform platform, AuthProvider provider) {
+    final l = FirebaseUILocalizations.labelsOf(context);
+
+    if (provider is EmailAuthProvider) {
+      return EmailForm(
+        key: ValueKey(_action),
+        auth: widget.auth,
+        action: _action,
+        provider: provider,
+        email: widget.email,
+        actionButtonLabelOverride: widget.actionButtonLabelOverride,
+        showPasswordVisibilityToggle: widget.showPasswordVisibilityToggle,
+      );
+    } else if (provider is PhoneAuthProvider) {
+      return PhoneVerificationButton(
+        label: l.signInWithPhoneButtonText,
+        action: _action,
+        auth: widget.auth,
+      );
+    } else if (provider is EmailLinkAuthProvider) {
+      return EmailLinkSignInButton(
+        auth: widget.auth,
+        provider: provider,
+      );
+    } else if (provider is OAuthProvider && !_buttonsBuilt) {
+      return _buildOAuthButtons(platform);
+    }
+    return null;
+  }
+
+  List<Widget> _defaultProvidersBuilder(
+    BuildContext context,
+    List<AuthProvider> providers,
+    AuthAction action,
+  ) {
+    final platform = Theme.of(context).platform;
+    final children = <Widget>[];
+
+    void addForType<T>() {
+      for (var provider in providers) {
+        if (provider is T && provider.supportsPlatform(platform)) {
+          final w = _buildProviderWidget(platform, provider);
+
+          if (w != null) {
+            if (provider is OAuthProvider) {
+              children.add(w);
+            } else {
+              children.add(const SizedBox(height: 8));
+              children.add(w);
+              if (provider is PhoneAuthProvider) {
+                children.add(const SizedBox(height: 8));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    addForType<EmailAuthProvider>();
+    addForType<PhoneAuthProvider>();
+    addForType<EmailLinkAuthProvider>();
+    addForType<OAuthProvider>();
+
+    return children;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final l = FirebaseUILocalizations.labelsOf(context);
     final platform = Theme.of(context).platform;
     _buttonsBuilt = false;
+
+    final children = <Widget>[
+      if (_showTitle) ..._buildHeader(context),
+    ];
+
+    final builder = widget.providersBuilder ?? _defaultProvidersBuilder;
+    children.addAll(builder(context, widget.providers, _action));
+
+    if (widget.footerBuilder != null) {
+      children.add(widget.footerBuilder!(context, _action));
+    }
 
     return IntrinsicHeight(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (_showTitle) ..._buildHeader(context),
-          for (var provider in widget.providers)
-            if (provider.supportsPlatform(platform))
-              if (provider is EmailAuthProvider) ...[
-                const SizedBox(height: 8),
-                EmailForm(
-                  key: ValueKey(_action),
-                  auth: widget.auth,
-                  action: _action,
-                  provider: provider,
-                  email: widget.email,
-                  actionButtonLabelOverride: widget.actionButtonLabelOverride,
-                  showPasswordVisibilityToggle:
-                      widget.showPasswordVisibilityToggle,
-                )
-              ] else if (provider is PhoneAuthProvider) ...[
-                const SizedBox(height: 8),
-                PhoneVerificationButton(
-                  label: l.signInWithPhoneButtonText,
-                  action: _action,
-                  auth: widget.auth,
-                ),
-                const SizedBox(height: 8),
-              ] else if (provider is EmailLinkAuthProvider) ...[
-                const SizedBox(height: 8),
-                EmailLinkSignInButton(
-                  auth: widget.auth,
-                  provider: provider,
-                ),
-              ] else if (provider is OAuthProvider && !_buttonsBuilt)
-                _buildOAuthButtons(platform),
-          if (widget.footerBuilder != null)
-            widget.footerBuilder!(
-              context,
-              _action,
-            ),
-        ],
+        children: children,
       ),
     );
   }

@@ -105,32 +105,36 @@ class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flowKey = Object();
+    final auth = this.auth ?? FirebaseAuthProvider.maybeOf(context) ?? fba.FirebaseAuth.instance;
 
-    return FirebaseUIActions(
-      actions: actions ?? [SMSCodeRequestedAction(_next)],
-      child: UniversalScaffold(
-        body: ResponsivePage(
-          desktopLayoutDirection: desktopLayoutDirection,
-          sideBuilder: sideBuilder,
-          headerBuilder: headerBuilder,
-          headerMaxExtent: headerMaxExtent,
-          breakpoint: breakpoint,
-          maxWidth: maxWidth,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                PhoneInputView(
-                  auth: auth,
-                  action: action,
-                  subtitleBuilder: subtitleBuilder,
-                  footerBuilder: footerBuilder,
-                  flowKey: flowKey,
-                  multiFactorSession: multiFactorSession,
-                  mfaHint: mfaHint,
-                ),
-              ],
+    return FirebaseAuthProvider(
+      auth: auth,
+      child: FirebaseUIActions(
+        actions: actions ?? [SMSCodeRequestedAction(_next)],
+        child: UniversalScaffold(
+          body: ResponsivePage(
+            desktopLayoutDirection: desktopLayoutDirection,
+            sideBuilder: sideBuilder,
+            headerBuilder: headerBuilder,
+            headerMaxExtent: headerMaxExtent,
+            breakpoint: breakpoint,
+            maxWidth: maxWidth,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PhoneInputView(
+                    auth: auth,
+                    action: action,
+                    subtitleBuilder: subtitleBuilder,
+                    footerBuilder: footerBuilder,
+                    flowKey: flowKey,
+                    multiFactorSession: multiFactorSession,
+                    mfaHint: mfaHint,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
