@@ -61,7 +61,8 @@ void main() {
             body: FirestoreListView<Map>(
               query: collection.orderBy('value'),
               loadingBuilder: (context) => const Text('loading...'),
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              itemBuilder: (context, snapshot, index) =>
+                  throw UnimplementedError(),
             ),
           ),
         ),
@@ -84,7 +85,8 @@ void main() {
             home: Scaffold(
               body: FirestoreListView<Map>(
                 query: collection.orderBy('value'),
-                itemBuilder: (context, snapshot) => throw UnimplementedError(),
+                itemBuilder: (context, snapshot, index) =>
+                    throw UnimplementedError(),
               ),
             ),
           ),
@@ -105,7 +107,8 @@ void main() {
             body: FirestoreListView<Map>(
               query: collection,
               cacheExtent: 0,
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              itemBuilder: (context, snapshot, index) =>
+                  throw UnimplementedError(),
             ),
           ),
         ),
@@ -144,7 +147,7 @@ void main() {
                   cacheExtent: 0,
                   pageSize: 5,
                   itemExtent: size,
-                  itemBuilder: (context, snapshot) {
+                  itemBuilder: (context, snapshot, index) {
                     final v = snapshot.data()['value'] as int;
 
                     return Container(
@@ -208,6 +211,7 @@ class ListViewBuilderSpy<T> extends Mock {
   Widget call(
     BuildContext? context,
     T? snapshot,
+    int? index,
   ) {
     return super.noSuchMethod(
       Invocation.method(#call, [context, snapshot]),
