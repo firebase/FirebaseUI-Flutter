@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final providers = [EmailAuthProvider()];
 
-    void onSignedIn() {
+    void onSignedIn(BuildContext context) {
       Navigator.pushReplacementNamed(context, '/profile');
     }
 
@@ -57,10 +57,10 @@ class MyApp extends StatelessWidget {
             actions: [
               AuthStateChangeAction<UserCreated>((context, state) {
                 // Put any new user logic here
-                onSignedIn();
+                onSignedIn(context);
               }),
               AuthStateChangeAction<SignedIn>((context, state) {
-                onSignedIn();
+                onSignedIn(context);
               }),
             ],
           );
