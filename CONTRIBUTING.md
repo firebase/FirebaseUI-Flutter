@@ -136,7 +136,7 @@ These tests require the Firebase Emulator.
 To start the Firebase Emulator, run this command:
 
 ```bash
-firebase emulator:start
+melos emulator:start
 ```
 
 Once the Firebase Emulator is up and running, execute the following Melos command from the terminal:
