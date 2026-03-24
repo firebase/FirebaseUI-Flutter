@@ -422,7 +422,6 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
           ),
           const SizedBox(height: 16),
           if (state == EmailVerificationState.pending)
-            // ignore: prefer_const_constructors
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -615,6 +614,8 @@ class _MFAToggleState extends State<_MFAToggle> {
     final mfa = widget.auth.currentUser!.multiFactor;
     final session = await mfa.getSession();
 
+    if (!mounted) return;
+
     await startPhoneVerification(
       context: context,
       action: AuthAction.none,
@@ -637,7 +638,9 @@ class _MFAToggleState extends State<_MFAToggle> {
               isLoading = false;
             });
 
-            Navigator.of(context).popUntil((route) => route == currentRoute);
+            if (context.mounted) {
+              Navigator.of(context).popUntil((route) => route == currentRoute);
+            }
           }
         })
       ],

@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// ignore_for_file: subtype_of_sealed_class, must_be_immutable, avoid_implementing_value_types
+// ignore_for_file: subtype_of_sealed_class, must_be_immutable
 
 import 'dart:async';
 

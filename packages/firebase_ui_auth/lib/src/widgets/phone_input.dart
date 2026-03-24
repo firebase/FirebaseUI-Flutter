@@ -38,7 +38,6 @@ class _CountryPicker extends StatefulWidget {
   const _CountryPicker();
 
   @override
-  // ignore: library_private_types_in_public_api
   _CountryPickerState createState() => _CountryPickerState();
 }
 
@@ -142,7 +141,7 @@ class PhoneInputState extends State<PhoneInput> {
   // ignore: library_private_types_in_public_api
   _CountryCodeItem? countryCodeItem;
 
-  void _onSubmitted(_) {
+  void _onSubmitted(void _) {
     if (formKey.currentState!.validate()) {
       widget.onSubmit?.call(phoneNumber);
     }
