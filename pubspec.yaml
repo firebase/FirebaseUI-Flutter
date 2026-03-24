@@ -1,7 +1,27 @@
 name: firebase_ui_workspace
 
 environment:
-  sdk: ">=2.18.0 <4.0.0"
+  sdk: ^3.5.0
+
+workspace:
+  - packages/firebase_ui_auth
+  - packages/firebase_ui_auth/example
+  - packages/firebase_ui_database
+  - packages/firebase_ui_database/example
+  - packages/firebase_ui_firestore
+  - packages/firebase_ui_firestore/example
+  - packages/firebase_ui_localizations
+  - packages/firebase_ui_localizations/example
+  - packages/firebase_ui_oauth
+  - packages/firebase_ui_oauth/example
+  - packages/firebase_ui_oauth_apple
+  - packages/firebase_ui_oauth_facebook
+  - packages/firebase_ui_oauth_google
+  - packages/firebase_ui_oauth_twitter
+  - packages/firebase_ui_shared
+  - packages/firebase_ui_storage
+  - packages/firebase_ui_storage/example
+  - tests
 
 dev_dependencies:
-  melos: ^4.0.0
+  melos: ^6.3.0

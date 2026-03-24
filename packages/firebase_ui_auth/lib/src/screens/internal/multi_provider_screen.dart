@@ -22,7 +22,7 @@ abstract class MultiProviderScreen extends Widget {
 
   List<AuthProvider> get providers {
     if (_providers != null) {
-      return _providers!;
+      return _providers;
     } else {
       return FirebaseUIAuth.providersFor(auth.app);
     }

@@ -221,9 +221,9 @@ class _AuthFlowBuilderState<T extends AuthController>
 
   AuthProvider _createDefaultProvider() {
     switch (T) {
-      case EmailAuthController:
+      case EmailAuthController _:
         return EmailAuthProvider();
-      case PhoneAuthController:
+      case PhoneAuthController _:
         return PhoneAuthProvider();
       default:
         throw Exception("Can't create $T provider");

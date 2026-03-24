@@ -13,10 +13,6 @@ command:
     changelogCommitBodies:
       include: true
 
-  bootstrap:
-    runPubGetInParallel: false
-    usePubspecOverrides: true
-
 scripts:
   lint:
     run: melos run analyze && melos run format
