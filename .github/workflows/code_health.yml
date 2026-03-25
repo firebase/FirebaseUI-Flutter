@@ -105,8 +105,10 @@ jobs:
         with:
           go-version: "^1.13.1"
       - run: go install github.com/google/addlicense@latest
-      - name: Install Dart
-        uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
       - name: Install Melos
         uses: bluefireteam/melos-action@v3
         with:
