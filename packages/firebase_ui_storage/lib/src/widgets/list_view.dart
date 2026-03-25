@@ -84,6 +84,7 @@ class StorageListView extends StatefulWidget {
   /// See [SliverChildBuilderDelegate.addSemanticIndexes].
   final bool addSemanticIndexes;
 
+  // ignore: deprecated_member_use
   /// See [ScrollView.cacheExtent].
   final double? cacheExtent;
 
@@ -204,6 +205,7 @@ class _StorageListViewState extends State<StorageListView> {
       addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
       addRepaintBoundaries: widget.addRepaintBoundaries,
       addSemanticIndexes: widget.addSemanticIndexes,
+      // ignore: deprecated_member_use
       cacheExtent: widget.cacheExtent,
       clipBehavior: widget.clipBehavior,
       controller: widget.controller,

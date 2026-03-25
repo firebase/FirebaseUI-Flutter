@@ -535,6 +535,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               addAutomaticKeepAlives: addAutomaticKeepAlives,
               addRepaintBoundaries: addRepaintBoundaries,
               addSemanticIndexes: addSemanticIndexes,
+              // ignore: deprecated_member_use
               cacheExtent: cacheExtent,
               semanticChildCount: semanticChildCount,
               dragStartBehavior: dragStartBehavior,
@@ -642,10 +643,12 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               physics: physics,
               shrinkWrap: shrinkWrap,
               padding: padding,
+              // ignore: deprecated_member_use
               findChildIndexCallback: findChildIndexCallback,
               addAutomaticKeepAlives: addAutomaticKeepAlives,
               addRepaintBoundaries: addRepaintBoundaries,
               addSemanticIndexes: addSemanticIndexes,
+              // ignore: deprecated_member_use
               cacheExtent: cacheExtent,
               dragStartBehavior: dragStartBehavior,
               keyboardDismissBehavior: keyboardDismissBehavior,

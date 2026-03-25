@@ -39,7 +39,9 @@ void main() {
 
         expect(auth.currentUser, isNotNull);
       },
-      skip: isCI && (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.android),
+      skip: isCI &&
+          (defaultTargetPlatform == TargetPlatform.macOS ||
+              defaultTargetPlatform == TargetPlatform.android),
     );
 
     testWidgets(
@@ -103,7 +105,9 @@ void main() {
 
         await tester.pumpAndSettle();
       },
-      skip: isCI && (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.android),
+      skip: isCI &&
+          (defaultTargetPlatform == TargetPlatform.macOS ||
+              defaultTargetPlatform == TargetPlatform.android),
     );
 
     testWidgets(

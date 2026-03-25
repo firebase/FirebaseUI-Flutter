@@ -172,8 +172,8 @@ Future<CollectionReference<T>> clearCollection<T>(
 }
 
 Future<void> clearReference(
-    DatabaseReference ref,
-    ) async {
+  DatabaseReference ref,
+) async {
   final snapshot = await ref.get();
   if (!snapshot.exists) return;
   await ref.remove();

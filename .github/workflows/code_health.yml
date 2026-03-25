@@ -27,7 +27,7 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@v3
         with:
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: "Run Analyze"
         run: melos run analyze
 
@@ -41,7 +41,7 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@v3
         with:
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: "Pub Check"
         run: |
           melos exec -c 1 --no-private --ignore="*example*" -- \
@@ -57,7 +57,7 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@v3
         with:
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: "flutter pub get"
         run: |
           melos exec -c 1 --scope="*example*" -- \
@@ -74,7 +74,7 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@v3
         with:
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - uses: Homebrew/actions/setup-homebrew@master
       - name: "Install Tools"
         run: |
@@ -105,12 +105,14 @@ jobs:
         with:
           go-version: "^1.13.1"
       - run: go install github.com/google/addlicense@latest
-      - name: Install Dart
-        uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
       - name: Install Melos
         uses: bluefireteam/melos-action@v3
         with:
           run-bootstrap: false
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: Check license header
         run: melos run check-license-header
