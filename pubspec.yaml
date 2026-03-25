@@ -24,4 +24,4 @@ workspace:
   - tests
 
 dev_dependencies:
-  melos: ^6.3.0
+  melos: ^7.5.0
