@@ -13,123 +13,100 @@ const localeTW = Locale('zh', 'TW');
 Future<void> main() async {
   late FirebaseUILocalizationDelegate delegate;
 
-  group(
-    'FirebaseUILocalization loads the appropriate Chinese translation',
-    () {
-      localizeText(BuildContext context) {
-        final labels = FirebaseUILocalizations.labelsOf(context);
-        return labels.signInWithPhoneButtonText;
-      }
+  group('FirebaseUILocalization loads the appropriate Chinese translation', () {
+    localizeText(BuildContext context) {
+      final labels = FirebaseUILocalizations.labelsOf(context);
+      return labels.signInWithPhoneButtonText;
+    }
 
-      setUp(() async {
-        delegate = const FirebaseUILocalizationDelegate();
-      });
+    setUp(() async {
+      delegate = const FirebaseUILocalizationDelegate();
+    });
 
-      test(
-        'Loads the correct translation with the language tag "${localeZh.toLanguageTag()}"',
-        () async {
-          final localizations = await delegate.load(localeZh);
-          expect(localizations.labels.signInWithPhoneButtonText, '使用电话号码登录');
-        },
+    test(
+      'Loads the correct translation with the language tag "${localeZh.toLanguageTag()}"',
+      () async {
+        final localizations = await delegate.load(localeZh);
+        expect(localizations.labels.signInWithPhoneButtonText, '使用电话号码登录');
+      },
+    );
+
+    testWidgets('UI test for the "${localeZh.toLanguageTag()}" translation', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestMaterialApp(locale: localeZh, localizeText: localizeText),
       );
+      expect(find.text('使用电话号码登录'), findsOneWidget);
+    });
 
-      testWidgets(
-        'UI test for the "${localeZh.toLanguageTag()}" translation',
-        (tester) async {
-          await tester.pumpWidget(
-            TestMaterialApp(
-              locale: localeZh,
-              localizeText: localizeText,
-            ),
-          );
-          expect(find.text('使用电话号码登录'), findsOneWidget);
-        },
+    test(
+      'Loads the correct translation with the language tag "${localeTW.toLanguageTag()}"',
+      () async {
+        final localizations = await delegate.load(localeTW);
+        expect(localizations.labels.signInWithPhoneButtonText, '使用電話號碼登入');
+      },
+    );
+
+    testWidgets('UI test for the "${localeTW.toLanguageTag()}" translation', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestMaterialApp(locale: localeTW, localizeText: localizeText),
       );
+      expect(find.text('使用電話號碼登入'), findsOneWidget);
+    });
+  });
 
-      test(
-        'Loads the correct translation with the language tag "${localeTW.toLanguageTag()}"',
-        () async {
-          final localizations = await delegate.load(localeTW);
-          expect(localizations.labels.signInWithPhoneButtonText, '使用電話號碼登入');
-        },
-      );
+  group('Localization override', () {
+    localizeText(BuildContext context) {
+      return FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
+    }
 
-      testWidgets(
-        'UI test for the "${localeTW.toLanguageTag()}" translation',
-        (tester) async {
-          await tester.pumpWidget(
-            TestMaterialApp(
-              locale: localeTW,
-              localizeText: localizeText,
-            ),
-          );
-          expect(find.text('使用電話號碼登入'), findsOneWidget);
-        },
-      );
-    },
-  );
+    test('Overrides the DefaultLocalizations', () async {
+      final localizations = await const FirebaseUILocalizationDelegate(
+        DefaultLocalizationsOverrides(),
+      ).load(localeTW);
+      expect(localizations.labels.verifyEmailTitle, 'Overwritten');
+    });
 
-  group(
-    'Localization override',
-    () {
-      localizeText(BuildContext context) {
-        return FirebaseUILocalizations.labelsOf(context).verifyEmailTitle;
-      }
-
-      test(
-        'Overrides the DefaultLocalizations',
-        () async {
-          final localizations = await const FirebaseUILocalizationDelegate(
+    testWidgets('UI test for the default translation override', (tester) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          locale: localeZh,
+          localizationsOverride: const FirebaseUILocalizationDelegate(
             DefaultLocalizationsOverrides(),
-          ).load(localeTW);
-          expect(localizations.labels.verifyEmailTitle, 'Overwritten');
-        },
+          ),
+          localizeText: localizeText,
+        ),
       );
+      expect(find.text('Overwritten'), findsOneWidget);
+    });
 
-      testWidgets(
-        'UI test for the default translation override',
-        (tester) async {
-          await tester.pumpWidget(
-            TestMaterialApp(
-              locale: localeZh,
-              localizationsOverride: const FirebaseUILocalizationDelegate(
-                DefaultLocalizationsOverrides(),
-              ),
-              localizeText: localizeText,
+    test('Overrides the DefaultLocalizations', () async {
+      final localizations = await const FirebaseUILocalizationDelegate(
+        ZhTWLocalizationsOverrides(),
+      ).load(localeTW);
+      expect(localizations.labels.verifyEmailTitle, '覆寫標題');
+    });
+
+    testWidgets(
+      'UI test for the "${localeTW.toLanguageTag()}" translation override',
+      (tester) async {
+        await tester.pumpWidget(
+          TestMaterialApp(
+            // Test that 'en' labels are overridden by `ZhTWLocalizationsOverrides` overrides
+            locale: const Locale('en'),
+            localizationsOverride: const FirebaseUILocalizationDelegate(
+              ZhTWLocalizationsOverrides(),
             ),
-          );
-          expect(find.text('Overwritten'), findsOneWidget);
-        },
-      );
-
-      test(
-        'Overrides the DefaultLocalizations',
-        () async {
-          final localizations = await const FirebaseUILocalizationDelegate(
-            ZhTWLocalizationsOverrides(),
-          ).load(localeTW);
-          expect(localizations.labels.verifyEmailTitle, '覆寫標題');
-        },
-      );
-
-      testWidgets(
-        'UI test for the "${localeTW.toLanguageTag()}" translation override',
-        (tester) async {
-          await tester.pumpWidget(
-            TestMaterialApp(
-              // Test that 'en' labels are overridden by `ZhTWLocalizationsOverrides` overrides
-              locale: const Locale('en'),
-              localizationsOverride: const FirebaseUILocalizationDelegate(
-                ZhTWLocalizationsOverrides(),
-              ),
-              localizeText: localizeText,
-            ),
-          );
-          expect(find.text('覆寫標題'), findsOneWidget);
-        },
-      );
-    },
-  );
+            localizeText: localizeText,
+          ),
+        );
+        expect(find.text('覆寫標題'), findsOneWidget);
+      },
+    );
+  });
 }
 
 class DefaultLocalizationsOverrides extends DefaultLocalizations {
@@ -170,11 +147,7 @@ class TestMaterialApp extends StatelessWidget {
             ? FirebaseUILocalizations.delegate
             : localizationsOverride!,
       ],
-      home: Builder(
-        builder: (context) => Text(
-          localizeText.call(context),
-        ),
-      ),
+      home: Builder(builder: (context) => Text(localizeText.call(context))),
     );
   }
 }

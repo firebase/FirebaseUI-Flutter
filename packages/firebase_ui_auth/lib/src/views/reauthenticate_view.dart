@@ -49,15 +49,12 @@ class ReauthenticateView extends StatelessWidget {
     final linkedProviders =
         (auth ?? fba.FirebaseAuth.instance).currentUser!.providerData;
 
-    final providersMap = this.providers.fold<Map<String, AuthProvider>>(
-      {},
-      (map, provider) {
-        return {
-          ...map,
-          provider.providerId: provider,
-        };
-      },
-    );
+    final providersMap = this.providers.fold<Map<String, AuthProvider>>({}, (
+      map,
+      provider,
+    ) {
+      return {...map, provider.providerId: provider};
+    });
 
     List<AuthProvider> providers = [];
 
@@ -87,9 +84,7 @@ class ReauthenticateView extends StatelessWidget {
     });
 
     return FirebaseUIActions(
-      actions: [
-        onSignedInAction,
-      ],
+      actions: [onSignedInAction],
       child: LoginView(
         action: AuthAction.signIn,
         providers: providers,

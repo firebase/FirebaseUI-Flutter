@@ -275,9 +275,7 @@ void main() {
           verificationId: 'verificationId',
         );
 
-        final invocation = verify(
-          listener.onCredentialReceived(captureAny),
-        );
+        final invocation = verify(listener.onCredentialReceived(captureAny));
 
         expect(invocation.callCount, 1);
         expect(invocation.captured.first, isA<fba.PhoneAuthCredential>());
@@ -288,31 +286,28 @@ void main() {
         expect(cred.verificationId, 'verificationId');
       });
 
-      test(
-        'calls onCredentialLinked if credential linking succeded',
-        () async {
-          final user = MockUser();
-          auth.user = user;
+      test('calls onCredentialLinked if credential linking succeded', () async {
+        final user = MockUser();
+        auth.user = user;
 
-          provider.verifySMSCode(
-            action: AuthAction.link,
-            code: '123456',
-            verificationId: 'verificationId',
-          );
+        provider.verifySMSCode(
+          action: AuthAction.link,
+          code: '123456',
+          verificationId: 'verificationId',
+        );
 
-          await untilCalled(user.linkWithCredential(any));
+        await untilCalled(user.linkWithCredential(any));
 
-          final invocation = verify(listener.onCredentialLinked(captureAny));
+        final invocation = verify(listener.onCredentialLinked(captureAny));
 
-          expect(invocation.callCount, 1);
-          expect(invocation.captured.first, isA<fba.PhoneAuthCredential>());
+        expect(invocation.callCount, 1);
+        expect(invocation.captured.first, isA<fba.PhoneAuthCredential>());
 
-          final cred = invocation.captured.first as fba.PhoneAuthCredential;
+        final cred = invocation.captured.first as fba.PhoneAuthCredential;
 
-          expect(cred.smsCode, '123456');
-          expect(cred.verificationId, 'verificationId');
-        },
-      );
+        expect(cred.smsCode, '123456');
+        expect(cred.verificationId, 'verificationId');
+      });
     });
 
     group('PhoneAuthController', () {
@@ -371,17 +366,13 @@ class MockProvider extends Mock implements PhoneAuthProvider {
     fba.PhoneMultiFactorInfo? hint,
   }) {
     super.noSuchMethod(
-      Invocation.method(
-        #sendVerificationCode,
-        null,
-        {
-          #phoneNumber: phoneNumber,
-          #action: action,
-          #forceResendingToken: forceResendingToken,
-          #multiFactorSession: multiFactorSession,
-          #hint: hint,
-        },
-      ),
+      Invocation.method(#sendVerificationCode, null, {
+        #phoneNumber: phoneNumber,
+        #action: action,
+        #forceResendingToken: forceResendingToken,
+        #multiFactorSession: multiFactorSession,
+        #hint: hint,
+      }),
     );
   }
 
@@ -393,16 +384,12 @@ class MockProvider extends Mock implements PhoneAuthProvider {
     fba.ConfirmationResult? confirmationResult,
   }) {
     super.noSuchMethod(
-      Invocation.method(
-        #verifySMSCode,
-        null,
-        {
-          #action: action,
-          #code: code,
-          #verificationId: verificationId,
-          #confirmationResult: confirmationResult,
-        },
-      ),
+      Invocation.method(#verifySMSCode, null, {
+        #action: action,
+        #code: code,
+        #verificationId: verificationId,
+        #confirmationResult: confirmationResult,
+      }),
     );
   }
 }
@@ -415,73 +402,41 @@ class MockListener extends Mock implements PhoneAuthListener {
   @override
   void onCodeSent(String? verificationId, [int? forceResendToken]) {
     super.noSuchMethod(
-      Invocation.method(
-        #onCodeSent,
-        [
-          verificationId,
-          forceResendToken,
-        ],
-      ),
+      Invocation.method(#onCodeSent, [verificationId, forceResendToken]),
     );
   }
 
   @override
   void onSMSCodeRequested(String? phoneNumber) {
-    super.noSuchMethod(
-      Invocation.method(
-        #onSMSCodeRequested,
-        [phoneNumber],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#onSMSCodeRequested, [phoneNumber]));
   }
 
   @override
   void onCredentialLinked(fba.AuthCredential? credential) {
-    super.noSuchMethod(
-      Invocation.method(
-        #onCredentialLinked,
-        [credential],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#onCredentialLinked, [credential]));
   }
 
   @override
   void onVerificationCompleted(fba.PhoneAuthCredential? credential) {
     super.noSuchMethod(
-      Invocation.method(
-        #onVerificationCompleted,
-        [credential],
-      ),
+      Invocation.method(#onVerificationCompleted, [credential]),
     );
   }
 
   @override
   void onError(Object? error) {
-    super.noSuchMethod(
-      Invocation.method(
-        #onError,
-        [error],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#onError, [error]));
   }
 
   @override
   void onCredentialReceived(fba.AuthCredential? credential) {
     super.noSuchMethod(
-      Invocation.method(
-        #onBeforeCredentialLinked,
-        [credential],
-      ),
+      Invocation.method(#onBeforeCredentialLinked, [credential]),
     );
   }
 
   @override
   void onSignedIn(fba.UserCredential? credential) {
-    super.noSuchMethod(
-      Invocation.method(
-        #onSignedIn,
-        [credential],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#onSignedIn, [credential]));
   }
 }

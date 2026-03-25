@@ -166,11 +166,7 @@ class UniversalButton extends PlatformWidget {
     } else {
       switch (variant) {
         case ButtonVariant.text:
-          return TextButton(
-            onPressed: onPressed,
-            style: style,
-            child: child,
-          );
+          return TextButton(onPressed: onPressed, style: style, child: child);
         case ButtonVariant.filled:
           return ElevatedButton(
             onPressed: onPressed,

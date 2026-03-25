@@ -59,10 +59,7 @@ class UuidFileUploadNamingPolicy implements FileUploadNamingPolicy {
   final Uuid uuid;
   final V4Options? options;
 
-  const UuidFileUploadNamingPolicy({
-    this.uuid = const Uuid(),
-    this.options,
-  });
+  const UuidFileUploadNamingPolicy({this.uuid = const Uuid(), this.options});
 
   @override
   String getUploadFileName(String fullPath) {

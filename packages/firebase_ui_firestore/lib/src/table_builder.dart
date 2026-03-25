@@ -41,20 +41,21 @@ import 'query_builder.dart';
 /// {@endtemplate}
 ///
 
-typedef CellBuilder = Widget Function(
-  QueryDocumentSnapshot<Map<String, Object?>> snapshot,
-  String colKey,
-);
+typedef CellBuilder =
+    Widget Function(
+      QueryDocumentSnapshot<Map<String, Object?>> snapshot,
+      String colKey,
+    );
 
-typedef OnTapCell = void Function(
-  QueryDocumentSnapshot<Map<String, Object?>> snapshot,
-  Object? value,
-  String propertyName,
-);
+typedef OnTapCell =
+    void Function(
+      QueryDocumentSnapshot<Map<String, Object?>> snapshot,
+      Object? value,
+      String propertyName,
+    );
 
-typedef OnSelectedRows = void Function(
-  List<QueryDocumentSnapshot<Map<String, Object?>>> items,
-);
+typedef OnSelectedRows =
+    void Function(List<QueryDocumentSnapshot<Map<String, Object?>>> items);
 
 class FirestoreDataTable extends StatefulWidget {
   /// {@macro firebase_ui.firestore_table}
@@ -84,12 +85,12 @@ class FirestoreDataTable extends StatefulWidget {
     this.enableDefaultCellEditor = true,
     this.onTapCell,
     this.onSelectedRows,
-  })  : assert(
-          columnLabels is LinkedHashMap,
-          'only LinkedHashMap are supported as header',
-        ),
-        dataRowMinHeight = dataRowMinHeight ?? kMinInteractiveDimension,
-        dataRowMaxHeight = dataRowMaxHeight ?? kMinInteractiveDimension;
+  }) : assert(
+         columnLabels is LinkedHashMap,
+         'only LinkedHashMap are supported as header',
+       ),
+       dataRowMinHeight = dataRowMinHeight ?? kMinInteractiveDimension,
+       dataRowMaxHeight = dataRowMaxHeight ?? kMinInteractiveDimension;
 
   /// When specified, the builder will be used to display your own widget for the cell
   final CellBuilder? cellBuilder;
@@ -306,7 +307,7 @@ class _FirestoreTableState extends State<FirestoreDataTable> {
                       actions: actions.isEmpty ? null : actions,
                       columns: [
                         for (final head in widget.columnLabels.values)
-                          DataColumn(label: head)
+                          DataColumn(label: head),
                       ],
                     );
                   },
@@ -332,17 +333,15 @@ class _FirestoreTableState extends State<FirestoreDataTable> {
         return StatefulBuilder(
           builder: (context, setState) {
             void onTypeChanged(_PropertyType? newType) {
-              setState(
-                () {
-                  // Delaying dispose as otherwise the next build
-                  // will throw because it'll call "removeListener"
-                  Future.delayed(
-                    const Duration(milliseconds: 10),
-                    formState.dispose,
-                  );
-                  formState = _initialFormStateForType(newType);
-                },
-              );
+              setState(() {
+                // Delaying dispose as otherwise the next build
+                // will throw because it'll call "removeListener"
+                Future.delayed(
+                  const Duration(milliseconds: 10),
+                  formState.dispose,
+                );
+                formState = _initialFormStateForType(newType);
+              });
             }
 
             void onFormChange(_FormState newFormState) {
@@ -351,8 +350,10 @@ class _FirestoreTableState extends State<FirestoreDataTable> {
 
             return Dialog(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 10,
+                ),
                 child: DropdownButtonHideUnderline(
                   child: Theme(
                     data: Theme.of(context).copyWith(
@@ -426,9 +427,7 @@ class _PropertyTypeForm extends StatelessWidget {
           controller: formState.controller,
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.allow(
-              RegExp('[0-9]+?.?[0-9]*'),
-            ),
+            FilteringTextInputFormatter.allow(RegExp('[0-9]+?.?[0-9]*')),
           ],
           decoration: InputDecoration(labelText: localizations.valueLabel),
         ),
@@ -502,10 +501,7 @@ class _PropertyTypeForm extends StatelessWidget {
 }
 
 class _EditModalButtonBar extends StatelessWidget {
-  const _EditModalButtonBar({
-    required this.formState,
-    required this.reference,
-  });
+  const _EditModalButtonBar({required this.formState, required this.reference});
 
   final _FormState formState;
   final DocumentReference reference;
@@ -661,7 +657,7 @@ abstract class _FormState {
 
 class _NumberFormState extends _FormState {
   _NumberFormState(String text)
-      : controller = TextEditingController(text: text);
+    : controller = TextEditingController(text: text);
 
   final TextEditingController controller;
 
@@ -677,7 +673,7 @@ class _NumberFormState extends _FormState {
 
 class _StringFormState extends _FormState {
   _StringFormState(String text)
-      : controller = TextEditingController(text: text);
+    : controller = TextEditingController(text: text);
 
   final TextEditingController controller;
 
@@ -729,9 +725,9 @@ class _NullFormState extends _FormState {
 
 class _TimestampFormState extends _FormState {
   _TimestampFormState(DateTime date)
-      : controller = TextEditingController(
-          text: date.microsecondsSinceEpoch.toString(),
-        );
+    : controller = TextEditingController(
+        text: date.microsecondsSinceEpoch.toString(),
+      );
 
   final TextEditingController controller;
 
@@ -742,9 +738,7 @@ class _TimestampFormState extends _FormState {
   _Edit submit(DocumentReference<Object?> ref) {
     return _Edit(
       Timestamp.fromDate(
-        DateTime.fromMicrosecondsSinceEpoch(
-          int.parse(controller.text),
-        ),
+        DateTime.fromMicrosecondsSinceEpoch(int.parse(controller.text)),
       ),
     );
   }
@@ -754,11 +748,9 @@ class _TimestampFormState extends _FormState {
 }
 
 class _GeoPointFormState extends _FormState {
-  _GeoPointFormState({
-    required String longitude,
-    required String latitude,
-  })  : latitudeController = TextEditingController(text: latitude),
-        longitudeController = TextEditingController(text: longitude);
+  _GeoPointFormState({required String longitude, required String latitude})
+    : latitudeController = TextEditingController(text: latitude),
+      longitudeController = TextEditingController(text: longitude);
 
   final TextEditingController longitudeController;
   final TextEditingController latitudeController;
@@ -785,7 +777,7 @@ class _GeoPointFormState extends _FormState {
 
 class _ReferenceFormState extends _FormState {
   _ReferenceFormState(String text)
-      : controller = TextEditingController(text: text);
+    : controller = TextEditingController(text: text);
 
   final TextEditingController controller;
 
@@ -818,8 +810,8 @@ class _Source extends DataTableSource {
     required this.onTapCell,
     this.builder,
     this.onSelectedRows,
-  })  : _selectionEnabled = selectionEnabled,
-        _rowsPerpage = rowsPerPage;
+  }) : _selectionEnabled = selectionEnabled,
+       _rowsPerpage = rowsPerPage;
 
   final CellBuilder? builder;
 
@@ -847,7 +839,7 @@ class _Source extends DataTableSource {
 
   final Map<String, Widget> Function() getHeaders;
   final void Function(Object error, StackTrace stackTrace)? Function()
-      getOnError;
+  getOnError;
 
   final _selectedRowIds = <String>{};
 
@@ -909,11 +901,7 @@ class _Source extends DataTableSource {
             builder?.call(doc, head) ?? _ValueView(data[head]),
             onTap: enableDefaultEditor
                 ? () {
-                    onTapCell(
-                      doc,
-                      data[head],
-                      head,
-                    );
+                    onTapCell(doc, data[head], head);
                   }
                 : null,
           ),
@@ -940,7 +928,7 @@ class _Source extends DataTableSource {
     // such as when more content got loaded.
     final wereAllItemsSelected =
         _previousSnapshot?.docs.length == _selectedRowIds.length &&
-            _previousSnapshot!.docs.isNotEmpty;
+        _previousSnapshot!.docs.isNotEmpty;
 
     _previousSnapshot = snapshot;
     if (wereAllItemsSelected) onSelectAll(true);
@@ -962,9 +950,9 @@ class _Source extends DataTableSource {
     for (final doc in _previousSnapshot!.docs) {
       if (_selectedRowIds.contains(doc.id)) {
         doc.reference.delete().then<void>(
-              (value) => _selectedRowIds.remove(doc.id),
-              onError: getOnError(),
-            );
+          (value) => _selectedRowIds.remove(doc.id),
+          onError: getOnError(),
+        );
       }
     }
   }

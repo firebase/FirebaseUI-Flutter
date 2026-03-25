@@ -41,20 +41,11 @@ class LayoutFlowAwarePadding extends StatelessWidget {
     if (axis == null) {
       finalPadding = padding;
     } else if (axis == Axis.horizontal) {
-      finalPadding = EdgeInsets.only(
-        left: padding.left,
-        right: padding.right,
-      );
+      finalPadding = EdgeInsets.only(left: padding.left, right: padding.right);
     } else {
-      finalPadding = EdgeInsets.only(
-        top: padding.top,
-        bottom: padding.bottom,
-      );
+      finalPadding = EdgeInsets.only(top: padding.top, bottom: padding.bottom);
     }
 
-    return Padding(
-      padding: finalPadding,
-      child: child,
-    );
+    return Padding(padding: finalPadding, child: child);
   }
 }

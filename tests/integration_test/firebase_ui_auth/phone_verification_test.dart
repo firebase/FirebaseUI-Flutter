@@ -60,10 +60,7 @@ void main() {
     });
 
     testWidgets('validates phone number', (tester) async {
-      await render(
-        tester,
-        const PhoneInputScreen(),
-      );
+      await render(tester, const PhoneInputScreen());
 
       await tester.pump();
 
@@ -77,43 +74,41 @@ void main() {
       expect(errorText, findsOneWidget);
     });
 
-    testWidgets(
-      'sends sms verification code when next is clicked',
-      (tester) async {
-        final completer = Completer<void>();
+    testWidgets('sends sms verification code when next is clicked', (
+      tester,
+    ) async {
+      final completer = Completer<void>();
 
-        await render(
-          tester,
-          PhoneInputScreen(
-            actions: [
-              AuthStateChangeAction<SMSCodeSent>((context, state) {
-                completer.complete();
-              }),
-              AuthStateChangeAction<AuthFailed>((context, state) {
-                fail('should not fail');
-              }),
-            ],
-          ),
-        );
+      await render(
+        tester,
+        PhoneInputScreen(
+          actions: [
+            AuthStateChangeAction<SMSCodeSent>((context, state) {
+              completer.complete();
+            }),
+            AuthStateChangeAction<AuthFailed>((context, state) {
+              fail('should not fail');
+            }),
+          ],
+        ),
+      );
 
-        await sendSMS(tester, '555555555');
+      await sendSMS(tester, '555555555');
 
-        await completer.future;
+      await completer.future;
 
-        final code = await getVerificationCode('+1555555555');
-        expect(code, isNotEmpty);
-      },
-    );
+      final code = await getVerificationCode('+1555555555');
+      expect(code, isNotEmpty);
+    });
 
-    testWidgets(
-      'opens sms verification screen when code is requested',
-      (tester) async {
-        await render(tester, const PhoneInputScreen());
-        await sendSMS(tester, '123456789');
+    testWidgets('opens sms verification screen when code is requested', (
+      tester,
+    ) async {
+      await render(tester, const PhoneInputScreen());
+      await sendSMS(tester, '123456789');
 
-        expect(find.text(labels.enterSMSCodeText), findsOneWidget);
-      },
-    );
+      expect(find.text(labels.enterSMSCodeText), findsOneWidget);
+    });
   });
 
   group('SMSCodeInputScreen', () {
@@ -129,86 +124,83 @@ void main() {
       expect(find.byType(PhoneInputScreen), findsOneWidget);
     });
 
-    testWidgets(
-      'shows error message if invalid code was entered',
-      (tester) async {
-        final completer = Completer<void>();
+    testWidgets('shows error message if invalid code was entered', (
+      tester,
+    ) async {
+      final completer = Completer<void>();
 
-        await render(
-          tester,
-          AuthStateListener<PhoneAuthController>(
-            listener: (oldState, newState, _) {
-              if (newState is! AuthFailed) return;
-              completer.complete();
+      await render(
+        tester,
+        AuthStateListener<PhoneAuthController>(
+          listener: (oldState, newState, _) {
+            if (newState is! AuthFailed) return;
+            completer.complete();
 
-              return null;
-            },
-            child: const PhoneInputScreen(),
-          ),
-        );
-        await sendSMS(tester, '555555556');
+            return null;
+          },
+          child: const PhoneInputScreen(),
+        ),
+      );
+      await sendSMS(tester, '555555556');
 
-        final smsCodeInput = find.byType(SMSCodeInput);
-        expect(smsCodeInput, findsOneWidget);
+      final smsCodeInput = find.byType(SMSCodeInput);
+      expect(smsCodeInput, findsOneWidget);
 
-        final code = await getVerificationCode('+1555555556');
-        final invalidCode =
-            code.split('').map(int.parse).map((v) => (v + 1) % 10).join();
+      final code = await getVerificationCode('+1555555556');
+      final invalidCode = code
+          .split('')
+          .map(int.parse)
+          .map((v) => (v + 1) % 10)
+          .join();
 
-        await tester.tap(smsCodeInput);
+      await tester.tap(smsCodeInput);
 
-        await tester.enterText(smsCodeInput, invalidCode);
-        await tester.pumpAndSettle();
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await completer.future;
+      await tester.enterText(smsCodeInput, invalidCode);
+      await tester.pumpAndSettle();
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await completer.future;
 
-        await tester.pump();
+      await tester.pump();
 
-        expect(find.byType(ErrorText), findsOneWidget);
-        expect(
-          find.text(labels.invalidVerificationCodeErrorText),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(find.byType(ErrorText), findsOneWidget);
+      expect(
+        find.text(labels.invalidVerificationCodeErrorText),
+        findsOneWidget,
+      );
+    });
 
-    testWidgets(
-      'signs in if the code is correct',
-      (tester) async {
-        final completer = Completer<fba.User>();
+    testWidgets('signs in if the code is correct', (tester) async {
+      final completer = Completer<fba.User>();
 
-        await render(
-          tester,
-          FirebaseUIActions(
-            actions: [
-              AuthStateChangeAction<UserCreated>((context, state) {
-                completer.complete(state.credential.user!);
-              }),
-              AuthStateChangeAction<AuthFailed>((context, state) {
-                fail("shouldn't fail");
-              }),
-            ],
-            child: const PhoneInputScreen(),
-          ),
-        );
-        await sendSMS(tester, '555555557');
+      await render(
+        tester,
+        FirebaseUIActions(
+          actions: [
+            AuthStateChangeAction<UserCreated>((context, state) {
+              completer.complete(state.credential.user!);
+            }),
+            AuthStateChangeAction<AuthFailed>((context, state) {
+              fail("shouldn't fail");
+            }),
+          ],
+          child: const PhoneInputScreen(),
+        ),
+      );
+      await sendSMS(tester, '555555557');
 
-        final smsCodeInput = find.byType(SMSCodeInput);
-        final code = await getVerificationCode('+1555555557');
+      final smsCodeInput = find.byType(SMSCodeInput);
+      final code = await getVerificationCode('+1555555557');
 
-        await tester.tap(smsCodeInput);
+      await tester.tap(smsCodeInput);
 
-        await tester.enterText(smsCodeInput, code);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+      await tester.enterText(smsCodeInput, code);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
 
-        final user = await completer.future.timeout(
-          const Duration(seconds: 10),
-        );
+      final user = await completer.future.timeout(const Duration(seconds: 10));
 
-        expect(user.phoneNumber, '+1555555557');
-      },
-    );
+      expect(user.phoneNumber, '+1555555557');
+    });
   });
 
   group('showReauthenticateDialog', () {
@@ -245,19 +237,21 @@ void main() {
 
         await render(
           tester,
-          Builder(builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                showReauthenticateDialog(
-                  context: context,
-                  providers: [PhoneAuthProvider()],
-                  onSignedIn: () => reauthenticationCompleter.complete(),
-                  onPhoneVerfifed: () => onPhoneVerifiedCalled = true,
-                );
-              },
-              child: const Text('Reauthenticate'),
-            );
-          }),
+          Builder(
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () {
+                  showReauthenticateDialog(
+                    context: context,
+                    providers: [PhoneAuthProvider()],
+                    onSignedIn: () => reauthenticationCompleter.complete(),
+                    onPhoneVerfifed: () => onPhoneVerifiedCalled = true,
+                  );
+                },
+                child: const Text('Reauthenticate'),
+              );
+            },
+          ),
         );
 
         await tester.tap(find.byType(ElevatedButton));
@@ -284,7 +278,8 @@ void main() {
         expect(onPhoneVerifiedCalled, isTrue);
       },
       // passes locally but fails in CI
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.android ||
               defaultTargetPlatform == TargetPlatform.iOS),
     );

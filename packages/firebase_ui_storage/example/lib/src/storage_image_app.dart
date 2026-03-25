@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
 import 'apps.dart';
 
-const preloadedBlurhash = ':eDJq[9wo~xUbKNexqWG-@M|xuRlt7ayWVoMIwskxVIvs+slNHt'
+const preloadedBlurhash =
+    ':eDJq[9wo~xUbKNexqWG-@M|xuRlt7ayWVoMIwskxVIvs+slNHt'
     '2j]j?RiocR%fRo0oJtRW=V@t2R*bHoMfSbca#oJaybHj@flbIsoWCbHaya}bHoeazbIayofWC'
     'n~j[R*oJ';
 

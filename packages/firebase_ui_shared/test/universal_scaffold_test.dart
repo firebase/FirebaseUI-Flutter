@@ -11,29 +11,20 @@ void main() {
   group('UniversalScaffold', () {
     testWidgets('uses Scaffold under MaterialApp', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: UniversalScaffold(
-            body: Text('body'),
-          ),
-        ),
+        const MaterialApp(home: UniversalScaffold(body: Text('body'))),
       );
 
       expect(find.byType(Scaffold), findsOneWidget);
     });
 
-    testWidgets(
-      'uses CupertinoPageScaffold under CupertinoApp',
-      (tester) async {
-        await tester.pumpWidget(
-          const CupertinoApp(
-            home: UniversalScaffold(
-              body: Text('body'),
-            ),
-          ),
-        );
+    testWidgets('uses CupertinoPageScaffold under CupertinoApp', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const CupertinoApp(home: UniversalScaffold(body: Text('body'))),
+      );
 
-        expect(find.byType(CupertinoPageScaffold), findsOneWidget);
-      },
-    );
+      expect(find.byType(CupertinoPageScaffold), findsOneWidget);
+    });
   });
 }

@@ -10,12 +10,13 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
 import '../widgets/internal/title.dart';
 
-typedef SMSCodeRequestedCallback = void Function(
-  BuildContext context,
-  AuthAction? action,
-  Object flowKey,
-  String phoneNumber,
-);
+typedef SMSCodeRequestedCallback =
+    void Function(
+      BuildContext context,
+      AuthAction? action,
+      Object flowKey,
+      String phoneNumber,
+    );
 
 typedef PhoneNumberSubmitCallback = void Function(String phoneNumber);
 
@@ -77,10 +78,7 @@ class _PhoneInputViewState extends State<PhoneInputView> {
         if (widget.onSubmit != null) {
           widget.onSubmit!(phoneNumber);
         } else {
-          ctrl.acceptPhoneNumber(
-            phoneNumber,
-            widget.multiFactorSession,
-          );
+          ctrl.acceptPhoneNumber(phoneNumber, widget.multiFactorSession);
         }
       };
 
@@ -94,7 +92,8 @@ class _PhoneInputViewState extends State<PhoneInputView> {
   @override
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
-    final countryCode = Localizations.localeOf(context).countryCode ??
+    final countryCode =
+        Localizations.localeOf(context).countryCode ??
         WidgetsBinding.instance.platformDispatcher.locale.countryCode;
 
     return AuthFlowBuilder<PhoneAuthController>(
@@ -103,9 +102,11 @@ class _PhoneInputViewState extends State<PhoneInputView> {
       auth: widget.auth,
       listener: (oldState, newState, controller) {
         if (newState is SMSCodeRequested) {
-          final cb = widget.onSMSCodeRequested ??
-              FirebaseUIAction.ofType<SMSCodeRequestedAction>(context)
-                  ?.callback;
+          final cb =
+              widget.onSMSCodeRequested ??
+              FirebaseUIAction.ofType<SMSCodeRequestedAction>(
+                context,
+              )?.callback;
 
           cb?.call(
             context,

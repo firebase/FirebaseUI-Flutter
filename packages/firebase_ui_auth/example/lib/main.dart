@@ -85,18 +85,16 @@ class FirebaseAuthUIExample extends StatelessWidget {
       ),
     );
 
-    final mfaAction = AuthStateChangeAction<MFARequired>(
-      (context, state) async {
-        final nav = Navigator.of(context);
+    final mfaAction = AuthStateChangeAction<MFARequired>((
+      context,
+      state,
+    ) async {
+      final nav = Navigator.of(context);
 
-        await startMFAVerification(
-          resolver: state.resolver,
-          context: context,
-        );
+      await startMFAVerification(resolver: state.resolver, context: context);
 
-        nav.pushReplacementNamed('/profile');
-      },
-    );
+      nav.pushReplacementNamed('/profile');
+    });
 
     return MaterialApp(
       theme: ThemeData(
@@ -224,14 +222,15 @@ class FirebaseAuthUIExample extends StatelessWidget {
           );
         },
         '/sms': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>?;
+          final arguments =
+              ModalRoute.of(context)?.settings.arguments
+                  as Map<String, dynamic>?;
 
           return SMSCodeInputScreen(
             actions: [
               AuthStateChangeAction<SignedIn>((context, state) {
                 Navigator.of(context).pushReplacementNamed('/profile');
-              })
+              }),
             ],
             flowKey: arguments?['flowKey'],
             action: arguments?['action'],
@@ -240,8 +239,9 @@ class FirebaseAuthUIExample extends StatelessWidget {
           );
         },
         '/forgot-password': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>?;
+          final arguments =
+              ModalRoute.of(context)?.settings.arguments
+                  as Map<String, dynamic>?;
 
           return ForgotPasswordScreen(
             email: arguments?['email'],
@@ -274,7 +274,8 @@ class FirebaseAuthUIExample extends StatelessWidget {
               mfaAction,
             ],
             actionCodeSettings: actionCodeSettings,
-            showMFATile: kIsWeb ||
+            showMFATile:
+                kIsWeb ||
                 platform == TargetPlatform.iOS ||
                 platform == TargetPlatform.android,
             showUnlinkConfirmationDialog: true,
@@ -375,10 +376,7 @@ class _AppTrackingTransparencyCardState
         children: [
           const Text('App tracking allowed'),
           const SizedBox(width: 12),
-          Switch(
-            value: _isAllowed,
-            onChanged: _onToggleChanged,
-          ),
+          Switch(value: _isAllowed, onChanged: _onToggleChanged),
         ],
       ),
     );

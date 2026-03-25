@@ -80,9 +80,7 @@ class FirebaseUIStorageGallery extends StatelessWidget {
   Widget buildCupertino(BuildContext context, Brightness brightness) {
     return CupertinoApp(
       title: 'Firebase UI Storage Gallery',
-      theme: CupertinoThemeData(
-        brightness: brightness,
-      ),
+      theme: CupertinoThemeData(brightness: brightness),
       home: const Gallery(),
     );
   }
@@ -100,10 +98,7 @@ class Gallery extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                const SizedBox(
-                  width: 200,
-                  child: AppList(),
-                ),
+                const SizedBox(width: 200, child: AppList()),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -111,9 +106,8 @@ class Gallery extends StatelessWidget {
                     children: [
                       ValueListenableBuilder(
                         valueListenable: app,
-                        builder: (context, app, _) => Expanded(
-                          child: Center(child: app),
-                        ),
+                        builder: (context, app, _) =>
+                            Expanded(child: Center(child: app)),
                       ),
                     ],
                   ),
@@ -208,13 +202,11 @@ class Toolbar extends PlatformWidget {
             designLib.value == DesignLib.cupertino,
           ],
           onPressed: (index) {
-            designLib.value =
-                index == 0 ? DesignLib.material : DesignLib.cupertino;
+            designLib.value = index == 0
+                ? DesignLib.material
+                : DesignLib.cupertino;
           },
-          children: const <Widget>[
-            Icon(Icons.android),
-            Icon(Icons.apple),
-          ],
+          children: const <Widget>[Icon(Icons.android), Icon(Icons.apple)],
         ),
       ],
     );
@@ -222,9 +214,6 @@ class Toolbar extends PlatformWidget {
 
   @override
   Widget? buildWrapper(BuildContext context, Widget child) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: child,
-    );
+    return Padding(padding: const EdgeInsets.all(8), child: child);
   }
 }

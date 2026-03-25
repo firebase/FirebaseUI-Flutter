@@ -6,7 +6,7 @@ homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/fi
 resolution: workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.9.0
 
 dependencies:
   flutter:

@@ -32,17 +32,9 @@ Future<void> main(List<String> args) async {
     listOfFutures.add(future);
   }
 
+  listOfFutures.add(updatePodfileVersion(iosSdkVersion, './tests/ios/Podfile'));
   listOfFutures.add(
-    updatePodfileVersion(
-      iosSdkVersion,
-      './tests/ios/Podfile',
-    ),
-  );
-  listOfFutures.add(
-    updatePodfileVersion(
-      iosSdkVersion,
-      './tests/macos/Podfile',
-    ),
+    updatePodfileVersion(iosSdkVersion, './tests/macos/Podfile'),
   );
 
   await Future.wait(listOfFutures);
@@ -77,7 +69,7 @@ List<String> findPubspecFiles(Directory root) {
   final pubspecFiles = <String>[];
   final directories = [
     Directory(p.join(root.path, 'packages')),
-    Directory(p.join(root.path, 'tests'))
+    Directory(p.join(root.path, 'tests')),
   ];
 
   for (final dir in directories) {
@@ -109,7 +101,8 @@ Future<void> updatePodfileVersion(
 
   final updatedContent = content.replaceAllMapped(
     RegExp(
-        r"pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '\d+\.\d+\.\d+'"),
+      r"pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '\d+\.\d+\.\d+'",
+    ),
     (match) =>
         "pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '$iosSdkVersion'",
   );
@@ -117,5 +110,6 @@ Future<void> updatePodfileVersion(
   await podfile.writeAsString(updatedContent);
 
   print(
-      'Updated Podfile Firestore framework on path: $podfilePath to version: $iosSdkVersion');
+    'Updated Podfile Firestore framework on path: $podfilePath to version: $iosSdkVersion',
+  );
 }

@@ -31,12 +31,11 @@ void main() {
   /// If EmailLinkSignInView is the root view, there should be
   /// no option to go back.
   testWidgets('no go back option if root view', (tester) async {
-    await tester.pumpWidget(TestMaterialApp(
-      child: EmailLinkSignInView(
-        provider: emailLinkProvider,
-        auth: auth,
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
       ),
-    ));
+    );
 
     final button = find.text(labels.goBackButtonLabel);
     expect(button, findsNothing);
@@ -55,7 +54,9 @@ void main() {
               MaterialPageRoute(
                 builder: (context) => Scaffold(
                   body: EmailLinkSignInView(
-                      provider: emailLinkProvider, auth: auth),
+                    provider: emailLinkProvider,
+                    auth: auth,
+                  ),
                 ),
               ),
             ),

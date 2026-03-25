@@ -46,36 +46,37 @@ void main() {
   });
 
   group('FirebaseUIStorageConfigOverride', () {
-    testWidgets(
-      'allows to override a top-level configuration',
-      (tester) async {
-        final initialConfig = FirebaseUIStorageConfiguration(
-          storage: MockStorage.instance,
-        );
+    testWidgets('allows to override a top-level configuration', (tester) async {
+      final initialConfig = FirebaseUIStorageConfiguration(
+        storage: MockStorage.instance,
+      );
 
-        final overriden = FirebaseUIStorageConfiguration(
-          storage: MockStorage.instance,
-          namingPolicy: const UuidFileUploadNamingPolicy(),
-        );
+      final overriden = FirebaseUIStorageConfiguration(
+        storage: MockStorage.instance,
+        namingPolicy: const UuidFileUploadNamingPolicy(),
+      );
 
-        FirebaseUIStorage.configure(initialConfig);
+      FirebaseUIStorage.configure(initialConfig);
 
-        await tester.pumpWidget(
-          Builder(builder: (context) {
+      await tester.pumpWidget(
+        Builder(
+          builder: (context) {
             final config = context.configFor(MockStorage.instance);
             expect(config, initialConfig);
 
             return FirebaseUIStorageConfigOverride(
               config: overriden,
-              child: Builder(builder: (context) {
-                final config = context.configFor(MockStorage.instance);
-                expect(config, overriden);
-                return const SizedBox();
-              }),
+              child: Builder(
+                builder: (context) {
+                  final config = context.configFor(MockStorage.instance);
+                  expect(config, overriden);
+                  return const SizedBox();
+                },
+              ),
             );
-          }),
-        );
-      },
-    );
+          },
+        ),
+      );
+    });
   });
 }

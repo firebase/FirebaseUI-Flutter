@@ -29,9 +29,7 @@ class GoogleSignInButton extends _GoogleSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-        );
+  }) : super(isLoading: isLoading ?? false);
 }
 
 class GoogleSignInIconButton extends _GoogleSignInButton {
@@ -51,10 +49,7 @@ class GoogleSignInIconButton extends _GoogleSignInButton {
     super.redirectUri,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-          label: '',
-        );
+  }) : super(isLoading: isLoading ?? false, label: '');
 }
 
 GoogleProvider? _mockProvider;
@@ -102,9 +97,9 @@ class _GoogleSignInButton extends StatelessWidget {
     this.redirectUri,
     this.onError,
     this.onCanceled,
-  })  : label = label ?? 'Sign in with Google',
-        overrideDefaultTapAction = overrideDefaultTapAction ?? false,
-        size = size ?? 19;
+  }) : label = label ?? 'Sign in with Google',
+       overrideDefaultTapAction = overrideDefaultTapAction ?? false,
+       size = size ?? 19;
 
   GoogleProvider get provider {
     if (_mockProvider != null) return _mockProvider!;

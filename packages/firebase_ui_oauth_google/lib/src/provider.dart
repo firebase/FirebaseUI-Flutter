@@ -55,10 +55,7 @@ class GoogleProvider extends OAuthProvider {
     if (_ignoreClientId()) {
       provider = GoogleSignIn(scopes: scopes ?? []);
     } else {
-      provider = GoogleSignIn(
-        clientId: clientId,
-        scopes: scopes ?? [],
-      );
+      provider = GoogleSignIn(clientId: clientId, scopes: scopes ?? []);
     }
   }
 
@@ -73,19 +70,23 @@ class GoogleProvider extends OAuthProvider {
 
   @override
   void mobileSignIn(AuthAction action) async {
-    provider.signIn().then((user) {
-      if (user == null) throw AuthCancelledException();
-      return user.authentication;
-    }).then((auth) {
-      final credential = fba.GoogleAuthProvider.credential(
-        accessToken: auth.accessToken,
-        idToken: auth.idToken,
-      );
+    provider
+        .signIn()
+        .then((user) {
+          if (user == null) throw AuthCancelledException();
+          return user.authentication;
+        })
+        .then((auth) {
+          final credential = fba.GoogleAuthProvider.credential(
+            accessToken: auth.accessToken,
+            idToken: auth.idToken,
+          );
 
-      onCredentialReceived(credential, action);
-    }).catchError((err) {
-      authListener.onError(err);
-    });
+          onCredentialReceived(credential, action);
+        })
+        .catchError((err) {
+          authListener.onError(err);
+        });
   }
 
   @override

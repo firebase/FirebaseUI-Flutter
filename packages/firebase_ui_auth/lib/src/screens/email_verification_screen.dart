@@ -140,8 +140,9 @@ class __EmailVerificationScreenContentState
 
   @override
   void initState() {
-    _ambiguate(SchedulerBinding.instance)!
-        .addPostFrameCallback(_sendEmailVerification);
+    _ambiguate(
+      SchedulerBinding.instance,
+    )!.addPostFrameCallback(_sendEmailVerification);
     super.initState();
   }
 
@@ -171,9 +172,7 @@ class __EmailVerificationScreenContentState
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Align(
-          child: Title(text: l.verifyEmailTitle),
-        ),
+        Align(child: Title(text: l.verifyEmailTitle)),
         const SizedBox(height: 32),
         Text(l.verificationEmailSentText),
         const SizedBox(height: 32),
@@ -206,7 +205,7 @@ class __EmailVerificationScreenContentState
                 widget.actionCodeSettings,
               );
             },
-          )
+          ),
         ],
         if (state == EmailVerificationState.failed) ...[
           const SizedBox(height: 16),
@@ -217,10 +216,11 @@ class __EmailVerificationScreenContentState
           variant: ButtonVariant.text,
           text: l.goBackButtonLabel,
           onPressed: () {
-            FirebaseUIAction.ofType<AuthCancelledAction>(context)
-                ?.callback(context);
+            FirebaseUIAction.ofType<AuthCancelledAction>(
+              context,
+            )?.callback(context);
           },
-        )
+        ),
       ],
     );
   }

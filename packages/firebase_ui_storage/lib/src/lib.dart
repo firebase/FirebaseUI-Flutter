@@ -38,9 +38,7 @@ class FirebaseUIStorage {
   }
 
   /// Configures FirebaseUIStorage to be used with a [FirebaseStorage].
-  static Future<void> configure(
-    FirebaseUIStorageConfiguration config,
-  ) async {
+  static Future<void> configure(FirebaseUIStorageConfiguration config) async {
     final storage = config.storage;
 
     if (isConfigured(storage)) {

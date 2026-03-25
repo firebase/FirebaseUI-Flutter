@@ -13,10 +13,8 @@ import 'package:flutter/material.dart' hide Title;
 
 import '../widgets/internal/title.dart';
 
-typedef AuthViewContentBuilder = Widget Function(
-  BuildContext context,
-  AuthAction action,
-);
+typedef AuthViewContentBuilder =
+    Widget Function(BuildContext context, AuthAction action);
 
 /// {@template ui.auth.views.login_view}
 /// A view that could be used to build a custom [SignInScreen] or
@@ -91,9 +89,9 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildOAuthButtons(TargetPlatform platform) {
-    final oauthProviders = widget.providers
-        .whereType<OAuthProvider>()
-        .where((element) => element.supportsPlatform(platform));
+    final oauthProviders = widget.providers.whereType<OAuthProvider>().where(
+      (element) => element.supportsPlatform(platform),
+    );
 
     _buttonsBuilt = true;
 
@@ -107,10 +105,7 @@ class _LoginViewState extends State<LoginView> {
     }).toList();
 
     if (widget.oauthButtonVariant == OAuthButtonVariant.icon_and_text) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: oauthButtonsList,
-      );
+      return Column(mainAxisSize: MainAxisSize.min, children: oauthButtonsList);
     } else {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,23 +162,17 @@ class _LoginViewState extends State<LoginView> {
       Title(text: title),
       const SizedBox(height: 16),
       if (widget.subtitleBuilder != null)
-        widget.subtitleBuilder!(
-          context,
-          _action,
-        ),
+        widget.subtitleBuilder!(context, _action),
       if (_showAuthActionSwitch) ...[
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(
-                text: '$hint ',
-                style: hintStyle,
-              ),
+              TextSpan(text: '$hint ', style: hintStyle),
               TextSpan(
                 text: actionText,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: registerTextColor,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(color: registerTextColor),
                 mouseCursor: SystemMouseCursors.click,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _handleDifferentAuthAction(context),
@@ -192,7 +181,7 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
         const SizedBox(height: 16),
-      ]
+      ],
     ];
   }
 
@@ -228,7 +217,7 @@ class _LoginViewState extends State<LoginView> {
                   actionButtonLabelOverride: widget.actionButtonLabelOverride,
                   showPasswordVisibilityToggle:
                       widget.showPasswordVisibilityToggle,
-                )
+                ),
               ] else if (provider is PhoneAuthProvider) ...[
                 const SizedBox(height: 8),
                 PhoneVerificationButton(
@@ -239,17 +228,11 @@ class _LoginViewState extends State<LoginView> {
                 const SizedBox(height: 8),
               ] else if (provider is EmailLinkAuthProvider) ...[
                 const SizedBox(height: 8),
-                EmailLinkSignInButton(
-                  auth: widget.auth,
-                  provider: provider,
-                ),
+                EmailLinkSignInButton(auth: widget.auth, provider: provider),
               ] else if (provider is OAuthProvider && !_buttonsBuilt)
                 _buildOAuthButtons(platform),
           if (widget.footerBuilder != null)
-            widget.footerBuilder!(
-              context,
-              _action,
-            ),
+            widget.footerBuilder!(context, _action),
         ],
       ),
     );

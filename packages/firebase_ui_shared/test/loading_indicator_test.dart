@@ -8,28 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const home = Scaffold(
-    body: LoadingIndicator(
-      size: 30,
-      borderWidth: 2,
-    ),
-  );
+  const home = Scaffold(body: LoadingIndicator(size: 30, borderWidth: 2));
 
   group('LoadingIndicator', () {
-    testWidgets(
-      'uses CircularProgressIndicator under MaterialApp',
-      (tester) async {
-        await tester.pumpWidget(const MaterialApp(home: home));
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      },
-    );
+    testWidgets('uses CircularProgressIndicator under MaterialApp', (
+      tester,
+    ) async {
+      await tester.pumpWidget(const MaterialApp(home: home));
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
 
-    testWidgets(
-      'uses CupertinoActivityIndicator under MaterialApp',
-      (tester) async {
-        await tester.pumpWidget(const CupertinoApp(home: home));
-        expect(find.byType(CupertinoActivityIndicator), findsOneWidget);
-      },
-    );
+    testWidgets('uses CupertinoActivityIndicator under MaterialApp', (
+      tester,
+    ) async {
+      await tester.pumpWidget(const CupertinoApp(home: home));
+      expect(find.byType(CupertinoActivityIndicator), findsOneWidget);
+    });
   });
 }

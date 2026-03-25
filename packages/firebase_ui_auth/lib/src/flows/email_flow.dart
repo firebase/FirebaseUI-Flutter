@@ -39,10 +39,7 @@ class EmailAuthFlow extends AuthFlow<EmailAuthProvider>
 
     /// {@macro ui.auth.auth_action}
     super.action,
-  }) : super(
-          initialState: AwaitingEmailAndPassword(),
-          provider: provider,
-        );
+  }) : super(initialState: AwaitingEmailAndPassword(), provider: provider);
 
   @override
   void onBeforeSignIn() {

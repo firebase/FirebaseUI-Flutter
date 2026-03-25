@@ -116,7 +116,7 @@ class OAuthProviderButton extends StatelessWidget {
           label: variant == OAuthButtonVariant.icon
               ? ''
               : provider.style.label ??
-                  resolveProviderButtonLabel(provider.providerId, labels),
+                    resolveProviderButtonLabel(provider.providerId, labels),
           auth: auth,
         );
 
@@ -124,12 +124,7 @@ class OAuthProviderButton extends StatelessWidget {
           return button;
         }
 
-        return Column(
-          children: [
-            button,
-            const _ErrorListener(),
-          ],
-        );
+        return Column(children: [button, const _ErrorListener()]);
       },
     );
   }

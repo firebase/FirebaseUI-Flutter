@@ -9,10 +9,12 @@ import '../test_utils.dart';
 
 void main() {
   final auth = MockAuth();
-  auth.user = MockUser(providerData: [
-    MockUserInfo(providerId: 'email'),
-    MockUserInfo(providerId: 'phone'),
-  ]);
+  auth.user = MockUser(
+    providerData: [
+      MockUserInfo(providerId: 'email'),
+      MockUserInfo(providerId: 'phone'),
+    ],
+  );
 
   group('$ReauthenticateDialog', () {
     testWidgets('has capitalized Cancel label', (tester) async {
@@ -20,10 +22,7 @@ void main() {
         TestMaterialApp(
           child: ReauthenticateDialog(
             auth: auth,
-            providers: [
-              EmailAuthProvider(),
-              PhoneAuthProvider(),
-            ],
+            providers: [EmailAuthProvider(), PhoneAuthProvider()],
           ),
         ),
       );

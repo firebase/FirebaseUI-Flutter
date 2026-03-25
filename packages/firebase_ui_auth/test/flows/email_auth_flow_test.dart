@@ -145,11 +145,7 @@ void main() {
         ctrl.setEmailAndPassword('email', 'password');
 
         final result = verify(
-          provider.authenticate(
-            captureAny,
-            captureAny,
-            captureAny,
-          ),
+          provider.authenticate(captureAny, captureAny, captureAny),
         )..called(1);
 
         expect(result.captured[0], 'email');
@@ -178,10 +174,8 @@ void main() {
               builder: (context, state, ctrl, _) {
                 return ElevatedButton(
                   child: const Text('Sign in'),
-                  onPressed: () => ctrl.setEmailAndPassword(
-                    'email',
-                    'password',
-                  ),
+                  onPressed: () =>
+                      ctrl.setEmailAndPassword('email', 'password'),
                 );
               },
             ),
@@ -216,10 +210,8 @@ void main() {
               builder: (context, state, ctrl, _) {
                 return ElevatedButton(
                   child: const Text('Sign in'),
-                  onPressed: () => ctrl.setEmailAndPassword(
-                    'email',
-                    'password',
-                  ),
+                  onPressed: () =>
+                      ctrl.setEmailAndPassword('email', 'password'),
                 );
               },
             ),
@@ -249,31 +241,18 @@ class MockAuthListener extends Mock implements EmailAuthListener {
   @override
   void onCredentialReceived(AuthCredential? credential) {
     super.noSuchMethod(
-      Invocation.method(
-        #onBeforeCredentialLinked,
-        [credential],
-      ),
+      Invocation.method(#onBeforeCredentialLinked, [credential]),
     );
   }
 
   @override
   void onCredentialLinked(AuthCredential? credential) {
-    super.noSuchMethod(
-      Invocation.method(
-        #onCredentialLinked,
-        [credential],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#onCredentialLinked, [credential]));
   }
 
   @override
   void onSignedIn(UserCredential? credential) {
-    super.noSuchMethod(
-      Invocation.method(
-        #onSignedIn,
-        [credential],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#onSignedIn, [credential]));
   }
 
   @override

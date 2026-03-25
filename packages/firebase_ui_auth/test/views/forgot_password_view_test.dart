@@ -18,14 +18,10 @@ class MockFirebaseAuth extends Mock implements fba.FirebaseAuth {
     fba.ActionCodeSettings? actionCodeSettings,
   }) {
     return super.noSuchMethod(
-      Invocation.method(
-        #sendPasswordResetEmail,
-        [],
-        {
-          #email: email,
-          #actionCodeSettings: actionCodeSettings,
-        },
-      ),
+      Invocation.method(#sendPasswordResetEmail, [], {
+        #email: email,
+        #actionCodeSettings: actionCodeSettings,
+      }),
       returnValue: Future.value(),
       returnValueForMissingStub: Future.value(),
     );
@@ -40,9 +36,7 @@ void main() {
     setUpAll(() {
       auth = MockFirebaseAuth();
 
-      widget = TestMaterialApp(
-        child: ForgotPasswordView(auth: auth),
-      );
+      widget = TestMaterialApp(child: ForgotPasswordView(auth: auth));
 
       when(auth.sendPasswordResetEmail(email: 'invalid@email')).thenThrow(
         fba.FirebaseAuthException(
@@ -51,13 +45,13 @@ void main() {
         ),
       );
 
-      when(auth.sendPasswordResetEmail(email: 'valid@email.com')).thenAnswer(
-        (_) => Future.value(),
-      );
+      when(
+        auth.sendPasswordResetEmail(email: 'valid@email.com'),
+      ).thenAnswer((_) => Future.value());
 
-      when(auth.sendPasswordResetEmail(email: 'delay@email.com')).thenAnswer(
-        (_) => Future.delayed(const Duration(milliseconds: 200)),
-      );
+      when(
+        auth.sendPasswordResetEmail(email: 'delay@email.com'),
+      ).thenAnswer((_) => Future.delayed(const Duration(milliseconds: 200)));
     });
 
     testWidgets('shows error if sendPasswordResetEmail failed', (tester) async {

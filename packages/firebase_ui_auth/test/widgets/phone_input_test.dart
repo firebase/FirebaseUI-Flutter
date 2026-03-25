@@ -11,28 +11,23 @@ void main() {
     testWidgets('shows default country and country code', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: PhoneInput(initialCountryCode: 'US'),
-          ),
+          home: Scaffold(body: PhoneInput(initialCountryCode: 'US')),
         ),
       );
 
       expect(find.text('United States'), findsOneWidget);
     });
 
-    testWidgets(
-      'prompts to select a country if initialCountryCode is null',
-      (tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: Scaffold(
-              body: PhoneInput(initialCountryCode: null),
-            ),
-          ),
-        );
+    testWidgets('prompts to select a country if initialCountryCode is null', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(body: PhoneInput(initialCountryCode: null)),
+        ),
+      );
 
-        expect(find.text('Choose a country'), findsOneWidget);
-      },
-    );
+      expect(find.text('Choose a country'), findsOneWidget);
+    });
   });
 }

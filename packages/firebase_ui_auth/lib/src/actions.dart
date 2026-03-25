@@ -103,11 +103,8 @@ class AccountDeletedAction extends FirebaseUIAction {
 /// {@endtemplate}
 class DisplayNameChangedAction extends FirebaseUIAction {
   /// A callback that is being called when user has changed their display name.
-  final void Function(
-    BuildContext context,
-    String? oldName,
-    String newName,
-  ) callback;
+  final void Function(BuildContext context, String? oldName, String newName)
+  callback;
 
   /// {@macro ui.auth.actions.display_name_changed}
   DisplayNameChangedAction(this.callback);

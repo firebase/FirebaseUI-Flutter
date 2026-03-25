@@ -64,7 +64,8 @@ class StorageListView extends StatefulWidget {
     BuildContext context,
     Object? error,
     PaginatedLoadingController controller,
-  )? errorBuilder;
+  )?
+  errorBuilder;
 
   /// A builder that is called for each item in the list.
   final Widget Function(BuildContext context, Reference ref) itemBuilder;
@@ -161,20 +162,18 @@ class StorageListView extends StatefulWidget {
     this.semanticChildCount,
     this.shrinkWrap = false,
   }) : assert(
-          ref != null || loadingController != null,
-          'ref or loadingController must be provided',
-        );
+         ref != null || loadingController != null,
+         'ref or loadingController must be provided',
+       );
 
   @override
   State<StorageListView> createState() => _StorageListViewState();
 }
 
 class _StorageListViewState extends State<StorageListView> {
-  late PaginatedLoadingController ctrl = widget.loadingController ??
-      PaginatedLoadingController(
-        ref: widget.ref!,
-        pageSize: widget.pageSize,
-      );
+  late PaginatedLoadingController ctrl =
+      widget.loadingController ??
+      PaginatedLoadingController(ref: widget.ref!, pageSize: widget.pageSize);
 
   @override
   void didUpdateWidget(covariant StorageListView oldWidget) {
@@ -232,10 +231,7 @@ class _StorageListViewState extends State<StorageListView> {
       builder: (context, _) {
         return switch (ctrl.state) {
           InitialPageLoading() => widget.loadingBuilder(context),
-          PageLoadError(
-            error: final error,
-            items: final items,
-          ) =>
+          PageLoadError(error: final error, items: final items) =>
             widget.errorBuilder != null
                 ? widget.errorBuilder!(context, error, ctrl)
                 : listBuilder(context, items ?? []),

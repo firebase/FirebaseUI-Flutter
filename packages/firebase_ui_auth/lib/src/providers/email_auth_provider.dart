@@ -42,10 +42,9 @@ class EmailAuthProvider
     String password, [
     AuthAction action = AuthAction.signIn,
   ]) {
-    final credential = fba.EmailAuthProvider.credential(
-      email: email,
-      password: password,
-    ) as fba.EmailAuthCredential;
+    final credential =
+        fba.EmailAuthProvider.credential(email: email, password: password)
+            as fba.EmailAuthCredential;
 
     onCredentialReceived(credential, action);
   }

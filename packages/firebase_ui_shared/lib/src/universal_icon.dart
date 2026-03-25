@@ -24,19 +24,11 @@ class UniversalIcon extends PlatformWidget {
 
   @override
   Widget buildCupertino(BuildContext context) {
-    return Icon(
-      cupertinoIcon,
-      color: color,
-      size: size,
-    );
+    return Icon(cupertinoIcon, color: color, size: size);
   }
 
   @override
   Widget buildMaterial(BuildContext context) {
-    return Icon(
-      materialIcon,
-      color: color,
-      size: size,
-    );
+    return Icon(materialIcon, color: color, size: size);
   }
 }
