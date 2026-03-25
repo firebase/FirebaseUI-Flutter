@@ -2,4 +2,5 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    - unnecessary_ignore
+    # Ignoring to handle diffenent SDKs on dev machine
+    #- unnecessary_ignore
