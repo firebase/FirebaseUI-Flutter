@@ -39,7 +39,8 @@ void main() {
 
         expect(auth.currentUser, isNotNull);
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.android),
     );
@@ -89,7 +90,7 @@ void main() {
                 expect(state, isA<SignedIn>());
                 expect(state.user, isNotNull);
                 expect(state.user!.email, equals('test@test.com'));
-              })
+              }),
             ],
             child: const EmailForm(action: AuthAction.signIn),
           ),
@@ -105,7 +106,8 @@ void main() {
 
         await tester.pumpAndSettle();
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.android),
     );
@@ -113,10 +115,7 @@ void main() {
     testWidgets(
       'links email and password when auth action is link',
       (tester) async {
-        await render(
-          tester,
-          const EmailForm(action: AuthAction.link),
-        );
+        await render(tester, const EmailForm(action: AuthAction.link));
 
         await auth.signInAnonymously();
         final anonymousUid = auth.currentUser!.uid;

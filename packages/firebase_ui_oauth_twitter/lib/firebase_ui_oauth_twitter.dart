@@ -29,9 +29,7 @@ class TwitterSignInButton extends _TwitterSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-        );
+  }) : super(isLoading: isLoading ?? false);
 }
 
 class TwitterSignInIconButton extends _TwitterSignInButton {
@@ -51,10 +49,7 @@ class TwitterSignInIconButton extends _TwitterSignInButton {
     super.redirectUri,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-          label: '',
-        );
+  }) : super(isLoading: isLoading ?? false, label: '');
 }
 
 TwitterProvider? _mockProvider;
@@ -102,9 +97,9 @@ class _TwitterSignInButton extends StatelessWidget {
     this.redirectUri,
     this.onError,
     this.onCanceled,
-  })  : label = label ?? 'Sign in with Twitter',
-        overrideDefaultTapAction = overrideDefaultTapAction ?? false,
-        size = size ?? 19;
+  }) : label = label ?? 'Sign in with Twitter',
+       overrideDefaultTapAction = overrideDefaultTapAction ?? false,
+       size = size ?? 19;
 
   TwitterProvider get provider {
     if (_mockProvider != null) return _mockProvider!;

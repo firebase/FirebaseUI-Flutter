@@ -16,9 +16,7 @@ Future<void> main() async {
 
   final storage = FirebaseStorage.instance;
 
-  final config = FirebaseUIStorageConfiguration(
-    storage: storage,
-  );
+  final config = FirebaseUIStorageConfiguration(storage: storage);
 
   await FirebaseUIStorage.configure(config);
 
@@ -32,10 +30,7 @@ class FirebaseUIStorageExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FirebaseUI Storage Example',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.pink, useMaterial3: true),
       home: const Home(),
     );
   }
@@ -59,10 +54,7 @@ class _HomeState extends State<Home> {
       itemBuilder: (context, ref) {
         return AspectRatio(
           aspectRatio: 1,
-          child: StorageImage(
-            ref: ref,
-            fit: BoxFit.cover,
-          ),
+          child: StorageImage(ref: ref, fit: BoxFit.cover),
         );
       },
     );
@@ -75,10 +67,7 @@ class _HomeState extends State<Home> {
       itemBuilder: (context, ref) {
         return AspectRatio(
           aspectRatio: 1,
-          child: StorageImage(
-            ref: ref,
-            fit: BoxFit.cover,
-          ),
+          child: StorageImage(ref: ref, fit: BoxFit.cover),
         );
       },
     );
@@ -104,14 +93,8 @@ class _HomeState extends State<Home> {
         currentIndex: _selectedIndex,
         onTap: (index) => setState(() => _selectedIndex = index),
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'List',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_on),
-            label: 'Grid',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
+          BottomNavigationBarItem(icon: Icon(Icons.grid_on), label: 'Grid'),
         ],
       ),
       body: Column(
@@ -125,25 +108,27 @@ class _HomeState extends State<Home> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Builder(builder: (context) {
-              return UploadButton(
-                onError: (error, _) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(error.toString())),
-                  );
-                },
-                onUploadComplete: (ref) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Upload complete')),
-                  );
+            child: Builder(
+              builder: (context) {
+                return UploadButton(
+                  onError: (error, _) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(error.toString())));
+                  },
+                  onUploadComplete: (ref) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Upload complete')),
+                    );
 
-                  setState(() {
-                    key = GlobalKey();
-                  });
-                },
-              );
-            }),
-          )
+                    setState(() {
+                      key = GlobalKey();
+                    });
+                  },
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

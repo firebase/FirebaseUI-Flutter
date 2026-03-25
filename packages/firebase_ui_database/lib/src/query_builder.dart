@@ -11,11 +11,12 @@ import 'package:firebase_database/firebase_database.dart';
 /// A function that builds a widget from a [FirebaseQueryBuilderSnapshot]
 ///
 /// See also [FirebaseDatabaseQueryBuilder].
-typedef FirebaseQueryBuilderSnapshotBuilder = Widget Function(
-  BuildContext context,
-  FirebaseQueryBuilderSnapshot snapshot,
-  Widget? child,
-);
+typedef FirebaseQueryBuilderSnapshotBuilder =
+    Widget Function(
+      BuildContext context,
+      FirebaseQueryBuilderSnapshot snapshot,
+      Widget? child,
+    );
 
 /// {@template firebase_ui.firebase_database_query_builder}
 /// Listens to a query and paginates the result in a way that is compatible with
@@ -163,8 +164,8 @@ class _FirestoreQueryBuilderState extends State<FirebaseDatabaseQueryBuilder> {
     // "build" – most commonly ListView's itemBuilder
     Future.microtask(() => setState(() {}));
 
-    final expectedDocsCount = (_pageCount + 1) * widget.pageSize
-
+    final expectedDocsCount =
+        (_pageCount + 1) * widget.pageSize
         /// The "+1" is used to voluntarily fetch one extra item,
         /// used to determine whether there is a next page or not.
         /// This extra item will not be rendered.
@@ -363,20 +364,15 @@ class _Sentinel {
 }
 
 /// A type representing the function passed to [FirebaseDatabaseListView] for its `itemBuilder`.
-typedef FirebaseItemBuilder = Widget Function(
-  BuildContext context,
-  DataSnapshot doc,
-);
+typedef FirebaseItemBuilder =
+    Widget Function(BuildContext context, DataSnapshot doc);
 
 /// A type representing the function passed to [FirebaseDatabaseListView] for its `loadingBuilder`.
 typedef FirebaseLoadingBuilder = Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirebaseDatabaseListView] for its `errorBuilder`.
-typedef FirebaseErrorBuilder = Widget Function(
-  BuildContext context,
-  Object error,
-  StackTrace stackTrace,
-);
+typedef FirebaseErrorBuilder =
+    Widget Function(BuildContext context, Object error, StackTrace stackTrace);
 
 /// {@template firebase_ui.firebase_database_list_view}
 /// A [ListView.builder] that obtains its items from a Firestore query.
@@ -435,49 +431,49 @@ class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator.adaptive());
-            }
+         builder: (context, snapshot, _) {
+           if (snapshot.isFetching) {
+             return loadingBuilder?.call(context) ??
+                 const Center(child: CircularProgressIndicator.adaptive());
+           }
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
+           if (snapshot.hasError && errorBuilder != null) {
+             return errorBuilder(
+               context,
+               snapshot.error!,
+               snapshot.stackTrace!,
+             );
+           }
 
-            return ListView.builder(
-              itemCount: snapshot.docs.length,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == snapshot.docs.length;
-                if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
+           return ListView.builder(
+             itemCount: snapshot.docs.length,
+             itemBuilder: (context, index) {
+               final isLastItem = index + 1 == snapshot.docs.length;
+               if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
 
-                final doc = snapshot.docs[index];
-                return itemBuilder(context, doc);
-              },
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              itemExtent: itemExtent,
-              prototypeItem: prototypeItem,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              // ignore: deprecated_member_use
-              cacheExtent: cacheExtent,
-              semanticChildCount: semanticChildCount,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
-        );
+               final doc = snapshot.docs[index];
+               return itemBuilder(context, doc);
+             },
+             scrollDirection: scrollDirection,
+             reverse: reverse,
+             controller: controller,
+             primary: primary,
+             physics: physics,
+             shrinkWrap: shrinkWrap,
+             padding: padding,
+             itemExtent: itemExtent,
+             prototypeItem: prototypeItem,
+             addAutomaticKeepAlives: addAutomaticKeepAlives,
+             addRepaintBoundaries: addRepaintBoundaries,
+             addSemanticIndexes: addSemanticIndexes,
+             // ignore: deprecated_member_use
+             cacheExtent: cacheExtent,
+             semanticChildCount: semanticChildCount,
+             dragStartBehavior: dragStartBehavior,
+             keyboardDismissBehavior: keyboardDismissBehavior,
+             restorationId: restorationId,
+             clipBehavior: clipBehavior,
+           );
+         },
+       );
 }

@@ -67,7 +67,8 @@ class StorageGridView extends StatefulWidget {
     BuildContext context,
     Object? error,
     PaginatedLoadingController controller,
-  )? errorBuilder;
+  )?
+  errorBuilder;
 
   /// A builder that is called for each item in the list.
   final Widget Function(BuildContext context, Reference ref) itemBuilder;
@@ -87,20 +88,18 @@ class StorageGridView extends StatefulWidget {
     ),
     required this.itemBuilder,
   }) : assert(
-          ref != null || loadingController != null,
-          'ref or loadingController must be provided',
-        );
+         ref != null || loadingController != null,
+         'ref or loadingController must be provided',
+       );
 
   @override
   State<StorageGridView> createState() => _StorageGridViewState();
 }
 
 class _StorageGridViewState extends State<StorageGridView> {
-  late PaginatedLoadingController ctrl = widget.loadingController ??
-      PaginatedLoadingController(
-        ref: widget.ref!,
-        pageSize: widget.pageSize,
-      );
+  late PaginatedLoadingController ctrl =
+      widget.loadingController ??
+      PaginatedLoadingController(ref: widget.ref!, pageSize: widget.pageSize);
 
   Widget gridBuilder(BuildContext context, List<Reference> items) {
     return GridView.builder(
@@ -123,10 +122,7 @@ class _StorageGridViewState extends State<StorageGridView> {
       builder: (context, _) {
         return switch (ctrl.state) {
           InitialPageLoading() => widget.loadingBuilder(context),
-          PageLoadError(
-            error: final error,
-            items: final items,
-          ) =>
+          PageLoadError(error: final error, items: final items) =>
             widget.errorBuilder != null
                 ? widget.errorBuilder!(context, error, ctrl)
                 : gridBuilder(context, items ?? []),

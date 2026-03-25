@@ -71,17 +71,11 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
         desktopLayoutDirection: desktopLayoutDirection,
         child: Padding(
           padding: const EdgeInsets.all(32),
-          child: EmailLinkSignInView(
-            auth: auth,
-            provider: provider,
-          ),
+          child: EmailLinkSignInView(auth: auth, provider: provider),
         ),
       ),
     );
 
-    return FirebaseUIActions(
-      actions: actions ?? const [],
-      child: child,
-    );
+    return FirebaseUIActions(actions: actions ?? const [], child: child);
   }
 }

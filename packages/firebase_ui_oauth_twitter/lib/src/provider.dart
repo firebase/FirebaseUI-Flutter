@@ -42,26 +42,28 @@ class TwitterProvider extends OAuthProvider {
   void mobileSignIn(AuthAction action) {
     final result = provider.login();
 
-    result.then((value) {
-      switch (value.status!) {
-        case TwitterLoginStatus.loggedIn:
-          final credential = TwitterAuthProvider.credential(
-            accessToken: value.authToken!,
-            secret: value.authTokenSecret!,
-          );
+    result
+        .then((value) {
+          switch (value.status!) {
+            case TwitterLoginStatus.loggedIn:
+              final credential = TwitterAuthProvider.credential(
+                accessToken: value.authToken!,
+                secret: value.authTokenSecret!,
+              );
 
-          onCredentialReceived(credential, action);
-          break;
-        case TwitterLoginStatus.cancelledByUser:
-          authListener.onError(AuthCancelledException());
-          break;
-        case TwitterLoginStatus.error:
-          authListener.onError(Exception(value.errorMessage));
-          break;
-      }
-    }).catchError((err) {
-      authListener.onError(err);
-    });
+              onCredentialReceived(credential, action);
+              break;
+            case TwitterLoginStatus.cancelledByUser:
+              authListener.onError(AuthCancelledException());
+              break;
+            case TwitterLoginStatus.error:
+              authListener.onError(Exception(value.errorMessage));
+              break;
+          }
+        })
+        .catchError((err) {
+          authListener.onError(err);
+        });
   }
 
   @override

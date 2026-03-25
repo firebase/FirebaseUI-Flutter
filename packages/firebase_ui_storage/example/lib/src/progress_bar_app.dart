@@ -28,10 +28,7 @@ class MockSnapshot implements TaskSnapshot {
   @override
   final int totalBytes;
 
-  MockSnapshot({
-    required this.bytesTransferred,
-    required this.totalBytes,
-  });
+  MockSnapshot({required this.bytesTransferred, required this.totalBytes});
 
   @override
   noSuchMethod(Invocation invocation) {
@@ -63,10 +60,7 @@ class _ProgressBarAppState extends State<ProgressBarApp> {
   Future<void> emitProgress() async {
     for (var i = 0; i <= 10; i++) {
       await Future.delayed(const Duration(milliseconds: 300));
-      task.ctrl.add(MockSnapshot(
-        bytesTransferred: i * 10,
-        totalBytes: 100,
-      ));
+      task.ctrl.add(MockSnapshot(bytesTransferred: i * 10, totalBytes: 100));
     }
   }
 

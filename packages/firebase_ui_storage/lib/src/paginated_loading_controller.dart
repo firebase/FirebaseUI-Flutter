@@ -28,30 +28,21 @@ class PageLoadComplete extends PaginatedLoadingState {
   final List<Reference> pageItems;
   final List<Reference> items;
 
-  const PageLoadComplete({
-    required this.pageItems,
-    required this.items,
-  });
+  const PageLoadComplete({required this.pageItems, required this.items});
 }
 
 class PageLoadError extends PaginatedLoadingState {
   final Object? error;
   final List<Reference>? items;
 
-  const PageLoadError({
-    required this.error,
-    this.items,
-  });
+  const PageLoadError({required this.error, this.items});
 }
 
 class PaginatedLoadingController extends ChangeNotifier {
   int pageSize;
   final Reference ref;
 
-  PaginatedLoadingController({
-    required this.ref,
-    this.pageSize = 50,
-  }) {
+  PaginatedLoadingController({required this.ref, this.pageSize = 50}) {
     load();
   }
 
@@ -62,10 +53,7 @@ class PaginatedLoadingController extends ChangeNotifier {
   List<Reference>? _items;
 
   ListOptions get _listOptions {
-    return ListOptions(
-      maxResults: pageSize,
-      pageToken: _cursor?.nextPageToken,
-    );
+    return ListOptions(maxResults: pageSize, pageToken: _cursor?.nextPageToken);
   }
 
   Future<void> load() {
@@ -84,15 +72,9 @@ class PaginatedLoadingController extends ChangeNotifier {
         _cursor = value;
         (_items ??= []).addAll(value.items);
 
-        _state = PageLoadComplete(
-          pageItems: value.items,
-          items: _items!,
-        );
+        _state = PageLoadComplete(pageItems: value.items, items: _items!);
       } catch (err) {
-        _state = PageLoadError(
-          error: err,
-          items: _items,
-        );
+        _state = PageLoadError(error: err, items: _items);
       } finally {
         completer.complete();
         notifyListeners();

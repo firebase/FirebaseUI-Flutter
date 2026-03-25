@@ -17,8 +17,8 @@ abstract class FirebaseUIStyle {
     BuildContext context,
     T defaultValue,
   ) {
-    final el =
-        context.getElementForInheritedWidgetOfExactType<FirebaseUITheme>();
+    final el = context
+        .getElementForInheritedWidgetOfExactType<FirebaseUITheme>();
     if (el == null) return defaultValue;
 
     context.dependOnInheritedElement(el, aspect: T);
@@ -39,9 +39,6 @@ abstract class FirebaseUIStyle {
   /// Wires the style with the widget tree and makes sure it is accessible
   /// from the [child] or its descendants.
   Widget mount({required Widget child}) {
-    return FirebaseUITheme(
-      styles: {this},
-      child: child,
-    );
+    return FirebaseUITheme(styles: {this}, child: child);
   }
 }

@@ -12,9 +12,7 @@ import '../utils.dart';
 void main() {
   group('FirestoreQueryBuilder', () {
     setUp(() async {
-      await clearCollection(
-        db.collection('flutter-tests/query-builder/works'),
-      );
+      await clearCollection(db.collection('flutter-tests/query-builder/works'));
     });
 
     testWidgets('fetches initial page', (tester) async {
@@ -262,142 +260,139 @@ void main() {
       );
     });
 
-    testWidgets(
-      'when the query changes, re-fetches from first page',
-      (tester) async {
-        final builderSpy = QueryBuilderSpy();
-        final collection = db.collection('flutter-tests/query-builder/works');
+    testWidgets('when the query changes, re-fetches from first page', (
+      tester,
+    ) async {
+      final builderSpy = QueryBuilderSpy();
+      final collection = db.collection('flutter-tests/query-builder/works');
 
-        await fillCollection(collection, 25);
+      await fillCollection(collection, 25);
 
-        await tester.pumpWidget(
-          FirestoreQueryBuilder<Map>(
-            query: collection.orderBy('value'),
-            builder: builderSpy.call,
-          ),
-        );
+      await tester.pumpWidget(
+        FirestoreQueryBuilder<Map>(
+          query: collection.orderBy('value'),
+          builder: builderSpy.call,
+        ),
+      );
 
-        clearInteractions(builderSpy);
+      clearInteractions(builderSpy);
 
-        await collection.get();
-        await tester.pump();
+      await collection.get();
+      await tester.pump();
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: false,
-                hasData: true,
-                hasMore: true,
-                docs: [
-                  for (var i = 0; i < 10; i++)
-                    isQueryDocumentSnapshot(data: {'value': i}),
-                ],
-                error: null,
-                stackTrace: null,
-                isFetchingNextPage: false,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: false,
+              hasData: true,
+              hasMore: true,
+              docs: [
+                for (var i = 0; i < 10; i++)
+                  isQueryDocumentSnapshot(data: {'value': i}),
+              ],
+              error: null,
+              stackTrace: null,
+              isFetchingNextPage: false,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
 
-        builderSpy.lastSnapshot!.fetchMore();
-        await tester.pump();
+      builderSpy.lastSnapshot!.fetchMore();
+      await tester.pump();
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(isFetchingNextPage: true),
+      verify(
+        builderSpy(
+          any,
+          captureThat(isQueryBuilderSnapshot(isFetchingNextPage: true)),
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
+
+      await collection.get();
+      await tester.pump();
+
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: false,
+              hasData: true,
+              hasMore: true,
+              docs: [
+                for (var i = 0; i < 20; i++)
+                  isQueryDocumentSnapshot(data: {'value': i}),
+              ],
+              error: null,
+              stackTrace: null,
+              isFetchingNextPage: false,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
 
-        await collection.get();
-        await tester.pump();
+      await tester.pumpWidget(
+        FirestoreQueryBuilder<Map>(
+          query: collection.orderBy('value', descending: true),
+          builder: builderSpy.call,
+        ),
+      );
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: false,
-                hasData: true,
-                hasMore: true,
-                docs: [
-                  for (var i = 0; i < 20; i++)
-                    isQueryDocumentSnapshot(data: {'value': i}),
-                ],
-                error: null,
-                stackTrace: null,
-                isFetchingNextPage: false,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: true,
+              hasData: true,
+              hasMore: true,
+              docs: [
+                for (var i = 0; i < 20; i++)
+                  isQueryDocumentSnapshot(data: {'value': i}),
+              ],
+              error: null,
+              stackTrace: null,
+              isFetchingNextPage: false,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
 
-        await tester.pumpWidget(
-          FirestoreQueryBuilder<Map>(
-            query: collection.orderBy('value', descending: true),
-            builder: builderSpy.call,
-          ),
-        );
+      await collection.get();
+      await tester.pump();
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: true,
-                hasData: true,
-                hasMore: true,
-                docs: [
-                  for (var i = 0; i < 20; i++)
-                    isQueryDocumentSnapshot(data: {'value': i}),
-                ],
-                error: null,
-                stackTrace: null,
-                isFetchingNextPage: false,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: false,
+              hasData: true,
+              hasMore: true,
+              docs: [
+                for (var i = 0; i < 10; i++)
+                  isQueryDocumentSnapshot(data: {'value': 24 - i}),
+              ],
+              error: null,
+              stackTrace: null,
+              isFetchingNextPage: false,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
-
-        await collection.get();
-        await tester.pump();
-
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: false,
-                hasData: true,
-                hasMore: true,
-                docs: [
-                  for (var i = 0; i < 10; i++)
-                    isQueryDocumentSnapshot(data: {'value': 24 - i}),
-                ],
-                error: null,
-                stackTrace: null,
-                isFetchingNextPage: false,
-              ),
-            ),
-            null,
-          ),
-        );
-        verifyNoMoreInteractions(builderSpy);
-      },
-    );
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
+    });
 
     testWidgets(
       'when the page size changes, re-fetches but preserve progress',
@@ -447,9 +442,7 @@ void main() {
         verify(
           builderSpy(
             any,
-            captureThat(
-              isQueryBuilderSnapshot(isFetchingNextPage: true),
-            ),
+            captureThat(isQueryBuilderSnapshot(isFetchingNextPage: true)),
             null,
           ),
         );
@@ -730,121 +723,120 @@ void main() {
       verifyNoMoreInteractions(builderSpy);
     });
 
-    testWidgets(
-      'data after error resets hasError/error/stackTrace',
-      (tester) async {
-        final builderSpy = QueryBuilderSpy();
-        final validCollection = db.collection(
-          'flutter-tests/query-builder/works',
-        );
-        final unknownCollection = db.collection('unknown');
+    testWidgets('data after error resets hasError/error/stackTrace', (
+      tester,
+    ) async {
+      final builderSpy = QueryBuilderSpy();
+      final validCollection = db.collection(
+        'flutter-tests/query-builder/works',
+      );
+      final unknownCollection = db.collection('unknown');
 
-        await fillCollection(validCollection, 25);
+      await fillCollection(validCollection, 25);
 
-        await tester.pumpWidget(
-          FirestoreQueryBuilder<Map>(
-            query: unknownCollection,
-            builder: builderSpy.call,
-          ),
-        );
+      await tester.pumpWidget(
+        FirestoreQueryBuilder<Map>(
+          query: unknownCollection,
+          builder: builderSpy.call,
+        ),
+      );
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: true,
-                hasData: false,
-                hasMore: false,
-                hasError: false,
-                docs: [],
-                error: null,
-                stackTrace: null,
-                isFetchingNextPage: false,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: true,
+              hasData: false,
+              hasMore: false,
+              hasError: false,
+              docs: [],
+              error: null,
+              stackTrace: null,
+              isFetchingNextPage: false,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
 
-        await unknownCollection.snapshots().first.then((_) {}, onError: (_) {});
-        await tester.pump();
+      await unknownCollection.snapshots().first.then((_) {}, onError: (_) {});
+      await tester.pump();
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: false,
-                isFetchingNextPage: false,
-                hasData: false,
-                hasMore: false,
-                docs: [],
-                hasError: true,
-                error: isA<FirebaseException>(),
-                stackTrace: isNotNull,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: false,
+              isFetchingNextPage: false,
+              hasData: false,
+              hasMore: false,
+              docs: [],
+              hasError: true,
+              error: isA<FirebaseException>(),
+              stackTrace: isNotNull,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
 
-        await tester.pumpWidget(
-          FirestoreQueryBuilder<Map>(
-            query: validCollection.orderBy('value'),
-            builder: builderSpy.call,
-          ),
-        );
+      await tester.pumpWidget(
+        FirestoreQueryBuilder<Map>(
+          query: validCollection.orderBy('value'),
+          builder: builderSpy.call,
+        ),
+      );
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: true,
-                isFetchingNextPage: false,
-                hasData: false,
-                hasMore: false,
-                docs: [],
-                hasError: true,
-                error: isA<FirebaseException>(),
-                stackTrace: isNotNull,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: true,
+              isFetchingNextPage: false,
+              hasData: false,
+              hasMore: false,
+              docs: [],
+              hasError: true,
+              error: isA<FirebaseException>(),
+              stackTrace: isNotNull,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
 
-        await validCollection.get();
-        await tester.pump();
+      await validCollection.get();
+      await tester.pump();
 
-        verify(
-          builderSpy(
-            any,
-            captureThat(
-              isQueryBuilderSnapshot(
-                isFetching: false,
-                hasData: true,
-                hasMore: true,
-                docs: [
-                  for (var i = 0; i < 10; i++)
-                    isQueryDocumentSnapshot(data: {'value': i}),
-                ],
-                hasError: false,
-                error: null,
-                stackTrace: null,
-                isFetchingNextPage: false,
-              ),
+      verify(
+        builderSpy(
+          any,
+          captureThat(
+            isQueryBuilderSnapshot(
+              isFetching: false,
+              hasData: true,
+              hasMore: true,
+              docs: [
+                for (var i = 0; i < 10; i++)
+                  isQueryDocumentSnapshot(data: {'value': i}),
+              ],
+              hasError: false,
+              error: null,
+              stackTrace: null,
+              isFetchingNextPage: false,
             ),
-            null,
           ),
-        );
-        verifyNoMoreInteractions(builderSpy);
-      },
-    );
+          null,
+        ),
+      );
+      verifyNoMoreInteractions(builderSpy);
+    });
   });
 }
 
@@ -866,7 +858,8 @@ class QueryBuilderSpy<T> extends Mock {
     BuildContext context,
     FirestoreQueryBuilderSnapshot<T> snapshot,
     Widget? child,
-  )? _builder;
+  )?
+  _builder;
 
   FirestoreQueryBuilderSnapshot<T>? lastSnapshot;
 

@@ -57,7 +57,7 @@ class _AvailableProvidersRowState extends State<_AvailableProvidersRow> {
           context: context,
           barrierDismissible: true,
           barrierLabel: '',
-          pageBuilder: (context, _, __) {
+          pageBuilder: (context, _, _) {
             return EmailSignUpDialog(
               provider: provider as EmailAuthProvider,
               auth: widget.auth,
@@ -139,10 +139,7 @@ class _EditButton extends StatelessWidget {
   final bool isEditing;
   final VoidCallback? onPressed;
 
-  const _EditButton({
-    required this.isEditing,
-    this.onPressed,
-  });
+  const _EditButton({required this.isEditing, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -260,10 +257,7 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
           width: size,
           height: size,
           child: unlinkingProvider == providerId
-              ? LoadingIndicator(
-                  size: size - (size / 4),
-                  borderWidth: 1,
-                )
+              ? LoadingIndicator(size: size - (size / 4), borderWidth: 1)
               : providerIcon(context, provider),
         ),
         if (unlinkingProvider != providerId)
@@ -301,13 +295,14 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
     Widget child = Row(
-      children: [
-        for (var provider in widget.providers)
-          buildProviderIcon(context, provider)
-      ]
-          .map((e) => [e, const SizedBox(width: 8)])
-          .expand((element) => element)
-          .toList(),
+      children:
+          [
+                for (var provider in widget.providers)
+                  buildProviderIcon(context, provider),
+              ]
+              .map((e) => [e, const SizedBox(width: 8)])
+              .expand((element) => element)
+              .toList(),
     );
 
     if (widget.providers.length > 1) {
@@ -315,10 +310,7 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
         children: [
           Expanded(child: child),
           const SizedBox(width: 8),
-          _EditButton(
-            isEditing: isEditing,
-            onPressed: _toggleEdit,
-          ),
+          _EditButton(isEditing: isEditing, onPressed: _toggleEdit),
         ],
       );
     }
@@ -337,10 +329,7 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
 class _EmailVerificationBadge extends StatefulWidget {
   final fba.FirebaseAuth auth;
   final fba.ActionCodeSettings? actionCodeSettings;
-  const _EmailVerificationBadge({
-    required this.auth,
-    this.actionCodeSettings,
-  });
+  const _EmailVerificationBadge({required this.auth, this.actionCodeSettings});
 
   @override
   State<_EmailVerificationBadge> createState() =>
@@ -406,7 +395,8 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Subtitle(
-                    text: state == EmailVerificationState.sent ||
+                    text:
+                        state == EmailVerificationState.sent ||
                             state == EmailVerificationState.pending
                         ? l.verificationEmailSentTextShort
                         : l.emailIsNotVerifiedText,
@@ -415,7 +405,7 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
                   if (state == EmailVerificationState.pending) ...[
                     const SizedBox(height: 8),
                     Text(l.checkEmailHintText),
-                  ]
+                  ],
                 ],
               ),
             ),
@@ -463,9 +453,9 @@ class _EmailVerificationBadgeState extends State<_EmailVerificationBadge> {
                     onPressed: () {
                       setState(service.dismiss);
                     },
-                  )
+                  ),
               ],
-            )
+            ),
         ],
       ),
     );
@@ -642,7 +632,7 @@ class _MFAToggleState extends State<_MFAToggle> {
               Navigator.of(context).popUntil((route) => route == currentRoute);
             }
           }
-        })
+        }),
       ],
     );
 
@@ -667,22 +657,20 @@ class _MFAToggleState extends State<_MFAToggle> {
               color: getColor(),
             ),
             const SizedBox(width: 8),
-            Expanded(
-              child: Text(widget.enrolled ? l.on : l.off),
-            ),
+            Expanded(child: Text(widget.enrolled ? l.on : l.off)),
             LoadingButton(
               variant: ButtonVariant.text,
               label: widget.enrolled ? l.disable : l.enable,
               onTap: widget.enrolled ? _disable : _enable,
               isLoading: isLoading,
-            )
+            ),
           ],
         ),
         if (exception != null)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: ErrorText(exception: exception!),
-          )
+          ),
       ],
     );
   }
@@ -825,7 +813,8 @@ class ProfileScreen extends MultiProviderScreen {
 
     final user = auth.currentUser!;
 
-    final avatarWidget = avatar ??
+    final avatarWidget =
+        avatar ??
         Align(
           child: UserAvatar(
             auth: auth,
@@ -927,10 +916,7 @@ class ProfileScreen extends MultiProviderScreen {
           ),
         ...children,
         const SizedBox(height: 16),
-        SignOutButton(
-          auth: auth,
-          variant: ButtonVariant.outlined,
-        ),
+        SignOutButton(auth: auth, variant: ButtonVariant.outlined),
         const SizedBox(height: 8),
         DeleteAccountButton(
           auth: auth,
@@ -965,22 +951,15 @@ class ProfileScreen extends MultiProviderScreen {
     if (isCupertino) {
       child = CupertinoPageScaffold(
         navigationBar: cupertinoNavigationBar,
-        child: SafeArea(
-          child: SingleChildScrollView(child: child),
-        ),
+        child: SafeArea(child: SingleChildScrollView(child: child)),
       );
     } else {
       child = Scaffold(
         appBar: appBar,
-        body: SafeArea(
-          child: SingleChildScrollView(child: body),
-        ),
+        body: SafeArea(child: SingleChildScrollView(child: body)),
       );
     }
 
-    return FirebaseUIActions(
-      actions: actions ?? const [],
-      child: child,
-    );
+    return FirebaseUIActions(actions: actions ?? const [], child: child);
   }
 }

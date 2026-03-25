@@ -10,12 +10,13 @@ import 'package:firebase_ui_auth/src/widgets/internal/universal_page_route.dart'
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
-typedef SMSCodeInputScreenBuilder = Widget Function(
-  BuildContext context,
-  List<FirebaseUIAction> actions,
-  Object flowKey,
-  AuthAction action,
-);
+typedef SMSCodeInputScreenBuilder =
+    Widget Function(
+      BuildContext context,
+      List<FirebaseUIAction> actions,
+      Object flowKey,
+      AuthAction action,
+    );
 
 Future<fba.UserCredential> startMFAVerification({
   required BuildContext context,
@@ -105,10 +106,7 @@ Future<fba.UserCredential> startPhoneMFAVerification({
     );
   }
 
-  final pageRoute = createPageRoute(
-    context: context,
-    builder: builder,
-  );
+  final pageRoute = createPageRoute(context: context, builder: builder);
 
   navigator.push(pageRoute);
 

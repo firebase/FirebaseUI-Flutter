@@ -60,45 +60,44 @@ class ReauthenticateDialog extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 400),
         child: Dialog(
           child: Padding(
-              padding: verticalPadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: horizontalPadding,
-                    child: Title(text: l.verifyItsYouText),
+            padding: verticalPadding,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: horizontalPadding,
+                  child: Title(text: l.verifyItsYouText),
+                ),
+                const SizedBox(height: 16),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.shortestSide / 1.5,
                   ),
-                  const SizedBox(height: 16),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.shortestSide / 1.5,
-                    ),
-                    child: Scrollbar(
-                      thumbVisibility: true,
-                      trackVisibility: true,
-                      child: ListView(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        children: [
-                          reauthenticateView,
-                          const SizedBox(height: 16),
-                        ],
-                      ),
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    trackVisibility: true,
+                    child: ListView(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      children: [
+                        reauthenticateView,
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: horizontalPadding.copyWith(
-                      top: verticalPadding.top,
-                    ),
-                    child: UniversalButton(
-                      text: l.cancelButtonLabel,
-                      variant: ButtonVariant.text,
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  )
-                ],
-              )),
+                ),
+                Padding(
+                  padding: horizontalPadding.copyWith(top: verticalPadding.top),
+                  child: UniversalButton(
+                    text: l.cancelButtonLabel,
+                    variant: ButtonVariant.text,
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -53,7 +53,7 @@ final countries = [
   {
     'name': 'Democratic Republic of the Congo',
     'phoneCode': '243',
-    'countryCode': 'CD'
+    'countryCode': 'CD',
   },
   {'name': 'Denmark', 'phoneCode': '45', 'countryCode': 'DK'},
   {'name': 'Djibouti', 'phoneCode': '253', 'countryCode': 'DJ'},
@@ -166,12 +166,12 @@ final countries = [
   {
     'name': 'Saint Pierre and Miquelon',
     'phoneCode': '508',
-    'countryCode': 'PM'
+    'countryCode': 'PM',
   },
   {
     'name': 'Saint Vincent and the Grenadines',
     'phoneCode': '1-784',
-    'countryCode': 'VC'
+    'countryCode': 'VC',
   },
   {'name': 'Samoa', 'phoneCode': '685', 'countryCode': 'WS'},
   {'name': 'Sao Tome and Principe', 'phoneCode': '239', 'countryCode': 'ST'},
@@ -202,7 +202,7 @@ final countries = [
   {
     'name': 'Turks and Caicos Islands',
     'phoneCode': '1-649',
-    'countryCode': 'TC'
+    'countryCode': 'TC',
   },
   {'name': 'U.S. Virgin Islands', 'phoneCode': '1-340', 'countryCode': 'VI'},
   {'name': 'Uganda', 'phoneCode': '256', 'countryCode': 'UG'},
@@ -216,7 +216,7 @@ final countries = [
   {'name': 'Vietnam', 'phoneCode': '84', 'countryCode': 'VN'},
   {'name': 'Yemen', 'phoneCode': '967', 'countryCode': 'YE'},
   {'name': 'Zambia', 'phoneCode': '260', 'countryCode': 'ZM'},
-  {'name': 'Zimbabwe', 'phoneCode': '263', 'countryCode': 'ZW'}
+  {'name': 'Zimbabwe', 'phoneCode': '263', 'countryCode': 'ZW'},
 ].map(_CountryCodeItem.fromJson);
 
 final countriesByCountryCode = countries.fold<Map<String, _CountryCodeItem>>(

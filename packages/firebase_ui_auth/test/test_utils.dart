@@ -16,11 +16,7 @@ class TestMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: child,
-      ),
-    );
+    return MaterialApp(home: Scaffold(body: child));
   }
 }
 
@@ -44,10 +40,7 @@ class MockUser extends Mock implements fba.User {
     fba.AuthCredential? credential,
   ) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #linkWithCredential,
-        [credential],
-      ),
+      Invocation.method(#linkWithCredential, [credential]),
       returnValue: MockCredential(),
       returnValueForMissingStub: MockCredential(),
     );
@@ -120,10 +113,7 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     fba.AuthCredential? credential,
   ) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #signInWithCredential,
-        [credential],
-      ),
+      Invocation.method(#signInWithCredential, [credential]),
       returnValue: MockCredential(),
       returnValueForMissingStub: MockCredential(),
     );
@@ -150,14 +140,10 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     required fba.ActionCodeSettings? actionCodeSettings,
   }) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #sendSignInLinkToEmail,
-        null,
-        {
-          #email: email,
-          #actionCodeSettings: actionCodeSettings,
-        },
-      ),
+      Invocation.method(#sendSignInLinkToEmail, null, {
+        #email: email,
+        #actionCodeSettings: actionCodeSettings,
+      }),
       returnValueForMissingStub: null,
     );
   }
@@ -165,10 +151,7 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
   @override
   bool isSignInWithEmailLink(String? emailLink) {
     return super.noSuchMethod(
-      Invocation.method(
-        #isSignInWithEmailLink,
-        [emailLink],
-      ),
+      Invocation.method(#isSignInWithEmailLink, [emailLink]),
       returnValue: true,
       returnValueForMissingStub: true,
     );
@@ -180,14 +163,10 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     required String? emailLink,
   }) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #signInWithEmailLink,
-        null,
-        {
-          #email: email,
-          #emailLink: emailLink,
-        },
-      ),
+      Invocation.method(#signInWithEmailLink, null, {
+        #email: email,
+        #emailLink: emailLink,
+      }),
       returnValue: MockCredential(),
       returnValueForMissingStub: MockCredential(),
     );
@@ -207,20 +186,16 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     fba.MultiFactorSession? multiFactorSession,
   }) async {
     super.noSuchMethod(
-      Invocation.method(
-        #verifyPhoneNumber,
-        null,
-        {
-          #phoneNumber: phoneNumber,
-          #verificationCompleted: verificationCompleted,
-          #verificationFailed: verificationFailed,
-          #codeSent: codeSent,
-          #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-          #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
-          #timeout: timeout,
-          #forceResendingToken: forceResendingToken,
-        },
-      ),
+      Invocation.method(#verifyPhoneNumber, null, {
+        #phoneNumber: phoneNumber,
+        #verificationCompleted: verificationCompleted,
+        #verificationFailed: verificationFailed,
+        #codeSent: codeSent,
+        #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+        #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
+        #timeout: timeout,
+        #forceResendingToken: forceResendingToken,
+      }),
     );
   }
 }

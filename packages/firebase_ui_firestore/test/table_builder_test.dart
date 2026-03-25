@@ -29,57 +29,49 @@ Future<void> main() async {
     when(bob2Snapshot.data()).thenReturn(bob2.toMap());
   });
 
-  testWidgets(
-    'FirestoreDataTable without CellBuilder is render as expected',
-    (WidgetTester tester) async {
-      await tester.pumpWidget(_dataTableBuilder(query: collection));
-      mockCtrl.add(mockQuerySnapshot);
+  testWidgets('FirestoreDataTable without CellBuilder is render as expected', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(_dataTableBuilder(query: collection));
+    mockCtrl.add(mockQuerySnapshot);
 
-      await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-      final street = bob.address.street;
-      final city = bob.address.city;
+    final street = bob.address.street;
+    final city = bob.address.city;
 
-      final streetFinder = find.text('{street: $street, city: $city}');
-      final firstNameFinder = find.text(bob.firstName);
+    final streetFinder = find.text('{street: $street, city: $city}');
+    final firstNameFinder = find.text(bob.firstName);
 
-      expect(streetFinder, findsNWidgets(2));
-      expect(firstNameFinder, findsOneWidget);
-    },
-  );
+    expect(streetFinder, findsNWidgets(2));
+    expect(firstNameFinder, findsOneWidget);
+  });
 
-  testWidgets(
-    'FirestoreDataTable with CellBuilder is render as expected',
-    (WidgetTester tester) async {
-      await tester.pumpWidget(
-        _dataTableBuilder(
-          query: collection,
-          cellBuilder: _defaultCellBuilder,
-        ),
-      );
+  testWidgets('FirestoreDataTable with CellBuilder is render as expected', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      _dataTableBuilder(query: collection, cellBuilder: _defaultCellBuilder),
+    );
 
-      mockCtrl.add(mockQuerySnapshot);
+    mockCtrl.add(mockQuerySnapshot);
 
-      await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-      final cityFinder = find.text(bob.address.city);
-      final streetFinder = find.text(bob.address.street);
-      final firstNameFinder = find.text(bob.firstName);
+    final cityFinder = find.text(bob.address.city);
+    final streetFinder = find.text(bob.address.street);
+    final firstNameFinder = find.text(bob.firstName);
 
-      expect(cityFinder, findsNWidgets(2));
-      expect(streetFinder, findsNWidgets(2));
-      expect(firstNameFinder, findsOneWidget);
-    },
-  );
+    expect(cityFinder, findsNWidgets(2));
+    expect(streetFinder, findsNWidgets(2));
+    expect(firstNameFinder, findsOneWidget);
+  });
 
   testWidgets(
     'FirestoreDataTable with default dell dialog editor is render as expected',
     (WidgetTester tester) async {
       await tester.pumpWidget(
-        _dataTableBuilder(
-          query: collection,
-          cellBuilder: _defaultCellBuilder,
-        ),
+        _dataTableBuilder(query: collection, cellBuilder: _defaultCellBuilder),
       );
 
       mockCtrl.add(mockQuerySnapshot);
@@ -167,51 +159,50 @@ Future<void> main() async {
     },
   );
 
-  testWidgets(
-    'FirestoreDataTable row selection is capture',
-    (WidgetTester tester) async {
-      //For some reason, we have a renderflex issue when tapping
-      tester.view.physicalSize = const Size(1000, 2000);
+  testWidgets('FirestoreDataTable row selection is capture', (
+    WidgetTester tester,
+  ) async {
+    //For some reason, we have a renderflex issue when tapping
+    tester.view.physicalSize = const Size(1000, 2000);
 
-      var nbItemSelected = 0;
+    var nbItemSelected = 0;
 
-      await tester.pumpWidget(
-        _dataTableBuilder(
-          query: collection,
-          cellBuilder: _defaultCellBuilder,
-          enableDefaultCellEditor: false,
-          onSelectedRows: (selection) {
-            nbItemSelected = selection.length;
-          },
-        ),
-      );
+    await tester.pumpWidget(
+      _dataTableBuilder(
+        query: collection,
+        cellBuilder: _defaultCellBuilder,
+        enableDefaultCellEditor: false,
+        onSelectedRows: (selection) {
+          nbItemSelected = selection.length;
+        },
+      ),
+    );
 
-      mockCtrl.add(mockQuerySnapshot);
+    mockCtrl.add(mockQuerySnapshot);
 
-      await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-      final firstRowFinder = find.text(bob.firstName);
-      expect(firstRowFinder, findsOneWidget);
+    final firstRowFinder = find.text(bob.firstName);
+    expect(firstRowFinder, findsOneWidget);
 
-      await tester.tap(firstRowFinder);
-      await tester.pumpAndSettle();
+    await tester.tap(firstRowFinder);
+    await tester.pumpAndSettle();
 
-      expect(nbItemSelected, 1);
+    expect(nbItemSelected, 1);
 
-      final secondRowFinder = find.text(bob2.firstName);
-      expect(secondRowFinder, findsOneWidget);
-      await tester.tap(secondRowFinder);
-      await tester.pumpAndSettle();
+    final secondRowFinder = find.text(bob2.firstName);
+    expect(secondRowFinder, findsOneWidget);
+    await tester.tap(secondRowFinder);
+    await tester.pumpAndSettle();
 
-      expect(nbItemSelected, 2);
+    expect(nbItemSelected, 2);
 
-      await tester.tap(firstRowFinder);
-      await tester.tap(secondRowFinder);
-      await tester.pumpAndSettle();
+    await tester.tap(firstRowFinder);
+    await tester.tap(secondRowFinder);
+    await tester.pumpAndSettle();
 
-      expect(nbItemSelected, 0);
-    },
-  );
+    expect(nbItemSelected, 0);
+  });
 }
 
 Widget _defaultCellBuilder(
@@ -225,10 +216,7 @@ Widget _defaultCellBuilder(
       return Text(person.firstName);
     case ColumnKey.address:
       return Row(
-        children: [
-          Text(person.address.street),
-          Text(person.address.city),
-        ],
+        children: [Text(person.address.street), Text(person.address.city)],
       );
     default:
       return Container();
@@ -257,26 +245,17 @@ Widget _dataTableBuilder({
   );
 }
 
-enum ColumnKey {
-  firstName,
-  address,
-}
+enum ColumnKey { firstName, address }
 
 @immutable
 class Person {
-  const Person({
-    required this.firstName,
-    required this.address,
-  });
+  const Person({required this.firstName, required this.address});
 
   final String firstName;
   final Address address;
 
   Map<String, dynamic> toMap() {
-    return {
-      'firstName': firstName,
-      'address': address.toMap(),
-    };
+    return {'firstName': firstName, 'address': address.toMap()};
   }
 
   factory Person.fromMap(Map<String, dynamic> map) {
@@ -286,10 +265,7 @@ class Person {
     );
   }
 
-  Person copyWith({
-    String? firstName,
-    Address? address,
-  }) {
+  Person copyWith({String? firstName, Address? address}) {
     return Person(
       firstName: firstName ?? this.firstName,
       address: address ?? this.address,
@@ -299,26 +275,17 @@ class Person {
 
 @immutable
 class Address {
-  const Address({
-    required this.street,
-    required this.city,
-  });
+  const Address({required this.street, required this.city});
 
   final String street;
   final String city;
 
   Map<String, dynamic> toMap() {
-    return {
-      'street': street,
-      'city': city,
-    };
+    return {'street': street, 'city': city};
   }
 
   factory Address.fromMap(Map<String, dynamic> map) {
-    return Address(
-      street: map['street'] ?? '',
-      city: map['city'] ?? '',
-    );
+    return Address(street: map['street'] ?? '', city: map['city'] ?? '');
   }
 }
 
@@ -390,10 +357,7 @@ class MockCollection extends Mock
   @override
   Query<Map<String, Object?>> limit([int? limit]) {
     return super.noSuchMethod(
-      Invocation.method(
-        #limit,
-        [limit],
-      ),
+      Invocation.method(#limit, [limit]),
       returnValue: mockQuery,
       returnValueForMissingStub: mockQuery,
     );
@@ -460,14 +424,8 @@ class MockQuerySnapshot extends Mock implements Snapshot {
   List<QueryDocumentSnapshot<Map<String, Object?>>> get docs {
     return super.noSuchMethod(
       Invocation.getter(#docs),
-      returnValue: [
-        bobSnapshot,
-        bob2Snapshot,
-      ],
-      returnValueForMissingStub: [
-        bobSnapshot,
-        bob2Snapshot,
-      ],
+      returnValue: [bobSnapshot, bob2Snapshot],
+      returnValueForMissingStub: [bobSnapshot, bob2Snapshot],
     );
   }
 }

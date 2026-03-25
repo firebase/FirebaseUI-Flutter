@@ -26,9 +26,7 @@ class AppleSignInButton extends _AppleSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-        );
+  }) : super(isLoading: isLoading ?? false);
 }
 
 class AppleSignInIconButton extends _AppleSignInButton {
@@ -45,10 +43,7 @@ class AppleSignInIconButton extends _AppleSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-          label: '',
-        );
+  }) : super(isLoading: isLoading ?? false, label: '');
 }
 
 AppleProvider? _mockProvider;
@@ -90,9 +85,9 @@ class _AppleSignInButton extends StatelessWidget {
     double? size,
     this.onError,
     this.onCanceled,
-  })  : label = label ?? 'Sign in with Apple',
-        overrideDefaultTapAction = overrideDefaultTapAction ?? false,
-        size = size ?? 19;
+  }) : label = label ?? 'Sign in with Apple',
+       overrideDefaultTapAction = overrideDefaultTapAction ?? false,
+       size = size ?? 19;
 
   AppleProvider get provider {
     if (_mockProvider != null) {

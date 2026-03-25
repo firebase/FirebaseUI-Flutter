@@ -30,18 +30,17 @@ class FacebookProvider extends OAuthProvider {
     redirectUri: redirectUri ?? defaultRedirectUri,
   );
 
-  FacebookProvider({
-    required this.clientId,
-    this.redirectUri,
-  });
+  FacebookProvider({required this.clientId, this.redirectUri});
 
   /// Generates a cryptographically secure random nonce for limited login
   String _generateNonce([int length = 32]) {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
-        .join();
+    return List.generate(
+      length,
+      (_) => charset[random.nextInt(charset.length)],
+    ).join();
   }
 
   /// Returns the SHA256 hash of the given string
@@ -81,8 +80,9 @@ class FacebookProvider extends OAuthProvider {
         // Check the token type to determine if it's classic or limited login
         if (accessToken.type == AccessTokenType.classic) {
           // Classic login - use access token
-          credential =
-              fba.FacebookAuthProvider.credential(accessToken.tokenString);
+          credential = fba.FacebookAuthProvider.credential(
+            accessToken.tokenString,
+          );
         } else if (accessToken.type == AccessTokenType.limited) {
           // Limited login - use ID token with nonce
           if (_rawNonce == null) {
@@ -91,10 +91,9 @@ class FacebookProvider extends OAuthProvider {
             );
             return;
           }
-          credential = fba.OAuthProvider(providerId).credential(
-            idToken: accessToken.tokenString,
-            rawNonce: _rawNonce,
-          );
+          credential = fba.OAuthProvider(
+            providerId,
+          ).credential(idToken: accessToken.tokenString, rawNonce: _rawNonce);
         } else {
           authListener.onError(
             Exception('Unknown access token type: ${accessToken.type}'),
@@ -141,8 +140,9 @@ class FacebookProvider extends OAuthProvider {
       final hasPermission = await _hasTrackingPermission();
 
       // Determine login tracking mode
-      final loginTracking =
-          hasPermission ? LoginTracking.enabled : LoginTracking.limited;
+      final loginTracking = hasPermission
+          ? LoginTracking.enabled
+          : LoginTracking.limited;
 
       // Generate nonce for limited login
       if (loginTracking == LoginTracking.limited) {

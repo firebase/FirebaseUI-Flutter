@@ -38,10 +38,7 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
 
     /// {@macro ui.auth.auth_flow.ctor.provider}
     required super.provider,
-  }) : super(
-          action: AuthAction.signIn,
-          initialState: const Uninitialized(),
-        );
+  }) : super(action: AuthAction.signIn, initialState: const Uninitialized());
 
   @override
   void sendLink(String email) {
