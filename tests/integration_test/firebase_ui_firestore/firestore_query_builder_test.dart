@@ -852,7 +852,7 @@ class QueryBuilderSpy<T> extends Mock {
   QueryBuilderSpy([this._builder]) {
     if (_builder != null) {
       when(call(any, any, any)).thenAnswer((realInvocation) {
-        return _builder!(
+        return _builder(
           realInvocation.positionalArguments[0] as BuildContext,
           realInvocation.positionalArguments[1]
               as FirestoreQueryBuilderSnapshot<T>,

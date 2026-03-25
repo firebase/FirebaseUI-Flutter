@@ -4,8 +4,10 @@ version: 3.0.1
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_storage/
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ^3.5.0
   flutter: ">=3.10.0"
+
+resolution: workspace
 
 false_secrets:
   - example/**

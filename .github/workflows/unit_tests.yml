@@ -51,7 +51,7 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@v3
         with:
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
 
       - name: Run unit tests on Chrome
         if: matrix.target == 'html'

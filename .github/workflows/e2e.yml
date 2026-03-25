@@ -67,7 +67,7 @@ jobs:
       - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
         with:
           run-bootstrap: false
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
         # needed because twitter_login plugin doesn't have a namespace defined and he hasn't released a new version yet: https://github.com/0maru/twitter_login/issues/139
@@ -146,7 +146,7 @@ jobs:
       - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
         with:
           run-bootstrap: false
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
       - name: Clean up previous build artifacts
@@ -225,7 +225,7 @@ jobs:
       - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
         with:
           run-bootstrap: false
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
       - name: "Build Application"
@@ -260,7 +260,7 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
         with:
-          melos-version: "3.0.1"
+          melos-version: "^6.3.3"
       - name: 'Build Test Applications'
         run: |
           cd packages/firebase_ui_auth/example

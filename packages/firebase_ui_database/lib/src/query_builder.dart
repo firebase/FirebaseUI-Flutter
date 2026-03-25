@@ -470,6 +470,7 @@ class FirebaseDatabaseListView extends FirebaseDatabaseQueryBuilder {
               addAutomaticKeepAlives: addAutomaticKeepAlives,
               addRepaintBoundaries: addRepaintBoundaries,
               addSemanticIndexes: addSemanticIndexes,
+              // ignore: deprecated_member_use
               cacheExtent: cacheExtent,
               semanticChildCount: semanticChildCount,
               dragStartBehavior: dragStartBehavior,
