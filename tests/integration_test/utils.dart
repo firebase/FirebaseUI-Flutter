@@ -198,7 +198,6 @@ TypeMatcher<QueryDocumentSnapshot<T>> isQueryDocumentSnapshot<T>({
 }) {
   var matcher = isA<QueryDocumentSnapshot<T>>();
 
-  // ignore: join_return_with_assignment
   matcher = matcher.applyHaving('data', (value) => value.data(), data);
 
   return matcher;

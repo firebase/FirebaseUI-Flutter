@@ -156,7 +156,6 @@ class MockCredential extends Mock implements fba.UserCredential {
 
 class MockProvider extends Mock implements fba.AppleAuthProvider {}
 
-// ignore: avoid_implementing_value_types
 class MockApp extends Mock implements FirebaseApp {}
 
 class MockAuth extends Mock implements fba.FirebaseAuth {

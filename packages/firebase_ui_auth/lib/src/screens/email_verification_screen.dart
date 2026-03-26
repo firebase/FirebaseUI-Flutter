@@ -145,7 +145,7 @@ class __EmailVerificationScreenContentState
     super.initState();
   }
 
-  void _sendEmailVerification(_) {
+  void _sendEmailVerification(void _) {
     controller
       ..addListener(() {
         setState(() {});

@@ -192,7 +192,7 @@ class _AuthFlowBuilderState<T extends AuthController>
 
   late AuthProvider provider = widget.provider ?? _createDefaultProvider();
 
-  Widget _defaultBuilder(_, __, ___, ____) {
+  Widget _defaultBuilder(BuildContext _, AuthState __, T ___, Widget? ____) {
     return widget.child!;
   }
 

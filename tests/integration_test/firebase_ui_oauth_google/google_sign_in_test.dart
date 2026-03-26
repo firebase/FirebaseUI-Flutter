@@ -126,7 +126,7 @@ class MockAuthentication extends Mock implements GoogleSignInAuthentication {
   final String accessToken = _jwt;
 }
 
-// ignore: avoid_implementing_value_types, must_be_immutable
+// ignore: must_be_immutable
 class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {
   @override
   Future<GoogleSignInAuthentication> get authentication async =>
