@@ -161,8 +161,9 @@ void main() {
       expect(textFinder, findsOneWidget);
     });
 
-    testWidgets('applies dark theme background color from style',
-        (tester) async {
+    testWidgets('applies dark theme background color from style', (
+      tester,
+    ) async {
       await tester.pumpWidget(renderMaterialButton(Brightness.dark));
 
       final containerFinder = find.byWidgetPredicate(
@@ -199,25 +200,27 @@ void main() {
     });
 
     testWidgets('has layout flow aware padding', (tester) async {
-      await tester.pumpWidget(DefaultAssetBundle(
-        bundle: FakeAssetBundle(),
-        child: MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: [
-                Expanded(
-                  child: OAuthProviderButtonBase(
-                    provider: provider,
-                    auth: FakeAuth(),
-                    label: 'Sign in with Fake provider',
-                    loadingIndicator: const CircularProgressIndicator(),
+      await tester.pumpWidget(
+        DefaultAssetBundle(
+          bundle: FakeAssetBundle(),
+          child: MaterialApp(
+            home: Scaffold(
+              body: Row(
+                children: [
+                  Expanded(
+                    child: OAuthProviderButtonBase(
+                      provider: provider,
+                      auth: FakeAuth(),
+                      label: 'Sign in with Fake provider',
+                      loadingIndicator: const CircularProgressIndicator(),
+                    ),
                   ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ));
+      );
 
       expect(find.byType(LayoutFlowAwarePadding), findsOneWidget);
     });

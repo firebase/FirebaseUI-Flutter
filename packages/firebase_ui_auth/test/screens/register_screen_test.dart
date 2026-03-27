@@ -14,21 +14,20 @@ void main() {
       setFirebaseUiIsTestMode(true);
     });
 
-    testWidgets(
-      "doesn't have password visibility toggle by default",
-      (tester) async {
-        await tester.pumpWidget(
-          TestMaterialApp(
-            child: RegisterScreen(
-              auth: MockAuth(),
-              providers: [EmailAuthProvider()],
-            ),
+    testWidgets("doesn't have password visibility toggle by default", (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: RegisterScreen(
+            auth: MockAuth(),
+            providers: [EmailAuthProvider()],
           ),
-        );
+        ),
+      );
 
-        expect(find.byIcon(Icons.visibility), findsNothing);
-      },
-    );
+      expect(find.byIcon(Icons.visibility), findsNothing);
+    });
 
     testWidgets('allows to add password visibility toggle', (tester) async {
       await tester.pumpWidget(

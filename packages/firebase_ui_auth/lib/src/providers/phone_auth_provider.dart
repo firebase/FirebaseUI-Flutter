@@ -100,15 +100,18 @@ class PhoneAuthProvider
       );
       onCredentialReceived(credential, action);
     } else {
-      confirmationResult!.confirm(code).then((userCredential) {
-        if (action == AuthAction.link) {
-          authListener.onCredentialLinked(userCredential.credential!);
-        } else {
-          authListener.onSignedIn(userCredential);
-        }
-      }).catchError((err) {
-        authListener.onError(err);
-      });
+      confirmationResult!
+          .confirm(code)
+          .then((userCredential) {
+            if (action == AuthAction.link) {
+              authListener.onCredentialLinked(userCredential.credential!);
+            } else {
+              authListener.onSignedIn(userCredential);
+            }
+          })
+          .catchError((err) {
+            authListener.onError(err);
+          });
     }
   }
 

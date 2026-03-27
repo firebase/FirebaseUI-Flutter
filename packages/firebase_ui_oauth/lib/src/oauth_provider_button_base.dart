@@ -18,10 +18,8 @@ typedef ErrorBuilder = Widget Function(Exception e);
 /// A callback that is being called when there are different oauth providers
 /// associated with the same email.
 /// {@endtemplate}
-typedef DifferentProvidersFoundCallback = void Function(
-  List<String> providers,
-  fba.AuthCredential? credential,
-);
+typedef DifferentProvidersFoundCallback =
+    void Function(List<String> providers, fba.AuthCredential? credential);
 
 /// {@template ui.oauth.oauth_provider_button_base.signed_in_callback}
 /// A callback that is being called when the user signs in.
@@ -132,8 +130,8 @@ class OAuthProviderButtonBase extends StatefulWidget {
 
     /// {@macro ui.oauth.oauth_provider_button_base.on_cancelled}
     this.onCancelled,
-  })  : assert(!overrideDefaultTapAction || onTap != null),
-        _padding = size * 1.33 / 2;
+  }) : assert(!overrideDefaultTapAction || onTap != null),
+       _padding = size * 1.33 / 2;
 
   @override
   State<OAuthProviderButtonBase> createState() =>
@@ -394,29 +392,18 @@ class _ButtonContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final icon = Padding(
       padding: EdgeInsets.all(iconPadding),
-      child: SvgPicture.string(
-        iconSrc,
-        width: height,
-        height: height,
-      ),
+      child: SvgPicture.string(iconSrc, width: height, height: height),
     );
 
     if (label.isEmpty) {
       if (!isLoading) return icon;
 
-      return SizedBox.square(
-        dimension: fontSize,
-        child: loadingIndicator,
-      );
+      return SizedBox.square(dimension: fontSize, child: loadingIndicator);
     }
 
     final text = TextSpan(
       text: label,
-      style: TextStyle(
-        height: 1.1,
-        color: textColor,
-        fontSize: fontSize,
-      ),
+      style: TextStyle(height: 1.1, color: textColor, fontSize: fontSize),
     );
 
     return Row(
@@ -438,13 +425,13 @@ class _ButtonContent extends StatelessWidget {
               if (isLoading) {
                 // "fontSize" is also the indicator's width
                 final freeSpace = totalButtonWidth - fontSize;
-                final startPadding =
-                    (freeSpace / 2 - totalIconWidth).clamp(0.0, availableWidth);
+                final startPadding = (freeSpace / 2 - totalIconWidth).clamp(
+                  0.0,
+                  availableWidth,
+                );
 
                 return Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    start: startPadding,
-                  ),
+                  padding: EdgeInsetsDirectional.only(start: startPadding),
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: SizedBox.square(
@@ -463,12 +450,12 @@ class _ButtonContent extends StatelessWidget {
                 text: text,
                 textDirection: Directionality.of(context),
                 maxLines: 1,
-              )..layout(maxWidth: availableWidth))
-                  .size
-                  .width;
+              )..layout(maxWidth: availableWidth)).size.width;
               final freeSpace = totalButtonWidth - textWidth;
-              final startPadding =
-                  (freeSpace / 2 - totalIconWidth).clamp(0.0, availableWidth);
+              final startPadding = (freeSpace / 2 - totalIconWidth).clamp(
+                0.0,
+                availableWidth,
+              );
 
               return Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -478,10 +465,7 @@ class _ButtonContent extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text.rich(
-                    text,
-                    style: text.style,
-                  ),
+                  child: Text.rich(text, style: text.style),
                 ),
               );
             },
@@ -497,18 +481,14 @@ class _ButtonContent extends StatelessWidget {
 class _MaterialForeground extends StatelessWidget {
   final VoidCallback onTap;
 
-  const _MaterialForeground({
-    required this.onTap,
-  });
+  const _MaterialForeground({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: Material(
         color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-        ),
+        child: InkWell(onTap: onTap),
       ),
     );
   }

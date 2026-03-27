@@ -23,10 +23,7 @@ class _LoadingButtonContent extends StatelessWidget {
 
     if (color != null) {
       final theme = Theme.of(context).textTheme.labelLarge;
-      child = Text(
-        label,
-        style: theme?.copyWith(color: color),
-      );
+      child = Text(label, style: theme?.copyWith(color: color));
     } else {
       child = Text(label);
     }

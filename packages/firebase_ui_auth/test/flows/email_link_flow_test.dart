@@ -34,10 +34,7 @@ void main() {
       appLinks: appLinks,
     );
 
-    flow = EmailLinkFlow(
-      provider: provider,
-      auth: auth,
-    );
+    flow = EmailLinkFlow(provider: provider, auth: auth);
 
     ctrl = flow;
   });
@@ -350,22 +347,16 @@ class MockListener extends Mock implements EmailLinkAuthListener {
 
   @override
   void onBeforeLinkSent(String? email) {
-    super.noSuchMethod(
-      Invocation.method(#onBeforeLinkSent, [email]),
-    );
+    super.noSuchMethod(Invocation.method(#onBeforeLinkSent, [email]));
   }
 
   @override
   void onLinkSent(String? email) {
-    super.noSuchMethod(
-      Invocation.method(#onLinkSent, [email]),
-    );
+    super.noSuchMethod(Invocation.method(#onLinkSent, [email]));
   }
 
   @override
   void onError(Object? error) {
-    super.noSuchMethod(
-      Invocation.method(#onError, [error]),
-    );
+    super.noSuchMethod(Invocation.method(#onError, [error]));
   }
 }

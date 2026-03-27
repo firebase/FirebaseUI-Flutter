@@ -42,11 +42,7 @@ SideBuilder sideIcon(IconData icon) {
   return (context, constraints) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Icon(
-        icon,
-        color: Colors.blue,
-        size: constraints.maxWidth / 3,
-      ),
+      child: Icon(icon, color: Colors.blue, size: constraints.maxWidth / 3),
     );
   };
 }

@@ -20,9 +20,6 @@ class Title extends PlatformWidget {
 
   @override
   Widget buildMaterial(BuildContext context) {
-    return Text(
-      text,
-      style: Theme.of(context).textTheme.headlineSmall,
-    );
+    return Text(text, style: Theme.of(context).textTheme.headlineSmall);
   }
 }

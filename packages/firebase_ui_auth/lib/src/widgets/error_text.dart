@@ -55,7 +55,8 @@ class ErrorText extends StatelessWidget {
   static String Function(
     BuildContext context,
     fba.FirebaseAuthException exception,
-  )? localizeError;
+  )?
+  localizeError;
 
   /// A way to customize error message for [PlatformException]
   ///
@@ -65,10 +66,8 @@ class ErrorText extends StatelessWidget {
   ///   if (e.code == "network_error") return "Please check your internet connection.";
   ///   return "Oh no! Something went wrong.";
   /// }
-  static String Function(
-    BuildContext context,
-    PlatformException exception,
-  )? localizePlatformError;
+  static String Function(BuildContext context, PlatformException exception)?
+  localizePlatformError;
 
   /// A way to customize the widget that is used across the library to show
   /// error hints. By default a localized text is used with a color set to
@@ -84,11 +83,7 @@ class ErrorText extends StatelessWidget {
   final TextAlign? textAlign;
 
   /// {@macro ui.auth.widgets.error_text}
-  const ErrorText({
-    super.key,
-    required this.exception,
-    this.textAlign,
-  });
+  const ErrorText({super.key, required this.exception, this.textAlign});
 
   @override
   Widget build(BuildContext context) {

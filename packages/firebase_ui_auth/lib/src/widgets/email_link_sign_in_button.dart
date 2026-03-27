@@ -27,11 +27,7 @@ class EmailLinkSignInButton extends StatelessWidget {
   final EmailLinkAuthProvider provider;
 
   /// {@macro ui.auth.widget.email_link_sign_in_button}
-  const EmailLinkSignInButton({
-    super.key,
-    required this.provider,
-    this.auth,
-  });
+  const EmailLinkSignInButton({super.key, required this.provider, this.auth});
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +48,7 @@ class EmailLinkSignInButton extends StatelessWidget {
               builder: (_) {
                 return FirebaseUIActions.inherit(
                   from: context,
-                  child: EmailLinkSignInScreen(
-                    auth: auth,
-                    provider: provider,
-                  ),
+                  child: EmailLinkSignInScreen(auth: auth, provider: provider),
                 );
               },
             ),

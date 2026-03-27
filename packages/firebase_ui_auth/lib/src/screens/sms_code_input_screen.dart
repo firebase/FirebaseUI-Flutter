@@ -133,7 +133,7 @@ class SMSCodeInputScreen extends StatelessWidget {
                       _reset();
                       Navigator.of(context).pop();
                     },
-                  )
+                  ),
                 ],
               ),
             ),

@@ -32,53 +32,32 @@ class PlatformAware extends PlatformWidget {
 
 void main() {
   group('PlatformWidget', () {
-    testWidgets(
-      'builds cupertino widget if CupertinoApp is used',
-      (tester) async {
-        await tester.pumpWidget(
-          const CupertinoApp(
-            home: PlatformAware(),
-          ),
-        );
+    testWidgets('builds cupertino widget if CupertinoApp is used', (
+      tester,
+    ) async {
+      await tester.pumpWidget(const CupertinoApp(home: PlatformAware()));
 
-        expect(find.text('Cupertino'), findsOneWidget);
-        expect(find.text('Material'), findsNothing);
-      },
-    );
+      expect(find.text('Cupertino'), findsOneWidget);
+      expect(find.text('Material'), findsNothing);
+    });
 
-    testWidgets(
-      'builds material widget if MaterialApp is used',
-      (tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: PlatformAware(),
-          ),
-        );
+    testWidgets('builds material widget if MaterialApp is used', (
+      tester,
+    ) async {
+      await tester.pumpWidget(const MaterialApp(home: PlatformAware()));
 
-        expect(find.text('Cupertino'), findsNothing);
-        expect(find.text('Material'), findsOneWidget);
-      },
-    );
+      expect(find.text('Cupertino'), findsNothing);
+      expect(find.text('Material'), findsOneWidget);
+    });
 
-    testWidgets(
-      'builds wrapper widget if it is implemented',
-      (tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: PlatformAware(),
-          ),
-        );
+    testWidgets('builds wrapper widget if it is implemented', (tester) async {
+      await tester.pumpWidget(const MaterialApp(home: PlatformAware()));
 
-        expect(find.byKey(const ValueKey('wrapper')), findsOneWidget);
+      expect(find.byKey(const ValueKey('wrapper')), findsOneWidget);
 
-        await tester.pumpWidget(
-          const CupertinoApp(
-            home: PlatformAware(),
-          ),
-        );
+      await tester.pumpWidget(const CupertinoApp(home: PlatformAware()));
 
-        expect(find.byKey(const ValueKey('wrapper')), findsOneWidget);
-      },
-    );
+      expect(find.byKey(const ValueKey('wrapper')), findsOneWidget);
+    });
   });
 }

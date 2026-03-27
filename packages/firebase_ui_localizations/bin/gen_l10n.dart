@@ -37,41 +37,44 @@ void main() async {
       parsed[0]: {
         ...(acc[parsed[0]] ?? {}),
         if (parsed.length > 1) parsed[1]: arbJson else 'default': arbJson,
-      }
+      },
     };
   });
 
   final licenseHeader = await getLicenseHeader();
 
-  final genOps = labelsByLocale.entries.map((entry) {
-    if (entry.value.length == 1) {
-      return [
-        generateLocalizationsClass(
-          locale: entry.key,
-          arb: entry.value['default'],
-          licenseHeader: licenseHeader,
-        )
-      ];
-    }
+  final genOps = labelsByLocale.entries
+      .map((entry) {
+        if (entry.value.length == 1) {
+          return [
+            generateLocalizationsClass(
+              locale: entry.key,
+              arb: entry.value['default'],
+              licenseHeader: licenseHeader,
+            ),
+          ];
+        }
 
-    return [
-      generateLocalizationsClass(
-        locale: entry.key,
-        arb: entry.value['default'],
-        licenseHeader: licenseHeader,
-      ),
-      ...entry.value.entries
-          .where((element) => element.key != 'default')
-          .map((e) {
-        return generateLocalizationsClass(
-          locale: entry.key,
-          countryCode: e.key,
-          arb: e.value,
-          licenseHeader: licenseHeader,
-        );
-      }).toList(),
-    ];
-  }).expand((element) => element);
+        return [
+          generateLocalizationsClass(
+            locale: entry.key,
+            arb: entry.value['default'],
+            licenseHeader: licenseHeader,
+          ),
+          ...entry.value.entries
+              .where((element) => element.key != 'default')
+              .map((e) {
+                return generateLocalizationsClass(
+                  locale: entry.key,
+                  countryCode: e.key,
+                  arb: e.value,
+                  licenseHeader: licenseHeader,
+                );
+              })
+              .toList(),
+        ];
+      })
+      .expand((element) => element);
 
   await Future.wait([...genOps.cast<Future>()]);
 
@@ -160,11 +163,7 @@ class Label {
   final String translation;
   final String? description;
 
-  Label({
-    required this.key,
-    required this.translation,
-    this.description,
-  });
+  Label({required this.key, required this.translation, this.description});
 }
 
 Future<String> getLicenseHeader() async {
@@ -177,8 +176,9 @@ Future<String> getLicenseHeader() async {
       .replaceAll('{{.Year}}', now.year.toString())
       .split('\n')
       .map((e) {
-    return '// $e';
-  }).join('\n');
+        return '// $e';
+      })
+      .join('\n');
 }
 
 Future<void> generateDefaultLocalizations(
@@ -193,8 +193,7 @@ Future<void> generateDefaultLocalizations(
       translation: e.value,
       description: meta['description'],
     );
-  }).toList()
-    ..sort((a, b) => a.key.compareTo(b.key));
+  }).toList()..sort((a, b) => a.key.compareTo(b.key));
 
   final content = await getDefaultLocalizationsContent(labels, licenseHeader);
   final outFile = File(path.join(outDir.path, 'default_localizations.dart'));

@@ -12,9 +12,7 @@ void main() {
     testWidgets('renders text as content', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: UniversalButton(text: 'text'),
-          ),
+          home: Scaffold(body: UniversalButton(text: 'text')),
         ),
       );
 
@@ -22,9 +20,7 @@ void main() {
 
       await tester.pumpWidget(
         const CupertinoApp(
-          home: Scaffold(
-            body: UniversalButton(text: 'text'),
-          ),
+          home: Scaffold(body: UniversalButton(text: 'text')),
         ),
       );
 
@@ -35,10 +31,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: UniversalButton(
-              text: 'text',
-              child: Text('child'),
-            ),
+            body: UniversalButton(text: 'text', child: Text('child')),
           ),
         ),
       );
@@ -49,10 +42,7 @@ void main() {
       await tester.pumpWidget(
         const CupertinoApp(
           home: Scaffold(
-            body: UniversalButton(
-              text: 'text',
-              child: Text('child'),
-            ),
+            body: UniversalButton(text: 'text', child: Text('child')),
           ),
         ),
       );
@@ -67,10 +57,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
-              body: UniversalButton(
-                text: 'text',
-                variant: ButtonVariant.text,
-              ),
+              body: UniversalButton(text: 'text', variant: ButtonVariant.text),
             ),
           ),
         );
@@ -79,87 +66,69 @@ void main() {
       },
     );
 
-    testWidgets(
-      'renders OutlinedButton under MaterialApp when variant '
-      'is ButtonVariant.text',
-      (tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: Scaffold(
-              body: UniversalButton(
-                text: 'text',
-                variant: ButtonVariant.outlined,
-              ),
+    testWidgets('renders OutlinedButton under MaterialApp when variant '
+        'is ButtonVariant.text', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: UniversalButton(
+              text: 'text',
+              variant: ButtonVariant.outlined,
             ),
           ),
-        );
+        ),
+      );
 
-        expect(find.byType(OutlinedButton), findsOneWidget);
-      },
-    );
+      expect(find.byType(OutlinedButton), findsOneWidget);
+    });
 
-    testWidgets(
-      'renders ElevatedButton under MaterialApp when variant '
-      'is ButtonVariant.text',
-      (tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: Scaffold(
-              body: UniversalButton(
-                text: 'text',
-                variant: ButtonVariant.filled,
-              ),
+    testWidgets('renders ElevatedButton under MaterialApp when variant '
+        'is ButtonVariant.text', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: UniversalButton(text: 'text', variant: ButtonVariant.filled),
+          ),
+        ),
+      );
+
+      expect(find.byType(ElevatedButton), findsOneWidget);
+    });
+
+    testWidgets('renders CupertinoButton under CupertinoApp', (tester) async {
+      await tester.pumpWidget(
+        const CupertinoApp(
+          home: Scaffold(
+            body: UniversalButton(text: 'text', variant: ButtonVariant.text),
+          ),
+        ),
+      );
+
+      expect(find.byType(CupertinoButton), findsOneWidget);
+
+      await tester.pumpWidget(
+        const CupertinoApp(
+          home: Scaffold(
+            body: UniversalButton(text: 'text', variant: ButtonVariant.filled),
+          ),
+        ),
+      );
+
+      expect(find.byType(CupertinoButton), findsOneWidget);
+
+      await tester.pumpWidget(
+        const CupertinoApp(
+          home: Scaffold(
+            body: UniversalButton(
+              text: 'text',
+              variant: ButtonVariant.outlined,
             ),
           ),
-        );
+        ),
+      );
 
-        expect(find.byType(ElevatedButton), findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      'renders CupertinoButton under CupertinoApp',
-      (tester) async {
-        await tester.pumpWidget(
-          const CupertinoApp(
-            home: Scaffold(
-              body: UniversalButton(
-                text: 'text',
-                variant: ButtonVariant.text,
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(CupertinoButton), findsOneWidget);
-
-        await tester.pumpWidget(
-          const CupertinoApp(
-            home: Scaffold(
-              body: UniversalButton(
-                text: 'text',
-                variant: ButtonVariant.filled,
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(CupertinoButton), findsOneWidget);
-
-        await tester.pumpWidget(
-          const CupertinoApp(
-            home: Scaffold(
-              body: UniversalButton(
-                text: 'text',
-                variant: ButtonVariant.outlined,
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(CupertinoButton), findsOneWidget);
-      },
-    );
+      expect(find.byType(CupertinoButton), findsOneWidget);
+    });
 
     testWidgets('calls onPressed when button is tapped', (tester) async {
       var pressed = 0;
@@ -170,10 +139,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: UniversalButton(
-              text: 'press me',
-              onPressed: onPressed,
-            ),
+            body: UniversalButton(text: 'press me', onPressed: onPressed),
           ),
         ),
       );
@@ -186,10 +152,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: Scaffold(
-            body: UniversalButton(
-              text: 'press me',
-              onPressed: onPressed,
-            ),
+            body: UniversalButton(text: 'press me', onPressed: onPressed),
           ),
         ),
       );

@@ -15,9 +15,7 @@ const _kTestPath = 'flutter-tests';
 void main() {
   group('DatabaseListViewBuilder', () {
     setUp(() async {
-      await clearReference(
-        rtdb.ref(_kTestPath),
-      );
+      await clearReference(rtdb.ref(_kTestPath));
     });
 
     testWidgets(
@@ -57,7 +55,8 @@ void main() {
         expect(find.byType(ListView), findsNothing);
       },
       // Works locally but fails on CI
-      skip: defaultTargetPlatform == TargetPlatform.iOS ||
+      skip:
+          defaultTargetPlatform == TargetPlatform.iOS ||
           defaultTargetPlatform == TargetPlatform.macOS,
     );
 
@@ -82,7 +81,8 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsNothing);
         expect(find.byType(ListView), findsNothing);
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.iOS),
     );
@@ -106,7 +106,8 @@ void main() {
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.byType(ListView), findsNothing);
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.iOS),
     );
@@ -140,7 +141,8 @@ void main() {
 
         expect(find.byType(ListView), findsOneWidget);
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.iOS),
     );
@@ -156,32 +158,31 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: Builder(builder: (context) {
-                final mq = MediaQuery.of(context);
-                final h = mq.size.height;
-                size = h / 5;
+              child: Builder(
+                builder: (context) {
+                  final mq = MediaQuery.of(context);
+                  final h = mq.size.height;
+                  size = h / 5;
 
-                return FirebaseDatabaseListView(
-                  physics: const ClampingScrollPhysics(),
-                  query: ref.orderByValue(),
-                  cacheExtent: 0,
-                  pageSize: 5,
-                  itemExtent: size,
-                  itemBuilder: (context, snapshot) {
-                    final v = snapshot.value as int;
+                  return FirebaseDatabaseListView(
+                    physics: const ClampingScrollPhysics(),
+                    query: ref.orderByValue(),
+                    cacheExtent: 0,
+                    pageSize: 5,
+                    itemExtent: size,
+                    itemBuilder: (context, snapshot) {
+                      final v = snapshot.value as int;
 
-                    return Container(
-                      alignment: Alignment.center,
-                      color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
-                      key: ValueKey(v.toString()),
-                      child: Text(
-                        v.toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
-                );
-              }),
+                      return Container(
+                        alignment: Alignment.center,
+                        color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                        key: ValueKey(v.toString()),
+                        child: Text(v.toString(), textAlign: TextAlign.center),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         );
@@ -222,7 +223,8 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.android ||
               defaultTargetPlatform == TargetPlatform.iOS),
@@ -239,33 +241,32 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: Builder(builder: (context) {
-                final mq = MediaQuery.of(context);
-                final h = mq.size.height;
-                size = h / 5;
+              child: Builder(
+                builder: (context) {
+                  final mq = MediaQuery.of(context);
+                  final h = mq.size.height;
+                  size = h / 5;
 
-                return FirebaseDatabaseListView(
-                  physics: const ClampingScrollPhysics(),
-                  query: ref.orderByValue(),
-                  reverseQuery: true,
-                  cacheExtent: 0,
-                  pageSize: 5,
-                  itemExtent: size,
-                  itemBuilder: (context, snapshot) {
-                    final v = snapshot.value as int;
+                  return FirebaseDatabaseListView(
+                    physics: const ClampingScrollPhysics(),
+                    query: ref.orderByValue(),
+                    reverseQuery: true,
+                    cacheExtent: 0,
+                    pageSize: 5,
+                    itemExtent: size,
+                    itemBuilder: (context, snapshot) {
+                      final v = snapshot.value as int;
 
-                    return Container(
-                      alignment: Alignment.center,
-                      color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
-                      key: ValueKey(v.toString()),
-                      child: Text(
-                        v.toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
-                );
-              }),
+                      return Container(
+                        alignment: Alignment.center,
+                        color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                        key: ValueKey(v.toString()),
+                        child: Text(v.toString(), textAlign: TextAlign.center),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         );
@@ -276,7 +277,8 @@ void main() {
           expect(find.byKey(ValueKey(i.toString())), findsOneWidget);
         }
       },
-      skip: isCI &&
+      skip:
+          isCI &&
           (defaultTargetPlatform == TargetPlatform.macOS ||
               defaultTargetPlatform == TargetPlatform.iOS),
     );
@@ -284,10 +286,7 @@ void main() {
 }
 
 class ListViewBuilderSpy<T> extends Mock {
-  Widget call(
-    BuildContext? context,
-    T? snapshot,
-  ) {
+  Widget call(BuildContext? context, T? snapshot) {
     return super.noSuchMethod(
       Invocation.method(#call, [context, snapshot]),
       returnValueForMissingStub: Container(),
@@ -297,7 +296,5 @@ class ListViewBuilderSpy<T> extends Mock {
 }
 
 Future<void> fillReference(DatabaseReference ref, int length) {
-  return Future.wait([
-    for (var i = 0; i < length; i++) ref.push().set(i),
-  ]);
+  return Future.wait([for (var i = 0; i < length; i++) ref.push().set(i)]);
 }

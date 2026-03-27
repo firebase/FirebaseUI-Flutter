@@ -32,60 +32,45 @@ void main() async {
         expect(find.text(labels.signInWithFacebookButtonText), findsOneWidget);
       });
 
-      testWidgets(
-        'calls sign in when tapped',
-        (tester) async {
-          await render(
-            tester,
-            OAuthProviderButton(provider: provider),
-          );
+      testWidgets('calls sign in when tapped', (tester) async {
+        await render(tester, OAuthProviderButton(provider: provider));
 
-          final button = find.byType(OAuthProviderButtonBase);
-          await tester.tap(button);
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
 
-          await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-          // Verify login was invoked by checking that the mock's login method
-          // completed successfully (actual parameter verification happens in unit tests)
-          expect(true, isTrue);
-        },
-      );
+        // Verify login was invoked by checking that the mock's login method
+        // completed successfully (actual parameter verification happens in unit tests)
+        expect(true, isTrue);
+      });
 
-      testWidgets(
-        'shows loading indicator when sign in is in progress',
-        (tester) async {
-          // Create a new provider with a mock that delays
-          final delayedProvider = FacebookProvider(clientId: 'clientId');
-          final delayedMock = MockFacebookAuth();
-          delayedProvider.provider = delayedMock;
-          setMockFacebookProvider(delayedProvider);
+      testWidgets('shows loading indicator when sign in is in progress', (
+        tester,
+      ) async {
+        // Create a new provider with a mock that delays
+        final delayedProvider = FacebookProvider(clientId: 'clientId');
+        final delayedMock = MockFacebookAuth();
+        delayedProvider.provider = delayedMock;
+        setMockFacebookProvider(delayedProvider);
 
-          // Override noSuchMethod to add delay
-          when(delayedMock.login()).thenAnswer(
-            (realInvocation) async {
-              await Future.delayed(const Duration(milliseconds: 50));
-              return MockLoginResult();
-            },
-          );
+        // Override noSuchMethod to add delay
+        when(delayedMock.login()).thenAnswer((realInvocation) async {
+          await Future.delayed(const Duration(milliseconds: 50));
+          return MockLoginResult();
+        });
 
-          await render(
-            tester,
-            OAuthProviderButton(provider: delayedProvider),
-          );
+        await render(tester, OAuthProviderButton(provider: delayedProvider));
 
-          final button = find.byType(OAuthProviderButtonBase);
-          await tester.tap(button);
-          await tester.pump();
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pump();
 
-          expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        },
-      );
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      });
 
       testWidgets('signs the user in', (tester) async {
-        await render(
-          tester,
-          OAuthProviderButton(provider: provider),
-        );
+        await render(tester, OAuthProviderButton(provider: provider));
 
         final button = find.byType(OAuthProviderButtonBase);
         await tester.tap(button);

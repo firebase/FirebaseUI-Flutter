@@ -81,10 +81,7 @@ Future<void> render(WidgetTester tester, Widget widget) async {
     MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(8),
-            child: widget,
-          ),
+          body: Padding(padding: const EdgeInsets.all(8), child: widget),
         ),
       ),
     ),
@@ -140,10 +137,7 @@ Future<String> getVerificationCode(String phoneNumber) async {
     final codes = (body['verificationCodes'] as List).fold<Map<String, String>>(
       {},
       (acc, value) {
-        return {
-          ...acc,
-          value['phoneNumber']: value['code'],
-        };
+        return {...acc, value['phoneNumber']: value['code']};
       },
     );
 
@@ -163,17 +157,13 @@ Future<CollectionReference<T>> clearCollection<T>(
   final snapshot = await ref.get();
   if (snapshot.docs.isEmpty) return ref;
 
-  await Future.wait([
-    for (final doc in snapshot.docs) doc.reference.delete(),
-  ]);
+  await Future.wait([for (final doc in snapshot.docs) doc.reference.delete()]);
 
   await ref.get(const GetOptions(source: Source.server));
   return ref;
 }
 
-Future<void> clearReference(
-  DatabaseReference ref,
-) async {
+Future<void> clearReference(DatabaseReference ref) async {
   final snapshot = await ref.get();
   if (!snapshot.exists) return;
   await ref.remove();
@@ -220,14 +210,13 @@ TypeMatcher<FirestoreQueryBuilderSnapshot<T>> isQueryBuilderSnapshot<T>({
     (value) => value.isFetching,
     isFetching,
   );
-  matcher =
-      matcher.applyHaving('hasError', (value) => value.hasError, hasError);
-  matcher = matcher.applyHaving('hasData', (value) => value.hasData, hasData);
   matcher = matcher.applyHaving(
-    'hasMore',
-    (value) => value.hasMore,
-    hasMore,
+    'hasError',
+    (value) => value.hasError,
+    hasError,
   );
+  matcher = matcher.applyHaving('hasData', (value) => value.hasData, hasData);
+  matcher = matcher.applyHaving('hasMore', (value) => value.hasMore, hasMore);
   matcher = matcher.applyHaving(
     'isFetchingMore',
     (value) => value.isFetchingMore,

@@ -26,10 +26,7 @@ class MyApp extends StatelessWidget {
       builder: (context, setState) {
         return MaterialApp(
           title: 'Firebase UI Localizations Demo',
-          supportedLocales: const [
-            Locale('en'),
-            Locale('fr'),
-          ],
+          supportedLocales: const [Locale('en'), Locale('fr')],
           locale: locale,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
@@ -61,13 +58,7 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: SignInScreen(
-                  providers: [
-                    EmailAuthProvider(),
-                  ],
-                ),
-              ),
+              Expanded(child: SignInScreen(providers: [EmailAuthProvider()])),
             ],
           ),
         );

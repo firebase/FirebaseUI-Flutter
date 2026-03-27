@@ -54,8 +54,7 @@ class FirebaseUILocalizations<T extends FirebaseUILocalizationLabels> {
   ///
   /// See [FirebaseUILocalizationLabels].
   static FirebaseUILocalizationDelegate
-      withDefaultOverrides<T extends FirebaseUILocalizationLabels>(
-          T overrides) {
+  withDefaultOverrides<T extends FirebaseUILocalizationLabels>(T overrides) {
     return FirebaseUILocalizationDelegate<T>(overrides);
   }
 }

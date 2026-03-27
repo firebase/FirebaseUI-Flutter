@@ -37,19 +37,21 @@ mixin PlatformSignInMixin {
 
   /// Handles authentication logic on desktop platforms
   void desktopSignIn(AuthAction action) {
-    DesktopWebviewAuth.signIn(desktopSignInArgs).then((value) {
-      if (value == null) throw AuthCancelledException();
+    DesktopWebviewAuth.signIn(desktopSignInArgs)
+        .then((value) {
+          if (value == null) throw AuthCancelledException();
 
-      final oauthCredential = fromDesktopAuthResult(value);
-      onCredentialReceived(oauthCredential, action);
-    }).catchError((err) {
-      if (err is AuthCancelledException) {
-        authListener.onCanceled();
-        return;
-      }
+          final oauthCredential = fromDesktopAuthResult(value);
+          onCredentialReceived(oauthCredential, action);
+        })
+        .catchError((err) {
+          if (err is AuthCancelledException) {
+            authListener.onCanceled();
+            return;
+          }
 
-      authListener.onError(err);
-    });
+          authListener.onError(err);
+        });
   }
 
   /// Handles authentication logic on mobile platforms.

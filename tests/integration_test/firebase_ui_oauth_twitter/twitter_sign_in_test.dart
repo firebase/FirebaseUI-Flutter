@@ -36,52 +36,37 @@ void main() async {
         expect(find.text(labels.signInWithTwitterButtonText), findsOneWidget);
       });
 
-      testWidgets(
-        'calls sign in when tapped',
-        (tester) async {
-          await render(
-            tester,
-            OAuthProviderButton(provider: provider),
-          );
+      testWidgets('calls sign in when tapped', (tester) async {
+        await render(tester, OAuthProviderButton(provider: provider));
 
-          final button = find.byType(OAuthProviderButtonBase);
-          await tester.tap(button);
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
 
-          await tester.pumpAndSettle();
-          verify(provider.provider.login()).called(1);
+        await tester.pumpAndSettle();
+        verify(provider.provider.login()).called(1);
 
-          expect(true, isTrue);
-        },
-      );
+        expect(true, isTrue);
+      });
 
-      testWidgets(
-        'shows loading indicator when sign in is in progress',
-        (tester) async {
-          await render(
-            tester,
-            OAuthProviderButton(provider: provider),
-          );
+      testWidgets('shows loading indicator when sign in is in progress', (
+        tester,
+      ) async {
+        await render(tester, OAuthProviderButton(provider: provider));
 
-          when(provider.provider.login()).thenAnswer(
-            (realInvocation) async {
-              await Future.delayed(const Duration(milliseconds: 50));
-              return MockAuthResult();
-            },
-          );
+        when(provider.provider.login()).thenAnswer((realInvocation) async {
+          await Future.delayed(const Duration(milliseconds: 50));
+          return MockAuthResult();
+        });
 
-          final button = find.byType(OAuthProviderButtonBase);
-          await tester.tap(button);
-          await tester.pump();
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pump();
 
-          expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        },
-      );
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      });
 
       testWidgets('signs the user in', (tester) async {
-        await render(
-          tester,
-          OAuthProviderButton(provider: provider),
-        );
+        await render(tester, OAuthProviderButton(provider: provider));
 
         final button = find.byType(OAuthProviderButtonBase);
         await tester.tap(button);
@@ -120,10 +105,7 @@ class MockTwitterLogin extends Mock implements TwitterLogin {
   @override
   Future<twe.AuthResult> login({bool? forceLogin}) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #signIn,
-        [],
-      ),
+      Invocation.method(#signIn, []),
       returnValue: MockAuthResult(),
       returnValueForMissingStub: MockAuthResult(),
     );

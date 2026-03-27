@@ -15,10 +15,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LoadingButton(
-              label: 'label',
-              onTap: () {},
-            ),
+            body: LoadingButton(label: 'label', onTap: () {}),
           ),
         ),
       );
@@ -26,48 +23,47 @@ void main() {
       expect(find.text('label'), findsOneWidget);
     });
 
-    testWidgets(
-      'shows loading indicator when isLoading = true',
-      (tester) async {
-        var isLoading = false;
-        var completer = Completer<void>();
+    testWidgets('shows loading indicator when isLoading = true', (
+      tester,
+    ) async {
+      var isLoading = false;
+      var completer = Completer<void>();
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: StatefulBuilder(
-                builder: (context, setState) => LoadingButton(
-                  label: 'button',
-                  onTap: () async {
-                    setState(() {
-                      isLoading = !isLoading;
-                    });
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: StatefulBuilder(
+              builder: (context, setState) => LoadingButton(
+                label: 'button',
+                onTap: () async {
+                  setState(() {
+                    isLoading = !isLoading;
+                  });
 
-                    await completer.future;
+                  await completer.future;
 
-                    setState(() {
-                      isLoading = !isLoading;
-                    });
-                  },
-                  isLoading: isLoading,
-                ),
+                  setState(() {
+                    isLoading = !isLoading;
+                  });
+                },
+                isLoading: isLoading,
               ),
             ),
           ),
-        );
+        ),
+      );
 
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-        await tester.tap(find.text('button'));
-        await tester.pump();
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+      await tester.tap(find.text('button'));
+      await tester.pump();
 
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-        completer.complete();
-        await tester.pump();
+      completer.complete();
+      await tester.pump();
 
-        expect(find.byType(CircularProgressIndicator), findsNothing);
-      },
-    );
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+    });
 
     testWidgets('works under CupertinoApp', (tester) async {
       var isLoading = false;

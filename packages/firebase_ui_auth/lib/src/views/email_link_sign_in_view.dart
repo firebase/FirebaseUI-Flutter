@@ -45,10 +45,7 @@ class _EmailLinkSignInViewState extends State<EmailLinkSignInView> {
   Widget build(BuildContext context) {
     final l = FirebaseUILocalizations.labelsOf(context);
     final formKey = GlobalKey<FormState>();
-    const statesToHideForm = [
-      AwaitingDynamicLink,
-      SigningIn,
-    ];
+    const statesToHideForm = [AwaitingDynamicLink, SigningIn];
 
     return AuthFlowBuilder<EmailLinkAuthController>(
       auth: widget.auth,

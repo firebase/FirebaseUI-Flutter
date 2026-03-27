@@ -27,9 +27,7 @@ class OAuthFlow extends AuthFlow<OAuthProvider>
 
     /// {@macro ui.auth.auth_controller.auth}
     super.auth,
-  }) : super(
-          initialState: const Uninitialized(),
-        );
+  }) : super(initialState: const Uninitialized());
 
   @override
   void signIn(TargetPlatform platform) {
