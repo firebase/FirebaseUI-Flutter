@@ -51,7 +51,7 @@ class UniversalAlert extends PlatformWidget {
 
   @override
   Widget buildMaterial(BuildContext context) {
-    return AlertDialog(
+    return AlertDialog.adaptive(
       title: Text(title),
       content: Text(message),
       actions: [
