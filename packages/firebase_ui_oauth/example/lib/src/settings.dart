@@ -4,15 +4,9 @@
 
 import 'package:flutter/material.dart';
 
-enum DesignLibrary {
-  cupertino,
-  material,
-}
+enum DesignLibrary { cupertino, material }
 
-enum ButtonVariant {
-  icon,
-  full,
-}
+enum ButtonVariant { icon, full }
 
 class SettingsChip extends StatelessWidget {
   final VoidCallback onTap;
@@ -59,7 +53,8 @@ class Settings extends StatefulWidget {
     DesignLibrary library,
     Brightness brightness,
     ButtonVariant buttonVariant,
-  ) builder;
+  )
+  builder;
 
   const Settings({
     super.key,

@@ -23,9 +23,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: ErrorText(exception: exception),
-          localizationsDelegates: const [
-            FirebaseUILocalizations.delegate,
-          ],
+          localizationsDelegates: const [FirebaseUILocalizations.delegate],
         ),
       );
       expect(
@@ -48,16 +46,11 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: ErrorText(exception: exception),
-          localizationsDelegates: const [
-            FirebaseUILocalizations.delegate,
-          ],
+          localizationsDelegates: const [FirebaseUILocalizations.delegate],
         ),
       );
 
-      expect(
-        find.text('Custom error text'),
-        findsOneWidget,
-      );
+      expect(find.text('Custom error text'), findsOneWidget);
     });
   });
 }

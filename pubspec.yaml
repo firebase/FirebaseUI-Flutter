@@ -1,7 +1,7 @@
 name: firebase_ui_workspace
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.9.0
 
 workspace:
   - packages/firebase_ui_auth

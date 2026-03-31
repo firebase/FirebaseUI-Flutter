@@ -23,10 +23,7 @@ void main() {
 
     setUp(() {
       widget = TestMaterialApp(
-        child: EmailForm(
-          auth: MockAuth(),
-          action: AuthAction.signIn,
-        ),
+        child: EmailForm(auth: MockAuth(), action: AuthAction.signIn),
       );
     });
 
@@ -41,34 +38,51 @@ void main() {
       await tester.pumpWidget(widget);
       final button = find.byType(TextButton);
 
-      expect(
-        button,
-        findsOneWidget,
-      );
+      expect(button, findsOneWidget);
     });
 
-    testWidgets(
-      'respects EmailFormStyle passed to FirebaseUITheme',
-      (tester) async {
-        await tester.pumpWidget(
-          FirebaseUITheme(
-            styles: const {
-              EmailFormStyle(signInButtonVariant: ButtonVariant.filled)
-            },
-            child: widget,
+    testWidgets('respects EmailFormStyle passed to FirebaseUITheme', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        FirebaseUITheme(
+          styles: const {
+            EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
+          },
+          child: widget,
+        ),
+      );
+
+      final button = find.byType(ElevatedButton);
+      expect(button, findsOneWidget);
+    });
+
+    testWidgets('respects EmailFormStyle passed via property', (tester) async {
+      await tester.pumpWidget(
+        widget = TestMaterialApp(
+          child: EmailForm(
+            auth: MockAuth(),
+            action: AuthAction.signIn,
+            style: const EmailFormStyle(
+              signInButtonVariant: ButtonVariant.filled,
+            ),
           ),
-        );
+        ),
+      );
 
-        final button = find.byType(ElevatedButton);
-        expect(button, findsOneWidget);
-      },
-    );
+      final button = find.byType(ElevatedButton);
+      expect(button, findsOneWidget);
+    });
 
-    testWidgets(
-      'respects EmailFormStyle passed via property',
-      (tester) async {
-        await tester.pumpWidget(
-          widget = TestMaterialApp(
+    testWidgets('EmailFormStyle passed via property is higher priority', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: FirebaseUITheme(
+            styles: const {
+              EmailFormStyle(signInButtonVariant: ButtonVariant.text),
+            },
             child: EmailForm(
               auth: MockAuth(),
               action: AuthAction.signIn,
@@ -77,37 +91,12 @@ void main() {
               ),
             ),
           ),
-        );
+        ),
+      );
 
-        final button = find.byType(ElevatedButton);
-        expect(button, findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      'EmailFormStyle passed via property is higher priority',
-      (tester) async {
-        await tester.pumpWidget(
-          TestMaterialApp(
-            child: FirebaseUITheme(
-              styles: const {
-                EmailFormStyle(signInButtonVariant: ButtonVariant.text)
-              },
-              child: EmailForm(
-                auth: MockAuth(),
-                action: AuthAction.signIn,
-                style: const EmailFormStyle(
-                  signInButtonVariant: ButtonVariant.filled,
-                ),
-              ),
-            ),
-          ),
-        );
-
-        final button = find.byType(ElevatedButton);
-        expect(button, findsOneWidget);
-      },
-    );
+      final button = find.byType(ElevatedButton);
+      expect(button, findsOneWidget);
+    });
 
     testWidgets('has password visibility toggle', (tester) async {
       await tester.pumpWidget(
@@ -159,11 +148,7 @@ void main() {
 
     testWidgets('validates email', (tester) async {
       await tester.pumpWidget(
-        TestMaterialApp(
-          child: EmailForm(
-            auth: MockAuth(),
-          ),
-        ),
+        TestMaterialApp(child: EmailForm(auth: MockAuth())),
       );
 
       final inputs = find.byType(TextFormField);
@@ -178,11 +163,7 @@ void main() {
 
     testWidgets('requires password', (tester) async {
       await tester.pumpWidget(
-        TestMaterialApp(
-          child: EmailForm(
-            auth: MockAuth(),
-          ),
-        ),
+        TestMaterialApp(child: EmailForm(auth: MockAuth())),
       );
 
       final inputs = find.byType(TextFormField);
@@ -198,86 +179,72 @@ void main() {
       expect(find.text(labels.passwordIsRequiredErrorText), findsOneWidget);
     });
 
-    testWidgets(
-      'shows password confirmation if action is sign up',
-      (tester) async {
-        await tester.pumpWidget(
-          TestMaterialApp(
-            child: EmailForm(
-              auth: MockAuth(),
-              action: AuthAction.signUp,
-            ),
-          ),
-        );
+    testWidgets('shows password confirmation if action is sign up', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(auth: MockAuth(), action: AuthAction.signUp),
+        ),
+      );
 
-        final inputs = find.byType(TextFormField);
-        expect(inputs, findsNWidgets(3));
-      },
-    );
+      final inputs = find.byType(TextFormField);
+      expect(inputs, findsNWidgets(3));
+    });
 
-    testWidgets(
-      'requires password confirmation',
-      (tester) async {
-        await tester.pumpWidget(
-          TestMaterialApp(
-            child: EmailForm(
-              auth: MockAuth(),
-              action: AuthAction.signUp,
-            ),
-          ),
-        );
+    testWidgets('requires password confirmation', (tester) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(auth: MockAuth(), action: AuthAction.signUp),
+        ),
+      );
 
-        final inputs = find.byType(TextFormField);
+      final inputs = find.byType(TextFormField);
 
-        await tester.enterText(inputs.at(0), 'test@test.com');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.enterText(inputs.at(0), 'test@test.com');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
 
-        await tester.enterText(inputs.at(1), 'password');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.enterText(inputs.at(1), 'password');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
 
-        await tester.enterText(inputs.at(2), '');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.enterText(inputs.at(2), '');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        expect(
-          find.text(labels.confirmPasswordIsRequiredErrorText),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(
+        find.text(labels.confirmPasswordIsRequiredErrorText),
+        findsOneWidget,
+      );
+    });
 
-    testWidgets(
-      'verifies that password confirmation matches password',
-      (tester) async {
-        await tester.pumpWidget(
-          TestMaterialApp(
-            child: EmailForm(
-              auth: MockAuth(),
-              action: AuthAction.signUp,
-            ),
-          ),
-        );
+    testWidgets('verifies that password confirmation matches password', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        TestMaterialApp(
+          child: EmailForm(auth: MockAuth(), action: AuthAction.signUp),
+        ),
+      );
 
-        final inputs = find.byType(TextFormField);
+      final inputs = find.byType(TextFormField);
 
-        await tester.enterText(inputs.at(0), 'test@test.com');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pump();
+      await tester.enterText(inputs.at(0), 'test@test.com');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
 
-        await tester.enterText(inputs.at(1), 'password');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pump();
+      await tester.enterText(inputs.at(1), 'password');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
 
-        await tester.enterText(inputs.at(2), 'psasword');
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+      await tester.enterText(inputs.at(2), 'psasword');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
 
-        expect(
-          find.text(labels.confirmPasswordDoesNotMatchErrorText),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(
+        find.text(labels.confirmPasswordDoesNotMatchErrorText),
+        findsOneWidget,
+      );
+    });
   });
 }

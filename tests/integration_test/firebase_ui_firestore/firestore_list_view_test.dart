@@ -72,28 +72,25 @@ void main() {
       expect(find.byType(ListView), findsNothing);
     });
 
-    testWidgets(
-      'By default, shows a progress indicator when loading',
-      (tester) async {
-        final collection = db.collection(
-          'flutter-tests/list-view-builder/works',
-        );
+    testWidgets('By default, shows a progress indicator when loading', (
+      tester,
+    ) async {
+      final collection = db.collection('flutter-tests/list-view-builder/works');
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FirestoreListView<Map>(
-                query: collection.orderBy('value'),
-                itemBuilder: (context, snapshot) => throw UnimplementedError(),
-              ),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FirestoreListView<Map>(
+              query: collection.orderBy('value'),
+              itemBuilder: (context, snapshot) => throw UnimplementedError(),
             ),
           ),
-        );
+        ),
+      );
 
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        expect(find.byType(ListView), findsNothing);
-      },
-    );
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(ListView), findsNothing);
+    });
 
     testWidgets('By default, ignore errors', (tester) async {
       final builderSpy = ListViewBuilderSpy();
@@ -133,32 +130,31 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: Builder(builder: (context) {
-                final mq = MediaQuery.of(context);
-                final h = mq.size.height;
-                size = h / 5;
+              child: Builder(
+                builder: (context) {
+                  final mq = MediaQuery.of(context);
+                  final h = mq.size.height;
+                  size = h / 5;
 
-                return FirestoreListView<Map>(
-                  physics: const ClampingScrollPhysics(),
-                  query: ref.orderBy('value'),
-                  cacheExtent: 0,
-                  pageSize: 5,
-                  itemExtent: size,
-                  itemBuilder: (context, snapshot) {
-                    final v = snapshot.data()['value'] as int;
+                  return FirestoreListView<Map>(
+                    physics: const ClampingScrollPhysics(),
+                    query: ref.orderBy('value'),
+                    cacheExtent: 0,
+                    pageSize: 5,
+                    itemExtent: size,
+                    itemBuilder: (context, snapshot) {
+                      final v = snapshot.data()['value'] as int;
 
-                    return Container(
-                      alignment: Alignment.center,
-                      color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
-                      key: ValueKey(v.toString()),
-                      child: Text(
-                        v.toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
-                );
-              }),
+                      return Container(
+                        alignment: Alignment.center,
+                        color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                        key: ValueKey(v.toString()),
+                        child: Text(v.toString(), textAlign: TextAlign.center),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         );
@@ -205,10 +201,7 @@ void main() {
 }
 
 class ListViewBuilderSpy<T> extends Mock {
-  Widget call(
-    BuildContext? context,
-    T? snapshot,
-  ) {
+  Widget call(BuildContext? context, T? snapshot) {
     return super.noSuchMethod(
       Invocation.method(#call, [context, snapshot]),
       returnValueForMissingStub: Container(),

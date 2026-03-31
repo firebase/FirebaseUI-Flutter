@@ -15,9 +15,7 @@ void main() {
   group('UniversalIcon', () {
     testWidgets('uses cupertinoIcon under CupertinoApp', (tester) async {
       await tester.pumpWidget(
-        const CupertinoApp(
-          home: UniversalScaffold(body: icon),
-        ),
+        const CupertinoApp(home: UniversalScaffold(body: icon)),
       );
 
       expect(find.byIcon(CupertinoIcons.check_mark), findsOneWidget);
@@ -26,9 +24,7 @@ void main() {
 
     testWidgets('uses materialIcon under MaterialApp', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: UniversalScaffold(body: icon),
-        ),
+        const MaterialApp(home: UniversalScaffold(body: icon)),
       );
 
       expect(find.byIcon(CupertinoIcons.check_mark), findsNothing);

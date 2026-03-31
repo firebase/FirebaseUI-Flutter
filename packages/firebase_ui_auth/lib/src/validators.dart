@@ -70,10 +70,8 @@ class EmailValidator extends Validator {
 class ConfirmPasswordValidator extends Validator {
   final TextEditingController controller;
 
-  ConfirmPasswordValidator(
-    this.controller,
-    String errorText,
-  ) : super(errorText, []);
+  ConfirmPasswordValidator(this.controller, String errorText)
+    : super(errorText, []);
 
   @override
   String? validate(String? value) {

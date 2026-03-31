@@ -26,16 +26,13 @@ void main() {
         },
       );
 
-      test(
-        'throws an error if already configured',
-        () async {
-          await FirebaseUIStorage.configure(config);
-          expect(
-            () => FirebaseUIStorage.configure(config),
-            throwsA(isA<StateError>()),
-          );
-        },
-      );
+      test('throws an error if already configured', () async {
+        await FirebaseUIStorage.configure(config);
+        expect(
+          () => FirebaseUIStorage.configure(config),
+          throwsA(isA<StateError>()),
+        );
+      });
     });
 
     group('configurationFor()', () {
@@ -47,34 +44,25 @@ void main() {
         },
       );
 
-      test(
-        'throws an error if not configured',
-        () async {
-          expect(
-            () => FirebaseUIStorage.configurationFor(config.storage),
-            throwsA(isA<StateError>()),
-          );
-        },
-      );
+      test('throws an error if not configured', () async {
+        expect(
+          () => FirebaseUIStorage.configurationFor(config.storage),
+          throwsA(isA<StateError>()),
+        );
+      });
     });
 
     group('isConfigured()', () {
-      test(
-        'returns true if a configuration is set for a given FirebaseStorage '
-        'instance',
-        () async {
-          await FirebaseUIStorage.configure(config);
-          expect(FirebaseUIStorage.isConfigured(storage), isTrue);
-        },
-      );
+      test('returns true if a configuration is set for a given FirebaseStorage '
+          'instance', () async {
+        await FirebaseUIStorage.configure(config);
+        expect(FirebaseUIStorage.isConfigured(storage), isTrue);
+      });
 
-      test(
-        'returns false if a configuration is not set for a given '
-        'FirebaseStorage instance',
-        () async {
-          expect(FirebaseUIStorage.isConfigured(storage), isFalse);
-        },
-      );
+      test('returns false if a configuration is not set for a given '
+          'FirebaseStorage instance', () async {
+        expect(FirebaseUIStorage.isConfigured(storage), isFalse);
+      });
     });
   });
 }

@@ -12,47 +12,42 @@ import 'package:mockito/mockito.dart';
 
 void main() {
   group('Reauthenticate dialog', () {
-    testWidgets(
-      "doesn't have an overflow when keyboard is visible",
-      (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: ReauthenticateDialog(
-                providers: [
-                  EmailAuthProvider(),
-                  PhoneAuthProvider(),
-                  GoogleProvider(clientId: 'mock'),
-                  AppleProvider(),
-                ],
-                auth: MockAuth(),
-              ),
+    testWidgets("doesn't have an overflow when keyboard is visible", (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ReauthenticateDialog(
+              providers: [
+                EmailAuthProvider(),
+                PhoneAuthProvider(),
+                GoogleProvider(clientId: 'mock'),
+                AppleProvider(),
+              ],
+              auth: MockAuth(),
             ),
           ),
-        );
+        ),
+      );
 
-        // Triggers keyboard to appear
-        await tester.tap(find.byType(TextFormField).first);
+      // Triggers keyboard to appear
+      await tester.tap(find.byType(TextFormField).first);
 
-        // Waits for keyboard to appear
-        await tester.pumpAndSettle();
+      // Waits for keyboard to appear
+      await tester.pumpAndSettle();
 
-        // No need for an expect.
-        // Test will fail if there is an overflow.
-        // This is a built-in flutter functionality
+      // No need for an expect.
+      // Test will fail if there is an overflow.
+      // This is a built-in flutter functionality
 
-        await tester.tap(find.text('Cancel'));
-        await tester.pumpAndSettle();
-      },
-    );
+      await tester.tap(find.text('Cancel'));
+      await tester.pumpAndSettle();
+    });
   });
 }
 
-const _user = {
-  'uid': 'uid',
-  'isAnonymous': false,
-  'isEmailVerified': false,
-};
+const _user = {'uid': 'uid', 'isAnonymous': false, 'isEmailVerified': false};
 
 class MockUser extends Mock implements fba.User {
   @override
@@ -61,7 +56,7 @@ class MockUser extends Mock implements fba.User {
       fba.UserInfo.fromJson({..._user, 'providerId': 'password'}),
       fba.UserInfo.fromJson({..._user, 'providerId': 'google.com'}),
       fba.UserInfo.fromJson({..._user, 'providerId': 'apple.com'}),
-      fba.UserInfo.fromJson({..._user, 'providerId': 'phone'})
+      fba.UserInfo.fromJson({..._user, 'providerId': 'phone'}),
     ];
   }
 }

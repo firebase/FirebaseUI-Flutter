@@ -12,11 +12,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// A function that builds a widget from a [FirestoreQueryBuilderSnapshot]
 ///
 /// See also [FirebaseDatabaseQueryBuilder].
-typedef FirestoreQueryBuilderSnapshotBuilder<T> = Widget Function(
-  BuildContext context,
-  FirestoreQueryBuilderSnapshot<T> snapshot,
-  Widget? child,
-);
+typedef FirestoreQueryBuilderSnapshotBuilder<T> =
+    Widget Function(
+      BuildContext context,
+      FirestoreQueryBuilderSnapshot<T> snapshot,
+      Widget? child,
+    );
 
 /// {@template firebase_ui.firestore_query_builder}
 /// Listens to a query and paginates the result in a way that is compatible with
@@ -167,8 +168,8 @@ class _FirestoreQueryBuilderState<Document>
     // "build" – most commonly ListView's itemBuilder
     Future.microtask(() => setState(() {}));
 
-    final expectedDocsCount = (_pageCount + 1) * widget.pageSize
-
+    final expectedDocsCount =
+        (_pageCount + 1) * widget.pageSize
         /// The "+1" is used to voluntarily fetch one extra item,
         /// used to determine whether there is a next page or not.
         /// This extra item will not be rendered.
@@ -180,43 +181,43 @@ class _FirestoreQueryBuilderState<Document>
     _querySubscription = query
         .snapshots(includeMetadataChanges: widget.includeMetadataChanges)
         .listen(
-      (event) {
-        setState(() {
-          if (nextPage) {
-            _snapshot = _snapshot.copyWith(isFetchingMore: false);
-          } else {
-            _snapshot = _snapshot.copyWith(isFetching: false);
-          }
+          (event) {
+            setState(() {
+              if (nextPage) {
+                _snapshot = _snapshot.copyWith(isFetchingMore: false);
+              } else {
+                _snapshot = _snapshot.copyWith(isFetching: false);
+              }
 
-          _snapshot = _snapshot.copyWith(
-            hasData: true,
-            docs: event.size < expectedDocsCount
-                ? event.docs
-                : event.docs.take(expectedDocsCount - 1).toList(),
-            error: null,
-            hasMore: event.size == expectedDocsCount,
-            stackTrace: null,
-            hasError: false,
-          );
-        });
-      },
-      onError: (Object error, StackTrace stackTrace) {
-        setState(() {
-          if (nextPage) {
-            _snapshot = _snapshot.copyWith(isFetchingMore: false);
-          } else {
-            _snapshot = _snapshot.copyWith(isFetching: false);
-          }
+              _snapshot = _snapshot.copyWith(
+                hasData: true,
+                docs: event.size < expectedDocsCount
+                    ? event.docs
+                    : event.docs.take(expectedDocsCount - 1).toList(),
+                error: null,
+                hasMore: event.size == expectedDocsCount,
+                stackTrace: null,
+                hasError: false,
+              );
+            });
+          },
+          onError: (Object error, StackTrace stackTrace) {
+            setState(() {
+              if (nextPage) {
+                _snapshot = _snapshot.copyWith(isFetchingMore: false);
+              } else {
+                _snapshot = _snapshot.copyWith(isFetching: false);
+              }
 
-          _snapshot = _snapshot.copyWith(
-            error: error,
-            stackTrace: stackTrace,
-            hasError: true,
-            hasMore: false,
-          );
-        });
-      },
-    );
+              _snapshot = _snapshot.copyWith(
+                error: error,
+                stackTrace: stackTrace,
+                hasError: true,
+                hasMore: false,
+              );
+            });
+          },
+        );
   }
 
   @override
@@ -358,25 +359,19 @@ class _Sentinel {
 }
 
 /// A type representing the function passed to [FirestoreListView] for its `itemBuilder`.
-typedef FirestoreItemBuilder<Document> = Widget Function(
-  BuildContext context,
-  QueryDocumentSnapshot<Document> doc,
-);
+typedef FirestoreItemBuilder<Document> =
+    Widget Function(BuildContext context, QueryDocumentSnapshot<Document> doc);
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingBuilder`.
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingIndicatorBuilder`.
-typedef FirestoreFetchingIndicatorBuilder = Widget Function(
-  BuildContext context,
-);
+typedef FirestoreFetchingIndicatorBuilder =
+    Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirestoreListView] for its `errorBuilder`.
-typedef FirestoreErrorBuilder = Widget Function(
-  BuildContext context,
-  Object error,
-  StackTrace stackTrace,
-);
+typedef FirestoreErrorBuilder =
+    Widget Function(BuildContext context, Object error, StackTrace stackTrace);
 
 /// A type representing the function passed to [FirestoreListView] for its `emptyBuilder`.
 typedef FirestoreEmptyBuilder = Widget Function(BuildContext context);
@@ -465,86 +460,86 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator.adaptive());
-            }
+         builder: (context, snapshot, _) {
+           if (snapshot.isFetching) {
+             return loadingBuilder?.call(context) ??
+                 const Center(child: CircularProgressIndicator.adaptive());
+           }
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
+           if (snapshot.hasError && errorBuilder != null) {
+             return errorBuilder(
+               context,
+               snapshot.error!,
+               snapshot.stackTrace!,
+             );
+           }
 
-            if (snapshot.docs.isEmpty && emptyBuilder != null) {
-              return emptyBuilder(context);
-            }
+           if (snapshot.docs.isEmpty && emptyBuilder != null) {
+             return emptyBuilder(context);
+           }
 
-            final itemCount = snapshot.docs.length;
+           final itemCount = snapshot.docs.length;
 
-            return ListView.builder(
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == itemCount;
-                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
-                  snapshot.fetchMore();
-                }
+           return ListView.builder(
+             itemCount: itemCount,
+             itemBuilder: (context, index) {
+               final isLastItem = index + 1 == itemCount;
+               if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+                 snapshot.fetchMore();
+               }
 
-                final doc = snapshot.docs[index];
-                return showFetchingIndicator
-                    ? OnMountListener(
-                        onMount: () {
-                          if (isLastItem && snapshot.hasMore) {
-                            snapshot.fetchMore();
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            itemBuilder(context, doc),
-                            if (isLastItem && snapshot.hasMore)
-                              fetchingIndicatorBuilder?.call(context) ??
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                    ),
-                                    child: Center(
-                                      child: LoadingIndicator(
-                                        size: 30.0,
-                                        borderWidth: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : itemBuilder(context, doc);
-              },
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              itemExtent: itemExtent,
-              prototypeItem: prototypeItem,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              // ignore: deprecated_member_use
-              cacheExtent: cacheExtent,
-              semanticChildCount: semanticChildCount,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
-        );
+               final doc = snapshot.docs[index];
+               return showFetchingIndicator
+                   ? OnMountListener(
+                       onMount: () {
+                         if (isLastItem && snapshot.hasMore) {
+                           snapshot.fetchMore();
+                         }
+                       },
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           itemBuilder(context, doc),
+                           if (isLastItem && snapshot.hasMore)
+                             fetchingIndicatorBuilder?.call(context) ??
+                                 const Padding(
+                                   padding: EdgeInsets.symmetric(
+                                     vertical: 16.0,
+                                   ),
+                                   child: Center(
+                                     child: LoadingIndicator(
+                                       size: 30.0,
+                                       borderWidth: 2.0,
+                                     ),
+                                   ),
+                                 ),
+                         ],
+                       ),
+                     )
+                   : itemBuilder(context, doc);
+             },
+             scrollDirection: scrollDirection,
+             reverse: reverse,
+             controller: controller,
+             primary: primary,
+             physics: physics,
+             shrinkWrap: shrinkWrap,
+             padding: padding,
+             itemExtent: itemExtent,
+             prototypeItem: prototypeItem,
+             addAutomaticKeepAlives: addAutomaticKeepAlives,
+             addRepaintBoundaries: addRepaintBoundaries,
+             addSemanticIndexes: addSemanticIndexes,
+             // ignore: deprecated_member_use
+             cacheExtent: cacheExtent,
+             semanticChildCount: semanticChildCount,
+             dragStartBehavior: dragStartBehavior,
+             keyboardDismissBehavior: keyboardDismissBehavior,
+             restorationId: restorationId,
+             clipBehavior: clipBehavior,
+           );
+         },
+       );
 
   /// Shows a separator between list items just as in [ListView.separated]
   FirestoreListView.separated({
@@ -577,86 +572,86 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator.adaptive());
-            }
+         builder: (context, snapshot, _) {
+           if (snapshot.isFetching) {
+             return loadingBuilder?.call(context) ??
+                 const Center(child: CircularProgressIndicator.adaptive());
+           }
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
+           if (snapshot.hasError && errorBuilder != null) {
+             return errorBuilder(
+               context,
+               snapshot.error!,
+               snapshot.stackTrace!,
+             );
+           }
 
-            if (snapshot.docs.isEmpty && emptyBuilder != null) {
-              return emptyBuilder(context);
-            }
+           if (snapshot.docs.isEmpty && emptyBuilder != null) {
+             return emptyBuilder(context);
+           }
 
-            final itemCount = snapshot.docs.length;
+           final itemCount = snapshot.docs.length;
 
-            return ListView.separated(
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == itemCount;
-                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
-                  snapshot.fetchMore();
-                }
+           return ListView.separated(
+             itemCount: itemCount,
+             itemBuilder: (context, index) {
+               final isLastItem = index + 1 == itemCount;
+               if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+                 snapshot.fetchMore();
+               }
 
-                final doc = snapshot.docs[index];
-                return showFetchingIndicator
-                    ? OnMountListener(
-                        onMount: () {
-                          if (isLastItem && snapshot.hasMore) {
-                            snapshot.fetchMore();
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            itemBuilder(context, doc),
-                            if (isLastItem && snapshot.hasMore)
-                              fetchingIndicatorBuilder?.call(context) ??
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                    ),
-                                    child: Center(
-                                      child: LoadingIndicator(
-                                        size: 30.0,
-                                        borderWidth: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : itemBuilder(context, doc);
-              },
-              separatorBuilder: separatorBuilder,
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              // ignore: deprecated_member_use
-              findChildIndexCallback: findChildIndexCallback,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              // ignore: deprecated_member_use
-              cacheExtent: cacheExtent,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
-        );
+               final doc = snapshot.docs[index];
+               return showFetchingIndicator
+                   ? OnMountListener(
+                       onMount: () {
+                         if (isLastItem && snapshot.hasMore) {
+                           snapshot.fetchMore();
+                         }
+                       },
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           itemBuilder(context, doc),
+                           if (isLastItem && snapshot.hasMore)
+                             fetchingIndicatorBuilder?.call(context) ??
+                                 const Padding(
+                                   padding: EdgeInsets.symmetric(
+                                     vertical: 16.0,
+                                   ),
+                                   child: Center(
+                                     child: LoadingIndicator(
+                                       size: 30.0,
+                                       borderWidth: 2.0,
+                                     ),
+                                   ),
+                                 ),
+                         ],
+                       ),
+                     )
+                   : itemBuilder(context, doc);
+             },
+             separatorBuilder: separatorBuilder,
+             scrollDirection: scrollDirection,
+             reverse: reverse,
+             controller: controller,
+             primary: primary,
+             physics: physics,
+             shrinkWrap: shrinkWrap,
+             padding: padding,
+             // ignore: deprecated_member_use
+             findChildIndexCallback: findChildIndexCallback,
+             addAutomaticKeepAlives: addAutomaticKeepAlives,
+             addRepaintBoundaries: addRepaintBoundaries,
+             addSemanticIndexes: addSemanticIndexes,
+             // ignore: deprecated_member_use
+             cacheExtent: cacheExtent,
+             dragStartBehavior: dragStartBehavior,
+             keyboardDismissBehavior: keyboardDismissBehavior,
+             restorationId: restorationId,
+             clipBehavior: clipBehavior,
+           );
+         },
+       );
 }
 
 /// Listens to an aggregate query and passes the [AsyncSnapshot] to the builder.
@@ -668,7 +663,8 @@ class AggregateQueryBuilder extends StatefulWidget {
   final Widget Function(
     BuildContext context,
     AsyncSnapshot<AggregateQuerySnapshot> snapshot,
-  ) builder;
+  )
+  builder;
 
   const AggregateQueryBuilder({
     super.key,

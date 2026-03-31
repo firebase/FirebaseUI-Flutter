@@ -35,53 +35,40 @@ void main() async {
       testWidgets('has a correct button label', (tester) async {
         await render(
           tester,
-          OAuthProviderButton(
-            provider: provider,
-            auth: auth,
-          ),
+          OAuthProviderButton(provider: provider, auth: auth),
         );
         expect(find.text(labels.signInWithAppleButtonText), findsOneWidget);
       });
 
-      testWidgets(
-        'calls sign in when tapped',
-        (tester) async {
-          await render(
-            tester,
-            OAuthProviderButton(
-              provider: provider,
-              auth: auth,
-            ),
-          );
+      testWidgets('calls sign in when tapped', (tester) async {
+        await render(
+          tester,
+          OAuthProviderButton(provider: provider, auth: auth),
+        );
 
-          final button = find.byType(OAuthProviderButtonBase);
-          await tester.tap(button);
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
 
-          await tester.pumpAndSettle();
-          verify(auth.signInWithProvider(fbProvider)).called(1);
+        await tester.pumpAndSettle();
+        verify(auth.signInWithProvider(fbProvider)).called(1);
 
-          expect(true, isTrue);
-        },
-      );
+        expect(true, isTrue);
+      });
 
-      testWidgets(
-        'shows loading indicator when sign in is in progress',
-        (tester) async {
-          await render(
-            tester,
-            OAuthProviderButton(
-              provider: provider,
-              auth: auth,
-            ),
-          );
+      testWidgets('shows loading indicator when sign in is in progress', (
+        tester,
+      ) async {
+        await render(
+          tester,
+          OAuthProviderButton(provider: provider, auth: auth),
+        );
 
-          final button = find.byType(OAuthProviderButtonBase);
-          await tester.tap(button);
-          await tester.pump();
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pump();
 
-          expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        },
-      );
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      });
 
       testWidgets('signs the user in', (tester) async {
         final listener = MockListener();
@@ -93,10 +80,7 @@ void main() async {
               listener(state);
               return null;
             },
-            child: OAuthProviderButton(
-              provider: provider,
-              auth: auth,
-            ),
+            child: OAuthProviderButton(provider: provider, auth: auth),
           ),
         );
 
@@ -130,14 +114,7 @@ void main() async {
 
 class MockListener<T> extends Mock {
   void call(AuthState? state) {
-    super.noSuchMethod(
-      Invocation.method(
-        #call,
-        [
-          state,
-        ],
-      ),
-    );
+    super.noSuchMethod(Invocation.method(#call, [state]));
   }
 }
 
@@ -163,13 +140,12 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
   Future<fba.UserCredential> signInWithProvider(Object provider) async {
     return super.noSuchMethod(
       Invocation.method(#signInWithAuthProvider, [provider]),
-      returnValue: Future.delayed(const Duration(milliseconds: 500)).then(
-        (_) => MockCredential(),
-      ),
-      returnValueForMissingStub:
-          Future.delayed(const Duration(milliseconds: 500)).then(
-        (_) => MockCredential(),
-      ),
+      returnValue: Future.delayed(
+        const Duration(milliseconds: 500),
+      ).then((_) => MockCredential()),
+      returnValueForMissingStub: Future.delayed(
+        const Duration(milliseconds: 500),
+      ).then((_) => MockCredential()),
     );
   }
 }

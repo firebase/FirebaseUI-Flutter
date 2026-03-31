@@ -63,12 +63,12 @@ class FirebaseDatabaseDataTable extends StatefulWidget {
     this.dragStartBehavior = DragStartBehavior.start,
     this.arrowHeadColor,
     this.checkboxHorizontalMargin,
-  })  : assert(
-          columnLabels is LinkedHashMap,
-          'only LinkedHashMap are supported as header',
-        ), // using an assert instead of a type because `<A, B>{}` types as `Map` but is an instance of `LinkedHashMap`
-        dataRowMinHeight = dataRowMinHeight ?? kMinInteractiveDimension,
-        dataRowMaxHeight = dataRowMaxHeight ?? kMinInteractiveDimension;
+  }) : assert(
+         columnLabels is LinkedHashMap,
+         'only LinkedHashMap are supported as header',
+       ), // using an assert instead of a type because `<A, B>{}` types as `Map` but is an instance of `LinkedHashMap`
+       dataRowMinHeight = dataRowMinHeight ?? kMinInteractiveDimension,
+       dataRowMaxHeight = dataRowMaxHeight ?? kMinInteractiveDimension;
 
   /// The firestore query that will be displayed
   final Query query;
@@ -231,14 +231,13 @@ class _FirestoreTableState extends State<FirebaseDatabaseDataTable> {
               showFirstLastButtons: widget.showFirstLastButtons,
               sortAscending: widget.sortAscending,
               sortColumnIndex: widget.sortColumnIndex,
-              header:
-                  actions.isEmpty ? null : (widget.header ?? const SizedBox()),
+              header: actions.isEmpty
+                  ? null
+                  : (widget.header ?? const SizedBox()),
               actions: actions.isEmpty ? null : actions,
               columns: [
                 for (final head in widget.columnLabels.values)
-                  DataColumn(
-                    label: head,
-                  )
+                  DataColumn(label: head),
               ],
             );
           },
@@ -260,17 +259,15 @@ class _FirestoreTableState extends State<FirebaseDatabaseDataTable> {
         return StatefulBuilder(
           builder: (context, setState) {
             void onTypeChanged(_PropertyType? newType) {
-              setState(
-                () {
-                  // Delaying dispose as otherwise the next build
-                  // will throw because it'll call "removeListener"
-                  Future.delayed(
-                    const Duration(milliseconds: 10),
-                    formState.dispose,
-                  );
-                  formState = _initialFormStateForType(newType);
-                },
-              );
+              setState(() {
+                // Delaying dispose as otherwise the next build
+                // will throw because it'll call "removeListener"
+                Future.delayed(
+                  const Duration(milliseconds: 10),
+                  formState.dispose,
+                );
+                formState = _initialFormStateForType(newType);
+              });
             }
 
             void onFormChange(_FormState newFormState) {
@@ -279,8 +276,10 @@ class _FirestoreTableState extends State<FirebaseDatabaseDataTable> {
 
             return Dialog(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 10,
+                ),
                 child: DropdownButtonHideUnderline(
                   child: Theme(
                     data: Theme.of(context).copyWith(
@@ -354,9 +353,7 @@ class _PropertyTypeForm extends StatelessWidget {
           controller: formState.controller,
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.allow(
-              RegExp('[0-9]+?.?[0-9]*'),
-            ),
+            FilteringTextInputFormatter.allow(RegExp('[0-9]+?.?[0-9]*')),
           ],
           decoration: InputDecoration(labelText: localizations.valueLabel),
         ),
@@ -383,10 +380,7 @@ class _PropertyTypeForm extends StatelessWidget {
 }
 
 class _EditModalButtonBar extends StatelessWidget {
-  const _EditModalButtonBar({
-    required this.formState,
-    required this.ref,
-  });
+  const _EditModalButtonBar({required this.formState, required this.ref});
 
   final _FormState formState;
   final DatabaseReference ref;
@@ -477,11 +471,7 @@ _FormState _initialFormStateForType(_PropertyType? type) {
   }
 }
 
-enum _PropertyType {
-  number,
-  boolean,
-  string,
-}
+enum _PropertyType { number, boolean, string }
 
 abstract class _FormState {
   const _FormState();
@@ -494,7 +484,7 @@ abstract class _FormState {
 
 class _NumberFormState extends _FormState {
   _NumberFormState(String text)
-      : controller = TextEditingController(text: text);
+    : controller = TextEditingController(text: text);
 
   final TextEditingController controller;
 
@@ -510,7 +500,7 @@ class _NumberFormState extends _FormState {
 
 class _StringFormState extends _FormState {
   _StringFormState(String text)
-      : controller = TextEditingController(text: text);
+    : controller = TextEditingController(text: text);
 
   final TextEditingController controller;
 
@@ -560,14 +550,11 @@ class _Source extends DataTableSource {
     required bool selectionEnabled,
     required int rowsPerPage,
     required this.onEditItem,
-  })  : _selectionEnabled = selectionEnabled,
-        _rowsPerpage = rowsPerPage;
+  }) : _selectionEnabled = selectionEnabled,
+       _rowsPerpage = rowsPerPage;
 
-  final void Function(
-    DataSnapshot snapshot,
-    Object? value,
-    String propertyName,
-  ) onEditItem;
+  final void Function(DataSnapshot snapshot, Object? value, String propertyName)
+  onEditItem;
 
   int _rowsPerpage;
   int get rowsPerPage => _rowsPerpage;
@@ -589,7 +576,7 @@ class _Source extends DataTableSource {
 
   final Map<String, Widget> Function() getHeaders;
   final void Function(Object error, StackTrace stackTrace)? Function()
-      getOnError;
+  getOnError;
 
   final _selectedRowIds = <String>{};
 
@@ -660,7 +647,7 @@ class _Source extends DataTableSource {
     // such as when more content got loaded.
     final wereAllItemsSelected =
         _previousSnapshot?.docs.length == _selectedRowIds.length &&
-            _previousSnapshot!.docs.isNotEmpty;
+        _previousSnapshot!.docs.isNotEmpty;
 
     _previousSnapshot = snapshot;
     if (wereAllItemsSelected) onSelectAll(true);
@@ -682,9 +669,9 @@ class _Source extends DataTableSource {
     for (final doc in _previousSnapshot!.docs) {
       if (_selectedRowIds.contains(doc.key)) {
         doc.ref.remove().then<void>(
-              (value) => _selectedRowIds.remove(doc.key),
-              onError: getOnError(),
-            );
+          (value) => _selectedRowIds.remove(doc.key),
+          onError: getOnError(),
+        );
       }
     }
   }

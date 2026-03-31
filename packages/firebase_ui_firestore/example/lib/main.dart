@@ -52,18 +52,13 @@ class FirebaseUIFirestoreExample extends StatelessWidget {
 
 class UserTile extends StatelessWidget {
   final User user;
-  const UserTile({
-    super.key,
-    required this.user,
-  });
+  const UserTile({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          child: Text(user.firstName[0]),
-        ),
+        CircleAvatar(child: Text(user.firstName[0])),
         const SizedBox(width: 8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,10 +69,7 @@ class UserTile extends StatelessWidget {
               '${user.firstName} ${user.lastName}',
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Text(
-              user.number,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
+            Text(user.number, style: Theme.of(context).textTheme.bodySmall),
           ],
         ),
       ],
@@ -99,18 +91,18 @@ class User {
     required this.number,
   });
   User.fromJson(Map<String, Object?> json)
-      : this(
-          city: json['city'].toString(),
-          country: json['country'].toString(),
-          streetName: json['streetName'].toString(),
-          zipCode: json['zipCode'].toString(),
-          prefix: json['prefix'].toString(),
-          firstName: json['firstName'].toString(),
-          lastName: json['lastName'].toString(),
-          email: json['email'].toString(),
-          userName: json['userName'].toString(),
-          number: json['number'].toString(),
-        );
+    : this(
+        city: json['city'].toString(),
+        country: json['country'].toString(),
+        streetName: json['streetName'].toString(),
+        zipCode: json['zipCode'].toString(),
+        prefix: json['prefix'].toString(),
+        firstName: json['firstName'].toString(),
+        lastName: json['lastName'].toString(),
+        email: json['email'].toString(),
+        userName: json['userName'].toString(),
+        number: json['number'].toString(),
+      );
 
   final String city;
   final String country;

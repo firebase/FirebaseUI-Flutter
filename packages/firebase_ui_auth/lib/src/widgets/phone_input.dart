@@ -184,10 +184,7 @@ class PhoneInputState extends State<PhoneInput> {
 
   void _onCountryChanged() {
     setState(() {
-      _setCountry(
-        phoneCode: countryController.text,
-        updateCountryInput: false,
-      );
+      _setCountry(phoneCode: countryController.text, updateCountryInput: false);
     });
   }
 
@@ -285,9 +282,8 @@ class PhoneInputState extends State<PhoneInput> {
                   );
                 }).toList();
               },
-              onSelected: (selected) => _setCountry(
-                countryCode: selected.countryCode,
-              ),
+              onSelected: (selected) =>
+                  _setCountry(countryCode: selected.countryCode),
             ),
           const SizedBox(height: 16),
           Directionality(
@@ -300,14 +296,12 @@ class PhoneInputState extends State<PhoneInput> {
                     width: 90,
                     child: UniversalTextFormField(
                       autofillHints: const [
-                        AutofillHints.telephoneNumberCountryCode
+                        AutofillHints.telephoneNumberCountryCode,
                       ],
                       controller: countryController,
                       prefix: const Text('+'),
                       placeholder: l.countryCode,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.phone,
                       validator: NotEmpty('').validate,
                       onSubmitted: (_) {
@@ -319,7 +313,7 @@ class PhoneInputState extends State<PhoneInput> {
                   Expanded(
                     child: UniversalTextFormField(
                       autofillHints: const [
-                        AutofillHints.telephoneNumberNational
+                        AutofillHints.telephoneNumberNational,
                       ],
                       autofocus: widget.autoFocus,
                       focusNode: numberFocusNode,
@@ -330,9 +324,7 @@ class PhoneInputState extends State<PhoneInput> {
                         PhoneValidator(l.phoneNumberInvalidErrorText),
                       ]),
                       onSubmitted: _onSubmitted,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.phone,
                     ),
                   ),
