@@ -10,7 +10,7 @@ resolution: workspace
 
 dependencies:
   cupertino_icons: ^1.0.6
-  file_picker: ^6.1.1
+  file_picker: ^11.0.1
   firebase_core: ^4.3.0
   firebase_storage: ^13.0.5
   firebase_ui_storage: ^3.0.1
