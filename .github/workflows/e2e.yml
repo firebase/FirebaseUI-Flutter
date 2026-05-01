@@ -29,7 +29,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         name: Install Node.js
         with:
           node-version: "22"
@@ -94,7 +94,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         name: Install Node.js
         with:
           node-version: "22"
@@ -119,7 +119,7 @@ jobs:
             /usr/local/share/powershell \
             /usr/share/dotnet
           df -h /
-      - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9
+      - uses: hendrikmuhs/ccache-action@d62db5f07c26379fc4b4e0916f098a92573c3b03
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-ios-v3
@@ -190,7 +190,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         name: Install Node.js
         with:
           node-version: "22"
@@ -198,7 +198,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "21"
-      - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9
+      - uses: hendrikmuhs/ccache-action@d62db5f07c26379fc4b4e0916f098a92573c3b03
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-macos-v2
