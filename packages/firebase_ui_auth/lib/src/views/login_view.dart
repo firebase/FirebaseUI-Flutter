@@ -16,6 +16,16 @@ import '../widgets/internal/title.dart';
 typedef AuthViewContentBuilder =
     Widget Function(BuildContext context, AuthAction action);
 
+/// A builder that allows full customization of the layout and ordering of
+/// authentication provider widgets.
+///
+/// The [providers] parameter contains [AuthProvider] configuration objects,
+/// not widgets. You must build the appropriate widget for each provider
+/// manually (e.g., [EmailForm] for [EmailAuthProvider], [OAuthProviderButton]
+/// for OAuth providers).
+///
+/// The [action] parameter reflects the current [AuthAction] (sign in or
+/// sign up) so the builder can adapt its output accordingly.
 typedef ProvidersBuilder = List<Widget> Function(
   BuildContext context,
   List<AuthProvider> providers,

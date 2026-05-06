@@ -119,14 +119,14 @@ class FirebaseAuthProvider extends InheritedWidget {
   }
 
   /// Looks up an instance of [fba.FirebaseAuth] in the widget tree.
-  /// Throws an [Exception] if no [FirebaseAuthProvider] was found.
+  /// Throws a [FlutterError] if no [FirebaseAuthProvider] was found.
   static fba.FirebaseAuth of(BuildContext context) {
     final auth = maybeOf(context);
 
     if (auth == null) {
-      throw Exception(
-        'No FirebaseAuthProvider found. '
-        'Make sure to wrap your code with FirebaseAuthProvider',
+      throw FlutterError(
+        'No FirebaseAuthProvider found in the widget tree. '
+        'Make sure to wrap your widget tree with a FirebaseAuthProvider.',
       );
     }
 

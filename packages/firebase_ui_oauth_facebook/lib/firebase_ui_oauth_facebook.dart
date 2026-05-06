@@ -7,7 +7,6 @@ export 'src/theme.dart' show FacebookProviderButtonStyle;
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import 'src/provider.dart';
@@ -106,27 +105,20 @@ class _FacebookSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthFlowBuilder<OAuthController>(
+    return OAuthProviderButtonBase(
       provider: provider,
+      label: label,
+      onTap: onTap,
+      loadingIndicator: loadingIndicator,
+      isLoading: isLoading,
       action: action,
       auth: auth,
-      builder: (context, state, ctrl, child) {
-        return OAuthProviderButtonBase(
-          provider: provider,
-          label: label,
-          onTap: () => ctrl.signIn(Theme.of(context).platform),
-          loadingIndicator: loadingIndicator,
-          isLoading: state is SigningIn || state is CredentialReceived,
-          action: action,
-          auth: auth ?? fba.FirebaseAuth.instance,
-          onDifferentProvidersFound: onDifferentProvidersFound,
-          onSignedIn: onSignedIn,
-          overrideDefaultTapAction: true,
-          size: size,
-          onError: onError,
-          onCancelled: onCanceled,
-        );
-      },
+      onDifferentProvidersFound: onDifferentProvidersFound,
+      onSignedIn: onSignedIn,
+      overrideDefaultTapAction: overrideDefaultTapAction,
+      size: size,
+      onError: onError,
+      onCancelled: onCanceled,
     );
   }
 }

@@ -7,7 +7,6 @@ export 'src/theme.dart' show GoogleProviderButtonStyle;
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import 'src/provider.dart';
@@ -107,11 +106,25 @@ class _GoogleSignInButton extends StatefulWidget {
 }
 
 class _GoogleSignInButtonState extends State<_GoogleSignInButton> {
-  late final GoogleProvider _provider;
+  late GoogleProvider _provider;
 
   @override
   void initState() {
     super.initState();
+    _initProvider();
+  }
+
+  @override
+  void didUpdateWidget(_GoogleSignInButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.clientId != widget.clientId ||
+        oldWidget.redirectUri != widget.redirectUri ||
+        oldWidget.scopes != widget.scopes) {
+      _initProvider();
+    }
+  }
+
+  void _initProvider() {
     _provider = _mockProvider ??
         GoogleProvider(
           clientId: widget.clientId,
@@ -122,27 +135,20 @@ class _GoogleSignInButtonState extends State<_GoogleSignInButton> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthFlowBuilder<OAuthController>(
+    return OAuthProviderButtonBase(
       provider: _provider,
+      label: widget.label,
+      onTap: widget.onTap,
+      loadingIndicator: widget.loadingIndicator,
+      isLoading: widget.isLoading,
       action: widget.action,
       auth: widget.auth,
-      builder: (context, state, ctrl, child) {
-        return OAuthProviderButtonBase(
-          provider: _provider,
-          label: widget.label,
-          onTap: () => ctrl.signIn(Theme.of(context).platform),
-          loadingIndicator: widget.loadingIndicator,
-          isLoading: state is SigningIn || state is CredentialReceived,
-          action: widget.action,
-          auth: widget.auth ?? fba.FirebaseAuth.instance,
-          onDifferentProvidersFound: widget.onDifferentProvidersFound,
-          onSignedIn: widget.onSignedIn,
-          overrideDefaultTapAction: true,
-          size: widget.size,
-          onError: widget.onError,
-          onCancelled: widget.onCanceled,
-        );
-      },
+      onDifferentProvidersFound: widget.onDifferentProvidersFound,
+      onSignedIn: widget.onSignedIn,
+      overrideDefaultTapAction: widget.overrideDefaultTapAction,
+      size: widget.size,
+      onError: widget.onError,
+      onCancelled: widget.onCanceled,
     );
   }
 }
