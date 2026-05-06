@@ -6,7 +6,7 @@ export 'src/provider.dart' show AppleProvider;
 export 'src/theme.dart' show AppleProviderButtonStyle;
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import 'src/provider.dart';
@@ -106,7 +106,7 @@ class _AppleSignInButton extends StatelessWidget {
       loadingIndicator: loadingIndicator,
       isLoading: isLoading,
       action: action,
-      auth: auth ?? fba.FirebaseAuth.instance,
+      auth: auth,
       onDifferentProvidersFound: onDifferentProvidersFound,
       onSignedIn: onSignedIn,
       overrideDefaultTapAction: overrideDefaultTapAction,

@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
 /// {@template ui.auth.widgets.user_avatar}
@@ -45,7 +46,10 @@ class UserAvatar extends StatefulWidget {
 }
 
 class _UserAvatarState extends State<UserAvatar> {
-  fba.FirebaseAuth get auth => widget.auth ?? fba.FirebaseAuth.instance;
+  fba.FirebaseAuth get auth =>
+      widget.auth ??
+      FirebaseAuthProvider.maybeOf(context) ??
+      fba.FirebaseAuth.instance;
   ShapeBorder get shape => widget.shape ?? const CircleBorder();
   Color get placeholderColor => widget.placeholderColor ?? Colors.grey;
   double get size => widget.size ?? 120;

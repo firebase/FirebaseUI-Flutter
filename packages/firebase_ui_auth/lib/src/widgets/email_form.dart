@@ -202,6 +202,11 @@ class _SignInFormContent extends StatefulWidget {
 }
 
 class _SignInFormContentState extends State<_SignInFormContent> {
+  fba.FirebaseAuth get auth =>
+      widget.auth ??
+      FirebaseAuthProvider.maybeOf(context) ??
+      fba.FirebaseAuth.instance;
+
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
   final confirmPasswordCtrl = TextEditingController();
@@ -283,7 +288,7 @@ class _SignInFormContentState extends State<_SignInFormContent> {
                 showForgotPasswordScreen(
                   context: context,
                   email: email,
-                  auth: widget.auth,
+                  auth: auth,
                 );
               }
             },
