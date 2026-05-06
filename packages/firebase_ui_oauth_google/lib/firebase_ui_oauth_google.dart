@@ -60,7 +60,7 @@ void setMockGoogleProvider(GoogleProvider provider) {
   _mockProvider = provider;
 }
 
-class _GoogleSignInButton extends StatelessWidget {
+class _GoogleSignInButton extends StatefulWidget {
   final String label;
   final Widget loadingIndicator;
   final void Function()? onTap;
@@ -102,37 +102,45 @@ class _GoogleSignInButton extends StatelessWidget {
        overrideDefaultTapAction = overrideDefaultTapAction ?? false,
        size = size ?? 19;
 
-  GoogleProvider get provider {
-    if (_mockProvider != null) return _mockProvider!;
+  @override
+  State<_GoogleSignInButton> createState() => _GoogleSignInButtonState();
+}
 
-    return GoogleProvider(
-      clientId: clientId,
-      redirectUri: redirectUri,
-      scopes: scopes ?? [],
-    );
+class _GoogleSignInButtonState extends State<_GoogleSignInButton> {
+  late final GoogleProvider _provider;
+
+  @override
+  void initState() {
+    super.initState();
+    _provider = _mockProvider ??
+        GoogleProvider(
+          clientId: widget.clientId,
+          redirectUri: widget.redirectUri,
+          scopes: widget.scopes ?? [],
+        );
   }
 
   @override
   Widget build(BuildContext context) {
     return AuthFlowBuilder<OAuthController>(
-      provider: provider,
-      action: action,
-      auth: auth,
+      provider: _provider,
+      action: widget.action,
+      auth: widget.auth,
       builder: (context, state, ctrl, child) {
         return OAuthProviderButtonBase(
-          provider: provider,
-          label: label,
+          provider: _provider,
+          label: widget.label,
           onTap: () => ctrl.signIn(Theme.of(context).platform),
-          loadingIndicator: loadingIndicator,
+          loadingIndicator: widget.loadingIndicator,
           isLoading: state is SigningIn || state is CredentialReceived,
-          action: action,
-          auth: auth ?? fba.FirebaseAuth.instance,
-          onDifferentProvidersFound: onDifferentProvidersFound,
-          onSignedIn: onSignedIn,
+          action: widget.action,
+          auth: widget.auth ?? fba.FirebaseAuth.instance,
+          onDifferentProvidersFound: widget.onDifferentProvidersFound,
+          onSignedIn: widget.onSignedIn,
           overrideDefaultTapAction: true,
-          size: size,
-          onError: onError,
-          onCancelled: onCanceled,
+          size: widget.size,
+          onError: widget.onError,
+          onCancelled: widget.onCanceled,
         );
       },
     );
