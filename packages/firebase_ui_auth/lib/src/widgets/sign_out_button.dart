@@ -32,10 +32,7 @@ class SignOutButton extends StatelessWidget {
 
     return UniversalButton(
       text: l.signOutButtonText,
-      onPressed: () => FirebaseUIAuth.signOut(
-        context: context,
-        auth: auth,
-      ),
+      onPressed: () => FirebaseUIAuth.signOut(context: context, auth: auth),
       cupertinoIcon: CupertinoIcons.arrow_right_circle,
       materialIcon: Icons.logout,
       variant: variant,

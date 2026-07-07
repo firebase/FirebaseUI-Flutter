@@ -61,8 +61,10 @@ abstract class AuthListener {
 /// An interface that all auth providers should implement.
 /// Contains shared authentication logic.
 /// {@endtemplate}
-abstract class AuthProvider<T extends AuthListener,
-    K extends fba.AuthCredential> {
+abstract class AuthProvider<
+  T extends AuthListener,
+  K extends fba.AuthCredential
+> {
   /// {@macro ui.auth.auth_controller.auth}
   late fba.FirebaseAuth auth;
 

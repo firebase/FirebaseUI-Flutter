@@ -126,6 +126,8 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       final user = auth.currentUser!;
       await auth.currentUser?.delete();
 
+      if (!mounted) return;
+
       FirebaseUIAction.ofType<AccountDeletedAction>(
         context,
       )?.callback(context, user);

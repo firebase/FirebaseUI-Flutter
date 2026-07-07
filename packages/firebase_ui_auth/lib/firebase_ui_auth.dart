@@ -142,7 +142,7 @@ class FirebaseUIAuth {
     await OAuthProviders.signOut(resolvedAuth);
     await resolvedAuth.signOut();
 
-    if (context != null) {
+    if (context != null && context.mounted) {
       final action = FirebaseUIAction.ofType<SignedOutAction>(context);
       action?.callback(context);
     }

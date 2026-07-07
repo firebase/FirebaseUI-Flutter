@@ -10,10 +10,7 @@ typedef StylesMap = Map<Type, FirebaseUIStyle>;
 
 StylesMap _buildStylesMap(Set<FirebaseUIStyle> styles) {
   return styles.fold({}, (acc, el) {
-    return {
-      ...acc,
-      el.runtimeType: el,
-    };
+    return {...acc, el.runtimeType: el};
   });
 }
 
@@ -68,8 +65,9 @@ class FirebaseUIThemeElement extends InheritedModelElement {
 
   @override
   void mount(Element? parent, Object? newSlot) {
-    _parent = parent?.getElementForInheritedWidgetOfExactType<FirebaseUITheme>()
-        as FirebaseUIThemeElement?;
+    _parent =
+        parent?.getElementForInheritedWidgetOfExactType<FirebaseUITheme>()
+            as FirebaseUIThemeElement?;
 
     if (_parent != null) {
       dependOnInheritedElement(_parent!);

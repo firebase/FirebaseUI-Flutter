@@ -93,10 +93,7 @@ class PhoneInputScreen extends StatelessWidget {
         context: context,
         builder: (_) => FirebaseUIActions.inherit(
           from: context,
-          child: SMSCodeInputScreen(
-            action: action,
-            flowKey: flowKey,
-          ),
+          child: SMSCodeInputScreen(action: action, flowKey: flowKey),
         ),
       ),
     );

@@ -73,12 +73,10 @@ void main() {
       expect(find.byType(ListView), findsNothing);
     });
 
-    testWidgets(
-      'By default, shows a progress indicator when loading',
-      (tester) async {
-        final collection = db.collection(
-          'flutter-tests/list-view-builder/works',
-        );
+    testWidgets('By default, shows a progress indicator when loading', (
+      tester,
+    ) async {
+      final collection = db.collection('flutter-tests/list-view-builder/works');
 
         await tester.pumpWidget(
           MaterialApp(
@@ -90,12 +88,12 @@ void main() {
               ),
             ),
           ),
-        );
+        ),
+      );
 
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-        expect(find.byType(ListView), findsNothing);
-      },
-    );
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(ListView), findsNothing);
+    });
 
     testWidgets('By default, ignore errors', (tester) async {
       final builderSpy = ListViewBuilderSpy();

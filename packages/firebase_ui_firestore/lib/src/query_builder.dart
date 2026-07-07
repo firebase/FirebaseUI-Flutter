@@ -12,11 +12,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// A function that builds a widget from a [FirestoreQueryBuilderSnapshot]
 ///
 /// See also [FirebaseDatabaseQueryBuilder].
-typedef FirestoreQueryBuilderSnapshotBuilder<T> = Widget Function(
-  BuildContext context,
-  FirestoreQueryBuilderSnapshot<T> snapshot,
-  Widget? child,
-);
+typedef FirestoreQueryBuilderSnapshotBuilder<T> =
+    Widget Function(
+      BuildContext context,
+      FirestoreQueryBuilderSnapshot<T> snapshot,
+      Widget? child,
+    );
 
 /// {@template firebase_ui.firestore_query_builder}
 /// Listens to a query and paginates the result in a way that is compatible with
@@ -167,8 +168,8 @@ class _FirestoreQueryBuilderState<Document>
     // "build" – most commonly ListView's itemBuilder
     Future.microtask(() => setState(() {}));
 
-    final expectedDocsCount = (_pageCount + 1) * widget.pageSize
-
+    final expectedDocsCount =
+        (_pageCount + 1) * widget.pageSize
         /// The "+1" is used to voluntarily fetch one extra item,
         /// used to determine whether there is a next page or not.
         /// This extra item will not be rendered.
@@ -180,43 +181,43 @@ class _FirestoreQueryBuilderState<Document>
     _querySubscription = query
         .snapshots(includeMetadataChanges: widget.includeMetadataChanges)
         .listen(
-      (event) {
-        setState(() {
-          if (nextPage) {
-            _snapshot = _snapshot.copyWith(isFetchingMore: false);
-          } else {
-            _snapshot = _snapshot.copyWith(isFetching: false);
-          }
+          (event) {
+            setState(() {
+              if (nextPage) {
+                _snapshot = _snapshot.copyWith(isFetchingMore: false);
+              } else {
+                _snapshot = _snapshot.copyWith(isFetching: false);
+              }
 
-          _snapshot = _snapshot.copyWith(
-            hasData: true,
-            docs: event.size < expectedDocsCount
-                ? event.docs
-                : event.docs.take(expectedDocsCount - 1).toList(),
-            error: null,
-            hasMore: event.size == expectedDocsCount,
-            stackTrace: null,
-            hasError: false,
-          );
-        });
-      },
-      onError: (Object error, StackTrace stackTrace) {
-        setState(() {
-          if (nextPage) {
-            _snapshot = _snapshot.copyWith(isFetchingMore: false);
-          } else {
-            _snapshot = _snapshot.copyWith(isFetching: false);
-          }
+              _snapshot = _snapshot.copyWith(
+                hasData: true,
+                docs: event.size < expectedDocsCount
+                    ? event.docs
+                    : event.docs.take(expectedDocsCount - 1).toList(),
+                error: null,
+                hasMore: event.size == expectedDocsCount,
+                stackTrace: null,
+                hasError: false,
+              );
+            });
+          },
+          onError: (Object error, StackTrace stackTrace) {
+            setState(() {
+              if (nextPage) {
+                _snapshot = _snapshot.copyWith(isFetchingMore: false);
+              } else {
+                _snapshot = _snapshot.copyWith(isFetching: false);
+              }
 
-          _snapshot = _snapshot.copyWith(
-            error: error,
-            stackTrace: stackTrace,
-            hasError: true,
-            hasMore: false,
-          );
-        });
-      },
-    );
+              _snapshot = _snapshot.copyWith(
+                error: error,
+                stackTrace: stackTrace,
+                hasError: true,
+                hasMore: false,
+              );
+            });
+          },
+        );
   }
 
   @override
@@ -368,16 +369,12 @@ typedef FirestoreItemBuilder<Document> = Widget Function(
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingIndicatorBuilder`.
-typedef FirestoreFetchingIndicatorBuilder = Widget Function(
-  BuildContext context,
-);
+typedef FirestoreFetchingIndicatorBuilder =
+    Widget Function(BuildContext context);
 
 /// A type representing the function passed to [FirestoreListView] for its `errorBuilder`.
-typedef FirestoreErrorBuilder = Widget Function(
-  BuildContext context,
-  Object error,
-  StackTrace stackTrace,
-);
+typedef FirestoreErrorBuilder =
+    Widget Function(BuildContext context, Object error, StackTrace stackTrace);
 
 /// A type representing the function passed to [FirestoreListView] for its `emptyBuilder`.
 typedef FirestoreEmptyBuilder = Widget Function(BuildContext context);
@@ -536,6 +533,7 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               addAutomaticKeepAlives: addAutomaticKeepAlives,
               addRepaintBoundaries: addRepaintBoundaries,
               addSemanticIndexes: addSemanticIndexes,
+              // ignore: deprecated_member_use
               cacheExtent: cacheExtent,
               semanticChildCount: semanticChildCount,
               dragStartBehavior: dragStartBehavior,
@@ -643,10 +641,12 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
               physics: physics,
               shrinkWrap: shrinkWrap,
               padding: padding,
+              // ignore: deprecated_member_use
               findChildIndexCallback: findChildIndexCallback,
               addAutomaticKeepAlives: addAutomaticKeepAlives,
               addRepaintBoundaries: addRepaintBoundaries,
               addSemanticIndexes: addSemanticIndexes,
+              // ignore: deprecated_member_use
               cacheExtent: cacheExtent,
               dragStartBehavior: dragStartBehavior,
               keyboardDismissBehavior: keyboardDismissBehavior,
@@ -666,7 +666,8 @@ class AggregateQueryBuilder extends StatefulWidget {
   final Widget Function(
     BuildContext context,
     AsyncSnapshot<AggregateQuerySnapshot> snapshot,
-  ) builder;
+  )
+  builder;
 
   const AggregateQueryBuilder({
     super.key,

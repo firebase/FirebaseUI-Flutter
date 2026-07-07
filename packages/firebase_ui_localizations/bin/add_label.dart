@@ -63,9 +63,6 @@ Future<Map<String, dynamic>> addLabel(
     ...content,
     "@@last_modified": DateTime.now().toIso8601String(),
     name: englishTranslation,
-    "@$name": {
-      "description": description,
-      "placeholders": {},
-    },
+    "@$name": {"description": description, "placeholders": {}},
   };
 }

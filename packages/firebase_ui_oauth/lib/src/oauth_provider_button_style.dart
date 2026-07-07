@@ -2,8 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:flutter/widgets.dart';
-
+import 'package:flutter/material.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -27,11 +26,11 @@ abstract class ThemedOAuthProviderButtonStyle {
   /// The widget to display for custom OAuth providers in pages such as the
   /// Profile Screen.
   ThemedValue<Widget> get iconWidget => ThemedValue(
-        // Display the light icon on a dark background.
-        SvgPicture.string(iconSrc.light),
-        // Display the dark icon on a light background.
-        SvgPicture.string(iconSrc.dark),
-      );
+    // Display the light icon on a dark background.
+    SvgPicture.string(iconSrc.light),
+    // Display the dark icon on a light background.
+    SvgPicture.string(iconSrc.dark),
+  );
 
   /// {@macro ui.oauth.themed_oauth_provider_button_style}
   const ThemedOAuthProviderButtonStyle();

@@ -126,9 +126,7 @@ class SignInScreen extends MultiProviderScreen {
 
   @override
   Widget build(BuildContext context) {
-    final actions = [
-      ...this.actions,
-    ];
+    final actions = [...this.actions];
 
     return FirebaseUIActions(
       actions: actions,

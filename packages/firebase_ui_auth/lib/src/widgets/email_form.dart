@@ -70,9 +70,9 @@ class EmailFormStyle extends FirebaseUIStyle {
   @override
   Widget applyToMaterialTheme(BuildContext context, Widget child) {
     return Theme(
-      data: Theme.of(context).copyWith(
-        inputDecorationTheme: inputDecorationTheme,
-      ),
+      data: Theme.of(
+        context,
+      ).copyWith(inputDecorationTheme: inputDecorationTheme),
       child: child,
     );
   }
@@ -237,10 +237,7 @@ class _SignInFormContentState extends State<_SignInFormContent> {
       if (widget.onSubmit != null) {
         widget.onSubmit!(email, passwordCtrl.text);
       } else {
-        ctrl.setEmailAndPassword(
-          email,
-          password ?? passwordCtrl.text,
-        );
+        ctrl.setEmailAndPassword(email, password ?? passwordCtrl.text);
       }
     }
   }
@@ -275,8 +272,9 @@ class _SignInFormContentState extends State<_SignInFormContent> {
           alignment: Alignment.centerRight,
           child: ForgotPasswordButton(
             onPressed: () {
-              final navAction =
-                  FirebaseUIAction.ofType<ForgotPasswordAction>(context);
+              final navAction = FirebaseUIAction.ofType<ForgotPasswordAction>(
+                context,
+              );
               final email = widget.email ?? emailCtrl.text;
 
               if (navAction != null) {
@@ -305,7 +303,7 @@ class _SignInFormContentState extends State<_SignInFormContent> {
             ConfirmPasswordValidator(
               passwordCtrl,
               l.confirmPasswordDoesNotMatchErrorText,
-            )
+            ),
           ]),
           placeholder: l.confirmPasswordInputLabel,
           showVisibilityToggle: widget.showPasswordVisibilityToggle,
@@ -316,7 +314,8 @@ class _SignInFormContentState extends State<_SignInFormContent> {
       Builder(
         builder: (context) {
           final state = AuthState.of(context);
-          final style = widget.style ??
+          final style =
+              widget.style ??
               FirebaseUIStyle.ofType<EmailFormStyle>(
                 context,
                 const EmailFormStyle(),

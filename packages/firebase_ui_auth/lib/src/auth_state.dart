@@ -199,11 +199,8 @@ class AuthStateTransition<T extends AuthController> extends Notification {
   AuthStateTransition(this.from, this.to, this.controller);
 }
 
-typedef AuthStateListenerCallback<T extends AuthController> = bool? Function(
-  AuthState oldState,
-  AuthState state,
-  T controller,
-);
+typedef AuthStateListenerCallback<T extends AuthController> =
+    bool? Function(AuthState oldState, AuthState state, T controller);
 
 /// {@template ui.auth.auth_state.auth_state_listener}
 /// A [Widget] that could be used to listen auth state transitions.

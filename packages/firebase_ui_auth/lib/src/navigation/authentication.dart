@@ -32,7 +32,7 @@ Future<bool> showReauthenticateDialog({
     context: context,
     barrierDismissible: true,
     barrierLabel: l.cancelButtonLabel,
-    pageBuilder: (_, __, ___) => FirebaseUIActions.inherit(
+    pageBuilder: (_, _, _) => FirebaseUIActions.inherit(
       from: context,
       child: ReauthenticateDialog(
         providers: providers,

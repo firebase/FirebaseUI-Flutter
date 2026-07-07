@@ -19,9 +19,9 @@ abstract class LoadingStateVariant {
 
     /// {@macro ui.storage.image.loadingStateVariant.animationDuration}
     Duration? animationDuration,
-  })  : animationDuration =
-            animationDuration ?? const Duration(milliseconds: 1000),
-        curve = curve ?? Curves.easeOutExpo;
+  }) : animationDuration =
+           animationDuration ?? const Duration(milliseconds: 1000),
+       curve = curve ?? Curves.easeOutExpo;
 
   /// A solid color placeholder.
   factory LoadingStateVariant.solidColor({
@@ -109,9 +109,9 @@ class _LoadingIndicatorLoadingStateVariant extends LoadingStateVariant {
     this.strokeWidth = 2,
     this.color,
   }) : super(
-          curve: Curves.easeOutExpo,
-          animationDuration: const Duration(milliseconds: 1000),
-        );
+         curve: Curves.easeOutExpo,
+         animationDuration: const Duration(milliseconds: 1000),
+       );
 }
 
 class _ShimmerLoadingStateVariant extends LoadingStateVariant {
@@ -138,7 +138,8 @@ class StorageImage extends StatefulWidget {
     BuildContext context,
     Object error, [
     StackTrace? stackTrace,
-  ])? errorBuilder;
+  ])?
+  errorBuilder;
 
   /// See [NetworkImage.scale]
   final double scale;
@@ -249,11 +250,9 @@ class _StorageImageState extends State<StorageImage>
         )
       : null;
 
-  late final Animation<double> opacity = widget.opacity ??
-      CurvedAnimation(
-        parent: ctrl!,
-        curve: loadingStateVariant.curve,
-      );
+  late final Animation<double> opacity =
+      widget.opacity ??
+      CurvedAnimation(parent: ctrl!, curve: loadingStateVariant.curve);
 
   void maybeAnimate() {
     if (ctrl == null) return;
@@ -319,9 +318,8 @@ class _StorageImageState extends State<StorageImage>
     }
 
     if (loadingStateVariant is _ShimmerLoadingStateVariant) {
-      final _ShimmerLoadingStateVariant(
-        :initialProgress,
-      ) = loadingStateVariant as _ShimmerLoadingStateVariant;
+      final _ShimmerLoadingStateVariant(:initialProgress) =
+          loadingStateVariant as _ShimmerLoadingStateVariant;
 
       final placeholder = _ShimmerLoadingStateVariantPlaceholder(
         key: placeholderKey,
@@ -363,8 +361,10 @@ class _StorageImageState extends State<StorageImage>
       future: downloadUrlFuture,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          final customError =
-              widget.errorBuilder?.call(context, snapshot.error!);
+          final customError = widget.errorBuilder?.call(
+            context,
+            snapshot.error!,
+          );
           return customError ?? const SizedBox.shrink();
         }
 
@@ -449,10 +449,7 @@ class _SolidColorLoadingStateVariantPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: resolveLoadingColor(context),
-      child: child,
-    );
+    return Container(color: resolveLoadingColor(context), child: child);
   }
 }
 
@@ -487,9 +484,9 @@ class _BlurHashLoadingStateVariantPlaceholderState
   FutureOr<String?> loadHash() async {
     if (widget.value != null) return widget.value;
 
-    return widget.ref
-        .getMetadata()
-        .then((value) => value.customMetadata?['blurHash']);
+    return widget.ref.getMetadata().then(
+      (value) => value.customMetadata?['blurHash'],
+    );
   }
 
   Widget buildContent(String hash) {
@@ -580,16 +577,10 @@ class __ShimmerLoadingStateVariantPlaceholderState
   late final animation = Tween(
     begin: 0.0,
     end: 1.0,
-  ).animate(CurvedAnimation(
-    parent: ctrl,
-    curve: widget.curve,
-  ));
+  ).animate(CurvedAnimation(parent: ctrl, curve: widget.curve));
 
   Alignment getAlignment(double animationProgress) {
-    return Alignment(
-      -2 + animationProgress * 4,
-      -2 + animationProgress * 4,
-    );
+    return Alignment(-2 + animationProgress * 4, -2 + animationProgress * 4);
   }
 
   @override
@@ -622,11 +613,7 @@ class __ShimmerLoadingStateVariantPlaceholderState
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                darker,
-                lighter,
-                darker,
-              ],
+              colors: [darker, lighter, darker],
               stops: const [0.0, 0.5, 1.0],
               begin: getAlignment(animation.value),
               end: alignment + const Alignment(1, 1),

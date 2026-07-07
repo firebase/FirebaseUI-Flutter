@@ -3,7 +3,7 @@ name: Mark stale issues and pull requests
 on:
   workflow_dispatch:
   schedule:
-    - cron: 35 * * * *
+    - cron: '0 0 * * 0'
 permissions:
   contents: read
 jobs:
@@ -25,14 +25,15 @@ jobs:
 
             Thank you for your contributions.
           stale-pr-message: |
-            Hello 👋, this PR has been opened for more than 2 months with no activity on it.
+            Hello 👋, this PR has been without activity for more than 28 days.
 
             If you think this is a mistake please comment and ping a maintainer to get this merged ASAP! Thanks for contributing!
 
-            You have 15 days until this gets closed automatically
+            You have 15 days until this gets closed automatically.
           exempt-issue-labels: 'Keep Open'
           exempt-pr-labels: 'Keep Open'
           close-issue-reason: not_planned
           days-before-stale: 28
           days-before-close: 15
           stale-issue-label: 'Stale'
+          stale-pr-label: 'Stale'

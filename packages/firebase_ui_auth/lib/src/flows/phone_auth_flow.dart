@@ -52,11 +52,7 @@ class SMSCodeSent extends AuthState {
   fba.ConfirmationResult? confirmationResult;
 
   /// {@macro ui.auth.flows.phone_auth_flow}
-  SMSCodeSent({
-    this.verificationId,
-    this.resendToken,
-    this.confirmationResult,
-  });
+  SMSCodeSent({this.verificationId, this.resendToken, this.confirmationResult});
 }
 
 /// {@template ui.auth.flows.autoresolution_failed_exception}
@@ -112,9 +108,7 @@ class PhoneAuthFlow extends AuthFlow<PhoneAuthProvider>
 
     /// {@macro ui.auth.auth_action}
     super.action,
-  }) : super(
-          initialState: AwaitingPhoneNumber(),
-        );
+  }) : super(initialState: AwaitingPhoneNumber());
 
   @override
   void acceptPhoneNumber(
@@ -221,7 +215,8 @@ class SMSCodeRequestedAction extends FirebaseUIAction {
     AuthAction? action,
     Object flowKey,
     String phoneNumber,
-  ) callback;
+  )
+  callback;
 
   /// {@macro ui.auth.flows.phone_auth_flow.sms_code_requested_action}
   SMSCodeRequestedAction(this.callback);

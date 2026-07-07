@@ -37,10 +37,7 @@ class _NumberSlotDecoration extends Decoration {
   final InputBorder inputBorder;
   final Color color;
 
-  const _NumberSlotDecoration({
-    required this.inputBorder,
-    required this.color,
-  });
+  const _NumberSlotDecoration({required this.inputBorder, required this.color});
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
@@ -113,15 +110,9 @@ class _NumberSlotState extends State<_NumberSlot>
         child: AnimatedBuilder(
           animation: controller,
           builder: (context, child) {
-            return Transform.scale(
-              scale: controller.value,
-              child: child,
-            );
+            return Transform.scale(scale: controller.value, child: child);
           },
-          child: Text(
-            widget.number,
-            style: const TextStyle(fontSize: 24),
-          ),
+          child: Text(widget.number, style: const TextStyle(fontSize: 24)),
         ),
       ),
     );
@@ -251,8 +242,9 @@ class SMSCodeInputState extends State<SMSCodeInput> {
                 autofocus: true,
                 focusNode: focusNode,
                 controller: controller,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 onSubmitted: (v) {
                   if (v == null) return;

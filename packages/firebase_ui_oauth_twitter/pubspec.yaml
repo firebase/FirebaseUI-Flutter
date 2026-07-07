@@ -3,9 +3,10 @@ description: Firebase UI widgets for authentication & OAuth.
 version: 2.0.1
 homepage: https://github.com/firebase/FirebaseUI-Flutter/tree/master/packages/firebase_ui_oauth_twitter
 
+resolution: workspace
+
 environment:
-  sdk: ">=2.18.0 <4.0.0"
-  flutter: ">=3.3.0"
+  sdk: ^3.9.0
 
 dependencies:
   flutter:
@@ -17,7 +18,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

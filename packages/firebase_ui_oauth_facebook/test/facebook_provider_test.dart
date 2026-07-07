@@ -338,10 +338,7 @@ class MockAccessToken implements AccessToken {
   @override
   final AccessTokenType type;
 
-  MockAccessToken({
-    required this.tokenString,
-    required this.type,
-  });
+  MockAccessToken({required this.tokenString, required this.type});
 
   String get applicationId => 'test-app-id';
 
@@ -381,11 +378,7 @@ class MockLoginResult implements LoginResult {
   @override
   final String? message;
 
-  MockLoginResult({
-    required this.status,
-    this.accessToken,
-    this.message,
-  });
+  MockLoginResult({required this.status, this.accessToken, this.message});
 
   Map<String, dynamic> toJson() => {};
 }

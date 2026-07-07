@@ -36,10 +36,7 @@ class EditableUserDisplayName extends StatefulWidget {
   final fba.FirebaseAuth? auth;
 
   /// {@macro ui.auth.widgets.editable_user_display_name}
-  const EditableUserDisplayName({
-    super.key,
-    this.auth,
-  });
+  const EditableUserDisplayName({super.key, this.auth});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -74,11 +71,11 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
       await auth.currentUser?.updateDisplayName(ctrl.text);
       await auth.currentUser?.reload();
 
-      FirebaseUIAction.ofType<DisplayNameChangedAction>(context)?.callback(
+      if (!mounted) return;
+
+      FirebaseUIAction.ofType<DisplayNameChangedAction>(
         context,
-        previousDisplayName,
-        ctrl.text,
-      );
+      )?.callback(context, previousDisplayName, ctrl.text);
     } finally {
       setState(() {
         _editing = false;
@@ -163,10 +160,7 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
               if (_isLoading)
                 const LoadingIndicator(size: 24, borderWidth: 1)
               else
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: iconButton,
-                ),
+                Align(alignment: Alignment.topLeft, child: iconButton),
             ],
           ),
         ),

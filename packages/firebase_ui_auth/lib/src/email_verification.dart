@@ -47,8 +47,8 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   StreamSubscription<Uri>? _linkSubscription;
 
   EmailVerificationController(this.auth, {AppLinks? appLinks})
-      : _appLinks = appLinks ?? AppLinks(),
-        super(EmailVerificationState.unresolved) {
+    : _appLinks = appLinks ?? AppLinks(),
+      super(EmailVerificationState.unresolved) {
     final user = auth.currentUser;
 
     if (user != null) {

@@ -18,7 +18,9 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ^3.9.0
+
+resolution: workspace
 
 dependencies:
   app_tracking_transparency: ^2.0.6
@@ -46,7 +48,7 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^6.0.0
   google_sign_in: ^6.2.1
   http: ^1.1.2
   integration_test:

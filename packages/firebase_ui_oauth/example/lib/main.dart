@@ -23,29 +23,31 @@ class OAuthProviderButtonExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Settings(builder: (context, library, brightness, buttonVariant) {
-      if (library == DesignLibrary.material) {
-        return MaterialApp(
-          theme: ThemeData(brightness: brightness),
-          home: Scaffold(
-            body: Content(
-              designLibrary: library,
-              buttonVariant: buttonVariant,
+    return Settings(
+      builder: (context, library, brightness, buttonVariant) {
+        if (library == DesignLibrary.material) {
+          return MaterialApp(
+            theme: ThemeData(brightness: brightness),
+            home: Scaffold(
+              body: Content(
+                designLibrary: library,
+                buttonVariant: buttonVariant,
+              ),
             ),
-          ),
-        );
-      } else {
-        return CupertinoApp(
-          theme: CupertinoThemeData(brightness: brightness),
-          home: CupertinoPageScaffold(
-            child: Content(
-              designLibrary: library,
-              buttonVariant: buttonVariant,
+          );
+        } else {
+          return CupertinoApp(
+            theme: CupertinoThemeData(brightness: brightness),
+            home: CupertinoPageScaffold(
+              child: Content(
+                designLibrary: library,
+                buttonVariant: buttonVariant,
+              ),
             ),
-          ),
-        );
-      }
-    });
+          );
+        }
+      },
+    );
   }
 }
 
@@ -103,19 +105,11 @@ class _ContentState extends State<Content> {
               'Sign in with Facebook',
             ),
             _button(
-              GoogleProvider(
-                clientId: '',
-                redirectUri: '',
-                scopes: [],
-              ),
+              GoogleProvider(clientId: '', redirectUri: '', scopes: []),
               'Sign in with Google',
             ),
             _button(
-              TwitterProvider(
-                apiKey: '',
-                apiSecretKey: '',
-                redirectUri: '',
-              ),
+              TwitterProvider(apiKey: '', apiSecretKey: '', redirectUri: ''),
               'Sign in with Twitter',
             ),
           ],
