@@ -463,86 +463,86 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator.adaptive());
-            }
+         builder: (context, snapshot, _) {
+           if (snapshot.isFetching) {
+             return loadingBuilder?.call(context) ??
+                 const Center(child: CircularProgressIndicator.adaptive());
+           }
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
+           if (snapshot.hasError && errorBuilder != null) {
+             return errorBuilder(
+               context,
+               snapshot.error!,
+               snapshot.stackTrace!,
+             );
+           }
 
-            if (snapshot.docs.isEmpty && emptyBuilder != null) {
-              return emptyBuilder(context);
-            }
+           if (snapshot.docs.isEmpty && emptyBuilder != null) {
+             return emptyBuilder(context);
+           }
 
-            final itemCount = snapshot.docs.length;
+           final itemCount = snapshot.docs.length;
 
-            return ListView.builder(
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == itemCount;
-                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
-                  snapshot.fetchMore();
-                }
+           return ListView.builder(
+             itemCount: itemCount,
+             itemBuilder: (context, index) {
+               final isLastItem = index + 1 == itemCount;
+               if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+                 snapshot.fetchMore();
+               }
 
-                final doc = snapshot.docs[index];
-                return showFetchingIndicator
-                    ? OnMountListener(
-                        onMount: () {
-                          if (isLastItem && snapshot.hasMore) {
-                            snapshot.fetchMore();
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            itemBuilder(context, doc, index),
-                            if (isLastItem && snapshot.hasMore)
-                              fetchingIndicatorBuilder?.call(context) ??
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                    ),
-                                    child: Center(
-                                      child: LoadingIndicator(
-                                        size: 30.0,
-                                        borderWidth: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : itemBuilder(context, doc, index);
-              },
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              itemExtent: itemExtent,
-              prototypeItem: prototypeItem,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              // ignore: deprecated_member_use
-              cacheExtent: cacheExtent,
-              semanticChildCount: semanticChildCount,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
-        );
+               final doc = snapshot.docs[index];
+               return showFetchingIndicator
+                   ? OnMountListener(
+                       onMount: () {
+                         if (isLastItem && snapshot.hasMore) {
+                           snapshot.fetchMore();
+                         }
+                       },
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           itemBuilder(context, doc, index),
+                           if (isLastItem && snapshot.hasMore)
+                             fetchingIndicatorBuilder?.call(context) ??
+                                 const Padding(
+                                   padding: EdgeInsets.symmetric(
+                                     vertical: 16.0,
+                                   ),
+                                   child: Center(
+                                     child: LoadingIndicator(
+                                       size: 30.0,
+                                       borderWidth: 2.0,
+                                     ),
+                                   ),
+                                 ),
+                         ],
+                       ),
+                     )
+                   : itemBuilder(context, doc, index);
+             },
+             scrollDirection: scrollDirection,
+             reverse: reverse,
+             controller: controller,
+             primary: primary,
+             physics: physics,
+             shrinkWrap: shrinkWrap,
+             padding: padding,
+             itemExtent: itemExtent,
+             prototypeItem: prototypeItem,
+             addAutomaticKeepAlives: addAutomaticKeepAlives,
+             addRepaintBoundaries: addRepaintBoundaries,
+             addSemanticIndexes: addSemanticIndexes,
+             // ignore: deprecated_member_use
+             cacheExtent: cacheExtent,
+             semanticChildCount: semanticChildCount,
+             dragStartBehavior: dragStartBehavior,
+             keyboardDismissBehavior: keyboardDismissBehavior,
+             restorationId: restorationId,
+             clipBehavior: clipBehavior,
+           );
+         },
+       );
 
   /// Shows a separator between list items just as in [ListView.separated]
   FirestoreListView.separated({
@@ -575,86 +575,86 @@ class FirestoreListView<Document> extends FirestoreQueryBuilder<Document> {
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
   }) : super(
-          builder: (context, snapshot, _) {
-            if (snapshot.isFetching) {
-              return loadingBuilder?.call(context) ??
-                  const Center(child: CircularProgressIndicator.adaptive());
-            }
+         builder: (context, snapshot, _) {
+           if (snapshot.isFetching) {
+             return loadingBuilder?.call(context) ??
+                 const Center(child: CircularProgressIndicator.adaptive());
+           }
 
-            if (snapshot.hasError && errorBuilder != null) {
-              return errorBuilder(
-                context,
-                snapshot.error!,
-                snapshot.stackTrace!,
-              );
-            }
+           if (snapshot.hasError && errorBuilder != null) {
+             return errorBuilder(
+               context,
+               snapshot.error!,
+               snapshot.stackTrace!,
+             );
+           }
 
-            if (snapshot.docs.isEmpty && emptyBuilder != null) {
-              return emptyBuilder(context);
-            }
+           if (snapshot.docs.isEmpty && emptyBuilder != null) {
+             return emptyBuilder(context);
+           }
 
-            final itemCount = snapshot.docs.length;
+           final itemCount = snapshot.docs.length;
 
-            return ListView.separated(
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                final isLastItem = index + 1 == itemCount;
-                if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
-                  snapshot.fetchMore();
-                }
+           return ListView.separated(
+             itemCount: itemCount,
+             itemBuilder: (context, index) {
+               final isLastItem = index + 1 == itemCount;
+               if (!showFetchingIndicator && isLastItem && snapshot.hasMore) {
+                 snapshot.fetchMore();
+               }
 
-                final doc = snapshot.docs[index];
-                return showFetchingIndicator
-                    ? OnMountListener(
-                        onMount: () {
-                          if (isLastItem && snapshot.hasMore) {
-                            snapshot.fetchMore();
-                          }
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            itemBuilder(context, doc, index),
-                            if (isLastItem && snapshot.hasMore)
-                              fetchingIndicatorBuilder?.call(context) ??
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                    ),
-                                    child: Center(
-                                      child: LoadingIndicator(
-                                        size: 30.0,
-                                        borderWidth: 2.0,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : itemBuilder(context, doc, index);
-              },
-              separatorBuilder: separatorBuilder,
-              scrollDirection: scrollDirection,
-              reverse: reverse,
-              controller: controller,
-              primary: primary,
-              physics: physics,
-              shrinkWrap: shrinkWrap,
-              padding: padding,
-              // ignore: deprecated_member_use
-              findChildIndexCallback: findChildIndexCallback,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
-              // ignore: deprecated_member_use
-              cacheExtent: cacheExtent,
-              dragStartBehavior: dragStartBehavior,
-              keyboardDismissBehavior: keyboardDismissBehavior,
-              restorationId: restorationId,
-              clipBehavior: clipBehavior,
-            );
-          },
-        );
+               final doc = snapshot.docs[index];
+               return showFetchingIndicator
+                   ? OnMountListener(
+                       onMount: () {
+                         if (isLastItem && snapshot.hasMore) {
+                           snapshot.fetchMore();
+                         }
+                       },
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           itemBuilder(context, doc, index),
+                           if (isLastItem && snapshot.hasMore)
+                             fetchingIndicatorBuilder?.call(context) ??
+                                 const Padding(
+                                   padding: EdgeInsets.symmetric(
+                                     vertical: 16.0,
+                                   ),
+                                   child: Center(
+                                     child: LoadingIndicator(
+                                       size: 30.0,
+                                       borderWidth: 2.0,
+                                     ),
+                                   ),
+                                 ),
+                         ],
+                       ),
+                     )
+                   : itemBuilder(context, doc, index);
+             },
+             separatorBuilder: separatorBuilder,
+             scrollDirection: scrollDirection,
+             reverse: reverse,
+             controller: controller,
+             primary: primary,
+             physics: physics,
+             shrinkWrap: shrinkWrap,
+             padding: padding,
+             // ignore: deprecated_member_use
+             findChildIndexCallback: findChildIndexCallback,
+             addAutomaticKeepAlives: addAutomaticKeepAlives,
+             addRepaintBoundaries: addRepaintBoundaries,
+             addSemanticIndexes: addSemanticIndexes,
+             // ignore: deprecated_member_use
+             cacheExtent: cacheExtent,
+             dragStartBehavior: dragStartBehavior,
+             keyboardDismissBehavior: keyboardDismissBehavior,
+             restorationId: restorationId,
+             clipBehavior: clipBehavior,
+           );
+         },
+       );
 }
 
 /// Listens to an aggregate query and passes the [AsyncSnapshot] to the builder.
