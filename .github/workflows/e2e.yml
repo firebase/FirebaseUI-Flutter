@@ -100,7 +100,8 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
-          persist-credentials: false
+          # Required for some `pod` commands
+          persist-credentials: true # zizmor: ignore[artipacked]
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         name: Install Node.js
         with:
@@ -198,7 +199,8 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
-          persist-credentials: false
+          # Required for some `pod` commands
+          persist-credentials: true # zizmor: ignore[artipacked]
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         name: Install Node.js
         with:
