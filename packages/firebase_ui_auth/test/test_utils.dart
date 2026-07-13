@@ -4,9 +4,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
+import 'dart:async';
 
 class TestMaterialApp extends StatelessWidget {
   final Widget child;
@@ -15,11 +16,7 @@ class TestMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: child,
-      ),
-    );
+    return MaterialApp(home: Scaffold(body: child));
   }
 }
 
@@ -43,37 +40,59 @@ class MockUser extends Mock implements fba.User {
     fba.AuthCredential? credential,
   ) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #linkWithCredential,
-        [credential],
-      ),
+      Invocation.method(#linkWithCredential, [credential]),
       returnValue: MockCredential(),
       returnValueForMissingStub: MockCredential(),
     );
   }
 }
 
-class MockLinksStream extends Mock implements Stream<PendingDynamicLinkData> {
+class MockUriStream extends Mock implements Stream<Uri> {
+  static final StreamController<Uri> _controller =
+      StreamController<Uri>.broadcast();
+
   @override
-  Future<PendingDynamicLinkData> get first async {
-    return super.noSuchMethod(
-      Invocation.getter(#first),
-      returnValue: PendingDynamicLinkData(
-        link: Uri.parse('https://test.com'),
-      ),
-      returnValueForMissingStub: PendingDynamicLinkData(
-        link: Uri.parse('https://test.com'),
-      ),
+  StreamSubscription<Uri> listen(
+    void Function(Uri)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) {
+    return _controller.stream.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError,
     );
+  }
+
+  static void addLink(Uri uri) {
+    _controller.add(uri);
+  }
+
+  static void addError(Object error) {
+    _controller.addError(error);
+  }
+
+  static void close() {
+    _controller.close();
   }
 }
 
-// ignore: deprecated_member_use
-class MockDynamicLinks extends Mock implements FirebaseDynamicLinks {
-  static final _linkStream = MockLinksStream();
+class MockAppLinks extends Mock implements AppLinks {
+  static final _uriStream = MockUriStream();
 
   @override
-  Stream<PendingDynamicLinkData> get onLink => _linkStream;
+  Stream<Uri> get uriLinkStream => _uriStream;
+
+  @override
+  Future<Uri?> getInitialLink() async {
+    return super.noSuchMethod(
+      Invocation.method(#getInitialLink, []),
+      returnValue: null,
+      returnValueForMissingStub: null,
+    );
+  }
 }
 
 class MockApp extends Mock implements FirebaseApp {}
@@ -94,10 +113,7 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     fba.AuthCredential? credential,
   ) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #signInWithCredential,
-        [credential],
-      ),
+      Invocation.method(#signInWithCredential, [credential]),
       returnValue: MockCredential(),
       returnValueForMissingStub: MockCredential(),
     );
@@ -124,14 +140,10 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     required fba.ActionCodeSettings? actionCodeSettings,
   }) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #sendSignInLinkToEmail,
-        null,
-        {
-          #email: email,
-          #actionCodeSettings: actionCodeSettings,
-        },
-      ),
+      Invocation.method(#sendSignInLinkToEmail, null, {
+        #email: email,
+        #actionCodeSettings: actionCodeSettings,
+      }),
       returnValueForMissingStub: null,
     );
   }
@@ -139,10 +151,7 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
   @override
   bool isSignInWithEmailLink(String? emailLink) {
     return super.noSuchMethod(
-      Invocation.method(
-        #isSignInWithEmailLink,
-        [emailLink],
-      ),
+      Invocation.method(#isSignInWithEmailLink, [emailLink]),
       returnValue: true,
       returnValueForMissingStub: true,
     );
@@ -154,28 +163,12 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     required String? emailLink,
   }) async {
     return super.noSuchMethod(
-      Invocation.method(
-        #signInWithEmailLink,
-        null,
-        {
-          #email: email,
-          #emailLink: emailLink,
-        },
-      ),
+      Invocation.method(#signInWithEmailLink, null, {
+        #email: email,
+        #emailLink: emailLink,
+      }),
       returnValue: MockCredential(),
       returnValueForMissingStub: MockCredential(),
-    );
-  }
-
-  @override
-  Future<List<String>> fetchSignInMethodsForEmail(String? email) async {
-    return super.noSuchMethod(
-      Invocation.method(
-        #fetchSignInMethodsForEmail,
-        [email],
-      ),
-      returnValue: <String>['phone'],
-      returnValueForMissingStub: <String>['phone'],
     );
   }
 
@@ -193,20 +186,16 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
     fba.MultiFactorSession? multiFactorSession,
   }) async {
     super.noSuchMethod(
-      Invocation.method(
-        #verifyPhoneNumber,
-        null,
-        {
-          #phoneNumber: phoneNumber,
-          #verificationCompleted: verificationCompleted,
-          #verificationFailed: verificationFailed,
-          #codeSent: codeSent,
-          #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-          #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
-          #timeout: timeout,
-          #forceResendingToken: forceResendingToken,
-        },
-      ),
+      Invocation.method(#verifyPhoneNumber, null, {
+        #phoneNumber: phoneNumber,
+        #verificationCompleted: verificationCompleted,
+        #verificationFailed: verificationFailed,
+        #codeSent: codeSent,
+        #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+        #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
+        #timeout: timeout,
+        #forceResendingToken: forceResendingToken,
+      }),
     );
   }
 }

@@ -10,10 +10,7 @@ typedef StylesMap = Map<Type, FirebaseUIStyle>;
 
 StylesMap _buildStylesMap(Set<FirebaseUIStyle> styles) {
   return styles.fold({}, (acc, el) {
-    return {
-      ...acc,
-      el.runtimeType: el,
-    };
+    return {...acc, el.runtimeType: el};
   });
 }
 
@@ -22,7 +19,7 @@ StylesMap _buildStylesMap(Set<FirebaseUIStyle> styles) {
 /// Shouldn't be used if you're using pre-built screens, but could be used
 /// if you're building your own and using only widgets from the FirebaseUI.
 class FirebaseUITheme extends InheritedModel {
-  /// A set of styles that need to be provded down the widget tree.
+  /// A set of styles that need to be provided down the widget tree.
   final Set<FirebaseUIStyle> styles;
 
   const FirebaseUITheme({
@@ -68,8 +65,9 @@ class FirebaseUIThemeElement extends InheritedModelElement {
 
   @override
   void mount(Element? parent, Object? newSlot) {
-    _parent = parent?.getElementForInheritedWidgetOfExactType<FirebaseUITheme>()
-        as FirebaseUIThemeElement?;
+    _parent =
+        parent?.getElementForInheritedWidgetOfExactType<FirebaseUITheme>()
+            as FirebaseUIThemeElement?;
 
     if (_parent != null) {
       dependOnInheritedElement(_parent!);

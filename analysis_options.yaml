@@ -1,0 +1,6 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Ignoring to handle diffenent SDKs on dev machine
+    #- unnecessary_ignore

@@ -28,7 +28,7 @@ jobs:
       packages: ${{ steps.filter.outputs.changed_packages }}
       has_changes: ${{ steps.filter.outputs.changed_packages != '[]' }}
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v6.0.2
       - uses: ./.github/actions/changes
         id: filter
 
@@ -44,27 +44,31 @@ jobs:
         target: ["html", "io"]
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v6.0.2
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
       - uses: bluefireteam/melos-action@v3
         with:
-          melos-version: "3.0.1"
+          melos-version: "^7.5.0"
 
       - name: Run unit tests on Chrome
         if: matrix.target == 'html'
         run: |
           melos exec \
-            --scope=${{ matrix.package }}* \
+            --scope=${MATRIX_PACKAGE}* \
             --dir-exists="test" \
             --fail-fast -- "flutter test --platform chrome"
+        env:
+          MATRIX_PACKAGE: ${{ matrix.package }}
 
       - name: Run unit tests
         if: matrix.target == 'io'
         run: |
           melos exec \
-            --scope=${{ matrix.package }}* \
+            --scope=${MATRIX_PACKAGE}* \
             --dir-exists="test" \
             --fail-fast -- "flutter test"
+        env:
+          MATRIX_PACKAGE: ${{ matrix.package }}

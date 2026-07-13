@@ -1,3 +1,31 @@
+## 2.0.1
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+
+## 1.14.1
+
+ - **FIX**: bump FF dependencies to latest ([#526](https://github.com/firebase/FirebaseUI-Flutter/issues/526)). ([9f355bfc](https://github.com/firebase/FirebaseUI-Flutter/commit/9f355bfcda8319c9ed4786e1e3da91babb4f5229))
+
+## 1.14.0
+
+ - **FIX**: bump FF dependencies to latest ([#520](https://github.com/firebase/FirebaseUI-Flutter/issues/520)). ([ac4f1fdd](https://github.com/firebase/FirebaseUI-Flutter/commit/ac4f1fddcee04b020a6384ac74f2571bccafe44e))
+ - **FEAT**: Add missing translation values ([#507](https://github.com/firebase/FirebaseUI-Flutter/issues/507)). ([fc0e3da0](https://github.com/firebase/FirebaseUI-Flutter/commit/fc0e3da07388b624e049c3878cbf03f6817a840f))
+
+## 1.13.1
+
+ - **FIX**: replace deprecated API and bump FlutterFire dependencies ([#453](https://github.com/firebase/FirebaseUI-Flutter/issues/453)). ([530be48a](https://github.com/firebase/FirebaseUI-Flutter/commit/530be48a4710387832f98059bd34ce07bba1778c))
+ - **FIX**(ui localizations): fixed typos and added translations to 'pt' (Portugese) ([#414](https://github.com/firebase/FirebaseUI-Flutter/issues/414)). ([3609796c](https://github.com/firebase/FirebaseUI-Flutter/commit/3609796ccdb2eebe78f8fb4faff793e7833f238d))
+
+## 1.13.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+
 ## 1.12.0
 
  - **FIX**(ui_localizations): Add missing 'nb' language code to kSupportedLanguages ([#350](https://github.com/firebase/FirebaseUI-Flutter/issues/350)). ([3fbfded0](https://github.com/firebase/FirebaseUI-Flutter/commit/3fbfded079b8dbe54b15d805ed5be5836e0d1ff7))

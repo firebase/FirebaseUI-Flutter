@@ -27,10 +27,7 @@ void main() {
 
   group('EmailLinkSignInView', () {
     testWidgets('validates email', (tester) async {
-      await render(
-        tester,
-        EmailLinkSignInView(provider: emailLinkProvider),
-      );
+      await render(tester, EmailLinkSignInView(provider: emailLinkProvider));
 
       final input = find.byType(TextFormField);
       await tester.enterText(input, 'notanemail');
@@ -42,12 +39,7 @@ void main() {
     });
 
     testWidgets('sends a link to an email', (tester) async {
-      await render(
-        tester,
-        EmailLinkSignInView(
-          provider: emailLinkProvider,
-        ),
-      );
+      await render(tester, EmailLinkSignInView(provider: emailLinkProvider));
 
       final input = find.byType(TextFormField);
       await tester.enterText(input, 'test@test.com');

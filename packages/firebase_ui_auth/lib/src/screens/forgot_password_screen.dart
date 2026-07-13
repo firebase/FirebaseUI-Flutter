@@ -78,10 +78,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         breakpoint: breakpoint,
         maxWidth: maxWidth,
         contentFlex: 1,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: child,
-        ),
+        child: Padding(padding: const EdgeInsets.all(32), child: child),
       ),
     );
   }

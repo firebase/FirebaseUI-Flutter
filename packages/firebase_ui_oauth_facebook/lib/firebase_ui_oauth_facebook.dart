@@ -29,9 +29,7 @@ class FacebookSignInButton extends _FacebookSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-        );
+  }) : super(isLoading: isLoading ?? false);
 }
 
 class FacebookSignInIconButton extends _FacebookSignInButton {
@@ -50,10 +48,7 @@ class FacebookSignInIconButton extends _FacebookSignInButton {
     super.redirectUri,
     super.onError,
     super.onCanceled,
-  }) : super(
-          isLoading: isLoading ?? false,
-          label: '',
-        );
+  }) : super(isLoading: isLoading ?? false, label: '');
 }
 
 FacebookProvider? _mockProvider;
@@ -99,17 +94,14 @@ class _FacebookSignInButton extends StatelessWidget {
     this.redirectUri,
     this.onError,
     this.onCanceled,
-  })  : label = label ?? 'Sign in with Facebook',
-        overrideDefaultTapAction = overrideDefaultTapAction ?? false,
-        size = size ?? 19;
+  }) : label = label ?? 'Sign in with Facebook',
+       overrideDefaultTapAction = overrideDefaultTapAction ?? false,
+       size = size ?? 19;
 
   FacebookProvider get provider {
     if (_mockProvider != null) return _mockProvider!;
 
-    return FacebookProvider(
-      clientId: clientId,
-      redirectUri: redirectUri,
-    );
+    return FacebookProvider(clientId: clientId, redirectUri: redirectUri);
   }
 
   @override

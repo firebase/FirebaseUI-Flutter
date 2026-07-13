@@ -47,15 +47,14 @@ class FirebaseUILocalizations<T extends FirebaseUILocalizationLabels> {
 
   /// Localization delegate that could be provided to the
   /// [MaterialApp.localizationsDelegates].
-  static FirebaseUILocalizationDelegate delegate =
-      const FirebaseUILocalizationDelegate();
+  static const FirebaseUILocalizationDelegate delegate =
+      FirebaseUILocalizationDelegate();
 
   /// Should be used to override labels provided by the library.
   ///
   /// See [FirebaseUILocalizationLabels].
   static FirebaseUILocalizationDelegate
-      withDefaultOverrides<T extends FirebaseUILocalizationLabels>(
-          T overrides) {
+  withDefaultOverrides<T extends FirebaseUILocalizationLabels>(T overrides) {
     return FirebaseUILocalizationDelegate<T>(overrides);
   }
 }

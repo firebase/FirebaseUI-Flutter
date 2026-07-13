@@ -138,7 +138,10 @@ void main() {
       final expectedColor = style.backgroundColor.getValue(Brightness.dark);
 
       final containerFinder = find.byWidgetPredicate((widget) {
-        return widget is Material && widget.color!.value == expectedColor.value;
+        return widget is Material &&
+            widget.color!.r == expectedColor.r &&
+            widget.color!.g == expectedColor.g &&
+            widget.color!.b == expectedColor.b;
       });
 
       expect(containerFinder, findsOneWidget);
@@ -150,15 +153,17 @@ void main() {
       final textFinder = find.byWidgetPredicate(
         (widget) =>
             widget is Text &&
-            widget.style!.color!.value ==
-                style.color.getValue(Brightness.dark).value,
+            widget.style!.color!.r == style.color.getValue(Brightness.dark).r &&
+            widget.style!.color!.g == style.color.getValue(Brightness.dark).g &&
+            widget.style!.color!.b == style.color.getValue(Brightness.dark).b,
       );
 
       expect(textFinder, findsOneWidget);
     });
 
-    testWidgets('applies dark theme background color from style',
-        (tester) async {
+    testWidgets('applies dark theme background color from style', (
+      tester,
+    ) async {
       await tester.pumpWidget(renderMaterialButton(Brightness.dark));
 
       final containerFinder = find.byWidgetPredicate(
@@ -195,23 +200,27 @@ void main() {
     });
 
     testWidgets('has layout flow aware padding', (tester) async {
-      await tester.pumpWidget(DefaultAssetBundle(
-        bundle: FakeAssetBundle(),
-        child: MaterialApp(
-          home: Scaffold(
-            body: Row(
-              children: [
-                OAuthProviderButtonBase(
-                  provider: provider,
-                  auth: FakeAuth(),
-                  label: 'Sign in with Fake provider',
-                  loadingIndicator: const CircularProgressIndicator(),
-                )
-              ],
+      await tester.pumpWidget(
+        DefaultAssetBundle(
+          bundle: FakeAssetBundle(),
+          child: MaterialApp(
+            home: Scaffold(
+              body: Row(
+                children: [
+                  Expanded(
+                    child: OAuthProviderButtonBase(
+                      provider: provider,
+                      auth: FakeAuth(),
+                      label: 'Sign in with Fake provider',
+                      loadingIndicator: const CircularProgressIndicator(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ));
+      );
 
       expect(find.byType(LayoutFlowAwarePadding), findsOneWidget);
     });

@@ -8,16 +8,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// A builder that is invoked for each progress event.
-typedef TaskProgressBuilder = Widget Function(
-  BuildContext context,
-  double progress,
-);
+typedef TaskProgressBuilder =
+    Widget Function(BuildContext context, double progress);
 
 /// A builder that is invoked when an error occurs.
-typedef ErrorBuilder = Widget Function(
-  BuildContext context,
-  Object? error,
-);
+typedef ErrorBuilder = Widget Function(BuildContext context, Object? error);
 
 class _BindTaskWidget extends StatelessWidget {
   final Task task;
@@ -47,6 +42,7 @@ class _BindTaskWidget extends StatelessWidget {
         } else {
           final taskSnapshot = snapshot.requireData;
           progress = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes;
+          if (progress.isNaN) progress = 0;
         }
 
         return builder(context, progress);

@@ -17,7 +17,8 @@ import './firebase_ui_oauth_google/firebase_ui_oauth_google_e2e.dart'
     as firebase_ui_oauth_google_e2e;
 import './firebase_ui_oauth_twitter/firebase_ui_oauth_twitter_e2e.dart'
     as firebase_ui_oauth_twitter_e2e;
-import './firebase_ui_database/firebase_ui_database.dart' as firebase_ui_database;
+import './firebase_ui_database/firebase_ui_database.dart'
+    as firebase_ui_database;
 import 'utils.dart';
 
 void main() {

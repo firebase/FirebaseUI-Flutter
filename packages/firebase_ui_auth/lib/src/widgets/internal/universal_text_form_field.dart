@@ -53,9 +53,7 @@ class UniversalTextFormField extends PlatformWidget {
           padding: const EdgeInsets.only(bottom: 8),
           decoration: const BoxDecoration(
             border: Border(
-              bottom: BorderSide(
-                color: CupertinoColors.inactiveGray,
-              ),
+              bottom: BorderSide(color: CupertinoColors.inactiveGray),
             ),
           ),
           child: CupertinoTextFormFieldRow(

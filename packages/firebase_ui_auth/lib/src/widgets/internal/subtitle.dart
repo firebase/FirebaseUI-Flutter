@@ -10,11 +10,7 @@ class Subtitle extends PlatformWidget {
   final String text;
   final FontWeight? fontWeight;
 
-  const Subtitle({
-    super.key,
-    required this.text,
-    this.fontWeight,
-  });
+  const Subtitle({super.key, required this.text, this.fontWeight});
 
   @override
   Widget buildCupertino(BuildContext context) {
@@ -28,10 +24,9 @@ class Subtitle extends PlatformWidget {
   Widget buildMaterial(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context)
-          .textTheme
-          .titleMedium!
-          .copyWith(fontWeight: fontWeight),
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium!.copyWith(fontWeight: fontWeight),
     );
   }
 }

@@ -16,7 +16,7 @@ abstract class ProviderScreen<T extends AuthProvider> extends StatelessWidget {
 
   /// Current [AuthProvider] that is being used to authenticate the user.
   T get provider {
-    if (_provider != null) return _provider!;
+    if (_provider != null) return _provider;
     if (_cache.containsKey(T)) {
       return _cache[T]! as T;
     }
@@ -28,9 +28,6 @@ abstract class ProviderScreen<T extends AuthProvider> extends StatelessWidget {
     return config;
   }
 
-  const ProviderScreen({
-    super.key,
-    T? provider,
-    this.auth,
-  }) : _provider = provider;
+  const ProviderScreen({super.key, T? provider, this.auth})
+    : _provider = provider;
 }

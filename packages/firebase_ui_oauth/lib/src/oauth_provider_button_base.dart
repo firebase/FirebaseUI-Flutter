@@ -18,10 +18,8 @@ typedef ErrorBuilder = Widget Function(Exception e);
 /// A callback that is being called when there are different oauth providers
 /// associated with the same email.
 /// {@endtemplate}
-typedef DifferentProvidersFoundCallback = void Function(
-  List<String> providers,
-  fba.AuthCredential? credential,
-);
+typedef DifferentProvidersFoundCallback =
+    void Function(List<String> providers, fba.AuthCredential? credential);
 
 /// {@template ui.oauth.oauth_provider_button_base.signed_in_callback}
 /// A callback that is being called when the user signs in.
@@ -132,8 +130,8 @@ class OAuthProviderButtonBase extends StatefulWidget {
 
     /// {@macro ui.oauth.oauth_provider_button_base.on_cancelled}
     this.onCancelled,
-  })  : assert(!overrideDefaultTapAction || onTap != null),
-        _padding = size * 1.33 / 2;
+  }) : assert(!overrideDefaultTapAction || onTap != null),
+       _padding = size * 1.33 / 2;
 
   @override
   State<OAuthProviderButtonBase> createState() =>
@@ -305,13 +303,6 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
   }
 
   @override
-  void onBeforeProvidersForEmailFetch() {
-    safeSetState(() {
-      isLoading = true;
-    });
-  }
-
-  @override
   void onBeforeSignIn() {
     safeSetState(() {
       isLoading = true;
@@ -323,15 +314,6 @@ class _OAuthProviderButtonBaseState extends State<OAuthProviderButtonBase>
     safeSetState(() {
       isLoading = false;
     });
-  }
-
-  @override
-  void onDifferentProvidersFound(
-    String email,
-    List<String> providers,
-    fba.AuthCredential? credential,
-  ) {
-    widget.onDifferentProvidersFound?.call(providers, credential);
   }
 
   @override
@@ -404,76 +386,109 @@ class _ButtonContent extends StatelessWidget {
     required this.iconBackgroundColor,
   });
 
-  Widget _buildLoadingIndicator() {
-    return SizedBox(
-      height: fontSize,
-      width: fontSize,
-      child: loadingIndicator,
-    );
-  }
+  static const kEndPadding = 16.0;
 
   @override
   Widget build(BuildContext context) {
-    Widget child = Padding(
+    final icon = Padding(
       padding: EdgeInsets.all(iconPadding),
-      child: SvgPicture.string(
-        iconSrc,
-        width: height,
-        height: height,
-      ),
+      child: SvgPicture.string(iconSrc, width: height, height: height),
     );
 
-    if (label.isNotEmpty) {
-      final content = isLoading
-          ? _buildLoadingIndicator()
-          : Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                height: 1.1,
-                color: textColor,
-                fontSize: fontSize,
-              ),
-            );
+    if (label.isEmpty) {
+      if (!isLoading) return icon;
 
-      final isCupertino = CupertinoUserInterfaceLevel.maybeOf(context) != null;
-      final topMargin = isCupertino ? (height - fontSize) / 2 : 0.0;
-
-      child = Stack(
-        children: [
-          child,
-          Align(
-            alignment: AlignmentDirectional.center,
-            child: Padding(
-              padding: EdgeInsets.only(top: topMargin),
-              child: content,
-            ),
-          ),
-        ],
-      );
-    } else if (isLoading) {
-      child = _buildLoadingIndicator();
+      return SizedBox.square(dimension: fontSize, child: loadingIndicator);
     }
 
-    return child;
+    final text = TextSpan(
+      text: label,
+      style: TextStyle(height: 1.1, color: textColor, fontSize: fontSize),
+    );
+
+    return Row(
+      children: [
+        //
+        icon,
+        //
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              //
+              final availableWidth = constraints.maxWidth;
+
+              // "height" is also the button's width
+              final totalIconWidth = height + (iconPadding * 2);
+              final totalButtonWidth =
+                  availableWidth + totalIconWidth + kEndPadding;
+
+              if (isLoading) {
+                // "fontSize" is also the indicator's width
+                final freeSpace = totalButtonWidth - fontSize;
+                final startPadding = (freeSpace / 2 - totalIconWidth).clamp(
+                  0.0,
+                  availableWidth,
+                );
+
+                return Padding(
+                  padding: EdgeInsetsDirectional.only(start: startPadding),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: SizedBox.square(
+                      dimension: fontSize,
+                      child: loadingIndicator,
+                    ),
+                  ),
+                );
+              }
+
+              final isCupertino =
+                  CupertinoUserInterfaceLevel.maybeOf(context) != null;
+              final topPadding = isCupertino ? (height - fontSize) / 2 : 0.0;
+
+              final textWidth = (TextPainter(
+                text: text,
+                textDirection: Directionality.of(context),
+                maxLines: 1,
+              )..layout(maxWidth: availableWidth)).size.width;
+              final freeSpace = totalButtonWidth - textWidth;
+              final startPadding = (freeSpace / 2 - totalIconWidth).clamp(
+                0.0,
+                availableWidth,
+              );
+
+              return Padding(
+                padding: EdgeInsetsDirectional.only(
+                  top: topPadding,
+                  start: startPadding,
+                ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text.rich(text, style: text.style),
+                ),
+              );
+            },
+          ),
+        ),
+        //
+        const SizedBox(width: kEndPadding),
+      ],
+    );
   }
 }
 
 class _MaterialForeground extends StatelessWidget {
   final VoidCallback onTap;
 
-  const _MaterialForeground({
-    required this.onTap,
-  });
+  const _MaterialForeground({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: Material(
         color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-        ),
+        child: InkWell(onTap: onTap),
       ),
     );
   }

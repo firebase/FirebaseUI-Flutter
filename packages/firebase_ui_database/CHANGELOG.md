@@ -1,3 +1,32 @@
+## 2.0.1
+
+ - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: bump FlutterFire dependencies & remove deprecated API ([#529](https://github.com/firebase/FirebaseUI-Flutter/issues/529)). ([7650921e](https://github.com/firebase/FirebaseUI-Flutter/commit/7650921e0c99479d35302e994df7c31f7b624420))
+ - **BREAKING** **FEAT**: removed `dataRowHeight` from `FirebaseDatabaseDataTable`. Please use `dataRowMinHeight` & `dataRowMaxHeight`.
+
+## 1.5.3
+
+ - **FIX**: bump FF dependencies to latest ([#526](https://github.com/firebase/FirebaseUI-Flutter/issues/526)). ([9f355bfc](https://github.com/firebase/FirebaseUI-Flutter/commit/9f355bfcda8319c9ed4786e1e3da91babb4f5229))
+
+## 1.5.2
+
+ - **FIX**: bump FF dependencies to latest ([#520](https://github.com/firebase/FirebaseUI-Flutter/issues/520)). ([ac4f1fdd](https://github.com/firebase/FirebaseUI-Flutter/commit/ac4f1fddcee04b020a6384ac74f2571bccafe44e))
+
+## 1.5.1
+
+ - **FIX**: replace deprecated API and bump FlutterFire dependencies ([#453](https://github.com/firebase/FirebaseUI-Flutter/issues/453)). ([530be48a](https://github.com/firebase/FirebaseUI-Flutter/commit/530be48a4710387832f98059bd34ce07bba1778c))
+
+## 1.5.0
+
+ - **FEAT**: bump FlutterFire dependencies 2024-09-30 ([#407](https://github.com/firebase/FirebaseUI-Flutter/issues/407)). ([d72ce8e3](https://github.com/firebase/FirebaseUI-Flutter/commit/d72ce8e3e6d79563c7992d25f36c05b06a742297))
+ - **FEAT**(database,firestore): updated default loading indicator to be platform adaptive ([#399](https://github.com/firebase/FirebaseUI-Flutter/issues/399)). ([c034d56a](https://github.com/firebase/FirebaseUI-Flutter/commit/c034d56aac9b6f5be7bba5a70c549ffb89b8f4e4))
+
 ## 1.4.4
 
  - Update a dependency to the latest release.

@@ -1,11 +1,12 @@
 name: firebase_ui_shared
 description: Abstractions and widgets that are used across Firebase UI packages.
-version: 1.4.1
+version: 1.4.2
 homepage: https://github.com/firebase/FirebaseUI-Flutter/packages/firebase_ui_shared
 
+resolution: workspace
+
 environment:
-  sdk: ">=2.18.0 <4.0.0"
-  flutter: ">=3.3.0"
+  sdk: ^3.9.0
 
 dependencies:
   flutter:
@@ -14,6 +15,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^6.0.0
 
 flutter:

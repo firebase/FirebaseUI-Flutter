@@ -3,9 +3,9 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../actions.dart';
@@ -36,10 +36,7 @@ class EditableUserDisplayName extends StatefulWidget {
   final fba.FirebaseAuth? auth;
 
   /// {@macro ui.auth.widgets.editable_user_display_name}
-  const EditableUserDisplayName({
-    super.key,
-    this.auth,
-  });
+  const EditableUserDisplayName({super.key, this.auth});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -70,14 +67,15 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
         _isLoading = true;
       });
 
+      final previousDisplayName = displayName;
       await auth.currentUser?.updateDisplayName(ctrl.text);
       await auth.currentUser?.reload();
 
-      FirebaseUIAction.ofType<DisplayNameChangedAction>(context)?.callback(
+      if (!mounted) return;
+
+      FirebaseUIAction.ofType<DisplayNameChangedAction>(
         context,
-        displayName,
-        ctrl.text,
-      );
+      )?.callback(context, previousDisplayName, ctrl.text);
     } finally {
       setState(() {
         _editing = false;
@@ -139,11 +137,14 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
         ),
       );
     } else {
-      textField = TextField(
-        autofocus: true,
-        controller: ctrl,
-        decoration: InputDecoration(hintText: l.name, labelText: l.name),
-        onSubmitted: (_) => _finishEditing(),
+      textField = Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5.5),
+        child: TextField(
+          autofocus: true,
+          controller: ctrl,
+          decoration: InputDecoration(hintText: l.name, labelText: l.name),
+          onSubmitted: (_) => _finishEditing(),
+        ),
       );
     }
 
@@ -159,10 +160,7 @@ class _EditableUserDisplayNameState extends State<EditableUserDisplayName> {
               if (_isLoading)
                 const LoadingIndicator(size: 24, borderWidth: 1)
               else
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: iconButton,
-                ),
+                Align(alignment: Alignment.topLeft, child: iconButton),
             ],
           ),
         ),

@@ -17,12 +17,12 @@ abstract class MultiProviderScreen extends Widget {
     super.key,
     fba.FirebaseAuth? auth,
     List<AuthProvider>? providers,
-  })  : _auth = auth,
-        _providers = providers;
+  }) : _auth = auth,
+       _providers = providers;
 
   List<AuthProvider> get providers {
     if (_providers != null) {
-      return _providers!;
+      return _providers;
     } else {
       return FirebaseUIAuth.providersFor(auth.app);
     }

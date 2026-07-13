@@ -10,11 +10,12 @@ import '../../widgets/internal/keyboard_appearence_listener.dart';
 /// A builder that builds the contents of the header.
 /// Used only on mobile platforms.
 /// {@endtemplate}
-typedef HeaderBuilder = Widget Function(
-  BuildContext context,
-  BoxConstraints constraints,
-  double shrinkOffset,
-);
+typedef HeaderBuilder =
+    Widget Function(
+      BuildContext context,
+      BoxConstraints constraints,
+      double shrinkOffset,
+    );
 
 const defaultHeaderImageHeight = 150.0;
 
@@ -35,11 +36,8 @@ class HeaderImageSliverDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return LayoutBuilder(
-      builder: (context, constraints) => builder(
-        context,
-        constraints,
-        shrinkOffset / maxExtent,
-      ),
+      builder: (context, constraints) =>
+          builder(context, constraints, shrinkOffset / maxExtent),
     );
   }
 
@@ -58,10 +56,8 @@ class HeaderImageSliverDelegate extends SliverPersistentHeaderDelegate {
 ///
 /// Used only on desktop platforms.
 /// {@endtemplate}
-typedef SideBuilder = Widget Function(
-  BuildContext context,
-  BoxConstraints constraints,
-);
+typedef SideBuilder =
+    Widget Function(BuildContext context, BoxConstraints constraints);
 
 class ResponsivePage extends StatefulWidget {
   /// Main content of the page
@@ -143,10 +139,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
   Widget build(BuildContext context) {
     final breakpoint = widget.breakpoint;
 
-    final content = KeyedSubtree(
-      key: key,
-      child: widget.child,
-    );
+    final content = KeyedSubtree(key: key, child: widget.child);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -182,7 +175,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -204,31 +197,22 @@ class _ResponsivePageState extends State<ResponsivePage> {
                       ),
                     ),
                   SliverList(
-                    delegate: SliverChildListDelegate.fixed(
-                      [
-                        content,
-                        ValueListenableBuilder<double>(
-                          valueListenable: paddingListenable,
-                          builder: (context, value, _) {
-                            return SizedBox(height: value);
-                          },
-                        ),
-                      ],
-                    ),
-                  )
+                    delegate: SliverChildListDelegate.fixed([
+                      content,
+                      ValueListenableBuilder<double>(
+                        valueListenable: paddingListenable,
+                        builder: (context, value, _) {
+                          return SizedBox(height: value);
+                        },
+                      ),
+                    ]),
+                  ),
                 ],
               ),
             ),
           );
         } else {
-          return Center(
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                content,
-              ],
-            ),
-          );
+          return Center(child: ListView(shrinkWrap: true, children: [content]));
         }
       },
     );

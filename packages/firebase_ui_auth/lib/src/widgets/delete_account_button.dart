@@ -63,6 +63,11 @@ class DeleteAccountButton extends StatefulWidget {
   /// {@endtemplate}
   final bool showDeleteConfirmationDialog;
 
+  /// {@template ui.auth.widgets.delete_account_button.delete_confirmation}
+  /// A callback to replace the default account deletion modal.
+  /// {@endtemplate}
+  final Future<bool> Function(BuildContext context)? deleteConfirmation;
+
   /// {@macro ui.auth.widgets.delete_account_button}
   const DeleteAccountButton({
     super.key,
@@ -71,6 +76,7 @@ class DeleteAccountButton extends StatefulWidget {
     this.onDeleteFailed,
     this.variant = ButtonVariant.filled,
     this.showDeleteConfirmationDialog = false,
+    this.deleteConfirmation,
   });
 
   @override
@@ -85,25 +91,29 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
   void Function() pop<T>(BuildContext context, T result) =>
       () => Navigator.of(context).pop(result);
 
-  Future<void> _deleteAccount() async {
-    bool? confirmed = !widget.showDeleteConfirmationDialog;
+  Future<void> _deleteAccount({bool skipConfirmation = false}) async {
+    bool? confirmed = skipConfirmation || !widget.showDeleteConfirmationDialog;
 
     if (!confirmed) {
       final l = FirebaseUILocalizations.labelsOf(context);
 
-      confirmed = await showCupertinoDialog<bool?>(
-        context: context,
-        builder: (context) {
-          return UniversalAlert(
-            onConfirm: pop(context, true),
-            onCancel: pop(context, false),
-            title: l.confirmDeleteAccountAlertTitle,
-            confirmButtonText: l.confirmDeleteAccountButtonLabel,
-            cancelButtonText: l.cancelButtonLabel,
-            message: l.confirmDeleteAccountAlertMessage,
-          );
-        },
-      );
+      if (widget.deleteConfirmation != null) {
+        confirmed = await widget.deleteConfirmation!(context);
+      } else {
+        confirmed = await showCupertinoDialog<bool?>(
+          context: context,
+          builder: (context) {
+            return UniversalAlert(
+              onConfirm: pop(context, true),
+              onCancel: pop(context, false),
+              title: l.confirmDeleteAccountAlertTitle,
+              confirmButtonText: l.confirmDeleteAccountButtonLabel,
+              cancelButtonText: l.cancelButtonLabel,
+              message: l.confirmDeleteAccountAlertMessage,
+            );
+          },
+        );
+      }
     }
 
     if (!(confirmed ?? false)) return;
@@ -116,17 +126,18 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       final user = auth.currentUser!;
       await auth.currentUser?.delete();
 
-      FirebaseUIAction.ofType<AccountDeletedAction>(context)?.callback(
+      if (!mounted) return;
+
+      FirebaseUIAction.ofType<AccountDeletedAction>(
         context,
-        user,
-      );
+      )?.callback(context, user);
       await FirebaseUIAuth.signOut(context: context, auth: auth);
     } on fba.FirebaseAuthException catch (err) {
       if (err.code == 'requires-recent-login') {
         if (widget.onSignInRequired != null) {
           final signedIn = await widget.onSignInRequired!();
           if (signedIn) {
-            await _deleteAccount();
+            await _deleteAccount(skipConfirmation: true);
           }
         }
       }

@@ -32,7 +32,7 @@ Future<bool> showReauthenticateDialog({
     context: context,
     barrierDismissible: true,
     barrierLabel: l.cancelButtonLabel,
-    pageBuilder: (_, __, ___) => FirebaseUIActions.inherit(
+    pageBuilder: (_, _, _) => FirebaseUIActions.inherit(
       from: context,
       child: ReauthenticateDialog(
         providers: providers,
@@ -46,41 +46,4 @@ Future<bool> showReauthenticateDialog({
 
   if (reauthenticated == null) return false;
   return reauthenticated;
-}
-
-/// Shows [DifferentMethodSignInDialog].
-@Deprecated(
-  'Email enumeration protection is on by default.'
-  'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-)
-Future<void> showDifferentMethodSignInDialog({
-  required BuildContext context,
-
-  /// A list of providers associated with the user account
-  required List<String> availableProviders,
-
-  /// A list of all supported providers
-  required List<AuthProvider> providers,
-
-  /// {@macro ui.auth.auth_controller.auth}
-  fba.FirebaseAuth? auth,
-
-  /// A callback that is being called after user has successfully signed in.
-  VoidCallback? onSignedIn,
-}) async {
-  final l = FirebaseUILocalizations.labelsOf(context);
-
-  await showGeneralDialog(
-    context: context,
-    barrierDismissible: true,
-    barrierLabel: l.cancelButtonLabel,
-    pageBuilder: (context, _, __) => DifferentMethodSignInDialog(
-      availableProviders: availableProviders,
-      providers: providers,
-      auth: auth,
-      onSignedIn: () {
-        Navigator.of(context).pop();
-      },
-    ),
-  );
 }

@@ -100,10 +100,10 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
 
     /// {@macro ui.auth.auth_action}
     AuthAction? action,
-  })  : auth = auth ?? fba.FirebaseAuth.instance,
-        _action = action,
-        _provider = provider,
-        super(initialState) {
+  }) : auth = auth ?? fba.FirebaseAuth.instance,
+       _action = action,
+       _provider = provider,
+       super(initialState) {
     _provider.authListener = this;
     _provider.auth = auth ?? fba.FirebaseAuth.instance;
   }
@@ -114,11 +114,6 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   }
 
   @override
-  void onBeforeProvidersForEmailFetch() {
-    value = const FetchingProvidersForEmail();
-  }
-
-  @override
   void onBeforeSignIn() {
     value = const SigningIn();
   }
@@ -126,24 +121,6 @@ class AuthFlow<T extends AuthProvider> extends ValueNotifier<AuthState>
   @override
   void onCredentialLinked(fba.AuthCredential credential) {
     value = CredentialLinked(credential, auth.currentUser!);
-  }
-
-  @override
-  @Deprecated(
-    'Email enumeration protection is on by default.'
-    'Read more here https://cloud.google.com/identity-platform/docs/admin/email-enumeration-protection',
-  )
-  @override
-  void onDifferentProvidersFound(
-    String email,
-    List<String> providers,
-    fba.AuthCredential? credential,
-  ) {
-    value = DifferentSignInMethodsFound(
-      email,
-      providers,
-      credential,
-    );
   }
 
   @override

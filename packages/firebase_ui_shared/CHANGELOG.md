@@ -1,3 +1,7 @@
+## 1.4.2
+
+ - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))
+
 ## 1.4.1
 
  - **FIX**(ui_auth): adaptive AlertDialog for Flutter <3.13 ([#152](https://github.com/firebase/FirebaseUI-Flutter/issues/152)). ([0e93d610](https://github.com/firebase/FirebaseUI-Flutter/commit/0e93d6101be1ebaa4b2ee491362fa7a83c71cb58))
