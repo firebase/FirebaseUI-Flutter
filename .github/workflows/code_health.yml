@@ -68,6 +68,8 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
@@ -88,7 +90,7 @@ jobs:
           swiftformat --version
       - name: "Dart, Java and Objective-C "
         run: |
-          flutter pub global run flutter_plugin_tools format
+          flutter pub global run flutter_plugin_tools format --base-branch=origin/main
           ./scripts/validate-formatting.sh
       - name: "Swift"
         if: ${{ success() || failure() }}
