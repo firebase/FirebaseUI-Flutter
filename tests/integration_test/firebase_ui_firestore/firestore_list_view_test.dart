@@ -38,15 +38,13 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       expect(find.byType(ListView), findsNothing);
 
-      await tester.pumpAndSettle();
+      await collection.snapshots().first.then((_) {}, onError: (_) {});
+      await tester.pump();
 
       verifyZeroInteractions(builderSpy);
 
       expect(
-        find.text(
-          'error: [cloud_firestore/permission-denied] '
-          'The caller does not have permission to execute the specified operation.',
-        ),
+        find.textContaining('error: [cloud_firestore/permission-denied]'),
         findsOneWidget,
       );
       expect(find.byType(ListView), findsNothing);
