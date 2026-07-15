@@ -31,7 +31,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  firebase_ui_firestore: ^2.0.1
+  firebase_ui_firestore: ^2.1.0
   cloud_firestore: ^6.6.0
   cupertino_icons: ^1.0.6
   firebase_core: ^4.11.0
