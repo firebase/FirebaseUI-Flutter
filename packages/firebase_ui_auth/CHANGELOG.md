@@ -1,3 +1,11 @@
+## 3.1.0
+
+ - **FEAT**: Require Dart 3.9 ([#618](https://github.com/firebase/FirebaseUI-Flutter/issues/618)). ([80a27122](https://github.com/firebase/FirebaseUI-Flutter/commit/80a27122e1008b76c3cb505f8140195f6dd52648))
+ - **FEAT**: upgrade all packages min SDK to Dart 3.5 ([#616](https://github.com/firebase/FirebaseUI-Flutter/issues/616)). ([1535fac4](https://github.com/firebase/FirebaseUI-Flutter/commit/1535fac4e26a5dc91c13601c1327e43994d5403c))
+ - **FEAT**: upgrade all packages min SDK to Dart 3.5 ([#615](https://github.com/firebase/FirebaseUI-Flutter/issues/615)). ([aefa711a](https://github.com/firebase/FirebaseUI-Flutter/commit/aefa711ad9c550f4f96cb574cb6a26919593d5eb))
+ - **FEAT**: update FlutterFire dependencies to the latest ([#580](https://github.com/firebase/FirebaseUI-Flutter/issues/580)). ([acef6d3c](https://github.com/firebase/FirebaseUI-Flutter/commit/acef6d3c4575a44e951247638a2a015285a19ff1))
+ - **FEAT**(auth): upgrade flutter_facebook_auth dependency and use limited/classic login depending on ATT status  ([#553](https://github.com/firebase/FirebaseUI-Flutter/issues/553)). ([c3acdba7](https://github.com/firebase/FirebaseUI-Flutter/commit/c3acdba70eb6a6f79d12911361d416d9f0b866d7))
+
 ## 3.0.1
 
  - **FIX**: bump FlutterFire dependencies & fix CI ([#552](https://github.com/firebase/FirebaseUI-Flutter/issues/552)). ([0e6d85bf](https://github.com/firebase/FirebaseUI-Flutter/commit/0e6d85bf4c31b1a3fadff9ebdde3e00704123ad6))
