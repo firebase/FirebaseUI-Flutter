@@ -26,7 +26,7 @@ dependencies:
   cloud_firestore: ^6.6.0
   firebase_ui_firestore: ^2.1.0
   http: ^1.1.2
-  google_sign_in: ^6.2.1
+  google_sign_in: ^7.2.0
   firebase_ui_shared: ^1.5.0
   firebase_database: ^12.4.4
   firebase_ui_database: ^2.1.0
