@@ -148,6 +148,7 @@ class _ResponsivePageState extends State<ResponsivePage> {
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: widget.maxWidth ?? constraints.biggest.width,
+                maxHeight: constraints.biggest.height,
               ),
               child: Row(
                 textDirection: widget.desktopLayoutDirection,
