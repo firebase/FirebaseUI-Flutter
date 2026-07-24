@@ -297,11 +297,10 @@ class _LoginViewState extends State<LoginView> {
       children.add(widget.footerBuilder!(context, _action));
     }
 
-    return IntrinsicHeight(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: children,
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: children,
     );
   }
 }
