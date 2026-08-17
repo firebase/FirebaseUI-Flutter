@@ -3,8 +3,13 @@
 // BSD-style license that can be found in the LICENSE file.
 
 export 'package:firebase_auth/firebase_auth.dart' show OAuthCredential;
-export 'package:desktop_webview_auth/desktop_webview_auth.dart'
-    show AuthResult, ProviderArgs;
+
+// Re-export Wasm-compatible libraries instead of `desktop_webview_auth`,
+// which imports `dart:io`.
+// ignore: implementation_imports
+export 'package:desktop_webview_auth/src/auth_result.dart' show AuthResult;
+// ignore: implementation_imports
+export 'package:desktop_webview_auth/src/provider_args.dart' show ProviderArgs;
 export 'package:desktop_webview_auth/google.dart';
 export 'package:desktop_webview_auth/facebook.dart';
 export 'package:desktop_webview_auth/twitter.dart';
