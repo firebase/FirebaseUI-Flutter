@@ -45,6 +45,15 @@ class GoogleProvider extends OAuthProvider {
   // GoogleSignInButton). The first instance to sign in configures the plugin.
   static Future<void>? _initialization;
 
+  /// Resets the one-time initialization state.
+  ///
+  /// The plugin is initialized exactly once per process, so tests that inject
+  /// a fresh mock in `setUp` must clear the cached future to stay isolated.
+  @visibleForTesting
+  static void debugReset() {
+    _initialization = null;
+  }
+
   @override
   final fba.GoogleAuthProvider firebaseAuthProvider = fba.GoogleAuthProvider();
 
@@ -79,12 +88,10 @@ class GoogleProvider extends OAuthProvider {
   }
 
   Future<void> _ensureInitialized() {
-    final initialization = _initialization ??= provider.initialize(
+    return _initialization ??= provider.initialize(
       clientId: _ignoreClientId() ? null : clientId,
       serverClientId: serverClientId,
-    );
-
-    return initialization.catchError((Object err) {
+    ).catchError((Object err) {
       // Allow a later sign-in attempt to retry initialization instead of
       // rethrowing the same stale error forever.
       _initialization = null;

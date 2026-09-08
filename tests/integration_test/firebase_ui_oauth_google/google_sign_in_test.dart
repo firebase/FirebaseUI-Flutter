@@ -24,6 +24,7 @@ void main() async {
   );
 
   setUp(() {
+    GoogleProvider.debugReset();
     provider.provider = MockGoogleSignIn();
     setMockGoogleProvider(provider);
   });
