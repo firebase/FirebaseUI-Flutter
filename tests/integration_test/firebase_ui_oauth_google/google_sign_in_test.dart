@@ -14,11 +14,13 @@ import 'package:mockito/mockito.dart';
 
 import '../utils.dart';
 
+const _scopes = ['scope1', 'scope2'];
+
 void main() async {
   late GoogleProvider provider = GoogleProvider(
     clientId: 'clientId',
     redirectUri: 'redirectUri',
-    scopes: const ['scope1', 'scope2'],
+    scopes: _scopes,
   );
 
   setUp(() {
@@ -28,72 +30,70 @@ void main() async {
 
   const labels = DefaultLocalizations();
 
-  group(
-    'Sign in with Google button',
-    () {
-      testWidgets('has a correct button label', (tester) async {
-        await render(tester, OAuthProviderButton(provider: provider));
-        expect(find.text(labels.signInWithGoogleButtonText), findsOneWidget);
-      });
+  group('Sign in with Google button', () {
+    testWidgets('has a correct button label', (tester) async {
+      await render(tester, OAuthProviderButton(provider: provider));
+      expect(find.text(labels.signInWithGoogleButtonText), findsOneWidget);
+    });
 
-      testWidgets('calls sign in when tapped', (tester) async {
-        await render(tester, OAuthProviderButton(provider: provider));
+    testWidgets('calls sign in when tapped', (tester) async {
+      await render(tester, OAuthProviderButton(provider: provider));
 
-        final button = find.byType(OAuthProviderButtonBase);
-        await tester.tap(button);
+      final button = find.byType(OAuthProviderButtonBase);
+      await tester.tap(button);
 
-        await tester.pumpAndSettle();
-        verify(provider.provider.signIn()).called(1);
+      await tester.pumpAndSettle();
+      verify(provider.provider.authenticate(scopeHint: _scopes)).called(1);
 
-        expect(true, isTrue);
-      });
+      expect(true, isTrue);
+    });
 
-      testWidgets('shows loading indicator when sign in is in progress', (
-        tester,
+    testWidgets('shows loading indicator when sign in is in progress', (
+      tester,
+    ) async {
+      await render(tester, OAuthProviderButton(provider: provider));
+
+      when(provider.provider.authenticate(scopeHint: _scopes)).thenAnswer((
+        realInvocation,
       ) async {
-        await render(tester, OAuthProviderButton(provider: provider));
-
-        when(provider.provider.signIn()).thenAnswer((realInvocation) async {
-          await Future.delayed(const Duration(milliseconds: 50));
-          return MockGoogleSignInAccount();
-        });
-
-        final button = find.byType(OAuthProviderButtonBase);
-        await tester.tap(button);
-        await tester.pump();
-
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+        await Future.delayed(const Duration(milliseconds: 50));
+        return MockGoogleSignInAccount();
       });
 
-      testWidgets('signs the user in', (tester) async {
-        await render(tester, OAuthProviderButton(provider: provider));
+      final button = find.byType(OAuthProviderButtonBase);
+      await tester.tap(button);
+      await tester.pump();
 
-        final button = find.byType(OAuthProviderButtonBase);
-        await tester.tap(button);
-        await tester.pumpAndSettle();
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
 
-        final user = auth.currentUser!;
+    testWidgets('signs the user in', (tester) async {
+      await render(tester, OAuthProviderButton(provider: provider));
 
-        expect(user.displayName, 'Test User');
-        expect(user.email, 'test@test.com');
-      });
+      final button = find.byType(OAuthProviderButtonBase);
+      await tester.tap(button);
+      await tester.pumpAndSettle();
 
-      testWidgets('works standalone', (tester) async {
-        await render(
-          tester,
-          const GoogleSignInButton(
-            loadingIndicator: CircularProgressIndicator(),
-            clientId: 'test',
-          ),
-        );
+      final user = auth.currentUser!;
 
-        final button = find.byType(GoogleSignInButton);
-        await tester.tap(button);
-        await tester.pump();
-      });
-    },
-    skip: !provider.supportsPlatform(defaultTargetPlatform),
-  );
+      expect(user.displayName, 'Test User');
+      expect(user.email, 'test@test.com');
+    });
+
+    testWidgets('works standalone', (tester) async {
+      await render(
+        tester,
+        const GoogleSignInButton(
+          loadingIndicator: CircularProgressIndicator(),
+          clientId: 'test',
+        ),
+      );
+
+      final button = find.byType(GoogleSignInButton);
+      await tester.tap(button);
+      await tester.pump();
+    });
+  }, skip: !provider.supportsPlatform(defaultTargetPlatform));
 }
 
 // Mock JWT with the following payload:
@@ -106,25 +106,49 @@ void main() async {
 const _jwt =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.m5qYto_Vs5ELTURC8rkD-JAJuoosdQZeuUZ_qFrEiaE';
 
-class MockAuthentication extends Mock implements GoogleSignInAuthentication {
+class MockAuthorizationClient extends Mock
+    implements GoogleSignInAuthorizationClient {
   @override
-  final String accessToken = _jwt;
+  Future<GoogleSignInClientAuthorization?> authorizationForScopes(
+    List<String> scopes,
+  ) async {
+    return const GoogleSignInClientAuthorization(accessToken: _jwt);
+  }
 }
 
 // ignore: must_be_immutable
 class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {
   @override
-  Future<GoogleSignInAuthentication> get authentication async =>
-      MockAuthentication();
+  GoogleSignInAuthentication get authentication =>
+      const GoogleSignInAuthentication(idToken: _jwt);
+
+  @override
+  GoogleSignInAuthorizationClient get authorizationClient =>
+      MockAuthorizationClient();
 }
 
 class MockGoogleSignIn extends Mock implements GoogleSignIn {
   @override
-  Future<GoogleSignInAccount?> signIn() async {
+  Future<void> initialize({
+    String? clientId,
+    String? serverClientId,
+    String? nonce,
+    String? hostedDomain,
+  }) async {}
+
+  @override
+  Future<GoogleSignInAccount> authenticate({
+    List<String> scopeHint = const <String>[],
+  }) {
     return super.noSuchMethod(
-      Invocation.method(#signIn, []),
-      returnValue: MockGoogleSignInAccount(),
-      returnValueForMissingStub: MockGoogleSignInAccount(),
-    );
+          Invocation.method(#authenticate, [], {#scopeHint: scopeHint}),
+          returnValue: Future<GoogleSignInAccount>.value(
+            MockGoogleSignInAccount(),
+          ),
+          returnValueForMissingStub: Future<GoogleSignInAccount>.value(
+            MockGoogleSignInAccount(),
+          ),
+        )
+        as Future<GoogleSignInAccount>;
   }
 }
