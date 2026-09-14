@@ -4,15 +4,11 @@
 
 export 'package:firebase_auth/firebase_auth.dart' show OAuthCredential;
 
-// Re-export Wasm-compatible libraries instead of `desktop_webview_auth`,
-// which imports `dart:io`.
-// ignore: implementation_imports
-export 'package:desktop_webview_auth/src/auth_result.dart' show AuthResult;
-// ignore: implementation_imports
-export 'package:desktop_webview_auth/src/provider_args.dart' show ProviderArgs;
-export 'package:desktop_webview_auth/google.dart';
-export 'package:desktop_webview_auth/facebook.dart';
-export 'package:desktop_webview_auth/twitter.dart';
+export './src/oauth/auth_result.dart';
+export './src/oauth/provider_args.dart';
+export './src/oauth/google_sign_in_args.dart';
+export './src/oauth/facebook_sign_in_args.dart';
+export './src/oauth/twitter_sign_in_args.dart';
 
 export './src/oauth_provider.dart';
 export './src/oauth_provider_button_base.dart';
