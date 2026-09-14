@@ -113,6 +113,35 @@ void main() async {
         verifyNever(auth.signInWithProvider(fbProvider));
       });
 
+      testWidgets('reports an error when linking with no signed in user', (
+        tester,
+      ) async {
+        final listener = MockListener();
+
+        await render(
+          tester,
+          AuthStateListener<OAuthController>(
+            listener: (oldState, state, controller) {
+              listener(state);
+              return null;
+            },
+            child: OAuthProviderButton(
+              provider: provider,
+              auth: auth,
+              action: AuthAction.link,
+            ),
+          ),
+        );
+
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pumpAndSettle();
+
+        final result = verify(listener.call(captureAny));
+        expect(result.captured.last, isA<AuthFailed>());
+        verifyNever(auth.signInWithProvider(fbProvider));
+      });
+
       test('throws when AuthAction.none is used', () {
         provider.auth = auth;
 
