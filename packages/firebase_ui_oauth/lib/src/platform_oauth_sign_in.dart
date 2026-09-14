@@ -2,11 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:desktop_webview_auth/desktop_webview_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
+import 'oauth/auth_result.dart';
+import 'oauth/provider_args.dart';
 import 'oauth_provider.dart';
 
 /// {@template ui.oauth.platform_sign_in_mixin}
@@ -36,22 +38,41 @@ mixin PlatformSignInMixin {
   }
 
   /// Handles authentication logic on desktop platforms
-  void desktopSignIn(AuthAction action) {
-    DesktopWebviewAuth.signIn(desktopSignInArgs)
-        .then((value) {
-          if (value == null) throw AuthCancelledException();
+  void desktopSignIn(AuthAction action) async {
+    try {
+      final args = desktopSignInArgs;
+      final signInUri = await args.buildSignInUri();
+      final redirectUri = Uri.parse(args.redirectUri);
 
-          final oauthCredential = fromDesktopAuthResult(value);
-          onCredentialReceived(oauthCredential, action);
-        })
-        .catchError((err) {
-          if (err is AuthCancelledException) {
-            authListener.onCanceled();
-            return;
-          }
+      final callbackUrl = await FlutterWebAuth2.authenticate(
+        url: signInUri,
+        callbackUrlScheme: redirectUri.scheme,
+        options: FlutterWebAuth2Options(
+          httpsHost: redirectUri.host,
+          httpsPath: redirectUri.path,
+        ),
+      );
 
-          authListener.onError(err);
-        });
+      final value = await args.authorizeFromCallback(callbackUrl);
+      if (value == null) throw AuthCancelledException();
+
+      final oauthCredential = fromDesktopAuthResult(value);
+      onCredentialReceived(oauthCredential, action);
+    } on PlatformException catch (err) {
+      if (err.code == 'CANCELED') {
+        authListener.onCanceled();
+        return;
+      }
+
+      authListener.onError(err);
+    } catch (err) {
+      if (err is AuthCancelledException) {
+        authListener.onCanceled();
+        return;
+      }
+
+      authListener.onError(err);
+    }
   }
 
   /// Handles authentication logic on mobile platforms.
