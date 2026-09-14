@@ -43,3 +43,14 @@ android {
 flutter {
     source = "../.."
 }
+
+configurations.all {
+    resolutionStrategy {
+        // flutter_web_auth_2 (used by firebase_ui_oauth) pulls in
+        // androidx.browser 1.9.0, which requires AGP 8.9.1+. Force an
+        // older, still-compatible version until AGP can be bumped (blocked
+        // on twitter_login releasing a fix, see the compileSdk comment
+        // above).
+        force "androidx.browser:browser:1.8.0"
+    }
+}

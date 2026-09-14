@@ -80,25 +80,26 @@ class TwitterSignInArgs extends ProviderArgs {
   }
 
   Future<({String token, String secret})> getRequestToken() async {
-    try {
-      final res = await _post(_requestTokenPath, {
-        'oauth_callback': Uri.encodeFull(redirectUri),
-      });
+    final res = await _post(_requestTokenPath, {
+      'oauth_callback': Uri.encodeFull(redirectUri),
+    });
 
-      if (res == null) throw Exception();
-
-      final body = Uri.splitQueryString(res);
-      final requestToken = body['oauth_token'];
-      final requestTokenSecret = body['oauth_token_secret'];
-
-      if (requestToken == null || requestTokenSecret == null) {
-        throw Exception();
-      }
-
-      return (token: requestToken, secret: requestTokenSecret);
-    } on Exception catch (_) {
-      throw Exception("Couldn't get request token");
+    if (res == null) {
+      throw Exception("Couldn't get Twitter request token: empty response");
     }
+
+    final body = Uri.splitQueryString(res);
+    final requestToken = body['oauth_token'];
+    final requestTokenSecret = body['oauth_token_secret'];
+
+    if (requestToken == null || requestTokenSecret == null) {
+      throw Exception(
+        "Couldn't get Twitter request token: response missing "
+        'oauth_token/oauth_token_secret ($body)',
+      );
+    }
+
+    return (token: requestToken, secret: requestTokenSecret);
   }
 
   /// [tokenSecret] is the OAuth 1.0a token secret used to derive the request
