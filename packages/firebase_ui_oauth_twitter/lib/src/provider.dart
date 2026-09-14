@@ -107,8 +107,26 @@ class TwitterProvider extends OAuthProvider {
     // Linking is also used to upgrade an anonymous user, so that the
     // anonymous uid survives the sign in.
     if (action == AuthAction.link || shouldUpgradeAnonymous) {
-      auth.currentUser
-          ?.linkWithProvider(firebaseAuthProvider)
+      final currentUser = auth.currentUser;
+
+      // Only AuthAction.link can reach this with no user, since
+      // shouldUpgradeAnonymous is false when currentUser is null. Reporting it
+      // matters because a null-shorting call would leave the flow stuck in its
+      // loading state with no error and no completion.
+      if (currentUser == null) {
+        authListener.onError(
+          FirebaseAuthException(
+            code: 'no-current-user',
+            message:
+                'AuthAction.link requires a signed in user to link the '
+                'Twitter credential to, but FirebaseAuth.currentUser is null.',
+          ),
+        );
+        return;
+      }
+
+      currentUser
+          .linkWithProvider(firebaseAuthProvider)
           .then(_onLinked)
           .catchError(authListener.onError);
       return;
