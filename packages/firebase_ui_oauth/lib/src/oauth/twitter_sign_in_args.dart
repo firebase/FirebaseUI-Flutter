@@ -39,6 +39,7 @@ class TwitterSignInArgs extends ProviderArgs {
   });
 
   late String token;
+  String _tokenSecret = '';
 
   @override
   Map<String, String> buildQueryParameters() {
@@ -47,20 +48,26 @@ class TwitterSignInArgs extends ProviderArgs {
 
   @override
   Future<String> buildSignInUri() async {
-    token = await getRequestToken();
+    final requestToken = await getRequestToken();
+    token = requestToken.token;
+    _tokenSecret = requestToken.secret;
     return super.buildSignInUri();
   }
 
   @override
   Future<AuthResult?> authorizeFromCallback(String callbackUrl) async {
     final parsed = Uri.parse(callbackUrl);
-    final oauthToken = parsed.queryParameters['oauth_token'] as String;
-    final oauthVerifier = parsed.queryParameters['oauth_verifier'] as String;
+    final oauthToken = parsed.queryParameters['oauth_token'];
+    final oauthVerifier = parsed.queryParameters['oauth_verifier'];
+
+    // The user denied consent (Twitter redirects with `denied=<token>` and
+    // no `oauth_verifier` in that case), or the callback is malformed.
+    if (oauthToken == null || oauthVerifier == null) return null;
 
     final res = await _post(_accessTokenPath, {
       'oauth_token': oauthToken,
       'oauth_verifier': oauthVerifier,
-    });
+    }, tokenSecret: _tokenSecret);
 
     if (res == null) throw Exception("Couldn't authroize");
 
@@ -72,7 +79,7 @@ class TwitterSignInArgs extends ProviderArgs {
     );
   }
 
-  Future<String> getRequestToken() async {
+  Future<({String token, String secret})> getRequestToken() async {
     try {
       final res = await _post(_requestTokenPath, {
         'oauth_callback': Uri.encodeFull(redirectUri),
@@ -81,24 +88,34 @@ class TwitterSignInArgs extends ProviderArgs {
       if (res == null) throw Exception();
 
       final body = Uri.splitQueryString(res);
+      final requestToken = body['oauth_token'];
+      final requestTokenSecret = body['oauth_token_secret'];
 
-      if (body.containsKey('oauth_token')) {
-        return body['oauth_token'] as String;
-      } else {
+      if (requestToken == null || requestTokenSecret == null) {
         throw Exception();
       }
+
+      return (token: requestToken, secret: requestTokenSecret);
     } on Exception catch (_) {
       throw Exception("Couldn't get request token");
     }
   }
 
-  Future<String?> _post(String path, Map<String, String> params) async {
+  /// [tokenSecret] is the OAuth 1.0a token secret used to derive the request
+  /// signing key. It must never be sent as a request parameter, so it's kept
+  /// separate from [params] rather than smuggled inside that map.
+  Future<String?> _post(
+    String path,
+    Map<String, String> params, {
+    String tokenSecret = '',
+  }) async {
     final uri = Uri(scheme: 'https', host: host, path: path);
 
     final authorization = _buildAuthHeader(
       method: 'POST',
       uri: uri,
       params: params,
+      requestSecretKey: tokenSecret,
     );
 
     final res = await http.post(uri, headers: {'Authorization': authorization});
@@ -114,10 +131,10 @@ class TwitterSignInArgs extends ProviderArgs {
     required String method,
     required Uri uri,
     required Map<String, String> params,
+    required String requestSecretKey,
   }) {
     final timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     final nonce = generateNonce();
-    final requestSecretKey = params['oauth_token_secret'];
 
     final signature = _createSignature(
       method: method,
@@ -125,10 +142,8 @@ class TwitterSignInArgs extends ProviderArgs {
       timestamp: timestamp,
       nonce: nonce,
       params: params,
-      requestSecretKey: requestSecretKey ?? '',
+      requestSecretKey: requestSecretKey,
     );
-
-    final paramsClone = Map<String, dynamic>.from(params);
 
     final authComponents = [
       'OAuth oauth_consumer_key="$apiKey"',
@@ -137,8 +152,8 @@ class TwitterSignInArgs extends ProviderArgs {
       'oauth_signature_method="$_kSignatureMethod"',
       'oauth_timestamp="$timestamp"',
       'oauth_version="$_kOAuthVersion"',
-      for (var key in paramsClone.keys)
-        '$key="${Uri.encodeComponent(paramsClone[key])}"',
+      for (var key in params.keys)
+        '$key="${Uri.encodeComponent(params[key]!)}"',
     ];
 
     authComponents.sort();

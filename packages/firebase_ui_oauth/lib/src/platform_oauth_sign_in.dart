@@ -2,7 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:io' show Platform;
+
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
@@ -10,6 +13,22 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'oauth/auth_result.dart';
 import 'oauth/provider_args.dart';
 import 'oauth_provider.dart';
+
+/// flutter_web_auth_2 can only match an `https` callback URL by host/path
+/// (rather than completing on the first `https` navigation it sees) from
+/// macOS 14.4 onward. Below that, desktop OAuth sign-in via the Firebase
+/// hosted auth handler is not reliable.
+/// See https://pub.dev/packages/flutter_web_auth_2.
+bool _macOSSupportsHttpsCallbackMatching() {
+  final match = RegExp(
+    r'(\d+)\.(\d+)',
+  ).firstMatch(Platform.operatingSystemVersion);
+  if (match == null) return false;
+
+  final major = int.parse(match.group(1)!);
+  final minor = int.parse(match.group(2)!);
+  return major > 14 || (major == 14 && minor >= 4);
+}
 
 /// {@template ui.oauth.platform_sign_in_mixin}
 /// A helper mixin that implements the platform-specific sign-in logic.
@@ -40,6 +59,15 @@ mixin PlatformSignInMixin {
   /// Handles authentication logic on desktop platforms
   void desktopSignIn(AuthAction action) async {
     try {
+      if (defaultTargetPlatform == TargetPlatform.macOS &&
+          !_macOSSupportsHttpsCallbackMatching()) {
+        throw UnsupportedError(
+          'Desktop OAuth sign-in requires macOS 14.4 or later. Below that '
+          "version, flutter_web_auth_2 can't reliably match the OAuth "
+          'callback URL and the sign-in flow would silently fail.',
+        );
+      }
+
       final args = desktopSignInArgs;
       final signInUri = await args.buildSignInUri();
       final redirectUri = Uri.parse(args.redirectUri);
@@ -50,6 +78,7 @@ mixin PlatformSignInMixin {
         options: FlutterWebAuth2Options(
           httpsHost: redirectUri.host,
           httpsPath: redirectUri.path,
+          useWebview: true,
         ),
       );
 
