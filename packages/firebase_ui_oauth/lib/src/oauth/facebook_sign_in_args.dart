@@ -2,6 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'auth_result.dart';
 import 'oauth_util.dart';
 import 'provider_args.dart';
 
@@ -33,5 +34,23 @@ class FacebookSignInArgs extends ProviderArgs {
       'state': state,
       'response_type': _responseType,
     };
+  }
+
+  /// Validates the `state` echoed back by Facebook against the one sent in
+  /// [buildQueryParameters] before accepting the callback, to guard against
+  /// CSRF: an attacker tricking the app into completing a sign-in the user
+  /// never started.
+  @override
+  Future<AuthResult?> authorizeFromCallback(String callbackUrl) async {
+    final uri = Uri.parse(callbackUrl);
+    final args = usesFragment
+        ? Uri.splitQueryString(uri.fragment)
+        : uri.queryParameters;
+
+    if (args['state'] != state) {
+      throw Exception('OAuth state mismatch, possible CSRF attempt');
+    }
+
+    return super.authorizeFromCallback(callbackUrl);
   }
 }

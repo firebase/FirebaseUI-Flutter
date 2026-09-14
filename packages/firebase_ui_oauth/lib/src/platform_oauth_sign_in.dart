@@ -59,7 +59,12 @@ mixin PlatformSignInMixin {
   /// Handles authentication logic on desktop platforms
   void desktopSignIn(AuthAction action) async {
     try {
-      if (defaultTargetPlatform == TargetPlatform.macOS &&
+      final args = desktopSignInArgs;
+      final redirectUri = Uri.parse(args.redirectUri);
+      final isHttpsCallback = redirectUri.scheme == 'https';
+
+      if (isHttpsCallback &&
+          defaultTargetPlatform == TargetPlatform.macOS &&
           !_macOSSupportsHttpsCallbackMatching()) {
         throw UnsupportedError(
           'Desktop OAuth sign-in requires macOS 14.4 or later. Below that '
@@ -68,16 +73,17 @@ mixin PlatformSignInMixin {
         );
       }
 
-      final args = desktopSignInArgs;
       final signInUri = await args.buildSignInUri();
-      final redirectUri = Uri.parse(args.redirectUri);
 
       final callbackUrl = await FlutterWebAuth2.authenticate(
         url: signInUri,
         callbackUrlScheme: redirectUri.scheme,
         options: FlutterWebAuth2Options(
-          httpsHost: redirectUri.host,
-          httpsPath: redirectUri.path,
+          // httpsHost/httpsPath only apply to `https` callbacks (Universal
+          // Links); passing them for a custom-scheme redirectUri would send
+          // its (empty) host/path as if they were meaningful HTTPS values.
+          httpsHost: isHttpsCallback ? redirectUri.host : null,
+          httpsPath: isHttpsCallback ? redirectUri.path : null,
           useWebview: true,
         ),
       );
