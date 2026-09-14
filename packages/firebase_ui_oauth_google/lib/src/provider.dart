@@ -88,15 +88,17 @@ class GoogleProvider extends OAuthProvider {
   }
 
   Future<void> _ensureInitialized() {
-    return _initialization ??= provider.initialize(
-      clientId: _ignoreClientId() ? null : clientId,
-      serverClientId: serverClientId,
-    ).catchError((Object err) {
-      // Allow a later sign-in attempt to retry initialization instead of
-      // rethrowing the same stale error forever.
-      _initialization = null;
-      throw err;
-    });
+    return _initialization ??= provider
+        .initialize(
+          clientId: _ignoreClientId() ? null : clientId,
+          serverClientId: serverClientId,
+        )
+        .catchError((Object err) {
+          // Allow a later sign-in attempt to retry initialization instead of
+          // rethrowing the same stale error forever.
+          _initialization = null;
+          throw err;
+        });
   }
 
   @override
