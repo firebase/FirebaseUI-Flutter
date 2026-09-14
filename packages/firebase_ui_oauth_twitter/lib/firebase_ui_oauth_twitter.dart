@@ -15,8 +15,8 @@ class TwitterSignInButton extends _TwitterSignInButton {
   const TwitterSignInButton({
     super.key,
     required super.loadingIndicator,
-    required super.apiKey,
-    required super.apiSecretKey,
+    super.apiKey,
+    super.apiSecretKey,
     super.redirectUri,
     super.action = null,
     super.auth,
@@ -35,8 +35,8 @@ class TwitterSignInButton extends _TwitterSignInButton {
 class TwitterSignInIconButton extends _TwitterSignInButton {
   const TwitterSignInIconButton({
     super.key,
-    required super.apiKey,
-    required super.apiSecretKey,
+    super.apiKey,
+    super.apiSecretKey,
     required super.loadingIndicator,
     super.action = null,
     super.auth,
@@ -74,16 +74,16 @@ class _TwitterSignInButton extends StatelessWidget {
   final DifferentProvidersFoundCallback? onDifferentProvidersFound;
   final SignedInCallback? onSignedIn;
   final double size;
-  final String apiKey;
-  final String apiSecretKey;
+  final String? apiKey;
+  final String? apiSecretKey;
   final String? redirectUri;
   final void Function(Exception exception)? onError;
   final VoidCallback? onCanceled;
 
   const _TwitterSignInButton({
     super.key,
-    required this.apiKey,
-    required this.apiSecretKey,
+    this.apiKey,
+    this.apiSecretKey,
     required this.loadingIndicator,
     String? label,
     bool? overrideDefaultTapAction,
