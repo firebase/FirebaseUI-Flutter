@@ -16,6 +16,7 @@ class GoogleSignInButton extends _GoogleSignInButton {
     super.key,
     required super.loadingIndicator,
     required super.clientId,
+    super.serverClientId,
     super.redirectUri,
     super.scopes,
     super.action = null,
@@ -36,6 +37,7 @@ class GoogleSignInIconButton extends _GoogleSignInButton {
   const GoogleSignInIconButton({
     super.key,
     required super.clientId,
+    super.serverClientId,
     required super.loadingIndicator,
     super.scopes,
     super.action = null,
@@ -75,6 +77,7 @@ class _GoogleSignInButton extends StatelessWidget {
   final SignedInCallback? onSignedIn;
   final double size;
   final String clientId;
+  final String? serverClientId;
   final String? redirectUri;
   final List<String>? scopes;
   final void Function(Exception exception)? onError;
@@ -83,6 +86,7 @@ class _GoogleSignInButton extends StatelessWidget {
   const _GoogleSignInButton({
     super.key,
     required this.clientId,
+    this.serverClientId,
     required this.loadingIndicator,
     this.scopes,
     String? label,
@@ -106,6 +110,7 @@ class _GoogleSignInButton extends StatelessWidget {
 
     return GoogleProvider(
       clientId: clientId,
+      serverClientId: serverClientId,
       redirectUri: redirectUri,
       scopes: scopes ?? [],
     );
