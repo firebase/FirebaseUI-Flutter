@@ -717,6 +717,9 @@ class ProfileScreen extends MultiProviderScreen {
   /// ```
   final List<FirebaseUIAction>? actions;
 
+  // Any actions that should be performed before the account is deleted.
+  final ActionsBeforeDeleteCallback? actionsBeforeDelete;
+
   /// See [Scaffold.appBar].
   final AppBar? appBar;
 
@@ -755,6 +758,7 @@ class ProfileScreen extends MultiProviderScreen {
     this.avatarSize,
     this.children = const [],
     this.actions,
+    this.actionsBeforeDelete,
     this.appBar,
     this.cupertinoNavigationBar,
     this.actionCodeSettings,
@@ -920,6 +924,7 @@ class ProfileScreen extends MultiProviderScreen {
         const SizedBox(height: 8),
         DeleteAccountButton(
           auth: auth,
+          actionsBeforeDelete: actionsBeforeDelete,
           showDeleteConfirmationDialog: showDeleteConfirmationDialog,
           deleteConfirmation: deleteConfirmation,
           onSignInRequired: () {
