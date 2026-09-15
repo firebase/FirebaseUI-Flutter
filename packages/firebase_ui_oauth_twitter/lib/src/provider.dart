@@ -84,7 +84,8 @@ class TwitterProvider extends OAuthProvider {
   /// first signal the developer gets is a sign in that fails in the browser.
   void _warnIfKeysAreIgnored() {
     if (!kDebugMode || _warnedAboutIgnoredKeys) return;
-    if (!(apiKey?.isNotEmpty ?? false) && !(apiSecretKey?.isNotEmpty ?? false)) {
+    if (!(apiKey?.isNotEmpty ?? false) &&
+        !(apiSecretKey?.isNotEmpty ?? false)) {
       return;
     }
 
