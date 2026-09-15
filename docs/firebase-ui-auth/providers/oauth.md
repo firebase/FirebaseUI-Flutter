@@ -230,8 +230,9 @@ TwitterProvider(
 ),
 ```
 
-They are ignored on Android, iOS and the web, and `TwitterProvider` throws if they are missing on a
-platform that needs them.
+They are ignored on Android, iOS and the web. On a platform that needs them, sign in fails with a
+`FirebaseAuthException` rather than proceeding with empty credentials, so an absent
+`--dart-define` surfaces as a clear error.
 
 Because the secret is embedded in desktop builds, pass it at build time rather than committing it:
 
@@ -242,6 +243,33 @@ flutter run --dart-define TWITTER_SECRET=<your-twitter-api-secret-key>
 ```dart
 apiSecretKey: String.fromEnvironment('TWITTER_SECRET'),
 ```
+
+### Upgrading from 2.x
+
+Version 3.0.0 moved Android and iOS sign in from the `twitter_login` package to Firebase's own
+provider flow. Your code will still compile unchanged, but sign in fails at runtime on those two
+platforms until you update the configuration:
+
+1. In the [X developer portal](https://developer.twitter.com/en/portal/projects-and-apps), set the
+   app's Callback URL to `https://<your-project-id>.firebaseapp.com/__/auth/handler`. X accepts
+   several callback URLs, so you can add it alongside the custom scheme you use today and keep an
+   older build of your app working while you roll out.
+2. Add the encoded app ID URL scheme to `ios/Runner/Info.plist`, as described above.
+3. Register your Android SHA-1 fingerprint in the Firebase Console.
+4. Remove `twitter_login` from your `pubspec.yaml` if you depended on it directly, along with the
+   callback intent filter it needed in `AndroidManifest.xml`.
+
+`apiKey` and `apiSecretKey` are now optional. Drop them unless you ship for macOS or Windows.
+
+Two behaviours also changed on Android and iOS, both because Firebase signs the user in as part of
+returning the credential:
+
+- `AuthAction.none` fails with a `FirebaseAuthException`, where it previously handed you a
+  credential without signing in.
+- The credential passed to `onCredentialLinked` is a plain `AuthCredential` rather than an
+  `OAuthCredential`, so it carries no `secret` and cannot be cast to `OAuthCredential`.
+
+macOS, Windows and the web are unaffected.
 
 See [Custom screens section](#custom-screens) to learn how to use a button on your custom screen.
 

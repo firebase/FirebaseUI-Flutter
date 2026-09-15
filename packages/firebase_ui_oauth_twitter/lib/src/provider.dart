@@ -43,12 +43,23 @@ class TwitterProvider extends OAuthProvider {
   @override
   TwitterAuthProvider firebaseAuthProvider = TwitterAuthProvider();
 
+  /// Whether both OAuth 1.0a credentials are usable.
+  ///
+  /// `String.fromEnvironment` yields an empty string rather than null when the
+  /// define is absent, and that is the documented way to supply these, so an
+  /// empty value has to count as missing too.
+  bool get _hasDesktopCredentials =>
+      (apiKey?.isNotEmpty ?? false) && (apiSecretKey?.isNotEmpty ?? false);
+
   @override
   TwitterSignInArgs get desktopSignInArgs {
     final apiKey = this.apiKey;
     final apiSecretKey = this.apiSecretKey;
 
-    if (apiKey == null || apiSecretKey == null) {
+    if (apiKey == null ||
+        apiKey.isEmpty ||
+        apiSecretKey == null ||
+        apiSecretKey.isEmpty) {
       throw ArgumentError(
         'TwitterProvider.apiKey and TwitterProvider.apiSecretKey are required '
         'on $defaultTargetPlatform, which signs in using the OAuth 1.0a flow. '
@@ -74,7 +85,9 @@ class TwitterProvider extends OAuthProvider {
   /// first signal the developer gets is a sign in that fails in the browser.
   void _warnIfKeysAreIgnored() {
     if (!kDebugMode || _warnedAboutIgnoredKeys) return;
-    if (apiKey == null && apiSecretKey == null) return;
+    if (!(apiKey?.isNotEmpty ?? false) && !(apiSecretKey?.isNotEmpty ?? false)) {
+      return;
+    }
 
     _warnedAboutIgnoredKeys = true;
 
@@ -91,15 +104,53 @@ class TwitterProvider extends OAuthProvider {
     );
   }
 
+  /// Whether [error] is the user dismissing the sign in sheet.
+  ///
+  /// The native SDKs surface this as a `FirebaseAuthException` rather than a
+  /// cancellation, so it has to be recognised by code. Android reports the
+  /// underlying `ERROR_`-prefixed constant while Apple platforms report the
+  /// hyphenated form, and both spellings of "cancelled" are in use.
+  bool _isUserCancellation(Object error) {
+    if (error is! FirebaseAuthException) return false;
+
+    var code = error.code.toLowerCase().replaceAll('_', '-');
+    if (code.startsWith('error-')) code = code.substring('error-'.length);
+
+    return const {
+      'web-context-cancelled',
+      'web-context-canceled',
+      'user-cancelled',
+      'user-canceled',
+    }.contains(code);
+  }
+
+  void _onError(Object error) {
+    if (_isUserCancellation(error)) {
+      authListener.onCanceled();
+      return;
+    }
+
+    authListener.onError(error);
+  }
+
   @override
   void mobileSignIn(AuthAction action) {
     if (action == AuthAction.none) {
-      throw UnsupportedError(
-        'AuthAction.none is not supported by TwitterProvider on '
-        '$defaultTargetPlatform. Firebase signs the user in as part of '
-        'obtaining the credential, so the credential cannot be returned '
-        'without also creating a session.',
+      // Reported rather than thrown: signIn() has already moved the flow into
+      // its loading state, and an Error raised here would escape both
+      // AuthFlow.onError and the button's handler, which catch only Exception,
+      // leaving the button spinning forever.
+      authListener.onError(
+        FirebaseAuthException(
+          code: 'unsupported-auth-action',
+          message:
+              'AuthAction.none is not supported by TwitterProvider on '
+              '$defaultTargetPlatform. Firebase signs the user in as part of '
+              'obtaining the credential, so the credential cannot be returned '
+              'without also creating a session.',
+        ),
       );
+      return;
     }
 
     _warnIfKeysAreIgnored();
@@ -128,14 +179,36 @@ class TwitterProvider extends OAuthProvider {
       currentUser
           .linkWithProvider(firebaseAuthProvider)
           .then(_onLinked)
-          .catchError(authListener.onError);
+          .catchError(_onError);
       return;
     }
 
     auth
         .signInWithProvider(firebaseAuthProvider)
         .then(authListener.onSignedIn)
-        .catchError(authListener.onError);
+        .catchError(_onError);
+  }
+
+  @override
+  void desktopSignIn(AuthAction action) {
+    // desktopSignInArgs is read synchronously by the desktop flow, outside any
+    // error handling, so a throw there would escape as an Error and hang the
+    // UI. Check first and report through the listener instead.
+    if (!_hasDesktopCredentials) {
+      authListener.onError(
+        FirebaseAuthException(
+          code: 'missing-oauth-credentials',
+          message:
+              'TwitterProvider.apiKey and TwitterProvider.apiSecretKey are '
+              'required on $defaultTargetPlatform, which signs in using the '
+              'OAuth 1.0a flow. Android and iOS use the Firebase native '
+              'provider flow and do not need them.',
+        ),
+      );
+      return;
+    }
+
+    super.desktopSignIn(action);
   }
 
   @override
@@ -157,6 +230,22 @@ class TwitterProvider extends OAuthProvider {
   }
 
   void _onLinked(UserCredential userCredential) {
-    authListener.onCredentialLinked(userCredential.credential!);
+    final credential = userCredential.credential;
+
+    // Nullable on every platform, and a force unwrap here would throw inside
+    // .then, reaching onError as an Error and hanging the flow.
+    if (credential == null) {
+      authListener.onError(
+        FirebaseAuthException(
+          code: 'missing-credential',
+          message:
+              'The Twitter account was linked, but Firebase returned no '
+              'credential for it.',
+        ),
+      );
+      return;
+    }
+
+    authListener.onCredentialLinked(credential);
   }
 }
