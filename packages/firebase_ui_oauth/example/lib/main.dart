@@ -108,10 +108,7 @@ class _ContentState extends State<Content> {
               GoogleProvider(clientId: '', redirectUri: '', scopes: []),
               'Sign in with Google',
             ),
-            _button(
-              TwitterProvider(),
-              'Sign in with Twitter',
-            ),
+            _button(TwitterProvider(), 'Sign in with Twitter'),
           ],
         ),
       ),
