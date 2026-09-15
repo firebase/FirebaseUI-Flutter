@@ -17,6 +17,14 @@ class GoogleProvider extends OAuthProvider {
   /// Ignored on Android and iOS (if `iOSPreferPlist` is true).
   final String clientId;
 
+  /// The client ID of the web OAuth client associated with the app's
+  /// server-side component, if any.
+  ///
+  /// On Android this is required to receive an ID token, unless the app uses
+  /// `google-services.json` and it contains a web OAuth client entry, in
+  /// which case the plugin reads the value from there.
+  final String? serverClientId;
+
   /// When true, the Google Sign In plugin will use the GoogleService-Info.plist
   /// for configuration instead of the `clientId` parameter.
   final bool iOSPreferPlist;
@@ -28,7 +36,23 @@ class GoogleProvider extends OAuthProvider {
   /// The list of requested authorization scopes requested when signing in.
   final List<String>? scopes;
 
-  late GoogleSignIn provider;
+  /// The plugin instance. google_sign_in 7 exposes a single shared instance.
+  /// Assignable so that tests can inject a mock.
+  GoogleSignIn provider = GoogleSignIn.instance;
+
+  // google_sign_in 7 requires initialize to be called exactly once, while
+  // multiple GoogleProvider instances may be created (for example one per
+  // GoogleSignInButton). The first instance to sign in configures the plugin.
+  static Future<void>? _initialization;
+
+  /// Resets the one-time initialization state.
+  ///
+  /// The plugin is initialized exactly once per process, so tests that inject
+  /// a fresh mock in `setUp` must clear the cached future to stay isolated.
+  @visibleForTesting
+  static void debugReset() {
+    _initialization = null;
+  }
 
   @override
   final fba.GoogleAuthProvider firebaseAuthProvider = fba.GoogleAuthProvider();
@@ -44,6 +68,7 @@ class GoogleProvider extends OAuthProvider {
 
   GoogleProvider({
     required this.clientId,
+    this.serverClientId,
     this.redirectUri,
     this.scopes,
     this.iOSPreferPlist = false,
@@ -51,12 +76,6 @@ class GoogleProvider extends OAuthProvider {
     firebaseAuthProvider.setCustomParameters(const {
       'prompt': 'select_account',
     });
-
-    if (_ignoreClientId()) {
-      provider = GoogleSignIn(scopes: scopes ?? []);
-    } else {
-      provider = GoogleSignIn(clientId: clientId, scopes: scopes ?? []);
-    }
   }
 
   bool _ignoreClientId() {
@@ -68,25 +87,57 @@ class GoogleProvider extends OAuthProvider {
     return false;
   }
 
+  Future<void> _ensureInitialized() {
+    return _initialization ??= provider
+        .initialize(
+          clientId: _ignoreClientId() ? null : clientId,
+          serverClientId: serverClientId,
+        )
+        .catchError((Object err) {
+          // Allow a later sign-in attempt to retry initialization instead of
+          // rethrowing the same stale error forever.
+          _initialization = null;
+          throw err;
+        });
+  }
+
   @override
   void mobileSignIn(AuthAction action) async {
-    provider
-        .signIn()
-        .then((user) {
-          if (user == null) throw AuthCancelledException();
-          return user.authentication;
-        })
-        .then((auth) {
-          final credential = fba.GoogleAuthProvider.credential(
-            accessToken: auth.accessToken,
-            idToken: auth.idToken,
-          );
+    final requestedScopes = scopes ?? const <String>[];
 
-          onCredentialReceived(credential, action);
-        })
-        .catchError((err) {
-          authListener.onError(err);
-        });
+    try {
+      await _ensureInitialized();
+
+      final account = await provider.authenticate(scopeHint: requestedScopes);
+
+      // Authentication and authorization are separate steps in
+      // google_sign_in 7. Reuse an existing authorization when one is
+      // available, otherwise prompt for the requested scopes so that the
+      // credential carries an access token, matching the previous behavior.
+      String? accessToken;
+      if (requestedScopes.isNotEmpty) {
+        final client = account.authorizationClient;
+        final authorization =
+            await client.authorizationForScopes(requestedScopes) ??
+            await client.authorizeScopes(requestedScopes);
+        accessToken = authorization.accessToken;
+      }
+
+      final credential = fba.GoogleAuthProvider.credential(
+        accessToken: accessToken,
+        idToken: account.authentication.idToken,
+      );
+
+      onCredentialReceived(credential, action);
+    } on GoogleSignInException catch (err) {
+      if (err.code == GoogleSignInExceptionCode.canceled) {
+        authListener.onError(AuthCancelledException());
+      } else {
+        authListener.onError(err);
+      }
+    } catch (err) {
+      authListener.onError(err);
+    }
   }
 
   @override
@@ -112,6 +163,7 @@ class GoogleProvider extends OAuthProvider {
     if (defaultTargetPlatform == TargetPlatform.android ||
         defaultTargetPlatform == TargetPlatform.iOS ||
         defaultTargetPlatform == TargetPlatform.macOS) {
+      await _ensureInitialized();
       await provider.signOut();
     }
   }
