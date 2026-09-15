@@ -93,11 +93,12 @@ class GoogleProvider extends OAuthProvider {
           clientId: _ignoreClientId() ? null : clientId,
           serverClientId: serverClientId,
         )
-        .catchError((Object err) {
+        .catchError((Object err, StackTrace stackTrace) {
           // Allow a later sign-in attempt to retry initialization instead of
-          // rethrowing the same stale error forever.
+          // rethrowing the same stale error forever. Preserve the original
+          // stack trace rather than resetting it with a bare `throw`.
           _initialization = null;
-          throw err;
+          Error.throwWithStackTrace(err, stackTrace);
         });
   }
 
