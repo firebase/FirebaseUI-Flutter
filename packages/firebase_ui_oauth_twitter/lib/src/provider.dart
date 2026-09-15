@@ -17,8 +17,7 @@ import 'theme.dart';
 ///
 /// macOS and Windows still perform the OAuth 1.0a flow in-process and do
 /// require [apiKey] and [apiSecretKey]. `signInWithProvider` rejects every
-/// provider except Apple and Game Center on macOS, so the desktop flow stays
-/// in place there.
+/// provider except Apple on macOS, so the desktop flow stays in place there.
 class TwitterProvider extends OAuthProvider {
   @override
   final providerId = 'twitter.com';
@@ -97,7 +96,7 @@ class TwitterProvider extends OAuthProvider {
       'reads the Twitter API key and secret from the Firebase console. They '
       'are still used on macOS and Windows.\n'
       'If sign in fails, check that the Twitter app callback URL is '
-      '"${redirectUri ?? defaultRedirectUri}", and that you have added the '
+      '"$defaultRedirectUri", and that you have added the '
       'Encoded App ID URL scheme (iOS) or your SHA-1 fingerprint '
       '(Android). See '
       'https://github.com/firebase/FirebaseUI-Flutter/blob/main/docs/firebase-ui-auth/providers/oauth.md#twitter-login',
