@@ -100,9 +100,16 @@ void main() async {
         final anonymousUser = MockAnonymousUser();
         auth.currentUserOverride = anonymousUser;
 
+        // AuthAction.signIn is explicit: the flow would otherwise resolve to
+        // AuthAction.link on its own whenever currentUser is non-null, and the
+        // test would pass without shouldUpgradeAnonymous being consulted.
         await render(
           tester,
-          OAuthProviderButton(provider: provider, auth: auth),
+          OAuthProviderButton(
+            provider: provider,
+            auth: auth,
+            action: AuthAction.signIn,
+          ),
         );
 
         final button = find.byType(OAuthProviderButtonBase);
@@ -142,14 +149,90 @@ void main() async {
         verifyNever(auth.signInWithProvider(fbProvider));
       });
 
-      test('throws when AuthAction.none is used', () {
-        provider.auth = auth;
+      testWidgets('reports an error rather than hanging for AuthAction.none', (
+        tester,
+      ) async {
+        final listener = MockListener();
 
-        expect(
-          () => provider.mobileSignIn(AuthAction.none),
-          throwsUnsupportedError,
+        await render(
+          tester,
+          AuthStateListener<OAuthController>(
+            listener: (oldState, state, controller) {
+              listener(state);
+              return null;
+            },
+            child: OAuthProviderButton(
+              provider: provider,
+              auth: auth,
+              action: AuthAction.none,
+            ),
+          ),
         );
+
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pumpAndSettle();
+
+        final result = verify(listener.call(captureAny));
+        expect(result.captured.last, isA<AuthFailed>());
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+        verifyNever(auth.signInWithProvider(fbProvider));
       });
+
+      testWidgets('resets the flow when the user cancels', (tester) async {
+        auth.signInErrorOverride = fba.FirebaseAuthException(
+          code: 'web-context-cancelled',
+        );
+
+        final listener = MockListener();
+
+        await render(
+          tester,
+          AuthStateListener<OAuthController>(
+            listener: (oldState, state, controller) {
+              listener(state);
+              return null;
+            },
+            child: OAuthProviderButton(provider: provider, auth: auth),
+          ),
+        );
+
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pumpAndSettle();
+
+        final result = verify(listener.call(captureAny));
+        expect(result.captured.last, isNot(isA<AuthFailed>()));
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+      });
+
+      testWidgets(
+        'reports an error rather than hanging when desktop keys are missing',
+        (tester) async {
+          final listener = MockListener();
+
+          await render(
+            tester,
+            Theme(
+              data: ThemeData(platform: TargetPlatform.macOS),
+              child: AuthStateListener<OAuthController>(
+                listener: (oldState, state, controller) {
+                  listener(state);
+                  return null;
+                },
+                child: OAuthProviderButton(provider: provider, auth: auth),
+              ),
+            ),
+          );
+
+          final button = find.byType(OAuthProviderButtonBase);
+          await tester.tap(button);
+          await tester.pumpAndSettle();
+
+          final result = verify(listener.call(captureAny));
+          expect(result.captured.last, isA<AuthFailed>());
+        },
+      );
     },
     skip: !provider.supportsPlatform(defaultTargetPlatform),
   );
@@ -208,12 +291,19 @@ class MockApp extends Mock implements FirebaseApp {}
 
 class MockAuth extends Mock implements fba.FirebaseAuth {
   fba.User? currentUserOverride;
+  Object? signInErrorOverride;
 
   @override
   fba.User? get currentUser => currentUserOverride;
 
   @override
   Future<fba.UserCredential> signInWithProvider(Object provider) async {
+    final error = signInErrorOverride;
+    if (error != null) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      throw error;
+    }
+
     return super.noSuchMethod(
       Invocation.method(#signInWithProvider, [provider]),
       returnValue: Future.delayed(
