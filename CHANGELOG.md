@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-09-15
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`firebase_ui_oauth` - `v2.1.1`](#firebase_ui_oauth---v211)
+ - [`firebase_ui_auth` - `v3.1.1`](#firebase_ui_auth---v311)
+ - [`firebase_ui_oauth_apple` - `v2.1.1`](#firebase_ui_oauth_apple---v211)
+ - [`firebase_ui_oauth_facebook` - `v2.1.1`](#firebase_ui_oauth_facebook---v211)
+ - [`firebase_ui_oauth_google` - `v2.1.1`](#firebase_ui_oauth_google---v211)
+ - [`firebase_ui_oauth_twitter` - `v2.1.1`](#firebase_ui_oauth_twitter---v211)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `firebase_ui_auth` - `v3.1.1`
+ - `firebase_ui_oauth_apple` - `v2.1.1`
+ - `firebase_ui_oauth_facebook` - `v2.1.1`
+ - `firebase_ui_oauth_google` - `v2.1.1`
+ - `firebase_ui_oauth_twitter` - `v2.1.1`
+
+---
+
+#### `firebase_ui_oauth` - `v2.1.1`
+
+ - **FIX**(ui_oauth): use dart.library.js_interop for Wasm-compatible imports ([#675](https://github.com/firebase/FirebaseUI-Flutter/issues/675)). ([84da53c3](https://github.com/firebase/FirebaseUI-Flutter/commit/84da53c391d3f79926ae701c59c67b6037308e0b))
+
+
 ## 2026-07-15
 
 ### Changes

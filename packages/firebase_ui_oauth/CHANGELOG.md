@@ -1,3 +1,7 @@
+## 2.1.1
+
+ - **FIX**(ui_oauth): use dart.library.js_interop for Wasm-compatible imports ([#675](https://github.com/firebase/FirebaseUI-Flutter/issues/675)). ([84da53c3](https://github.com/firebase/FirebaseUI-Flutter/commit/84da53c391d3f79926ae701c59c67b6037308e0b))
+
 ## 2.1.0
 
  - **FIX**: compilation errors from invalid/unknown identifiers ([#579](https://github.com/firebase/FirebaseUI-Flutter/issues/579)). ([5d91871c](https://github.com/firebase/FirebaseUI-Flutter/commit/5d91871c15f1ee65509c6badb80be60caf9d6e97))
