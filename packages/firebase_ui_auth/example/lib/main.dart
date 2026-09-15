@@ -135,10 +135,16 @@ class FirebaseAuthUIExample extends StatelessWidget {
                 };
 
                 switch (user) {
-                  case User(emailVerified: true):
-                    Navigator.pushReplacementNamed(context, '/profile');
                   case User(emailVerified: false, email: final String _):
                     Navigator.pushNamed(context, '/verify-email');
+                  // Providers are not obliged to return an email. Twitter only
+                  // does when the app requests it, and such a user is never
+                  // emailVerified, so without this they matched no case and
+                  // the screen sat there after a successful sign in.
+                  case User():
+                    Navigator.pushReplacementNamed(context, '/profile');
+                  case null:
+                    break;
                 }
               }),
               mfaAction,
