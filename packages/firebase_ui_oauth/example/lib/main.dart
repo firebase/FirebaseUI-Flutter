@@ -109,7 +109,7 @@ class _ContentState extends State<Content> {
               'Sign in with Google',
             ),
             _button(
-              TwitterProvider(apiKey: '', apiSecretKey: '', redirectUri: ''),
+              TwitterProvider(),
               'Sign in with Twitter',
             ),
           ],

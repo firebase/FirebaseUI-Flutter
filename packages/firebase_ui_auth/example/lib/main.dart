@@ -43,10 +43,11 @@ Future<void> main() async {
     GoogleProvider(clientId: GOOGLE_CLIENT_ID),
     AppleProvider(),
     FacebookProvider(clientId: FACEBOOK_CLIENT_ID),
+    // apiKey and apiSecretKey are only used on macOS and Windows. Android and
+    // iOS sign in through Firebase, which holds the credentials itself.
     TwitterProvider(
       apiKey: TWITTER_API_KEY,
       apiSecretKey: TWITTER_API_SECRET_KEY,
-      redirectUri: TWITTER_REDIRECT_URI,
     ),
   ]);
 
