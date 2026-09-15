@@ -54,7 +54,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@2982f8e4fc92440a219490009d6d05195cb1a6a5 # v3
+      - uses: bluefireteam/melos-action@70965d09a7f2bf831b220c19a006cccf1dafbda1 # v3
         with:
           melos-version: "^7.5.0"
 
