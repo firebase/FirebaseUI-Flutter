@@ -246,30 +246,69 @@ apiSecretKey: String.fromEnvironment('TWITTER_SECRET'),
 
 ### Upgrading from 2.x
 
-Version 3.0.0 moved Android and iOS sign in from the `twitter_login` package to Firebase's own
-provider flow. Your code will still compile unchanged, but sign in fails at runtime on those two
-platforms until you update the configuration:
+Version 3.0.0 moves Twitter sign in on Android and iOS from the `twitter_login` package to
+Firebase's own provider flow. Your code keeps compiling, but sign in fails at runtime on those two
+platforms until you update the configuration below. macOS, Windows and the web are unaffected.
 
-1. In the [X developer portal](https://developer.twitter.com/en/portal/projects-and-apps), set the
-   app's Callback URL to `https://<your-project-id>.firebaseapp.com/__/auth/handler`. X accepts
-   several callback URLs, so you can add it alongside the custom scheme you use today and keep an
-   older build of your app working while you roll out.
-2. Add the encoded app ID URL scheme to `ios/Runner/Info.plist`, as described above.
-3. Register your Android SHA-1 fingerprint in the Firebase Console.
-4. Remove `twitter_login` from your `pubspec.yaml` if you depended on it directly, along with the
-   callback intent filter it needed in `AndroidManifest.xml`.
+#### What you must change
 
-`apiKey` and `apiSecretKey` are now optional. Drop them unless you ship for macOS or Windows.
+1. **Callback URL.** In the [X developer portal](https://developer.twitter.com/en/portal/projects-and-apps),
+   set your app's Callback URL to the Firebase auth handler:
 
-Two behaviours also changed on Android and iOS, both because Firebase signs the user in as part of
-returning the credential:
+   ```
+   https://<your-project-id>.firebaseapp.com/__/auth/handler
+   ```
 
-- `AuthAction.none` fails with a `FirebaseAuthException`, where it previously handed you a
-  credential without signing in.
+   X accepts several callback URLs, so you can add this alongside the custom scheme you use today
+   and keep an older build of your app working while you roll out.
+
+2. **iOS.** Add your encoded app ID as a URL scheme in `ios/Runner/Info.plist`, as described in the
+   setup section above. Without it, the sign in sheet completes but never returns to your app.
+
+3. **Android.** Register your app's SHA-1 fingerprint in the Firebase Console, then **re-download
+   `google-services.json`**. Adding the fingerprint alone is not enough, because the certificate
+   hash is embedded in that file when you download it. If you skip either step, sign in fails with:
+
+   ```
+   There was an error while trying to get your package certificate hash.
+   ```
+
+4. **Remove `twitter_login`** from your `pubspec.yaml` if you depended on it directly, along with
+   the callback intent filter it required in `AndroidManifest.xml`.
+
+5. **`apiKey` and `apiSecretKey` are now optional.** Remove them unless you ship for macOS or
+   Windows, which still perform the OAuth 1.0a flow in process and still need them. They are
+   ignored on Android, iOS and the web.
+
+#### Behaviour changes
+
+Firebase signs the user in as part of returning the credential, which changes three things on
+Android and iOS:
+
+- `AuthAction.none` now fails with a `FirebaseAuthException` instead of handing you a credential
+  without signing in. There is no way to obtain the credential without also creating a session.
 - The credential passed to `onCredentialLinked` is a plain `AuthCredential` rather than an
-  `OAuthCredential`, so it carries no `secret` and cannot be cast to `OAuthCredential`.
+  `OAuthCredential`. It carries no `secret` and cannot be cast to `OAuthCredential`.
+- `redirectUri` is ignored. Firebase always completes through its own auth handler. It is still
+  honoured on macOS and Windows.
 
-macOS, Windows and the web are unaffected.
+Cancelling sign in returns you to the app silently, with no error shown, which matches the previous
+behaviour.
+
+#### Known limitation on Android
+
+Firebase usually opens the sign in link in a Chrome Custom Tab inside your app's task, and
+dismissing it returns to your app. Occasionally it opens the full browser in its own task instead.
+If the user abandons the flow there, the pending operation never resolves and further attempts fail
+with:
+
+```
+A headful operation is already in progress. Please wait for that to finish.
+```
+
+Restarting the app clears it. This comes from the Firebase Android SDK rather than
+`firebase_ui_oauth_twitter`, and there is nothing the Dart layer can do about a sign in the SDK
+never completes.
 
 See [Custom screens section](#custom-screens) to learn how to use a button on your custom screen.
 
