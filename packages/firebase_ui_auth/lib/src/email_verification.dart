@@ -90,7 +90,14 @@ class EmailVerificationController extends ValueNotifier<EmailVerificationState>
   }
 
   /// Reloads firebase user and updates the [state].
+  ///
+  /// Does nothing when no user is signed in. This runs on every app resume,
+  /// which includes resuming with no user at all: returning from a cancelled
+  /// OAuth sign in brings the app back to the foreground while
+  /// [fba.FirebaseAuth.currentUser] is still null.
   Future<void> reload() async {
+    if (auth.currentUser == null) return;
+
     await user.reload();
 
     if (user.email == null) {

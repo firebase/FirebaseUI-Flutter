@@ -48,7 +48,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: Gradle cache
-        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
       - name: AVD cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: avd-cache
@@ -75,9 +75,6 @@ jobs:
           melos-version: "^7.5.0"
       - name: "Bootstrap package"
         run: melos bootstrap --scope tests
-        # needed because twitter_login plugin doesn't have a namespace defined and he hasn't released a new version yet: https://github.com/0maru/twitter_login/issues/139
-      - name: Patch twitter_login plugin
-        run: ./scripts/patch-twitter-login.sh
       - name: Start Firebase Emulator
         run: |
           cd functions/
