@@ -22,8 +22,6 @@ Future<void> main(List<String> args) async {
   final latestVersions =
       json[json.keys.first]["packages"] as Map<String, dynamic>;
 
-  final iosSdkVersion = json[json.keys.first]["firebase_sdk"]["ios"] as String;
-
   final pubspecFilePaths = findPubspecFiles(Directory.current);
 
   final listOfFutures = <Future>[];
@@ -31,11 +29,6 @@ Future<void> main(List<String> args) async {
     final future = updatePubspecFile(filePath, latestVersions);
     listOfFutures.add(future);
   }
-
-  listOfFutures.add(updatePodfileVersion(iosSdkVersion, './tests/ios/Podfile'));
-  listOfFutures.add(
-    updatePodfileVersion(iosSdkVersion, './tests/macos/Podfile'),
-  );
 
   await Future.wait(listOfFutures);
 
@@ -86,30 +79,4 @@ List<String> findPubspecFiles(Directory root) {
   }
 
   return pubspecFiles;
-}
-
-Future<void> updatePodfileVersion(
-  String iosSdkVersion,
-  String podfilePath,
-) async {
-  final podfile = File(podfilePath);
-  if (!await podfile.exists()) {
-    throw Exception('Podfile not found at $podfilePath');
-  }
-
-  String content = await podfile.readAsString();
-
-  final updatedContent = content.replaceAllMapped(
-    RegExp(
-      r"pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '\d+\.\d+\.\d+'",
-    ),
-    (match) =>
-        "pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '$iosSdkVersion'",
-  );
-
-  await podfile.writeAsString(updatedContent);
-
-  print(
-    'Updated Podfile Firestore framework on path: $podfilePath to version: $iosSdkVersion',
-  );
 }
