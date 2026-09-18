@@ -40,7 +40,7 @@ final usersQuery = FirebaseFirestore.instance.collection('users').orderBy('name'
 
 FirestoreListView<Map<String, dynamic>>(
   query: usersQuery,
-  itemBuilder: (context, snapshot) {
+  itemBuilder: (context, snapshot, index) {
     Map<String, dynamic> user = snapshot.data();
 
     return Text('User name is ${user['name']}');
@@ -109,7 +109,7 @@ final usersQuery = FirebaseFirestore.instance.collection('users')
 
 FirestoreListView<User>(
   query: usersQuery,
-  itemBuilder: (context, snapshot) {
+  itemBuilder: (context, snapshot, index) {
     // Data is now typed!
     User user = snapshot.data();
 
