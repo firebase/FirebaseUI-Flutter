@@ -47,10 +47,20 @@ Future<void> updatePubspecFile(
 
   final dependencies = pubspec['dependencies'] as YamlMap?;
 
+  // The tests app pins FlutterFire packages exactly. Their Package.swift files
+  // bake in an `exact:` firebase-ios-sdk version, so a caret that lets one
+  // package drift ahead of the others makes SPM resolution fail outright.
+  // Every other package keeps the caret.
+  final pinExact = p.basename(p.dirname(filePath)) == 'tests';
+
   if (dependencies != null) {
     dependencies.forEach((key, value) {
       if (latestVersions.containsKey(key)) {
-        yamlEditor.update(['dependencies', key], '^${latestVersions[key]}');
+        final version = latestVersions[key];
+        yamlEditor.update(
+          ['dependencies', key],
+          pinExact ? '$version' : '^$version',
+        );
       }
     });
   }
