@@ -3,10 +3,11 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:mockito/mockito.dart';
+
 import '../utils.dart';
 
 void main() {
@@ -76,14 +77,13 @@ void main() {
     ) async {
       final collection = db.collection('flutter-tests/list-view-builder/works');
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FirestoreListView<Map>(
-                query: collection.orderBy('value'),
-                itemBuilder: (context, snapshot, index) =>
-                    throw UnimplementedError(),
-              ),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FirestoreListView<Map>(
+              query: collection.orderBy('value'),
+              itemBuilder: (context, snapshot, index) =>
+                  throw UnimplementedError(),
             ),
           ),
         ),
@@ -132,32 +132,31 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: Builder(builder: (context) {
-                final mq = MediaQuery.of(context);
-                final h = mq.size.height;
-                size = h / 5;
+              child: Builder(
+                builder: (context) {
+                  final mq = MediaQuery.of(context);
+                  final h = mq.size.height;
+                  size = h / 5;
 
-                return FirestoreListView<Map>(
-                  physics: const ClampingScrollPhysics(),
-                  query: ref.orderBy('value'),
-                  cacheExtent: 0,
-                  pageSize: 5,
-                  itemExtent: size,
-                  itemBuilder: (context, snapshot, index) {
-                    final v = snapshot.data()['value'] as int;
+                  return FirestoreListView<Map>(
+                    physics: const ClampingScrollPhysics(),
+                    query: ref.orderBy('value'),
+                    cacheExtent: 0,
+                    pageSize: 5,
+                    itemExtent: size,
+                    itemBuilder: (context, snapshot, index) {
+                      final v = snapshot.data()['value'] as int;
 
-                    return Container(
-                      alignment: Alignment.center,
-                      color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
-                      key: ValueKey(v.toString()),
-                      child: Text(
-                        v.toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
-                );
-              }),
+                      return Container(
+                        alignment: Alignment.center,
+                        color: Colors.black.withAlpha(v % 2 == 0 ? 50 : 100),
+                        key: ValueKey(v.toString()),
+                        child: Text(v.toString(), textAlign: TextAlign.center),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         );
@@ -204,11 +203,7 @@ void main() {
 }
 
 class ListViewBuilderSpy<T> extends Mock {
-  Widget call(
-    BuildContext? context,
-    T? snapshot,
-    int? index,
-  ) {
+  Widget call(BuildContext? context, T? snapshot, int? index) {
     return super.noSuchMethod(
       Invocation.method(#call, [context, snapshot]),
       returnValueForMissingStub: Container(),
