@@ -48,7 +48,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: Gradle cache
-        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
       - name: AVD cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: avd-cache
@@ -57,7 +57,7 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-ubuntu
-      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
         with:
           channel: "stable"
           cache: true
@@ -69,7 +69,7 @@ jobs:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v2-${{ github.run_id }}
           restore-keys: firebase-emulators-v2
-      - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
+      - uses: bluefireteam/melos-action@2982f8e4fc92440a219490009d6d05195cb1a6a5
         with:
           run-bootstrap: false
           melos-version: "^7.5.0"
@@ -124,7 +124,7 @@ jobs:
             /usr/local/share/powershell \
             /usr/share/dotnet
           df -h /
-      - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9
+      - uses: hendrikmuhs/ccache-action@f09c25b45002a07be2955cbe52e8cee55643f89d
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-ios-v3
@@ -144,11 +144,11 @@ jobs:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v1-${{ github.run_id }}
           restore-keys: firebase-emulators-v1
-      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
+      - uses: bluefireteam/melos-action@2982f8e4fc92440a219490009d6d05195cb1a6a5
         with:
           run-bootstrap: false
           melos-version: "^7.5.0"
@@ -206,7 +206,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "21"
-      - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9
+      - uses: hendrikmuhs/ccache-action@f09c25b45002a07be2955cbe52e8cee55643f89d
         name: Xcode Compile Cache
         with:
           key: ${{ runner.os }}-macos-v2
@@ -229,11 +229,11 @@ jobs:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v1-${{ github.run_id }}
           restore-keys: firebase-emulators-v1
-      - uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
         with:
           channel: "stable"
           cache: true
-      - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
+      - uses: bluefireteam/melos-action@2982f8e4fc92440a219490009d6d05195cb1a6a5
         with:
           run-bootstrap: false
           melos-version: "^7.5.0"
@@ -267,11 +267,11 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
-      - uses: subosito/flutter-action@2783a3f08e1baf891508463f8c6653c258246225
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
         with:
           channel: 'stable'
           cache: true
-      - uses: bluefireteam/melos-action@720a109b686f61979b4f9f0d14f582ab1637647e
+      - uses: bluefireteam/melos-action@2982f8e4fc92440a219490009d6d05195cb1a6a5
         with:
           melos-version: "^6.3.3"
       - name: 'Build Test Applications'
