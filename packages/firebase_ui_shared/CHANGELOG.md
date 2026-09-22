@@ -1,3 +1,10 @@
+## 1.5.0
+
+ - **FIX**: compilation errors from invalid/unknown identifiers ([#579](https://github.com/firebase/FirebaseUI-Flutter/issues/579)). ([5d91871c](https://github.com/firebase/FirebaseUI-Flutter/commit/5d91871c15f1ee65509c6badb80be60caf9d6e97))
+ - **FEAT**: Require Dart 3.9 ([#618](https://github.com/firebase/FirebaseUI-Flutter/issues/618)). ([80a27122](https://github.com/firebase/FirebaseUI-Flutter/commit/80a27122e1008b76c3cb505f8140195f6dd52648))
+ - **FEAT**: upgrade all packages min SDK to Dart 3.5 ([#616](https://github.com/firebase/FirebaseUI-Flutter/issues/616)). ([1535fac4](https://github.com/firebase/FirebaseUI-Flutter/commit/1535fac4e26a5dc91c13601c1327e43994d5403c))
+ - **FEAT**: upgrade all packages min SDK to Dart 3.5 ([#615](https://github.com/firebase/FirebaseUI-Flutter/issues/615)). ([aefa711a](https://github.com/firebase/FirebaseUI-Flutter/commit/aefa711ad9c550f4f96cb574cb6a26919593d5eb))
+
 ## 1.4.2
 
  - **FIX**: analyser issues from later Flutter version ([#551](https://github.com/firebase/FirebaseUI-Flutter/issues/551)). ([62cc4be7](https://github.com/firebase/FirebaseUI-Flutter/commit/62cc4be752ac729306243111652b2717e5eeba42))

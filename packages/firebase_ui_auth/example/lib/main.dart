@@ -43,10 +43,11 @@ Future<void> main() async {
     GoogleProvider(clientId: GOOGLE_CLIENT_ID),
     AppleProvider(),
     FacebookProvider(clientId: FACEBOOK_CLIENT_ID),
+    // apiKey and apiSecretKey are only used on macOS and Windows. Android and
+    // iOS sign in through Firebase, which holds the credentials itself.
     TwitterProvider(
       apiKey: TWITTER_API_KEY,
       apiSecretKey: TWITTER_API_SECRET_KEY,
-      redirectUri: TWITTER_REDIRECT_URI,
     ),
   ]);
 
@@ -134,10 +135,16 @@ class FirebaseAuthUIExample extends StatelessWidget {
                 };
 
                 switch (user) {
-                  case User(emailVerified: true):
-                    Navigator.pushReplacementNamed(context, '/profile');
                   case User(emailVerified: false, email: final String _):
                     Navigator.pushNamed(context, '/verify-email');
+                  // Providers are not obliged to return an email. Twitter only
+                  // does when the app requests it, and such a user is never
+                  // emailVerified, so without this they matched no case and
+                  // the screen sat there after a successful sign in.
+                  case User():
+                    Navigator.pushReplacementNamed(context, '/profile');
+                  case null:
+                    break;
                 }
               }),
               mfaAction,

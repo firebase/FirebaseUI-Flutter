@@ -9,7 +9,8 @@ class MainFlutterWindow: NSWindow {
     self.setFrame(windowFrame, display: true)
 
     RegisterGeneratedPlugins(registry: flutterViewController)
-    GoogleSignInMacOSPlugin.register(with: flutterViewController.registrar(forPlugin: "GoogleSignInMacOSPlugin"))
+    GoogleSignInMacOSPlugin.register(
+      with: flutterViewController.registrar(forPlugin: "GoogleSignInMacOSPlugin"))
 
     super.awakeFromNib()
   }

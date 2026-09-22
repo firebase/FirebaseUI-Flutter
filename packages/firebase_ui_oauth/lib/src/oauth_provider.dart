@@ -7,7 +7,7 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
 import 'platform_oauth_sign_in.dart'
-    if (dart.library.html) 'platform_oauth_sign_in_web.dart';
+    if (dart.library.js_interop) 'platform_oauth_sign_in_web.dart';
 
 /// A listener of the [OAuthProvider].
 /// See also:

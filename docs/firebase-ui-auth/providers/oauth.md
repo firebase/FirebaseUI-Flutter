@@ -156,20 +156,27 @@ See [Custom screens section](#custom-screens) to learn how to use a button on yo
 
 ## Twitter Login
 
-To support Twitter as a provider, first install the [`twitter_login`](https://pub.dev/packages/twitter_login)
-plugin to your project and make sure you've performed necessary configuration as described on [README](https://pub.dev/packages/twitter_login).
-
-Next, enable the "Twitter" provider in the Firebase Console:
+Enable the "Twitter" provider in the Firebase Console, and give it the API key and secret from your
+app in the [X developer portal](https://developer.twitter.com/en/portal/projects-and-apps):
 
 ![Enable Twitter Provider](../images/ui-twitter-provider.jpg)
 
-You will also need to install [`firebase_ui_oauth_twitter`](https://pub.dev/packages/firebase_ui_oauth_twitter):
+![Twitter app id](../images/ui-twitter-app-id.png)
+
+Then set the "Callback URL" of that same X app to the Firebase auth handler, which the Firebase
+Console shows when you enable the provider:
+
+```
+https://<your-project-id>.firebaseapp.com/__/auth/handler
+```
+
+Install [`firebase_ui_oauth_twitter`](https://pub.dev/packages/firebase_ui_oauth_twitter):
 
 ```sh
 flutter pub add firebase_ui_oauth_twitter
 ```
 
-And add a provider to the configuration:
+And add the provider to the configuration:
 
 ```dart
 Future<void> main() async {
@@ -177,31 +184,131 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FirebaseUIAuth.configureProviders([
-    TwitterProvider(
-      apiKey: TWITTER_API_KEY,
-      apiSecretKey: TWITTER_API_SECRET_KEY,
-    ),
+    TwitterProvider(),
   ]);
 }
 ```
 
 Now all pre-built screens that support multiple providers (such as `RegisterScreen`, `SignInScreen`, `ProfileScreen` and others) will have a themed button.
 
-You can get the `apiKey` and `apiSecretKey` from the Firebase Console or [twitter developer portal](https://developer.twitter.com/en/portal/projects-and-apps).
+### Android and iOS setup
 
-![Twitter app id](../images/ui-twitter-app-id.png)
+On Android and iOS, Firebase performs the sign in itself, so the API key and secret stay in the
+Firebase Console and are never shipped in your app.
 
-Providing the `apiSecretKey` directly is not advised if you are building for the web. Instead, you can use "dart-define" to ensure that the value is omitted from web builds:
+On **iOS**, add your encoded app ID as a URL scheme in `ios/Runner/Info.plist`. You will find it in
+the Firebase Console under Project settings, listed as the App ID for your iOS app, with `:`
+replaced by `-`:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>app-1-1234567890-ios-0a1b2c3d4e5f6g7h8i9j</string>
+    </array>
+  </dict>
+</array>
+```
+
+On **Android**, add your app's SHA-1 fingerprint in the Firebase Console under Project settings, so
+Firebase can verify the sign in request.
+
+### macOS and Windows setup
+
+Firebase does not support this sign in flow on macOS or Windows, so on those platforms
+`firebase_ui_oauth_twitter` performs the OAuth 1.0a flow itself and does need the API key and
+secret:
+
+```dart
+TwitterProvider(
+  apiKey: TWITTER_API_KEY,
+  apiSecretKey: TWITTER_API_SECRET_KEY,
+),
+```
+
+They are ignored on Android, iOS and the web. On a platform that needs them, sign in fails with a
+`FirebaseAuthException` rather than proceeding with empty credentials, so an absent
+`--dart-define` surfaces as a clear error.
+
+Because the secret is embedded in desktop builds, pass it at build time rather than committing it:
 
 ```bash
 flutter run --dart-define TWITTER_SECRET=<your-twitter-api-secret-key>
 ```
 
-When building the app on platforms other than the web, the `TWITTER_SECRET` environment variable can be defined using:
-
 ```dart
-apiSecretKey: String.fromEnvironment('TWITTER_SECRET', ''),
+apiSecretKey: String.fromEnvironment('TWITTER_SECRET'),
 ```
+
+### Upgrading from 2.x
+
+Version 3.0.0 moves Twitter sign in on Android and iOS from the `twitter_login` package to
+Firebase's own provider flow. Your code keeps compiling, but sign in fails at runtime on those two
+platforms until you update the configuration below. macOS, Windows and the web are unaffected.
+
+#### What you must change
+
+1. **Callback URL.** In the [X developer portal](https://developer.twitter.com/en/portal/projects-and-apps),
+   set your app's Callback URL to the Firebase auth handler:
+
+   ```
+   https://<your-project-id>.firebaseapp.com/__/auth/handler
+   ```
+
+   X accepts several callback URLs, so you can add this alongside the custom scheme you use today
+   and keep an older build of your app working while you roll out.
+
+2. **iOS.** Add your encoded app ID as a URL scheme in `ios/Runner/Info.plist`, as described in the
+   setup section above. Without it, the sign in sheet completes but never returns to your app.
+
+3. **Android.** Register your app's SHA-1 fingerprint in the Firebase Console, then **re-download
+   `google-services.json`**. Adding the fingerprint alone is not enough, because the certificate
+   hash is embedded in that file when you download it. If you skip either step, sign in fails with:
+
+   ```
+   There was an error while trying to get your package certificate hash.
+   ```
+
+4. **Remove `twitter_login`** from your `pubspec.yaml` if you depended on it directly, along with
+   the callback intent filter it required in `AndroidManifest.xml`.
+
+5. **`apiKey` and `apiSecretKey` are now optional.** Remove them unless you ship for macOS or
+   Windows, which still perform the OAuth 1.0a flow in process and still need them. They are
+   ignored on Android, iOS and the web.
+
+#### Behaviour changes
+
+Firebase signs the user in as part of returning the credential, which changes three things on
+Android and iOS:
+
+- `AuthAction.none` now fails with a `FirebaseAuthException` instead of handing you a credential
+  without signing in. There is no way to obtain the credential without also creating a session.
+- The credential passed to `onCredentialLinked` is a plain `AuthCredential` rather than an
+  `OAuthCredential`. It carries no `secret` and cannot be cast to `OAuthCredential`.
+- `redirectUri` is ignored. Firebase always completes through its own auth handler. It is still
+  honoured on macOS and Windows.
+
+Cancelling sign in returns you to the app silently, with no error shown, which matches the previous
+behaviour.
+
+#### Known limitation on Android
+
+Firebase usually opens the sign in link in a Chrome Custom Tab inside your app's task, and
+dismissing it returns to your app. Occasionally it opens the full browser in its own task instead.
+If the user abandons the flow there, the pending operation never resolves and further attempts fail
+with:
+
+```
+A headful operation is already in progress. Please wait for that to finish.
+```
+
+Restarting the app clears it. This comes from the Firebase Android SDK rather than
+`firebase_ui_oauth_twitter`, and there is nothing the Dart layer can do about a sign in the SDK
+never completes.
 
 See [Custom screens section](#custom-screens) to learn how to use a button on your custom screen.
 

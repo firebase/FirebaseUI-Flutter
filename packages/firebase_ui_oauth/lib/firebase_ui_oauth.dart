@@ -3,11 +3,12 @@
 // BSD-style license that can be found in the LICENSE file.
 
 export 'package:firebase_auth/firebase_auth.dart' show OAuthCredential;
-export 'package:desktop_webview_auth/desktop_webview_auth.dart'
-    show AuthResult, ProviderArgs;
-export 'package:desktop_webview_auth/google.dart';
-export 'package:desktop_webview_auth/facebook.dart';
-export 'package:desktop_webview_auth/twitter.dart';
+
+export './src/oauth/auth_result.dart';
+export './src/oauth/provider_args.dart';
+export './src/oauth/google_sign_in_args.dart';
+export './src/oauth/facebook_sign_in_args.dart';
+export './src/oauth/twitter_sign_in_args.dart';
 
 export './src/oauth_provider.dart';
 export './src/oauth_provider_button_base.dart';
