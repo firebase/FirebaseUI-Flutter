@@ -359,11 +359,12 @@ class _Sentinel {
 }
 
 /// A type representing the function passed to [FirestoreListView] for its `itemBuilder`.
-typedef FirestoreItemBuilder<Document> = Widget Function(
-  BuildContext context,
-  QueryDocumentSnapshot<Document> doc,
-  int index,
-);
+typedef FirestoreItemBuilder<Document> =
+    Widget Function(
+      BuildContext context,
+      QueryDocumentSnapshot<Document> doc,
+      int index,
+    );
 
 /// A type representing the function passed to [FirestoreListView] for its `loadingBuilder`.
 typedef FirestoreLoadingBuilder = Widget Function(BuildContext context);
