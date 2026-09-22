@@ -3,10 +3,11 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:mockito/mockito.dart';
+
 import '../utils.dart';
 
 void main() {
@@ -59,7 +60,8 @@ void main() {
             body: FirestoreListView<Map>(
               query: collection.orderBy('value'),
               loadingBuilder: (context) => const Text('loading...'),
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              itemBuilder: (context, snapshot, index) =>
+                  throw UnimplementedError(),
             ),
           ),
         ),
@@ -80,7 +82,8 @@ void main() {
           home: Scaffold(
             body: FirestoreListView<Map>(
               query: collection.orderBy('value'),
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              itemBuilder: (context, snapshot, index) =>
+                  throw UnimplementedError(),
             ),
           ),
         ),
@@ -100,7 +103,8 @@ void main() {
             body: FirestoreListView<Map>(
               query: collection,
               cacheExtent: 0,
-              itemBuilder: (context, snapshot) => throw UnimplementedError(),
+              itemBuilder: (context, snapshot, index) =>
+                  throw UnimplementedError(),
             ),
           ),
         ),
@@ -140,7 +144,7 @@ void main() {
                     cacheExtent: 0,
                     pageSize: 5,
                     itemExtent: size,
-                    itemBuilder: (context, snapshot) {
+                    itemBuilder: (context, snapshot, index) {
                       final v = snapshot.data()['value'] as int;
 
                       return Container(
@@ -199,7 +203,7 @@ void main() {
 }
 
 class ListViewBuilderSpy<T> extends Mock {
-  Widget call(BuildContext? context, T? snapshot) {
+  Widget call(BuildContext? context, T? snapshot, int? index) {
     return super.noSuchMethod(
       Invocation.method(#call, [context, snapshot]),
       returnValueForMissingStub: Container(),
