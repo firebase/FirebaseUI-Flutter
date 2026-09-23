@@ -27,6 +27,10 @@ String? localizedErrorText(
       return labels.credentialAlreadyInUseErrorText;
     case 'invalid-verification-code':
       return labels.invalidVerificationCodeErrorText;
+    case 'email-link-wrong-device':
+      return labels.emailLinkWrongDeviceErrorText;
+    case 'email-link-different-anonymous-user':
+      return labels.emailLinkDifferentAnonymousUserErrorText;
     case 'weak-password':
       return labels.weakPasswordErrorText;
 

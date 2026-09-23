@@ -19,10 +19,24 @@ class AwaitingDynamicLink extends AuthState {
   const AwaitingDynamicLink();
 }
 
+/// A state that indicates that a sign in link was opened on a device that did
+/// not request it. The user should confirm their email to complete the sign
+/// in, see [EmailLinkAuthController.confirmEmail].
+class EmailRequired extends AuthState {
+  /// The sign in link that was opened.
+  final String link;
+
+  const EmailRequired(this.link);
+}
+
 /// A controller interface of the [EmailLinkFlow].
 abstract class EmailLinkAuthController extends AuthController {
   /// Sends a sign in link to the [email].
   void sendLink(String email);
+
+  /// Completes the sign in after [EmailRequired] with the [email] the user
+  /// confirmed.
+  void confirmEmail(String email);
 }
 
 /// {@template ui.auth.flows.email_link_flow}
@@ -38,7 +52,11 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
 
     /// {@macro ui.auth.auth_flow.ctor.provider}
     required super.provider,
-  }) : super(action: AuthAction.signIn, initialState: const Uninitialized());
+  }) : super(action: AuthAction.signIn, initialState: const Uninitialized()) {
+    provider.handleIncomingLinks();
+  }
+
+  String? _pendingLink;
 
   @override
   void sendLink(String email) {
@@ -54,6 +72,19 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
   void onLinkSent(String email) {
     value = const AwaitingDynamicLink();
     provider.awaitLink(email);
+  }
+
+  @override
+  void onEmailRequired(String link) {
+    _pendingLink = link;
+    value = EmailRequired(link);
+  }
+
+  @override
+  void confirmEmail(String email) {
+    final link = _pendingLink;
+    if (link == null) return;
+    provider.signInWithLink(email, link);
   }
 }
 

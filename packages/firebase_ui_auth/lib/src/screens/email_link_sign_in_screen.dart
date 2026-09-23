@@ -32,8 +32,11 @@ class EmailLinkSignInScreen extends ProviderScreen<EmailLinkAuthProvider> {
   /// ```dart
   /// EmailLinkSignInScreen(
   ///   actions: [
-  ///     AuthStateChangeAction<SignedIn>((context, state) {
-  ///       Navigator.pushReplacementNamed(context, '/');
+  ///     // First-time users emit UserCreated instead of SignedIn.
+  ///     AuthStateChangeAction((context, state) {
+  ///       if (state is SignedIn || state is UserCreated) {
+  ///         Navigator.pushReplacementNamed(context, '/');
+  ///       }
   ///     }),
   ///   ],
   /// );

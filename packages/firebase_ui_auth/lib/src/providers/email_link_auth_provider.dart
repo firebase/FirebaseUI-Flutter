@@ -8,6 +8,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:app_links/app_links.dart';
 import 'dart:async';
 
+import 'email_link_session.dart';
+
 /// A listener of the [EmailLinkFlow] lifecycle.
 abstract class EmailLinkAuthListener extends AuthListener {
   /// Called when the link being is sent to the user's [email].
@@ -15,11 +17,20 @@ abstract class EmailLinkAuthListener extends AuthListener {
 
   /// Called when the link was successfully sent to the [email].
   void onLinkSent(String email);
+
+  /// Called when a sign in [link] was opened on a device that did not request
+  /// it, so the email it was sent to is unknown. Complete the sign in with
+  /// [EmailLinkAuthProvider.signInWithLink] and the email the user confirms.
+  void onEmailRequired(String link);
 }
 
 /// {@template ui.auth.providers.email_link_auth_provider}
 /// An [AuthProvider] that allows to authenticate using a link that is being
 /// sent to the user's email.
+///
+/// The email is stored on the device when the link is sent, so a link that
+/// launches the app completes the sign in. If the link is opened on another
+/// device, the user is asked to confirm their email instead.
 /// {@endtemplate}
 class EmailLinkAuthProvider
     extends AuthProvider<EmailLinkAuthListener, fba.AuthCredential> {
@@ -28,6 +39,8 @@ class EmailLinkAuthProvider
 
   final AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
+  bool _initialLinkChecked = false;
+  String? _lastHandledLink;
 
   @override
   late EmailLinkAuthListener authListener;
@@ -51,25 +64,94 @@ class EmailLinkAuthProvider
   }) : _appLinks = appLinks ?? AppLinks();
 
   /// Sends a link to the [email].
+  ///
+  /// If the current user is anonymous, the link upgrades that user instead of
+  /// signing in a new one.
   void sendLink(String email) {
     authListener.onBeforeLinkSent(email);
 
-    final future = auth.sendSignInLinkToEmail(
+    final session = EmailLinkSession(
       email: email,
-      actionCodeSettings: actionCodeSettings,
+      sessionId: EmailLinkSession.generateSessionId(),
+      anonymousUserId: shouldUpgradeAnonymous ? auth.currentUser!.uid : null,
     );
 
-    future
+    auth
+        .sendSignInLinkToEmail(
+          email: email,
+          actionCodeSettings: _withSession(session),
+        )
+        .then((_) => session.save())
         .then((_) => authListener.onLinkSent(email))
         .catchError(authListener.onError);
   }
 
-  void _onLinkReceived(String email, Uri uri) {
+  fba.ActionCodeSettings _withSession(EmailLinkSession session) {
+    final settings = actionCodeSettings;
+
+    return fba.ActionCodeSettings(
+      url: session.appendTo(settings.url),
+      handleCodeInApp: settings.handleCodeInApp,
+      iOSBundleId: settings.iOSBundleId,
+      androidPackageName: settings.androidPackageName,
+      androidInstallApp: settings.androidInstallApp,
+      androidMinimumVersion: settings.androidMinimumVersion,
+      linkDomain: settings.linkDomain,
+    );
+  }
+
+  /// Listens for incoming app links and handles email authentication.
+  /// Should be called after [EmailLinkAuthListener.onLinkSent] was called.
+  ///
+  /// The [email] is read from the device storage written by [sendLink].
+  void awaitLink(String email) {
+    _listen();
+  }
+
+  /// Whether the app was launched from an email sign in link.
+  ///
+  /// Use it on startup to show [EmailLinkSignInScreen], which completes the
+  /// sign in with that link.
+  Future<bool> isLaunchedFromSignInLink({fba.FirebaseAuth? auth}) async {
+    final uri = await _appLinks.getInitialLink();
+    if (uri == null) return false;
+
+    final firebaseAuth = auth ?? fba.FirebaseAuth.instance;
+    return firebaseAuth.isSignInWithEmailLink(uri.toString());
+  }
+
+  /// Handles the sign in link that launched the app, if any, and starts
+  /// listening for links opened while the app is running.
+  void handleIncomingLinks() {
+    _listen();
+
+    if (_initialLinkChecked) return;
+    _initialLinkChecked = true;
+
+    _appLinks
+        .getInitialLink()
+        .then<void>((uri) {
+          if (uri == null) return;
+          final link = uri.toString();
+          if (auth.isSignInWithEmailLink(link)) _handleLink(link);
+        })
+        .catchError(authListener.onError);
+  }
+
+  void _listen() {
+    // Keep a single subscription: app_links closes its shared stream when the
+    // last listener cancels, so re-subscribing would drop the next link.
+    _linkSubscription ??= _appLinks.uriLinkStream.listen(
+      _onLinkReceived,
+      onError: (error) => authListener.onError(error),
+    );
+  }
+
+  void _onLinkReceived(Uri uri) {
     final link = uri.toString();
 
     if (auth.isSignInWithEmailLink(link)) {
-      authListener.onBeforeSignIn();
-      _signInWithEmailLink(email, link);
+      _handleLink(link);
     } else {
       authListener.onError(
         fba.FirebaseAuthException(
@@ -80,26 +162,90 @@ class EmailLinkAuthProvider
     }
   }
 
-  /// Listens for incoming app links and handles email authentication.
-  /// Should be called after [EmailLinkAuthListener.onLinkSent] was called.
-  void awaitLink(String email) {
-    _linkSubscription?.cancel();
+  Future<void> _handleLink(String link) async {
+    // The link that launched the app can arrive both from getInitialLink and
+    // from uriLinkStream.
+    if (link == _lastHandledLink) return;
+    _lastHandledLink = link;
 
-    _linkSubscription = _appLinks.uriLinkStream.listen(
-      (Uri uri) => _onLinkReceived(email, uri),
-      onError: (error) => authListener.onError(error),
+    try {
+      final params = parseEmailLinkParams(link);
+      final anonymousUserId = params[anonymousUserIdParam];
+      final session = await EmailLinkSession.load();
+      final isSameDevice =
+          session != null && session.sessionId == params[sessionIdParam];
+
+      if (!isSameDevice) {
+        if (anonymousUserId != null) {
+          throw fba.FirebaseAuthException(
+            code: 'email-link-wrong-device',
+            message:
+                'The sign in link must be opened on the device that '
+                'requested it',
+          );
+        }
+
+        authListener.onEmailRequired(link);
+        return;
+      }
+
+      _completeSignIn(session.email, link, anonymousUserId);
+    } catch (err) {
+      authListener.onError(err);
+    }
+  }
+
+  /// Completes the sign in with a [link] from
+  /// [EmailLinkAuthListener.onEmailRequired] and the [email] it was sent to.
+  void signInWithLink(String email, String link) {
+    _completeSignIn(email, link, null);
+  }
+
+  void _completeSignIn(String email, String link, String? anonymousUserId) {
+    if (anonymousUserId == null) {
+      authListener.onBeforeSignIn();
+      auth
+          .signInWithEmailLink(email: email, emailLink: link)
+          .then<void>((credential) async {
+            await EmailLinkSession.clear();
+            authListener.onSignedIn(credential);
+          })
+          .catchError(authListener.onError);
+      return;
+    }
+
+    final user = auth.currentUser;
+    if (user == null || !user.isAnonymous || user.uid != anonymousUserId) {
+      authListener.onError(
+        fba.FirebaseAuthException(
+          code: 'email-link-different-anonymous-user',
+          message:
+              'The anonymous user that requested the link is no longer '
+              'signed in',
+        ),
+      );
+      return;
+    }
+
+    final credential = fba.EmailAuthProvider.credentialWithLink(
+      email: email,
+      emailLink: link,
     );
+
+    authListener.onBeforeSignIn();
+    user
+        .linkWithCredential(credential)
+        .then<void>((_) async {
+          await EmailLinkSession.clear();
+          authListener.onCredentialLinked(credential);
+        })
+        .catchError(authListener.onError);
   }
 
   void dispose() {
     _linkSubscription?.cancel();
     _linkSubscription = null;
-  }
-
-  void _signInWithEmailLink(String email, String link) {
-    auth
-        .signInWithEmailLink(email: email, emailLink: link)
-        .then(authListener.onSignedIn)
-        .catchError(authListener.onError);
+    _initialLinkChecked = false;
+    _lastHandledLink = null;
   }
 }

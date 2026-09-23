@@ -7,6 +7,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_utils.dart';
 
@@ -17,6 +19,7 @@ void main() {
   late EmailLinkAuthProvider emailLinkProvider;
 
   setUp(() {
+    SharedPreferences.setMockInitialValues({});
     auth = MockAuth();
     appLinks = MockAppLinks();
     final actionCodeSettings = fba.ActionCodeSettings(
@@ -69,5 +72,38 @@ void main() {
     await tester.pumpAndSettle();
     final button = find.text(labels.goBackButtonLabel);
     expect(button, findsOneWidget);
+  });
+
+  testWidgets('asks to confirm the email for a link from another device', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onEmailRequired('https://test.com/link');
+    await tester.pump();
+
+    expect(find.text(labels.emailLinkConfirmEmailText), findsOneWidget);
+    expect(find.text(labels.sendLinkButtonLabel), findsNothing);
+
+    await tester.enterText(find.byType(TextFormField), 'test@test.com');
+    await tester.tap(find.text(labels.continueText));
+    await tester.pump();
+
+    verify(
+      auth.signInWithEmailLink(
+        email: 'test@test.com',
+        emailLink: 'https://test.com/link',
+      ),
+    ).called(1);
+    verifyNever(
+      auth.sendSignInLinkToEmail(
+        email: anyNamed('email'),
+        actionCodeSettings: anyNamed('actionCodeSettings'),
+      ),
+    );
   });
 }
