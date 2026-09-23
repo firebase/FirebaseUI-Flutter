@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
@@ -121,8 +121,20 @@ abstract class FirebaseUILocalizationLabels {
   /// Used as an error text of the EmailInput when the email is empty.
   String get emailIsRequiredErrorText;
 
+  /// Shown on EmailLinkSignInView when a sign-in link was opened on a different
+  /// device and the user must confirm their email.
+  String get emailLinkConfirmEmailText;
+
+  /// Used as an error message when an email sign-in link was requested by an
+  /// anonymous user who is no longer signed in.
+  String get emailLinkDifferentAnonymousUserErrorText;
+
   /// Used as a label of the EmailLinkSignInButton.
   String get emailLinkSignInButtonLabel;
+
+  /// Used as an error message when an email sign-in link that must be completed
+  /// on the device that requested it is opened elsewhere.
+  String get emailLinkWrongDeviceErrorText;
 
   /// Used as an error message when the user tries to sign up with an email that
   /// is already used.
