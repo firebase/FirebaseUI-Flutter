@@ -40,7 +40,7 @@ void main() {
       expect(find.byType(ListView), findsNothing);
 
       await collection.snapshots().first.then((_) {}, onError: (_) {});
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       verifyZeroInteractions(builderSpy);
 
