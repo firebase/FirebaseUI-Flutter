@@ -128,6 +128,9 @@ class EmailLinkAuthProvider
   ///
   /// Use it on startup to show [EmailLinkSignInScreen], which completes the
   /// sign in with that link.
+  ///
+  /// Pass [auth] when using a non-default Firebase app. The provider's own
+  /// auth instance is only set once a flow is created.
   Future<bool> isLaunchedFromSignInLink({fba.FirebaseAuth? auth}) async {
     final uri = await _appLinks.getInitialLink();
     if (uri == null) return false;
