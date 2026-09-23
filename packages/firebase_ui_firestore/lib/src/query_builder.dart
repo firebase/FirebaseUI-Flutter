@@ -185,6 +185,7 @@ class _FirestoreQueryBuilderState<Document>
     // included so that a server result identical to the cache still arrives
     // as an event.
     var awaitingServer = nextPage;
+    var hasRendered = false;
 
     _querySubscription = query
         .snapshots(
@@ -201,6 +202,15 @@ class _FirestoreQueryBuilderState<Document>
               }
               awaitingServer = false;
             }
+
+            // Metadata-only events have no doc changes. Only render them if
+            // the consumer asked for metadata changes.
+            if (hasRendered &&
+                !widget.includeMetadataChanges &&
+                event.docChanges.isEmpty) {
+              return;
+            }
+            hasRendered = true;
 
             setState(() {
               _snapshot = _snapshot.copyWith(

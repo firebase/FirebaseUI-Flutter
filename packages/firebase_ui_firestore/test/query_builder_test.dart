@@ -16,13 +16,20 @@ typedef Json = Map<String, Object?>;
 void main() {
   late FakeQuery query;
   late FirestoreQueryBuilderSnapshot<Json> snapshot;
+  late int builds;
 
-  Future<void> pumpBuilder(WidgetTester tester, {Query<Json>? otherQuery}) {
+  Future<void> pumpBuilder(
+    WidgetTester tester, {
+    Query<Json>? otherQuery,
+    bool includeMetadataChanges = false,
+  }) {
     return tester.pumpWidget(
       FirestoreQueryBuilder<Json>(
         query: otherQuery ?? query,
         pageSize: 2,
+        includeMetadataChanges: includeMetadataChanges,
         builder: (context, s, _) {
+          builds++;
           snapshot = s;
           return const SizedBox();
         },
@@ -30,7 +37,10 @@ void main() {
     );
   }
 
-  setUp(() => query = FakeQuery());
+  setUp(() {
+    query = FakeQuery();
+    builds = 0;
+  });
 
   testWidgets('keeps loaded pages while the next page is only in cache', (
     tester,
@@ -135,7 +145,7 @@ void main() {
 
     // The server confirms the cached result, which the SDK only reports as
     // a metadata change.
-    query.emit(5, size: 1, fromCache: false);
+    query.emit(5, size: 1, fromCache: false, metadataOnly: true);
     await tester.pump();
     expect(snapshot.docs, hasLength(1));
     expect(snapshot.isFetchingMore, isFalse);
@@ -199,6 +209,49 @@ void main() {
     expect(snapshot.docs, hasLength(1));
     expect(snapshot.isFetchingMore, isFalse);
   });
+
+  testWidgets('ignores metadata-only events after the server snapshot', (
+    tester,
+  ) async {
+    await pumpBuilder(tester);
+
+    query.emit(3, size: 3, fromCache: false);
+    await tester.pump();
+
+    snapshot.fetchMore();
+    await tester.pump();
+    query.emit(5, size: 5, fromCache: false);
+    await tester.pump();
+    final buildsBefore = builds;
+
+    // e.g. the device goes offline, or a write is confirmed.
+    query.emit(5, size: 5, fromCache: true, metadataOnly: true);
+    await tester.pump();
+    expect(builds, buildsBefore);
+  });
+
+  testWidgets('renders metadata-only events when includeMetadataChanges', (
+    tester,
+  ) async {
+    await pumpBuilder(tester, includeMetadataChanges: true);
+
+    query.emit(3, size: 3, fromCache: false);
+    await tester.pump();
+    final buildsBefore = builds;
+
+    query.emit(3, size: 3, fromCache: true, metadataOnly: true);
+    await tester.pump();
+    expect(builds, greaterThan(buildsBefore));
+  });
+
+  testWidgets('renders an empty first page', (tester) async {
+    await pumpBuilder(tester);
+
+    query.emit(3, size: 0, fromCache: false, metadataOnly: true);
+    await tester.pump();
+    expect(snapshot.hasData, isTrue);
+    expect(snapshot.isFetching, isFalse);
+  });
 }
 
 class FakeQuery extends Fake implements Query<Json> {
@@ -210,9 +263,14 @@ class FakeQuery extends Fake implements Query<Json> {
     required int size,
     required bool fromCache,
     bool hasPendingWrites = false,
+    bool metadataOnly = false,
   }) {
     _controllers[limit]!.add(
-      FakeQuerySnapshot(size, FakeMetadata(fromCache, hasPendingWrites)),
+      FakeQuerySnapshot(
+        size,
+        FakeMetadata(fromCache, hasPendingWrites),
+        hasDocChanges: !metadataOnly,
+      ),
     );
   }
 
@@ -243,7 +301,9 @@ class FakeLimitedQuery extends Fake implements Query<Json> {
 }
 
 class FakeQuerySnapshot extends Fake implements QuerySnapshot<Json> {
-  FakeQuerySnapshot(this.size, this.metadata);
+  FakeQuerySnapshot(this.size, this.metadata, {required this.hasDocChanges});
+
+  final bool hasDocChanges;
 
   @override
   final int size;
@@ -254,6 +314,10 @@ class FakeQuerySnapshot extends Fake implements QuerySnapshot<Json> {
   @override
   List<QueryDocumentSnapshot<Json>> get docs =>
       List.generate(size, (_) => FakeDocumentSnapshot());
+
+  @override
+  List<DocumentChange<Json>> get docChanges =>
+      hasDocChanges ? [FakeDocumentChange()] : [];
 }
 
 class FakeMetadata extends Fake implements SnapshotMetadata {
@@ -265,6 +329,8 @@ class FakeMetadata extends Fake implements SnapshotMetadata {
   @override
   final bool hasPendingWrites;
 }
+
+class FakeDocumentChange extends Fake implements DocumentChange<Json> {}
 
 class FakeDocumentSnapshot extends Fake
     implements QueryDocumentSnapshot<Json> {}
