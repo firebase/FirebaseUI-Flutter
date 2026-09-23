@@ -5,6 +5,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -105,5 +106,35 @@ void main() {
         actionCodeSettings: anyNamed('actionCodeSettings'),
       ),
     );
+  });
+
+  testWidgets('shows a loading indicator while signing in', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onBeforeSignIn();
+    await tester.pump();
+
+    expect(find.byType(LoadingIndicator), findsOneWidget);
+    expect(find.text(labels.signInWithEmailLinkSentText), findsNothing);
+    expect(find.byType(EmailInput), findsNothing);
+  });
+
+  testWidgets('keeps the form hidden after signing in', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onBeforeSignIn();
+    emailLinkProvider.authListener.onSignedIn(MockCredential());
+    await tester.pump();
+
+    expect(find.byType(EmailInput), findsNothing);
+    expect(find.byType(LoadingIndicator), findsOneWidget);
   });
 }
