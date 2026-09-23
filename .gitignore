@@ -17,6 +17,7 @@ examples/all_plugins/pubspec.yaml
 
 Podfile.lock
 Pods/
+**/xcshareddata/swiftpm/Package.resolved
 .symlinks/
 **/Flutter/ephemeral/
 **/Flutter/Flutter.podspec

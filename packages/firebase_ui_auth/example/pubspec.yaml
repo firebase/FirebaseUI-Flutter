@@ -61,7 +61,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   config:
-    enable-swift-package-manager: false
+    enable-swift-package-manager: true
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
