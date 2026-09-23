@@ -178,10 +178,24 @@ class _FirestoreQueryBuilderState<Document>
 
     final query = widget.query.limit(expectedDocsCount);
 
+    // A new listener first emits whatever the local cache holds, which is
+    // often less than the pages already shown. Rendering that would shrink
+    // the list and reset the scroll position, so keep the current pages until
+    // the server responds.
+    var awaitingServer = nextPage;
+
     _querySubscription = query
         .snapshots(includeMetadataChanges: widget.includeMetadataChanges)
         .listen(
           (event) {
+            if (awaitingServer) {
+              if (event.metadata.isFromCache &&
+                  event.size < expectedDocsCount) {
+                return;
+              }
+              awaitingServer = false;
+            }
+
             setState(() {
               if (nextPage) {
                 _snapshot = _snapshot.copyWith(isFetchingMore: false);
