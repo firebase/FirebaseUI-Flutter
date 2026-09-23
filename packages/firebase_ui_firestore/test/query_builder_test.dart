@@ -17,15 +17,11 @@ void main() {
   late FakeQuery query;
   late FirestoreQueryBuilderSnapshot<Json> snapshot;
 
-  Future<void> pumpBuilder(
-    WidgetTester tester, {
-    Query<Json>? otherQuery,
-    int pageSize = 2,
-  }) {
+  Future<void> pumpBuilder(WidgetTester tester, {Query<Json>? otherQuery}) {
     return tester.pumpWidget(
       FirestoreQueryBuilder<Json>(
         query: otherQuery ?? query,
-        pageSize: pageSize,
+        pageSize: 2,
         builder: (context, s, _) {
           snapshot = s;
           return const SizedBox();
@@ -186,7 +182,9 @@ void main() {
     expect(snapshot.isFetchingMore, isFalse);
   });
 
-  testWidgets('keeps loaded docs while the page size changes', (tester) async {
+  testWidgets('renders local writes while waiting for the server', (
+    tester,
+  ) async {
     await pumpBuilder(tester);
 
     query.emit(3, size: 3, fromCache: false);
@@ -194,22 +192,12 @@ void main() {
 
     snapshot.fetchMore();
     await tester.pump();
-    query.emit(5, size: 5, fromCache: false);
-    await tester.pump();
-    expect(snapshot.docs, hasLength(4));
 
-    await pumpBuilder(tester, pageSize: 3);
+    // e.g. offline, the user deletes a doc after the cache evicted the rest.
+    query.emit(5, size: 1, fromCache: true, hasPendingWrites: true);
     await tester.pump();
-
-    query.emit(7, size: 1, fromCache: true);
-    await tester.pump();
-    expect(snapshot.docs, hasLength(4));
-    expect(snapshot.isFetching, isTrue);
-
-    query.emit(7, size: 7, fromCache: false);
-    await tester.pump();
-    expect(snapshot.docs, hasLength(6));
-    expect(snapshot.isFetching, isFalse);
+    expect(snapshot.docs, hasLength(1));
+    expect(snapshot.isFetchingMore, isFalse);
   });
 }
 
@@ -217,8 +205,15 @@ class FakeQuery extends Fake implements Query<Json> {
   final _controllers = <int, StreamController<QuerySnapshot<Json>>>{};
   final includeMetadataChanges = <int, bool>{};
 
-  void emit(int limit, {required int size, required bool fromCache}) {
-    _controllers[limit]!.add(FakeQuerySnapshot(size, fromCache));
+  void emit(
+    int limit, {
+    required int size,
+    required bool fromCache,
+    bool hasPendingWrites = false,
+  }) {
+    _controllers[limit]!.add(
+      FakeQuerySnapshot(size, FakeMetadata(fromCache, hasPendingWrites)),
+    );
   }
 
   void emitError(int limit) {
@@ -248,8 +243,7 @@ class FakeLimitedQuery extends Fake implements Query<Json> {
 }
 
 class FakeQuerySnapshot extends Fake implements QuerySnapshot<Json> {
-  FakeQuerySnapshot(this.size, bool fromCache)
-    : metadata = FakeMetadata(fromCache);
+  FakeQuerySnapshot(this.size, this.metadata);
 
   @override
   final int size;
@@ -263,10 +257,13 @@ class FakeQuerySnapshot extends Fake implements QuerySnapshot<Json> {
 }
 
 class FakeMetadata extends Fake implements SnapshotMetadata {
-  FakeMetadata(this.isFromCache);
+  FakeMetadata(this.isFromCache, this.hasPendingWrites);
 
   @override
   final bool isFromCache;
+
+  @override
+  final bool hasPendingWrites;
 }
 
 class FakeDocumentSnapshot extends Fake

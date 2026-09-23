@@ -151,11 +151,11 @@ class _FirestoreQueryBuilderState<Document>
       // preserving the current progress.
       final previousItemCount = (oldWidget.pageSize + 1) * _pageCount;
       _pageCount = (previousItemCount / widget.pageSize).ceil();
-      _listenQuery(keepDocs: true);
+      _listenQuery();
     }
   }
 
-  void _listenQuery({bool nextPage = false, bool keepDocs = false}) {
+  void _listenQuery({bool nextPage = false}) {
     _querySubscription?.cancel();
 
     if (nextPage) {
@@ -181,9 +181,10 @@ class _FirestoreQueryBuilderState<Document>
     // A new listener first emits whatever the local cache holds, which is
     // often less than the pages already shown. Rendering that would shrink
     // the list and reset the scroll position, so keep the current docs until
-    // the server responds. Metadata changes are included so that a server
-    // result identical to the cache still arrives as an event.
-    var awaitingServer = nextPage || keepDocs;
+    // the server responds or the user writes locally. Metadata changes are
+    // included so that a server result identical to the cache still arrives
+    // as an event.
+    var awaitingServer = nextPage;
 
     _querySubscription = query
         .snapshots(
@@ -194,6 +195,7 @@ class _FirestoreQueryBuilderState<Document>
           (event) {
             if (awaitingServer) {
               if (event.metadata.isFromCache &&
+                  !event.metadata.hasPendingWrites &&
                   event.size < _snapshot.docs.length) {
                 return;
               }
