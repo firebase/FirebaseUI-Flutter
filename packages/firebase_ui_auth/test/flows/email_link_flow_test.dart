@@ -89,7 +89,32 @@ void main() {
         },
       );
 
-      test('adds the anonymous user id to the link', () {
+      test('does not upgrade anonymous users by default', () {
+        auth.user = AnonymousUser();
+        provider.authListener = listener;
+        provider.sendLink('test@test.com');
+
+        final result = verify(
+          auth.sendSignInLinkToEmail(
+            actionCodeSettings: captureAnyNamed('actionCodeSettings'),
+            email: anyNamed('email'),
+          ),
+        );
+
+        final settings = result.captured[0] as fba.ActionCodeSettings;
+        expect(
+          Uri.parse(settings.url).queryParameters,
+          isNot(contains('ui_auid')),
+        );
+      });
+
+      test('adds the anonymous user id to the link when enabled', () {
+        provider = EmailLinkAuthProvider(
+          actionCodeSettings: actionCodeSettings,
+          appLinks: appLinks,
+          upgradeAnonymousUsers: true,
+        );
+        provider.auth = auth;
         auth.user = AnonymousUser();
         provider.authListener = listener;
         provider.sendLink('test@test.com');
@@ -264,6 +289,33 @@ void main() {
         expect(result.captured, [exception]);
       });
 
+      test('handles a link again after it failed', () async {
+        provider.authListener = listener;
+        when(
+          auth.signInWithEmailLink(
+            email: anyNamed('email'),
+            emailLink: anyNamed('emailLink'),
+          ),
+        ).thenThrow(TestException());
+
+        provider.awaitLink('test@test.com');
+        final link = signInLink(sessionId: 'session-1');
+
+        MockUriStream.addLink(link);
+        await untilCalled(listener.onError(any));
+
+        MockUriStream.addLink(link);
+        await Future<void>.delayed(Duration.zero);
+        await Future<void>.delayed(Duration.zero);
+
+        verify(
+          auth.signInWithEmailLink(
+            email: anyNamed('email'),
+            emailLink: anyNamed('emailLink'),
+          ),
+        ).called(2);
+      });
+
       test('receives a link after awaitLink was called again', () async {
         final closingAppLinks = ClosingAppLinks();
         provider = EmailLinkAuthProvider(
@@ -337,6 +389,31 @@ void main() {
         final result = verify(listener.onError(captureAny));
         expect(result.captured[0].code, 'email-link-wrong-device');
         verifyNever(listener.onEmailRequired(any));
+      });
+
+      test('ignores other deep links until a link is requested', () async {
+        when(auth.isSignInWithEmailLink(any)).thenReturn(false);
+        provider.authListener = listener;
+        provider.handleIncomingLinks();
+
+        MockUriStream.addLink(Uri.parse('https://test.com/product/1'));
+        await Future<void>.delayed(Duration.zero);
+
+        verifyNever(listener.onError(any));
+      });
+
+      test('#signInWithLink keeps the session of this device', () async {
+        storeSession(email: 'test@test.com', sessionId: 'session-1');
+        provider.authListener = listener;
+
+        provider.signInWithLink('other@test.com', 'https://test.com/link');
+        await untilCalled(listener.onSignedIn(any));
+
+        final prefs = await SharedPreferences.getInstance();
+        expect(
+          prefs.getString('firebase_ui_auth.email_link.session_id'),
+          'session-1',
+        );
       });
 
       test('#signInWithLink signs in with the confirmed email', () async {
@@ -453,6 +530,28 @@ void main() {
         },
       );
 
+      test('does not handle the launch link again after dispose', () async {
+        storeSession(email: 'test@test.com', sessionId: 'session-1');
+        final link = signInLink(sessionId: 'session-1');
+        when(appLinks.getInitialLink()).thenAnswer((_) async => link);
+        provider = EmailLinkAuthProvider(
+          actionCodeSettings: actionCodeSettings,
+          appLinks: appLinks,
+        );
+        provider.auth = auth;
+        provider.authListener = listener;
+
+        provider.handleIncomingLinks();
+        await untilCalled(listener.onSignedIn(any));
+
+        provider.dispose();
+        provider.handleIncomingLinks();
+        await Future<void>.delayed(Duration.zero);
+
+        // Once by the flow in setUp, once by this provider.
+        verify(appLinks.getInitialLink()).called(2);
+      });
+
       test('ignores a launch link that is not a sign in link', () async {
         when(
           appLinks.getInitialLink(),
@@ -502,6 +601,29 @@ void main() {
 
       expect(flow.value, isA<EmailRequired>());
       expect((flow.value as EmailRequired).link, 'https://test.com/link');
+    });
+
+    test('confirms the email for a link from another device', () async {
+      provider.awaitLink('test@test.com');
+      final link = signInLink(sessionId: 'session-1');
+
+      MockUriStream.addLink(link);
+      await Future<void>.delayed(Duration.zero);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(flow.value, isA<EmailRequired>());
+
+      flow.confirmEmail('test@test.com');
+      await Future<void>.delayed(Duration.zero);
+
+      final result = verify(
+        auth.signInWithEmailLink(
+          email: captureAnyNamed('email'),
+          emailLink: captureAnyNamed('emailLink'),
+        ),
+      );
+      result.called(1);
+      expect(result.captured, ['test@test.com', link.toString()]);
     });
 
     test('#confirmEmail calls EmailLinkAuthProvider#signInWithLink', () {

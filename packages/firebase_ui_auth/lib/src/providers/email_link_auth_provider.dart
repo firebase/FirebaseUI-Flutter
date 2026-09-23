@@ -37,10 +37,22 @@ class EmailLinkAuthProvider
   /// A configuration of the dynamic link.
   final fba.ActionCodeSettings actionCodeSettings;
 
+  /// Whether a link requested by an anonymous user should be linked to that
+  /// user instead of signing in. Defaults to `false`.
+  ///
+  /// When enabled, the link must be opened on the device that requested it,
+  /// and signing in to an email that already has an account fails.
+  final bool upgradeAnonymousUsers;
+
   final AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
   bool _initialLinkChecked = false;
-  String? _lastHandledLink;
+  bool _isAwaitingLink = false;
+
+  // Links being handled or already used, so the link that launched the app is
+  // not handled twice when it arrives from both getInitialLink and
+  // uriLinkStream. A link is removed if it fails, so it can be opened again.
+  final Set<String> _handledLinks = {};
 
   @override
   late EmailLinkAuthListener authListener;
@@ -57,6 +69,7 @@ class EmailLinkAuthProvider
   /// {@macro ui.auth.providers.email_link_auth_provider}
   EmailLinkAuthProvider({
     required this.actionCodeSettings,
+    this.upgradeAnonymousUsers = false,
 
     /// An instance of the [AppLinks] that should be used to handle
     /// the link. By default [AppLinks()] is used.
@@ -65,15 +78,17 @@ class EmailLinkAuthProvider
 
   /// Sends a link to the [email].
   ///
-  /// If the current user is anonymous, the link upgrades that user instead of
-  /// signing in a new one.
+  /// If [upgradeAnonymousUsers] is enabled and the current user is anonymous,
+  /// the link upgrades that user instead of signing in a new one.
   void sendLink(String email) {
     authListener.onBeforeLinkSent(email);
 
     final session = EmailLinkSession(
       email: email,
       sessionId: EmailLinkSession.generateSessionId(),
-      anonymousUserId: shouldUpgradeAnonymous ? auth.currentUser!.uid : null,
+      anonymousUserId: upgradeAnonymousUsers && shouldUpgradeAnonymous
+          ? auth.currentUser!.uid
+          : null,
     );
 
     auth
@@ -105,6 +120,7 @@ class EmailLinkAuthProvider
   ///
   /// The [email] is read from the device storage written by [sendLink].
   void awaitLink(String email) {
+    _isAwaitingLink = true;
     _listen();
   }
 
@@ -152,7 +168,8 @@ class EmailLinkAuthProvider
 
     if (auth.isSignInWithEmailLink(link)) {
       _handleLink(link);
-    } else {
+    } else if (_isAwaitingLink) {
+      // Other deep links are only reported once a sign in link was requested.
       authListener.onError(
         fba.FirebaseAuthException(
           code: 'invalid-email-signin-link',
@@ -163,10 +180,7 @@ class EmailLinkAuthProvider
   }
 
   Future<void> _handleLink(String link) async {
-    // The link that launched the app can arrive both from getInitialLink and
-    // from uriLinkStream.
-    if (link == _lastHandledLink) return;
-    _lastHandledLink = link;
+    if (!_handledLinks.add(link)) return;
 
     try {
       final params = parseEmailLinkParams(link);
@@ -189,34 +203,58 @@ class EmailLinkAuthProvider
         return;
       }
 
-      _completeSignIn(session.email, link, anonymousUserId);
+      _completeSignIn(
+        session.email,
+        link,
+        anonymousUserId: anonymousUserId,
+        clearSession: true,
+      );
     } catch (err) {
-      authListener.onError(err);
+      _onSignInFailed(link, err);
     }
+  }
+
+  void _onSignInFailed(String link, Object error) {
+    _handledLinks.remove(link);
+    authListener.onError(error);
   }
 
   /// Completes the sign in with a [link] from
   /// [EmailLinkAuthListener.onEmailRequired] and the [email] it was sent to.
+  ///
+  /// The session stored for this device's own pending link is kept.
   void signInWithLink(String email, String link) {
-    _completeSignIn(email, link, null);
+    _handledLinks.add(link);
+    _completeSignIn(email, link, clearSession: false);
   }
 
-  void _completeSignIn(String email, String link, String? anonymousUserId) {
+  void _completeSignIn(
+    String email,
+    String link, {
+    String? anonymousUserId,
+    required bool clearSession,
+  }) {
+    Future<void> onCompleted() async {
+      _isAwaitingLink = false;
+      if (clearSession) await EmailLinkSession.clear();
+    }
+
     if (anonymousUserId == null) {
       authListener.onBeforeSignIn();
       auth
           .signInWithEmailLink(email: email, emailLink: link)
           .then<void>((credential) async {
-            await EmailLinkSession.clear();
+            await onCompleted();
             authListener.onSignedIn(credential);
           })
-          .catchError(authListener.onError);
+          .catchError((Object err) => _onSignInFailed(link, err));
       return;
     }
 
     final user = auth.currentUser;
     if (user == null || !user.isAnonymous || user.uid != anonymousUserId) {
-      authListener.onError(
+      _onSignInFailed(
+        link,
         fba.FirebaseAuthException(
           code: 'email-link-different-anonymous-user',
           message:
@@ -236,16 +274,15 @@ class EmailLinkAuthProvider
     user
         .linkWithCredential(credential)
         .then<void>((_) async {
-          await EmailLinkSession.clear();
+          await onCompleted();
           authListener.onCredentialLinked(credential);
         })
-        .catchError(authListener.onError);
+        .catchError((Object err) => _onSignInFailed(link, err));
   }
 
   void dispose() {
     _linkSubscription?.cancel();
     _linkSubscription = null;
-    _initialLinkChecked = false;
-    _lastHandledLink = null;
+    _isAwaitingLink = false;
   }
 }
