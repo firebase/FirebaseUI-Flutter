@@ -137,7 +137,7 @@ void main() {
 
         await ref.onValue.first.then((value) {}, onError: (_) {});
 
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         expect(find.byType(ListView), findsOneWidget);
       },
