@@ -151,11 +151,11 @@ class _FirestoreQueryBuilderState<Document>
       // preserving the current progress.
       final previousItemCount = (oldWidget.pageSize + 1) * _pageCount;
       _pageCount = (previousItemCount / widget.pageSize).ceil();
-      _listenQuery();
+      _listenQuery(keepDocs: true);
     }
   }
 
-  void _listenQuery({bool nextPage = false}) {
+  void _listenQuery({bool nextPage = false, bool keepDocs = false}) {
     _querySubscription?.cancel();
 
     if (nextPage) {
@@ -180,30 +180,30 @@ class _FirestoreQueryBuilderState<Document>
 
     // A new listener first emits whatever the local cache holds, which is
     // often less than the pages already shown. Rendering that would shrink
-    // the list and reset the scroll position, so keep the current pages until
-    // the server responds.
-    var awaitingServer = nextPage;
+    // the list and reset the scroll position, so keep the current docs until
+    // the server responds. Metadata changes are included so that a server
+    // result identical to the cache still arrives as an event.
+    var awaitingServer = nextPage || keepDocs;
 
     _querySubscription = query
-        .snapshots(includeMetadataChanges: widget.includeMetadataChanges)
+        .snapshots(
+          includeMetadataChanges:
+              widget.includeMetadataChanges || awaitingServer,
+        )
         .listen(
           (event) {
             if (awaitingServer) {
               if (event.metadata.isFromCache &&
-                  event.size < expectedDocsCount) {
+                  event.size < _snapshot.docs.length) {
                 return;
               }
               awaitingServer = false;
             }
 
             setState(() {
-              if (nextPage) {
-                _snapshot = _snapshot.copyWith(isFetchingMore: false);
-              } else {
-                _snapshot = _snapshot.copyWith(isFetching: false);
-              }
-
               _snapshot = _snapshot.copyWith(
+                isFetching: false,
+                isFetchingMore: false,
                 hasData: true,
                 docs: event.size < expectedDocsCount
                     ? event.docs
@@ -217,13 +217,9 @@ class _FirestoreQueryBuilderState<Document>
           },
           onError: (Object error, StackTrace stackTrace) {
             setState(() {
-              if (nextPage) {
-                _snapshot = _snapshot.copyWith(isFetchingMore: false);
-              } else {
-                _snapshot = _snapshot.copyWith(isFetching: false);
-              }
-
               _snapshot = _snapshot.copyWith(
+                isFetching: false,
+                isFetchingMore: false,
                 error: error,
                 stackTrace: stackTrace,
                 hasError: true,

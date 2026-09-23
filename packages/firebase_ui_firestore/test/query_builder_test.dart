@@ -17,11 +17,15 @@ void main() {
   late FakeQuery query;
   late FirestoreQueryBuilderSnapshot<Json> snapshot;
 
-  Future<void> pumpBuilder(WidgetTester tester) {
+  Future<void> pumpBuilder(
+    WidgetTester tester, {
+    Query<Json>? otherQuery,
+    int pageSize = 2,
+  }) {
     return tester.pumpWidget(
       FirestoreQueryBuilder<Json>(
-        query: query,
-        pageSize: 2,
+        query: otherQuery ?? query,
+        pageSize: pageSize,
         builder: (context, s, _) {
           snapshot = s;
           return const SizedBox();
@@ -96,33 +100,151 @@ void main() {
     expect(snapshot.docs, hasLength(3));
     expect(snapshot.hasMore, isFalse);
   });
+
+  testWidgets(
+    'renders a partial cache snapshot that does not shrink the list',
+    (tester) async {
+      await pumpBuilder(tester);
+
+      query.emit(3, size: 3, fromCache: false);
+      await tester.pump();
+
+      snapshot.fetchMore();
+      await tester.pump();
+
+      // e.g. offline, or the cache already holds the end of the collection.
+      query.emit(5, size: 3, fromCache: true);
+      await tester.pump();
+      expect(snapshot.docs, hasLength(3));
+      expect(snapshot.hasMore, isFalse);
+      expect(snapshot.isFetchingMore, isFalse);
+    },
+  );
+
+  testWidgets('listens to metadata changes while waiting for the server', (
+    tester,
+  ) async {
+    await pumpBuilder(tester);
+    expect(query.includeMetadataChanges[3], isFalse);
+
+    query.emit(3, size: 3, fromCache: false);
+    await tester.pump();
+
+    snapshot.fetchMore();
+    await tester.pump();
+    expect(query.includeMetadataChanges[5], isTrue);
+
+    query.emit(5, size: 1, fromCache: true);
+    await tester.pump();
+
+    // The server confirms the cached result, which the SDK only reports as
+    // a metadata change.
+    query.emit(5, size: 1, fromCache: false);
+    await tester.pump();
+    expect(snapshot.docs, hasLength(1));
+    expect(snapshot.isFetchingMore, isFalse);
+  });
+
+  testWidgets(
+    'clears isFetchingMore on an error while waiting for the server',
+    (tester) async {
+      await pumpBuilder(tester);
+
+      query.emit(3, size: 3, fromCache: false);
+      await tester.pump();
+
+      snapshot.fetchMore();
+      await tester.pump();
+
+      query.emit(5, size: 1, fromCache: true);
+      query.emitError(5);
+      await tester.pump();
+      expect(snapshot.hasError, isTrue);
+      expect(snapshot.isFetchingMore, isFalse);
+    },
+  );
+
+  testWidgets('clears isFetchingMore when the query changes mid-fetch', (
+    tester,
+  ) async {
+    await pumpBuilder(tester);
+
+    query.emit(3, size: 3, fromCache: false);
+    await tester.pump();
+
+    snapshot.fetchMore();
+    await tester.pump();
+    await tester.pump();
+    expect(snapshot.isFetchingMore, isTrue);
+
+    final otherQuery = FakeQuery();
+    await pumpBuilder(tester, otherQuery: otherQuery);
+
+    otherQuery.emit(3, size: 1, fromCache: true);
+    await tester.pump();
+    expect(snapshot.docs, hasLength(1));
+    expect(snapshot.isFetchingMore, isFalse);
+  });
+
+  testWidgets('keeps loaded docs while the page size changes', (tester) async {
+    await pumpBuilder(tester);
+
+    query.emit(3, size: 3, fromCache: false);
+    await tester.pump();
+
+    snapshot.fetchMore();
+    await tester.pump();
+    query.emit(5, size: 5, fromCache: false);
+    await tester.pump();
+    expect(snapshot.docs, hasLength(4));
+
+    await pumpBuilder(tester, pageSize: 3);
+    await tester.pump();
+
+    query.emit(7, size: 1, fromCache: true);
+    await tester.pump();
+    expect(snapshot.docs, hasLength(4));
+    expect(snapshot.isFetching, isTrue);
+
+    query.emit(7, size: 7, fromCache: false);
+    await tester.pump();
+    expect(snapshot.docs, hasLength(6));
+    expect(snapshot.isFetching, isFalse);
+  });
 }
 
 class FakeQuery extends Fake implements Query<Json> {
   final _controllers = <int, StreamController<QuerySnapshot<Json>>>{};
+  final includeMetadataChanges = <int, bool>{};
 
   void emit(int limit, {required int size, required bool fromCache}) {
     _controllers[limit]!.add(FakeQuerySnapshot(size, fromCache));
   }
 
+  void emitError(int limit) {
+    _controllers[limit]!.addError(Exception('permission-denied'));
+  }
+
   @override
-  Query<Json> limit(int limit) => FakeLimitedQuery(
-    _controllers
-        .putIfAbsent(limit, () => StreamController.broadcast(sync: true))
-        .stream,
-  );
+  Query<Json> limit(int limit) => FakeLimitedQuery(this, limit);
 }
 
 class FakeLimitedQuery extends Fake implements Query<Json> {
-  FakeLimitedQuery(this._stream);
+  FakeLimitedQuery(this._parent, this._limit);
 
-  final Stream<QuerySnapshot<Json>> _stream;
+  final FakeQuery _parent;
+  final int _limit;
 
   @override
   Stream<QuerySnapshot<Json>> snapshots({
     bool includeMetadataChanges = false,
     ListenSource source = ListenSource.defaultSource,
-  }) => _stream;
+  }) {
+    _parent.includeMetadataChanges[_limit] = includeMetadataChanges;
+    return _parent._controllers
+        .putIfAbsent(_limit, () => StreamController.broadcast(sync: true))
+        .stream;
+  }
 }
 
 class FakeQuerySnapshot extends Fake implements QuerySnapshot<Json> {
