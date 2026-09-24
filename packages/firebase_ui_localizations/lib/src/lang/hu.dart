@@ -339,13 +339,14 @@ class HuLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Erősítse meg az e-mail-címét a belépés folytatásához";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Próbálja meg ugyanazon az eszközön vagy böngészőben megnyitni a linket, amelyen a belépést elkezdte.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Az ehhez a belépési kérelemhez tartozó munkamenet lejárt vagy törlődött.";
 }

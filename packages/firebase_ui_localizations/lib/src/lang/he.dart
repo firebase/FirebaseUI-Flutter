@@ -338,13 +338,14 @@ class HeLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      """אשר את כתובת הדוא"ל כדי להמשיך בכניסה""";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "נסה לפתוח את הקישור באותו מכשיר או דפדפן שבו התחלת את תהליך הכניסה.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "תוקף ההפעלה של בקשת הכניסה הזו פג, או שהיא נמחקה.";
 }

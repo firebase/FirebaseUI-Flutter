@@ -341,13 +341,14 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Verifizierungs-E-Mail senden";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Bestätigen Sie Ihre E-Mail-Adresse, um die Anmeldung fortzusetzen";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Öffnen Sie den Link auf demselben Gerät oder in demselben Browser, mit dem Sie die Anmeldung gestartet haben.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Die Sitzung zu dieser Anmeldeanfrage ist abgelaufen oder wurde gelöscht.";
 }

@@ -342,13 +342,14 @@ class PtLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Enviar email de verificação";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Confirme seu email para continuar o login";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Tente abrir o link no mesmo dispositivo ou navegador em que você iniciou o login.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "A sessão associada a este pedido de login expirou ou foi apagada.";
 }

@@ -534,17 +534,17 @@
     "description": "Used as a button label to send a verification email",
     "placeholders": {}
   },
-  "emailLinkConfirmEmailText": "Confirm email to continue sign in",
+  "emailLinkConfirmEmailText": "Conferma la tua email per continuare l'accesso",
   "@emailLinkConfirmEmailText": {
     "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
     "placeholders": {}
   },
-  "emailLinkWrongDeviceErrorText": "Try opening the link using the same device or browser where you started the sign-in process.",
+  "emailLinkWrongDeviceErrorText": "Prova ad aprire il link sullo stesso dispositivo o browser da cui hai iniziato l'accesso.",
   "@emailLinkWrongDeviceErrorText": {
     "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
     "placeholders": {}
   },
-  "emailLinkDifferentAnonymousUserErrorText": "The session associated with this sign-in request has either expired or was cleared.",
+  "emailLinkDifferentAnonymousUserErrorText": "La sessione associata a questa richiesta di accesso è scaduta o è stata cancellata.",
   "@emailLinkDifferentAnonymousUserErrorText": {
     "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}

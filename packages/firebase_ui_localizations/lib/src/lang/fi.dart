@@ -341,13 +341,14 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Lähetä vahvistussähköposti";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Vahvista sähköpostiosoitteesi jatkaaksesi kirjautumista";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Avaa linkki samalla laitteella tai selaimella, jolla aloitit kirjautumisen.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Tähän kirjautumispyyntöön liittyvä istunto on vanhentunut tai poistettu.";
 }

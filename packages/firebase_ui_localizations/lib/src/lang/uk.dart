@@ -343,13 +343,14 @@ class UkLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Підтвердьте електронну адресу, щоб продовжити вхід";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Відкрийте посилання на тому самому пристрої або в тому самому браузері, де ви почали вхід.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Сеанс, пов’язаний із цим запитом на вхід, закінчився або його було видалено.";
 }

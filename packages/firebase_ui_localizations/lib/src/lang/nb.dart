@@ -338,13 +338,14 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send e-postbekreftelse";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Bekreft e-postadressen din for å fortsette innloggingen";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Prøv å åpne lenken på samme enhet eller i samme nettleser som du startet innloggingen på.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Økten som hører til denne innloggingsforespørselen, har utløpt eller blitt slettet.";
 }

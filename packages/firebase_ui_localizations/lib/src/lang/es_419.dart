@@ -344,13 +344,14 @@ class Es419Localizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Confirma tu correo electrónico para continuar con el acceso";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Intenta abrir el vínculo en el mismo dispositivo o navegador en el que comenzaste a acceder.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "La sesión asociada a esta solicitud de acceso venció o se borró.";
 }

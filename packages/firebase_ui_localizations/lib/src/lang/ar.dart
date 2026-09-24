@@ -344,13 +344,14 @@ class ArLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "أكِّد عنوان بريدك الإلكتروني لمتابعة تسجيل الدخول";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "يُرجى فتح الرابط على الجهاز أو المتصفح نفسه الذي بدأت منه تسجيل الدخول.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "انتهت صلاحية الجلسة المرتبطة بطلب تسجيل الدخول هذا أو تم محوها.";
 }

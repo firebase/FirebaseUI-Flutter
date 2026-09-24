@@ -343,13 +343,14 @@ class RoLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Confirmă emailul pentru a continua conectarea";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Încearcă să deschizi linkul pe același dispozitiv sau în același browser în care ai început conectarea.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Sesiunea asociată acestei solicitări de conectare a expirat sau a fost ștearsă.";
 }

@@ -534,17 +534,17 @@
     "description": "Used as a button label to send a verification email",
     "placeholders": {}
   },
-  "emailLinkConfirmEmailText": "Confirm email to continue sign in",
+  "emailLinkConfirmEmailText": "אשר את כתובת הדוא\"ל כדי להמשיך בכניסה",
   "@emailLinkConfirmEmailText": {
     "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
     "placeholders": {}
   },
-  "emailLinkWrongDeviceErrorText": "Try opening the link using the same device or browser where you started the sign-in process.",
+  "emailLinkWrongDeviceErrorText": "נסה לפתוח את הקישור באותו מכשיר או דפדפן שבו התחלת את תהליך הכניסה.",
   "@emailLinkWrongDeviceErrorText": {
     "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
     "placeholders": {}
   },
-  "emailLinkDifferentAnonymousUserErrorText": "The session associated with this sign-in request has either expired or was cleared.",
+  "emailLinkDifferentAnonymousUserErrorText": "תוקף ההפעלה של בקשת הכניסה הזו פג, או שהיא נמחקה.",
   "@emailLinkDifferentAnonymousUserErrorText": {
     "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}

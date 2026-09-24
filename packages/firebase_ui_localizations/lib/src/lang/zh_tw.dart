@@ -331,13 +331,12 @@ class ZhTWLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText => "請確認你的電子郵件地址以繼續登入";
 
   @override
-  String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+  String get emailLinkWrongDeviceErrorText => "請試著在你開始登入時使用的同一部裝置或瀏覽器中開啟該連結。";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "與這項登入要求相關聯的工作階段已過期或已遭清除。";
 }

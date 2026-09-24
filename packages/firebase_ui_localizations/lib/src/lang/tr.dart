@@ -341,13 +341,14 @@ class TrLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Oturum açmaya devam etmek için e-posta adresinizi onaylayın";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Bağlantıyı, oturum açma işlemini başlattığınız cihazda veya tarayıcıda açmayı deneyin.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Bu oturum açma isteğiyle ilişkili oturumun süresi doldu veya oturum temizlendi.";
 }

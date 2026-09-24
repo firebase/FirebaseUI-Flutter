@@ -333,13 +333,13 @@ class KoLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText => "로그인을 계속하려면 이메일을 확인하세요";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "로그인을 시작한 기기 또는 브라우저에서 링크를 열어 보세요.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "이 로그인 요청과 연결된 세션이 만료되었거나 삭제되었습니다.";
 }

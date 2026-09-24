@@ -341,13 +341,14 @@ class RuLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText =>
+      "Подтвердите адрес электронной почты, чтобы продолжить вход";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "Откройте ссылку на том же устройстве или в том же браузере, где вы начали вход.";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "Сеанс, связанный с этим запросом на вход, истек или был удален.";
 }

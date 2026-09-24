@@ -338,13 +338,13 @@ class ThLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText => "ยืนยันอีเมลเพื่อลงชื่อเข้าใช้ต่อ";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "โปรดลองเปิดลิงก์ในอุปกรณ์หรือเบราว์เซอร์เดียวกันกับที่คุณเริ่มลงชื่อเข้าใช้";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "เซสชันที่เชื่อมโยงกับคำขอลงชื่อเข้าใช้นี้หมดอายุหรือถูกล้างแล้ว";
 }

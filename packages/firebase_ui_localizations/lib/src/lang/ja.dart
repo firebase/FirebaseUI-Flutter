@@ -328,13 +328,13 @@ class JaLocalizations extends FirebaseUILocalizationLabels {
   String get sendVerificationEmailLabel => "Send verification email";
 
   @override
-  String get emailLinkConfirmEmailText => "Confirm email to continue sign in";
+  String get emailLinkConfirmEmailText => "サインインを続行するには、メールアドレスを確認してください";
 
   @override
   String get emailLinkWrongDeviceErrorText =>
-      "Try opening the link using the same device or browser where you started the sign-in process.";
+      "サインインを開始したのと同じデバイスまたはブラウザでリンクを開いてください。";
 
   @override
   String get emailLinkDifferentAnonymousUserErrorText =>
-      "The session associated with this sign-in request has either expired or was cleared.";
+      "このサインイン リクエストに関連付けられたセッションは、期限切れになったか削除されました。";
 }
