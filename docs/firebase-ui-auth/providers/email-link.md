@@ -57,7 +57,9 @@ MaterialApp(
     '/email-link-sign-in': (context) => EmailLinkSignInScreen(
       actions: [
         AuthStateChangeAction((context, state) {
-          if (state is SignedIn || state is UserCreated) {
+          if (state is SignedIn ||
+              state is UserCreated ||
+              state is CredentialLinked) {
             Navigator.pushReplacementNamed(context, '/profile');
           }
         }),
@@ -70,7 +72,7 @@ MaterialApp(
 
 > Notes:
 >
-> - a user signing in with an email link for the first time emits `UserCreated` rather than `SignedIn`, so handle both.
+> - a user signing in with an email link for the first time emits `UserCreated` rather than `SignedIn`, and an upgraded anonymous user (`upgradeAnonymousUsers`) emits `CredentialLinked`, so handle all three.
 > - see [navigation guide](../navigation.md) to learn how navigation works with Firebase UI.
 > - explore [FirebaseUIActions API docs](https://pub.dev/documentation/firebase_ui_auth/latest/firebase_ui_auth/FirebaseUIAction-class.html).
 
@@ -114,7 +116,9 @@ class MyEmailLinkSignInScreen extends StatelessWidget {
               child: FirebaseUIActions(
                 actions: [
                   AuthStateChangeAction((context, state) {
-                    if (state is SignedIn || state is UserCreated) {
+                    if (state is SignedIn ||
+                        state is UserCreated ||
+                        state is CredentialLinked) {
                       Navigator.pushReplacementNamed(context, '/profile');
                     }
                   }
@@ -141,7 +145,9 @@ class MyCustomWidget extends StatelessWidget {
     return AuthFlowBuilder<EmailLinkAuthController>(
       provider: emailLinkProvider,
       listener: (oldState, newState, ctrl) {
-        if (newState is SignedIn || newState is UserCreated) {
+        if (newState is SignedIn ||
+            newState is UserCreated ||
+            newState is CredentialLinked) {
           Navigator.of(context).pushReplacementNamed('/profile');
         }
       }

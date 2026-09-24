@@ -159,4 +159,45 @@ void main() {
     expect(find.text(labels.emailLinkConfirmEmailText), findsOneWidget);
     expect(find.text(labels.continueText), findsOneWidget);
   });
+
+  testWidgets('does not send a link for an empty email', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    await tester.tap(find.text(labels.sendLinkButtonLabel));
+    await tester.pump();
+
+    expect(find.text(labels.emailIsRequiredErrorText), findsOneWidget);
+    verifyNever(
+      auth.sendSignInLinkToEmail(
+        email: anyNamed('email'),
+        actionCodeSettings: anyNamed('actionCodeSettings'),
+      ),
+    );
+  });
+
+  testWidgets('does not confirm an empty email', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onEmailRequired('https://test.com/link');
+    await tester.pump();
+
+    await tester.tap(find.text(labels.continueText));
+    await tester.pump();
+
+    expect(find.text(labels.emailIsRequiredErrorText), findsOneWidget);
+    verifyNever(
+      auth.signInWithEmailLink(
+        email: anyNamed('email'),
+        emailLink: anyNamed('emailLink'),
+      ),
+    );
+  });
 }

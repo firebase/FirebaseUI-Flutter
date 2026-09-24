@@ -118,7 +118,9 @@ class _EmailLinkSignInViewState extends State<EmailLinkSignInView> {
                 label: isConfirmingEmail
                     ? l.continueText
                     : l.sendLinkButtonLabel,
-                onTap: submit,
+                onTap: () {
+                  if (formKey.currentState?.validate() ?? false) submit();
+                },
               ),
             ],
             if (canPop) ...[
