@@ -49,6 +49,12 @@ class EmailLinkAuthProvider
   bool _initialLinkChecked = false;
   bool _isAwaitingLink = false;
 
+  // Whether a flow (an email link screen) is showing. A sign in link that
+  // arrives while none is kept in _pendingLink until the next one opens, so
+  // its result is not reported to a screen that is gone.
+  bool _hasActiveFlow = false;
+  String? _pendingLink;
+
   // Links being handled or already used, so the link that launched the app is
   // not handled twice when it arrives from both getInitialLink and
   // uriLinkStream. A link is removed if it fails, so it can be opened again.
@@ -121,6 +127,7 @@ class EmailLinkAuthProvider
   /// The [email] is read from the device storage written by [sendLink].
   void awaitLink(String email) {
     _isAwaitingLink = true;
+    _hasActiveFlow = true;
     _listen();
   }
 
@@ -141,8 +148,17 @@ class EmailLinkAuthProvider
 
   /// Handles the sign in link that launched the app, if any, and starts
   /// listening for links opened while the app is running.
+  ///
+  /// A link that arrived while no flow was showing is handled now.
   void handleIncomingLinks() {
+    _hasActiveFlow = true;
     _listen();
+
+    final pendingLink = _pendingLink;
+    if (pendingLink != null) {
+      _pendingLink = null;
+      _handleLink(pendingLink);
+    }
 
     if (_initialLinkChecked) return;
     _initialLinkChecked = true;
@@ -170,7 +186,11 @@ class EmailLinkAuthProvider
     final link = uri.toString();
 
     if (auth.isSignInWithEmailLink(link)) {
-      _handleLink(link);
+      if (_hasActiveFlow) {
+        _handleLink(link);
+      } else {
+        _pendingLink = link;
+      }
     } else if (_isAwaitingLink) {
       // Other deep links are only reported once a sign in link was requested.
       authListener.onError(
@@ -287,15 +307,21 @@ class EmailLinkAuthProvider
         .catchError((Object err) => _onSignInFailed(link, err));
   }
 
-  /// Stops reporting deep links that are not sign in links as errors, for
-  /// example when the screen that requested a link is closed.
+  /// Called when the flow that handles links is disposed, for example when
+  /// its screen is closed.
+  ///
+  /// Deep links that are not sign in links are no longer reported as errors,
+  /// and a sign in link is kept until [handleIncomingLinks] is called again.
   void stopAwaitingLink() {
     _isAwaitingLink = false;
+    _hasActiveFlow = false;
   }
 
   void dispose() {
     _linkSubscription?.cancel();
     _linkSubscription = null;
     _isAwaitingLink = false;
+    _hasActiveFlow = false;
+    _pendingLink = null;
   }
 }

@@ -741,13 +741,63 @@ void main() {
       verify(provider.handleIncomingLinks()).called(1);
     });
 
-    test('stops awaiting a link when disposed', () {
-      final provider = MockProvider();
-      final flow = EmailLinkFlow(provider: provider, auth: auth);
+    test('stops awaiting a link when disposed', () async {
+      when(auth.isSignInWithEmailLink(any)).thenReturn(false);
+      provider.awaitLink('test@test.com');
+      final errors = <Object>[];
+      flow.addListener(() {
+        if (flow.value case AuthFailed(:final exception)) errors.add(exception);
+      });
 
       flow.onDispose();
+      MockUriStream.addLink(Uri.parse('https://test.com/product/1'));
+      await Future<void>.delayed(Duration.zero);
 
-      verify(provider.stopAwaitingLink()).called(1);
+      expect(errors, isEmpty);
+    });
+
+    test('a replaced flow does not stop the newer one', () async {
+      final newer = EmailLinkFlow(provider: provider, auth: auth);
+      storeSession(email: 'test@test.com', sessionId: 'session-1');
+
+      flow.onDispose();
+      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+      await pumpEventQueue();
+
+      expect(newer.value, isA<SignedIn>());
+    });
+
+    test('keeps a link that arrives while no flow is showing', () async {
+      storeSession(email: 'test@test.com', sessionId: 'session-1');
+      flow.onDispose();
+
+      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+      await pumpEventQueue();
+
+      verifyNever(
+        auth.signInWithEmailLink(
+          email: anyNamed('email'),
+          emailLink: anyNamed('emailLink'),
+        ),
+      );
+
+      final next = EmailLinkFlow(provider: provider, auth: auth);
+      await pumpEventQueue();
+
+      expect(next.value, isA<SignedIn>());
+    });
+
+    test('asks the next flow to confirm a kept link', () async {
+      flow.onDispose();
+
+      MockUriStream.addLink(signInLink(sessionId: 'other-device'));
+      await pumpEventQueue();
+      expect(flow.value, isA<Uninitialized>());
+
+      final next = EmailLinkFlow(provider: provider, auth: auth);
+      await pumpEventQueue();
+
+      expect(next.value, isA<EmailRequired>());
     });
 
     test('#onEmailRequired emits EmailRequired', () {

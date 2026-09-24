@@ -92,6 +92,7 @@ When the link is sent, the email is stored on the device, so the link completes 
 
   Disable Flutter's built-in deep linking so it does not replace `initialRoute` with the link: add `<meta-data android:name="flutter_deeplinking_enabled" android:value="false" />` to the `<activity>` in `AndroidManifest.xml` (not the `<application>`), and set `FlutterDeepLinkingEnabled` to `false` in `Info.plist`.
 
+- **Link opened while the app is running:** the link is handled by the email link screen. If that screen is not showing, the link is kept until it opens, so open `EmailLinkSignInScreen` yourself when a link arrives, for example from an `app_links` listener when `FirebaseAuth.instance.isSignInWithEmailLink(link)` is true and the screen is not already open.
 - **Link opened on another device:** the flow emits `EmailRequired` and `EmailLinkSignInView` asks the user to confirm their email before signing in.
 - **Anonymous users:** by default an anonymous user is replaced by the signed in user. Pass `upgradeAnonymousUsers: true` to `EmailLinkAuthProvider` to link the email to the anonymous user instead: the flow then emits `CredentialLinked` instead of `SignedIn`, the link must be opened on the same device (otherwise sign in fails with an `email-link-wrong-device` error), and an email that already has an account cannot be used.
 

@@ -53,8 +53,16 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
     /// {@macro ui.auth.auth_flow.ctor.provider}
     required super.provider,
   }) : super(action: AuthAction.signIn, initialState: const Uninitialized()) {
-    provider.handleIncomingLinks();
-    onDispose = provider.stopAwaitingLink;
+    // The provider getter makes this flow the provider's listener, so keep a
+    // reference that can be read without doing that.
+    final linkProvider = provider..handleIncomingLinks();
+    onDispose = () {
+      // A newer flow may already have replaced this one, for example after
+      // Navigator.pushReplacement.
+      if (identical(linkProvider.authListener, this)) {
+        linkProvider.stopAwaitingLink();
+      }
+    };
   }
 
   String? _pendingLink;

@@ -68,6 +68,9 @@ class _EmailLinkSignInViewState extends State<EmailLinkSignInView> {
       },
       builder: (context, state, ctrl, child) {
         final isFormHidden = statesToHideForm.contains(state.runtimeType);
+        // Also covers a flow that was already in EmailRequired when this view
+        // was built, which the listener above does not see.
+        if (state is EmailRequired) isConfirmingEmail = true;
 
         void submit() {
           if (isConfirmingEmail) {

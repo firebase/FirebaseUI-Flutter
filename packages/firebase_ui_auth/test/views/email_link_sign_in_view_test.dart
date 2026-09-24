@@ -137,4 +137,26 @@ void main() {
     expect(find.byType(EmailInput), findsNothing);
     expect(find.byType(LoadingIndicator), findsOneWidget);
   });
+
+  testWidgets('confirms the email for a link kept while it was closed', (
+    tester,
+  ) async {
+    Widget view() => TestMaterialApp(
+      child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+    );
+
+    // The screen is shown once, then closed.
+    await tester.pumpWidget(view());
+    await tester.pumpWidget(const SizedBox());
+
+    // A link from another device arrives while no email link screen shows.
+    MockUriStream.addLink(Uri.parse('https://test.com/link'));
+    await tester.pump();
+
+    await tester.pumpWidget(view());
+    await tester.pump();
+
+    expect(find.text(labels.emailLinkConfirmEmailText), findsOneWidget);
+    expect(find.text(labels.continueText), findsOneWidget);
+  });
 }
