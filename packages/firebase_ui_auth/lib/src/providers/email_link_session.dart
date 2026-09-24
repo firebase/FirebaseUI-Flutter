@@ -2,13 +2,16 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-const _emailKey = 'firebase_ui_auth.email_link.email';
-const _sessionIdKey = 'firebase_ui_auth.email_link.session_id';
-const _anonymousUserIdKey = 'firebase_ui_auth.email_link.anonymous_user_id';
+const _sessionsKey = 'firebase_ui_auth.email_link.sessions';
+
+/// How many requested links are remembered, so an older email still signs in
+/// on this device after the user asked for another link.
+const _maxSessions = 5;
 
 /// Link parameter names shared with FirebaseUI-Android.
 const sessionIdParam = 'ui_sid';
@@ -16,6 +19,9 @@ const anonymousUserIdParam = 'ui_auid';
 
 /// A pending email link sign in, persisted so that it survives the app being
 /// killed while the user opens their email.
+///
+/// [anonymousUserId] is only added to the link; the check when the link is
+/// opened compares it with the current user.
 class EmailLinkSession {
   final String email;
   final String sessionId;
@@ -34,35 +40,56 @@ class EmailLinkSession {
     return List.generate(10, (_) => chars[random.nextInt(chars.length)]).join();
   }
 
-  static Future<EmailLinkSession?> load() async {
-    final prefs = await SharedPreferences.getInstance();
-    final email = prefs.getString(_emailKey);
-    final sessionId = prefs.getString(_sessionIdKey);
-    if (email == null || sessionId == null) return null;
+  static List<Map<String, dynamic>> _readAll(SharedPreferences prefs) {
+    final stored = prefs.getStringList(_sessionsKey) ?? const [];
+    return [
+      for (final entry in stored) jsonDecode(entry) as Map<String, dynamic>,
+    ];
+  }
 
-    return EmailLinkSession(
-      email: email,
-      sessionId: sessionId,
-      anonymousUserId: prefs.getString(_anonymousUserIdKey),
-    );
+  static Future<void> _writeAll(
+    SharedPreferences prefs,
+    List<Map<String, dynamic>> sessions,
+  ) async {
+    if (sessions.isEmpty) {
+      await prefs.remove(_sessionsKey);
+    } else {
+      await prefs.setStringList(_sessionsKey, [
+        for (final session in sessions) jsonEncode(session),
+      ]);
+    }
+  }
+
+  /// Returns the stored session that requested the link with [sessionId].
+  static Future<EmailLinkSession?> find(String? sessionId) async {
+    if (sessionId == null) return null;
+
+    final prefs = await SharedPreferences.getInstance();
+    for (final session in _readAll(prefs)) {
+      if (session['sessionId'] == sessionId) {
+        return EmailLinkSession(
+          email: session['email'] as String,
+          sessionId: sessionId,
+        );
+      }
+    }
+    return null;
   }
 
   Future<void> save() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_emailKey, email);
-    await prefs.setString(_sessionIdKey, sessionId);
-    if (anonymousUserId case final uid?) {
-      await prefs.setString(_anonymousUserIdKey, uid);
-    } else {
-      await prefs.remove(_anonymousUserIdKey);
-    }
+    final sessions = _readAll(prefs);
+    sessions.add({'sessionId': sessionId, 'email': email});
+    final start = max(0, sessions.length - _maxSessions);
+    await _writeAll(prefs, sessions.sublist(start));
   }
 
-  static Future<void> clear() async {
+  /// Removes this session once its link was used.
+  Future<void> remove() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_emailKey);
-    await prefs.remove(_sessionIdKey);
-    await prefs.remove(_anonymousUserIdKey);
+    final sessions = _readAll(prefs);
+    sessions.removeWhere((session) => session['sessionId'] == sessionId);
+    await _writeAll(prefs, sessions);
   }
 
   /// Returns [url] with the session parameters added to its query.

@@ -54,6 +54,7 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
     required super.provider,
   }) : super(action: AuthAction.signIn, initialState: const Uninitialized()) {
     provider.handleIncomingLinks();
+    onDispose = provider.stopAwaitingLink;
   }
 
   String? _pendingLink;

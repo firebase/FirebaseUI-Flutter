@@ -188,11 +188,9 @@ class EmailLinkAuthProvider
     try {
       final params = parseEmailLinkParams(link);
       final anonymousUserId = params[anonymousUserIdParam];
-      final session = await EmailLinkSession.load();
-      final isSameDevice =
-          session != null && session.sessionId == params[sessionIdParam];
+      final session = await EmailLinkSession.find(params[sessionIdParam]);
 
-      if (!isSameDevice) {
+      if (session == null) {
         if (anonymousUserId != null) {
           throw fba.FirebaseAuthException(
             code: 'email-link-wrong-device',
@@ -202,6 +200,9 @@ class EmailLinkAuthProvider
           );
         }
 
+        // Not kept as handled, so the link can be opened again if the user
+        // leaves the confirm email step.
+        _handledLinks.remove(link);
         authListener.onEmailRequired(link);
         return;
       }
@@ -210,7 +211,7 @@ class EmailLinkAuthProvider
         session.email,
         link,
         anonymousUserId: anonymousUserId,
-        clearSession: true,
+        session: session,
       );
     } catch (err) {
       _onSignInFailed(link, err);
@@ -219,6 +220,7 @@ class EmailLinkAuthProvider
 
   void _onSignInFailed(String link, Object error) {
     _handledLinks.remove(link);
+    _isAwaitingLink = false;
     authListener.onError(error);
   }
 
@@ -228,26 +230,28 @@ class EmailLinkAuthProvider
   /// The session stored for this device's own pending link is kept.
   void signInWithLink(String email, String link) {
     _handledLinks.add(link);
-    _completeSignIn(email, link, clearSession: false);
+    _completeSignIn(email, link);
   }
 
   void _completeSignIn(
     String email,
     String link, {
     String? anonymousUserId,
-    required bool clearSession,
+    EmailLinkSession? session,
   }) {
-    Future<void> onCompleted() async {
+    void onCompleted() {
       _isAwaitingLink = false;
-      if (clearSession) await EmailLinkSession.clear();
+      // A session left behind only means its link would ask for the email
+      // again, so a storage error must not turn a sign in into a failure.
+      session?.remove().catchError((_) {});
     }
 
     if (anonymousUserId == null) {
       authListener.onBeforeSignIn();
       auth
           .signInWithEmailLink(email: email, emailLink: link)
-          .then<void>((credential) async {
-            await onCompleted();
+          .then<void>((credential) {
+            onCompleted();
             authListener.onSignedIn(credential);
           })
           .catchError((Object err) => _onSignInFailed(link, err));
@@ -276,11 +280,17 @@ class EmailLinkAuthProvider
     authListener.onBeforeSignIn();
     user
         .linkWithCredential(credential)
-        .then<void>((_) async {
-          await onCompleted();
+        .then<void>((_) {
+          onCompleted();
           authListener.onCredentialLinked(credential);
         })
         .catchError((Object err) => _onSignInFailed(link, err));
+  }
+
+  /// Stops reporting deep links that are not sign in links as errors, for
+  /// example when the screen that requested a link is closed.
+  void stopAwaitingLink() {
+    _isAwaitingLink = false;
   }
 
   void dispose() {

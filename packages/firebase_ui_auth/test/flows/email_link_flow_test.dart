@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:app_links/app_links.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
@@ -11,6 +12,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:firebase_ui_auth/src/providers/email_link_session.dart';
 
 import '../test_utils.dart';
 
@@ -145,15 +148,9 @@ void main() {
         final settings = result.captured[0] as fba.ActionCodeSettings;
         final sessionId = Uri.parse(settings.url).queryParameters['ui_sid'];
 
-        final prefs = await SharedPreferences.getInstance();
-        expect(
-          prefs.getString('firebase_ui_auth.email_link.email'),
-          'test@test.com',
-        );
-        expect(
-          prefs.getString('firebase_ui_auth.email_link.session_id'),
-          sessionId,
-        );
+        expect(await storedSessions(), [
+          {'sessionId': sessionId, 'email': 'test@test.com'},
+        ]);
       });
 
       test('calls onLinkSent', () async {
@@ -263,8 +260,8 @@ void main() {
         result.called(1);
         expect(result.captured[0], isA<MockCredential>());
 
-        final prefs = await SharedPreferences.getInstance();
-        expect(prefs.getString('firebase_ui_auth.email_link.email'), isNull);
+        await Future<void>.delayed(Duration.zero);
+        expect(await storedSessions(), isEmpty);
       });
 
       test('calls onError if sing in failed', () async {
@@ -402,6 +399,53 @@ void main() {
         verifyNever(listener.onError(any));
       });
 
+      test('asks for the email again when the link is reopened', () async {
+        provider.authListener = listener;
+        provider.awaitLink('test@test.com');
+        final link = signInLink(sessionId: 'session-1');
+
+        MockUriStream.addLink(link);
+        await untilCalled(listener.onEmailRequired(any));
+        MockUriStream.addLink(link);
+        await Future<void>.delayed(Duration.zero);
+        await Future<void>.delayed(Duration.zero);
+
+        verify(listener.onEmailRequired(any)).called(2);
+      });
+
+      test('ignores other deep links after a failed sign in', () async {
+        storeSession(email: 'test@test.com', sessionId: 'session-1');
+        when(
+          auth.signInWithEmailLink(
+            email: anyNamed('email'),
+            emailLink: anyNamed('emailLink'),
+          ),
+        ).thenThrow(TestException());
+        provider.authListener = listener;
+        provider.awaitLink('test@test.com');
+
+        MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+        await untilCalled(listener.onError(any));
+
+        when(auth.isSignInWithEmailLink(any)).thenReturn(false);
+        MockUriStream.addLink(Uri.parse('https://test.com/product/1'));
+        await Future<void>.delayed(Duration.zero);
+
+        verify(listener.onError(any)).called(1);
+      });
+
+      test('#stopAwaitingLink ignores other deep links', () async {
+        when(auth.isSignInWithEmailLink(any)).thenReturn(false);
+        provider.authListener = listener;
+        provider.awaitLink('test@test.com');
+        provider.stopAwaitingLink();
+
+        MockUriStream.addLink(Uri.parse('https://test.com/product/1'));
+        await Future<void>.delayed(Duration.zero);
+
+        verifyNever(listener.onError(any));
+      });
+
       test('#signInWithLink keeps the session of this device', () async {
         storeSession(email: 'test@test.com', sessionId: 'session-1');
         provider.authListener = listener;
@@ -409,11 +453,10 @@ void main() {
         provider.signInWithLink('other@test.com', 'https://test.com/link');
         await untilCalled(listener.onSignedIn(any));
 
-        final prefs = await SharedPreferences.getInstance();
-        expect(
-          prefs.getString('firebase_ui_auth.email_link.session_id'),
-          'session-1',
-        );
+        await Future<void>.delayed(Duration.zero);
+        expect(await storedSessions(), [
+          {'sessionId': 'session-1', 'email': 'test@test.com'},
+        ]);
       });
 
       test('#signInWithLink signs in with the confirmed email', () async {
@@ -433,13 +476,53 @@ void main() {
       });
     });
 
+    group('several links', () {
+      Future<List<String>> sendLinks(int count) async {
+        provider.authListener = listener;
+        for (var i = 0; i < count; i++) {
+          provider.sendLink('test@test.com');
+          await pumpEventQueue();
+        }
+
+        final result = verify(
+          auth.sendSignInLinkToEmail(
+            actionCodeSettings: captureAnyNamed('actionCodeSettings'),
+            email: anyNamed('email'),
+          ),
+        );
+        return [
+          for (final settings in result.captured.cast<fba.ActionCodeSettings>())
+            Uri.parse(settings.url).queryParameters['ui_sid']!,
+        ];
+      }
+
+      test('an older link still signs in on this device', () async {
+        final sessionIds = await sendLinks(2);
+
+        provider.awaitLink('test@test.com');
+        MockUriStream.addLink(signInLink(sessionId: sessionIds.first));
+        await untilCalled(listener.onSignedIn(any));
+
+        verifyNever(listener.onEmailRequired(any));
+        verify(
+          auth.signInWithEmailLink(
+            email: 'test@test.com',
+            emailLink: anyNamed('emailLink'),
+          ),
+        ).called(1);
+      });
+
+      test('keeps the 5 most recent links', () async {
+        final sessionIds = await sendLinks(6);
+
+        final stored = await storedSessions();
+        expect(stored.map((s) => s['sessionId']), sessionIds.sublist(1));
+      });
+    });
+
     group('anonymous upgrade', () {
       setUp(() {
-        storeSession(
-          email: 'test@test.com',
-          sessionId: 'session-1',
-          anonymousUserId: 'anon-uid',
-        );
+        storeSession(email: 'test@test.com', sessionId: 'session-1');
       });
 
       test('links the credential to the anonymous user', () async {
@@ -463,6 +546,47 @@ void main() {
             emailLink: anyNamed('emailLink'),
           ),
         );
+      });
+
+      test('an older link still upgrades the anonymous user', () async {
+        // The provider from setUp also listens to the shared mock stream.
+        provider.dispose();
+        provider = EmailLinkAuthProvider(
+          actionCodeSettings: actionCodeSettings,
+          appLinks: appLinks,
+          upgradeAnonymousUsers: true,
+        );
+        final user = AnonymousUser();
+        auth.user = user;
+        provider.auth = auth;
+        provider.authListener = listener;
+
+        provider.sendLink('test@test.com');
+        provider.sendLink('test@test.com');
+        await untilCalled(listener.onLinkSent(any));
+        await Future<void>.delayed(Duration.zero);
+
+        final result = verify(
+          auth.sendSignInLinkToEmail(
+            actionCodeSettings: captureAnyNamed('actionCodeSettings'),
+            email: anyNamed('email'),
+          ),
+        );
+        final firstUrl = Uri.parse(
+          (result.captured.first as fba.ActionCodeSettings).url,
+        );
+
+        provider.awaitLink('test@test.com');
+        MockUriStream.addLink(
+          signInLink(
+            sessionId: firstUrl.queryParameters['ui_sid']!,
+            anonymousUserId: firstUrl.queryParameters['ui_auid'],
+          ),
+        );
+        await untilCalled(listener.onCredentialLinked(any));
+
+        verifyNever(listener.onError(any));
+        verify(user.linkWithCredential(any)).called(1);
       });
 
       test('calls onError if the anonymous user changed', () async {
@@ -574,6 +698,27 @@ void main() {
     });
   });
 
+  group('parseEmailLinkParams', () {
+    test('reads the session from an action link', () {
+      final continueUrl = Uri.https('example.com', '/', {'ui_sid': 'sid'});
+      final action = Uri.https('test.com', '/__/auth/action', {
+        'mode': 'signIn',
+        'continueUrl': continueUrl.toString(),
+      });
+
+      expect(parseEmailLinkParams(action.toString())['ui_sid'], 'sid');
+    });
+
+    test('reads the session from a Hosting link', () {
+      final link = signInLink(sessionId: 'sid', anonymousUserId: 'uid');
+      final params = parseEmailLinkParams(link.toString());
+
+      expect(params['ui_sid'], 'sid');
+      expect(params['ui_auid'], 'uid');
+      expect(params['mode'], 'signIn');
+    });
+  });
+
   group('EmailLinkFlowController', () {
     test('#sendLink calls EmailLinkAuthProvider#sendLink', () {
       final provider = MockProvider();
@@ -594,6 +739,15 @@ void main() {
       EmailLinkFlow(provider: provider, auth: auth);
 
       verify(provider.handleIncomingLinks()).called(1);
+    });
+
+    test('stops awaiting a link when disposed', () {
+      final provider = MockProvider();
+      final flow = EmailLinkFlow(provider: provider, auth: auth);
+
+      flow.onDispose();
+
+      verify(provider.stopAwaitingLink()).called(1);
     });
 
     test('#onEmailRequired emits EmailRequired', () {
@@ -803,16 +957,21 @@ class AnonymousUser extends MockUser {
   bool get isAnonymous => true;
 }
 
-void storeSession({
-  required String email,
-  required String sessionId,
-  String? anonymousUserId,
-}) {
+void storeSession({required String email, required String sessionId}) {
   SharedPreferences.setMockInitialValues({
-    'firebase_ui_auth.email_link.email': email,
-    'firebase_ui_auth.email_link.session_id': sessionId,
-    'firebase_ui_auth.email_link.anonymous_user_id': ?anonymousUserId,
+    'firebase_ui_auth.email_link.sessions': [
+      jsonEncode({'sessionId': sessionId, 'email': email}),
+    ],
   });
+}
+
+Future<List<Map<String, dynamic>>> storedSessions() async {
+  final prefs = await SharedPreferences.getInstance();
+  final stored = prefs.getStringList('firebase_ui_auth.email_link.sessions');
+  return [
+    for (final entry in stored ?? const <String>[])
+      jsonDecode(entry) as Map<String, dynamic>,
+  ];
 }
 
 /// A sign in link in the Firebase Hosting format, with the session
