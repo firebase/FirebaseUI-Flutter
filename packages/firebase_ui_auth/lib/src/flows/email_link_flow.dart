@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 /// A state that indicates that the sign in link is being sent.
@@ -52,17 +53,21 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
 
     /// {@macro ui.auth.auth_flow.ctor.provider}
     required super.provider,
-  }) : super(action: AuthAction.signIn, initialState: const Uninitialized()) {
-    // The provider getter makes this flow the provider's listener, so keep a
-    // reference that can be read without doing that.
-    final linkProvider = provider..handleIncomingLinks();
-    onDispose = () {
-      // A newer flow may already have replaced this one, for example after
-      // Navigator.pushReplacement.
-      if (identical(linkProvider.authListener, this)) {
-        linkProvider.stopAwaitingLink();
-      }
-    };
+  }) : super(action: AuthAction.signIn, initialState: const Uninitialized());
+
+  /// Whether a widget, such as [AuthFlowBuilder], is listening to this flow.
+  @internal
+  bool get hasWidgetListeners => hasListeners;
+
+  @override
+  void addListener(VoidCallback listener) {
+    final wasShowing = hasListeners;
+    super.addListener(listener);
+
+    // The first widget to show this flow, including one that reuses it with a
+    // flowKey, makes it the provider's listener and receives any sign in link
+    // that arrived while no email link screen was showing.
+    if (!wasShowing) provider.handleIncomingLinks();
   }
 
   String? _pendingLink;

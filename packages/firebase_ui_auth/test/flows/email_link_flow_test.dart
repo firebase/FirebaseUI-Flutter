@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:app_links/app_links.dart';
+import 'package:clock/clock.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -434,18 +435,6 @@ void main() {
         verify(listener.onError(any)).called(1);
       });
 
-      test('#stopAwaitingLink ignores other deep links', () async {
-        when(auth.isSignInWithEmailLink(any)).thenReturn(false);
-        provider.authListener = listener;
-        provider.awaitLink('test@test.com');
-        provider.stopAwaitingLink();
-
-        MockUriStream.addLink(Uri.parse('https://test.com/product/1'));
-        await Future<void>.delayed(Duration.zero);
-
-        verifyNever(listener.onError(any));
-      });
-
       test('#signInWithLink keeps the session of this device', () async {
         storeSession(email: 'test@test.com', sessionId: 'session-1');
         provider.authListener = listener;
@@ -626,7 +615,6 @@ void main() {
           storeSession(email: 'test@test.com', sessionId: 'session-1');
           final link = signInLink(sessionId: 'session-1');
           when(appLinks.getInitialLink()).thenAnswer((_) async => link);
-          // The flow created in setUp already checked for a launch link.
           provider = EmailLinkAuthProvider(
             actionCodeSettings: actionCodeSettings,
             appLinks: appLinks,
@@ -643,8 +631,7 @@ void main() {
           MockUriStream.addLink(link);
           await Future<void>.delayed(Duration.zero);
 
-          // Once by the flow in setUp, once by this provider.
-          verify(appLinks.getInitialLink()).called(2);
+          verify(appLinks.getInitialLink()).called(1);
           verify(
             auth.signInWithEmailLink(
               email: anyNamed('email'),
@@ -672,8 +659,7 @@ void main() {
         provider.handleIncomingLinks();
         await Future<void>.delayed(Duration.zero);
 
-        // Once by the flow in setUp, once by this provider.
-        verify(appLinks.getInitialLink()).called(2);
+        verify(appLinks.getInitialLink()).called(1);
       });
 
       test('ignores a launch link that is not a sign in link', () async {
@@ -681,7 +667,6 @@ void main() {
           appLinks.getInitialLink(),
         ).thenAnswer((_) async => Uri.parse('https://test.com/other'));
         when(auth.isSignInWithEmailLink(any)).thenReturn(false);
-        // The flow created in setUp already checked for a launch link.
         provider = EmailLinkAuthProvider(
           actionCodeSettings: actionCodeSettings,
           appLinks: appLinks,
@@ -734,42 +719,37 @@ void main() {
   });
 
   group('EmailLinkFlow', () {
-    test('handles incoming links when created', () {
+    // What AuthFlowBuilder does when it shows and removes a flow.
+    void show(EmailLinkFlow flow) => flow.addListener(_noop);
+    void hide(EmailLinkFlow flow) => flow.removeListener(_noop);
+
+    test('handles incoming links when first shown', () {
       final provider = MockProvider();
-      EmailLinkFlow(provider: provider, auth: auth);
+      final flow = EmailLinkFlow(provider: provider, auth: auth);
+      verifyNever(provider.handleIncomingLinks());
+
+      show(flow);
+      flow.addListener(() {});
 
       verify(provider.handleIncomingLinks()).called(1);
     });
 
-    test('stops awaiting a link when disposed', () async {
+    test('ignores other deep links once its screen is gone', () async {
       when(auth.isSignInWithEmailLink(any)).thenReturn(false);
+      show(flow);
       provider.awaitLink('test@test.com');
-      final errors = <Object>[];
-      flow.addListener(() {
-        if (flow.value case AuthFailed(:final exception)) errors.add(exception);
-      });
+      hide(flow);
 
-      flow.onDispose();
       MockUriStream.addLink(Uri.parse('https://test.com/product/1'));
-      await Future<void>.delayed(Duration.zero);
-
-      expect(errors, isEmpty);
-    });
-
-    test('a replaced flow does not stop the newer one', () async {
-      final newer = EmailLinkFlow(provider: provider, auth: auth);
-      storeSession(email: 'test@test.com', sessionId: 'session-1');
-
-      flow.onDispose();
-      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
       await pumpEventQueue();
 
-      expect(newer.value, isA<SignedIn>());
+      expect(flow.value, isNot(isA<AuthFailed>()));
     });
 
     test('keeps a link that arrives while no flow is showing', () async {
       storeSession(email: 'test@test.com', sessionId: 'session-1');
-      flow.onDispose();
+      show(flow);
+      hide(flow);
 
       MockUriStream.addLink(signInLink(sessionId: 'session-1'));
       await pumpEventQueue();
@@ -782,22 +762,114 @@ void main() {
       );
 
       final next = EmailLinkFlow(provider: provider, auth: auth);
+      show(next);
       await pumpEventQueue();
 
       expect(next.value, isA<SignedIn>());
     });
 
     test('asks the next flow to confirm a kept link', () async {
-      flow.onDispose();
+      show(flow);
+      hide(flow);
 
       MockUriStream.addLink(signInLink(sessionId: 'other-device'));
       await pumpEventQueue();
       expect(flow.value, isA<Uninitialized>());
 
       final next = EmailLinkFlow(provider: provider, auth: auth);
+      show(next);
       await pumpEventQueue();
 
       expect(next.value, isA<EmailRequired>());
+    });
+
+    test('gives a kept link to a reused flow when it is shown again', () async {
+      storeSession(email: 'test@test.com', sessionId: 'session-1');
+      show(flow);
+      hide(flow);
+
+      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+      await pumpEventQueue();
+
+      // The same flow is shown again, as AuthFlowBuilder does with a flowKey.
+      show(flow);
+      await pumpEventQueue();
+
+      expect(flow.value, isA<SignedIn>());
+    });
+
+    test('a replaced flow does not hide the newer one', () async {
+      storeSession(email: 'test@test.com', sessionId: 'session-1');
+      show(flow);
+      final newer = EmailLinkFlow(provider: provider, auth: auth);
+      show(newer);
+
+      // The old screen goes away after the new one is shown, and reading its
+      // provider on the way out does not make it the listener again.
+      hide(flow);
+      flow.reset();
+
+      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+      await pumpEventQueue();
+
+      expect(newer.value, isA<SignedIn>());
+    });
+
+    test('reset does not stop a showing flow from receiving links', () async {
+      storeSession(email: 'test@test.com', sessionId: 'session-1');
+      show(flow);
+      flow.reset();
+
+      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+      await pumpEventQueue();
+
+      expect(flow.value, isA<SignedIn>());
+    });
+
+    test('drops a kept link after 10 minutes', () async {
+      var now = DateTime(2026, 9, 24, 12);
+      await withClock(Clock(() => now), () async {
+        final provider = EmailLinkAuthProvider(
+          actionCodeSettings: actionCodeSettings,
+          appLinks: appLinks,
+        );
+        storeSession(email: 'test@test.com', sessionId: 'session-1');
+        final first = EmailLinkFlow(provider: provider, auth: auth);
+        show(first);
+        hide(first);
+
+        MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+        await pumpEventQueue();
+
+        now = now.add(const Duration(minutes: 11));
+        final next = EmailLinkFlow(provider: provider, auth: auth);
+        show(next);
+        await pumpEventQueue();
+
+        expect(next.value, isA<Uninitialized>());
+        provider.dispose();
+      });
+    });
+
+    test('drops a kept link when a new link is sent', () async {
+      storeSession(email: 'test@test.com', sessionId: 'session-1');
+      show(flow);
+      hide(flow);
+
+      MockUriStream.addLink(signInLink(sessionId: 'session-1'));
+      await pumpEventQueue();
+
+      flow.sendLink('test@test.com');
+      final next = EmailLinkFlow(provider: provider, auth: auth);
+      show(next);
+      await pumpEventQueue();
+
+      verifyNever(
+        auth.signInWithEmailLink(
+          email: anyNamed('email'),
+          emailLink: anyNamed('emailLink'),
+        ),
+      );
     });
 
     test('#onEmailRequired emits EmailRequired', () {
@@ -808,6 +880,7 @@ void main() {
     });
 
     test('confirms the email for a link from another device', () async {
+      show(flow);
       provider.awaitLink('test@test.com');
       final link = signInLink(sessionId: 'session-1');
 
@@ -1059,3 +1132,5 @@ class ClosingAppLinks extends Mock implements AppLinks {
     _controller?.add(uri);
   }
 }
+
+void _noop() {}

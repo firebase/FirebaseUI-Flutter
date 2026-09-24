@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:app_links/app_links.dart';
+import 'package:clock/clock.dart';
 import 'dart:async';
 
 import 'email_link_session.dart';
@@ -49,11 +50,12 @@ class EmailLinkAuthProvider
   bool _initialLinkChecked = false;
   bool _isAwaitingLink = false;
 
-  // Whether a flow (an email link screen) is showing. A sign in link that
-  // arrives while none is kept in _pendingLink until the next one opens, so
-  // its result is not reported to a screen that is gone.
-  bool _hasActiveFlow = false;
+  // A sign in link that arrived while no email link screen was showing. It is
+  // handled when one opens, so its result is not reported to a screen that is
+  // gone, unless it is older than _pendingLinkLifetime.
   String? _pendingLink;
+  DateTime? _pendingLinkReceivedAt;
+  static const _pendingLinkLifetime = Duration(minutes: 10);
 
   // Links being handled or already used, so the link that launched the app is
   // not handled twice when it arrives from both getInitialLink and
@@ -88,6 +90,7 @@ class EmailLinkAuthProvider
   /// the link upgrades that user instead of signing in a new one.
   void sendLink(String email) {
     authListener.onBeforeLinkSent(email);
+    _pendingLink = null;
 
     final session = EmailLinkSession(
       email: email,
@@ -127,7 +130,6 @@ class EmailLinkAuthProvider
   /// The [email] is read from the device storage written by [sendLink].
   void awaitLink(String email) {
     _isAwaitingLink = true;
-    _hasActiveFlow = true;
     _listen();
   }
 
@@ -149,14 +151,17 @@ class EmailLinkAuthProvider
   /// Handles the sign in link that launched the app, if any, and starts
   /// listening for links opened while the app is running.
   ///
-  /// A link that arrived while no flow was showing is handled now.
+  /// A link that arrived while no email link screen was showing is handled
+  /// now, if it arrived in the last 10 minutes.
   void handleIncomingLinks() {
-    _hasActiveFlow = true;
     _listen();
 
     final pendingLink = _pendingLink;
-    if (pendingLink != null) {
-      _pendingLink = null;
+    final receivedAt = _pendingLinkReceivedAt;
+    _pendingLink = null;
+    if (pendingLink != null &&
+        receivedAt != null &&
+        clock.now().difference(receivedAt) < _pendingLinkLifetime) {
       _handleLink(pendingLink);
     }
 
@@ -186,12 +191,13 @@ class EmailLinkAuthProvider
     final link = uri.toString();
 
     if (auth.isSignInWithEmailLink(link)) {
-      if (_hasActiveFlow) {
+      if (_isShowing) {
         _handleLink(link);
       } else {
         _pendingLink = link;
+        _pendingLinkReceivedAt = clock.now();
       }
-    } else if (_isAwaitingLink) {
+    } else if (_isAwaitingLink && _isShowing) {
       // Other deep links are only reported once a sign in link was requested.
       authListener.onError(
         fba.FirebaseAuthException(
@@ -307,21 +313,17 @@ class EmailLinkAuthProvider
         .catchError((Object err) => _onSignInFailed(link, err));
   }
 
-  /// Called when the flow that handles links is disposed, for example when
-  /// its screen is closed.
-  ///
-  /// Deep links that are not sign in links are no longer reported as errors,
-  /// and a sign in link is kept until [handleIncomingLinks] is called again.
-  void stopAwaitingLink() {
-    _isAwaitingLink = false;
-    _hasActiveFlow = false;
+  // Whether the listener is shown by a widget. A listener that is not an
+  // EmailLinkFlow, such as a custom stateful widget, always counts as shown.
+  bool get _isShowing {
+    final listener = authListener;
+    return listener is! EmailLinkFlow || listener.hasWidgetListeners;
   }
 
   void dispose() {
     _linkSubscription?.cancel();
     _linkSubscription = null;
     _isAwaitingLink = false;
-    _hasActiveFlow = false;
     _pendingLink = null;
   }
 }
