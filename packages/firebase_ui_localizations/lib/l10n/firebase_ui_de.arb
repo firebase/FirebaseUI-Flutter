@@ -1,6 +1,6 @@
 {
   "@@locale": "de",
-  "@@last_modified": "2024-02-04T10:25:05.099040",
+  "@@last_modified": "2026-09-23T14:42:53.123190",
   "accessDisabledErrorText": "Der Zugriff auf dieses Konto wurde vorübergehend gesperrt",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -532,6 +532,21 @@
   "sendVerificationEmailLabel": "Verifizierungs-E-Mail senden",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
+    "placeholders": {}
+  },
+  "emailLinkConfirmEmailText": "Bestätigen Sie Ihre E-Mail-Adresse, um die Anmeldung fortzusetzen",
+  "@emailLinkConfirmEmailText": {
+    "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
+    "placeholders": {}
+  },
+  "emailLinkWrongDeviceErrorText": "Öffnen Sie den Link auf demselben Gerät oder in demselben Browser, mit dem Sie die Anmeldung gestartet haben.",
+  "@emailLinkWrongDeviceErrorText": {
+    "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
+    "placeholders": {}
+  },
+  "emailLinkDifferentAnonymousUserErrorText": "Die Sitzung zu dieser Anmeldeanfrage ist abgelaufen oder wurde gelöscht.",
+  "@emailLinkDifferentAnonymousUserErrorText": {
+    "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}
   }
 }

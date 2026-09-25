@@ -5,8 +5,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+import 'package:firebase_ui_shared/firebase_ui_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_utils.dart';
 
@@ -17,6 +20,7 @@ void main() {
   late EmailLinkAuthProvider emailLinkProvider;
 
   setUp(() {
+    SharedPreferences.setMockInitialValues({});
     auth = MockAuth();
     appLinks = MockAppLinks();
     final actionCodeSettings = fba.ActionCodeSettings(
@@ -69,5 +73,131 @@ void main() {
     await tester.pumpAndSettle();
     final button = find.text(labels.goBackButtonLabel);
     expect(button, findsOneWidget);
+  });
+
+  testWidgets('asks to confirm the email for a link from another device', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onEmailRequired('https://test.com/link');
+    await tester.pump();
+
+    expect(find.text(labels.emailLinkConfirmEmailText), findsOneWidget);
+    expect(find.text(labels.sendLinkButtonLabel), findsNothing);
+
+    await tester.enterText(find.byType(TextFormField), 'test@test.com');
+    await tester.tap(find.text(labels.continueText));
+    await tester.pump();
+
+    verify(
+      auth.signInWithEmailLink(
+        email: 'test@test.com',
+        emailLink: 'https://test.com/link',
+      ),
+    ).called(1);
+    verifyNever(
+      auth.sendSignInLinkToEmail(
+        email: anyNamed('email'),
+        actionCodeSettings: anyNamed('actionCodeSettings'),
+      ),
+    );
+  });
+
+  testWidgets('shows a loading indicator while signing in', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onBeforeSignIn();
+    await tester.pump();
+
+    expect(find.byType(LoadingIndicator), findsOneWidget);
+    expect(find.text(labels.signInWithEmailLinkSentText), findsNothing);
+    expect(find.byType(EmailInput), findsNothing);
+  });
+
+  testWidgets('keeps the form hidden after signing in', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onBeforeSignIn();
+    emailLinkProvider.authListener.onSignedIn(MockCredential());
+    await tester.pump();
+
+    expect(find.byType(EmailInput), findsNothing);
+    expect(find.byType(LoadingIndicator), findsOneWidget);
+  });
+
+  testWidgets('confirms the email for a link kept while it was closed', (
+    tester,
+  ) async {
+    Widget view() => TestMaterialApp(
+      child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+    );
+
+    // The screen is shown once, then closed.
+    await tester.pumpWidget(view());
+    await tester.pumpWidget(const SizedBox());
+
+    // A link from another device arrives while no email link screen shows.
+    MockUriStream.addLink(Uri.parse('https://test.com/link'));
+    await tester.pump();
+
+    await tester.pumpWidget(view());
+    await tester.pump();
+
+    expect(find.text(labels.emailLinkConfirmEmailText), findsOneWidget);
+    expect(find.text(labels.continueText), findsOneWidget);
+  });
+
+  testWidgets('does not send a link for an empty email', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    await tester.tap(find.text(labels.sendLinkButtonLabel));
+    await tester.pump();
+
+    expect(find.text(labels.emailIsRequiredErrorText), findsOneWidget);
+    verifyNever(
+      auth.sendSignInLinkToEmail(
+        email: anyNamed('email'),
+        actionCodeSettings: anyNamed('actionCodeSettings'),
+      ),
+    );
+  });
+
+  testWidgets('does not confirm an empty email', (tester) async {
+    await tester.pumpWidget(
+      TestMaterialApp(
+        child: EmailLinkSignInView(provider: emailLinkProvider, auth: auth),
+      ),
+    );
+
+    emailLinkProvider.authListener.onEmailRequired('https://test.com/link');
+    await tester.pump();
+
+    await tester.tap(find.text(labels.continueText));
+    await tester.pump();
+
+    expect(find.text(labels.emailIsRequiredErrorText), findsOneWidget);
+    verifyNever(
+      auth.signInWithEmailLink(
+        email: anyNamed('email'),
+        emailLink: anyNamed('emailLink'),
+      ),
+    );
   });
 }

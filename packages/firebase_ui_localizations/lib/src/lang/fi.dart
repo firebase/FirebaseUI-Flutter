@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -339,4 +339,16 @@ class FiLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get sendVerificationEmailLabel => "Lähetä vahvistussähköposti";
+
+  @override
+  String get emailLinkConfirmEmailText =>
+      "Vahvista sähköpostiosoitteesi jatkaaksesi kirjautumista";
+
+  @override
+  String get emailLinkWrongDeviceErrorText =>
+      "Avaa linkki samalla laitteella tai selaimella, jolla aloitit kirjautumisen.";
+
+  @override
+  String get emailLinkDifferentAnonymousUserErrorText =>
+      "Tähän kirjautumispyyntöön liittyvä istunto on vanhentunut tai poistettu.";
 }

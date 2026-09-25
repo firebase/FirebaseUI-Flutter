@@ -51,7 +51,10 @@ Future<void> main() async {
     ),
   ]);
 
-  runApp(const FirebaseAuthUIExample());
+  final launchedFromSignInLink = await emailLinkProviderConfig
+      .isLaunchedFromSignInLink();
+
+  runApp(FirebaseAuthUIExample(launchedFromSignInLink: launchedFromSignInLink));
 }
 
 // Overrides a label for en locale
@@ -65,10 +68,18 @@ class LabelOverrides extends DefaultLocalizations {
 }
 
 class FirebaseAuthUIExample extends StatelessWidget {
-  const FirebaseAuthUIExample({super.key});
+  const FirebaseAuthUIExample({super.key, this.launchedFromSignInLink = false});
+
+  /// Whether an email sign in link launched the app, so it can complete the
+  /// sign in on the email link screen.
+  final bool launchedFromSignInLink;
 
   String get initialRoute {
     final user = FirebaseAuth.instance.currentUser;
+
+    if (launchedFromSignInLink && (user == null || user.isAnonymous)) {
+      return '/email-link-sign-in';
+    }
 
     return switch (user) {
       null => '/',
@@ -260,8 +271,12 @@ class FirebaseAuthUIExample extends StatelessWidget {
         '/email-link-sign-in': (context) {
           return EmailLinkSignInScreen(
             actions: [
-              AuthStateChangeAction<SignedIn>((context, state) {
-                Navigator.pushReplacementNamed(context, '/profile');
+              AuthStateChangeAction((context, state) {
+                if (state is SignedIn ||
+                    state is UserCreated ||
+                    state is CredentialLinked) {
+                  Navigator.pushReplacementNamed(context, '/profile');
+                }
               }),
             ],
             provider: emailLinkProviderConfig,

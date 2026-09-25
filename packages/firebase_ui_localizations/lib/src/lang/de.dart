@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -339,4 +339,16 @@ class DeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get sendVerificationEmailLabel => "Verifizierungs-E-Mail senden";
+
+  @override
+  String get emailLinkConfirmEmailText =>
+      "Bestätigen Sie Ihre E-Mail-Adresse, um die Anmeldung fortzusetzen";
+
+  @override
+  String get emailLinkWrongDeviceErrorText =>
+      "Öffnen Sie den Link auf demselben Gerät oder in demselben Browser, mit dem Sie die Anmeldung gestartet haben.";
+
+  @override
+  String get emailLinkDifferentAnonymousUserErrorText =>
+      "Die Sitzung zu dieser Anmeldeanfrage ist abgelaufen oder wurde gelöscht.";
 }

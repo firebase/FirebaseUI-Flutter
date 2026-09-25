@@ -1,6 +1,6 @@
 {
   "@@locale": "zh_TW",
-  "@@last_modified": "2024-02-04T10:25:05.121670",
+  "@@last_modified": "2026-09-23T14:42:53.123659",
   "accessDisabledErrorText": "這個帳戶暫時無法存取",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -532,6 +532,21 @@
   "sendVerificationEmailLabel": "Send verification email",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
+    "placeholders": {}
+  },
+  "emailLinkConfirmEmailText": "請確認你的電子郵件地址以繼續登入",
+  "@emailLinkConfirmEmailText": {
+    "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
+    "placeholders": {}
+  },
+  "emailLinkWrongDeviceErrorText": "請試著在你開始登入時使用的同一部裝置或瀏覽器中開啟該連結。",
+  "@emailLinkWrongDeviceErrorText": {
+    "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
+    "placeholders": {}
+  },
+  "emailLinkDifferentAnonymousUserErrorText": "與這項登入要求相關聯的工作階段已過期或已遭清除。",
+  "@emailLinkDifferentAnonymousUserErrorText": {
+    "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}
   }
 }

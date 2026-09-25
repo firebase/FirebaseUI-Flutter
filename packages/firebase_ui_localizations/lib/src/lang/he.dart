@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -336,4 +336,16 @@ class HeLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get sendVerificationEmailLabel => "Send verification email";
+
+  @override
+  String get emailLinkConfirmEmailText =>
+      """אשר את כתובת הדוא"ל כדי להמשיך בכניסה""";
+
+  @override
+  String get emailLinkWrongDeviceErrorText =>
+      "נסה לפתוח את הקישור באותו מכשיר או דפדפן שבו התחלת את תהליך הכניסה.";
+
+  @override
+  String get emailLinkDifferentAnonymousUserErrorText =>
+      "תוקף ההפעלה של בקשת הכניסה הזו פג, או שהיא נמחקה.";
 }

@@ -1,6 +1,6 @@
 {
   "@@locale": "ru",
-  "@@last_modified": "2024-02-04T10:25:05.118670",
+  "@@last_modified": "2026-09-23T14:42:53.129486",
   "accessDisabledErrorText": "Доступ к этому аккаунту временно заблокирован.",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -532,6 +532,21 @@
   "sendVerificationEmailLabel": "Send verification email",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
+    "placeholders": {}
+  },
+  "emailLinkConfirmEmailText": "Подтвердите адрес электронной почты, чтобы продолжить вход",
+  "@emailLinkConfirmEmailText": {
+    "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
+    "placeholders": {}
+  },
+  "emailLinkWrongDeviceErrorText": "Откройте ссылку на том же устройстве или в том же браузере, где вы начали вход.",
+  "@emailLinkWrongDeviceErrorText": {
+    "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
+    "placeholders": {}
+  },
+  "emailLinkDifferentAnonymousUserErrorText": "Сеанс, связанный с этим запросом на вход, истек или был удален.",
+  "@emailLinkDifferentAnonymousUserErrorText": {
+    "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}
   }
 }

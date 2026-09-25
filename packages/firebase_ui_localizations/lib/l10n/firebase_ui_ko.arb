@@ -1,6 +1,6 @@
 {
   "@@locale": "ko",
-  "@@last_modified": "2024-02-04T10:25:05.115670",
+  "@@last_modified": "2026-09-23T14:42:53.116132",
   "accessDisabledErrorText": "이 계정의 액세스가 일시적으로 중지되었습니다.",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -532,6 +532,21 @@
   "sendVerificationEmailLabel": "Send verification email",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
+    "placeholders": {}
+  },
+  "emailLinkConfirmEmailText": "로그인을 계속하려면 이메일을 확인하세요",
+  "@emailLinkConfirmEmailText": {
+    "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
+    "placeholders": {}
+  },
+  "emailLinkWrongDeviceErrorText": "로그인을 시작한 기기 또는 브라우저에서 링크를 열어 보세요.",
+  "@emailLinkWrongDeviceErrorText": {
+    "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
+    "placeholders": {}
+  },
+  "emailLinkDifferentAnonymousUserErrorText": "이 로그인 요청과 연결된 세션이 만료되었거나 삭제되었습니다.",
+  "@emailLinkDifferentAnonymousUserErrorText": {
+    "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}
   }
 }

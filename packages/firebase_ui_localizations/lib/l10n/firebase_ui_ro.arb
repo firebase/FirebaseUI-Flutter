@@ -1,6 +1,6 @@
 {
   "@@locale": "ro",
-  "@@last_modified": "2024-02-04T10:25:05.117671",
+  "@@last_modified": "2026-09-23T14:42:53.122395",
   "accessDisabledErrorText": "Accesul la acest cont a fost dezactivat temporar",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -532,6 +532,21 @@
   "sendVerificationEmailLabel": "Send verification email",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
+    "placeholders": {}
+  },
+  "emailLinkConfirmEmailText": "Confirmă emailul pentru a continua conectarea",
+  "@emailLinkConfirmEmailText": {
+    "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
+    "placeholders": {}
+  },
+  "emailLinkWrongDeviceErrorText": "Încearcă să deschizi linkul pe același dispozitiv sau în același browser în care ai început conectarea.",
+  "@emailLinkWrongDeviceErrorText": {
+    "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
+    "placeholders": {}
+  },
+  "emailLinkDifferentAnonymousUserErrorText": "Sesiunea asociată acestei solicitări de conectare a expirat sau a fost ștearsă.",
+  "@emailLinkDifferentAnonymousUserErrorText": {
+    "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}
   }
 }

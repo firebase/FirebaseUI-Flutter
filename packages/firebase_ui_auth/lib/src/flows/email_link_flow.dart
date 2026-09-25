@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
 /// A state that indicates that the sign in link is being sent.
@@ -19,10 +20,24 @@ class AwaitingDynamicLink extends AuthState {
   const AwaitingDynamicLink();
 }
 
+/// A state that indicates that a sign in link was opened on a device that did
+/// not request it. The user should confirm their email to complete the sign
+/// in, see [EmailLinkAuthController.confirmEmail].
+class EmailRequired extends AuthState {
+  /// The sign in link that was opened.
+  final String link;
+
+  const EmailRequired(this.link);
+}
+
 /// A controller interface of the [EmailLinkFlow].
 abstract class EmailLinkAuthController extends AuthController {
   /// Sends a sign in link to the [email].
   void sendLink(String email);
+
+  /// Completes the sign in after [EmailRequired] with the [email] the user
+  /// confirmed.
+  void confirmEmail(String email);
 }
 
 /// {@template ui.auth.flows.email_link_flow}
@@ -40,6 +55,23 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
     required super.provider,
   }) : super(action: AuthAction.signIn, initialState: const Uninitialized());
 
+  /// Whether a widget, such as [AuthFlowBuilder], is listening to this flow.
+  @internal
+  bool get hasWidgetListeners => hasListeners;
+
+  @override
+  void addListener(VoidCallback listener) {
+    final wasShowing = hasListeners;
+    super.addListener(listener);
+
+    // The first widget to show this flow, including one that reuses it with a
+    // flowKey, makes it the provider's listener and receives any sign in link
+    // that arrived while no email link screen was showing.
+    if (!wasShowing) provider.handleIncomingLinks();
+  }
+
+  String? _pendingLink;
+
   @override
   void sendLink(String email) {
     provider.sendLink(email);
@@ -54,6 +86,19 @@ class EmailLinkFlow extends AuthFlow<EmailLinkAuthProvider>
   void onLinkSent(String email) {
     value = const AwaitingDynamicLink();
     provider.awaitLink(email);
+  }
+
+  @override
+  void onEmailRequired(String link) {
+    _pendingLink = link;
+    value = EmailRequired(link);
+  }
+
+  @override
+  void confirmEmail(String email) {
+    final link = _pendingLink;
+    if (link == null) return;
+    provider.signInWithLink(email, link);
   }
 }
 

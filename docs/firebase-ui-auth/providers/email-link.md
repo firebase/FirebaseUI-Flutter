@@ -56,8 +56,12 @@ MaterialApp(
     },
     '/email-link-sign-in': (context) => EmailLinkSignInScreen(
       actions: [
-        AuthStateChangeAction<SignedIn>((context, state) {
-          Navigator.pushReplacementNamed(context, '/profile');
+        AuthStateChangeAction((context, state) {
+          if (state is SignedIn ||
+              state is UserCreated ||
+              state is CredentialLinked) {
+            Navigator.pushReplacementNamed(context, '/profile');
+          }
         }),
       ],
     ),
@@ -68,8 +72,31 @@ MaterialApp(
 
 > Notes:
 >
+> - a user signing in with an email link for the first time emits `UserCreated` rather than `SignedIn`, and an upgraded anonymous user (`upgradeAnonymousUsers`) emits `CredentialLinked`, so handle all three.
 > - see [navigation guide](../navigation.md) to learn how navigation works with Firebase UI.
 > - explore [FirebaseUIActions API docs](https://pub.dev/documentation/firebase_ui_auth/latest/firebase_ui_auth/FirebaseUIAction-class.html).
+
+## Handling the sign in link
+
+When the link is sent, the email is stored on the device, so the link completes the sign in even if the app was killed in the meantime.
+
+- **Link opens the app:** `EmailLinkSignInScreen` completes the sign in with the link that launched the app. Show it on startup when `isLaunchedFromSignInLink` is true:
+
+  ```dart
+  final launchedFromSignInLink =
+      await emailLinkProvider.isLaunchedFromSignInLink();
+
+  MaterialApp(
+    initialRoute: launchedFromSignInLink ? '/email-link-sign-in' : '/login',
+    // ...
+  );
+  ```
+
+  Disable Flutter's built-in deep linking so it does not replace `initialRoute` with the link: add `<meta-data android:name="flutter_deeplinking_enabled" android:value="false" />` to the `<activity>` in `AndroidManifest.xml` (not the `<application>`), and set `FlutterDeepLinkingEnabled` to `false` in `Info.plist`.
+
+- **Link opened while the app is running:** the link is handled by the email link screen. If that screen is not showing, the link is kept until it opens, so open `EmailLinkSignInScreen` yourself when a link arrives, for example from an `app_links` listener when `FirebaseAuth.instance.isSignInWithEmailLink(link)` is true and the screen is not already open.
+- **Link opened on another device:** the flow emits `EmailRequired` and `EmailLinkSignInView` asks the user to confirm their email before signing in.
+- **Anonymous users:** by default an anonymous user is replaced by the signed in user. Pass `upgradeAnonymousUsers: true` to `EmailLinkAuthProvider` to link the email to the anonymous user instead: the flow then emits `CredentialLinked` instead of `SignedIn`, the link must be opened on the same device (otherwise sign in fails with an `email-link-wrong-device` error), and an email that already has an account cannot be used.
 
 ## Using view
 
@@ -88,8 +115,12 @@ class MyEmailLinkSignInScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
               child: FirebaseUIActions(
                 actions: [
-                  AuthStateChangeAction<SignedIn>((context, state) {
-                    Navigator.pushReplacementNamed(context, '/profile');
+                  AuthStateChangeAction((context, state) {
+                    if (state is SignedIn ||
+                        state is UserCreated ||
+                        state is CredentialLinked) {
+                      Navigator.pushReplacementNamed(context, '/profile');
+                    }
                   }
                 ],
                 child: EmailLinkSignInView(provider: emailLinkAuthProvider),
@@ -114,7 +145,9 @@ class MyCustomWidget extends StatelessWidget {
     return AuthFlowBuilder<EmailLinkAuthController>(
       provider: emailLinkProvider,
       listener: (oldState, newState, ctrl) {
-        if (newState is SignedIn) {
+        if (newState is SignedIn ||
+            newState is UserCreated ||
+            newState is CredentialLinked) {
           Navigator.of(context).pushReplacementNamed('/profile');
         }
       }
@@ -128,6 +161,14 @@ class MyCustomWidget extends StatelessWidget {
           );
         } else if (state is AwaitingDynamicLink) {
           return CircularProgressIndicator();
+        } else if (state is EmailRequired) {
+          // The link was opened on another device.
+          return TextField(
+            decoration: InputDecoration(label: Text('Confirm your email')),
+            onSubmitted: (email) {
+              ctrl.confirmEmail(email);
+            },
+          );
         } else if (state is AuthFailed) {
           return ErrorText(exception: state.exception);
         } else {
@@ -166,6 +207,13 @@ class _CustomEmailLinkSignInState extends State<CustomEmailLinkSignIn>
   );
 
   @override
+  void initState() {
+    super.initState();
+    // Completes the sign in if a sign in link launched the app.
+    provider.handleIncomingLinks();
+  }
+
+  @override
   void onBeforeLinkSent(String email) {
     setState(() {
       child = CircularProgressIndicator();
@@ -174,8 +222,21 @@ class _CustomEmailLinkSignInState extends State<CustomEmailLinkSignIn>
 
   @override
   void onLinkSent(String email) {
+    provider.awaitLink(email);
     setState(() {
       child = Text('Check your email and click the link');
+    });
+  }
+
+  @override
+  void onEmailRequired(String link) {
+    setState(() {
+      child = TextField(
+        decoration: const InputDecoration(
+          labelText: 'Confirm your email',
+        ),
+        onSubmitted: (email) => provider.signInWithLink(email, link),
+      );
     });
   }
 

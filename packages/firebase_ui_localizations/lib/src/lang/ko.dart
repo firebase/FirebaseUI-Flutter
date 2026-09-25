@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -331,4 +331,15 @@ class KoLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get sendVerificationEmailLabel => "Send verification email";
+
+  @override
+  String get emailLinkConfirmEmailText => "로그인을 계속하려면 이메일을 확인하세요";
+
+  @override
+  String get emailLinkWrongDeviceErrorText =>
+      "로그인을 시작한 기기 또는 브라우저에서 링크를 열어 보세요.";
+
+  @override
+  String get emailLinkDifferentAnonymousUserErrorText =>
+      "이 로그인 요청과 연결된 세션이 만료되었거나 삭제되었습니다.";
 }

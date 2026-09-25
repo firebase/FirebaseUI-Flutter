@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -329,4 +329,13 @@ class ZhLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get sendVerificationEmailLabel => "Send verification email";
+
+  @override
+  String get emailLinkConfirmEmailText => "请确认您的电子邮件地址以继续登录";
+
+  @override
+  String get emailLinkWrongDeviceErrorText => "请尝试在您开始登录时所用的同一设备或浏览器中打开该链接。";
+
+  @override
+  String get emailLinkDifferentAnonymousUserErrorText => "与此登录请求关联的会话已过期或已被清除。";
 }

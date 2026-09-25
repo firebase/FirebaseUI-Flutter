@@ -1,6 +1,6 @@
 {
   "@@locale": "hu",
-  "@@last_modified": "2024-02-04T10:25:05.112669",
+  "@@last_modified": "2026-09-23T14:42:53.117852",
   "accessDisabledErrorText": "A fiók átmenetileg le van tiltva",
   "@accessDisabledErrorText": {
     "description": "Used as an error message when account is blocked and user tries to perform some actions with the account (e.g. unlinking a credential).",
@@ -532,6 +532,21 @@
   "sendVerificationEmailLabel": "Send verification email",
   "@sendVerificationEmailLabel": {
     "description": "Used as a button label to send a verification email",
+    "placeholders": {}
+  },
+  "emailLinkConfirmEmailText": "Erősítse meg az e-mail-címét a belépés folytatásához",
+  "@emailLinkConfirmEmailText": {
+    "description": "Shown on EmailLinkSignInView when a sign-in link was opened on a different device and the user must confirm their email.",
+    "placeholders": {}
+  },
+  "emailLinkWrongDeviceErrorText": "Próbálja meg ugyanazon az eszközön vagy böngészőben megnyitni a linket, amelyen a belépést elkezdte.",
+  "@emailLinkWrongDeviceErrorText": {
+    "description": "Used as an error message when an email sign-in link that must be completed on the device that requested it is opened elsewhere.",
+    "placeholders": {}
+  },
+  "emailLinkDifferentAnonymousUserErrorText": "Az ehhez a belépési kérelemhez tartozó munkamenet lejárt vagy törlődött.",
+  "@emailLinkDifferentAnonymousUserErrorText": {
+    "description": "Used as an error message when an email sign-in link was requested by an anonymous user who is no longer signed in.",
     "placeholders": {}
   }
 }

@@ -1,4 +1,4 @@
-// Copyright 2025, the Chromium project authors.  Please see the AUTHORS file
+// Copyright 2026, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 import '../default_localizations.dart';
@@ -336,4 +336,16 @@ class NbLocalizations extends FirebaseUILocalizationLabels {
 
   @override
   String get sendVerificationEmailLabel => "Send e-postbekreftelse";
+
+  @override
+  String get emailLinkConfirmEmailText =>
+      "Bekreft e-postadressen din for å fortsette innloggingen";
+
+  @override
+  String get emailLinkWrongDeviceErrorText =>
+      "Prøv å åpne lenken på samme enhet eller i samme nettleser som du startet innloggingen på.";
+
+  @override
+  String get emailLinkDifferentAnonymousUserErrorText =>
+      "Økten som hører til denne innloggingsforespørselen, har utløpt eller blitt slettet.";
 }
