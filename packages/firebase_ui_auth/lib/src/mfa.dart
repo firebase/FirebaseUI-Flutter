@@ -19,7 +19,7 @@ typedef SMSCodeInputScreenBuilder =
       AuthAction action,
     );
 
-Future<fba.UserCredential?> startMFAVerification({
+Future<fba.UserCredential> startMFAVerification({
   required BuildContext context,
   required fba.MultiFactorResolver resolver,
   fba.FirebaseAuth? auth,
@@ -31,6 +31,7 @@ Future<fba.UserCredential?> startMFAVerification({
       context: context,
       resolver: resolver,
       auth: auth,
+      smsCodeInputScreenBuilder: smsCodeInputScreenBuilder,
       onError: onError,
     );
   } else {
@@ -38,7 +39,7 @@ Future<fba.UserCredential?> startMFAVerification({
   }
 }
 
-Future<fba.UserCredential?> startPhoneMFAVerification({
+Future<fba.UserCredential> startPhoneMFAVerification({
   required BuildContext context,
   required fba.MultiFactorResolver resolver,
   fba.FirebaseAuth? auth,
@@ -47,7 +48,7 @@ Future<fba.UserCredential?> startPhoneMFAVerification({
 }) async {
   final session = resolver.session;
   final hint = resolver.hints.first;
-  var completer = Completer<fba.UserCredential?>();
+  final completer = Completer<fba.UserCredential>();
 
   final navigator = Navigator.of(context);
 
@@ -62,32 +63,22 @@ Future<fba.UserCredential?> startPhoneMFAVerification({
 
   provider.authListener = flow;
 
-  completer.future.catchError((e) {
-    onError?.call(e as FirebaseException);
-    flow.onError(e);
-    return null;
-  });
-
   final flowKey = Object();
 
   final actions = [
-    AuthStateChangeAction<CredentialReceived>((context, inner) {
-      if (completer.isCompleted) {
-        completer = Completer<fba.UserCredential>();
-        completer.future.catchError((e) {
-          onError?.call(e as FirebaseException);
-          flow.onError(e);
-          return null;
-        });
-      }
-
+    AuthStateChangeAction<CredentialReceived>((context, inner) async {
       final cred = inner.credential as fba.PhoneAuthCredential;
       final assertion = fba.PhoneMultiFactorGenerator.getAssertion(cred);
       try {
-        final cred = resolver.resolveSignIn(assertion);
-        completer.complete(cred);
+        final cred = await resolver.resolveSignIn(assertion);
+        if (!completer.isCompleted) {
+          completer.complete(cred);
+        }
       } catch (e) {
-        completer.completeError(e);
+        if (e is FirebaseException) {
+          onError?.call(e);
+        }
+        flow.onError(e);
       }
     }),
   ];
@@ -120,6 +111,7 @@ Future<fba.UserCredential?> startPhoneMFAVerification({
     }
 
     return AuthFlowBuilder<PhoneAuthController>(
+      auth: auth,
       flow: flow,
       flowKey: flowKey,
       child: child,
