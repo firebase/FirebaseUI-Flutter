@@ -55,8 +55,8 @@ void main() {
     snapshot.fetchMore();
     await tester.pump();
 
-    // The new listener's cache only holds one doc.
-    query.emit(5, size: 1, fromCache: true);
+    // The new listener's cache holds none of the shown docs.
+    query.emit(5, size: 0, fromCache: true);
     await tester.pump();
     expect(snapshot.docs, hasLength(2));
     expect(snapshot.hasMore, isTrue);
@@ -140,14 +140,14 @@ void main() {
     await tester.pump();
     expect(query.includeMetadataChanges[5], isTrue);
 
-    query.emit(5, size: 1, fromCache: true);
+    query.emit(5, size: 0, fromCache: true);
     await tester.pump();
 
     // The server confirms the cached result, which the SDK only reports as
     // a metadata change.
-    query.emit(5, size: 1, fromCache: false, metadataOnly: true);
+    query.emit(5, size: 0, fromCache: false, metadataOnly: true);
     await tester.pump();
-    expect(snapshot.docs, hasLength(1));
+    expect(snapshot.docs, isEmpty);
     expect(snapshot.isFetchingMore, isFalse);
   });
 
@@ -162,7 +162,7 @@ void main() {
       snapshot.fetchMore();
       await tester.pump();
 
-      query.emit(5, size: 1, fromCache: true);
+      query.emit(5, size: 0, fromCache: true);
       query.emitError(5);
       await tester.pump();
       expect(snapshot.hasError, isTrue);
@@ -192,9 +192,7 @@ void main() {
     expect(snapshot.isFetchingMore, isFalse);
   });
 
-  testWidgets('renders local writes while waiting for the server', (
-    tester,
-  ) async {
+  Future<void> loadTwoPages(WidgetTester tester) async {
     await pumpBuilder(tester);
 
     query.emit(3, size: 3, fromCache: false);
@@ -202,11 +200,35 @@ void main() {
 
     snapshot.fetchMore();
     await tester.pump();
-
-    // e.g. offline, the user deletes a doc after the cache evicted the rest.
-    query.emit(5, size: 1, fromCache: true, hasPendingWrites: true);
+    query.emit(5, size: 5, fromCache: false);
     await tester.pump();
-    expect(snapshot.docs, hasLength(1));
+    expect(snapshot.docs, hasLength(4));
+
+    snapshot.fetchMore();
+    await tester.pump();
+  }
+
+  testWidgets(
+    'ignores a cache snapshot with local writes that shrinks the list',
+    (tester) async {
+      await loadTwoPages(tester);
+
+      // e.g. the only cached doc is listened to elsewhere and has a local write.
+      query.emit(7, size: 1, fromCache: true, hasPendingWrites: true);
+      await tester.pump();
+      expect(snapshot.docs, hasLength(4));
+      expect(snapshot.isFetchingMore, isTrue);
+    },
+  );
+
+  testWidgets('renders a local delete while waiting for the server', (
+    tester,
+  ) async {
+    await loadTwoPages(tester);
+
+    query.emit(7, size: 3, fromCache: true, hasPendingWrites: true);
+    await tester.pump();
+    expect(snapshot.docs, hasLength(3));
     expect(snapshot.isFetchingMore, isFalse);
   });
 

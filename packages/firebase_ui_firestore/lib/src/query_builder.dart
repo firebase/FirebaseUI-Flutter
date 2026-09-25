@@ -181,9 +181,9 @@ class _FirestoreQueryBuilderState<Document>
     // A new listener first emits whatever the local cache holds, which is
     // often less than the pages already shown. Rendering that would shrink
     // the list and reset the scroll position, so keep the current docs until
-    // the server responds or the user writes locally. Metadata changes are
-    // included so that a server result identical to the cache still arrives
-    // as an event.
+    // the server responds. A drop of one doc is still rendered, since that is
+    // what a local delete looks like. Metadata changes are included so that a
+    // server result identical to the cache still arrives as an event.
     var awaitingServer = nextPage;
     var hasRendered = false;
 
@@ -196,8 +196,7 @@ class _FirestoreQueryBuilderState<Document>
           (event) {
             if (awaitingServer) {
               if (event.metadata.isFromCache &&
-                  !event.metadata.hasPendingWrites &&
-                  event.size < _snapshot.docs.length) {
+                  event.size < _snapshot.docs.length - 1) {
                 return;
               }
               awaitingServer = false;
