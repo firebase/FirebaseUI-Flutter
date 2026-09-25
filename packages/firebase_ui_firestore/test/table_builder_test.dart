@@ -428,7 +428,19 @@ class MockQuerySnapshot extends Mock implements Snapshot {
       returnValueForMissingStub: [bobSnapshot, bob2Snapshot],
     );
   }
+
+  @override
+  List<DocumentChange<Map<String, Object?>>> get docChanges {
+    return super.noSuchMethod(
+      Invocation.getter(#docChanges),
+      returnValue: [MockDocumentChange()],
+      returnValueForMissingStub: [MockDocumentChange()],
+    );
+  }
 }
+
+class MockDocumentChange extends Mock
+    implements DocumentChange<Map<String, Object?>> {}
 
 final mockQuerySnapshot = MockQuerySnapshot();
 final mockCtrl = StreamController<Snapshot>.broadcast();
