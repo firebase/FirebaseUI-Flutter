@@ -198,6 +198,20 @@ class MockAuth extends Mock implements fba.FirebaseAuth {
       }),
     );
   }
+
+  @override
+  Future<fba.ConfirmationResult> signInWithPhoneNumber(
+    String? phoneNumber, [
+    fba.RecaptchaVerifier? verifier,
+  ]) async {
+    return super.noSuchMethod(
+      Invocation.method(#signInWithPhoneNumber, [phoneNumber, verifier]),
+      returnValue: Future.value(MockConfirmationResult()),
+      returnValueForMissingStub: Future.value(MockConfirmationResult()),
+    );
+  }
 }
+
+class MockConfirmationResult extends Mock implements fba.ConfirmationResult {}
 
 class TestException implements Exception {}

@@ -5,6 +5,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_auth/src/widgets/internal/universal_page_route.dart';
 import 'package:flutter/scheduler.dart';
@@ -23,12 +24,15 @@ Future<fba.UserCredential> startMFAVerification({
   required fba.MultiFactorResolver resolver,
   fba.FirebaseAuth? auth,
   SMSCodeInputScreenBuilder? smsCodeInputScreenBuilder,
+  void Function(FirebaseException e)? onError,
 }) async {
   if (resolver.hints.first is fba.PhoneMultiFactorInfo) {
     return startPhoneMFAVerification(
       context: context,
       resolver: resolver,
       auth: auth,
+      smsCodeInputScreenBuilder: smsCodeInputScreenBuilder,
+      onError: onError,
     );
   } else {
     throw Exception('Unsupported MFA type');
@@ -40,10 +44,12 @@ Future<fba.UserCredential> startPhoneMFAVerification({
   required fba.MultiFactorResolver resolver,
   fba.FirebaseAuth? auth,
   SMSCodeInputScreenBuilder? smsCodeInputScreenBuilder,
+  void Function(FirebaseException e)? onError,
 }) async {
   final session = resolver.session;
   final hint = resolver.hints.first;
   final completer = Completer<fba.UserCredential>();
+
   final navigator = Navigator.of(context);
 
   final provider = PhoneAuthProvider();
@@ -60,14 +66,19 @@ Future<fba.UserCredential> startPhoneMFAVerification({
   final flowKey = Object();
 
   final actions = [
-    AuthStateChangeAction<CredentialReceived>((context, inner) {
+    AuthStateChangeAction<CredentialReceived>((context, inner) async {
       final cred = inner.credential as fba.PhoneAuthCredential;
       final assertion = fba.PhoneMultiFactorGenerator.getAssertion(cred);
       try {
-        final cred = resolver.resolveSignIn(assertion);
-        completer.complete(cred);
+        final cred = await resolver.resolveSignIn(assertion);
+        if (!completer.isCompleted) {
+          completer.complete(cred);
+        }
       } catch (e) {
-        completer.completeError(e);
+        if (e is FirebaseException) {
+          onError?.call(e);
+        }
+        flow.onError(e);
       }
     }),
   ];
@@ -100,6 +111,7 @@ Future<fba.UserCredential> startPhoneMFAVerification({
     }
 
     return AuthFlowBuilder<PhoneAuthController>(
+      auth: auth,
       flow: flow,
       flowKey: flowKey,
       child: child,
