@@ -274,6 +274,44 @@ void main() {
     expect(snapshot.hasData, isTrue);
     expect(snapshot.isFetching, isFalse);
   });
+
+  testWidgets('scrolled away in the frame that its builder calls fetchMore', (
+    tester,
+  ) async {
+    final controller = ScrollController();
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: ListView(
+          controller: controller,
+          cacheExtent: 0,
+          itemExtent: 1000,
+          children: [
+            FirestoreQueryBuilder<Json>(
+              query: query,
+              pageSize: 2,
+              builder: (context, s, _) {
+                if (s.hasMore) s.fetchMore();
+                return const SizedBox();
+              },
+            ),
+            const SizedBox(),
+            const SizedBox(),
+          ],
+        ),
+      ),
+    );
+
+    // The snapshot rebuilds the query builder, whose builder fetches the
+    // next page, and the list drops it while laying out that same frame. The
+    // setState that fetchMore delays runs after it is disposed.
+    query.emit(3, size: 3, fromCache: false);
+    controller.jumpTo(2000);
+    await tester.pump();
+    expect(tester.takeException(), isNull);
+  });
 }
 
 class FakeQuery extends Fake implements Query<Json> {
