@@ -165,8 +165,11 @@ class _FirestoreQueryBuilderState<Document>
     }
 
     // Delaying the setState so that fetchNextpage can be used within a child's
-    // "build" – most commonly ListView's itemBuilder
-    Future.microtask(() => setState(() {}));
+    // "build" – most commonly ListView's itemBuilder. That build can be in the
+    // frame that removes this widget, so it may be gone by now.
+    Future.microtask(() {
+      if (mounted) setState(() {});
+    });
 
     final expectedDocsCount =
         (_pageCount + 1) * widget.pageSize
