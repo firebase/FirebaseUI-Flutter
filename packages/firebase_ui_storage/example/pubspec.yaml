@@ -9,7 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^2.0.0
   firebase_core: ^4.15.0
   firebase_storage: ^13.4.3
   firebase_ui_storage: ^3.1.0
