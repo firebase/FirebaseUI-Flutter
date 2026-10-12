@@ -116,7 +116,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       }
     }
 
-    if (!(confirmed ?? false)) return;
+    if (!(confirmed ?? false) || !mounted) return;
 
     setState(() {
       _isLoading = true;
@@ -144,9 +144,11 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     } on Exception catch (e) {
       widget.onDeleteFailed?.call(e);
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
