@@ -56,6 +56,7 @@ class _FakeMultiFactorSession extends Fake implements fba.MultiFactorSession {}
 
 class _FakeUser extends Fake implements fba.User {
   final unlinkCompleter = Completer<fba.User>();
+  final deleteCompleter = Completer<void>();
 
   @override
   final _FakeMultiFactor multiFactor = _FakeMultiFactor();
@@ -80,6 +81,9 @@ class _FakeUser extends Fake implements fba.User {
 
   @override
   Future<void> reload() async {}
+
+  @override
+  Future<void> delete() => deleteCompleter.future;
 }
 
 class _FakeAuth extends Fake implements fba.FirebaseAuth {
@@ -172,6 +176,28 @@ void main() {
         expect(tester.takeException(), isNull);
       });
     });
+
+    testWidgets(
+      "doesn't show the re-authentication dialog if disposed before deleting "
+      'the account fails with a recent login error',
+      (tester) async {
+        final user = _FakeUser();
+        await pumpProfileScreen(tester, _FakeAuth(user));
+        await tester.ensureVisible(find.byType(DeleteAccountButton));
+        await tester.tap(find.byType(DeleteAccountButton));
+        await tester.pump();
+
+        await removeProfileScreen(tester);
+
+        user.deleteCompleter.completeError(
+          fba.FirebaseAuthException(code: 'requires-recent-login'),
+        );
+        await tester.pump();
+
+        expect(tester.takeException(), isNull);
+        expect(find.byType(ReauthenticateDialog), findsNothing);
+      },
+    );
 
     group('disabling MFA', () {
       testWidgets(
@@ -351,6 +377,42 @@ void main() {
 
           expect(tester.takeException(), isNull);
           expect(find.byType(PhoneInputScreen), findsNothing);
+        },
+      );
+
+      testWidgets(
+        "doesn't pop past the profile screen's route once it's been removed",
+        (tester) async {
+          final user = _FakeUser();
+          user.multiFactor.enrolledFactors = () async => [];
+          final auth = _FakeAuth(user);
+          final navigatorKey = GlobalKey<NavigatorState>();
+
+          await tester.pumpWidget(
+            MaterialApp(navigatorKey: navigatorKey, home: const Text('Home')),
+          );
+          final profileRoute = MaterialPageRoute<void>(
+            builder: (_) => ProfileScreen(
+              auth: auth,
+              providers: [EmailAuthProvider(), PhoneAuthProvider()],
+              showMFATile: true,
+            ),
+          );
+          navigatorKey.currentState!.push(profileRoute);
+          await tester.pumpAndSettle();
+          await tester.tap(find.text('Enable'));
+          await tester.pumpAndSettle();
+          expect(find.byType(PhoneInputScreen), findsOneWidget);
+
+          navigatorKey.currentState!.removeRoute(profileRoute);
+          await tester.pump();
+
+          await receiveCredential(tester);
+          user.multiFactor.enrollCompleter.complete();
+          await tester.pumpAndSettle();
+
+          expect(tester.takeException(), isNull);
+          expect(find.text('Home', skipOffstage: false), findsOneWidget);
         },
       );
 

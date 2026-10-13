@@ -647,7 +647,9 @@ class _MFAToggleState extends State<_MFAToggle> {
               });
             }
 
-            if (context.mounted) {
+            // If currentRoute was removed, popUntil would never find it and
+            // would pop every route.
+            if (context.mounted && (currentRoute?.isActive ?? false)) {
               Navigator.of(context).popUntil((route) => route == currentRoute);
             }
           }

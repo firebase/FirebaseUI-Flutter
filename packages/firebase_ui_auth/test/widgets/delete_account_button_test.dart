@@ -85,6 +85,41 @@ void main() {
     });
 
     testWidgets(
+      "doesn't ask to re-authenticate if disposed before deleting fails with "
+      'a recent login error',
+      (tester) async {
+        final user = _FakeUser();
+        final auth = _FakeAuth(user);
+        var signInRequiredCalls = 0;
+
+        await tester.pumpWidget(
+          TestMaterialApp(
+            child: DeleteAccountButton(
+              auth: auth,
+              onSignInRequired: () async {
+                signInRequiredCalls++;
+                return true;
+              },
+            ),
+          ),
+        );
+        await tester.tap(find.byType(DeleteAccountButton));
+        await tester.pump();
+
+        await removeButton(tester);
+
+        user.deleteCompleter.completeError(
+          fba.FirebaseAuthException(code: 'requires-recent-login'),
+        );
+        await tester.pump();
+
+        expect(tester.takeException(), isNull);
+        expect(signInRequiredCalls, 0);
+        expect(user.deleteCalls, 1);
+      },
+    );
+
+    testWidgets(
       "doesn't call setState or retry if disposed while re-authenticating",
       (tester) async {
         final user = _FakeUser();
