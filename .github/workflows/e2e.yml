@@ -42,7 +42,7 @@ jobs:
           arch: x86_64
           profile: pixel_5
           script: echo "Generated AVD snapshot for caching."
-      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         name: Install Node.js
         with:
           node-version: "18"
@@ -109,7 +109,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         name: Install Node.js
         with:
           node-version: "18"
@@ -179,7 +179,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         name: Install Node.js
         with:
           node-version: "18"
