@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions/v2";
 import { getStorage } from "firebase-admin/storage";
 import { encode } from "blurhash";
-import * as sharp from "sharp";
+import sharp from "sharp";
 import { initializeApp } from "firebase-admin/app";
 
 initializeApp();
