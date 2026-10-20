@@ -92,7 +92,7 @@ jobs:
           script: flutter test integration_test/firebase_ui_test.dart --dart-define=CI=true -d emulator-5554
 
   ios:
-    runs-on: macos-15
+    runs-on: xcode-27
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -179,8 +179,8 @@ jobs:
       - uses: futureware-tech/simulator-action@82fbf87feb764ca7f516260ebfb464b83638a068
         id: simulator
         with:
-          # List of available simulators: https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md#installed-simulators
-          model: "iPhone 16"
+          # List of available simulators: https://github.com/actions/runner-images/blob/main/images/macos/xcode-27-arm64-Readme.md#installed-simulators
+          model: "iPhone 17"
       - name: "E2E Tests"
         working-directory: tests
         env:
@@ -191,7 +191,7 @@ jobs:
           flutter test ./integration_test/firebase_ui_test.dart -d "$SIMULATOR" --dart-define=CI=true
 
   macos:
-    runs-on: macos-15
+    runs-on: xcode-27
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
