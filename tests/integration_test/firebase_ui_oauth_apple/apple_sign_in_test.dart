@@ -17,7 +17,7 @@ import '../utils.dart';
 
 void main() async {
   final provider = AppleProvider();
-  late fba.FirebaseAuth auth;
+  late MockAuth auth;
   late MockProvider fbProvider;
 
   const labels = DefaultLocalizations();
@@ -95,6 +95,61 @@ void main() async {
         expect(user.displayName, 'Test User');
         expect(user.email, 'test@test.com');
       });
+
+      testWidgets('links the credential when the user is anonymous', (
+        tester,
+      ) async {
+        final anonymousUser = MockAnonymousUser();
+        auth.currentUserOverride = anonymousUser;
+
+        // AuthAction.signIn is explicit: the flow would otherwise resolve to
+        // AuthAction.link on its own whenever currentUser is non-null, and the
+        // test would pass without shouldUpgradeAnonymous being consulted.
+        await render(
+          tester,
+          OAuthProviderButton(
+            provider: provider,
+            auth: auth,
+            action: AuthAction.signIn,
+          ),
+        );
+
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pumpAndSettle();
+
+        verify(anonymousUser.linkWithProvider(fbProvider)).called(1);
+        verifyNever(auth.signInWithProvider(fbProvider));
+      });
+
+      testWidgets('reports an error when linking with no signed in user', (
+        tester,
+      ) async {
+        final listener = MockListener();
+
+        await render(
+          tester,
+          AuthStateListener<OAuthController>(
+            listener: (oldState, state, controller) {
+              listener(state);
+              return null;
+            },
+            child: OAuthProviderButton(
+              provider: provider,
+              auth: auth,
+              action: AuthAction.link,
+            ),
+          ),
+        );
+
+        final button = find.byType(OAuthProviderButtonBase);
+        await tester.tap(button);
+        await tester.pumpAndSettle();
+
+        final result = verify(listener.call(captureAny));
+        expect(result.captured.last, isA<AuthFailed>());
+        verifyNever(auth.signInWithProvider(fbProvider));
+      });
     },
     skip: !provider.supportsPlatform(defaultTargetPlatform),
   );
@@ -124,11 +179,33 @@ class MockUser extends Mock implements fba.User {
 
   @override
   String? get email => 'test@test.com';
+
+  @override
+  bool get isAnonymous => false;
 }
+
+class MockAnonymousUser extends Mock implements fba.User {
+  @override
+  bool get isAnonymous => true;
+
+  @override
+  Future<fba.UserCredential> linkWithProvider(Object provider) async {
+    return super.noSuchMethod(
+      Invocation.method(#linkWithProvider, [provider]),
+      returnValue: Future.value(MockCredential()),
+      returnValueForMissingStub: Future.value(MockCredential()),
+    );
+  }
+}
+
+class MockAuthCredential extends Mock implements fba.AuthCredential {}
 
 class MockCredential extends Mock implements fba.UserCredential {
   @override
   fba.User? get user => MockUser();
+
+  @override
+  fba.AuthCredential? get credential => MockAuthCredential();
 }
 
 class MockProvider extends Mock implements fba.AppleAuthProvider {}
@@ -136,6 +213,11 @@ class MockProvider extends Mock implements fba.AppleAuthProvider {}
 class MockApp extends Mock implements FirebaseApp {}
 
 class MockAuth extends Mock implements fba.FirebaseAuth {
+  fba.User? currentUserOverride;
+
+  @override
+  fba.User? get currentUser => currentUserOverride;
+
   @override
   Future<fba.UserCredential> signInWithProvider(Object provider) async {
     return super.noSuchMethod(

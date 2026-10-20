@@ -56,9 +56,29 @@ class AppleProvider extends OAuthProvider {
   void mobileSignIn(AuthAction action) {
     authListener.onBeforeSignIn();
 
+    // Linking is also used to upgrade an anonymous user, so that the
+    // anonymous uid survives the sign in.
     if (action == AuthAction.link || shouldUpgradeAnonymous) {
-      auth.currentUser
-          ?.linkWithProvider(firebaseAuthProvider)
+      final currentUser = auth.currentUser;
+
+      // Only AuthAction.link can reach this with no user, since
+      // shouldUpgradeAnonymous is false when currentUser is null. Reporting it
+      // matters because a null-shorting call would leave the flow stuck in its
+      // loading state with no error and no completion.
+      if (currentUser == null) {
+        authListener.onError(
+          fba.FirebaseAuthException(
+            code: 'no-current-user',
+            message:
+                'AuthAction.link requires a signed in user to link the '
+                'Apple credential to, but FirebaseAuth.currentUser is null.',
+          ),
+        );
+        return;
+      }
+
+      currentUser
+          .linkWithProvider(firebaseAuthProvider)
           .then(_onLinked)
           .catchError(authListener.onError);
       return;
@@ -97,6 +117,22 @@ class AppleProvider extends OAuthProvider {
   }
 
   void _onLinked(fba.UserCredential userCredential) {
-    authListener.onCredentialLinked(userCredential.credential!);
+    final credential = userCredential.credential;
+
+    // Nullable on every platform, and a force unwrap here would throw inside
+    // .then, reaching onError as an Error and hanging the flow.
+    if (credential == null) {
+      authListener.onError(
+        fba.FirebaseAuthException(
+          code: 'missing-credential',
+          message:
+              'The Apple account was linked, but Firebase returned no '
+              'credential for it.',
+        ),
+      );
+      return;
+    }
+
+    authListener.onCredentialLinked(credential);
   }
 }
