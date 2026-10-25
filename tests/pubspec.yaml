@@ -15,21 +15,21 @@ dependencies:
   cupertino_icons: ^2.0.0
   firebase_auth: ^7.0.0
   firebase_core: ^5.0.0
-  forui_firebase_ui_auth: ^0.3.0
-  forui_firebase_ui_localizations: ^0.3.0
-  forui_firebase_ui_oauth_apple: ^0.3.0
-  forui_firebase_ui_oauth_facebook: ^0.3.0
-  forui_firebase_ui_oauth_google: ^0.3.0
-  forui_firebase_ui_oauth: ^0.3.0
+  forui_firebase_ui_auth: ^0.1.0
+  forui_firebase_ui_localizations: ^0.1.0
+  forui_firebase_ui_oauth_apple: ^0.1.0
+  forui_firebase_ui_oauth_facebook: ^0.1.0
+  forui_firebase_ui_oauth_google: ^0.1.0
+  forui_firebase_ui_oauth: ^0.1.0
   flutter_facebook_auth: ^7.3.2
-  forui_firebase_ui_oauth_twitter: ^0.3.0
+  forui_firebase_ui_oauth_twitter: ^0.1.0
   cloud_firestore: ^7.0.0
-  forui_firebase_ui_firestore: ^0.3.0
+  forui_firebase_ui_firestore: ^0.1.0
   http: ^1.1.2
   google_sign_in: ^7.1.0
-  forui_firebase_ui_shared: ^0.1.2
+  forui_firebase_ui_shared: ^0.1.0
   firebase_database: ^13.0.0
-  forui_firebase_ui_database: ^0.3.0
+  forui_firebase_ui_database: ^0.1.0
 
   material_ui: ^1.8.0
 dev_dependencies:

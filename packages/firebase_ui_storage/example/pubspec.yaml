@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^2.0.0
   firebase_core: ^5.0.0
   firebase_storage: ^14.0.0
-  forui_firebase_ui_storage: ^0.3.0
+  forui_firebase_ui_storage: ^0.1.0
 
   flutter:
     sdk: flutter

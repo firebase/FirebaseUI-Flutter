@@ -1,6 +1,6 @@
 name: forui_firebase_ui_storage
 description: Pre-built widgets and utilites that make it easy to integrate Firebase Storage into your Flutter app.
-version: 0.3.0
+version: 0.1.0
 homepage: https://github.com/gnomezgrave/forui_FirebaseUI-Flutter/tree/main/packages/firebase_ui_storage/
 
 environment:
@@ -16,8 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_storage: ^14.0.0
-  forui_firebase_ui_localizations: ^0.3.0
-  forui_firebase_ui_shared: ^0.1.2
+  forui_firebase_ui_localizations: ^0.1.0
+  forui_firebase_ui_shared: ^0.1.0
   forui: ^0.27.0
   path: ^1.8.3
   uuid: ^4.2.2
