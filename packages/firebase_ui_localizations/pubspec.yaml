@@ -1,6 +1,6 @@
 name: forui_firebase_ui_localizations
 description: Localization package for forui_firebase_ui_auth, forui_firebase_ui_firestore and forui_firebase_ui_database
-version: 0.2.0
+version: 0.3.0
 homepage: https://github.com/gnomezgrave/forui_FirebaseUI-Flutter/tree/main/packages/firebase_ui_localizations
 
 resolution: workspace

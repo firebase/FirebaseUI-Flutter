@@ -1,6 +1,6 @@
 name: forui_firebase_ui_auth
 description: Pre-built widgets library that are integrated with the variety of the Firebase Auth providers.
-version: 0.2.0
+version: 0.3.0
 repository: https://github.com/gnomezgrave/forui_FirebaseUI-Flutter/tree/main/packages/firebase_ui_auth
 homepage: https://github.com/gnomezgrave/forui_FirebaseUI-Flutter/tree/main/packages/firebase_ui_auth
 
@@ -15,9 +15,9 @@ dependencies:
   email_validator: ^3.0.0
   firebase_auth: ^7.0.0
   firebase_core: ^5.0.0
-  forui_firebase_ui_localizations: ^0.2.0
-  forui_firebase_ui_oauth: ^0.2.0
-  forui_firebase_ui_shared: ^0.1.1
+  forui_firebase_ui_localizations: ^0.3.0
+  forui_firebase_ui_oauth: ^0.3.0
+  forui_firebase_ui_shared: ^0.1.2
   flutter:
     sdk: flutter
   forui: ^0.27.0

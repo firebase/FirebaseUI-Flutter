@@ -30,17 +30,17 @@ dependencies:
   firebase_core: ^5.0.0
   flutter:
     sdk: flutter
-  forui_firebase_ui_auth: ^0.2.0
-  forui_firebase_ui_localizations: ^0.2.0
-  forui_firebase_ui_oauth: ^0.2.0
-  forui_firebase_ui_oauth_apple: ^0.2.0
-  forui_firebase_ui_oauth_facebook: ^0.2.0
-  forui_firebase_ui_oauth_google: ^0.2.0
-  forui_firebase_ui_oauth_twitter: ^0.2.0
+  forui_firebase_ui_auth: ^0.3.0
+  forui_firebase_ui_localizations: ^0.3.0
+  forui_firebase_ui_oauth: ^0.3.0
+  forui_firebase_ui_oauth_apple: ^0.3.0
+  forui_firebase_ui_oauth_facebook: ^0.3.0
+  forui_firebase_ui_oauth_google: ^0.3.0
+  forui_firebase_ui_oauth_twitter: ^0.3.0
   material_ui: ^1.8.0
 dev_dependencies:
   drive: ^1.0.0-1.0.nullsafety.5
-  forui_firebase_ui_shared: ^0.1.1
+  forui_firebase_ui_shared: ^0.1.2
   flutter_facebook_auth: ^7.1.2
   flutter_driver:
     sdk: flutter
