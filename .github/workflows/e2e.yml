@@ -54,7 +54,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: AVD cache
-        uses: actions/cache@v3
+        uses: actions/cache@v6
         id: avd-cache
         with:
           path: |
@@ -76,7 +76,7 @@ jobs:
           channel: "stable"
           cache: true
       - name: Firebase Emulator Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v2-${{ github.run_id }}
@@ -122,7 +122,7 @@ jobs:
         with:
           key: ${{ runner.os }}-ios-v3
           max-size: 700M
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         name: Pods Cache
         id: pods-cache
         with:
@@ -130,7 +130,7 @@ jobs:
           key: ${{ runner.os }}-pods-v3-${{ hashFiles('tests/ios/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-ios-pods-v2
       - name: Firebase Emulator Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v1-${{ github.run_id }}
@@ -192,7 +192,7 @@ jobs:
         with:
           key: ${{ runner.os }}-macos-v2
           max-size: 700M
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         name: Pods Cache
         id: pods-cache
         with:
@@ -200,7 +200,7 @@ jobs:
           key: ${{ runner.os }}-pods-v2-${{ hashFiles('tests/macos/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-macos-pods-v1
       - name: Cache Firebase Emulator
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: ~/.cache/firebase/emulators
           key: firebase-emulators-v1-${{ github.run_id }}
