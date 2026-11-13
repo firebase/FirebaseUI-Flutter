@@ -96,9 +96,11 @@ class _UploadButtonState extends State<UploadButton> {
     } catch (e, stackTrace) {
       widget.onError(e, stackTrace);
     } finally {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
