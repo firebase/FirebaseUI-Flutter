@@ -1,5 +1,11 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  errors:
+    # Flutter 3.50 deprecates material.dart and cupertino.dart in favour of
+    # material_ui and cupertino_ui. Ignoring until we migrate.
+    deprecated_member_use: ignore
+
 linter:
   rules:
     # Ignoring to handle diffenent SDKs on dev machine
