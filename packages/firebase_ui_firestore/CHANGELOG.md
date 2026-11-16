@@ -1,3 +1,52 @@
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**(ui_firestore): keep loaded pages while the next page is only in cache ([#709](https://github.com/firebase/FirebaseUI-Flutter/issues/709)). ([23506053](https://github.com/firebase/FirebaseUI-Flutter/commit/235060533968aea51be5f99ff256756e3326c4d5))
+ - **BREAKING** **FEAT**: update FlutterFire dependencies and drop CocoaPods ([#731](https://github.com/firebase/FirebaseUI-Flutter/issues/731)). ([c95b0991](https://github.com/firebase/FirebaseUI-Flutter/commit/c95b0991fa350f420863ab603b0c220ba53f8699))
+
+    * feat!: update FlutterFire dependencies and drop CocoaPods
+    
+    Runs scripts/update_dependencies.dart, moving to firebase_core 5, firebase_auth 7, cloud_firestore 7, firebase_database 13 and firebase_storage 14 (Firebase Apple SDK 13, Android BoM 35).
+    
+    - Enable Swift Package Manager in every app pubspec and the workspace root.
+    - Remove CocoaPods from all iOS apps and the macOS apps that don't depend on facebook_auth_desktop.
+    - Raise example minimums to iOS 15, macOS 12 and Android minSdk 24.
+    - tests/android: Gradle 8.14.3 and AGP 8.11.1, the minimums for current Flutter stable.
+    
+    
+    
+    * ci: run iOS and macOS e2e on the xcode-27 runner
+    
+    firebase-ios-sdk 13 uses Swift tools 6.2, which the macos-15 image's Xcode can't read. Match FlutterFire's runner and simulator. Also opt the oauth example's macOS AppDelegate into secure state restoration like the other examples.
+    
+    ---------
+
+ - **BREAKING** **FEAT**(ui_firestore): Expose index to FirestoreItemBuilder ([#497](https://github.com/firebase/FirebaseUI-Flutter/issues/497)). ([a0563b7e](https://github.com/firebase/FirebaseUI-Flutter/commit/a0563b7ee2643bf448f5cdf0d154e2793db36b01))
+
+    * Expose index to FirestoreItemBuilder
+    
+    Exposes itemBuilder index in FirestoreListView and FirestoreListView.separated to be consistent with flutter ListView.builder and ListView.separated.
+    
+    * Fix tests, doc, example
+    
+    * Bump cloud_firestore and firebase_core versions
+    
+    * Dependency updates, remove deprecated code
+    
+    * Fix conflicts
+    
+    * Update docs
+    
+    * Update query_builder.dart
+    
+    * Fix test formatting
+    
+    * Fix formatting
+    
+    ---------
+
+
 ## 2.1.0
 
  - **FEAT**: Require Dart 3.9 ([#618](https://github.com/firebase/FirebaseUI-Flutter/issues/618)). ([80a27122](https://github.com/firebase/FirebaseUI-Flutter/commit/80a27122e1008b76c3cb505f8140195f6dd52648))

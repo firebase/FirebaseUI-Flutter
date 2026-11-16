@@ -1,3 +1,114 @@
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: update FlutterFire dependencies and drop CocoaPods ([#731](https://github.com/firebase/FirebaseUI-Flutter/issues/731)). ([c95b0991](https://github.com/firebase/FirebaseUI-Flutter/commit/c95b0991fa350f420863ab603b0c220ba53f8699))
+
+    * feat!: update FlutterFire dependencies and drop CocoaPods
+    
+    Runs scripts/update_dependencies.dart, moving to firebase_core 5, firebase_auth 7, cloud_firestore 7, firebase_database 13 and firebase_storage 14 (Firebase Apple SDK 13, Android BoM 35).
+    
+    - Enable Swift Package Manager in every app pubspec and the workspace root.
+    - Remove CocoaPods from all iOS apps and the macOS apps that don't depend on facebook_auth_desktop.
+    - Raise example minimums to iOS 15, macOS 12 and Android minSdk 24.
+    - tests/android: Gradle 8.14.3 and AGP 8.11.1, the minimums for current Flutter stable.
+    
+    
+    
+    * ci: run iOS and macOS e2e on the xcode-27 runner
+    
+    firebase-ios-sdk 13 uses Swift tools 6.2, which the macos-15 image's Xcode can't read. Match FlutterFire's runner and simulator. Also opt the oauth example's macOS AppDelegate into secure state restoration like the other examples.
+    
+    ---------
+
+ - **BREAKING** **FEAT**(ui_oauth_twitter): replace twitter_login with signInWithProvider ([#697](https://github.com/firebase/FirebaseUI-Flutter/issues/697)). ([6290de49](https://github.com/firebase/FirebaseUI-Flutter/commit/6290de498144efc95d5bd98018a420c20f8777b5))
+
+    * feat(ui_oauth_twitter)!: replace twitter_login with signInWithProvider
+    
+    twitter_login has not published since July 2023 and ships an Android build.gradle with no namespace that pins AGP 4.1.0, which capped this repo at AGP 8.7.3 and blocked #693 from using flutter_web_auth_2.
+    
+    TwitterProvider now signs in through auth.signInWithProvider on Android and iOS, mirroring AppleProvider, so Firebase performs the OAuth dance and the Twitter API key and secret move out of the app binary into the Firebase console. macOS and Windows keep the vendored OAuth 1.0a flow, which is why apiKey and apiSecretKey survive as optional parameters rather than being removed.
+    
+    macOS stays on the desktop flow because signInWithProvider is not available to it: FLTFirebaseAuthPlugin.swift carves out Apple and Game Center, then fails every other provider under `#if os(macOS)` with unsupported-platform. Android has no equivalent restriction.
+    
+    - AuthAction.none throws UnsupportedError on Android and iOS, since signInWithProvider cannot return a credential without also creating a session.
+    - Anonymous users are upgraded with linkWithProvider so the anonymous uid survives sign in.
+    - A debug-only diagnostic warns once when apiKey or apiSecretKey are passed on a platform that now ignores them.
+    - Restores compileSdk to flutter.compileSdkVersion and bumps AGP to 8.9.1, now that nothing pins it.
+    
+    
+    
+    * fix(ui_oauth_twitter): report an error when linking without a signed in user
+    
+    AuthAction.link with no FirebaseAuth.currentUser null-shorted the linkWithProvider call, so the flow neither completed nor reported an error and the UI stayed in its loading state. The credential path this replaced raised through auth.currentUser!, so a null user was at least surfaced.
+    
+    Reports a FirebaseAuthException instead, which reaches AuthFailed rather than escaping as an unhandled Error the way a StateError would.
+    
+    * ci(e2e): correct stale version comment on the setup-gradle pin
+    
+    The pin comment claimed v6 while the pinned SHA is v6.2.0, and upstream has since moved the v6 tag to v6.3.0. zizmor flagged the mismatch as a medium severity finding, which blocks the workflow check.
+    
+    Corrects the comment rather than moving the pin, so the action version CI runs is unchanged.
+    
+    * docs(ui_oauth_twitter): document the signInWithProvider setup
+    
+    Rewrites the Twitter section around the flow Firebase now performs on Android and iOS: enable the provider in the console, point the X app callback URL at the Firebase auth handler, then add the encoded app ID URL scheme on iOS and the SHA-1 on Android. The twitter_login install step is gone, and the API key and secret move into their own macOS and Windows section, since those are the only platforms that still need them.
+    
+    Adds the encoded app ID scheme to the firebase_ui_auth example and drops the ffire:// redirect it passed for twitter_login, which no longer takes part in either flow.
+    
+    * fix(tests): bump the Gradle wrapper to 8.11.1 for AGP 8.9.1
+    
+    AGP 8.9.1 requires Gradle 8.11.1 or later, and the tests app wrapper was on 8.10, so assembleDebug failed with a version-check error as soon as the AGP pin moved.
+    
+    Only the tests app is affected. The example apps keep their own lower AGP versions and wrappers.
+    
+    * chore(ui_oauth): format the twitter example button call
+    
+    * fix(ui_oauth_twitter): report auth failures instead of throwing Errors
+    
+    Independent review found that three of the new failure paths raised Error subtypes into the auth listener. defaultOnAuthError rethrows anything that is not a FirebaseAuthException, and both AuthFlow.onError and the button's handler catch only Exception, so those Errors escaped and left the flow in its loading state permanently.
+    
+    - AuthAction.none now reports a FirebaseAuthException rather than throwing UnsupportedError out of the tap handler.
+    - Missing OAuth 1.0a credentials are checked in desktopSignIn, before the base flow reads desktopSignInArgs synchronously, so the ArgumentError is no longer reachable from the UI.
+    - Empty strings count as missing credentials, since String.fromEnvironment yields an empty string and that is the documented way to supply them. The debug diagnostic no longer fires on them either.
+    - User cancellation is mapped back to a flow reset. The native SDKs report dismissal as a FirebaseAuthException, which was being rendered as a sign in failure where the previous flow reset silently.
+    - The linked credential is no longer force unwrapped, since it is nullable on every platform.
+    
+    Also makes the anonymous upgrade test pass AuthAction.signIn explicitly. The flow resolves to AuthAction.link whenever currentUser is non-null, so the test was passing without the shouldUpgradeAnonymous branch being consulted.
+    
+    * fix(ui_oauth_twitter): correct the diagnostic callback URL and two stale comments
+    
+    The debug diagnostic told developers to set their Twitter app callback URL to redirectUri when one was supplied, but the native flow on Android and iOS ignores redirectUri and always completes through the Firebase auth handler, so the advice guaranteed failure for exactly the consumers migrating from the custom scheme twitter_login needed. It now names the handler. The desktop flow still honours redirectUri, so its own use of it is unchanged.
+    
+    Also corrects the class doc, which listed Game Center alongside Apple as exempt from the macOS restriction. Game Center is rejected on every platform, for its own reason, so Apple is the only exception. And removes a comment in the example that lost its subject when the twitter_login dependency was deleted.
+    
+    * fix(ui_auth): navigate to the profile after a sign in that returns no email
+    
+    The example's sign in handler matched only emailVerified users and unverified users that have an email, so a user with neither matched no case and the screen stayed put after signing in successfully. Twitter only returns an email when the app asks for it, and such a user is never emailVerified, so Twitter sign in landed in that gap.
+    
+    The app's own initialRoute already treats those users as signed in via its catch all, so this brings the in flow navigation in line with what a relaunch does.
+    
+    * fix(ui_auth): stop EmailVerificationController crashing on resume when signed out
+    
+    reload() read auth.currentUser! and runs on every app resume, so resuming with no signed in user threw an unhandled TypeError rather than an Exception, which escapes the flow's error handling entirely.
+    
+    Cancelling an OAuth sign in is the easiest way to hit it: the provider takes the app to the background, cancelling brings it back, and currentUser is still null because the sign in never completed. Any app switch while signed out does the same, so this is not specific to a provider.
+    
+    The constructor already guards currentUser for null, so this brings reload() in line with the rest of the class rather than changing its contract.
+    
+    * chore(ui_oauth_twitter): wrap the diagnostic guard condition
+    
+    * docs(ui_oauth_twitter): expand the 2.x upgrade note with what testing found
+    
+    Device testing surfaced three things the original note could not have covered, because none of them is visible from the source.
+    
+    - Registering the Android SHA-1 is not sufficient on its own. The certificate hash is embedded in google-services.json at download time, so the file has to be re-downloaded afterwards. The note now carries the error string Firebase shows when either step is missed, since that is what consumers will actually search for.
+    - Firebase occasionally opens the full browser rather than a Chrome Custom Tab, and abandoning the flow there leaves the operation pending until the app restarts. Recorded as a known limitation, since nothing in the Dart layer can resolve a future the SDK never completes.
+    - Cancelling returns silently, which is worth stating because it is indistinguishable from nothing having happened.
+    
+    Also documents that redirectUri is ignored on Android and iOS, which was missing, and splits the section into what you must change, what behaviour changed, and the known limitation.
+
+
 ## 2.1.1
 
  - Update a dependency to the latest release.

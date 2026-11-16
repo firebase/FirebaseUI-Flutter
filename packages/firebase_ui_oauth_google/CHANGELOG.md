@@ -1,3 +1,70 @@
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: update FlutterFire dependencies and drop CocoaPods ([#731](https://github.com/firebase/FirebaseUI-Flutter/issues/731)). ([c95b0991](https://github.com/firebase/FirebaseUI-Flutter/commit/c95b0991fa350f420863ab603b0c220ba53f8699))
+
+    * feat!: update FlutterFire dependencies and drop CocoaPods
+    
+    Runs scripts/update_dependencies.dart, moving to firebase_core 5, firebase_auth 7, cloud_firestore 7, firebase_database 13 and firebase_storage 14 (Firebase Apple SDK 13, Android BoM 35).
+    
+    - Enable Swift Package Manager in every app pubspec and the workspace root.
+    - Remove CocoaPods from all iOS apps and the macOS apps that don't depend on facebook_auth_desktop.
+    - Raise example minimums to iOS 15, macOS 12 and Android minSdk 24.
+    - tests/android: Gradle 8.14.3 and AGP 8.11.1, the minimums for current Flutter stable.
+    
+    
+    
+    * ci: run iOS and macOS e2e on the xcode-27 runner
+    
+    firebase-ios-sdk 13 uses Swift tools 6.2, which the macos-15 image's Xcode can't read. Match FlutterFire's runner and simulator. Also opt the oauth example's macOS AppDelegate into secure state restoration like the other examples.
+    
+    ---------
+
+ - **BREAKING** **FEAT**(ui_oauth_google): migrate to google_sign_in 7 ([#700](https://github.com/firebase/FirebaseUI-Flutter/issues/700)). ([7fd741c9](https://github.com/firebase/FirebaseUI-Flutter/commit/7fd741c9bb4db30a0525f24b1cdbc003d320228c))
+
+    * feat(ui_oauth_google)!: migrate to google_sign_in 7
+    
+    Migrates GoogleProvider to the google_sign_in 7 API, which adopts the
+    UIScene lifecycle on iOS (google_sign_in_ios 6.3.0) and Swift Package
+    Manager (6.3.3). Fixes the deprecated application lifecycle warning
+    tracked in #673.
+    
+    - GoogleSignIn is now the shared instance and is initialized once
+      before the first sign-in.
+    - Authentication and authorization are separate steps. The provider
+      reuses an existing authorization for the requested scopes and prompts
+      for consent when one is not available, so the credential still
+      carries an access token when scopes are requested.
+    - A cancelled sign-in surfaces as AuthCancelledException, matching the
+      previous flow reset behaviour.
+    - Adds an optional serverClientId parameter to GoogleProvider,
+      GoogleSignInButton and GoogleSignInIconButton for Android apps that
+      do not use google-services.json.
+    - Updates the integration test mocks to the new API.
+    
+    
+    integration steps: GIDClientID in Info.plist on iOS, and on Android a
+    web OAuth client entry in google-services.json or an explicit
+    serverClientId. When no scopes are requested the credential now
+    contains only an ID token.
+    
+    * refactor(ui_oauth_google): simplify init and isolate it in tests
+    
+    Chain the retry-reset catchError directly onto initialize() instead of
+    threading an intermediate local, and add a @visibleForTesting
+    debugReset() that clears the static one-time-init future so each test
+    starts from a clean state with its freshly injected mock.
+    
+    Addresses review feedback on #689.
+    
+    * chore(ui_oauth_google): format provider.dart
+    
+    * fix(ui_oauth_google): preserve stack trace on init retry
+    
+    Use Error.throwWithStackTrace in the initialize() catchError so a failed initialization keeps its original stack trace instead of resetting it with a bare throw.
+
+
 ## 2.1.1
 
  - Update a dependency to the latest release.

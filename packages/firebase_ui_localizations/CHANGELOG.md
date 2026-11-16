@@ -1,3 +1,28 @@
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: update FlutterFire dependencies and drop CocoaPods ([#731](https://github.com/firebase/FirebaseUI-Flutter/issues/731)). ([c95b0991](https://github.com/firebase/FirebaseUI-Flutter/commit/c95b0991fa350f420863ab603b0c220ba53f8699))
+
+    * feat!: update FlutterFire dependencies and drop CocoaPods
+    
+    Runs scripts/update_dependencies.dart, moving to firebase_core 5, firebase_auth 7, cloud_firestore 7, firebase_database 13 and firebase_storage 14 (Firebase Apple SDK 13, Android BoM 35).
+    
+    - Enable Swift Package Manager in every app pubspec and the workspace root.
+    - Remove CocoaPods from all iOS apps and the macOS apps that don't depend on facebook_auth_desktop.
+    - Raise example minimums to iOS 15, macOS 12 and Android minSdk 24.
+    - tests/android: Gradle 8.14.3 and AGP 8.11.1, the minimums for current Flutter stable.
+    
+    
+    
+    * ci: run iOS and macOS e2e on the xcode-27 runner
+    
+    firebase-ios-sdk 13 uses Swift tools 6.2, which the macos-15 image's Xcode can't read. Match FlutterFire's runner and simulator. Also opt the oauth example's macOS AppDelegate into secure state restoration like the other examples.
+    
+    ---------
+
+ - **BREAKING** **FEAT**(ui_auth): complete email link sign in after cold start and on other devices ([#710](https://github.com/firebase/FirebaseUI-Flutter/issues/710)). ([57b353e5](https://github.com/firebase/FirebaseUI-Flutter/commit/57b353e598d0e2527ec506a869ecffa97caae5fd))
+
 ## 2.1.0
 
  - **FEAT**: Require Dart 3.9 ([#618](https://github.com/firebase/FirebaseUI-Flutter/issues/618)). ([80a27122](https://github.com/firebase/FirebaseUI-Flutter/commit/80a27122e1008b76c3cb505f8140195f6dd52648))
