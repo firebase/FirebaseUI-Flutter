@@ -14,7 +14,7 @@ dependencies:
   clock: ^1.1.1
   email_validator: ^2.1.17
   firebase_auth: ^7.0.0
-  firebase_core: ^5.0.0
+  firebase_core: 5.1.0
   firebase_ui_localizations: ^2.1.0
   firebase_ui_oauth: ^2.1.1
   firebase_ui_shared: ^1.5.0
