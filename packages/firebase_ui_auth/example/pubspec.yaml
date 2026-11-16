@@ -31,13 +31,13 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  firebase_ui_auth: ^3.1.1
-  firebase_ui_localizations: ^2.1.0
-  firebase_ui_oauth: ^2.1.1
-  firebase_ui_oauth_apple: ^2.1.1
-  firebase_ui_oauth_facebook: ^2.1.1
-  firebase_ui_oauth_google: ^2.1.1
-  firebase_ui_oauth_twitter: ^2.1.1
+  firebase_ui_auth: ^4.0.0
+  firebase_ui_localizations: ^3.0.0
+  firebase_ui_oauth: ^3.0.0
+  firebase_ui_oauth_apple: ^3.0.0
+  firebase_ui_oauth_facebook: ^3.0.0
+  firebase_ui_oauth_google: ^3.0.0
+  firebase_ui_oauth_twitter: ^3.0.0
 dev_dependencies:
   drive: ^1.0.0-1.0.nullsafety.5
   firebase_ui_shared: ^1.5.0
