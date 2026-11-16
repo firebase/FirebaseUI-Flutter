@@ -224,18 +224,24 @@ class _LinkedProvidersRowState extends State<_LinkedProvidersRow> {
       await user.unlink(providerId);
       await user.reload();
 
+      if (!mounted) return;
+
       setState(() {
         widget.onProviderUnlinked();
         isEditing = false;
       });
     } on fba.FirebaseAuthException catch (e) {
-      setState(() {
-        error = e;
-      });
+      if (mounted) {
+        setState(() {
+          error = e;
+        });
+      }
     } finally {
-      setState(() {
-        unlinkingProvider = null;
-      });
+      if (mounted) {
+        setState(() {
+          unlinkingProvider = null;
+        });
+      }
     }
   }
 
@@ -564,6 +570,8 @@ class _MFAToggleState extends State<_MFAToggle> {
     final mfa = widget.auth.currentUser!.multiFactor;
     final factors = await mfa.getEnrolledFactors();
 
+    if (!mounted) return;
+
     if (factors.isEmpty) {
       setState(() {
         isLoading = false;
@@ -573,23 +581,29 @@ class _MFAToggleState extends State<_MFAToggle> {
 
     try {
       await mfa.unenroll(multiFactorInfo: factors.first);
+      if (!mounted) return;
       widget.onToggled?.call();
     } on PlatformException catch (e) {
       if (e.code == 'FirebaseAuthRecentLoginRequiredException') {
-        if (await _reauthenticate()) {
+        if (!mounted) return;
+        if (await _reauthenticate() && mounted) {
           await _disable();
         }
       } else {
         rethrow;
       }
     } on Exception catch (e) {
-      setState(() {
-        exception = e;
-      });
+      if (mounted) {
+        setState(() {
+          exception = e;
+        });
+      }
     } finally {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -618,23 +632,32 @@ class _MFAToggleState extends State<_MFAToggle> {
 
           try {
             await mfa.enroll(assertion);
+            if (!mounted) return;
             widget.onToggled?.call();
           } on Exception catch (e) {
-            setState(() {
-              exception = e;
-            });
+            if (mounted) {
+              setState(() {
+                exception = e;
+              });
+            }
           } finally {
-            setState(() {
-              isLoading = false;
-            });
+            if (mounted) {
+              setState(() {
+                isLoading = false;
+              });
+            }
 
-            if (context.mounted) {
+            // If currentRoute was removed, popUntil would never find it and
+            // would pop every route.
+            if (context.mounted && (currentRoute?.isActive ?? false)) {
               Navigator.of(context).popUntil((route) => route == currentRoute);
             }
           }
         }),
       ],
     );
+
+    if (!mounted) return;
 
     setState(() {
       isLoading = false;
