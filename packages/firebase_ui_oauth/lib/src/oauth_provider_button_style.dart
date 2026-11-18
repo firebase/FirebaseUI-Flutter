@@ -4,19 +4,42 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_ui_shared/firebase_ui_shared.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 /// {@template ui.oauth.themed_oauth_provider_button_style}
 /// An object that is being used to resolve a style of the button.
 /// {@endtemplate}
 abstract class ThemedOAuthProviderButtonStyle {
+  /// Asset paths (relative to [assetsPackage]) of the light and dark icons.
+  ///
+  /// Icons must be compiled into the `vector_graphics` binary format. Declare
+  /// the SVG assets with the `vector_graphics_compiler` asset transformer:
+  ///
+  /// ```yaml
+  /// flutter:
+  ///   assets:
+  ///     - path: assets/icon.svg
+  ///       transformers:
+  ///         - package: vector_graphics_compiler
+  /// ```
+  ///
+  /// When the assets are declared by a package (see [assetsPackage]), that
+  /// package must list `vector_graphics_compiler` under `dependencies` (not
+  /// `dev_dependencies`) so that the transformer can be resolved when
+  /// building the consuming app. When the assets are declared by the app
+  /// itself, a `dev_dependencies` entry in the app is enough.
   ThemedIconSrc get iconSrc;
   ThemedColor get backgroundColor;
   ThemedColor get color;
   ThemedColor get iconBackgroundColor => backgroundColor;
   ThemedColor get borderColor => backgroundColor;
   double get iconPadding => 0;
-  String get assetsPackage;
+
+  /// The name of the package that contains the [iconSrc] assets.
+  ///
+  /// Return `null` when the assets are bundled with the app itself, for
+  /// example for a custom provider style defined in the app.
+  String? get assetsPackage;
 
   /// A custom label string.
   ///
@@ -27,9 +50,9 @@ abstract class ThemedOAuthProviderButtonStyle {
   /// Profile Screen.
   ThemedValue<Widget> get iconWidget => ThemedValue(
     // Display the light icon on a dark background.
-    SvgPicture.string(iconSrc.light),
+    OAuthProviderIcon(src: iconSrc.light, package: assetsPackage),
     // Display the dark icon on a light background.
-    SvgPicture.string(iconSrc.dark),
+    OAuthProviderIcon(src: iconSrc.dark, package: assetsPackage),
   );
 
   /// {@macro ui.oauth.themed_oauth_provider_button_style}
@@ -54,7 +77,7 @@ class OAuthProviderButtonStyle {
   final Color backgroundColor;
   final Color color;
   final Color borderColor;
-  final String assetsPackage;
+  final String? assetsPackage;
   final Color iconBackgroundColor;
 
   OAuthProviderButtonStyle({
@@ -66,4 +89,37 @@ class OAuthProviderButtonStyle {
     required this.assetsPackage,
     required this.iconBackgroundColor,
   });
+}
+
+/// {@template ui.oauth.oauth_provider_icon}
+/// Renders an SVG icon asset compiled by the `vector_graphics_compiler`
+/// asset transformer.
+/// {@endtemplate}
+class OAuthProviderIcon extends StatelessWidget {
+  /// The asset path of the precompiled icon.
+  final String src;
+
+  /// The package that contains the [src] asset.
+  final String? package;
+
+  final double? width;
+  final double? height;
+
+  /// {@macro ui.oauth.oauth_provider_icon}
+  const OAuthProviderIcon({
+    super.key,
+    required this.src,
+    this.package,
+    this.width,
+    this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return VectorGraphic(
+      loader: AssetBytesLoader(src, packageName: package),
+      width: width,
+      height: height,
+    );
+  }
 }

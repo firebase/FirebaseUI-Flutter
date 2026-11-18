@@ -13,9 +13,9 @@ dependencies:
   firebase_auth: ^7.0.0
   firebase_ui_auth: ^4.0.0
   firebase_ui_shared: ^1.5.0
-  flutter_svg: ^2.0.9
   flutter_web_auth_2: ^5.1.0
   http: ^1.6.0
+  vector_graphics: ^1.1.19
   flutter:
     sdk: flutter
 
@@ -23,6 +23,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  vector_graphics_compiler: ^1.1.19
 
 false_secrets:
   - "/example/**/google-services.json"
