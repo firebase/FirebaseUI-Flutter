@@ -5,7 +5,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
@@ -361,7 +360,7 @@ class _ButtonContent extends StatelessWidget {
   final double height;
   final String iconSrc;
   final double iconPadding;
-  final String assetsPackage;
+  final String? assetsPackage;
   final String label;
   final bool isLoading;
   final Color textColor;
@@ -392,7 +391,12 @@ class _ButtonContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final icon = Padding(
       padding: EdgeInsets.all(iconPadding),
-      child: SvgPicture.string(iconSrc, width: height, height: height),
+      child: OAuthProviderIcon(
+        src: iconSrc,
+        package: assetsPackage,
+        width: height,
+        height: height,
+      ),
     );
 
     if (label.isEmpty) {
