@@ -1,15 +1,14 @@
 name: pr_title
 
 on:
-  # This workflow is safe because it only validates the PR title and does not checkout any code.
-  pull_request_target: # zizmor: ignore[dangerous-triggers]
+  pull_request:
     types:
       - opened
       - edited
       - synchronize
 
 permissions:
-  statuses: write
+  pull-requests: read
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
